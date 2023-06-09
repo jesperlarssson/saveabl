@@ -58,6 +58,22 @@ module.exports = {
         roboto: ["Roboto", "sans-serif"],
         "open-sans": ["Open Sans", "sans-serif"],
       },
+      keyframes: {
+        float: {
+          '0%, 100%': { transform: 'translate(0, 0)' },
+          '25%': { transform: 'translate(10px, -10px)' },
+          '50%': { transform: 'translate(0, 0)' },
+          '75%': { transform: 'translate(-10px, 10px)' },
+        },
+        wiggle: {
+          '0%, 100%': { transform: 'rotate(-4deg)' },
+          '50%': { transform: 'rotate(4deg)' },
+        }
+      },
+      animation: {
+        float: 'float 10s linear infinite',
+        wiggle: 'wiggle 25s ease-in-out infinite',
+      },
     },
   },
   plugins: [],
