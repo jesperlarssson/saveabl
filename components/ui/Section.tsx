@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { twMerge } from "tailwind-merge";
 
 interface SectionProps {
@@ -7,11 +8,15 @@ interface SectionProps {
 
 const Section: React.FC<SectionProps> = ({ className, children }) => {
   return (
+    <>
+   
     <section className={twMerge(`w-full py-28`, className)}>
       <div className="max-w-screen-xl mx-auto px-2 sm:px-4 md:px-8">
         {children}
       </div>
     </section>
+    </>
+    
   );
 };
 

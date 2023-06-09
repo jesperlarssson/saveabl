@@ -74,6 +74,9 @@ module.exports = {
         float: 'float 10s linear infinite',
         wiggle: 'wiggle 25s ease-in-out infinite',
       },
+      width: {
+        '128': '36rem',
+      }
     },
   },
   plugins: [],

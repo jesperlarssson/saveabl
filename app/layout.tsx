@@ -1,9 +1,10 @@
-
 import "./globals.css";
 import { Figtree } from "next/font/google";
+import ToasterProvider from "@/providers/ToasterProvider";
 
 import Navbar from "@/components/ui/Navbar";
 import Footer from "@/components/ui/Footer";
+import MyParallaxProvider from "@/providers/MyParallaxProvider";
 
 const font = Figtree({ subsets: ["latin"] });
 
@@ -20,9 +21,14 @@ export default function RootLayout({
   return (
     <html lang="sv">
       <body className={font.className}>
-        <Navbar />
-        <main className="min-h-screen overflow-x-hidden">{children}</main>
-        <Footer />
+        <ToasterProvider />
+        <MyParallaxProvider>
+          <Navbar />
+
+          <main className="min-h-screen overflow-x-hidden">{children}</main>
+
+          <Footer />
+        </MyParallaxProvider>
       </body>
     </html>
   );

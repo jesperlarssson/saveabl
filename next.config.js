@@ -1,4 +1,14 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const nextConfig = {
+  images: {
+    domains: [
+      "media.graphcms.com",
+      "media.graphassets.com",
+      "localhost",
+      "api.qrserver.com",
+      "files.stripe.com",
+    ],
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

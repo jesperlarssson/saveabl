@@ -4,6 +4,7 @@ import { twMerge } from "tailwind-merge";
 interface NavItemProps {
   children: React.ReactNode;
   active: boolean;
+  disabled?: boolean;
   href: string;
   className?: string;
 }
@@ -11,6 +12,7 @@ interface NavItemProps {
 const NavItem: React.FC<NavItemProps> = ({
   href,
   active = false,
+  disabled = false,
   children,
   className,
 }) => {
@@ -18,11 +20,11 @@ const NavItem: React.FC<NavItemProps> = ({
     <Link
       className={twMerge(
         `
-    text-secondary hover:underline underline-offset-2
+    text-secondary tracking-wide  hover:underline underline-offset-2
  `,
-        className
+        [className, active && "underline font-semibold", disabled && "opacity-50 cursor-not-allowed hover:no-underline"]
       )}
-      href={href}
+      href={disabled ? "#" : href}
     >
       {children}
     </Link>
