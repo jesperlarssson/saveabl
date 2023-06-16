@@ -1,27 +1,33 @@
 import { Post, getAllPostsForHome } from "@/lib/hygraph";
 import Image from "next/image";
 import React from "react";
-
+import BlogPost from "../general/BlogPost";
+import Slider from "../ui/Slider";
+import Section from "../ui/Section";
 
 const News = async () => {
   const news = (await getAllPostsForHome(false)) || [];
   return (
-    <div className="h-96">
-      {news.map((post: Post) => (
-        <div
-          key={post.slug}
-          className="flex w-96 rounded-lg transition hover:shadow-xl"
-        >
-          <Image
-            width={350}
-            height={250}
-            className="object-contain"
-            alt={`post cover image from ${post.author.name}`}
-            src={post?.coverImage?.url}
+    <Section className="w-screen h-128 bg-secondary" 
+    //bgIllustrationComponent={
+    //  <div className="absolute top-0 left-0 w-full h-1/2 bg-primary">
+    //  </div>
+    //}
+    >
+      <Slider>
+        {news.map((post: Post) => (
+          <BlogPost
+            key={post.slug}
+            title={post.title}
+            date={post.date}
+            excerpt={post.excerpt}
+            image={post.coverImage.url}
+            slug={post.slug}
           />
-        </div>
-      ))}
-    </div>
+        ))}
+      </Slider>
+     
+    </Section>
   );
 };
 

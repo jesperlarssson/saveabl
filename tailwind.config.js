@@ -18,7 +18,7 @@ module.exports = {
           50: "#ffffff",
           100: "#ffffff",
           200: "#fcf7e8", //Current main color
-          300: "#fde9d5",
+          300: "#f9efd2",
           400: "#fbd3ab",
           500: "#eecfaa",
           600: "#c8a37f",
@@ -76,6 +76,9 @@ module.exports = {
       },
       width: {
         '128': '36rem',
+      },
+      scale: {
+        '103': '1.03',
       }
     },
   },

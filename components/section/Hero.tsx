@@ -23,7 +23,7 @@ const Hero = () => {
                 title="Saveabl - explainer video"
               />
             </div>
-            <div>
+            <div className="-ml-8">
               <Image
                 width={660 / 2}
                 height={140 / 2}

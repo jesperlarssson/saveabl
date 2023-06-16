@@ -8,8 +8,8 @@ const ToasterProvider = () => {
       position="bottom-left"
       toastOptions={{
         style: {
-          background: '#333',
-          color: '#fff',
+          background: '#eecfaa',
+          color: '#6e2936',
         }
       }}
     /> 

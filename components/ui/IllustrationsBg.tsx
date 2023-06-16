@@ -13,25 +13,15 @@ import { Parallax } from "react-scroll-parallax";
 const IllustrationsBg = () => {
   return (
     <Parallax speed={-40}>
-      <div className="w-screen max-w-screen-2xl h-screen p-24 opacity-60 relative flex justify-between">
+      <div className="w-screen max-w-screen-2xl h-screen p-24 opacity-60 relative flex justify-between overflow-hidden">
         <motion.div
           initial={{ opacity: 0, scale: 0.5 }}
-          animate={{
-            opacity: [0.6, 0.8], // cycle between 60% and 80% opacity
-            scale: [1, 1.05], // cycle between 100% and 105% scale
-            rotate: [0, 5, 0, -5, 0], // rotate element for wiggle effect
-          }}
-          transition={{
-            duration: 3, // slow wiggle effect
-            ease: "linear",
-            loop: Infinity, // infinite animation
-            repeatDelay: 0, // delay between each loop
-          }}
+          animate={{ opacity: 1, scale: 1 }}
         >
           <Image
             width={300}
             height={300}
-            className="hidden md:block object-contain"
+            className="hidden md:block object-contain animate-wiggle"
             alt={illustration[0].alt}
             src={illustration[0].path}
           />
@@ -46,16 +36,18 @@ const IllustrationsBg = () => {
             <Image
               width={400}
               height={400}
-              className="md:block object-contain "
+              className="md:block object-contain animate-wiggle"
               alt={illustration[2].alt}
               src={illustration[2].path}
             />
           </motion.div>
-          <div className="translate-x-36 z-1 relative">
-            <LottieAnimation
-              animationData={matkasseAnimation}
-              style={{ height: 440 }}
-            />
+          <div className="translate-x-36 z-1 relative ">
+            <div className="animate-wiggle">
+              <LottieAnimation
+                animationData={matkasseAnimation}
+                style={{ height: 440 }}
+              />
+            </div>
           </div>
         </div>
       </div>

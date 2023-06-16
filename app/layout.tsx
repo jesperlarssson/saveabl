@@ -1,12 +1,17 @@
 import "./globals.css";
 import { Figtree } from "next/font/google";
 import ToasterProvider from "@/providers/ToasterProvider";
+import "swiper/css";
 
 import Navbar from "@/components/ui/Navbar";
 import Footer from "@/components/ui/Footer";
 import MyParallaxProvider from "@/providers/MyParallaxProvider";
+import PromotionBanner from "@/components/ui/PromotionBanner";
+import ModalProvider from "@/providers/ModalProvider";
+import { AuthProvider } from "@/providers/AuthProvider";
 
 const font = Figtree({ subsets: ["latin"] });
+export const revalidate = 120 // revalidate this page every 60 seconds
 
 export const metadata = {
   title: "Saveabl",
@@ -21,14 +26,18 @@ export default function RootLayout({
   return (
     <html lang="sv">
       <body className={font.className}>
-        <ToasterProvider />
-        <MyParallaxProvider>
-          <Navbar />
+        <AuthProvider>
+          <ToasterProvider />
+          <ModalProvider />
+          <MyParallaxProvider>
+            <PromotionBanner />
+            <Navbar />
 
-          <main className="min-h-screen overflow-x-hidden">{children}</main>
-
-          <Footer />
-        </MyParallaxProvider>
+            <main className="min-h-screen overflow-x-hidden">{children}</main>
+            
+            <Footer />
+          </MyParallaxProvider>
+        </AuthProvider>
       </body>
     </html>
   );

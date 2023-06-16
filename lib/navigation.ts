@@ -37,3 +37,13 @@ export const navigation: NavigationItem[] = [
     disabled: true,
   },
 ];
+
+export const socials: NavigationItem[] = [
+  {
+    id: 1,
+    name: "Instagram",
+    path: "/bestall",
+    disabled: false,
+  },
+ 
+];

@@ -7,6 +7,7 @@ const nextConfig = {
       "localhost",
       "api.qrserver.com",
       "files.stripe.com",
+      "images.unsplash.com",
     ],
   },
 };

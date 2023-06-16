@@ -7,11 +7,17 @@ interface CardProps {
   clickable?: boolean;
 }
 
-const Card: React.FC<CardProps> = ({ children, className, onClick, clickable }) => {
+const Card: React.FC<CardProps> = ({
+  children,
+  className,
+  onClick,
+  clickable,
+}) => {
   return (
     <div
+      onClick={onClick}
       className={twMerge(
-        `bg-white rounded-md shadow-md p-4 transition`,
+        `bg-primary bg-opacity-25 my-8 shadow-inner p-8 rounded-lg text-primary transition`,
         [className, clickable && "cursor-pointer hover:shadow-lg"]
       )}
     >
