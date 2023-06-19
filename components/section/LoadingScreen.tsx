@@ -5,9 +5,9 @@ import jordklot from "../../public/anim/Jordklot.json";
 
 const LoadingScreen = () => {
   const animationComponent = [
-    <LottieAnimation animationData={matkasse} />,
-    <LottieAnimation animationData={klocka} />,
-    <LottieAnimation animationData={jordklot} />,
+    <LottieAnimation key={"loadinganimation 1"} animationData={matkasse} />,
+    <LottieAnimation key={"loadinganimation 2"} animationData={klocka} />,
+    <LottieAnimation key={"loadinganimation 3"} animationData={jordklot} />,
   ];
 
   return (

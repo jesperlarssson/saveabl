@@ -8,7 +8,7 @@ interface LottieAnimationProps {
   style?: React.CSSProperties;
 }
 
-const LottieAnimation: React.FC = ({ animationData, style }) => {
+const LottieAnimation: React.FC<LottieAnimationProps> = ({ animationData, style }) => {
 
   const defaultOptions = {
     loop: true,
