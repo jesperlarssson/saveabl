@@ -1,32 +1,25 @@
-import { Post, getAllPostsForHome } from "@/lib/hygraph";
-import Image from "next/image";
+import { getAllPostsForHome } from "@/lib/hygraph";
 import React from "react";
 import BlogPost from "../general/BlogPost";
 import Slider from "../ui/Slider";
 import Section from "../ui/Section";
+import { Post } from "@/types";
 
 const News = async () => {
   const news = (await getAllPostsForHome(false)) || [];
   return (
-    <Section className="w-screen h-128 bg-secondary" 
-    //bgIllustrationComponent={
-    //  <div className="absolute top-0 left-0 w-full h-1/2 bg-primary">
-    //  </div>
-    //}
+    <Section
+      className="w-screen h-128 bg-secondary"
+      //bgIllustrationComponent={
+      //  <div className="absolute top-0 left-0 w-full h-1/2 bg-primary">
+      //  </div>
+      //}
     >
       <Slider>
         {news.map((post: Post) => (
-          <BlogPost
-            key={post.slug}
-            title={post.title}
-            date={post.date}
-            excerpt={post.excerpt}
-            image={post.coverImage.url}
-            slug={post.slug}
-          />
+          <BlogPost key={post.slug} post={post} />
         ))}
       </Slider>
-     
     </Section>
   );
 };

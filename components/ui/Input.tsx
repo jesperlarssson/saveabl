@@ -32,14 +32,14 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           type={type}
           ref={ref}
           id={id}
-          className={twMerge(`w-full bg-primary p-2 rounded-md placeholder-slate-400
+          className={twMerge(
+            `w-full bg-primary p-2 rounded-md placeholder-slate-400
           focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary
           disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
-          invalid:border-pink-500 invalid:text-pink-600
-          focus:invalid:border-pink-500 focus:invalid:ring-pink-500`, [
-            className,
-            error && "border-red-500",
-          ])}
+          invalid:border-accent invalid:text-accent
+          focus:invalid:border-accent focus:invalid:ring-accent`,
+            [className, error && "border-red-500"]
+          )}
           disabled={disabled}
           {...props}
         >

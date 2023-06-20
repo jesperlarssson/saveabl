@@ -1,4 +1,4 @@
-import Stripe from 'stripe';
+import Stripe from "stripe";
 
 export interface Song {
   id: string;
@@ -85,7 +85,6 @@ export interface Recipe {
   chef: Chef;
   image: HyImage;
   freezabl: boolean;
-  
 }
 
 export interface Chef {
@@ -95,4 +94,30 @@ export interface Chef {
 
 export interface HyImage {
   url: string;
+}
+
+interface Picture {
+  url: string;
+}
+
+interface Author {
+  name: string;
+  title: string;
+  picture: Picture;
+}
+
+export interface Post {
+  id?: string;
+  title: string;
+  slug: string;
+  excerpt: string;
+  date: string;
+  tags: string[];
+  coverImage: Picture;
+  author: Author;
+  content?: any;
+}
+
+export interface PostsData {
+  posts: Post[];
 }

@@ -1,4 +1,5 @@
 import { getDatesFromWeek } from "@/helpers/format";
+import { Post, PostsData } from "@/types";
 
 async function fetchAPI(
   query: string,
@@ -44,30 +45,6 @@ export async function sendMutation(
   }
 }
 
-interface Picture {
-  url: string;
-}
-
-interface Author {
-  name: string;
-  title: string;
-  picture: Picture;
-}
-
-export interface Post {
-  title: string;
-  slug: string;
-  excerpt: string;
-  date: string;
-  tags: string[];
-  coverImage: Picture;
-  author: Author;
-}
-
-interface PostsData {
-  posts: Post[];
-}
-
 export async function getAllPostsForHome(mutation: boolean): Promise<Post[]> {
   const data: PostsData = await fetchAPI(
     `
@@ -108,6 +85,106 @@ export async function getAllPostsForHome(mutation: boolean): Promise<Post[]> {
       }
     `,
     { mutation }
+  );
+  return data.posts;
+}
+
+export async function getAllPostsWithSlug() {
+  const data = await fetchAPI(
+    `
+    query GetSlugs {
+      posts {
+        slug
+      }
+    }
+  `
+  );
+  return data.posts;
+}
+
+export async function getPostWithSlug(slug: string) {
+  const data = await fetchAPI(
+    `
+    query GetPost($slug: String!) {
+      post(where: {slug: $slug}) {
+        id
+        title
+        excerpt
+        slug
+        tags
+        seoKeywords
+        content {
+          html
+        }
+        date
+        postComment(orderBy: publishedAt_DESC) {
+          name
+          id
+          comment
+        }
+        ogImage: coverImage {
+          url(transformation: {image: {resize: {fit: crop, width: 2000, height: 1000}}})
+        }
+        coverImage {
+          url(transformation: {image: {resize: {fit: crop, width: 2000, height: 1000}}})
+        }
+        author {
+          name
+          title
+          picture {
+            url(transformation: {image: {resize: {fit: crop, width: 100, height: 100}}})
+          }
+        }
+
+      }
+    }
+  `,
+    { variables: { slug } }
+  );
+  return data.post;
+}
+
+export async function getPaginatedPosts(limit: number, offset: number) {
+  const variables = { limit, offset };
+  const data = await fetchAPI(
+    `
+    query GetPosts($limit: Int!, $offset: Int!) {
+      posts(orderBy: createdAt_DESC, first: $limit, skip: $offset) {
+        title
+          slug
+          excerpt
+          date
+          tags
+          coverImage {
+            url(transformation: {
+              image: {
+                resize: {
+                  fit:crop,
+                  width:2000,
+                  height:1000
+                }
+              }
+            })
+          }
+          author {
+            name
+            title
+            picture {
+              url(transformation: {
+                image: {
+                  resize: {
+                    width:200,
+                    height:200,
+                    fit:crop
+                  }
+                }
+              })
+            }
+          }
+      }
+    }
+  `,
+    { variables }
   );
   return data.posts;
 }
@@ -155,37 +232,6 @@ export async function getAllRecipes() {
   );
   return data.recepts;
 }
-
-// export async function getPaginatedRecipes(limit: number, offset: number) {
-//   const variables = { limit, offset };
-//   const data = await fetchAPI(
-//     `
-//     query GetRecipes($limit: Int!, $offset: Int!) {
-//       recepts(orderBy: startDate_DESC, first: $limit, skip: $offset) {
-//         id
-//         title
-//         slug
-//         startDate
-//         recipeNumber
-//         steg
-//         ingredients
-//         nutritionalValues
-//         savedIngredients
-//         contentAllergies
-//         chef {
-//           name
-//           title
-//         }
-//         image {
-//           url(transformation: {image: {resize: {height: 500, width: 700}}})
-//         }
-//       }
-//     }
-//   `,
-//     { variables }
-//   );
-//   return data.recepts;
-// }
 
 export async function getPaginatedRecipes(
   limit: number,
