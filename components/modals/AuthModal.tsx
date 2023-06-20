@@ -8,8 +8,6 @@ import useAuthModal from "@/hooks/useAuthModal";
 import { useAuth } from "@/hooks/useAuth";
 import Modal from "@/components/ui/Modal";
 import { toast } from "react-hot-toast";
-import Button from "../ui/Button";
-import { on } from "events";
 import SignInForm from "../general/SignInForm";
 
 const AuthModal = () => {

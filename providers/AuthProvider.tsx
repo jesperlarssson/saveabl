@@ -7,7 +7,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut as firebaseSignOut,
-} from "firebase/auth";
+} from "@firebase/auth";
 import { auth } from "@/firebase/init";
 import  LoadingScreen  from "@/components/section/LoadingScreen";
 
