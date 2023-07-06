@@ -29,7 +29,7 @@ export default function Home() {
         {/* <SellingPoints /> */}
 
         <CallToAction />
-        <TextBanner>{textBannerText}</TextBanner>
+        {/* <TextBanner>{textBannerText}</TextBanner> */}
         <Reviews />
         <TextBanner>{textBannerText}</TextBanner>
         <News />
