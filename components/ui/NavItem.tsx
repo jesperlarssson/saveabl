@@ -20,9 +20,13 @@ const NavItem: React.FC<NavItemProps> = ({
     <Link
       className={twMerge(
         `
-    text-secondary tracking-wide  hover:underline underline-offset-2
+    text-secondary tracking-wide  font-bold text-sm
  `,
-        [className, active && "underline font-semibold", disabled && "opacity-50 cursor-not-allowed hover:no-underline"]
+        [
+          className,
+          active && "underline font-semibold",
+          disabled && "opacity-50 cursor-not-allowed hover:no-underline",
+        ]
       )}
       href={disabled ? "#" : href}
     >

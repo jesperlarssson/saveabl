@@ -9,7 +9,7 @@ const Nyheter = async () => {
   const posts = await getPaginatedPosts(10, 0);
   return (
     <Section className="pt-16">
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center border-b border-primary pb-8">
         <Title>Nyheter</Title>
       </div>
       <BlogPosts posts={posts} />

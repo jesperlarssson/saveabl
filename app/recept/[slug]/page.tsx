@@ -28,7 +28,7 @@ const RecipePage: React.FC<RecipePageProps> = async ({ params }) => {
   return (
     <>
       <Head>
-        <title>{recipe.title}</title>
+        <title>{recipe?.title}</title>
       </Head>
       <RecipeLayout recipe={recipe} />
 

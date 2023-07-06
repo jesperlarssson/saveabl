@@ -213,6 +213,7 @@ export async function getAllRecipes() {
         title
         slug
         startDate
+        weekNr
         recipeNumber
         steg
         ingredients
@@ -252,6 +253,7 @@ export async function getPaginatedRecipes(
         title
         slug
         startDate
+        weekNr
         recipeNumber
         chef {
           name
@@ -334,20 +336,18 @@ export async function getPaginatedOldRecipes(limit: number, offset: number) {
 }
 
 export async function getRecipesForWeek(week: number) {
-  const dates = getDatesFromWeek(week);
-  console.log(dates);
-
   const data = await fetchAPI(
     `
-    query GetRecipes($dates: [Date!]) {
+    query GetRecipes($week: Int!) {
       recepts(
         orderBy: recipeNumber_ASC, 
-        where: {startDate_in: $dates}
+        where: {weekNr: $week}
       ) {
         id
         title
         slug
         startDate
+        weekNr
         recipeNumber
         chef {
           name
@@ -359,11 +359,44 @@ export async function getRecipesForWeek(week: number) {
       }
     }
   `,
-    { variables: { dates } }
+    { variables: { week } }
   );
 
   return data.recepts;
 }
+
+// export async function getRecipesForWeek(week: number) {
+//   const dates = getDatesFromWeek(week);
+//   console.log(dates);
+
+//   const data = await fetchAPI(
+//     `
+//     query GetRecipes($dates: [Date!]) {
+//       recepts(
+//         orderBy: recipeNumber_ASC,
+//         where: {startDate_in: $dates}
+//       ) {
+//         id
+//         title
+//         slug
+//         startDate
+//         weekNr
+//         recipeNumber
+//         chef {
+//           name
+//           title
+//         }
+//         image {
+//           url(transformation: {image: {resize: {height: 500, width: 700}}})
+//         }
+//       }
+//     }
+//   `,
+//     { variables: { dates } }
+//   );
+
+//   return data.recepts;
+// }
 
 export async function getAllRecipesWithSlug() {
   const data = await fetchAPI(

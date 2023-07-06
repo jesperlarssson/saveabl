@@ -9,9 +9,10 @@ import MyParallaxProvider from "@/providers/MyParallaxProvider";
 import PromotionBanner from "@/components/ui/PromotionBanner";
 import ModalProvider from "@/providers/ModalProvider";
 import { AuthProvider } from "@/providers/AuthProvider";
+import { RecipeProvider } from "@/providers/RecipeProvider";
 
 const font = Figtree({ subsets: ["latin"] });
-export const revalidate = 120 // revalidate this page every 60 seconds
+export const revalidate = 120; // revalidate this page every 60 seconds
 
 export const metadata = {
   title: "Saveabl",
@@ -30,12 +31,14 @@ export default function RootLayout({
           <ToasterProvider />
           <ModalProvider />
           <MyParallaxProvider>
-            <PromotionBanner />
-            <Navbar />
+            <RecipeProvider>
+              <PromotionBanner />
+              <Navbar />
 
-            <main className="min-h-screen overflow-x-hidden">{children}</main>
-            
-            <Footer />
+              <main className="min-h-screen overflow-x-hidden">{children}</main>
+
+              <Footer />
+            </RecipeProvider>
           </MyParallaxProvider>
         </AuthProvider>
       </body>

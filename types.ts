@@ -72,10 +72,13 @@ export interface Subscription {
 }
 
 export interface Recipe {
+  createdAt: string | number | Date;
+  deprecated: boolean;
   id: string;
   title: string;
   slug: string;
   startDate: string;
+  weekNr: number;
   recipeNumber: number;
   steg: string[];
   ingredients: string[];

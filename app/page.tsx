@@ -10,6 +10,8 @@ import TextBanner from "@/components/ui/TextBanner";
 import PromotionBanner from "@/components/ui/PromotionBanner";
 import Merch from "@/components/section/Merch";
 import { textBannerText } from "@/lib/general";
+import ExplainerVideo from "@/components/section/ExplainerVideo";
+import USP from "@/components/section/USP";
 
 export default function Home() {
 
@@ -21,8 +23,10 @@ export default function Home() {
       </div>
       <div className="relative z-1 flex min-h-screen flex-col items-center justify-between pt-16">
         <Hero />
-        <TextBanner>{textBannerText}</TextBanner>
-        <SellingPoints />
+        <ExplainerVideo />
+        {/* <TextBanner>{textBannerText}</TextBanner> */}
+        <USP />
+        {/* <SellingPoints /> */}
 
         <CallToAction />
         <TextBanner>{textBannerText}</TextBanner>

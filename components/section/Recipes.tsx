@@ -9,71 +9,13 @@ import RecipeTile from "../RecipeTile";
 import Button from "../ui/Button";
 import { getDateForPriorRecipes } from "@/helpers/format";
 import ThisWeekRecipes from "../general/ThisWeekRecipes";
+import { useRecipes } from "@/hooks/useRecipes";
 
 const Recipes = () => {
-  const [recipes, setRecipes] = useState<Recipe[]>([]);
-  const [recipeNextWeek, setRecipeNextWeek] = useState<Recipe[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [hasMore, setHasMore] = useState<boolean>(true);
-  const [loadingMore, setLoadingMore] = useState<boolean>(false);
 
-  const fetchMoreRecipes = async () => {
-    if (!hasMore || loadingMore) return;
-    try {
-      setLoadingMore(true);
-      const res = await fetch("/api/recipes", {
-        method: "POST",
-        body: JSON.stringify({
-          limit: 3,
-          offset: recipes.length,
-          endDate: getDateForPriorRecipes(),
-        }),
-      });
-      const data = await res.json();
-      setRecipes([...recipes, ...data]);
-      setHasMore(data.length === 3);
-    } catch (error) {
-      toast.error("Kunde inte hämta recept");
-    } finally {
-      setLoadingMore(false);
-    }
-  };
+  const { nextWeek, prior, fetchMorePrior, hasMore, loading } = useRecipes();
 
-  useEffect(() => {
-    const getNextWeeksRecipes = async () => {
-      try {
-        const res = await fetch("/api/recipes/next-week", {
-          method: "GET",
-        });
-        const data = await res.json();
-        console.log(data);
-        setRecipeNextWeek(data);
-      } catch (error) {
-        toast.error("Kunde inte hämta nästa veckas recept");
-      }
-    };
-    getNextWeeksRecipes();
-
-    const getRecipes = async () => {
-      try {
-        const res = await fetch("/api/recipes", {
-          method: "POST",
-          body: JSON.stringify({
-            limit: 3,
-            offset: 0,
-            endDate: getDateForPriorRecipes(),
-          }),
-        });
-        const data = await res.json();
-        setRecipes(data);
-      } catch (error) {
-        toast.error("Kunde inte hämta recept");
-      } finally {
-        setLoading(false);
-      }
-    };
-    getRecipes();
-  }, []);
+ 
 
   return (
     <div className="my-10 min-h-screen">
@@ -85,7 +27,7 @@ const Recipes = () => {
           <ThisWeekRecipes />
         </div>
 
-        {recipeNextWeek.length > 2 && (
+        {nextWeek.length > 2 && (
           <div className="col-span-3">
             <h3 className="font-poppins text-6xl text-primary">Nästa vecka</h3>
             <Grid className=" gap-8 pt-4">
@@ -96,7 +38,7 @@ const Recipes = () => {
                   <div className="h-80 overflow-hidden rounded-xl w-full animate-pulse bg-primary bg-opacity-25" />
                 </>
               ) : (
-                recipeNextWeek.map((recipe: Recipe, index: number) => (
+                nextWeek.map((recipe: Recipe, index: number) => (
                   <RecipeTile key={index} recipe={recipe} />
                 ))
               )}
@@ -113,13 +55,17 @@ const Recipes = () => {
             <div className="h-80 overflow-hidden rounded-xl w-full animate-pulse bg-primary bg-opacity-25" />
           </>
         ) : (
-          recipes.map((recipe: Recipe) => {
+          prior.map((recipe: Recipe) => {
             return <RecipeTile key={recipe.id} recipe={recipe} />;
           })
         )}
       </Grid>
-      <Button className="mt-8" disabled={!hasMore} onClick={fetchMoreRecipes}>
-        {!loadingMore ? (
+      <Button
+        className="mt-8"
+        disabled={!hasMore || loading}
+        onClick={fetchMorePrior}
+      >
+        {!loading ? (
           " Hämta äldre recept"
         ) : (
           <div role="status" className=" w-full flex justify-center">

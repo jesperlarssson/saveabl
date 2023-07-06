@@ -5,18 +5,29 @@ import Image from "next/image";
 import { Recipe } from "@/types";
 import { getWeekNumber } from "@/helpers/format";
 import { twMerge } from "tailwind-merge";
+import { toast } from "react-hot-toast";
 
 interface RecipeTileProps {
   recipe: Recipe;
   fullWidth?: boolean;
+
 }
 
 const RecipeTile: React.FC<RecipeTileProps> = ({ recipe, fullWidth }) => {
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (recipe.deprecated) {
+      e.preventDefault();
+      toast.error("Detta recept är inte längre tillgängligt");
+    }
+  };
   return (
-    <Link href={`recept/${recipe.slug}`}>
+    <Link
+      onClick={handleLinkClick}
+      href={recipe.deprecated ? "#" : `recept/${recipe.slug}`}
+    >
       <div
         className={twMerge(
-          `relative cursor-pointer h-80 overflow-hidden rounded-xl bg-white group drop-shadow-lg hover:drop-shadow-xl hover:-translate-y-2 transition duration-300`,
+          `relative cursor-pointer h-80 overflow-hidden rounded-xl bg-white group drop-shadow-lg hover:drop-shadow-xl hover:-translate-y-0 transition duration-300`,
           fullWidth && "rounded-none shadow-none hover:-translate-y-0"
         )}
       >
@@ -34,8 +45,9 @@ const RecipeTile: React.FC<RecipeTileProps> = ({ recipe, fullWidth }) => {
         </div>
         <div className="bg-gradient-to-t from-secondary to-transparent  h-fit w-full sm:p-6 text-primary-200 absolute bottom-0 left-0 p-4">
           <p className="text-primary ">{`Vecka ${getWeekNumber(
-            new Date(recipe.startDate)
-          )} - Dag ${recipe.recipeNumber}`}</p>
+            new Date(recipe.deprecated ? recipe.createdAt : recipe.startDate)
+          )}${recipe.deprecated ? "" : `- Dag ${recipe.recipeNumber}`}`}</p>
+
           <h3 className="font-poppins text-primary-200 text-md mt-2 group-hover:underline underline-offset-4 transition-all group-hover:mb-4">
             {recipe.title}
           </h3>

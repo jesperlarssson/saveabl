@@ -8,6 +8,7 @@ import Image from "next/image";
 import Button from "../ui/Button";
 import Section from "../ui/Section";
 import { Parallax } from "react-scroll-parallax";
+import RecipeDisplay from "../general/RecipeDisplay";
 
 const Hero = () => {
   return (
@@ -15,14 +16,15 @@ const Hero = () => {
       <Section>
         <Parallax speed={10}>
           <div className="flex flex-col  justify-center items-center gap-y-12 text-secondary ">
-            <div className="w-128 h-fit overflow-hidden rounded-lg  shadow-primary-800  drop-shadow-xl">
+            <RecipeDisplay />
+            {/* <div className="w-128 h-fit overflow-hidden rounded-lg  shadow-primary-800  drop-shadow-xl">
               <LiteYouTubeEmbed
                 aspectHeight={9}
                 aspectWidth={16}
                 id="SxbsaJLzIiE"
                 title="Saveabl - explainer video"
               />
-            </div>
+            </div> */}
             <div className="-ml-8">
               <Image
                 width={660 / 2}
