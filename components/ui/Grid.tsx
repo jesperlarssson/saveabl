@@ -10,7 +10,7 @@ const Grid: React.FC<GridProps> = ({ children, className }) => {
   return (
     <div
       className={twMerge(
-        `grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-8`,
+        `grid grid-cols-1 lg:grid-cols-3 sm:gap-8`,
         className
       )}
     >

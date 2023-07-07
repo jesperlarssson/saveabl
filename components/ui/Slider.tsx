@@ -23,7 +23,7 @@ const Slider: React.FC<SliderProps> = ({ children }) => {
     <div className="relative flex items-center">
       <IconButton
         onClick={() => swiperRef.current.slidePrev()}
-        className="absolute left-0  -ml-10"
+        className="hidden sm:flex absolute left-0 -ml-10 "
       >
         <BsChevronLeft size={28} />
       </IconButton>
@@ -33,7 +33,19 @@ const Slider: React.FC<SliderProps> = ({ children }) => {
         }}
         modules={[Navigation, Pagination]}
         spaceBetween={30}
-        slidesPerView={3}
+        slidesPerView={1}
+        breakpoints={{
+          // when window width is >= 640px
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 30,
+          },
+          // when window width is >= 768px
+          768: {
+            slidesPerView: 3,
+            spaceBetween: 30,
+          },
+        }}
         onSlideChange={() => console.log("slide change")}
       >
         {childrenArray.map((child, i) => {
@@ -42,7 +54,7 @@ const Slider: React.FC<SliderProps> = ({ children }) => {
       </Swiper>
       <IconButton
         onClick={() => swiperRef.current.slideNext()}
-        className="absolute right-0  -mr-10"
+        className="hidden sm:flex absolute right-0  -mr-10"
       >
         <BsChevronRight size={28} />
       </IconButton>

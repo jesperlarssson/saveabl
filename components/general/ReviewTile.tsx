@@ -2,7 +2,8 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 import Card from "../ui/Card";
-import { Parallax } from "react-scroll-parallax";
+//import { Parallax } from "react-scroll-parallax";
+
 
 interface ReviewTileProps {
   key: string;
@@ -28,7 +29,7 @@ const ReviewTile: React.FC<ReviewTileProps> = ({
   const router = useRouter();
   return (
     <div key={key} className="">
-      <Parallax speed={id * 3}>
+      {/* <Parallax speed={id * 3}> */}
         <Card
           clickable
           onClick={() => router.push(url)}
@@ -41,7 +42,7 @@ const ReviewTile: React.FC<ReviewTileProps> = ({
           <h3 className="font-poppins text-xl text-secondary">{title}</h3>
           <p className="opacity-80">{review}</p>
         </Card>
-      </Parallax>
+      {/* </Parallax> */}
     </div>
   );
 };

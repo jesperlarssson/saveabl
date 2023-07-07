@@ -16,7 +16,7 @@ const Footer = () => {
  
   return (
     <>
-      <TextBanner>{bannerText}</TextBanner>
+      {/* <TextBanner>{bannerText}</TextBanner> */}
       <footer className="bg-secondary ">
         <Section className="mx-auto  px-4 py-16 sm:px-6 lg:px-8">
           <div className="flex justify-center text-teal-600 dark:text-teal-300">

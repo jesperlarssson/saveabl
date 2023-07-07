@@ -17,7 +17,7 @@ const Card: React.FC<CardProps> = ({
     <div
       onClick={onClick}
       className={twMerge(
-        `bg-primary bg-opacity-25 my-8 shadow-inner p-8 rounded-lg text-primary transition`,
+        `bg-primary bg-opacity-25 mt-6 sm:my-8 shadow-inner p-4 sm:p-8 rounded-lg text-primary transition`,
         [className, clickable && "cursor-pointer hover:shadow-lg"]
       )}
     >

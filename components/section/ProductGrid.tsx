@@ -1,0 +1,83 @@
+"use client";
+
+import React from "react";
+import Section from "../ui/Section";
+import Grid from "../ui/Grid";
+import Image from "next/image";
+import { twMerge } from "tailwind-merge";
+import AnimatedGrid from "../ui/AnimatedGrid";
+import ProductTile from "../general/ProductTile";
+
+const productInfo = [
+  {
+    id: "1",
+    title: "Prenumeration varje vecka",
+    excerpt:
+      "Få hem tolv portioner mat till din dörr varje vecka. Välj leveransdag lör-mån.",
+    description:
+      'När du beställer en prenumeration får du hem tolv portioner mat till din dörr varje vecka. Prenumerationen har ingen bindningstid och du kan avsluta när du vill. Leveransdag väljer du själv lör-mån när du lägger din beställning. Din prenumeration kan hanteras under "mitt konto" när som.',
+    price: 599,
+    portions: 12,
+    favorite: true,
+    imgSrc: "/images/product-1.jpg",
+  },
+  {
+    id: "2",
+    title: "Prenumeration varannan vecka",
+    excerpt:
+      "Få hem tolv portioner mat till din dörr varannan vecka. Välj leveransdag lör-mån.",
+    description:
+      'När du beställer en prenumeration får du hem tolv portioner mat till din dörr varannan vecka. Prenumerationen har ingen bindningstid och du kan avsluta när du vill. Leveransdag väljer du själv lör-mån när du lägger din beställning. Din prenumeration kan hanteras under "mitt konto" när som.',
+    price: 599,
+    portions: 12,
+    imgSrc: "/images/product-2.jpg",
+  },
+  {
+    id: "3",
+    title: "Prova-på-kassen",
+    excerpt:
+      "Få hem åtta portioner mat och testa på saveabl-kassen. Välj leveransdag lör-mån.",
+    description:
+      "Få hem åtta portioner mat och testa på saveabl-kassen. Välj leveransdag lör-mån.",
+    price: 499,
+    portions: 8,
+    imgSrc: "/images/product-3.jpg",
+  },
+  {
+    id: "4",
+    title: "Engångsköp",
+    excerpt:
+      "Få hem tolv portioner mat till din dörr varje vecka. Välj leveransdag lör-mån.",
+    description:
+      "Få hem tolv portioner mat till din dörr varje vecka. Välj leveransdag lör-mån.",
+    price: 659,
+    portions: 12,
+    imgSrc: "/images/product-4.jpg",
+  },
+];
+
+const ProductGrid = () => {
+  return (
+    <Section className="bg-secondary pt-4 pb-48">
+      {/* <div className="grid sm:grid-cols-2 gap-4">
+        {productInfo.map((product) => (
+          <ProductTile
+            key={product.title}
+            title={product.title}
+            price={product.price}
+            imgSrc={product.imgSrc}
+            favorite={product.favorite}
+            portions={product.portions}
+            description={product.description}
+            id={product.id}
+            onExpand={(id) => console.log(id)}
+
+          />
+        ))}
+      </div> */}
+      <AnimatedGrid items={productInfo} />
+    </Section>
+  );
+};
+
+export default ProductGrid;

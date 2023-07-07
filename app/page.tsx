@@ -12,6 +12,7 @@ import Merch from "@/components/section/Merch";
 import { textBannerText } from "@/lib/general";
 import ExplainerVideo from "@/components/section/ExplainerVideo";
 import USP from "@/components/section/USP";
+import ProductGrid from "@/components/section/ProductGrid";
 
 export default function Home() {
 
@@ -27,14 +28,15 @@ export default function Home() {
         {/* <TextBanner>{textBannerText}</TextBanner> */}
         <USP />
         {/* <SellingPoints /> */}
+        <ProductGrid />
 
         <CallToAction />
-        {/* <TextBanner>{textBannerText}</TextBanner> */}
+        {/* <TextBanner className="bg-primary">{textBannerText}</TextBanner> */}
         <Reviews />
-        <TextBanner>{textBannerText}</TextBanner>
+        <TextBanner className="bg-primary">{textBannerText}</TextBanner>
         <News />
-        <TextBanner>{textBannerText}</TextBanner>
-        <Merch />
+        {/* <TextBanner className="bg-accent">{textBannerText}</TextBanner> */}
+        {/* <Merch /> */}
       </div>
     </>
   );

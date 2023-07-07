@@ -9,6 +9,9 @@ import ReviewTile from "../general/ReviewTile";
 import LottieAnimation from "../ui/LottieAnimation";
 import globAnimation from "../../public/anim/Jordklot.json";
 import clockAnimation from "../../public/anim/Klocka.json";
+import TitleH2 from "../ui/TitleH2";
+import Title from "../ui/Title";
+import BodyText from "../ui/BodyText";
 
 const Reviews = () => {
   return (
@@ -27,13 +30,17 @@ const Reviews = () => {
           </>
         }
       >
-        <TrustPilotWidget />
-        <h2 className="font-poppins text-secondary font-semibold text-5xl max-w-4xl mb-4">
+        <div className="w-full sm:w-128 mb-8 -ml-20">
+          <TrustPilotWidget />
+        </div>
+
+        <Title>
           Över 20 000 räddade middagar, tillsammans gör vi skillnad!
-        </h2>
-        <p className="text-gray-900 opacity-80">
+        </Title>
+        <BodyText >
           Såhär säger några av våra miljöhjältar till kunder:{" "}
-        </p>
+        </BodyText>
+
         <Grid>
           {reviews.map((review) => (
             <ReviewTile key={`review-${review.id}`} {...review} />
