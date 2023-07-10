@@ -18,17 +18,9 @@ const AnimatedGrid: React.FC<AnimatedGridProps> = ({ items }) => {
         {items.map((item) => (
           <ProductTile
             key={item.id}
-            title={item.title}
-            price={item.price}
-            imgSrc={item.imgSrc}
-            favorite={item.favorite}
-            portions={item.portions}
-            excerpt={item.excerpt}
-            description={item.description}
-            id={item.id}
+            product={item}
             onExpand={(id) => setExpandedId(id)}
-            isExpanded={expandedId === item.id}
-          >
+            isExpanded={expandedId === item.id}        >
           </ProductTile>
         ))}
       </AnimatePresence>

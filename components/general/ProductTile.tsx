@@ -6,18 +6,13 @@ import Button from "../ui/Button";
 import { toast } from "react-hot-toast";
 import { useRecipes } from "@/hooks/useRecipes";
 import Link from "next/link";
+import useCheckout from "@/hooks/useCheckout";
 
 interface ProductTileProps {
   key: string;
-  title: string;
-  excerpt?: string;
-  description: string;
-  price?: number;
-  portions?: number;
+  product: any;
   onClick?: () => void;
   favorite?: boolean;
-  imgSrc: string;
-  id: string;
   onExpand: (id: string) => void;
   isExpanded?: boolean;
   children?: React.ReactNode;
@@ -25,20 +20,15 @@ interface ProductTileProps {
 
 const ProductTile: React.FC<ProductTileProps> = ({
   key,
-  title,
-  excerpt,
-  description,
-  imgSrc,
-  price,
-  portions,
+  product,
   onClick,
   favorite = false,
-  id,
   onExpand,
   isExpanded,
   children,
 }) => {
   const { nextWeek } = useRecipes();
+  const { addMealKit } = useCheckout();
   return (
     <>
       <motion.div
@@ -46,16 +36,16 @@ const ProductTile: React.FC<ProductTileProps> = ({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        onClick={() => onExpand(isExpanded ? "" : id)}
+        onClick={() => onExpand(isExpanded ? "" : product.id)}
         className={twMerge(
           `w-full h-64 rounded-lg  drop-shadow-lg cursor-pointer  hover:drop-shadow-2xl overflow-auto `,
           [
-            favorite && "border-4 border-accent",
+            product.favorite && "border-4 border-accent",
             isExpanded ? "absolute top-0 left-0 h-full z-30" : "",
           ]
         )}
       >
-        <Image fill className="object-cover" alt="" src={imgSrc} />
+        <Image fill className="object-cover" alt="" src={product.imgSrc} />
         <div
           className={twMerge(
             `absolute top-0 left-0 h-full w-full grid  items-end  p-4  bg-black bg-opacity-40 text-primary-200`,
@@ -64,26 +54,30 @@ const ProductTile: React.FC<ProductTileProps> = ({
         >
           <div>
             <h3 className="text-2xl font-poppins bg-primary max-w-fit text-secondary px-2">
-              {title}
+              {product.title}
             </h3>
             {isExpanded ? (
               <>
                 <div className="absolute top-0 right-0 p-2 flex"></div>
-                <p className="text-xl max-w-4xl my-4">{description}</p>
+                <p className="text-xl max-w-4xl my-4">{product.description}</p>
                 <Button
-                  onClick={() => toast.error("Inte implementerat ännu")}
+                  onClick={() => addMealKit(product)}
                   className="max-w-fit"
                 >
-                  Beställ nu för {price} kr ({portions} portioner)
+                  Beställ nu för {product.price} kr ({product.portions}{" "}
+                  portioner)
                 </Button>
               </>
             ) : (
-              <p className="text-xl mt-2">{excerpt}</p>
+              <p className="text-xl mt-2">{product.excerpt}</p>
             )}
           </div>
           {isExpanded && (
             <div className="flex flex-col gap-2">
-              <h2 className="font-poppins text-xl">Nästa utkörning innehåller {portions == 8 && ("(två recept av)")} :</h2>
+              <h2 className="font-poppins text-xl">
+                Nästa utkörning innehåller{" "}
+                {product.portions == 8 && "(två recept av)"} :
+              </h2>
               {nextWeek.length > 2 ? (
                 nextWeek.map((recipe) => (
                   <Link
@@ -114,7 +108,7 @@ const ProductTile: React.FC<ProductTileProps> = ({
             </div>
           )}
         </div>
-        {favorite && (
+        {product.favorite && (
           <div className="absolute top-0 right-0 p-2 flex">
             <span className="font-poppins text-accent mr-2">Mest populär</span>
             <svg
