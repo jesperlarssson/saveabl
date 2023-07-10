@@ -14,7 +14,7 @@ interface State {
 // Define the action
 interface Action {
   type: string;
-  payload: Product | AddOn | number;
+  payload: Product | AddOn | number | any;
 }
 
 // Define the context
