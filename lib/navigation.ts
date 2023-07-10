@@ -30,12 +30,12 @@ export const navigation: NavigationItem[] = [
     path: "/nyheter",
     disabled: false,
   },
-  {
-    id: 5,
-    name: "Restaurangen",
-    path: "/restaurangen",
-    disabled: true,
-  },
+  // {
+  //   id: 5,
+  //   name: "Restaurangen",
+  //   path: "/restaurangen",
+  //   disabled: true,
+  // },
 ];
 
 export const socials: NavigationItem[] = [

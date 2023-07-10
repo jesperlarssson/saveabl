@@ -4,12 +4,15 @@ import { motion, useAnimation } from "framer-motion";
 import Button from "../ui/Button";
 import Section from "../ui/Section";
 import { toast } from "react-hot-toast";
+import Title from "../ui/Title";
+import useLocationModal from "@/hooks/useLocationModal";
 
 const CallToAction = () => {
+  const locationModal = useLocationModal();
   return (
     <Section className="bg-primary-200 w-full relative pt-0">
       <div className="flex flex-col justify-center items-center">
-        <div className="relative w-128 -mt-16 sm:-mt-20 ml-10 z-20">
+        <div className="relative w-full sm:w-128 -mt-16 sm:-mt-20 ml-10 z-20">
           <div className="w-full">
             <motion.div
               initial={{ opacity: 0, scale: 0.5, x: -100 }}
@@ -79,9 +82,9 @@ const CallToAction = () => {
           alt="scribble matkassen"
           src="/images/s-matkassen.png"
         />
-        <h1 className="text-center text-2xl sm:text-3xl font-poppins text-secondary max-w-xl mt-8">
+        <Title className="text-center mt-8">
           Var med du också och rädda mat på ett enkelt och klimatsmart sätt!
-        </h1>
+        </Title>
         <div className="mt-10 mb-5 grid grid-cols-2 sm:grid-cols-4 gap-4 text-secondary ">
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
@@ -123,7 +126,7 @@ const CallToAction = () => {
           </motion.div>
         </div>
         <Button
-          onClick={() => toast.error("Implement this button jeppe")}
+          onClick={() => locationModal.onOpen()}
           className="mt-8 w-full md:w-96 "
         >
           Beställ nu

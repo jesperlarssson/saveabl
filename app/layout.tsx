@@ -10,9 +10,10 @@ import PromotionBanner from "@/components/ui/PromotionBanner";
 import ModalProvider from "@/providers/ModalProvider";
 import { AuthProvider } from "@/providers/AuthProvider";
 import { RecipeProvider } from "@/providers/RecipeProvider";
+import { GeoProvider } from "@/providers/GeoProvider";
 
 const font = Figtree({ subsets: ["latin"] });
-export const revalidate = 120; // revalidate this page every 60 seconds
+export const revalidate = 1; // revalidate this page every 60 seconds
 
 export const metadata = {
   title: "Saveabl",
@@ -27,20 +28,24 @@ export default function RootLayout({
   return (
     <html lang="sv">
       <body className={font.className}>
-        <AuthProvider>
-          <ToasterProvider />
-          <ModalProvider />
-          <MyParallaxProvider>
-            <RecipeProvider>
-              <PromotionBanner />
-              <Navbar />
+        <GeoProvider>
+          <AuthProvider>
+            <ToasterProvider />
+            <ModalProvider />
+            <MyParallaxProvider>
+              <RecipeProvider>
+                <PromotionBanner />
+                <Navbar />
 
-              <main className="min-h-screen overflow-x-hidden">{children}</main>
+                <main className="min-h-screen overflow-x-hidden">
+                  {children}
+                </main>
 
-              <Footer />
-            </RecipeProvider>
-          </MyParallaxProvider>
-        </AuthProvider>
+                <Footer />
+              </RecipeProvider>
+            </MyParallaxProvider>
+          </AuthProvider>
+        </GeoProvider>
       </body>
     </html>
   );

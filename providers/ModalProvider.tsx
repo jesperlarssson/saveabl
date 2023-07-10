@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { ProductWithPrice } from "@/types";
 import Modal from "@/components/ui/Modal";
 import AuthModal from "@/components/modals/AuthModal";
+import LocationModal from "@/components/modals/LocationModal";
 
 
 const ModalProvider = () => {
@@ -21,6 +22,7 @@ const ModalProvider = () => {
   return (
     <>
       <AuthModal />
+      <LocationModal />
     </>
   );
 };

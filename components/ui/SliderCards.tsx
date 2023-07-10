@@ -24,9 +24,26 @@ const SliderCards: React.FC<SliderCardsProps> = ({ children }) => {
         grabCursor={true}
         centeredSlides={true}
         loop={false}
-        slidesPerView={
-            3
-        }
+        slidesPerView={1}
+        breakpoints={{
+          640: {
+            slidesPerView: 2,
+            width: 640,
+          },
+          768: {
+            slidesPerView: 3,
+            width: 768,
+          },
+          980: {
+            slidesPerView: 3,
+            width: 980,
+          },
+          1200: {
+            slidesPerView: 3,
+            width: 1200,
+          },
+        }}
+        width={340}
         coverflowEffect={{
         //   rotate: 5,
         //   stretch: 1,

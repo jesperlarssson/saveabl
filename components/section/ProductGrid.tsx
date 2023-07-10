@@ -10,7 +10,7 @@ import ProductTile from "../general/ProductTile";
 
 const productInfo = [
   {
-    id: "1",
+    id: "PRODUCT1",
     title: "Prenumeration varje vecka",
     excerpt:
       "Få hem tolv portioner mat till din dörr varje vecka. Välj leveransdag lör-mån.",
@@ -22,7 +22,7 @@ const productInfo = [
     imgSrc: "/images/product-1.jpg",
   },
   {
-    id: "2",
+    id: "PRODUCT2",
     title: "Prenumeration varannan vecka",
     excerpt:
       "Få hem tolv portioner mat till din dörr varannan vecka. Välj leveransdag lör-mån.",
@@ -33,7 +33,7 @@ const productInfo = [
     imgSrc: "/images/product-2.jpg",
   },
   {
-    id: "3",
+    id: "PRODUCT3",
     title: "Prova-på-kassen",
     excerpt:
       "Få hem åtta portioner mat och testa på saveabl-kassen. Välj leveransdag lör-mån.",
@@ -44,7 +44,7 @@ const productInfo = [
     imgSrc: "/images/product-3.jpg",
   },
   {
-    id: "4",
+    id: "PRODUCT4",
     title: "Engångsköp",
     excerpt:
       "Få hem tolv portioner mat till din dörr varje vecka. Välj leveransdag lör-mån.",
@@ -59,22 +59,6 @@ const productInfo = [
 const ProductGrid = () => {
   return (
     <Section className="bg-secondary pt-4 pb-48">
-      {/* <div className="grid sm:grid-cols-2 gap-4">
-        {productInfo.map((product) => (
-          <ProductTile
-            key={product.title}
-            title={product.title}
-            price={product.price}
-            imgSrc={product.imgSrc}
-            favorite={product.favorite}
-            portions={product.portions}
-            description={product.description}
-            id={product.id}
-            onExpand={(id) => console.log(id)}
-
-          />
-        ))}
-      </div> */}
       <AnimatedGrid items={productInfo} />
     </Section>
   );

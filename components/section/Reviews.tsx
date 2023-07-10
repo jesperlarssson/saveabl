@@ -1,5 +1,6 @@
 import React from "react";
 import Head from "next/head";
+import { AiOutlineArrowRight } from "react-icons/ai";
 import TrustPilotWidget from "./TrustPilotWidget";
 import Section from "../ui/Section";
 import InjectScriptComponent from "../general/InjectScript";
@@ -9,9 +10,10 @@ import ReviewTile from "../general/ReviewTile";
 import LottieAnimation from "../ui/LottieAnimation";
 import globAnimation from "../../public/anim/Jordklot.json";
 import clockAnimation from "../../public/anim/Klocka.json";
-import TitleH2 from "../ui/TitleH2";
+
 import Title from "../ui/Title";
 import BodyText from "../ui/BodyText";
+
 
 const Reviews = () => {
   return (
@@ -40,6 +42,7 @@ const Reviews = () => {
         <BodyText >
           Såhär säger några av våra miljöhjältar till kunder:{" "}
         </BodyText>
+        <a className="mt-4 font-bold text-neutral-700 flex items-center gap-2 cursor-pointer hover:gap-4 hover:text-neutral-600 transition-all group" href="https://se.trustpilot.com/review/saveabl.se">Läs alla omdömen <AiOutlineArrowRight className="group-hover:text-accent" /></a>
 
         <Grid>
           {reviews.map((review) => (

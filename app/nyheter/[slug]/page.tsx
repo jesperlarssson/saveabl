@@ -35,7 +35,7 @@ const PostPage: React.FC<PostPageProps> = async ({ params }) => {
       <Head>
         <title>{post.title}</title>
       </Head>
-      <Section className="pt-16">
+      <Section narrow className="pt-16">
         <Title>{post.title}</Title>
         <BodyText className="my-4 mb-8">{post.excerpt}</BodyText>
 

@@ -5,6 +5,7 @@ import { Recipe } from "@/types";
 import { getDateForPriorRecipes } from "@/helpers/format";
 import toast from "react-hot-toast";
 
+
 interface RecipeContextInterface {
   thisWeek: Recipe[];
   nextWeek: Recipe[];
@@ -37,6 +38,27 @@ export const RecipeProvider = ({ children }: RecipeProviderProps) => {
   const [hasMore, setHasMore] = useState<boolean>(true);
   const [deprecatedHasMore, setDeprecatedHasMore] = useState<boolean>(true);
   const [loadingMore, setLoadingMore] = useState<boolean>(false);
+
+  useEffect(() => {
+    // Your fetching logic here...
+  
+    const fetchOnFocus = async () => {
+      try {
+        const res = await fetch("/api/recipes/next-week", {
+          method: "GET",
+          
+        });
+        const data = await res.json();
+        console.log(data);
+        setNextWeek(data);
+      } catch (error) {}
+    };
+    window.addEventListener('focus', fetchOnFocus);
+  
+    // Make sure to clean up your event listeners!
+    return () => window.removeEventListener('focus', fetchOnFocus);
+  }, []);
+  
 
   useEffect(() => {
     const getNextWeeksRecipes = async () => {

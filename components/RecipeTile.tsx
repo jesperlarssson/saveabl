@@ -10,7 +10,6 @@ import { toast } from "react-hot-toast";
 interface RecipeTileProps {
   recipe: Recipe;
   fullWidth?: boolean;
-
 }
 
 const RecipeTile: React.FC<RecipeTileProps> = ({ recipe, fullWidth }) => {
@@ -44,9 +43,11 @@ const RecipeTile: React.FC<RecipeTileProps> = ({ recipe, fullWidth }) => {
           />
         </div>
         <div className="bg-gradient-to-t from-secondary to-transparent  h-fit w-full sm:p-6 text-primary-200 absolute bottom-0 left-0 p-4">
-          <p className="text-primary ">{`Vecka ${getWeekNumber(
-            new Date(recipe.deprecated ? recipe.createdAt : recipe.startDate)
-          )}${recipe.deprecated ? "" : `- Dag ${recipe.recipeNumber}`}`}</p>
+          <p className="text-primary ">{`Vecka ${
+            recipe.deprecated
+              ? getWeekNumber(new Date(recipe.createdAt))
+              : recipe.weekNr
+          } ${recipe.deprecated ? "" : `- Dag ${recipe.recipeNumber}`}`}</p>
 
           <h3 className="font-poppins text-primary-200 text-md mt-2 group-hover:underline underline-offset-4 transition-all group-hover:mb-4">
             {recipe.title}

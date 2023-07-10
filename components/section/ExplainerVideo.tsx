@@ -19,7 +19,7 @@ const ExplainerVideo = () => {
       className="w-full p-8 max-h-fit"
     >
       <div className="rounded-xl overflow-hidden">
-        <VideoPlayer src="/videos/explainer.mp4" type="video/mp4" />
+        <VideoPlayer src="https://media.graphassets.com/09byMtQKayU4vjSHGXfQ" type="video/mp4" />
       </div>
     </Section>
   );
