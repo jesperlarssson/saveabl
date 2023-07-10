@@ -1,6 +1,8 @@
 import { useContext } from 'react';
-import { CheckoutContext, actionTypes, Product, AddOn } from '../providers/CheckoutProvider';
+import { CheckoutContext, actionTypes } from '../providers/CheckoutProvider';
 import { free, shippingCostStage1, shippingCostStage2, shippingCostStage3 } from '@/lib/zipCodes';
+import { Product } from '@/lib/mealkits';
+import { AddOn } from '@/lib/addons';
 
 const useCheckout = () => {
   const { state, dispatch } = useContext(CheckoutContext);
