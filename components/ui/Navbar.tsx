@@ -9,8 +9,7 @@ import { navigation } from "@/lib/navigation";
 import NavItem from "./NavItem";
 import useAuthModal from "@/hooks/useAuthModal";
 import { useAuth } from "@/hooks/useAuth";
-import Button from "./Button";
-import MobileMenu from "./MobileMenu";
+
 
 const Navbar = () => {
   const authModal = useAuthModal();
@@ -30,7 +29,6 @@ const Navbar = () => {
 
   return (
     <>
-      {/* <MobileMenu /> */}
       <div
         className={twMerge(
           `sticky top-0 w-full bg-primary-200 border-b border-primary border-opacity-25 drop-shadow-sm  z-30 transition`,
