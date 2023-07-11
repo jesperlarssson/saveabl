@@ -1,4 +1,6 @@
 "use client";
+import { usePathname } from "next/navigation";
+
 import useCheckout from "@/hooks/useCheckout";
 import React, { useEffect } from "react";
 import Image from "next/image";
@@ -8,6 +10,8 @@ import { GiKnifeFork } from "react-icons/gi";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { BsPerson } from "react-icons/bs";
+import path from "path";
+
 
 const CheckoutBasket = () => {
   const {
@@ -20,11 +24,17 @@ const CheckoutBasket = () => {
     addAddOn,
   } = useCheckout();
   const [isExpanded, setIsExpanded] = React.useState(false);
+  const [hidden, setIsHidden] = React.useState(false);
+
+  const pathName = usePathname();
 
   useEffect(() => {
-    console.log(product);
-    console.log(addOns);
-  }, [product, addOns]);
+    if (pathName === "/checkout") {
+      setIsHidden(true);
+    } else {
+      setIsHidden(false);
+    }
+  }, [pathName]);
 
   const variants = {
     open: { opacity: 1, height: "auto" },
@@ -38,7 +48,7 @@ const CheckoutBasket = () => {
 
   return (
     <AnimatePresence>
-      {product && (
+      {product && !hidden && (
         <motion.div
           initial="closed"
           animate="open"
@@ -154,7 +164,7 @@ const CheckoutBasket = () => {
           </div>
           <div className="flex flex-col sm:items-end mt-4 sm:mt-0 ">
             <p>
-              <span className="font-bold">Totalt:</span> {getTotalPrice()}
+              <span className="font-bold">Totalt:</span> {getTotalPrice()} kr
             </p>
             <AnimatePresence>
               {!isExpanded && (
@@ -166,11 +176,12 @@ const CheckoutBasket = () => {
                 >
                   <div className="mt-1 flex  flex-col sm:items-end">
                     <p>
+                      <span className="font-bold">Fraktavgift:</span>{" "}
                       {shippingCost > 0
-                        ? `Fraktavgift: ${shippingCost}`
-                        : "Fri frakt"}
+                        ? `${shippingCost} kr`
+                        : "Gratis"}
                     </p>
-                    <Link href="/checkout" className="inline-block mt-2">
+                    <Link href="/checkout" className="inline-block mt-2 px-6 py-4 bg-accent rounded-md text-primary-200">
                       Gå till betalning
                     </Link>
                   </div>

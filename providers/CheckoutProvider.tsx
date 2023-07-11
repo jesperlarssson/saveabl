@@ -30,11 +30,16 @@ interface CheckoutProviderProps {
 }
 
 // Before the creation of the CheckoutContext
-const initialState: State = {
-  product: JSON.parse(localStorage.getItem("product") || "null"),
-  addOns: JSON.parse(localStorage.getItem("addOns") || "[]"),
-  shippingCost: JSON.parse(localStorage.getItem("shippingCost") || "0"),
+const initialState: State = typeof window !== 'undefined' ? {
+  product: JSON.parse(localStorage.getItem('product') || 'null'),
+  addOns: JSON.parse(localStorage.getItem('addOns') || '[]'),
+  shippingCost: JSON.parse(localStorage.getItem('shippingCost') || '0'),
+} : {
+  product: null,
+  addOns: [],
+  shippingCost: 0,
 };
+
 
 // Actions
 export const actionTypes = {
