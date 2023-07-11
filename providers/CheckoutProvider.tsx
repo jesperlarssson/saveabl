@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect } from "react";
+
 import { AddOn } from "@/lib/addons";
 import { Product } from "@/lib/mealkits";
 import React, { createContext, useReducer } from "react";
@@ -27,11 +29,11 @@ interface CheckoutProviderProps {
   children: React.ReactNode;
 }
 
-// Initial state
+// Before the creation of the CheckoutContext
 const initialState: State = {
-  product: null,
-  addOns: [],
-  shippingCost: 0,
+  product: JSON.parse(localStorage.getItem("product") || "null"),
+  addOns: JSON.parse(localStorage.getItem("addOns") || "[]"),
+  shippingCost: JSON.parse(localStorage.getItem("shippingCost") || "0"),
 };
 
 // Actions
@@ -87,7 +89,7 @@ const reducer = (state: State, action: Action) => {
             (item) => item.id !== (action.payload as AddOn).id
           ),
         };
-       }
+      }
 
     case actionTypes.UPDATE_SHIPPING_COST:
       return { ...state, shippingCost: action.payload as number };
@@ -105,6 +107,13 @@ export const CheckoutProvider: React.FC<CheckoutProviderProps> = ({
   children,
 }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  // This useEffect will run every time the state changes
+  useEffect(() => {
+    localStorage.setItem("product", JSON.stringify(state.product));
+    localStorage.setItem("addOns", JSON.stringify(state.addOns));
+    localStorage.setItem("shippingCost", JSON.stringify(state.shippingCost));
+  }, [state]); // Dependency array with state. If state changes, useEffect will run again.
 
   return (
     <CheckoutContext.Provider value={{ state, dispatch }}>

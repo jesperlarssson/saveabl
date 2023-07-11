@@ -13,7 +13,7 @@ const AnimatedGrid: React.FC<AnimatedGridProps> = ({ items }) => {
   const [expandedId, setExpandedId] = useState<string>("");
 
   return (
-    <div className="relative grid gap-4 sm:grid-cols-2">
+    <div className="relative grid gap-4 md:grid-cols-2">
       <AnimatePresence mode="wait">
         {items.map((item) => (
           <ProductTile
