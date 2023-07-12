@@ -23,7 +23,7 @@ const CheckoutBasket = () => {
     removeMealKit,
     addAddOn,
   } = useCheckout();
-  const [isExpanded, setIsExpanded] = React.useState(false);
+  const [isExpanded, setIsExpanded] = React.useState(true);
   const [hidden, setIsHidden] = React.useState(false);
 
   const pathName = usePathname();
@@ -59,7 +59,7 @@ const CheckoutBasket = () => {
             isExpanded ? `items-center` : ``
           )}
         >
-          <div className={twMerge(`cursor-pointer`)}>
+          <div className={"cursor-pointer"}>
             <div
               onClick={() => setIsExpanded((prev) => !prev)}
               className="flex items-center gap-2 w-full sm:w-auto "

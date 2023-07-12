@@ -29,7 +29,26 @@ const ProductTile: React.FC<ProductTileProps> = ({
   children,
 }) => {
   const { nextWeek } = useRecipes();
-  const { addMealKit } = useCheckout();
+  const { addMealKit, selectNextOneTimePurchase, selectNextSubscription } =
+    useCheckout();
+
+  const handleAddToCheckout = () => {
+    //TODO: Might need to change depending on product object from stripe/backend
+    if (product.subscription) {
+      if (product.everyWeek) {
+        selectNextSubscription(true);
+      } else {
+        selectNextSubscription(false);
+      }
+    } else {
+      if (product.portions < 12) {
+        addMealKit(product);
+      } else {
+        selectNextOneTimePurchase();
+      }
+    }
+  };
+
   return (
     <>
       <AnimatePresence mode="wait">
@@ -47,10 +66,13 @@ const ProductTile: React.FC<ProductTileProps> = ({
             <Image fill className="object-cover" alt="" src={product.imgSrc} />
             <div
               className={twMerge(
-                `absolute top-0 left-0 h-full w-full grid  items-end md:grid-cols-2 gap-4  p-4  bg-black bg-opacity-40 text-primary-200`,
+                `absolute top-0 left-0 h-full w-full grid  items-end md:grid-cols-2 gap-4  p-4  bg-black bg-opacity-40 text-primary-200`
               )}
             >
-              <button className="absolute right-0 top-0 m-4 p-4 rounded-xl bg-white bg-opacity-30 hover:bg-opacity-40" onClick={() => onExpand(isExpanded ? "" : product.id)}>
+              <button
+                className="absolute right-0 top-0 m-4 p-4 rounded-xl bg-white bg-opacity-30 hover:bg-opacity-40"
+                onClick={() => onExpand(isExpanded ? "" : product.id)}
+              >
                 <AiOutlineClose size={24} />
               </button>
               <div>
@@ -65,7 +87,7 @@ const ProductTile: React.FC<ProductTileProps> = ({
                         {product.description}
                       </p>
                       <Button
-                        onClick={() => addMealKit(product)}
+                        onClick={handleAddToCheckout}
                         className="max-w-fit"
                       >
                         Beställ nu för {product.price} kr ({product.portions}{" "}

@@ -9,6 +9,7 @@ export interface Product {
   favorite?: boolean;
   imgSrc: string;
   subscription?: boolean;
+  everyWeek?: boolean;
   type?: string;
 }
 
@@ -25,6 +26,7 @@ export const productInfo: Product[] = [
     recipes: 3,
     favorite: true,
     subscription: true,
+    everyWeek: true,
     imgSrc: "/images/product-1.jpg",
   },
   {
@@ -38,6 +40,7 @@ export const productInfo: Product[] = [
     portions: 12,
     recipes: 3,
     subscription: true,
+    everyWeek: false,
     imgSrc: "/images/product-2.jpg",
   },
   {

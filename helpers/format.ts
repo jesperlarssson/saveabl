@@ -22,3 +22,19 @@ export const getDateForPriorRecipes = () => {
   const dateString = dates[1].toISOString();
   return dateString;
 };
+
+export const deliveryDayParser = ({ start, end, label }: {
+  start: any;
+  end: any;
+  label: any;
+}) => {
+  const day = new Date(0);
+  day.setUTCSeconds(start);
+  // Sun = 0, Mon = 1, Sat = 6
+
+  if ([0, 1, 6].includes(day.getDay())) {
+    const labelSplit = label.split(" ");
+
+    return labelSplit.slice(0, 2).join(" ");
+  }
+};
