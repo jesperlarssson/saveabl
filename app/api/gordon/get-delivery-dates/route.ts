@@ -28,6 +28,11 @@ export async function POST(request: Request) {
       startDate = d.toISOString().split("T")[0];
     }
 
+    let weekAfterStartDate = "";
+    const newStartDate = new Date(startDate);
+    newStartDate.setDate(newStartDate.getDate() + 7);
+    weekAfterStartDate = newStartDate.toISOString().split("T")[0];
+
     const result = await axios.get(
       `https://backend.aws.gordondelivery.com/api/deliverywindow/checkout/${
         body.zipCode
@@ -39,7 +44,20 @@ export async function POST(request: Request) {
       }
     );
 
-    return new Response(JSON.stringify(result.data));
+    const resultNextWeek = await axios.get(
+      `https://backend.aws.gordondelivery.com/api/deliverywindow/checkout/${
+        body.zipCode
+      }${weekAfterStartDate ? `?startdate=${weekAfterStartDate}` : ""}`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+
+    return new Response(
+      JSON.stringify({ thisWeek: result.data, nextWeek: resultNextWeek.data })
+    );
   } catch (error) {
     console.error(error);
     return new Response(JSON.stringify(error));

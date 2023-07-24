@@ -11,12 +11,24 @@ interface Type {
   even: boolean;
 }
 
+interface DeliveryDay {
+  id: string;
+  start: number;
+  label: string;
+  end: number;
+}
+
 // Define the state
 interface State {
   product: Product | null;
   addOns: AddOn[];
   shippingCost: number;
   productType: Type;
+  deliveryDay: DeliveryDay | null;
+  zipCode: string | null;
+  deliveryDays: DeliveryDay[];
+  deliveryDaysError: string | null;
+  preferredWeekDay: number | null;
 }
 
 // Define the action
@@ -36,21 +48,42 @@ interface CheckoutProviderProps {
 }
 
 // Before the creation of the CheckoutContext
-const initialState: State = typeof window !== 'undefined' ? {
-  product: JSON.parse(localStorage.getItem('product') || 'null'),
-  addOns: JSON.parse(localStorage.getItem('addOns') || '[]'),
-  shippingCost: JSON.parse(localStorage.getItem('shippingCost') || '0'),
-  productType: JSON.parse(localStorage.getItem('productType') || '{"odd": false, "even": false}'),
-} : {
-  product: null,
-  addOns: [],
-  shippingCost: 0,
-  productType: {
-    odd: false,
-    even: false,
-  },
-};
-
+const initialState: State =
+  typeof window !== "undefined"
+    ? {
+        product: JSON.parse(localStorage.getItem("product") || "null"),
+        addOns: JSON.parse(localStorage.getItem("addOns") || "[]"),
+        shippingCost: JSON.parse(localStorage.getItem("shippingCost") || "0"),
+        productType: JSON.parse(
+          localStorage.getItem("productType") || '{"odd": false, "even": false}'
+        ),
+        deliveryDay: JSON.parse(
+          localStorage.getItem("deliveryDay") ||
+            '{"label": null, "start": null}'
+        ),
+        zipCode: JSON.parse(localStorage.getItem("zipCode") || "null"),
+        deliveryDays: JSON.parse(localStorage.getItem("deliveryDays") || "[]"),
+        deliveryDaysError: JSON.parse(
+          localStorage.getItem("deliveryDaysError") || "null"
+        ),
+        preferredWeekDay: JSON.parse(
+          localStorage.getItem("preferredWeekDay") || "null"
+        ),
+      }
+    : {
+        product: null,
+        addOns: [],
+        shippingCost: 0,
+        productType: {
+          odd: false,
+          even: false,
+        },
+        deliveryDay: null,
+        zipCode: null,
+        deliveryDays: [],
+        deliveryDaysError: null,
+        preferredWeekDay: null,
+      };
 
 // Actions
 export const actionTypes = {
@@ -60,6 +93,12 @@ export const actionTypes = {
   REMOVE_ADDON: "REMOVE_ADDON",
   UPDATE_SHIPPING_COST: "UPDATE_SHIPPING_COST",
   SET_PRODUCT_TYPE: "SET_PRODUCT_TYPE",
+  SET_DELIVERY_DAY: "SET_DELIVERY_DAY",
+  SET_ZIP_CODE: "SET_ZIP_CODE",
+  SET_DELIVERY_DAYS: "SET_DELIVERY_DAYS",
+  SET_DELIERY_DAYS_ERROR: "SET_DELIERY_DAYS_ERROR",
+  SET_PREFERRED_WEEK_DAY: "SET_PREFERRED_WEEK_DAY",
+
 };
 
 // Reducer
@@ -114,6 +153,21 @@ const reducer = (state: State, action: Action) => {
     case actionTypes.SET_PRODUCT_TYPE:
       return { ...state, productType: action.payload as Type };
 
+    case actionTypes.SET_DELIVERY_DAY:
+      return { ...state, deliveryDay: action.payload as DeliveryDay };
+
+    case actionTypes.SET_ZIP_CODE:
+      return { ...state, zipCode: action.payload as string };
+
+    case actionTypes.SET_DELIVERY_DAYS:
+      return { ...state, deliveryDays: action.payload as DeliveryDay[] };
+    
+    case actionTypes.SET_DELIERY_DAYS_ERROR:
+      return { ...state, deliveryDaysError: action.payload as string };
+
+    case actionTypes.SET_PREFERRED_WEEK_DAY:
+      return { ...state, preferredWeekDay: action.payload as number | null };
+
     default:
       return state;
   }
@@ -135,6 +189,12 @@ export const CheckoutProvider: React.FC<CheckoutProviderProps> = ({
     localStorage.setItem("addOns", JSON.stringify(state.addOns));
     localStorage.setItem("shippingCost", JSON.stringify(state.shippingCost));
     localStorage.setItem("productType", JSON.stringify(state.productType));
+    localStorage.setItem("deliveryDay", JSON.stringify(state.deliveryDay));
+    localStorage.setItem("zipCode", JSON.stringify(state.zipCode));
+    localStorage.setItem("deliveryDays", JSON.stringify(state.deliveryDays));
+    localStorage.setItem("deliveryDaysError", JSON.stringify(state.deliveryDaysError));
+    localStorage.setItem("preferredWeekDay", JSON.stringify(state.preferredWeekDay));
+    
   }, [state]); // Dependency array with state. If state changes, useEffect will run again.
 
   return (

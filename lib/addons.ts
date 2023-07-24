@@ -5,6 +5,7 @@ export interface AddOn {
   price: number;
   imgSrc: string;
   quantity?: number; // We add the quantity here for multiple same add-ons
+  variants?: string[];
 }
 
 export const addOnsInfo: AddOn[] = [
@@ -22,5 +23,8 @@ export const addOnsInfo: AddOn[] = [
     excerpt: "Rocka vår t-shirt och visa att du är en räddare!",
     price: 199,
     imgSrc: "/images/tshirt.png",
+    variants: [
+      "XS", "S", "M", "L", "XL"
+    ],
   },
 ];

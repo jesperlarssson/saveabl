@@ -15,6 +15,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import AddOnTile from "@/components/general/AddOnTile";
 import Title from "@/components/ui/Title";
 import CheckoutSection from "@/components/ui/CheckoutSection";
+import { stringify } from "querystring";
 
 interface Type {
   odd: boolean;
@@ -44,54 +45,36 @@ const Order = () => {
   }
 
   const [showDeliveryOptions, setShowDeliveryOptions] = useState(false);
-  const [deliveryDays, setDeliveryDays] = useState<string[] | any>([]);
+
   const [deliveryDaysLoading, setDeliveryDaysLoading] = useState(false);
-  const [deliveryDaysError, setDeliveryDaysError] = useState("");
 
   const fetchDeliveryDays = () => {
     return ["Lördag", "Söndag", "Måndag"];
   };
 
-  const selectDeliveryDay = (day: string) => {
-    toast.success(`Du har valt ${day} som leveransdag`);
-  };
+  const deliveryDaysToChoose = [
+    {
+      label: "Lördag",
+      id: 6,
+    },
+    {
+      label: "Söndag",
+      id: 0,
+    },
+    {
+      label: "Måndag",
+      id: 1,
+    },
+  ];
 
-  const fetchAvailableDeliveryDaysGordon = async (zipCode: string) => {
-    const response = await fetch("/api/gordon/get-delivery-dates", {
-      method: "POST",
-      body: JSON.stringify({
-        zipCode: zipCode,
-      }),
-    });
+  const selectDeliveryDay = (day: any) => {
+    // toast.success(
+    //   `Du har valt ${day.label} som leveransdag med start: ${day.start} och slut: ${day.end}`
+    // );
+    const selectedDay = new Date(0);
+    selectedDay.setUTCSeconds(day.start);
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const data = await response.json();
-
-    if (response.status !== 200) {
-      setDeliveryDaysLoading(false);
-      setDeliveryDaysError(
-        "Just nu kunde vi inte hämta leveransdagar. Vänligen försök igen eller kontakta vår kundservice."
-      );
-      return;
-    } else if (data.length === 0) {
-      setDeliveryDaysLoading(false);
-      setDeliveryDays([]);
-      setDeliveryDaysError(
-        "Inga möjliga leveransdagar hittade. Kontakta gärna vår support."
-      );
-      return;
-    } else {
-      const deliveryDays = data
-        .map((day: { start: any; end: any; label: any }) => {
-          return deliveryDayParser(day);
-        })
-        .filter((v: any) => v !== undefined);
-      setDeliveryDays([...new Set(deliveryDays)].slice(0, 3));
-      setDeliveryDaysLoading(false);
-    }
+    selectDeliveryDate(day);
   };
 
   const handleZipCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -99,7 +82,8 @@ const Order = () => {
     //remove all non numeric characters
     const zipCodeClean = zipCode.replace(/\D/g, "");
     if (zipCodeClean.length === 5) {
-      fetchAvailableDeliveryDaysGordon(zipCodeClean);
+      setZipCode(zipCodeClean);
+      //fetchAvailableDeliveryDaysGordon(zipCodeClean);
       setShowDeliveryOptions(true);
       updateShippingCost(zipCodeClean);
     }
@@ -109,6 +93,10 @@ const Order = () => {
     product,
     addOns,
     productType,
+    deliveryDay,
+    deliveryDays,
+    deliveryDaysError,
+    preferredWeekDay,
 
     addMealKit,
     removeMealKit,
@@ -118,6 +106,9 @@ const Order = () => {
     setProductType,
     selectNextSubscription,
     selectNextOneTimePurchase,
+    selectDeliveryDate,
+    setZipCode,
+    setPreferredWeekDay,
   } = useCheckout();
 
   return (
@@ -132,7 +123,12 @@ const Order = () => {
             Prenumeration
           </CheckoutButton>
           <CheckoutButton
-            selected={!productType.odd && !productType.even}
+            selected={
+              !productType.odd &&
+              !productType.even &&
+              productType.odd !== null &&
+              productType.even !== null
+            }
             onClick={selectNextOneTimePurchase}
           >
             Engångsköp
@@ -160,7 +156,7 @@ const Order = () => {
             onChange={handleZipCodeChange}
             id="postalcode"
             placeholder="12345"
-            className="border border-primary bg-transparent p-2 rounded-md font-bold placeholder-neutral-400 text-secondary"
+            className="border border-primary bg-transparent p-2 rounded-md font-bold placeholder-neutral-400 text-secondary ring-1 ring-transparent focus:ring-primary focus:outline-none"
           ></input>
         </div>
 
@@ -177,10 +173,11 @@ const Order = () => {
               <h3 key="title-delivery" className="font-poppins text-lg">
                 Välj leveransdag:
               </h3>
+              {/** TODO: Doesn't work for all zips */}
 
-              <div className="flex gap-4">
+              <div className="flex gap-4 flex-wrap">
                 <AnimatePresence mode="wait">
-                  {deliveryDaysError && deliveryDays.length == 0 && (
+                  {deliveryDaysError && deliveryDays.length == 0 ? (
                     <motion.div
                       key="error"
                       initial={{ opacity: 0, y: -10 }}
@@ -192,20 +189,84 @@ const Order = () => {
                         {deliveryDaysError}
                       </p>
                     </motion.div>
+                  ) : (
+                    deliveryDaysToChoose.map(
+                      (day: { id: number; label: string }, index: number) => (
+                        <motion.div
+                          key={day.label}
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          transition={{ delay: 0.15 * index }}
+                        >
+                          <CheckoutButton
+                            selected={preferredWeekDay == day.id}
+                            onClick={() => {
+                              if (preferredWeekDay == day.id) {
+                                setPreferredWeekDay(null);
+                                return;
+                              }
+                              setPreferredWeekDay(day.id);
+                            }}
+                          >
+                            {day.label}
+                          </CheckoutButton>
+                        </motion.div>
+                      )
+                    )
                   )}
-                  {deliveryDays.map((day: string, index: number) => (
+                </AnimatePresence>
+              </div>
+              <h3 className="font-poppins text-lg mt-4">
+                När vill du ha din första matkasse?
+              </h3>
+              <div className="flex gap-4 flex-wrap">
+                <AnimatePresence mode="wait">
+                  {deliveryDays
+                    .filter(({ start }) => {
+                      // Convert UTC seconds to milliseconds and create Date object
+                      const date = new Date(start * 1000);
+                      // Return whether the day of the week matches the target weekday
+                      return date.getDay() === preferredWeekDay;
+                    })
+                    .map((day: any, index: number) => (
+                      <motion.div
+                        key={day.label}
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ delay: 0.1 * index, duration: 0.15 }}
+                      >
+                        <CheckoutButton
+                          selected={deliveryDay?.id == day.id}
+                          onClick={() => {
+                            selectDeliveryDay(day);
+                          }}
+                        >
+                          <span className="capitalize">
+                            {new Date(day.start * 1000).toLocaleDateString(
+                              "sv-SE",
+                              { weekday: "long", month: "long", day: "numeric" }
+                            )}
+                          </span>
+                        </CheckoutButton>
+                      </motion.div>
+                    ))}
+                  {preferredWeekDay === null ||
+                  ![0, 1, 6].includes(preferredWeekDay) ||
+                  deliveryDays.length == 0 ? (
                     <motion.div
-                      key={day}
+                      key="error"
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
-                      transition={{ delay: 0.15 * index }}
+                      className="px-8 py-4 bg-primary text-primary-600 bg-opacity-30 rounded-md"
                     >
-                      <CheckoutButton onClick={() => selectDeliveryDay(day)}>
-                        {day}
-                      </CheckoutButton>
+                      <p className="font-poppins text-md">
+                        Välj en leveransdag först
+                      </p>
                     </motion.div>
-                  ))}
+                  ) : null}
                 </AnimatePresence>
               </div>
             </motion.div>

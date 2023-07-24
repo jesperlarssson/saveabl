@@ -9,6 +9,7 @@ import Button from "../ui/Button";
 import Section from "../ui/Section";
 import { Parallax } from "react-scroll-parallax";
 import RecipeDisplay from "../general/RecipeDisplay";
+import Link from "next/link";
 
 const Hero = () => {
   return (
@@ -48,9 +49,9 @@ const Hero = () => {
               >
                 Klimatvänligt på en helt ny nivå.
               </motion.p>
-              <div className="flex justify-center">
+              <Link href={"/bestall"} className="flex justify-center">
                 <Button className="ml-8 w-full md:w-96 ">Beställ nu</Button>
-              </div>
+              </Link>
             </div>
           </div>
         </Parallax>

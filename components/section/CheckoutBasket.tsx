@@ -12,12 +12,12 @@ import Link from "next/link";
 import { BsPerson } from "react-icons/bs";
 import path from "path";
 
-
 const CheckoutBasket = () => {
   const {
     product,
     addOns,
     shippingCost,
+    deliveryDay,
     getTotalPrice,
     removeAddOn,
     removeMealKit,
@@ -80,6 +80,11 @@ const CheckoutBasket = () => {
                       {addOns?.reduce((acc, curr) => {
                         return acc + curr.title + ", ";
                       }, "")}
+                    </p>
+                  )}
+                  {!isExpanded && deliveryDay && (
+                    <p className="-mt-1 text-sm text-neutral-500">
+                      {deliveryDay.label}
                     </p>
                   )}
                 </div>
@@ -177,11 +182,12 @@ const CheckoutBasket = () => {
                   <div className="mt-1 flex  flex-col sm:items-end">
                     <p>
                       <span className="font-bold">Fraktavgift:</span>{" "}
-                      {shippingCost > 0
-                        ? `${shippingCost} kr`
-                        : "Gratis"}
+                      {shippingCost > 0 ? `${shippingCost} kr` : "Gratis"}
                     </p>
-                    <Link href="/checkout" className="inline-block mt-2 px-6 py-4 bg-accent rounded-md text-primary-200">
+                    <Link
+                      href="/checkout"
+                      className="inline-block mt-2 px-6 py-4 bg-accent rounded-md text-primary-200"
+                    >
                       Gå till betalning
                     </Link>
                   </div>
