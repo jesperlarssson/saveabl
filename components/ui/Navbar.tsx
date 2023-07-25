@@ -9,19 +9,21 @@ import { navigation } from "@/lib/navigation";
 import NavItem from "./NavItem";
 import useAuthModal from "@/hooks/useAuthModal";
 import { useAuth } from "@/hooks/useAuth";
-
+import { useUser } from "@/hooks/useUser";
 
 const Navbar = () => {
   const authModal = useAuthModal();
   const [active, setActive] = useState(false);
   const pathname = usePathname();
 
-  const auth = useAuth();
-  if (!auth) {
-    return null;
-  }
+  const { user } = useUser();
 
-  const { user } = auth;
+  // const auth = useAuth();
+  // if (!auth) {
+  //   return null;
+  // }
+
+  // const { user } = auth;
 
   const handleClick = () => {
     setActive(!active);

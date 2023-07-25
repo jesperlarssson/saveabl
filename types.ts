@@ -124,3 +124,46 @@ export interface Post {
 export interface PostsData {
   posts: Post[];
 }
+
+{
+  /** Saveabl specifics */
+}
+
+export interface DeliveryRange {
+  start: number;
+  end: number;
+}
+
+export interface Mealkit {
+  id: string;
+  price_id: string;
+  cut_off_time: number;
+  weekNumber: number;
+  delivery_range: DeliveryRange;
+  quantity: number;
+  active?: boolean;
+  name?: string;
+  description?: string;
+  image?: string;
+  metadata?: Stripe.Metadata;
+  products?: Product;
+}
+
+export interface AddOn {
+  id: string;
+  name: string;
+  price_id: number;
+  description: string;
+  image?: string;
+  metadata?: Stripe.Metadata;
+}
+
+export interface Delivery {
+  id: string;
+  user_id: string;
+  selectedWeekDay: number;
+  selectedWeekDayName: string;
+  addOns?: AddOn[];
+  mealkit_id?: string;
+  mealkits?: Mealkit;
+}

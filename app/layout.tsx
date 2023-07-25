@@ -13,6 +13,8 @@ import { RecipeProvider } from "@/providers/RecipeProvider";
 import { GeoProvider } from "@/providers/GeoProvider";
 import { CheckoutProvider } from "@/providers/CheckoutProvider";
 import CheckoutBasket from "@/components/section/CheckoutBasket";
+import UserProvider from "@/providers/UserProvider";
+import SupabaseProvider from "@/providers/SupabaseProvider";
 
 const font = Figtree({ subsets: ["latin"] });
 export const revalidate = 1; // revalidate this page every 60 seconds
@@ -32,23 +34,27 @@ export default function RootLayout({
       <body className={font.className}>
         <GeoProvider>
           <AuthProvider>
-            <CheckoutProvider>
-              <ToasterProvider />
-              <ModalProvider />
-              <MyParallaxProvider>
-                <RecipeProvider>
-                  <PromotionBanner />
-                  <Navbar />
+            <SupabaseProvider>
+              <UserProvider>
+                <CheckoutProvider>
+                  <ToasterProvider />
+                  <ModalProvider />
+                  <MyParallaxProvider>
+                    <RecipeProvider>
+                      <PromotionBanner />
+                      <Navbar />
 
-                  <main className="min-h-screen overflow-x-hidden">
-                    {children}
-                  </main>
+                      <main className="min-h-screen overflow-x-hidden">
+                        {children}
+                      </main>
 
-                  <Footer />
-                </RecipeProvider>
-              </MyParallaxProvider>
-              <CheckoutBasket />
-            </CheckoutProvider>
+                      <Footer />
+                    </RecipeProvider>
+                  </MyParallaxProvider>
+                  <CheckoutBasket />
+                </CheckoutProvider>
+              </UserProvider>
+            </SupabaseProvider>
           </AuthProvider>
         </GeoProvider>
       </body>
