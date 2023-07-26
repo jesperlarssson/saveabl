@@ -1,3 +1,5 @@
+import { add, getUnixTime, setHours, setMinutes, startOfWeek } from "date-fns";
+
 export const getWeekNumber = (date: Date) => {
   const firstDayOfYear: any = new Date(date.getFullYear(), 0, 1);
   const pastDaysOfYear = (((date as any) - firstDayOfYear) as any) / 86400000;
@@ -38,3 +40,21 @@ export const deliveryDayParser = ({ start, end, label }: {
     return labelSplit.slice(0, 2).join(" ");
   }
 };
+
+// Function to calculate the epoch time of the target day
+export function getTargetDayEpoch(
+  weekNumber: number,
+  year: number,
+  currentWeek: number,
+  dayOffset: number
+): number {
+  // If the selected week is less than the current week, use next year's date
+  if (weekNumber < currentWeek) {
+    year += 1;
+  }
+
+  const monday = startOfWeek(new Date(year, 0, 1 + (weekNumber - 1) * 7));
+  const targetDay = add(monday, { days: dayOffset });
+  const finalDate = setHours(setMinutes(targetDay, 0), 0); // Set time to 10:00
+  return getUnixTime(finalDate);
+}

@@ -135,8 +135,9 @@ export interface DeliveryRange {
 }
 
 export interface Mealkit {
-  id: string;
-  price_id: string;
+  id?: string;
+  price_id?: string;
+  product_id?: string;
   cut_off_time: number;
   weekNumber: number;
   delivery_range: DeliveryRange;
@@ -162,6 +163,7 @@ export interface Delivery {
   id: string;
   user_id: string;
   selectedWeekDay: number;
+  selectedWeekDayEpoch?: number;
   selectedWeekDayName: string;
   addOns?: AddOn[];
   mealkit_id?: string;

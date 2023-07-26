@@ -2,23 +2,7 @@
 import React, { useState } from "react";
 import { getUnixTime, startOfWeek, sub, setDay, getWeek, add, setMinutes, setHours } from "date-fns";
 
-// Function to calculate the epoch time of the target day
-function getTargetDayEpoch(
-  weekNumber: number,
-  year: number,
-  currentWeek: number,
-  dayOffset: number
-): number {
-  // If the selected week is less than the current week, use next year's date
-  if (weekNumber < currentWeek) {
-    year += 1;
-  }
-
-  const monday = startOfWeek(new Date(year, 0, 1 + (weekNumber - 1) * 7));
-  const targetDay = add(monday, { days: dayOffset });
-  const finalDate = setHours(setMinutes(targetDay, 0), 10); // Set time to 10:00
-  return getUnixTime(finalDate);
-}
+import { getTargetDayEpoch } from "@/helpers/format";
 
 interface WeekSelectorProps {
   onWeekChange: (weekNumber: number, epochThursday: number, epochSaturday: number, epochMonday: number) => void;

@@ -1,13 +1,22 @@
 import getAllMealkits from "@/actions/getAllMealkits";
 import Calendar from "./components/Calendar";
-import { Mealkit } from "@/types";
+import { Delivery, Mealkit } from "@/types";
+import Section from "@/components/ui/Section";
+import getAllDeliveries from "@/actions/getAllDeliveries";
+import getRecurringPricesWithProducts from "@/actions/getRecurringPricesWithProducts";
 
 const CalendarView = async () => {
-    const mealkits: Mealkit[] = await getAllMealkits();
+  const mealkits: Mealkit[] = await getAllMealkits();
+  const deliveries: Delivery[] = await getAllDeliveries();
+  const productOptions = await getRecurringPricesWithProducts();
   return (
-    <div>
-      <Calendar year={2023} mealkits={mealkits} />
-    </div>
+    <Section className="pt-10">
+      <Calendar
+        mealkits={mealkits}
+        deliveries={deliveries}
+        productOptions={productOptions}
+      />
+    </Section>
   );
 };
 

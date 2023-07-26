@@ -7,19 +7,11 @@ const getRecurringPricesWithProducts = async (): Promise<Price[]> => {
     cookies: cookies,
   });
 
-  const { data: sessionData, error: sessionError } =
-    await supabase.auth.getSession();
-  if (sessionError) {
-    console.log(sessionError.message);
-    return [];
-  }
-
   const { data, error } = await supabase
     .from("prices")
     .select("*, products(*)")
     .eq("type", "recurring");
 
-  console.log(data);
 
   if (error) {
     console.log(error.message);
