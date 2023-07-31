@@ -3,8 +3,8 @@
 import { useEffect } from "react";
 
 import { AddOn } from "@/lib/addons";
-import { Product } from "@/lib/mealkits";
 import React, { createContext, useReducer } from "react";
+import { ProductInfo } from "@/types";
 
 interface Type {
   odd: boolean;
@@ -16,11 +16,14 @@ interface DeliveryDay {
   start: number;
   label: string;
   end: number;
+  soldOut?: boolean;
+  remaining?: number;
 }
 
 // Define the state
 interface State {
-  product: Product | null;
+  product: ProductInfo | null;
+  availableProducts: ProductInfo[];
   addOns: AddOn[];
   shippingCost: number;
   productType: Type;
@@ -34,7 +37,7 @@ interface State {
 // Define the action
 interface Action {
   type: string;
-  payload: Product | AddOn | Type | number | any;
+  payload: ProductInfo | AddOn | Type | number | any;
 }
 
 // Define the context
@@ -52,6 +55,7 @@ const initialState: State =
   typeof window !== "undefined"
     ? {
         product: JSON.parse(localStorage.getItem("product") || "null"),
+        availableProducts: [],
         addOns: JSON.parse(localStorage.getItem("addOns") || "[]"),
         shippingCost: JSON.parse(localStorage.getItem("shippingCost") || "0"),
         productType: JSON.parse(
@@ -72,6 +76,7 @@ const initialState: State =
       }
     : {
         product: null,
+        availableProducts: [],
         addOns: [],
         shippingCost: 0,
         productType: {
@@ -88,6 +93,7 @@ const initialState: State =
 // Actions
 export const actionTypes = {
   ADD_MEALKIT: "ADD_MEALKIT",
+  SET_AVAILABLE_PRODUCTS: "SET_AVAILABLE_PRODUCTS",
   ADD_ADDON: "ADD_ADDON",
   REMOVE_MEALKIT: "REMOVE_MEALKIT",
   REMOVE_ADDON: "REMOVE_ADDON",
@@ -105,7 +111,7 @@ export const actionTypes = {
 const reducer = (state: State, action: Action) => {
   switch (action.type) {
     case actionTypes.ADD_MEALKIT:
-      return { ...state, product: action.payload as Product };
+      return { ...state, product: action.payload as ProductInfo };
     case actionTypes.ADD_ADDON:
       const existingAddOnIndex = state.addOns.findIndex(
         (addOn) => addOn.id === (action.payload as AddOn).id
@@ -125,6 +131,8 @@ const reducer = (state: State, action: Action) => {
       }
     case actionTypes.REMOVE_MEALKIT:
       return { ...state, product: null, addOns: [] }; // When product is removed, clear the addOns too
+    case actionTypes.SET_AVAILABLE_PRODUCTS:
+      return { ...state, availableProducts: action.payload as ProductInfo[] };
     case actionTypes.REMOVE_ADDON:
       const existingAddOnIndexRemove = state.addOns.findIndex(
         (addOn) => addOn.id === (action.payload as AddOn).id

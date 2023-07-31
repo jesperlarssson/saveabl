@@ -5,11 +5,13 @@ import toast from "react-hot-toast";
 
 export const updateMealkit = async (mealkit: Mealkit) => {
   try {
-    await fetch("/api/admin/mealkits", {
+   const res = await fetch("/api/admin/mealkits", {
       method: "POST",
       body: JSON.stringify(mealkit),
     });
-  } catch (error) {
+    console.log(res.text())
+  } catch (error: any) {
     toast.error("Error creating mealkit");
   }
 };
+

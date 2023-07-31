@@ -29,7 +29,7 @@ const useWeekOptionsModal = create<WeekOptionsModalStore>((set) => ({
     description: "",
     image: "",
   },
-  productOptions: {},
+  productOptions: [],
   setProductOptions: (productOptions) => set({ productOptions }),
   setMealkit: (mealkit) => set({ mealkit }),
   onOpen: () => set({ isOpen: true }),

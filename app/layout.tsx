@@ -33,29 +33,27 @@ export default function RootLayout({
     <html lang="sv">
       <body className={font.className}>
         <GeoProvider>
-          <AuthProvider>
-            <SupabaseProvider>
-              <UserProvider>
-                <CheckoutProvider>
-                  <ToasterProvider />
-                  <ModalProvider />
-                  <MyParallaxProvider>
-                    <RecipeProvider>
-                      <PromotionBanner />
-                      <Navbar />
+          <SupabaseProvider>
+            <UserProvider>
+              <CheckoutProvider>
+                <ToasterProvider />
+                <ModalProvider />
+                <MyParallaxProvider>
+                  <RecipeProvider>
+                    <PromotionBanner />
+                    <Navbar />
 
-                      <main className="min-h-screen overflow-x-hidden">
-                        {children}
-                      </main>
+                    <main className="min-h-screen overflow-x-hidden">
+                      {children}
+                    </main>
 
-                      <Footer />
-                    </RecipeProvider>
-                  </MyParallaxProvider>
-                  <CheckoutBasket />
-                </CheckoutProvider>
-              </UserProvider>
-            </SupabaseProvider>
-          </AuthProvider>
+                    <Footer />
+                  </RecipeProvider>
+                </MyParallaxProvider>
+                <CheckoutBasket />
+              </CheckoutProvider>
+            </UserProvider>
+          </SupabaseProvider>
         </GeoProvider>
       </body>
     </html>

@@ -18,7 +18,7 @@ import BodyText from "../ui/BodyText";
 const Reviews = () => {
   return (
     <>
-      <InjectScriptComponent />
+      {/* <InjectScriptComponent /> //TODO: Fix this */} 
       <Section
         className="bg-primary flex flex-col items-start"
         bgIllustrationComponent={

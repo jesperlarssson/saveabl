@@ -123,7 +123,7 @@ const manageSubscriptionStatusChange = async (
     expand: ["default_payment_method"],
   });
   // Upsert the latest status of the subscription object.
-  const subscriptionData: Database["public"]["Tables"]["subscriptions"]["Insert"] =
+  const subscriptionData: Database["public"]["Tables"]["stripe_subscriptions"]["Insert"] =
     {
       id: subscription.id,
       user_id: uuid,
@@ -159,7 +159,7 @@ const manageSubscriptionStatusChange = async (
     };
 
   const { error } = await supabaseAdmin
-    .from("subscriptions")
+    .from("stripe_subscriptions")
     .upsert([subscriptionData]);
   if (error) throw error;
   console.log(

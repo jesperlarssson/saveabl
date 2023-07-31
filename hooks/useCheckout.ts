@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { use, useContext, useEffect } from "react";
 import { CheckoutContext, actionTypes } from "../providers/CheckoutProvider";
 import {
   free,
@@ -6,10 +6,12 @@ import {
   shippingCostStage2,
   shippingCostStage3,
 } from "@/lib/zipCodes";
-import { Product, productInfo } from "@/lib/mealkits";
+import { productInfo } from "@/lib/mealkits";
 import { AddOn } from "@/lib/addons";
 import { toast } from "react-hot-toast";
 import { deliveryDayParser, getWeekNumber } from "@/helpers/format";
+import { ProductInfo } from "@/types";
+
 
 interface Type {
   odd: boolean;
@@ -17,9 +19,10 @@ interface Type {
 }
 
 const useCheckout = () => {
+  
   const { state, dispatch } = useContext(CheckoutContext);
 
-  const addMealKit = (mealKit: Product) => {
+  const addMealKit = (mealKit: ProductInfo) => {
     dispatch({ type: actionTypes.ADD_MEALKIT, payload: mealKit });
   };
 
@@ -31,6 +34,10 @@ const useCheckout = () => {
     });
     dispatch({ type: actionTypes.SET_DELIVERY_DAY, payload: null });
     dispatch({ type: actionTypes.SET_PREFERRED_WEEK_DAY, payload: null });
+  };
+
+  const setAvailableProducts = (products: ProductInfo[]) => {
+    dispatch({ type: actionTypes.SET_AVAILABLE_PRODUCTS, payload: products });
   };
 
   const isWeekEven = (weekNumber: number) => {
@@ -70,31 +77,47 @@ const useCheckout = () => {
     dispatch({ type: actionTypes.SET_PRODUCT_TYPE, payload: newType });
   };
 
-  const setProductType = (newType: Type) => {
-    updateProductType(newType);
-    if (newType.odd === true && newType.even === false) {
-      // Add product varannan vecka udda veckor
-      // TODO: Fetch correct product and price_id
-      dispatch({ type: actionTypes.ADD_MEALKIT, payload: productInfo[1] });
-    } else if (newType.odd === false && newType.even === true) {
-      // Add product varannan vecka jämna veckor
-      // TODO: Fetch correct product and price_id
-      dispatch({ type: actionTypes.ADD_MEALKIT, payload: productInfo[1] });
-    } else if (newType.odd === false && newType.even === false) {
-      // Add product Engångsköp
-      // TODO: Fetch correct product and price_id
-      dispatch({ type: actionTypes.ADD_MEALKIT, payload: productInfo[3] });
-    } else if (newType.odd === true && newType.even === true) {
-      // Add product Prenumeration varje vecka
-      // TODO: Fetch correct product and price_id
-      dispatch({ type: actionTypes.ADD_MEALKIT, payload: productInfo[0] });
+  const getCorrespondingProductData = (type: Type) => {
+    if (type.odd === true && type.even === false) {
+      return state.availableProducts[1];
+    } else if (type.odd === false && type.even === true) {
+      return state.availableProducts[1];
+    } else if (type.odd === false && type.even === false) {
+      return state.availableProducts[3];
+    } else if (type.odd === true && type.even === true) {
+      return state.availableProducts[0];
     } else {
-      dispatch({ type: actionTypes.ADD_MEALKIT, payload: productInfo[2] });
+      return state.availableProducts[2];
     }
   };
 
+
+  const setProductType = (newType: Type) => {
+    updateProductType(newType);
+    dispatch({ type: actionTypes.ADD_MEALKIT, payload: getCorrespondingProductData(newType) });
+    // if (newType.odd === true && newType.even === false) {
+    //   // Add product varannan vecka udda veckor
+    //   // TODO: Fetch correct product and price_id
+    //   dispatch({ type: actionTypes.ADD_MEALKIT, payload: productInfo[1] });
+    // } else if (newType.odd === false && newType.even === true) {
+    //   // Add product varannan vecka jämna veckor
+    //   // TODO: Fetch correct product and price_id
+    //   dispatch({ type: actionTypes.ADD_MEALKIT, payload: productInfo[1] });
+    // } else if (newType.odd === false && newType.even === false) {
+    //   // Add product Engångsköp
+    //   // TODO: Fetch correct product and price_id
+    //   dispatch({ type: actionTypes.ADD_MEALKIT, payload: productInfo[3] });
+    // } else if (newType.odd === true && newType.even === true) {
+    //   // Add product Prenumeration varje vecka
+    //   // TODO: Fetch correct product and price_id
+    //   dispatch({ type: actionTypes.ADD_MEALKIT, payload: productInfo[0] });
+    // } else {
+    //   dispatch({ type: actionTypes.ADD_MEALKIT, payload: productInfo[2] });
+    // }
+  };
+
   const addAddOn = (addOn: Omit<AddOn, "quantity">) => {
-    //TODO: If variants !== null and variants.length > 1 open select variant modal. 
+    //TODO: If variants !== null and variants.length > 1 open select variant modal.
     if (state.product) {
       dispatch({ type: actionTypes.ADD_ADDON, payload: addOn });
     } else {
@@ -173,7 +196,7 @@ const useCheckout = () => {
           "Just nu kunde vi inte hämta leveransdagar. Kontrollera angiven postkod.",
       });
       return;
-    } else if (thisWeek.length === 0) {
+    } else if (thisWeek?.length === 0) {
       dispatch({ type: actionTypes.SET_DELIVERY_DAYS, payload: [] });
       dispatch({
         type: actionTypes.SET_DELIERY_DAYS_ERROR,
@@ -183,14 +206,19 @@ const useCheckout = () => {
       return;
     } else {
       const deliveryDays = thisWeek
-        .map((day: { start: any; end: any; label: any }, index: number) => {
-          return {
-            id: `this-${index}`,
-            label: deliveryDayParser(day),
-            start: day.start,
-            end: day.end,
-          };
-        })
+        .map(
+          (
+            day: { start: any; end: any; label: any; remaining: number },
+            index: number
+          ) => {
+            return {
+              id: `this-${index}`,
+              label: deliveryDayParser(day),
+              start: day.start,
+              end: day.end,
+            };
+          }
+        )
         .filter((v: any) => v.label !== undefined);
       const deliveryDaysNextWeek = nextWeek
         .map((day: { start: any; end: any; label: any }, index: number) => {
@@ -227,12 +255,72 @@ const useCheckout = () => {
           }, new Map())
           .values()
       );
-
       dispatch({ type: actionTypes.SET_DELIERY_DAYS_ERROR, payload: "" });
       dispatch({
         type: actionTypes.SET_DELIVERY_DAYS,
         payload: [...new Set(deduplicatedDeliveryDays)], //.slice(0, 3),
       });
+    }
+  };
+
+  const handleUpdateRemainingMealkits = async () => {
+    try {
+      const updatedDeliveryDays = await Promise.all(
+        state.deliveryDays.map(async (deliveryDay) => {
+          const remaining = await getRemainingMealkitsFromDeliveryRange(
+            deliveryDay.start
+          );
+          return { ...deliveryDay, remaining };
+        })
+      );
+
+      dispatch({
+        type: actionTypes.SET_DELIVERY_DAYS,
+        payload: updatedDeliveryDays,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getMealkitWeekFromEpoch = (epoch: number) => {
+    const date = new Date(epoch * 1000);
+    // if date is a saturday, add one to week number
+    const getWeekNumber = (d: any) => {
+      d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+      d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7));
+      const yearStart: any = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+      const weekNo = Math.ceil(((d - yearStart) / 86400000 + 1) / 7);
+      return weekNo;
+    };
+    if (date.getDay() === 6 || date.getDay() === 0) {
+      return getWeekNumber(date) + 1;
+    }
+
+    const week = getWeekNumber(date);
+    return week;
+  };
+
+  const getRemainingMealkitsFromDeliveryRange = async (
+    deliveryDayEpoch: number
+  ) => {
+    try {
+      const res = await fetch("/api/get-remaining-mealkits-for-week", {
+        method: "POST",
+        body: JSON.stringify({
+          weekNumber: getMealkitWeekFromEpoch(deliveryDayEpoch),
+        }),
+      });
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+
+      const data = await res.json();
+      return data;
+    } catch (error) {
+      //TODO: Handle error
+      console.log(error);
+      throw new Error("Kunde inte hämta antal kvarvarande måltidskassar.");
     }
   };
 
@@ -246,6 +334,7 @@ const useCheckout = () => {
     deliveryDaysError: state.deliveryDaysError,
     preferredWeekDay: state.preferredWeekDay,
     setProductType,
+    setAvailableProducts,
     addMealKit,
     removeMealKit,
     addAddOn,
@@ -257,6 +346,7 @@ const useCheckout = () => {
     selectDeliveryDate,
     setZipCode,
     setPreferredWeekDay,
+    handleUpdateRemainingMealkits,
   };
 };
 

@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import Papa from "papaparse";
 import {
   format,
   eachDayOfInterval,
@@ -51,10 +52,13 @@ const Week: React.FC<WeekProps> = ({
         (delivery) => delivery.mealkit_id === mealkit?.id
       ).length ?? 0
     );
-    if (mealkit) {
-      setSoldOut(amountSold >= mealkit?.quantity ?? false);
-    }
   }, [deliveriesForWeek]);
+
+  useEffect(() => {
+    if (mealkit) {
+      setSoldOut(amountSold >= mealkit?.quantity);
+    }
+  }, [amountSold, mealkit?.quantity]);
 
   const { setMealkit, onOpen, setProductOptions } = useWeekOptionsModal();
   useEffect(() => {
@@ -63,7 +67,7 @@ const Week: React.FC<WeekProps> = ({
 
   const [quantity, setQuantity] = useState<number>(50);
   const [productId, setProductId] = useState<string>(
-    productOptions[0].products.id
+    productOptions[0]?.products.id ?? ""
   );
 
   const handleCreateMealkit = async () => {
@@ -80,6 +84,44 @@ const Week: React.FC<WeekProps> = ({
     }
   };
 
+  const deliveriesToCsv = () => {
+    if (!deliveriesForWeek) return;
+    const data = deliveriesForWeek.map((delivery) => {
+      const delivery_date = new Date(delivery.selectedWeekDayEpoch! * 1000);
+      const add_ons = delivery.addOns?.map((addOn) => addOn.name).join(", ");
+      const user_name = delivery.users?.full_name;
+      const billing_address = delivery.users?.billing_address;
+
+      return {
+        delivery_date,
+        add_ons,
+        user_name,
+        billing_address,
+      };
+    });
+
+    const csv = Papa.unparse(data);
+    return csv;
+  };
+
+  const downloadCsv = (csv: string, filename: string) => {
+    const blob = new Blob([csv], { type: "text/csv" });
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const handleExportDeliveries = () => {
+    const csv = deliveriesToCsv();
+    if (!csv) return;
+    downloadCsv(csv, `lev-v-${mealkit?.weekNumber}.csv`);
+  };
+
   return (
     <div className="col-span-7 grid grid-cols-7 gap-4">
       <div
@@ -90,10 +132,10 @@ const Week: React.FC<WeekProps> = ({
           onOpen();
         }}
         className={twMerge(
-          `col-span-7 w-full flex  items-center justify-between gap-8 bg-primary rounded-md text-center p-4 pointer-events-auto text-secondary`,
+          `col-span-7 w-full flex  items-center justify-between gap-8 bg-primary rounded-md text-center py-2 px-4 pointer-events-auto text-secondary drop-shadow-sm border-2 border-primary-600`,
           [
             mealkit?.active &&
-              "bg-green-500 border-2 border-green-700 text-green-900 cursor-pointer hover:scale-103 pointer-events-auto transition",
+              "bg-green-500 border-2 border-green-700 text-green-900 cursor-pointer hover:drop-shadow-xl hover:-translate-y-1 pointer-events-auto transition",
             hasPast && "pointer-events-none opacity-50",
             soldOut && "bg-red-500 border-2 border-red-700 text-red-900",
           ]
@@ -124,6 +166,14 @@ const Week: React.FC<WeekProps> = ({
                 </>
               )}
             </p>
+            {amountSold > 0 && (
+              <button
+                onClick={handleExportDeliveries}
+                className="bg-secondary text-primary rounded-md py-2 px-4"
+              >
+                Exportera
+              </button>
+            )}
           </>
         )}
 
@@ -167,7 +217,7 @@ const Week: React.FC<WeekProps> = ({
 
             <Button
               disabled={hasPast}
-              className="max-w-fit"
+              className="max-w-fit rounded-full px-6 text-sm"
               onClick={handleCreateMealkit}
             >
               Skapa Matkasse för vecka

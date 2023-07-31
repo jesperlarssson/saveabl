@@ -136,7 +136,7 @@ export interface Database {
           user_id?: string | null
         }
       }
-      subscriptions: {
+      stripe_subscriptions: {
         Row: {
           cancel_at: string | null
           cancel_at_period_end: boolean | null

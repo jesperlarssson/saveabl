@@ -22,7 +22,9 @@ const InjectScriptComponent = () => {
 
   return (
     // The component's JSX goes here
-    <div></div>
+    <div>
+ 
+    </div>
   );
 };
 

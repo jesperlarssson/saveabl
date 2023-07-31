@@ -12,11 +12,13 @@ const Day: React.FC<DayProps> = ({ day, deliveries }) => {
   return (
     <div
       className={twMerge(
-        `p-4`,
-        deliveries && deliveries?.length > 0 && "rounded-md bg-primary"
+        `p-4 hover:drop-shadow-xl hover:bg-primary hover:bg-opacity-30 cursor-pointer transition rounded-md `,
+        deliveries &&
+          deliveries?.length > 0 &&
+          " bg-primary drop-shadow-sm border border-primary-600 bg-opacity-50"
       )}
     >
-      <div className="text-center" key={day.toString()}>
+      <div className="text-center font-poppins text-neutral-600" key={day.toString()}>
         {format(day, "d")}
       </div>
       {deliveries && deliveries?.length > 0 && (

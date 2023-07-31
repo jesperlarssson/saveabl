@@ -142,12 +142,30 @@ export interface Mealkit {
   weekNumber: number;
   delivery_range: DeliveryRange;
   quantity: number;
+  amount_sold?: number;
   active?: boolean;
   name?: string;
   description?: string;
   image?: string;
   metadata?: Stripe.Metadata;
   products?: Product;
+}
+
+export interface ProductInfo {
+  id: string;
+  title: string;
+  price_id: string;
+  prices?: Price;
+  excerpt: string;
+  description: string;
+  price: number;
+  portions: number;
+  recipes?: number;
+  favorite?: boolean;
+  imgSrc: string;
+  subscription?: boolean;
+  everyWeek?: boolean;
+  type?: string;
 }
 
 export interface AddOn {
@@ -162,6 +180,7 @@ export interface AddOn {
 export interface Delivery {
   id: string;
   user_id: string;
+  users?: UserDetails;
   selectedWeekDay: number;
   selectedWeekDayEpoch?: number;
   selectedWeekDayName: string;

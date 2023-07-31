@@ -24,7 +24,7 @@ const WeekOptionsModal = () => {
   );
   const [newActiveStatus, setNewActiveStatus] = React.useState<
     boolean | undefined
-  >(mealkit.active);
+  >(true);
 
   const onChange = (open: boolean) => {
     if (!open) {
@@ -47,7 +47,7 @@ const WeekOptionsModal = () => {
         active: newActiveStatus ?? mealkit.active,
 
         quantity: newQuantity,
-        product_id: newProductId,
+        product_id: mealkit.product_id,
       };
       await updateMealkit(mealkitToUpdate);
       router.refresh();
@@ -84,19 +84,20 @@ const WeekOptionsModal = () => {
           }}
           className="p-2 rounded-md text-center"
         >
-          {productOptions
-            ?.reduce((unique: any, price: Price) => {
-              return unique.some(
-                (item: any) => item.products.id === price?.products?.id
-              )
-                ? unique
-                : [...unique, price];
-            }, [])
-            .map((price: any) => (
-              <option key={price.products.id} value={price.products.id}>
-                {price.products.name + " " + price.unit_amount / 100 + " kr"}
-              </option>
-            ))}
+          {productOptions &&
+            productOptions
+              ?.reduce((unique: any, price: Price) => {
+                return unique.some(
+                  (item: any) => item.products.id === price?.products?.id
+                )
+                  ? unique
+                  : [...unique, price];
+              }, [])
+              .map((price: any) => (
+                <option key={price.products.id} value={price.products.id}>
+                  {price.products.name + " " + price.unit_amount / 100 + " kr"}
+                </option>
+              ))}
         </select>
         <Button onClick={handleSubmit}>Spara</Button>
       </div>

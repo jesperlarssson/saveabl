@@ -13,10 +13,11 @@ import { textBannerText } from "@/lib/general";
 import ExplainerVideo from "@/components/section/ExplainerVideo";
 import USP from "@/components/section/USP";
 import ProductGrid from "@/components/section/ProductGrid";
+import getAllProductInfo from "@/actions/getAllProductInfo";
 
 export default function Home() {
+  
 
-   
   return (
     <>
       <div className="absolute w-full min-h-screen flex justify-center items-center z-1">

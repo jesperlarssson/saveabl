@@ -2,10 +2,10 @@ import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 import { headers, cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
-import { stripe } from "@/libs/stripe";
-import { getURL } from "@/libs/helpers";
+import { stripe } from "@/lib/stripe";
+import { getURL } from "@/lib/helpers";
 
-import { createOrRetrieveCustomer } from "@/libs/supabaseAdmin";
+import { createOrRetrieveCustomer } from "@/lib/supabaseAdmin";
 
 export async function POST(request: Request) {
   const { price, quantity = 1, metadata = {} } = await request.json();
@@ -38,8 +38,8 @@ export async function POST(request: Request) {
         trial_from_plan: true,
         metadata,
       },
-      success_url: `${getURL()}/account`,
-      cancel_url: `${getURL()}`,
+      success_url: `${getURL()}/mina-sidor?success=true`,
+      cancel_url: `${getURL()}/bestall`,
       metadata,
     });
 
