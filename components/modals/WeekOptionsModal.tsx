@@ -41,7 +41,7 @@ const WeekOptionsModal = () => {
       //TODO: Update mealkit
       const mealkitToUpdate: Mealkit = {
         id: mealkit.id,
-        weekNumber: mealkit.weekNumber,
+        week_number: mealkit.week_number,
         cut_off_time: mealkit.cut_off_time,
         delivery_range: mealkit.delivery_range,
         active: newActiveStatus ?? mealkit.active,
@@ -60,7 +60,7 @@ const WeekOptionsModal = () => {
 
   return (
     <Modal
-      title={`Uppdatera vecka ${mealkit.weekNumber}`}
+      title={`Uppdatera vecka ${mealkit.week_number}`}
       description="Justera kvantitet för veckan eller kopplad produkt från stripe."
       isOpen={isOpen}
       onChange={onChange}

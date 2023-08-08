@@ -8,10 +8,10 @@ import ProductTile from "../general/ProductTile";
 import getAllProductInfo from "@/actions/getAllProductInfo";
 
 const ProductGrid = async () => {
-  const productInfo = await getAllProductInfo();
+  //const productInfo = await getAllProductInfo();
   return (
     <Section className="bg-secondary pt-4 pb-48">
-      <AnimatedGrid items={productInfo} />
+      <AnimatedGrid items={[]} />
     </Section>
   );
 };

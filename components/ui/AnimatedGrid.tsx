@@ -15,9 +15,9 @@ const AnimatedGrid: React.FC<AnimatedGridProps> = ({ items }) => {
   return (
     <div className="relative grid gap-4 md:grid-cols-2">
       <AnimatePresence mode="wait">
-        {items.map((item) => (
+        {items.map((item, index) => (
           <ProductTile
-            key={item.id}
+            key={`product-tile-${index}`}
             product={item}
             onExpand={(id) => setExpandedId(id)}
             isExpanded={expandedId === item.id}        >

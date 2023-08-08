@@ -119,7 +119,7 @@ const Week: React.FC<WeekProps> = ({
   const handleExportDeliveries = () => {
     const csv = deliveriesToCsv();
     if (!csv) return;
-    downloadCsv(csv, `lev-v-${mealkit?.weekNumber}.csv`);
+    downloadCsv(csv, `lev-v-${mealkit?.week_number}.csv`);
   };
 
   return (

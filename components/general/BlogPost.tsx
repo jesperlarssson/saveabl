@@ -13,7 +13,7 @@ interface BlogPostProps {
 const BlogPost: React.FC<BlogPostProps> = ({ key, post }) => {
   return (
     <Link href={`/nyheter/${post?.slug}`}>
-      <article className="overflow-hidden rounded-lg shadow transition hover:shadow-lg hover:-translate-y-2 relative h-96 min-w-96 flex-1 group cursor-pointer">
+      <div className="overflow-hidden rounded-lg shadow transition hover:shadow-lg hover:-translate-y-2 relative h-96 min-w-96 flex-1 group cursor-pointer">
         <Image
           alt="Office"
           src={post?.coverImage.url || "/images/placeholder.png"}
@@ -31,16 +31,16 @@ const BlogPost: React.FC<BlogPostProps> = ({ key, post }) => {
               {post?.date}
             </time>
 
-            <a href="#">
+            <div >
               <h3 className="mt-0.5 font-poppins text-xl">{post?.title}</h3>
-            </a>
+            </div>
 
             <p className="mt-2 line-clamp-3 text-sm/relaxed opacity-70 ">
               {post?.excerpt}
             </p>
           </div>
         </div>
-      </article>
+      </div>
     </Link>
   );
 };

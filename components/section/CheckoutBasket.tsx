@@ -2,7 +2,7 @@
 import { usePathname } from "next/navigation";
 
 import useCheckout from "@/hooks/useCheckout";
-import React, { useEffect } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import Image from "next/image";
 import { twMerge } from "tailwind-merge";
 import { GiKnifeFork } from "react-icons/gi";
@@ -10,7 +10,7 @@ import { GiKnifeFork } from "react-icons/gi";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { BsPerson } from "react-icons/bs";
-import path from "path";
+
 
 const CheckoutBasket = () => {
   const {
@@ -27,6 +27,12 @@ const CheckoutBasket = () => {
   const [hidden, setIsHidden] = React.useState(false);
 
   const pathName = usePathname();
+
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(typeof window !== "undefined");
+  }, []);
 
   useEffect(() => {
     if (pathName === "/checkout") {
@@ -46,6 +52,12 @@ const CheckoutBasket = () => {
     closed: { opacity: 0, height: "auto", y: "100%" },
   };
 
+  if (!isClient) {
+    return null;
+  }
+
+  const { AnimatePresence, motion } = require("framer-motion");
+  
   return (
     <AnimatePresence>
       {product && !hidden && (
@@ -69,7 +81,7 @@ const CheckoutBasket = () => {
                   <Image
                     fill
                     className="object-cover"
-                    src={product?.imgSrc || ""}
+                    src={product?.img_src || ""}
                     alt=""
                   />
                 </div>

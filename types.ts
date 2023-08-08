@@ -139,7 +139,7 @@ export interface Mealkit {
   price_id?: string;
   product_id?: string;
   cut_off_time: number;
-  weekNumber: number;
+  week_number: number;
   delivery_range: DeliveryRange;
   quantity: number;
   amount_sold?: number;
@@ -162,9 +162,9 @@ export interface ProductInfo {
   portions: number;
   recipes?: number;
   favorite?: boolean;
-  imgSrc: string;
+  img_src: string;
   subscription?: boolean;
-  everyWeek?: boolean;
+  every_week?: boolean;
   type?: string;
 }
 
@@ -187,4 +187,9 @@ export interface Delivery {
   addOns?: AddOn[];
   mealkit_id?: string;
   mealkits?: Mealkit;
+}
+
+export interface Type {
+  odd: boolean;
+  even: boolean;
 }

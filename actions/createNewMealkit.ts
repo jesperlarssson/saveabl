@@ -16,7 +16,7 @@ export const createNewMealkitWithWeekNumber = async (
       currentWeek,
       -3 // Thursday of the week before
     ),
-    weekNumber,
+    week_number: weekNumber,
     delivery_range: {
       start: getTargetDayEpoch(
         weekNumber,
@@ -36,11 +36,13 @@ export const createNewMealkitWithWeekNumber = async (
     product_id,
   };
   try {
-    await fetch("/api/admin/mealkits", {
+    const res = await fetch("/api/admin/mealkits", {
       method: "POST",
       body: JSON.stringify(mealkit),
     });
+    console.log(res.text());
   } catch (error) {
+    console.log(error);
     toast.error("Error creating mealkit");
   }
 };

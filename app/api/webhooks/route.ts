@@ -56,6 +56,8 @@ export async function POST(request: Request) {
             event.type === "customer.subscription.created"
           );
           break;
+
+        //TODO: Add payment intent?
         case "checkout.session.completed":
           const checkoutSession = event.data.object as Stripe.Checkout.Session;
           if (checkoutSession.mode === "subscription") {
@@ -66,6 +68,7 @@ export async function POST(request: Request) {
               true
             );
           }
+          //TODO: add logic for one time purchases
           break;
         default:
           throw new Error("Unhandled relevant event!");

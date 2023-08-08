@@ -18,7 +18,7 @@ const useWeekOptionsModal = create<WeekOptionsModalStore>((set) => ({
     price_id: "",
     product_id: "",
     cut_off_time: 0,
-    weekNumber: 0,
+    week_number: 0,
     delivery_range: {
       start: 0,
       end: 0,

@@ -5,13 +5,13 @@ import { twMerge } from "tailwind-merge";
 import Button from "@/components/ui/Button";
 import useCheckout from "@/hooks/useCheckout";
 import { addOnsInfo } from "@/lib/addons";
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Section from "@/components/ui/Section";
-import { AnimatePresence, motion } from "framer-motion";
 import AddOnTile from "@/components/general/AddOnTile";
 import CheckoutSection from "@/components/ui/CheckoutSection";
-import { stringify } from "querystring";
 import { ProductInfo } from "@/types";
+import CheckoutButton from "./CheckoutButton";
+import IntervalButtons from "./IntervalButtons";
 
 interface Type {
   odd: boolean;
@@ -42,13 +42,46 @@ const OrderContent: React.FC<OrderContentProps> = ({ productInfo }) => {
 
 */
   }
+  const [isClient, setIsClient] = useState(false);
+  const [showDeliveryOptions, setShowDeliveryOptions] = useState(false);
+  const [deliveryDaysLoading, setDeliveryDaysLoading] = useState(false);
+  const {
+    product,
+    addOns,
+    productType,
+    deliveryDay,
+    deliveryDays,
+    deliveryDaysError,
+    preferredWeekDay,
+
+    addMealKit,
+    removeMealKit,
+    addAddOn,
+    removeAddOn,
+    updateShippingCost,
+    setProductType,
+    selectNextSubscription,
+    selectNextOneTimePurchase,
+    selectDeliveryDate,
+    setZipCode,
+    setPreferredWeekDay,
+    handleUpdateRemainingMealkits,
+    setAvailableProducts,
+  } = useCheckout();
+
   useEffect(() => {
+    setIsClient(typeof window !== "undefined");
     setAvailableProducts(productInfo);
   }, []);
 
-  const [showDeliveryOptions, setShowDeliveryOptions] = useState(false);
+  if (!isClient) {
+    return null;
+  }
 
-  const [deliveryDaysLoading, setDeliveryDaysLoading] = useState(false);
+  const { AnimatePresence, motion } = require("framer-motion");
+
+
+  
 
   const fetchDeliveryDays = () => {
     return ["Lördag", "Söndag", "Måndag"];
@@ -91,29 +124,7 @@ const OrderContent: React.FC<OrderContentProps> = ({ productInfo }) => {
     }
   };
 
-  const {
-    product,
-    addOns,
-    productType,
-    deliveryDay,
-    deliveryDays,
-    deliveryDaysError,
-    preferredWeekDay,
 
-    addMealKit,
-    removeMealKit,
-    addAddOn,
-    removeAddOn,
-    updateShippingCost,
-    setProductType,
-    selectNextSubscription,
-    selectNextOneTimePurchase,
-    selectDeliveryDate,
-    setZipCode,
-    setPreferredWeekDay,
-    handleUpdateRemainingMealkits,
-    setAvailableProducts,
-  } = useCheckout();
 
   return (
     <Section className="pt-10">
@@ -243,7 +254,7 @@ const OrderContent: React.FC<OrderContentProps> = ({ productInfo }) => {
                         transition={{ delay: 0.1 * index, duration: 0.15 }}
                       >
                         <CheckoutButton
-                          disabled={day.remaining == 0}
+                          disabled={day.remaining <= 0}
                           selected={deliveryDay?.id == day.id}
                           onClick={() => {
                             selectDeliveryDay(day);
@@ -304,77 +315,3 @@ const OrderContent: React.FC<OrderContentProps> = ({ productInfo }) => {
 
 export default OrderContent;
 
-const CheckoutButton = ({
-  children,
-  onClick,
-  disabled,
-  selected,
-  className,
-}: {
-  children: React.ReactNode;
-  onClick: () => void;
-  disabled?: boolean;
-  selected?: boolean;
-  className?: string;
-}) => {
-  return (
-    <Button
-      onClick={onClick}
-      className={twMerge(
-        `mt-2 px-8 py-2 border bg-transparent text-neutral-700 font-medium border-primary rounded-md w-auto transition-all hover:bg-primary`,
-        [selected && `bg-primary text-secondary font-bold`, className]
-      )}
-      disabled={disabled}
-    >
-      {children}
-    </Button>
-  );
-};
-
-const IntervalButtons = ({
-  productType,
-  show,
-  selectNextSubscription,
-}: {
-  productType: Type;
-  show: boolean;
-  selectNextSubscription: (allWeeks: boolean) => void;
-}) => {
-  return (
-    <AnimatePresence>
-      {show && (
-        <motion.div
-          key="intervalButtons"
-          initial="closed"
-          animate="open"
-          exit="closed"
-          variants={variants}
-          className="mt-4 text-neutral-700"
-        >
-          <h3 key="interval-title" className="font-poppins text-lg ">
-            Välj intervall:
-          </h3>
-          <div key="interval-buttons" className="flex gap-4">
-            <CheckoutButton
-              key="interval-button-1"
-              selected={productType.even && productType.odd}
-              onClick={() => selectNextSubscription(true)}
-            >
-              Varje vecka
-            </CheckoutButton>
-            <CheckoutButton
-              key="interval-button-2"
-              selected={
-                (productType.even || productType.odd) &&
-                !(productType.even && productType.odd)
-              }
-              onClick={() => selectNextSubscription(false)}
-            >
-              Varannan vecka
-            </CheckoutButton>
-          </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
-  );
-};

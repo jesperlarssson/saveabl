@@ -61,11 +61,16 @@ const Calendar: React.FC<CalendarProps> = ({
           </div>
         ))}
         {weeksInMonth.map((weekStart, index) => {
+          const weekStartYear = weekStart.getFullYear();
+          
           const mealkit = mealkits?.find(
-            (mealkit) => mealkit.weekNumber === getWeek(weekStart)
+            (mealkit) =>
+              mealkit.week_number === getWeek(weekStart) &&
+              new Date(mealkit.delivery_range.end * 1000).getFullYear() === weekStartYear
           );
           const nextWeekMealkit = mealkits?.find(
-            (mealkit) => mealkit.weekNumber === getWeek(weekStart) + 1
+            (mealkit) => mealkit.week_number === getWeek(weekStart) + 1 &&
+            new Date(mealkit.delivery_range.end * 1000).getFullYear() === weekStartYear
           );
           const deliveriesForWeek = deliveries?.filter(
             (delivery) =>

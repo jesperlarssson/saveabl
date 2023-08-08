@@ -10,7 +10,6 @@ import useCheckout from "@/hooks/useCheckout";
 import { AiOutlineClose } from "react-icons/ai";
 
 interface ProductTileProps {
-  key: string;
   product: any;
   onClick?: () => void;
   favorite?: boolean;
@@ -20,7 +19,6 @@ interface ProductTileProps {
 }
 
 const ProductTile: React.FC<ProductTileProps> = ({
-  key,
   product,
   onClick,
   favorite = false,
@@ -54,7 +52,6 @@ const ProductTile: React.FC<ProductTileProps> = ({
       <AnimatePresence mode="wait">
         {isExpanded && (
           <motion.div
-            key={key}
             initial={{ opacity: 0, scale: 0.7 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.7 }}
@@ -63,7 +60,7 @@ const ProductTile: React.FC<ProductTileProps> = ({
               [product.favorite && "border-4 border-accent"]
             )}
           >
-            <Image fill className="object-cover" alt="" src={product.imgSrc} />
+            <Image fill className="object-cover" alt="" src={product.img_src} />
             <div
               className={twMerge(
                 `absolute top-0 left-0 h-full w-full grid  items-end md:grid-cols-2 gap-4  p-4  bg-black bg-opacity-40 text-primary-200`
@@ -169,7 +166,6 @@ const ProductTile: React.FC<ProductTileProps> = ({
         <div className="w-full h-64   relative rounded-lg bg-black bg-opacity-5"></div>
       ) : (
         <motion.div
-          key={key}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -182,7 +178,7 @@ const ProductTile: React.FC<ProductTileProps> = ({
             ]
           )}
         >
-          <Image fill className="object-cover" alt="" src={product.imgSrc} />
+          <Image fill className="object-cover" alt="" src={product.img_src} />
           <div
             className={twMerge(
               `absolute top-0 left-0 h-full w-full grid  items-end  p-4  bg-black bg-opacity-40 text-primary-200`

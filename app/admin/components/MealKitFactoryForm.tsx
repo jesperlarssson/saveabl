@@ -28,7 +28,7 @@ const MealKitFactoryForm: React.FC<MealKitFactoryFormProps> = ({
       end: 0,
     },
     quantity: 0,
-    weekNumber: 0,
+    week_number: 0,
   });
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -40,7 +40,7 @@ const MealKitFactoryForm: React.FC<MealKitFactoryFormProps> = ({
   ) => {
     setMealkit({
       ...mealkit,
-      weekNumber: weekNumber,
+      week_number: weekNumber,
       cut_off_time: epochThursday,
       delivery_range: {
         start: epochSaturday,

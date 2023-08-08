@@ -15,6 +15,7 @@ import { CheckoutProvider } from "@/providers/CheckoutProvider";
 import CheckoutBasket from "@/components/section/CheckoutBasket";
 import UserProvider from "@/providers/UserProvider";
 import SupabaseProvider from "@/providers/SupabaseProvider";
+import { Suspense } from "react";
 
 const font = Figtree({ subsets: ["latin"] });
 export const revalidate = 1; // revalidate this page every 60 seconds

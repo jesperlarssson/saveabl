@@ -365,6 +365,19 @@ export async function getRecipesForWeek(week: number) {
   return data.recepts;
 }
 
+
+export async function getAllFAQ() {
+  const data = await fetchAPI(`
+    {
+      faqs {
+        answer
+        question
+      }
+    }
+  `);
+  return data.faqs;
+}
+
 // export async function getRecipesForWeek(week: number) {
 //   const dates = getDatesFromWeek(week);
 //   console.log(dates);

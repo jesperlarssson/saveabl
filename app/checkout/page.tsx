@@ -1,5 +1,6 @@
 "use client";
 
+import addCustomerInfo from "@/actions/addCustomerInfo";
 import Button from "@/components/ui/Button";
 import useCheckout from "@/hooks/useCheckout";
 import { useUser } from "@/hooks/useUser";
@@ -12,6 +13,7 @@ import toast from "react-hot-toast";
 const Checkout = () => {
   const {
     product,
+    productType,
     addOns,
     shippingCost,
     getTotalPrice,
@@ -45,6 +47,18 @@ const Checkout = () => {
         data: { price: product.prices },
       });
 
+      //TODO: Add billing information and type to User
+      const res = await fetch("/api/user/update-user-info", {
+        method: "POST",
+        body: JSON.stringify({
+          type: productType,
+        }),
+      });
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+
+      const data = await res.json();
       const stripe = await getStripe();
       stripe?.redirectToCheckout({ sessionId });
     } catch (error) {

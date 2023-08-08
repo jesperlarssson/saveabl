@@ -12,7 +12,7 @@ const getRemainingMealkitsForWeek = async (
   const { data: mealkitsData, error: mealkitsError } = await supabase
     .from("mealkits")
     .select("id, quantity, amount_sold")
-    .eq("weekNumber", weekNumber)
+    .eq("week_number", weekNumber)
     .order("created_at", { ascending: false });
 
   if (mealkitsError || !mealkitsData) {

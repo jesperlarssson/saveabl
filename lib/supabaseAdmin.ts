@@ -29,6 +29,7 @@ const upsertProductRecord = async (product: Stripe.Product) => {
 
 const upsertMealkitRecord = async (mealkit: Mealkit) => {
   const { error } = await supabaseAdmin.from("mealkits").upsert([mealkit]);
+  console.log(error);
   if (error) throw error;
   return "Succesful upsert" + mealkit.id;
 };
