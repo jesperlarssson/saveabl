@@ -148,9 +148,7 @@ const useCheckout = () => {
   };
 
   const getTotalPrice = () => {
-    const productPrice = state.product && state.product.prices
-      ? state.product.prices?.unit_amount / 100
-      : 0;
+    const productPrice = state.product ? state.product.price : 0;
     const addOnsPrice = state.addOns.reduce(
       (total, addOn) => total + addOn.price * (addOn.quantity || 0),
       0

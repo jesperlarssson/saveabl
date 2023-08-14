@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 
 import SignOutButton from "@/components/SignOutButton";
 import { useAuth } from "@/hooks/useAuth";
-import { useUser } from "@/hooks/useUser";
+
 import { Delivery } from "@/types";
 
 interface MyPageContentProps {
@@ -11,24 +11,21 @@ interface MyPageContentProps {
 }
 
 const MyPageContent: React.FC<MyPageContentProps> = ({ deliveries }) => {
-  const { user } = useUser();
+  const auth = useAuth();
 
-  // const auth = useAuth();
+  if (!auth) {
+    return null;
+  }
 
-  // if (!auth) {
-  //   return null;
-  // }
+  const { user } = auth;
 
-  // const { user } = auth;
-
-  //   if (!user) {
-  //     redirect("/logga-in");
-  //   }
+  if (!user) {
+    redirect("/logga-in");
+  }
 
   function formatEpochToSwedishLocalTime(epoch: number | undefined): string {
-
     if (!epoch) {
-        return "Misslyckades att hämta datum";
+      return "Misslyckades att hämta datum";
     }
 
     // Convert the epoch time to milliseconds (since JavaScript uses milliseconds)

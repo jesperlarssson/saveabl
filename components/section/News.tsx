@@ -7,7 +7,7 @@ import { Post } from "@/types";
 import Title from "../ui/Title";
 import BodyText from "../ui/BodyText";
 
-const News = async () => {
+const News = async ({ newsText }: { newsText: any }) => {
   const news = (await getAllPostsForHome(false)) || [];
   return (
     <Section
@@ -16,11 +16,9 @@ const News = async () => {
         <div className="absolute top-0 left-0 w-full h-1/2 bg-primary-200"></div>
       }
     >
-      <Title className=" flex relative block z-20">
-        Följ med på resan - kika in våra senaste nyhetsinlägg!
-      </Title>
+      <Title className=" flex relative block z-20">{newsText.title}</Title>
       <BodyText className=" flex relative block z-20 max-w-3xl mb-6 text-lg">
-        Vi utvecklas och vi testar nytt. Vi expanderar och hittar på nya grejer. Här uppdaterar vi vad som händer i vår värld.
+        {newsText.text}
       </BodyText>
       <Slider>
         {news.map((post: Post) => (

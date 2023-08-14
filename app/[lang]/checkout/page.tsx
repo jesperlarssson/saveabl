@@ -2,8 +2,8 @@
 
 import addCustomerInfo from "@/actions/addCustomerInfo";
 import Button from "@/components/ui/Button";
+import { useAuth } from "@/hooks/useAuth";
 import useCheckout from "@/hooks/useCheckout";
-import { useUser } from "@/hooks/useUser";
 import { postData } from "@/lib/helpers";
 import { getStripe } from "@/lib/stripeClient";
 import { Price } from "@/types";
@@ -21,20 +21,27 @@ const Checkout = () => {
     removeMealKit,
     addAddOn,
   } = useCheckout();
-  const { user, isLoading, subscription } = useUser();
+
   const [priceIdLoading, setPriceIdLoading] = useState<string>();
 
-  const handleCheckout = async () => {
-    setPriceIdLoading(product?.prices?.id);
-    if (!user) {
-      setPriceIdLoading(undefined);
-      return toast.error("Must be logged in");
-    }
+  const auth = useAuth();
+  if (!auth) {
+    return null;
+  }
 
-    if (subscription) {
-      setPriceIdLoading(undefined);
-      return toast("Already subscribed");
-    }
+  const { user } = auth;
+
+  const handleCheckout = async () => {
+    // setPriceIdLoading(product?.prices?.id);
+    // if (!user) {
+    //   setPriceIdLoading(undefined);
+    //   return toast.error("Must be logged in");
+    // }
+
+    // if (subscription) {
+    //   setPriceIdLoading(undefined);
+    //   return toast("Already subscribed");
+    // }
 
     if (!product?.prices?.id) {
       setPriceIdLoading(undefined);

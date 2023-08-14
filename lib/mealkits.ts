@@ -15,7 +15,7 @@ export const productInfo: ProductInfo[] = [
     favorite: true,
     subscription: true,
     everyWeek: true,
-    imgSrc: "/images/product-1.jpg",
+    img_src: "/images/product-1.jpg",
   },
   {
     id: "PRODUCT2",
@@ -30,7 +30,7 @@ export const productInfo: ProductInfo[] = [
     recipes: 3,
     subscription: true,
     everyWeek: false,
-    imgSrc: "/images/product-2.jpg",
+    img_src: "/images/product-2.jpg",
   },
   {
     id: "PRODUCT3",
@@ -44,7 +44,7 @@ export const productInfo: ProductInfo[] = [
     portions: 8,
     recipes: 2,
     subscription: false,
-    imgSrc: "/images/product-3.jpg",
+    img_src: "/images/product-3.jpg",
   },
   {
     id: "PRODUCT4",
@@ -58,6 +58,6 @@ export const productInfo: ProductInfo[] = [
     portions: 12,
     recipes: 3,
     subscription: false,
-    imgSrc: "/images/product-4.jpg",
+    img_src: "/images/product-4.jpg",
   },
 ];

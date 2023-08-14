@@ -10,14 +10,15 @@ type FAQ = {
 
 type AccordionProps = {
   faqs: FAQ[];
+  title: string;
 };
 
-const Accordion = ({ faqs }: AccordionProps) => {
+const Accordion = ({ faqs, title }: AccordionProps) => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   return (
     <Section narrow className="bg-secondary text-primary-200">
-      <h3 className="font-poppins text-2xl mb-8">Vanliga frågor</h3>
+      <h3 className="font-poppins text-2xl mb-8">{title}</h3>
       <div className="w-full  mx-auto">
         {faqs.map((faq, index) => (
           <div key={index} className="border-b border-gray-200 border-opacity-20 overflow-hidden">

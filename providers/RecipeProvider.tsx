@@ -5,7 +5,6 @@ import { Recipe } from "@/types";
 import { getDateForPriorRecipes } from "@/helpers/format";
 import toast from "react-hot-toast";
 
-
 interface RecipeContextInterface {
   thisWeek: Recipe[];
   nextWeek: Recipe[];
@@ -28,9 +27,10 @@ export const RecipeContext = createContext<RecipeContextInterface>({
 
 interface RecipeProviderProps {
   children: ReactNode;
+  lang: string;
 }
 
-export const RecipeProvider = ({ children }: RecipeProviderProps) => {
+export const RecipeProvider = ({ children, lang }: RecipeProviderProps) => {
   const [thisWeek, setThisWeek] = useState<Recipe[]>([]);
   const [nextWeek, setNextWeek] = useState<Recipe[]>([]);
   const [prior, setPrior] = useState<Recipe[]>([]);
@@ -41,29 +41,27 @@ export const RecipeProvider = ({ children }: RecipeProviderProps) => {
 
   useEffect(() => {
     // Your fetching logic here...
-  
+
     const fetchOnFocus = async () => {
       try {
-        const res = await fetch("/api/recipes/next-week", {
+        const res = await fetch(`/api/recipes/next-week`, {
           method: "GET",
-          
         });
         const data = await res.json();
         console.log(data);
         setNextWeek(data);
       } catch (error) {}
     };
-    window.addEventListener('focus', fetchOnFocus);
-  
+    window.addEventListener("focus", fetchOnFocus);
+
     // Make sure to clean up your event listeners!
-    return () => window.removeEventListener('focus', fetchOnFocus);
+    return () => window.removeEventListener("focus", fetchOnFocus);
   }, []);
-  
 
   useEffect(() => {
     const getNextWeeksRecipes = async () => {
       try {
-        const res = await fetch("/api/recipes/next-week", {
+        const res = await fetch(`/api/recipes/next-week`, {
           method: "GET",
         });
         const data = await res.json();
@@ -75,7 +73,7 @@ export const RecipeProvider = ({ children }: RecipeProviderProps) => {
 
     const getThisWeeksRecipes = async () => {
       try {
-        const res = await fetch("/api/recipes/this-week", {
+        const res = await fetch(`/api/recipes/this-week`, {
           method: "GET",
         });
         const data = await res.json();
@@ -89,7 +87,7 @@ export const RecipeProvider = ({ children }: RecipeProviderProps) => {
 
     const getRecipes = async () => {
       try {
-        const res = await fetch("/api/recipes", {
+        const res = await fetch(`/api/recipes`, {
           method: "POST",
           body: JSON.stringify({
             limit: 3,
@@ -113,7 +111,7 @@ export const RecipeProvider = ({ children }: RecipeProviderProps) => {
     if (hasMore) {
       try {
         setLoadingMore(true);
-        const res = await fetch("/api/recipes", {
+        const res = await fetch(`/api/recipes`, {
           method: "POST",
           body: JSON.stringify({
             limit: 3,
@@ -135,7 +133,7 @@ export const RecipeProvider = ({ children }: RecipeProviderProps) => {
       //Fetch deprecated version of recipes
       try {
         setLoadingMore(true);
-        const res = await fetch("/api/recipes/deprecated", {
+        const res = await fetch(`/api/recipes/deprecated`, {
           method: "POST",
           body: JSON.stringify({
             limit: 3,

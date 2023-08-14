@@ -1,0 +1,76 @@
+{
+  "nav": {
+    "order": "Bestil nu",
+    "about": "Om os",
+    "recipe": "Opskrift",
+    "news": "Nyheder",
+    "log_in": "Log ind",
+    "log_out": "Log ud",
+    "sign_up": "Tilmeld dig",
+    "my_account": "Min konto"
+  },
+  "page": {
+    "hero": {
+      "title": "Færdiglavede madkasse der gør klimaet en tjeneste",
+      "subtitle": "Miljøvenlig på et helt nyt niveau.",
+      "order_now": "Bestil nu"
+    },
+    "usp": {
+      "title": "Hvad indebærer vores madkasse?",
+      "points": [
+        {
+          "title": "Vores kok skaber opskrifter",
+          "text": "Vi samler lækre råvarer, der ser lidt skøre ud, og laver lækre opskrifter på det."
+        },
+        {
+          "title": "Mad leveres til dig",
+          "text": "Du får din reddede madkasse leveret med det meste forberedt for dig."
+        },
+        {
+          "title": "Klimavenligt måltid på 15 min",
+          "text": "Du hakker og varmer det sidste på 15 minutter, nyd en lækker og klimavenlig middag!"
+        }
+      ]
+    },
+    "call_to_action": {
+      "title": "Deltag også og red mad på en nem og klimavenlig måde!",
+      "meals": "Måltider",
+      "vegetarian": "Vegetarisk",
+      "price_per_portion": "Kr/portion",
+      "cooking_time": "Min tilberedning",
+      "order_now": "Bestil nu"
+    },
+    "news": {
+      "title": "Følg med på rejsen - kig ind på vores seneste nyhedsindlæg!",
+      "text": "Vi udvikler og tester nyt. Vi ekspanderer og finder på nye ting. Her opdaterer vi, hvad der sker i vores verden."
+    },
+    "reviews": {
+      "title": "Over 20.000 reddede middage, sammen gør vi en forskel!",
+      "text": "Sådan siger nogle af vores miljøhelte til kunder:",
+      "read_all_reviews": "Læs alle anmeldelser"
+    }
+  },
+  "about_us": {
+    "title": "Redningsbar, noget der kan reddes",
+    "description": "Hos Saveabl identificerer vi systematisk spild hos producenter og grossister og laver en færdig madpose baseret på det, der skal reddes! Vores madpose findes i det magiske grænseland mellem en traditionel madpose og færdiglavet takeaway. Ud over klimaspørgsmålet tror vi stærkt på bekvemmelighed og har derfor udviklet en madpose, der er klar på 15 minutter. Utroligt smidigt og utroligt lækkert!",
+    "sections": [
+      {
+        "title": "Hvem vi er",
+        "text": "Her opstod den første idé til det, der skulle blive til Saveabl. Jeroen og Alexander spekulerede på, om de kunne gøre det endnu lettere for kunder at redde god mad fra at blive smidt væk. Problemet, de så, var, at det var lidt svært at vide, hvad man skulle gøre med maden, der var på Matsmart, der var begrænsede varer, og drengenes løsning ville være at forbinde et af de nye supermarkeders sortiment med Matsmart. Kunden kunne nemt indtaste deres indkøbsliste, og de varer, der var på Matsmart, og hvad der ikke var der, ville blive suppleret med varer fra f.eks. Coops online butik! Fantastisk tænkte Jeroen og Alexander! Problemet, de så, var, at det var lidt svært at vide, hvad man skulle gøre."
+      },
+      {
+        "title": "Vores madpose",
+        "text": "Her opstod den første idé til det, der skulle blive til Saveabl. Jeroen og Alexander spekulerede på, om de kunne gøre det endnu lettere for kunder at redde god mad fra at blive smidt væk. Problemet, de så, var, at det var lidt svært at vide, hvad man skulle gøre med maden, der var på Matsmart, der var begrænsede varer, og drengenes løsning ville være at forbinde et af de nye supermarkeders sortiment med Matsmart. Kunden kunne nemt indtaste deres indkøbsliste, og de varer, der var på Matsmart, og hvad der ikke var der, ville blive suppleret med varer fra f.eks. Coops online butik! Fantastisk tænkte Jeroen og Alexander! Problemet, de så, var, at det var lidt svært at vide, hvad man skulle gøre."
+      },
+      {
+        "title": "Reddet mad",
+        "text": "Her opstod den første idé til det, der skulle blive til Saveabl. Jeroen og Alexander spekulerede på, om de kunne gøre det endnu lettere for kunder at redde god mad fra at blive smidt væk. Problemet, de så, var, at det var lidt svært at vide, hvad man skulle gøre med maden, der var på Matsmart, der var begrænsede varer, og drengenes løsning ville være at forbinde et af de nye supermarkeders sortiment med Matsmart. Kunden kunne nemt indtaste deres indkøbsliste, og de varer, der var på Matsmart, og hvad der ikke var der, ville blive suppleret med varer fra f.eks. Coops online butik! Fantastisk tænkte Jeroen og Alexander! Problemet, de så, var, at det var lidt svært at vide, hvad man skulle gøre."
+      },
+      {
+        "title": "Vores klimaindsats",
+        "text": "Her opstod den første idé til det, der skulle blive til Saveabl. Jeroen og Alexander spekulerede på, om de kunne gøre det endnu lettere for kunder at redde god mad fra at blive smidt væk. Problemet, de så, var, at det var lidt svært at vide, hvad man skulle gøre med maden, der var på Matsmart, der var begrænsede varer, og drengenes løsning ville være at forbinde et af de nye supermarkeders sortiment med Matsmart. Kunden kunne nemt indtaste deres indkøbsliste, og de varer, der var på Matsmart, og hvad der ikke var der, ville blive suppleret med varer fra f.eks. Coops online butik! Fantastisk tænkte Jeroen og Alexander! Problemet, de så, var, at det var lidt svært at vide, hvad man skulle gøre."
+      }
+    ],
+    "faq": "Ofte stillede spørgsmål"
+  }
+}

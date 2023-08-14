@@ -14,11 +14,10 @@ import clockAnimation from "../../public/anim/Klocka.json";
 import Title from "../ui/Title";
 import BodyText from "../ui/BodyText";
 
-
-const Reviews = () => {
+const Reviews = ({ reviewsText }: { reviewsText: any }) => {
   return (
     <>
-      {/* <InjectScriptComponent /> //TODO: Fix this */} 
+      {/* <InjectScriptComponent /> //TODO: Fix this */}
       <Section
         className="bg-primary flex flex-col items-start"
         bgIllustrationComponent={
@@ -37,12 +36,18 @@ const Reviews = () => {
         </div>
 
         <Title>
-          Över 20 000 räddade middagar, tillsammans gör vi skillnad!
+          {reviewsText.title}
         </Title>
-        <BodyText >
-          Såhär säger några av våra miljöhjältar till kunder:{" "}
+        <BodyText>
+          {reviewsText.text}
         </BodyText>
-        <a className="mt-4 font-bold text-neutral-700 flex items-center gap-2 cursor-pointer hover:gap-4 hover:text-neutral-600 transition-all group" href="https://se.trustpilot.com/review/saveabl.se">Läs alla omdömen <AiOutlineArrowRight className="group-hover:text-accent" /></a>
+        <a
+          className="mt-4 font-bold text-neutral-700 flex items-center gap-2 cursor-pointer hover:gap-4 hover:text-neutral-600 transition-all group"
+          href="https://se.trustpilot.com/review/saveabl.se"
+        >
+          {reviewsText.read_all_reviews}
+          <AiOutlineArrowRight className="group-hover:text-accent" />
+        </a>
 
         <Grid>
           {reviews.map((review) => (

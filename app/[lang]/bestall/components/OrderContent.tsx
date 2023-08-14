@@ -12,6 +12,7 @@ import CheckoutSection from "@/components/ui/CheckoutSection";
 import { ProductInfo } from "@/types";
 import CheckoutButton from "./CheckoutButton";
 import IntervalButtons from "./IntervalButtons";
+import Input from "@/components/ui/Input";
 
 interface Type {
   odd: boolean;
@@ -45,6 +46,7 @@ const OrderContent: React.FC<OrderContentProps> = ({ productInfo }) => {
   const [isClient, setIsClient] = useState(false);
   const [showDeliveryOptions, setShowDeliveryOptions] = useState(false);
   const [deliveryDaysLoading, setDeliveryDaysLoading] = useState(false);
+  const [hasAllergies, setHasAllergies] = useState(true);
   const {
     product,
     addOns,
@@ -79,9 +81,6 @@ const OrderContent: React.FC<OrderContentProps> = ({ productInfo }) => {
   }
 
   const { AnimatePresence, motion } = require("framer-motion");
-
-
-  
 
   const fetchDeliveryDays = () => {
     return ["Lördag", "Söndag", "Måndag"];
@@ -124,8 +123,6 @@ const OrderContent: React.FC<OrderContentProps> = ({ productInfo }) => {
     }
   };
 
-
-
   return (
     <Section className="pt-10">
       <CheckoutSection title="Välj matkasse">
@@ -161,6 +158,32 @@ const OrderContent: React.FC<OrderContentProps> = ({ productInfo }) => {
           selectNextSubscription={selectNextSubscription}
         />
       </CheckoutSection>
+
+      {hasAllergies && (
+        <CheckoutSection title="Allergier">
+          <h3 className="font-poppins text-lg ">Information om allergier</h3>
+          <p>
+            Tyvärr kan vi inte ta hänsyn till alla allergier. För att vår idé
+            att rädda all typ av mat och göra goda recept på det ska fungera i
+            större skala så behöver vi kunna vara ganska flexibla i vilka
+            råvaror vi kan använda. Det vi tyvärr inte kan ta hänsyn till är
+            allergier mot:{" "}
+          </p>
+          <ul className="list-disc ml-8">
+            <li>Gluten</li>
+            <li>Sojaprotein</li>
+            <li>Mjölkprotein</li>
+            <li>Laktos*</li>
+          </ul>{" "}
+          <p className="text-sm my-2">
+            *rätterna innehåller inte supermycket laktos och allergener markeras
+            alltid i receptet så att du kan undvika dem. Kika gärna på recepten
+            innan du beställer så ser du hur mycket det är! Har du allergier som
+            inte är ^,
+          </p>
+          <Input label="Skriv din allergi här så ser kocken det:" placeholder="Din allergi"/>
+        </CheckoutSection>
+      )}
 
       <CheckoutSection title="Leverans">
         <div className="flex flex-col items-start my-4">
@@ -222,7 +245,7 @@ const OrderContent: React.FC<OrderContentProps> = ({ productInfo }) => {
                                 return;
                               }
                               setPreferredWeekDay(day.id);
-                              handleUpdateRemainingMealkits();
+                              //handleUpdateRemainingMealkits();
                             }}
                           >
                             {day.label}
@@ -308,10 +331,11 @@ const OrderContent: React.FC<OrderContentProps> = ({ productInfo }) => {
         </div>
       </CheckoutSection>
 
-      <Button onClick={() => addMealKit(productInfo[2])}>Prova på</Button>
+      <CheckoutSection title="Leverans och betalning">
+        <div>TODO: Add embed Stripe and pass checkout session to it</div>
+      </CheckoutSection>
     </Section>
   );
 };
 
 export default OrderContent;
-

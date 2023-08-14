@@ -15,7 +15,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       disabled,
       label,
       error,
-      type = "button",
+      type = "text",
       ...props
     },
     ref
