@@ -13,6 +13,7 @@ import { RecipeProvider } from "@/providers/RecipeProvider";
 import { GeoProvider } from "@/providers/GeoProvider";
 import { CheckoutProvider } from "@/providers/CheckoutProvider";
 import CheckoutBasket from "@/components/section/CheckoutBasket";
+import { Locale, i18n } from "@/i18n.config";
 
 const font = Figtree({ subsets: ["latin"] });
 export const revalidate = 1; // revalidate this page every 60 seconds
@@ -22,13 +23,19 @@ export const metadata = {
   description: "Matkassar",
 };
 
+export async function generateStaticParams() {
+  return i18n.locales.map((locale) => ({ lang: locale }));
+}
+
 export default function RootLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: { lang: Locale };
 }) {
   return (
-    <html lang="sv">
+    <html lang={params.lang}>
       <body className={font.className}>
         <GeoProvider>
           <AuthProvider>
@@ -36,9 +43,9 @@ export default function RootLayout({
               <ToasterProvider />
               <ModalProvider />
               <MyParallaxProvider>
-                <RecipeProvider>
+              <RecipeProvider lang={params.lang}>
                   <PromotionBanner />
-                  <Navbar />
+                  <Navbar lang={params.lang} />
 
                   <main className="min-h-screen overflow-x-hidden">
                     {children}

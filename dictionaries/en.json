@@ -1,0 +1,77 @@
+{
+    "nav": {
+      "order": "Order now",
+      "about": "About us",
+      "recipe": "Recipe",
+      "news": "News",
+      "log_in": "Log in",
+      "log_out": "Log out",
+      "sign_up": "Sign up",
+      "my_account": "My account"
+    },
+    "page": {
+      "hero": {
+        "title": "Ready-made food bag that does the climate a favor",
+        "subtitle": "Environmentally friendly on a whole new level.",
+        "order_now": "Order now"
+      },
+      "usp": {
+        "title": "What does our food bag mean?",
+        "points": [
+          {
+            "title": "Our chef creates recipes",
+            "text": "We gather delicious ingredients that look a bit quirky and create tasty recipes from them."
+          },
+          {
+            "title": "The food is sent to you",
+            "text": "You get your rescued food bag delivered with most things prepared for you."
+          },
+          {
+            "title": "Climate-smart meal in 15 min",
+            "text": "You chop and heat the last part in 15 minutes, enjoy a delicious and climate-smart dinner!"
+          }
+        ]
+      },
+      "call_to_action": {
+        "title": "Join us and save food in an easy and climate-smart way!",
+        "meals": "Meals",
+        "vegetarian": "Vegetarian",
+        "price_per_portion": "Kr/portion",
+        "cooking_time": "Min cooking",
+        "order_now": "Order now"
+      },
+      "news": {
+        "title": "Follow the journey - check out our latest news posts!",
+        "text": "We develop and test new things. We expand and come up with new stuff. Here we update what's happening in our world."
+      },
+      "reviews": {
+        "title": "Over 20,000 saved dinners, together we make a difference!",
+        "text": "Here's what some of our environmental heroes say to customers:",
+        "read_all_reviews": "Read all reviews"
+      }
+    },
+  
+    "about_us": {
+      "title": "Rescuable, something that can be saved",
+      "description": "At Saveabl, we systematically identify waste among producers and wholesalers, and create a ready-made food bag based on what needs to be rescued! Our food bag exists in the magical borderland between a traditional food bag and ready-made takeaway. In addition to the climate issue, we strongly believe in convenience and have therefore developed a food bag that is ready in 15 minutes. Incredibly smooth and incredibly tasty!",
+      "sections": [
+        {
+          "title": "Who we are",
+          "text": "Here the first idea arose for what would become Saveabl. Jeroen and Alexander wondered if they could make it even easier for customers to save good food from being thrown away. The problem they saw was that it was a little difficult to know what to do with the food that was on Matsmart, there were limited goods, and the guys' solution would be to link one of the new grocery stores' assortment with Matsmart. The customer could easily enter their shopping list and the goods that were on Matsmart, and what was not there, would be supplemented with goods from, for example, Coop's online store! Great thought Jeroen and Alexander! The problem they saw was that it was a little difficult to know what to do."
+        },
+        {
+          "title": "Our food bag",
+          "text": "Here the first idea arose for what would become Saveabl. Jeroen and Alexander wondered if they could make it even easier for customers to save good food from being thrown away. The problem they saw was that it was a little difficult to know what to do with the food that was on Matsmart, there were limited goods, and the guys' solution would be to link one of the new grocery stores' assortment with Matsmart. The customer could easily enter their shopping list and the goods that were on Matsmart, and what was not there, would be supplemented with goods from, for example, Coop's online store! Great thought Jeroen and Alexander! The problem they saw was that it was a little difficult to know what to do."
+        },
+        {
+          "title": "Rescued food",
+          "text": "Here the first idea arose for what would become Saveabl. Jeroen and Alexander wondered if they could make it even easier for customers to save good food from being thrown away. The problem they saw was that it was a little difficult to know what to do with the food that was on Matsmart, there were limited goods, and the guys' solution would be to link one of the new grocery stores' assortment with Matsmart. The customer could easily enter their shopping list and the goods that were on Matsmart, and what was not there, would be supplemented with goods from, for example, Coop's online store! Great thought Jeroen and Alexander! The problem they saw was that it was a little difficult to know what to do."
+        },
+        {
+          "title": "Our climate effort",
+          "text": "Here the first idea arose for what would become Saveabl. Jeroen and Alexander wondered if they could make it even easier for customers to save good food from being thrown away. The problem they saw was that it was a little difficult to know what to do with the food that was on Matsmart, there were limited goods, and the guys' solution would be to link one of the new grocery stores' assortment with Matsmart. The customer could easily enter their shopping list and the goods that were on Matsmart, and what was not there, would be supplemented with goods from, for example, Coop's online store! Great thought Jeroen and Alexander! The problem they saw was that it was a little difficult to know what to do."
+        }
+      ],
+      "faq": "Frequently Asked Questions"
+    }
+  }

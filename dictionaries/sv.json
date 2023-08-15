@@ -1,0 +1,77 @@
+{
+  "nav": {
+    "order": "Beställ nu",
+    "about": "Om oss",
+    "recipe": "Recept",
+    "news": "Nyheter",
+    "log_in": "Logga in",
+    "log_out": "Logga ut",
+    "sign_up": "Registrera dig",
+    "my_account": "Mina sidor"
+  },
+  "page": {
+    "hero": {
+      "title": "Färdiga matkassen som gör klimatet en tjänst",
+      "subtitle": "Klimatvänligt på en helt ny nivå.",
+      "order_now": "Beställ nu"
+    },
+    "usp": {
+      "title": "Vad innebär vår matkasse?",
+      "points": [
+        {
+          "title": "Vår kock skapar recept",
+          "text": "Vi samlar ihop jättegoda råvaror som ser lite tokiga ut och gör goda recept på det."
+        },
+        {
+          "title": "Maten skickas till dig",
+          "text": "Du får din räddade matkasse hemlevererad med det mesta förberett åt dig."
+        },
+        {
+          "title": "Klimatsmart måltid på 15 min",
+          "text": "Du hackar och värmer det sista på 15 minuter, njut av en god och klimatsmart middag!"
+        }
+      ]
+    },
+    "call_to_action": {
+      "title": "Var med du också och rädda mat på ett enkelt och klimatsmart sätt!",
+      "meals": "Måltider",
+      "vegetarian": "Vegetariskt",
+      "price_per_portion": "Kr/portion",
+      "cooking_time": "Min tillagning",
+      "order_now": "Beställ nu"
+    },
+    "news": {
+      "title": "Följ med på resan - kika in våra senaste nyhetsinlägg!",
+      "text": "Vi utvecklas och vi testar nytt. Vi expanderar och hittar på nya grejer. Här uppdaterar vi vad som händer i vår värld."
+    },
+    "reviews": {
+      "title": "Över 20 000 räddade middagar, tillsammans gör vi skillnad!",
+      "text": "Såhär säger några av våra miljöhjältar till kunder:",
+      "read_all_reviews": "Läs alla omdömen"
+    }
+  },
+
+  "about_us": {
+    "title": "Räddningsbar, något som går att rädda",
+    "description": "På Saveabl. identifierar vi systematiskt svinn hos producenter och grossister, och gör en färdig matkasse baserad på det som behöver räddas! Vår matkasse finns i det magiska gränslandet mellan en traditionell matkasse och färdig hämtmat. Utöver klimatfrågan tror vi starkt på smidighet och har därför tagit fram en matkasse som är klar på 15 minuter. Otroligt smidigt och otroligt gott!",
+    "sections": [
+      {
+        "title": "Vilka vi är",
+        "text": "Här uppstod den första idén till det som skulle komma att bli Saveabl. Jeroen och Alexander frågade sig om de skulle kunna göra det ännu lättare för kunder att rädda bra mat från att slängas. Problemet de såg var att det var lite svårt att veta vad man skulle göra med den maten som fanns på Matsmart, det fanns begränsat med varor och killarnas lösning skulle vara att koppla ihop en av de nya matbutikernas sortiment med Matsmart. Kunden skulle enkelt kunna lägga in sin inköpslista och de varor som fanns på matsmart, och det som inte fanns där, skulle kompletteras med varor från ex Coops online butik! Grymt tyckte Jeroen och Alexander! Problemet de såg var att det var lite svårt att veta vad man skulle göra."
+      },
+      {
+        "title": "Vår matkasse",
+        "text": "Här uppstod den första idén till det som skulle komma att bli Saveabl. Jeroen och Alexander frågade sig om de skulle kunna göra det ännu lättare för kunder att rädda bra mat från att slängas. Problemet de såg var att det var lite svårt att veta vad man skulle göra med den maten som fanns på Matsmart, det fanns begränsat med varor och killarnas lösning skulle vara att koppla ihop en av de nya matbutikernas sortiment med Matsmart. Kunden skulle enkelt kunna lägga in sin inköpslista och de varor som fanns på matsmart, och det som inte fanns där, skulle kompletteras med varor från ex Coops online butik! Grymt tyckte Jeroen och Alexander! Problemet de såg var att det var lite svårt att veta vad man skulle göra."
+      },
+      {
+        "title": "Räddad mat",
+        "text": "Här uppstod den första idén till det som skulle komma att bli Saveabl. Jeroen och Alexander frågade sig om de skulle kunna göra det ännu lättare för kunder att rädda bra mat från att slängas. Problemet de såg var att det var lite svårt att veta vad man skulle göra med den maten som fanns på Matsmart, det fanns begränsat med varor och killarnas lösning skulle vara att koppla ihop en av de nya matbutikernas sortiment med Matsmart. Kunden skulle enkelt kunna lägga in sin inköpslista och de varor som fanns på matsmart, och det som inte fanns där, skulle kompletteras med varor från ex Coops online butik! Grymt tyckte Jeroen och Alexander! Problemet de såg var att det var lite svårt att veta vad man skulle göra."
+      },
+      {
+        "title": "Vår klimatinsats",
+        "text": "Här uppstod den första idén till det som skulle komma att bli Saveabl. Jeroen och Alexander frågade sig om de skulle kunna göra det ännu lättare för kunder att rädda bra mat från att slängas. Problemet de såg var att det var lite svårt att veta vad man skulle göra med den maten som fanns på Matsmart, det fanns begränsat med varor och killarnas lösning skulle vara att koppla ihop en av de nya matbutikernas sortiment med Matsmart. Kunden skulle enkelt kunna lägga in sin inköpslista och de varor som fanns på matsmart, och det som inte fanns där, skulle kompletteras med varor från ex Coops online butik! Grymt tyckte Jeroen och Alexander! Problemet de såg var att det var lite svårt att veta vad man skulle göra."
+      }
+    ],
+    "faq": "Vanliga frågor"
+  }
+}

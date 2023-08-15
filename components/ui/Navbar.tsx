@@ -5,16 +5,46 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { twMerge } from "tailwind-merge";
 
-import { navigation } from "@/lib/navigation";
 import NavItem from "./NavItem";
 import useAuthModal from "@/hooks/useAuthModal";
 import { useAuth } from "@/hooks/useAuth";
 
+import { NavigationItem } from "@/lib/navigation";
+import { getDictionary } from "@/lib/dictionary";
 
-const Navbar = () => {
+const Navbar = async ({ lang }: { lang: any }) => {
   const authModal = useAuthModal();
   const [active, setActive] = useState(false);
   const pathname = usePathname();
+
+  const { nav } = await getDictionary(lang);
+
+  const navigation: NavigationItem[] = [
+    {
+      id: 1,
+      name: nav.order,
+      path: `/${lang}/bestall`,
+      disabled: false,
+    },
+    {
+      id: 2,
+      name: nav.recipe,
+      path: `/${lang}/recept`,
+      disabled: false,
+    },
+    {
+      id: 3,
+      name: nav.about,
+      path: `/${lang}/om-oss`,
+      disabled: false,
+    },
+    {
+      id: 4,
+      name: nav.news,
+      path: `/${lang}/nyheter`,
+      disabled: false,
+    },
+  ];
 
   const auth = useAuth();
   if (!auth) {
@@ -37,7 +67,7 @@ const Navbar = () => {
       >
         <nav className="w-full  flex items-center justify-between max-w-screen-2xl mx-auto px-2 sm:px-4 md:px-8">
           <Link
-            href={"/"}
+            href={`/${lang}/`}
             className=" px-4 h-14 flex items-center rounded-md hover:shadow-inner hover:scale-95 transition-all"
           >
             <Image
@@ -45,7 +75,7 @@ const Navbar = () => {
               width={90}
               height={18}
               alt="Saveabl home"
-              src={"/svg/logo.svg"}
+              src={`/svg/logo.svg`}
             />
           </Link>
           <ul className="hidden md:flex">
@@ -74,7 +104,7 @@ const Navbar = () => {
               onClick={authModal.onOpen}
               className="hidden md:flex px-8 py-3 rounded-full bg-accent text-primary-200  text-sm font-poppins tracking-wider border border-transparent disabled:cursor-not-allowed disabled:opacity-50 hover:bg-accent-600 hover:drop-shadow-md transition"
             >
-              Logga in
+              {nav.log_in}
             </button>
           ) : (
             <div className="hidden md:flex items-center gap-x-4">
@@ -82,7 +112,7 @@ const Navbar = () => {
                 href="/mina-sidor"
                 className=" px-8 py-3 rounded-full bg-primary text-primary-900  text-sm font-poppins tracking-wider border border-transparent disabled:cursor-not-allowed disabled:opacity-50 hover:bg-primary-500 hover:drop-shadow-md transition"
               >
-                Mina Sidor
+                {nav.my_account}
               </Link>
             </div>
           )}
