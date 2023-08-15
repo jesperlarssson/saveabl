@@ -1,14 +1,14 @@
 import { productInfo } from "@/lib/mealkits";
 import { ProductInfo } from "@/types";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+
 import { cookies } from "next/headers";
 
 const getAllProductInfo = async (): Promise<ProductInfo[]> => {
-  const supabase = createServerComponentClient({
-    cookies: cookies,
-  });
+  // const supabase = createServerComponentClient({
+  //   cookies: cookies,
+  // });
 
-  const data: ProductInfo[] = productInfo;
+  // const data: ProductInfo[] = productInfo;
 
   // const { data, error } = await supabase
   //   .from("product_info")
@@ -19,7 +19,7 @@ const getAllProductInfo = async (): Promise<ProductInfo[]> => {
   //   throw new Error(error.message);
   // }
 
-  return data as ProductInfo[];
+  return [];
 };
 
 export default getAllProductInfo;

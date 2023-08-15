@@ -9,7 +9,7 @@ import {
   signOut as firebaseSignOut,
 } from "@firebase/auth";
 import { auth } from "@/firebase/init";
-import  LoadingScreen  from "@/components/section/LoadingScreen";
+import LoadingScreen from "@/components/section/LoadingScreen";
 
 interface AuthContextInterface {
   user: User | null;
@@ -62,6 +62,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
+      console.log("Auth state changed:", user); // Add this line
       setUser(user);
       setLoading(false);
     });
@@ -72,7 +73,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   if (loading) {
     return (
-      <LoadingScreen />
+      <div>Loading...</div> //<LoadingScreen />
     );
   }
 

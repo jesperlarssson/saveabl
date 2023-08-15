@@ -10,7 +10,6 @@ const nextConfig = {
       "images.unsplash.com",
     ],
   },
-  basePath: '',
 };
 
 module.exports = nextConfig;

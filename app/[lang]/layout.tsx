@@ -13,7 +13,6 @@ import { RecipeProvider } from "@/providers/RecipeProvider";
 //import { GeoProvider } from "@/providers/GeoProvider";
 import { CheckoutProvider } from "@/providers/CheckoutProvider";
 import CheckoutBasket from "@/components/section/CheckoutBasket";
-import UserProvider from "@/providers/UserProvider";
 import { AuthProvider } from "@/providers/AuthProvider";
 //import SupabaseProvider from "@/providers/SupabaseProvider";
 
@@ -39,30 +38,7 @@ export default function RootLayout({
   return (
     <html lang={params.lang}>
       <body className={font.className}>
-        {/* <GeoProvider> */}
-        {/* <SupabaseProvider> */}
-        {/* <AuthProvider> */}
-          {/* <UserProvider> */}
-            {/* <CheckoutProvider>
-              <ToasterProvider />
-              <ModalProvider />
-              <MyParallaxProvider>
-                <RecipeProvider lang={params.lang}>
-                  <PromotionBanner />
-                  <Navbar lang={params.lang} />
-
-                  <main className="min-h-screen overflow-x-hidden">
-                    {children}
-                  </main>
-
-                  <Footer />
-                </RecipeProvider>
-              </MyParallaxProvider>
-              <CheckoutBasket />
-            </CheckoutProvider> */}
-
-
-
+<h1>LAYOUT PARENT</h1>
 
             <AuthProvider>
             <CheckoutProvider>
@@ -75,6 +51,7 @@ export default function RootLayout({
 
                   <main className="min-h-screen overflow-x-hidden">
                     {children}
+                    IN LAYOUT
                   </main>
 
                   <Footer />
@@ -84,12 +61,6 @@ export default function RootLayout({
             </CheckoutProvider>
           </AuthProvider>
 
-
-
-          {/* </UserProvider> */}
-        {/* </AuthProvider> */}
-        {/* </SupabaseProvider> */}
-        {/* </GeoProvider> */}
       </body>
     </html>
   );

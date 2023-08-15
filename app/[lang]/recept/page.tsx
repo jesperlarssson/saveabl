@@ -8,7 +8,6 @@ const Recept = async () => {
   return (
     <Section className="pt-16">
       <Title>Recept</Title>
-
       <Recipes />
     </Section>
   );
