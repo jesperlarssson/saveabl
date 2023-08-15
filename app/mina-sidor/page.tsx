@@ -1,25 +1,11 @@
-"use client";
-import { redirect } from "next/navigation";
+import getDeliveriesByUserId from "@/actions/getDeliveriesByUserId";
+import MyPageContent from "./components/MyPageContent";
 
-import SignOutButton from "@/components/SignOutButton";
-import { useAuth } from "@/hooks/useAuth";
-
-const MinaSidor = () => {
-  const auth = useAuth();
-
-  if (!auth) {
-    return null;
-  }
-
-  const { user } = auth;
-
-  if (!user) {
-    redirect("/logga-in");
-  }
-
+const MinaSidor = async () => {
+  const deliveries = await getDeliveriesByUserId();
   return (
     <div>
-      <SignOutButton />
+      <MyPageContent deliveries={deliveries} />
     </div>
   );
 };
