@@ -9,12 +9,55 @@ import { navigation } from "@/lib/navigation";
 import NavItem from "./NavItem";
 import useAuthModal from "@/hooks/useAuthModal";
 import { useAuth } from "@/hooks/useAuth";
-
+import LanguageSelector from "../general/LanguageSelector";
+import { useLang } from "@/hooks/useLang";
 
 const Navbar = () => {
   const authModal = useAuthModal();
   const [active, setActive] = useState(false);
   const pathname = usePathname();
+
+  const { text } = useLang();
+
+  interface NavigationItem {
+    id: number;
+    name: string;
+    path: string;
+    disabled?: boolean;
+  }
+
+  const navigation: NavigationItem[] = [
+    {
+      id: 1,
+      name: text.nav.order,
+      path: "/bestall",
+      disabled: false,
+    },
+    {
+      id: 2,
+      name: text.nav.recipe,
+      path: "/recept",
+      disabled: false,
+    },
+    {
+      id: 3,
+      name: text.nav.about,
+      path: "/om-oss",
+      disabled: false,
+    },
+    {
+      id: 4,
+      name: text.nav.news,
+      path: "/nyheter",
+      disabled: false,
+    },
+    // {
+    //   id: 5,
+    //   name: "Restaurangen",
+    //   path: "/restaurangen",
+    //   disabled: true,
+    // },
+  ];
 
   const auth = useAuth();
   if (!auth) {
@@ -69,23 +112,27 @@ const Navbar = () => {
               </li>
             ))}
           </ul>
-          {!user ? (
-            <button
-              onClick={authModal.onOpen}
-              className="hidden md:flex px-8 py-3 rounded-full bg-accent text-primary-200  text-sm font-poppins tracking-wider border border-transparent disabled:cursor-not-allowed disabled:opacity-50 hover:bg-accent-600 hover:drop-shadow-md transition"
-            >
-              Logga in
-            </button>
-          ) : (
-            <div className="hidden md:flex items-center gap-x-4">
-              <Link
-                href="/mina-sidor"
-                className=" px-8 py-3 rounded-full bg-primary text-primary-900  text-sm font-poppins tracking-wider border border-transparent disabled:cursor-not-allowed disabled:opacity-50 hover:bg-primary-500 hover:drop-shadow-md transition"
+          <div className="flex gap-2">
+            <LanguageSelector />
+
+            {!user ? (
+              <button
+                onClick={authModal.onOpen}
+                className="hidden md:flex px-8 py-3 rounded-full bg-accent text-primary-200  text-sm font-poppins tracking-wider border border-transparent disabled:cursor-not-allowed disabled:opacity-50 hover:bg-accent-600 hover:drop-shadow-md transition"
               >
-                Mina Sidor
-              </Link>
-            </div>
-          )}
+                {text.nav.log_in}
+              </button>
+            ) : (
+              <div className="hidden md:flex items-center gap-x-4">
+                <Link
+                  href="/mina-sidor"
+                  className=" px-8 py-3 rounded-full bg-primary text-primary-900  text-sm font-poppins tracking-wider border border-transparent disabled:cursor-not-allowed disabled:opacity-50 hover:bg-primary-500 hover:drop-shadow-md transition"
+                >
+                 {text.nav.my_account}
+                </Link>
+              </div>
+            )}
+          </div>
 
           <div className="md:hidden mr-4">
             <button

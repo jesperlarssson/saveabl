@@ -10,8 +10,12 @@ import Section from "../ui/Section";
 import { Parallax } from "react-scroll-parallax";
 import RecipeDisplay from "../general/RecipeDisplay";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useLang } from "@/hooks/useLang";
 
 const Hero = () => {
+  const { lang, text } = useLang();
+
   return (
     <div className="w-full h-screen -mt-32 flex flex-col justify-center">
       <Section>
@@ -39,7 +43,7 @@ const Hero = () => {
                 transition={{ duration: 0.5, delay: 0.3 }}
                 className="ml-8 -mt-16 font-poppins text-4xl md:text-5xl max-w-3xl text-center"
               >
-                Färdiga matkassen som gör klimatet en tjänst
+                {text.page.hero.title}
               </motion.h1>
               <motion.p
                 initial={{ opacity: 0 }}
@@ -47,10 +51,12 @@ const Hero = () => {
                 transition={{ duration: 0.5, delay: 0.3 }}
                 className="ml-8 mt-4 mb-12 text-gray-700 text-center text-xl tracking-wide"
               >
-                Klimatvänligt på en helt ny nivå.
+                {text.page.hero.subtitle}
               </motion.p>
               <Link href={"/bestall"} className="flex justify-center">
-                <Button className="ml-8 w-full md:w-96 ">Beställ nu</Button>
+                <Button className="ml-8 w-full md:w-96 ">
+                  {text.page.hero.order_now}
+                </Button>
               </Link>
             </div>
           </div>

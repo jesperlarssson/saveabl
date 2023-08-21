@@ -19,17 +19,16 @@ function getLocale(request: NextRequest): string {
 }
 
 export function middleware(request: NextRequest) {
-    const pathname = request.nextUrl.pathname;
-    const searchParams = request.nextUrl.searchParams;
-  
-    // Check if the locale query parameter is already present
-    if (!searchParams.has('locale')) {
-      const locale = getLocale(request);
-      const redirectUrl = new URL(pathname, request.url);
-      redirectUrl.searchParams.append('locale', locale); // Append the locale as a query parameter
-      return NextResponse.redirect(redirectUrl);
-    }
-  }
+  // const pathname = request.nextUrl.pathname;
+  // const searchParams = request.nextUrl.searchParams;
+  // // Check if the locale query parameter is already present
+  // if (!searchParams.has('locale')) {
+  //   const locale = getLocale(request);
+  //   const redirectUrl = new URL(pathname, request.url);
+  //   redirectUrl.searchParams.append('locale', locale); // Append the locale as a query parameter
+  //   return NextResponse.redirect(redirectUrl);
+  // }
+}
 
 export const config = {
   // Matcher ignoring `/_next/`, `/images/`, `/svg/`, and `/favicon.ico`
