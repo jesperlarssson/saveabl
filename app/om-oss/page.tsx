@@ -5,7 +5,7 @@ import TextAndImage from "@/components/ui/TextAndImage";
 import { getAllFAQ } from "@/lib/hygraph";
 import Accordion from "@/components/ui/Accordion";
 
-const OmOss = async ({ params: { lang } }: { params: { lang: any } }) => {
+const OmOss = async () => {
   const faqs = await getAllFAQ();
   const about_us = {
     title: "Räddningsbar, något som går att rädda",

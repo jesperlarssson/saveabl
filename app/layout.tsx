@@ -13,6 +13,7 @@ import { RecipeProvider } from "@/providers/RecipeProvider";
 import { GeoProvider } from "@/providers/GeoProvider";
 import { CheckoutProvider } from "@/providers/CheckoutProvider";
 import CheckoutBasket from "@/components/section/CheckoutBasket";
+import { TextProvider } from "@/providers/TextProvider";
 
 const font = Figtree({ subsets: ["latin"] });
 export const revalidate = 1; // revalidate this page every 60 seconds
