@@ -9,17 +9,19 @@ import {
   signOut as firebaseSignOut,
 } from "@firebase/auth";
 import { auth } from "@/firebase/init";
-import  LoadingScreen  from "@/components/section/LoadingScreen";
+import LoadingScreen from "@/components/section/LoadingScreen";
 
 interface AuthContextInterface {
   user: User | null;
-  signUp: (email: string, password: string) => Promise<User>;
-  signIn: (email: string, password: string) => Promise<User>;
+  error: string | null;
+  signUp: (email: string, password: string) => Promise<User | null>;
+  signIn: (email: string, password: string) => Promise<User | null>;
   signOut: () => Promise<void>;
 }
 
 export const AuthContext = createContext<AuthContextInterface | null>({
   user: null,
+  error: null,
   signUp: async () => {
     throw new Error("AuthProvider not ready");
   },
@@ -38,26 +40,37 @@ interface AuthProviderProps {
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   async function signUp(email: string, password: string) {
-    const credential = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-    setUser(credential.user);
-    return credential.user;
+    try {
+      const credential = await createUserWithEmailAndPassword(auth, email, password);
+      setUser(credential.user);
+      return credential.user;
+    } catch (err: any) {
+      setError(err.message);
+      return null;
+    }
   }
 
   async function signIn(email: string, password: string) {
-    const credential = await signInWithEmailAndPassword(auth, email, password);
-    setUser(credential.user);
-    return credential.user;
+    try {
+      const credential = await signInWithEmailAndPassword(auth, email, password);
+      setUser(credential.user);
+      return credential.user;
+    } catch (err: any) {
+      setError(err.message);
+      return null;
+    }
   }
 
   async function signOut() {
-    await firebaseSignOut(auth);
-    setUser(null);
+    try {
+      await firebaseSignOut(auth);
+      setUser(null);
+    } catch (err: any) {
+      setError(err.message);
+    }
   }
 
   useEffect(() => {
@@ -71,13 +84,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   }, []);
 
   if (loading) {
-    return (
-      <LoadingScreen />
-    );
+    return <LoadingScreen />;
   }
 
   return (
-    <AuthContext.Provider value={{ user, signUp, signIn, signOut }}>
+    <AuthContext.Provider value={{ user, error, signUp, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   );

@@ -6,6 +6,7 @@ import { ProductWithPrice } from "@/types";
 import Modal from "@/components/ui/Modal";
 import AuthModal from "@/components/modals/AuthModal";
 import LocationModal from "@/components/modals/LocationModal";
+import AddMealkitModal from "@/components/modals/AddMealkitModal";
 
 
 const ModalProvider = () => {
@@ -21,6 +22,7 @@ const ModalProvider = () => {
 
   return (
     <>
+      <AddMealkitModal />
       <AuthModal />
       <LocationModal />
     </>

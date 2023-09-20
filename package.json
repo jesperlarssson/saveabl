@@ -11,6 +11,7 @@
   "dependencies": {
     "@formatjs/intl-localematcher": "^0.4.0",
     "@radix-ui/react-dialog": "^1.0.4",
+    "@stripe/stripe-js": "^2.1.1",
     "@types/node": "20.2.5",
     "@types/react": "18.2.8",
     "@types/react-dom": "18.2.4",
@@ -19,6 +20,7 @@
     "eslint": "8.42.0",
     "eslint-config-next": "13.4.4",
     "firebase": "^9.22.2",
+    "firebase-admin": "^11.10.1",
     "framer-motion": "^10.12.16",
     "lottie-react": "^2.4.0",
     "negotiator": "^0.6.3",

@@ -64,13 +64,7 @@ const SignInForm = () => {
         Logga in
       </Button>
 
-      <p className="mt-4 text-sm text-gray-500 sm:mt-0">
-        Saknar du konto?
-        <a href="#" className="text-accent underline">
-          Skapa nu.
-        </a>
-        .
-      </p>
+     
     </form>
   );
 };

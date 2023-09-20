@@ -1,11 +1,11 @@
-import getDeliveriesByUserId from "@/actions/getDeliveriesByUserId";
+
 import MyPageContent from "./components/MyPageContent";
 
 const MinaSidor = async () => {
-  const deliveries = await getDeliveriesByUserId();
+  //const deliveries = await getDeliveriesByUserId();
   return (
     <div>
-      <MyPageContent deliveries={deliveries} />
+      <MyPageContent />
     </div>
   );
 };
