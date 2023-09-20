@@ -31,7 +31,8 @@ const MyPageContent = () => {
     if (signOut) signOut();
   };
 
-  const { onOpen, setPostalCode, setWeek, setSubscriptionId } = useAddMealkitModal();
+  const { onOpen, setPostalCode, setWeek, setSubscriptionId } =
+    useAddMealkitModal();
 
   const currentWeekNumber = getWeekNumber(new Date());
 
@@ -75,15 +76,57 @@ const MyPageContent = () => {
     return day?.day;
   };
 
-  const [userDetails, setUserDetails] = useState();
-  const [subscriptionDetails, setSubscriptionDetails] = useState();
+  const [userDetails, setUserDetails] = useState({
+    name: "",
+    email: "",
+    address: {
+      street: "",
+      postalCode: "",
+      city: "",
+    },
+    subscription: {
+      id: "",
+      price: {
+        schedule: {
+          intervalCount: 0,
+          interval: "",
+        },
+      },
+      weeklyDeliveryDay: 0,
+    },
+
+    mealKits: [
+      {
+        weekNumber: 0,
+        portions: 0,
+        nrRecipes: 0,
+      },
+    ],
+  });
+  const [subscriptionDetails, setSubscriptionDetails] = useState({
+    id: "",
+    price: {
+      schedule: {
+        intervalCount: 0,
+        interval: "",
+      },
+    },
+    weeklyDeliveryDay: 0,
+  });
   const [userMealkits, setUserMealkits] = useState([]);
   const [nextDelivery, setNextDelivery] = useState();
-  const [deliveryInfo, setDeliveryInfo] = useState();
-  const [prefferedDeliveryDay, setPrefferedDeliveryDay] = useState();
+  const [deliveryInfo, setDeliveryInfo] = useState({
+    street: "",
+    postalCode: "",
+    city: "",
+  });
+  const [prefferedDeliveryDay, setPrefferedDeliveryDay] = useState(0);
   const [subscriptionFrequency, setSubscriptionFrequency] = useState("");
   const [nextDeliveryDate, setNextDeliveryDate] = useState("");
-  const [oddOrEvenSubscription, setOddOrEvenSubscription] = useState({});
+  const [oddOrEvenSubscription, setOddOrEvenSubscription] = useState({
+    string: "",
+    odd: false,
+  });
 
   useEffect(() => {
     const fetchUserDetails = async () => {
@@ -132,12 +175,17 @@ const MyPageContent = () => {
         // Converting the baseline timestamp to a Date object
         const baselineDate: any = new Date(baseline * 1000);
 
-        // Finding the week number
+        const baselineDateMilliseconds = baselineDate.getTime();
+        const firstOfYearMilliseconds = new Date(
+          baselineDate.getFullYear(),
+          0,
+          1
+        ).getTime();
+        const differenceInMilliseconds =
+          baselineDateMilliseconds - firstOfYearMilliseconds;
+
         const weekNumber: any = Math.ceil(
-          ((baselineDate - new Date(baselineDate.getFullYear(), 0, 1)) /
-            86400000 +
-            1) /
-            7
+          (differenceInMilliseconds / 86400000 + 1) / 7
         );
 
         // Determining if it's odd or even week
@@ -246,7 +294,11 @@ const MyPageContent = () => {
 
             return (
               <div key={mealkit.weekNumber}>
-                <MealKitTile weekNumber={mealkit.weekNumber} active={active} onAddMealkit={() => openAddMealkitModal(mealkit.weekNumber)} />
+                <MealKitTile
+                  weekNumber={mealkit.weekNumber}
+                  active={active}
+                  onAddMealkit={() => openAddMealkitModal(mealkit.weekNumber)}
+                />
               </div>
             );
           })}
