@@ -124,3 +124,4 @@ export interface Post {
 export interface PostsData {
   posts: Post[];
 }
+
