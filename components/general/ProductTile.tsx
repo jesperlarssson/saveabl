@@ -29,22 +29,21 @@ const ProductTile: React.FC<ProductTileProps> = ({
   children,
 }) => {
   const { nextWeek } = useRecipes();
-  const { addMealKit, selectNextOneTimePurchase, selectNextSubscription } =
-    useCheckout();
+  const {  } = useCheckout();
 
   const handleAddToCheckout = () => {
     //TODO: Might need to change depending on product object from stripe/backend
     if (product.subscription) {
       if (product.everyWeek) {
-        selectNextSubscription(true);
+        
       } else {
-        selectNextSubscription(false);
+        
       }
     } else {
       if (product.portions < 12) {
-        addMealKit(product);
+       
       } else {
-        selectNextOneTimePurchase();
+       
       }
     }
   };
