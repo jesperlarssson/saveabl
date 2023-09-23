@@ -1,11 +1,6 @@
 "use client";
 
-import SignOutButton from "@/components/SignOutButton";
 import { useAuth } from "@/hooks/useAuth";
-import Button from "@/components/ui/Button";
-import { fetchUserDetails } from "@/actions/getUserDetails";
-import { putUserDetails } from "@/actions/putUserDetails";
-import { createNewCheckout } from "@/actions/createNewCheckout";
 import Section from "@/components/ui/Section";
 import Title from "@/components/ui/Title";
 import BodyText from "@/components/ui/BodyText";
@@ -20,7 +15,7 @@ import toast from "react-hot-toast";
 import instance from "@/lib/apiAxios";
 import { DeliveryWindow } from "@/providers/CheckoutProvider";
 import useAddMealkitModal from "@/hooks/useAddMealkitModal";
-import { set } from "video.js/dist/types/tech/middleware";
+
 
 const MyPageContent = () => {
   const auth = useAuth();

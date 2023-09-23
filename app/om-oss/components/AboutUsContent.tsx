@@ -3,16 +3,14 @@ import React from "react";
 import Image from "next/image";
 import Section from "@/components/ui/Section";
 import TextAndImage from "@/components/ui/TextAndImage";
-import { getAllFAQ } from "@/lib/hygraph";
 import Accordion from "@/components/ui/Accordion";
 import { useRouter } from "next/router";
-import { getDictionary } from "@/lib/dictionary";
+import { useLang } from "@/hooks/useLang";
 
 const AboutUsContent = () => {
-    const router = useRouter();
-    const locale = router.query.locale;
-    const { about_us } = getDictionary(locale);
-    
+
+  const { lang, text } = useLang();
+
   return (
     <div>
       <div className="relative">
@@ -27,10 +25,12 @@ const AboutUsContent = () => {
           <div className="max-w-xl mx-auto flex flex-col gap-3 ">
             <h1 className="text-4xl font-semibold text-white">
               Saveabl.{" "}
-              <span className="text-lg font-normal ">{about_us?.title}</span>{" "}
+              <span className="text-lg font-normal ">
+                {text.about_us?.title}
+              </span>{" "}
               <span className="text-sm text-green-400 italic">Adj.</span>
             </h1>
-            <p className=" text-white">{about_us?.description}</p>
+            <p className=" text-white">{text.about_us?.description}</p>
           </div>
         </Section>
       </div>
@@ -49,7 +49,9 @@ const AboutUsContent = () => {
                 className="object-contain w-full h-full"
               />
             </div>
-            <p className="text-sm md:text-base">{about_us.sections[0].title}</p>
+            <p className="text-sm md:text-base">
+              {text.about_us.sections[0].title}
+            </p>
           </a>
           <a
             href="#var-matkasse"
@@ -64,7 +66,9 @@ const AboutUsContent = () => {
                 className="object-contain w-full h-full"
               />
             </div>
-            <p className="text-sm md:text-base">{about_us.sections[1].title}</p>
+            <p className="text-sm md:text-base">
+              {text.about_us.sections[1].title}
+            </p>
           </a>
           <a
             href="#raddad-mat"
@@ -79,7 +83,9 @@ const AboutUsContent = () => {
                 className="object-contain w-full h-full"
               />
             </div>
-            <p className="text-sm md:text-base">{about_us.sections[2].title}</p>
+            <p className="text-sm md:text-base">
+              {text.about_us.sections[2].title}
+            </p>
           </a>
           <a
             href="#var-klimatinsats"
@@ -94,7 +100,9 @@ const AboutUsContent = () => {
                 className="object-contain w-full h-full"
               />
             </div>
-            <p className="text-sm md:text-base">{about_us.sections[3].title}</p>
+            <p className="text-sm md:text-base">
+              {text.about_us.sections[3].title}
+            </p>
           </a>
           <a
             href="#vanliga-fragor"
@@ -109,40 +117,40 @@ const AboutUsContent = () => {
                 className="object-contain w-full h-full"
               />
             </div>
-            <p className="text-sm md:text-base">{about_us.faq}</p>
+            <p className="text-sm md:text-base">{text.about_us.faq}</p>
           </a>
         </div>
       </Section>
       <TextAndImage
         anchorId="vilka-vi-ar"
         className="pt-10"
-        title={about_us.sections[0].title}
-        text={about_us.sections[0].text}
+        title={text.about_us.sections[0].title}
+        text={text.about_us.sections[0].text}
         imageUrl="/images/team.webp"
       />
       <TextAndImage
         anchorId="var-matkasse"
         reverse
-        title={about_us.sections[1].title}
-        text={about_us.sections[1].text}
+        title={text.about_us.sections[1].title}
+        text={text.about_us.sections[1].text}
         imageUrl="/images/product-2.jpg"
       />
       <TextAndImage
         anchorId="raddad-mat"
-        title={about_us.sections[2].title}
-        text={about_us.sections[2].text}
+        title={text.about_us.sections[2].title}
+        text={text.about_us.sections[2].text}
         imageUrl="/images/carrots-in-hand.png"
       />
       <TextAndImage
         reverse
         anchorId="var-klimatinsats"
         className="pb-10"
-        title={about_us.sections[3].title}
-        text={about_us.sections[3].text}
+        title={text.about_us.sections[3].title}
+        text={text.about_us.sections[3].text}
         imageUrl="/images/green-landscape.png"
       />
       <div id="vanliga-fragor">
-        <Accordion faqs={faqs} title={about_us.faq} />
+        <Accordion faqs={[]} title={text.about_us.faq} />
       </div>
     </div>
   );
