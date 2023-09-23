@@ -38,8 +38,8 @@ export interface Address {
 }
 
 export interface DeliveryWindow {
-  start: number | null;
-  end: number | null;
+  start?: number | null;
+  end?: number | null;
 }
 
 export interface UserInformation {

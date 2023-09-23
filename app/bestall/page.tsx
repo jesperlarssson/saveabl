@@ -320,6 +320,7 @@ const Order = () => {
       email,
       password,
       deliveryPeriodId,
+      addOns: [],
     };
 
     // TODO: Post to backend
