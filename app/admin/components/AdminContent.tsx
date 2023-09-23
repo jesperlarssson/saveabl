@@ -5,6 +5,8 @@ import axios from "axios";
 import React, { useEffect } from "react";
 // Import Stripe
 import { loadStripe } from "@stripe/stripe-js";
+import BodyText from "@/components/ui/BodyText";
+import instance from "@/lib/apiAxios";
 
 // Initialize Stripe
 const stripePromise = loadStripe(
@@ -18,6 +20,10 @@ interface AdminContentProps {
 const AdminContent: React.FC<AdminContentProps> = () => {
   const [errors, setErrors] = React.useState<any>();
   const [latestResponse, setLatestResponse] = React.useState<any>();
+  const [terminalOpen, setTerminalOpen] = React.useState<boolean>(false);
+  const [callUrl, setCallUrl] = React.useState<string>("api/ping");
+  const [callBody, setCallBody] = React.useState<string>("{}");
+  const [callResponse, setCallResponse] = React.useState<string | null>(null);
 
   const auth = useAuth();
 
@@ -94,7 +100,7 @@ const AdminContent: React.FC<AdminContentProps> = () => {
   };
 
   // Function to redirect to Stripe Checkout
-  async function redirectToCheckout(sessionId : string) {
+  async function redirectToCheckout(sessionId: string) {
     const stripe = await stripePromise;
     if (!stripe) {
       return;
@@ -109,33 +115,45 @@ const AdminContent: React.FC<AdminContentProps> = () => {
 
   const handleTestCheckout = async () => {
     try {
-      const res = await axios.post(
-        "",
-        {
-          name: "Jesper",
-          extraInfo: "Test test test",
-          phone: "123456",
-          productId: "9bee681b-59a4-4a37-83a6-f8ee17e9e022",
-          email: "new@saveabl.se",
-          deliveryWindow: {
-            start: 1693726501, // Sun Sep 03 2023 09:35:01 GMT+0200
-            end: 1693744501, // Sun Sep 03 2023 14:35:01 GMT+0200
-          },
-          deliveryPeriodId: "4801ee7c-8477-4de6-a9ff-26fb365b4fab",
-          password: "123456",
-          address: {
-            city: "Göteborg",
-            street: "Test",
-            postalCode: "22334",
-          },
-        }
-      );
+      const res = await axios.post("", {
+        name: "Jesper",
+        extraInfo: "Test test test",
+        phone: "123456",
+        productId: "9bee681b-59a4-4a37-83a6-f8ee17e9e022",
+        email: "new@saveabl.se",
+        deliveryWindow: {
+          start: 1693726501, // Sun Sep 03 2023 09:35:01 GMT+0200
+          end: 1693744501, // Sun Sep 03 2023 14:35:01 GMT+0200
+        },
+        deliveryPeriodId: "4801ee7c-8477-4de6-a9ff-26fb365b4fab",
+        password: "123456",
+        address: {
+          city: "Göteborg",
+          street: "Test",
+          postalCode: "22334",
+        },
+      });
       const data = await res.data;
       redirectToCheckout(data.id);
 
       setLatestResponse(JSON.stringify(data));
     } catch (error: any) {
       setErrors(error.message);
+    }
+  };
+
+  const handleOpenTerminal = async () => {
+    setTerminalOpen(!terminalOpen);
+  };
+
+  const handleApiCall = async () => {
+    try {
+      const res = await instance.post(callUrl, JSON.parse(callBody));
+      const data = await res.data;
+
+      setCallResponse(JSON.stringify(data));
+    } catch (error: any) {
+      setCallResponse(error.message);
     }
   };
 
@@ -188,12 +206,84 @@ const AdminContent: React.FC<AdminContentProps> = () => {
         </div>
 
         <div
+          onClick={handleOpenTerminal}
+          className="drop-shadow w-80 h-36 rounded-lg bg-primary flex flex-col justify-end p-4 hover:-translate-y-2 hover:bg-opacity-90 transition cursor-pointer"
+        >
+          <h3 className="font-poppins text-secondary">Saveabl-terminalen</h3>
+        </div>
+
+        <div
           onClick={resetMessages}
           className="drop-shadow w-80 h-36 rounded-lg bg-primary flex flex-col justify-end p-4 hover:-translate-y-2 hover:bg-opacity-90 transition cursor-pointer"
         >
           <h3 className="font-poppins text-secondary">RESET</h3>
         </div>
       </div>
+
+      {terminalOpen && (
+        <>
+          <div className="w-full p-8 flex flex-col">
+            <BodyText>POST Terminal</BodyText>
+            <div className="flex gap-4 mb-2 mt-2">
+              <button
+                onClick={() => {
+                  setCallUrl("areas");
+                  setCallBody('{"name": "Exempel", "audience": "exempel"}');
+                }}
+                className="test-sm px-2 py-1 bg-primary rounded-md text-secondary"
+              >
+                New area
+              </button>
+              <button
+                onClick={() => {
+                  setCallUrl("areas/{INSERT AREA ID HERE}/postalcode/batch");
+                  setCallBody('{"postalCodes": [], "country": "SE"}');
+                }}
+                className="test-sm px-2 py-1 bg-primary rounded-md text-secondary"
+              >
+                Postkoder
+              </button>
+              <button
+                onClick={() => {
+                  setCallUrl("products");
+                  setCallBody(
+                    '{"type": "subscription" eller "standard" eller "addon","stripeProductId": "PRODUCT_ID FRÅN STRIPE","schedule": (om prenumeration) {"interval": "week","intervalCount": 2}}'
+                  );
+                }}
+                className="test-sm px-2 py-1 bg-primary rounded-md text-secondary"
+              >
+                New product
+              </button>
+            </div>
+            <input
+              onChange={(e) => setCallUrl(e.target.value)}
+              className="p-2 bg-black bg-opacity-80 text-green-500 placeholder-green-500 border-b border-green-400"
+              type="text"
+              placeholder="url"
+              value={callUrl}
+            />
+            <textarea
+              onChange={(e) => setCallBody(e.target.value)}
+              className="bg-black bg-opacity-80 text-green-500 placeholder-green-500 p-2 h-96"
+              value={callBody}
+            />
+            <div onClick={handleApiCall} className="flex">
+              <button className="px-4 py-2 bg-accent-500 text-white mt-4 rounded-md">
+                Send to backend
+              </button>
+            </div>
+          </div>
+          {callResponse && (
+            <div className="w-full p-8 flex flex-col">
+              <BodyText>Response</BodyText>
+              <textarea
+                className="bg-black bg-opacity-80 text-green-500 placeholder-green-500 p-2 h-96"
+                value={callResponse}
+              />
+            </div>
+          )}
+        </>
+      )}
 
       {latestResponse && (
         <div className="m-8 w-full p-8 rounded-xl bg-green-200">

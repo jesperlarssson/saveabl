@@ -33,16 +33,6 @@ const AuthModal = () => {
     }
   }, [user]);
 
-  const handleSignIn = async () => {
-    try {
-      const user = await signIn("test@email.com", "123456");
-      toast.success(`Welcome ${user.uid}`);
-      router.push("/mina-sidor");
-      onClose();
-    } catch (error) {
-      toast.error(`Failed to sign in`);
-    }
-  };
 
   const onChange = (open: boolean) => {
     if (!open) {
