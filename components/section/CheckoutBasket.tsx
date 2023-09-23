@@ -13,42 +13,42 @@ import { BsPerson } from "react-icons/bs";
 import path from "path";
 
 const CheckoutBasket = () => {
-  const {
-    product,
-    addOns,
-    shippingCost,
-    deliveryDay,
-    getTotalPrice,
-    removeAddOn,
-    removeMealKit,
-    addAddOn,
-  } = useCheckout();
-  const [isExpanded, setIsExpanded] = React.useState(true);
-  const [hidden, setIsHidden] = React.useState(false);
+  // const {
+  //   product,
+  //   addOns,
+  //   shippingCost,
+  //   deliveryDay,
+  //   getTotalPrice,
+  //   removeAddOn,
+  //   removeMealKit,
+  //   addAddOn,
+  // } = useCheckout();
+  // const [isExpanded, setIsExpanded] = React.useState(true);
+  // const [hidden, setIsHidden] = React.useState(false);
 
-  const pathName = usePathname();
+  // const pathName = usePathname();
 
-  useEffect(() => {
-    if (pathName === "/checkout") {
-      setIsHidden(true);
-    } else {
-      setIsHidden(false);
-    }
-  }, [pathName]);
+  // useEffect(() => {
+  //   if (pathName === "/checkout") {
+  //     setIsHidden(true);
+  //   } else {
+  //     setIsHidden(false);
+  //   }
+  // }, [pathName]);
 
-  const variants = {
-    open: { opacity: 1, height: "auto" },
-    closed: { opacity: 0, height: 0 },
-  };
+  // const variants = {
+  //   open: { opacity: 1, height: "auto" },
+  //   closed: { opacity: 0, height: 0 },
+  // };
 
-  const mainVariants = {
-    open: { opacity: 1, height: "auto", y: "0%" },
-    closed: { opacity: 0, height: "auto", y: "100%" },
-  };
+  // const mainVariants = {
+  //   open: { opacity: 1, height: "auto", y: "0%" },
+  //   closed: { opacity: 0, height: "auto", y: "100%" },
+  // };
 
   return (
     <AnimatePresence>
-      {product && !hidden && (
+      {/* {product && !hidden && (
         <motion.div
           initial="closed"
           animate="open"
@@ -196,7 +196,7 @@ const CheckoutBasket = () => {
             </AnimatePresence>
           </div>
         </motion.div>
-      )}
+      )} */}
     </AnimatePresence>
   );
 };
