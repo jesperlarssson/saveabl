@@ -5,17 +5,6 @@ import {
   DeliveryWindow,
   actionTypes,
 } from "../providers/CheckoutProvider";
-import {
-  free,
-  shippingCostStage1,
-  shippingCostStage2,
-  shippingCostStage3,
-} from "@/lib/zipCodes";
-import { Product, productInfo } from "@/lib/mealkits";
-import { AddOn } from "@/lib/addons";
-import { toast } from "react-hot-toast";
-import { deliveryDayParser, getWeekNumber } from "@/helpers/format";
-import instance from "@/lib/apiAxios";
 
 interface Type {
   odd: boolean;
@@ -30,7 +19,6 @@ const useCheckout = () => {
       type: actionTypes.SET_ADDRESS_POSTAL_CODE,
       payload: postalCode,
     });
-    
   };
 
   const setStreetAddress = (streetAddress: string) => {
@@ -53,7 +41,6 @@ const useCheckout = () => {
       payload: country,
     });
   };
-
 
   const setAddress = (address: Address) => {
     dispatch({ type: actionTypes.SET_ADDRESS_STREET, payload: address.street });
@@ -111,6 +98,14 @@ const useCheckout = () => {
     dispatch({ type: actionTypes.SET_EXTRA_INFO, payload: extraInfo });
   };
 
+  const addAddOn = (addOn: any) => {
+    dispatch({ type: actionTypes.ADD_ADDON, payload: addOn });
+  };
+
+  const removeAddOn = (id: string) => {
+    dispatch({ type: actionTypes.REMOVE_ADDON, payload: { id } });
+  };
+
   return {
     address: state.address,
     name: state.name,
@@ -121,6 +116,9 @@ const useCheckout = () => {
     email: state.email,
     password: state.password,
     deliveryPeriodId: state.deliveryPeriodId,
+    addOns: state.addOns,
+    addAddOn,
+    removeAddOn,
     setPostalCode,
     setStreetAddress,
     setCity,

@@ -52,6 +52,7 @@ export interface UserInformation {
   email: string | null;
   password: string | null;
   deliveryPeriodId: string | null;
+  addOns: AddOn[];
 }
 
 // Define the action
@@ -93,6 +94,7 @@ const initialState: UserInformation =
         deliveryPeriodId: JSON.parse(
           localStorage.getItem("deliveryPeriodId") || "null"
         ),
+        addOns: [],
       }
     : {
         address: {
@@ -112,6 +114,7 @@ const initialState: UserInformation =
         email: null,
         password: null,
         deliveryPeriodId: null,
+        addOns: [],
       };
 
 export const actionTypes = {
@@ -135,6 +138,11 @@ export const actionTypes = {
   SET_EMAIL: "SET_EMAIL",
   SET_PASSWORD: "SET_PASSWORD",
   SET_DELIVERY_PERIOD_ID: "SET_DELIVERY_PERIOD_ID",
+
+  // Other actions
+  ADD_ADDON: "ADD_ADDON",
+  REMOVE_ADDON: "REMOVE_ADDON",
+
 };
 
 // Reducer
@@ -202,6 +210,21 @@ const reducer = (state: UserInformation, action: Action): UserInformation => {
 
     case actionTypes.SET_DELIVERY_PERIOD_ID:
       return { ...state, deliveryPeriodId: action.payload as string };
+
+    case actionTypes.ADD_ADDON:
+      return {
+        ...state,
+        addOns: [...state.addOns, { ...(action.payload as AddOn), quantity: 1 }],
+      };
+    
+    case actionTypes.REMOVE_ADDON:
+      return {
+        ...state,
+        addOns: state.addOns.filter(
+          (item) => item.id !== (action.payload as AddOn).id
+        ),
+      };
+      
 
     default:
       return state;
