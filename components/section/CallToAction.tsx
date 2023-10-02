@@ -8,11 +8,13 @@ import Title from "../ui/Title";
 import useLocationModal from "@/hooks/useLocationModal";
 import { useLang } from "@/hooks/useLang";
 import { use, useEffect, useState } from "react";
+import { useRouter } from "next/navigation"
 
 const CallToAction = () => {
   const locationModal = useLocationModal();
   const { text } = useLang();
   const [compText, setCompText] = useState(text.page.call_to_action);
+  const router = useRouter();
   useEffect(() => {
     setCompText(text.page.call_to_action);
   }, [text]);
@@ -133,7 +135,7 @@ const CallToAction = () => {
           </motion.div>
         </div>
         <Button
-          onClick={() => locationModal.onOpen()}
+          onClick={() => router.push("/bestall?id=1")}
           className="mt-8 w-full md:w-96 "
         >
           {compText.order_now}
