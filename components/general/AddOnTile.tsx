@@ -22,7 +22,7 @@ const AddOnTile: React.FC<AddOnTileProps> = ({ addon }) => {
       exit={{ opacity: 0 }}
       className=""
     >
-      <div className="relative w-80 h-80 rounded-t-lg overflow-auto">
+      {/* <div className="relative w-80 h-80 rounded-t-lg overflow-auto">
         <Image
           src={addon.imgSrc}
           alt={addon.title}
@@ -76,7 +76,7 @@ const AddOnTile: React.FC<AddOnTileProps> = ({ addon }) => {
             </motion.button>
           )}
         </AnimatePresence>
-      </div>
+      </div> */}
     </motion.div>
   );
 };
