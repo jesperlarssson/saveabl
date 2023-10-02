@@ -31,18 +31,18 @@ declare global {
 const PaymentArea = ({
   deliveryWindows,
   dk,
+  offerId,
 }: {
   deliveryWindows: any;
   dk: boolean;
+  offerId: number;
 }) => {
   const availableDays = getUniqueWeekdaysFromDeliveryWindows(deliveryWindows);
-  const offerId = 1;
 
   const [links, setLinks] = useState<ResponseLinks[] | null>(null);
 
   useEffect(() => {
     const availableDays = getUniqueWeekdaysFromDeliveryWindows(deliveryWindows);
-    const offerId = 1;
 
     const links: ResponseLinks[] | null = getResponse(
       availableDays,
@@ -51,11 +51,11 @@ const PaymentArea = ({
     );
 
     setLinks(links);
-  }, [deliveryWindows, dk]);
+  }, [deliveryWindows, dk, offerId]);
 
   return (
     <>
-    <script async src="https://js.stripe.com/v3/buy-button.js"></script>
+      <script async src="https://js.stripe.com/v3/buy-button.js"></script>
       <div className="grid sm:grid-cols-2">
         {links &&
           links.map((_, index: number) => (
