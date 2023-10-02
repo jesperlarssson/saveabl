@@ -6,9 +6,16 @@ import Section from "../ui/Section";
 import { toast } from "react-hot-toast";
 import Title from "../ui/Title";
 import useLocationModal from "@/hooks/useLocationModal";
+import { useLang } from "@/hooks/useLang";
+import { use, useEffect, useState } from "react";
 
 const CallToAction = () => {
   const locationModal = useLocationModal();
+  const { text } = useLang();
+  const [compText, setCompText] = useState(text.page.call_to_action);
+  useEffect(() => {
+    setCompText(text.page.call_to_action);
+  }, [text]);
   return (
     <Section className="bg-primary-200 w-full relative pt-0">
       <div className="flex flex-col justify-center items-center">
@@ -82,9 +89,7 @@ const CallToAction = () => {
           alt="scribble matkassen"
           src="/images/s-matkassen.png"
         />
-        <Title className="text-center mt-8">
-          Var med du också och rädda mat på ett enkelt och klimatsmart sätt!
-        </Title>
+        <Title className="text-center mt-8">{compText.title}</Title>
         <div className="mt-10 mb-5 grid grid-cols-2 sm:grid-cols-4 gap-4 text-secondary ">
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
@@ -92,7 +97,7 @@ const CallToAction = () => {
             className="flex flex-col items-center sm:w-40"
           >
             <h3 className="font-poppins text-5xl ">3</h3>
-            <p className="text-xl -mt-2 font-light ">Måltider</p>
+            <p className="text-xl -mt-2 font-light ">{compText.meals}</p>
           </motion.div>
 
           <motion.div
@@ -102,7 +107,7 @@ const CallToAction = () => {
             className="flex flex-col items-center sm:w-40"
           >
             <h3 className="font-poppins text-5xl ">100%</h3>
-            <p className="text-xl -mt-2 font-light ">Vegetariskt</p>
+            <p className="text-xl -mt-2 font-light ">{compText.vegetarian}</p>
           </motion.div>
 
           <motion.div
@@ -111,8 +116,10 @@ const CallToAction = () => {
             transition={{ delay: 0.4 }}
             className="flex flex-col items-center sm:w-40"
           >
-            <h3 className="font-poppins text-5xl ">50</h3>
-            <p className="text-xl -mt-2 font-light ">Kr/portion</p>
+            <h3 className="font-poppins text-5xl ">5x</h3>
+            <p className="text-xl -mt-2 font-light text-center">
+              {compText.price_per_portion}
+            </p>
           </motion.div>
 
           <motion.div
@@ -122,14 +129,14 @@ const CallToAction = () => {
             className="flex flex-col items-center sm:w-40"
           >
             <h3 className="font-poppins text-5xl ">15</h3>
-            <p className="text-xl -mt-2 font-light ">Min tillagning</p>
+            <p className="text-xl -mt-2 font-light ">{compText.cooking_time}</p>
           </motion.div>
         </div>
         <Button
           onClick={() => locationModal.onOpen()}
           className="mt-8 w-full md:w-96 "
         >
-          Beställ nu
+          {compText.order_now}
         </Button>
       </div>
     </Section>

@@ -115,7 +115,7 @@ const Navbar = () => {
           <div className="flex gap-2">
             <LanguageSelector />
 
-            {!user ? (
+            {/* {!user ? (
               <button
                 onClick={authModal.onOpen}
                 className="hidden md:flex px-8 py-3 rounded-full bg-accent text-primary-200  text-sm font-poppins tracking-wider border border-transparent disabled:cursor-not-allowed disabled:opacity-50 hover:bg-accent-600 hover:drop-shadow-md transition"
@@ -131,7 +131,7 @@ const Navbar = () => {
                  {text.nav.my_account}
                 </Link>
               </div>
-            )}
+            )} */}
           </div>
 
           <div className="md:hidden mr-4">

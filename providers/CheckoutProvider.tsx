@@ -52,7 +52,7 @@ export interface UserInformation {
   email: string | null;
   password: string | null;
   deliveryPeriodId: string | null;
-  addOns: AddOn[];
+  addOns: string[];
 }
 
 // Define the action
@@ -211,19 +211,19 @@ const reducer = (state: UserInformation, action: Action): UserInformation => {
     case actionTypes.SET_DELIVERY_PERIOD_ID:
       return { ...state, deliveryPeriodId: action.payload as string };
 
-    case actionTypes.ADD_ADDON:
-      return {
-        ...state,
-        addOns: [...state.addOns, { ...(action.payload as AddOn), quantity: 1 }],
-      };
+    // case actionTypes.ADD_ADDON:
+    //   return {
+    //     ...state,
+    //     addOns: [...state.addOns, { ...(action.payload as AddOn), quantity: 1 }],
+    //   };
     
-    case actionTypes.REMOVE_ADDON:
-      return {
-        ...state,
-        addOns: state.addOns.filter(
-          (item) => item.id !== (action.payload as AddOn).id
-        ),
-      };
+    // case actionTypes.REMOVE_ADDON:
+    //   return {
+    //     ...state,
+    //     addOns: state.addOns.filter(
+    //       (item) => item.id !== (action.payload as AddOn).id
+    //     ),
+    //   };
       
 
     default:

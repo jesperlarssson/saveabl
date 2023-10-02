@@ -1,3 +1,4 @@
+
 import { navigation } from "@/lib/navigation";
 import NavItem from "./NavItem";
 import Section from "./Section";
@@ -69,7 +70,7 @@ const Footer = () => {
             559266-3149. VAT number: SE559266314901.
           </p>
 
-          <ul className="mt-12 flex flex-wrap justify-center gap-6 md:gap-8 lg:gap-12">
+          {/* <ul className="mt-12 flex flex-wrap justify-center gap-6 md:gap-8 lg:gap-12">
             {navigation.map((item) => (
               <li key={item.id}>
                 <NavItem
@@ -82,7 +83,7 @@ const Footer = () => {
                 </NavItem>
               </li>
             ))}
-          </ul>
+          </ul> */}
 
           <ul className="mt-12 flex justify-center gap-6 md:gap-8">
             <li className="h-14 w-14 drop-shadow-lg flex justify-center items-center transition bg-accent hover:bg-accent/75 text-white hover:text-white/75 rounded-full p-3">

@@ -1,309 +1,397 @@
-"use client";
+import React from 'react'
 
-import { useAuth } from "@/hooks/useAuth";
-import axios from "axios";
-import React, { useEffect } from "react";
-// Import Stripe
-import { loadStripe } from "@stripe/stripe-js";
-import BodyText from "@/components/ui/BodyText";
-import instance from "@/lib/apiAxios";
-
-// Initialize Stripe
-const stripePromise = loadStripe(
-  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || ""
-);
-
-interface AdminContentProps {
-  children?: React.ReactNode;
+const AdminContent = () => {
+  return (
+    <div>AdminContent</div>
+  )
 }
 
-const AdminContent: React.FC<AdminContentProps> = () => {
-  const [errors, setErrors] = React.useState<any>();
-  const [latestResponse, setLatestResponse] = React.useState<any>();
-  const [terminalOpen, setTerminalOpen] = React.useState<boolean>(false);
-  const [callUrl, setCallUrl] = React.useState<string>("api/ping");
-  const [callBody, setCallBody] = React.useState<string>("{}");
-  const [callResponse, setCallResponse] = React.useState<string | null>(null);
+export default AdminContent
 
-  const auth = useAuth();
+// "use client";
 
-  if (!auth) {
-    return null;
-  }
+// import { useAuth } from "@/hooks/useAuth";
+// import axios from "axios";
+// import React, { useEffect } from "react";
+// // Import Stripe
+// import { loadStripe } from "@stripe/stripe-js";
+// import BodyText from "@/components/ui/BodyText";
+// import instance from "@/lib/apiAxios";
 
-  const { user } = auth;
+// // Initialize Stripe
+// const stripePromise = loadStripe(
+//   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || ""
+// );
 
-  const testConnection = async () => {
-    try {
-      const res = await fetch("https://main-cxgvpi5ruq-ey.a.run.app/api/ping");
-      const data = await res.text();
+// interface AdminContentProps {
+//   children?: React.ReactNode;
+// }
 
-      setLatestResponse(data);
-    } catch (error: any) {
-      setErrors(error.message);
-    }
-  };
+// const AdminContent: React.FC<AdminContentProps> = () => {
+//   const [errors, setErrors] = React.useState<any>();
+//   const [latestResponse, setLatestResponse] = React.useState<any>();
+//   const [terminalOpen, setTerminalOpen] = React.useState<boolean>(false);
+//   const [callUrl, setCallUrl] = React.useState<string>("api/ping");
+//   const [callBody, setCallBody] = React.useState<string>("{}");
+//   const [callResponse, setCallResponse] = React.useState<string | null>(null);
 
-  const checkCustomClaims = async () => {
-    if (user) {
-      user
-        .getIdTokenResult()
-        .then((idTokenResult) => {
-          // Get custom claims
-          const customClaims = idTokenResult.claims;
+//   const auth = useAuth();
 
-          // Check for the 'admin' custom claim
-          if (customClaims.admin) {
-            setLatestResponse("User is an admin");
-          }
+//   if (!auth) {
+//     return null;
+//   }
 
-          // Display all custom claims
-          setLatestResponse("Custom claims:" + JSON.stringify(customClaims));
-        })
-        .catch((error) => {
-          setLatestResponse("Error getting custom claims:" + error);
-        });
-    }
-  };
+//   const { user } = auth;
 
-  const displayToken = async () => {
-    if (user) {
-      const token = await user.getIdToken();
-      setLatestResponse(token);
-    }
-  };
+//   const testConnection = async () => {
+//     try {
+//       const res = await fetch("https://main-cxgvpi5ruq-ey.a.run.app/api/ping");
+//       const data = await res.text();
 
-  const handleAdminCreation = async () => {
-    try {
-      const res = await axios.post("/api/user/make-user-admin", {});
-      const data = await res.data;
+//       setLatestResponse(data);
+//     } catch (error: any) {
+//       setErrors(error.message);
+//     }
+//   };
 
-      setLatestResponse(JSON.stringify(data));
-    } catch (error: any) {
-      setErrors(error.message);
-    }
-  };
+//   const checkCustomClaims = async () => {
+//     if (user) {
+//       user
+//         .getIdTokenResult()
+//         .then((idTokenResult) => {
+//           // Get custom claims
+//           const customClaims = idTokenResult.claims;
 
-  const addProductWithInterval = async (interval: number) => {
-    try {
-      const userToken = await user?.getIdToken();
-      console.log("userToken", userToken);
-      const res = await axios.post("/api/products/create", {
-        token: userToken,
-        interval: interval,
-      });
-      console.log("Product added:", res.data);
-      setLatestResponse("Product added:" + JSON.stringify(res.data));
-    } catch (error: any) {
-      setErrors(error.message);
-    }
-  };
+//           // Check for the 'admin' custom claim
+//           if (customClaims.admin) {
+//             setLatestResponse("User is an admin");
+//           }
 
-  // Function to redirect to Stripe Checkout
-  async function redirectToCheckout(sessionId: string) {
-    const stripe = await stripePromise;
-    if (!stripe) {
-      return;
-    }
-    const { error } = await stripe.redirectToCheckout({
-      sessionId,
-    });
-    if (error) {
-      console.error(error);
-    }
-  }
+//           // Display all custom claims
+//           setLatestResponse("Custom claims:" + JSON.stringify(customClaims));
+//         })
+//         .catch((error) => {
+//           setLatestResponse("Error getting custom claims:" + error);
+//         });
+//     }
+//   };
 
-  const handleTestCheckout = async () => {
-    try {
-      const res = await axios.post("", {
-        name: "Jesper",
-        extraInfo: "Test test test",
-        phone: "123456",
-        productId: "9bee681b-59a4-4a37-83a6-f8ee17e9e022",
-        email: "new@saveabl.se",
-        deliveryWindow: {
-          start: 1693726501, // Sun Sep 03 2023 09:35:01 GMT+0200
-          end: 1693744501, // Sun Sep 03 2023 14:35:01 GMT+0200
-        },
-        deliveryPeriodId: "4801ee7c-8477-4de6-a9ff-26fb365b4fab",
-        password: "123456",
-        address: {
-          city: "Göteborg",
-          street: "Test",
-          postalCode: "22334",
-        },
-      });
-      const data = await res.data;
-      redirectToCheckout(data.id);
+//   const displayToken = async () => {
+//     if (user) {
+//       const token = await user.getIdToken();
+//       setLatestResponse(token);
+//     }
+//   };
 
-      setLatestResponse(JSON.stringify(data));
-    } catch (error: any) {
-      setErrors(error.message);
-    }
-  };
+//   const handleAdminCreation = async () => {
+//     try {
+//       const res = await axios.post("/api/user/make-user-admin", {});
+//       const data = await res.data;
 
-  const handleOpenTerminal = async () => {
-    setTerminalOpen(!terminalOpen);
-  };
+//       setLatestResponse(JSON.stringify(data));
+//     } catch (error: any) {
+//       setErrors(error.message);
+//     }
+//   };
 
-  const handleApiCall = async () => {
-    try {
-      const res = await instance.post(callUrl, JSON.parse(callBody));
-      const data = await res.data;
+//   const addProductWithInterval = async (interval: number) => {
+//     try {
+//       const userToken = await user?.getIdToken();
+//       console.log("userToken", userToken);
+//       const res = await axios.post("/api/products/create", {
+//         token: userToken,
+//         interval: interval,
+//       });
+//       console.log("Product added:", res.data);
+//       setLatestResponse("Product added:" + JSON.stringify(res.data));
+//     } catch (error: any) {
+//       setErrors(error.message);
+//     }
+//   };
 
-      setCallResponse(JSON.stringify(data));
-    } catch (error: any) {
-      setCallResponse(error.message);
-    }
-  };
+//   // Function to redirect to Stripe Checkout
+//   async function redirectToCheckout(sessionId: string) {
+//     const stripe = await stripePromise;
+//     if (!stripe) {
+//       return;
+//     }
+//     const { error } = await stripe.redirectToCheckout({
+//       sessionId,
+//     });
+//     if (error) {
+//       console.error(error);
+//     }
+//   }
 
-  const resetMessages = () => {
-    setErrors(null);
-    setLatestResponse(null);
-  };
+//   const handleTestCheckout = async () => {
+//     try {
+//       const res = await axios.post("", {
+//         name: "Jesper",
+//         extraInfo: "Test test test",
+//         phone: "123456",
+//         productId: "9bee681b-59a4-4a37-83a6-f8ee17e9e022",
+//         email: "new@saveabl.se",
+//         deliveryWindow: {
+//           start: 1693726501, // Sun Sep 03 2023 09:35:01 GMT+0200
+//           end: 1693744501, // Sun Sep 03 2023 14:35:01 GMT+0200
+//         },
+//         deliveryPeriodId: "4801ee7c-8477-4de6-a9ff-26fb365b4fab",
+//         password: "123456",
+//         address: {
+//           city: "Göteborg",
+//           street: "Test",
+//           postalCode: "22334",
+//         },
+//       });
+//       const data = await res.data;
+//       redirectToCheckout(data.id);
 
-  return (
-    <div>
-      <div className="mx-8 flex gap-8 mt-8 flex-wrap">
-        <div
-          onClick={testConnection}
-          className="drop-shadow w-80 h-36 rounded-lg bg-primary flex flex-col justify-end p-4 hover:-translate-y-2 hover:bg-opacity-90 transition cursor-pointer"
-        >
-          <h3 className="font-poppins text-secondary">PING</h3>
-        </div>
-        <div
-          onClick={handleAdminCreation}
-          className="drop-shadow w-80 h-36 rounded-lg bg-primary flex flex-col justify-end p-4 hover:-translate-y-2 hover:bg-opacity-90 transition cursor-pointer"
-        >
-          <h3 className="font-poppins text-secondary">Skapa en admin</h3>
-        </div>
-        <div
-          onClick={checkCustomClaims}
-          className="drop-shadow w-80 h-36 rounded-lg bg-primary flex flex-col justify-end p-4 hover:-translate-y-2 hover:bg-opacity-90 transition cursor-pointer"
-        >
-          <h3 className="font-poppins text-secondary">Kolla claims</h3>
-        </div>
-        <div
-          onClick={displayToken}
-          className="drop-shadow w-80 h-36 rounded-lg bg-primary flex flex-col justify-end p-4 hover:-translate-y-2 hover:bg-opacity-90 transition cursor-pointer"
-        >
-          <h3 className="font-poppins text-secondary">Visa Token</h3>
-        </div>
+//       setLatestResponse(JSON.stringify(data));
+//     } catch (error: any) {
+//       setErrors(error.message);
+//     }
+//   };
 
-        <div
-          onClick={() => addProductWithInterval(1)}
-          className="drop-shadow w-80 h-36 rounded-lg bg-primary flex flex-col justify-end p-4 hover:-translate-y-2 hover:bg-opacity-90 transition cursor-pointer"
-        >
-          <h3 className="font-poppins text-secondary">
-            Lägg till varje vecka product
-          </h3>
-        </div>
-        <div
-          onClick={handleTestCheckout}
-          className="drop-shadow w-80 h-36 rounded-lg bg-primary flex flex-col justify-end p-4 hover:-translate-y-2 hover:bg-opacity-90 transition cursor-pointer"
-        >
-          <h3 className="font-poppins text-secondary">Checkout</h3>
-        </div>
+//   const handleOpenTerminal = async () => {
+//     setTerminalOpen(!terminalOpen);
+//   };
 
-        <div
-          onClick={handleOpenTerminal}
-          className="drop-shadow w-80 h-36 rounded-lg bg-primary flex flex-col justify-end p-4 hover:-translate-y-2 hover:bg-opacity-90 transition cursor-pointer"
-        >
-          <h3 className="font-poppins text-secondary">Saveabl-terminalen</h3>
-        </div>
+//   const handleApiCall = async () => {
+//     try {
+//       const res = await instance.post(callUrl, JSON.parse(callBody));
+//       const data = await res.data;
 
-        <div
-          onClick={resetMessages}
-          className="drop-shadow w-80 h-36 rounded-lg bg-primary flex flex-col justify-end p-4 hover:-translate-y-2 hover:bg-opacity-90 transition cursor-pointer"
-        >
-          <h3 className="font-poppins text-secondary">RESET</h3>
-        </div>
-      </div>
+//       setCallResponse(JSON.stringify(data));
+//     } catch (error: any) {
+//       setCallResponse(error.message);
+//     }
+//   };
 
-      {terminalOpen && (
-        <>
-          <div className="w-full p-8 flex flex-col">
-            <BodyText>POST Terminal</BodyText>
-            <div className="flex gap-4 mb-2 mt-2">
-              <button
-                onClick={() => {
-                  setCallUrl("areas");
-                  setCallBody('{"name": "Exempel", "audience": "exempel"}');
-                }}
-                className="test-sm px-2 py-1 bg-primary rounded-md text-secondary"
-              >
-                New area
-              </button>
-              <button
-                onClick={() => {
-                  setCallUrl("areas/{INSERT AREA ID HERE}/postalcode/batch");
-                  setCallBody('{"postalCodes": [], "country": "SE"}');
-                }}
-                className="test-sm px-2 py-1 bg-primary rounded-md text-secondary"
-              >
-                Postkoder
-              </button>
-              <button
-                onClick={() => {
-                  setCallUrl("products");
-                  setCallBody(
-                    '{"type": "subscription" eller "standard" eller "addon","stripeProductId": "PRODUCT_ID FRÅN STRIPE","schedule": (om prenumeration) {"interval": "week","intervalCount": 2}}'
-                  );
-                }}
-                className="test-sm px-2 py-1 bg-primary rounded-md text-secondary"
-              >
-                New product
-              </button>
-            </div>
-            <input
-              onChange={(e) => setCallUrl(e.target.value)}
-              className="p-2 bg-black bg-opacity-80 text-green-500 placeholder-green-500 border-b border-green-400"
-              type="text"
-              placeholder="url"
-              value={callUrl}
-            />
-            <textarea
-              onChange={(e) => setCallBody(e.target.value)}
-              className="bg-black bg-opacity-80 text-green-500 placeholder-green-500 p-2 h-96"
-              value={callBody}
-            />
-            <div onClick={handleApiCall} className="flex">
-              <button className="px-4 py-2 bg-accent-500 text-white mt-4 rounded-md">
-                Send to backend
-              </button>
-            </div>
-          </div>
-          {callResponse && (
-            <div className="w-full p-8 flex flex-col">
-              <BodyText>Response</BodyText>
-              <textarea
-                className="bg-black bg-opacity-80 text-green-500 placeholder-green-500 p-2 h-96"
-                value={callResponse}
-              />
-            </div>
-          )}
-        </>
-      )}
 
-      {latestResponse && (
-        <div className="m-8 w-full p-8 rounded-xl bg-green-200">
-          <div className="flex flex-col gap-4">
-            <h3 className="font-poppins text-secondary">Senaste svar:</h3>
-            <p className="">{latestResponse}</p>
-          </div>
-        </div>
-      )}
+//   const handleRunAddDeliveryPeriods = async (areaId: string, weekNumber: number) => {
+//     try {
+//       // Get the date for the given week number
+//       const date = getDateOfISOWeek(weekNumber, new Date().getFullYear());
+  
+//       // Get the Wednesday, Saturday, and Tuesday dates
+//       const lastWednesday = new Date(date);
+//       lastWednesday.setDate(date.getDate() - 4); // Go back to the previous week's Wednesday
+//       lastWednesday.setHours(23, 0, 0, 0);
+  
+//       const lastSaturday = new Date(date);
+//       lastSaturday.setDate(date.getDate() - 2); // Go back to the previous week's Saturday
+//       lastSaturday.setHours(8, 0, 0, 0);
+  
+//       const nextTuesday = new Date(date);
+//       nextTuesday.setDate(date.getDate() + 2); // Go to the current week's Tuesday
+//       nextTuesday.setHours(23, 0, 0, 0);
+  
+//       // Convert the dates to epoch timestamps
+//       const cutoff = lastWednesday.getTime() / 1000;
+//       const start = lastSaturday.getTime() / 1000;
+//       const end = nextTuesday.getTime() / 1000;
+  
+//       // Post the data
+//       const res = await instance.post("periods", {
+//         areaId,
+//         cutoff,
+//         start,
+//         end,
+//       });
+//       const data = await res.data;
+//       setLatestResponse(JSON.stringify(data));
+//     } catch (error: any) {
+//       console.log(error);
+//       setErrors(error.message);
+//     }
+//   };
+  
+//   // Helper function to get the date for a given ISO week number
+//   function getDateOfISOWeek(w: number, y: number) {
+//     const simple = new Date(y, 0, 1 + (w - 1) * 7);
+//     const dow = simple.getDay();
+//     const ISOweekStart = simple;
+//     if (dow <= 4) ISOweekStart.setDate(simple.getDate() - simple.getDay() + 1);
+//     else ISOweekStart.setDate(simple.getDate() + 8 - simple.getDay());
+//     return ISOweekStart;
+//   }
+  
 
-      {errors && (
-        <div className="m-8 w-full p-8 rounded-xl bg-red-300">
-          <div className="flex flex-col gap-4">
-            <h3 className="font-poppins text-secondary">Felmeddelande</h3>
-            <p className="">{errors}</p>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-};
+//   const getWeekNumber = (date: Date) => {
+//     const d = new Date(
+//       Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())
+//     );
+//     const dayNum = d.getUTCDay() || 7;
+//     d.setUTCDate(d.getUTCDate() + 4 - dayNum);
+//     const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+//     return Math.ceil(((d.getTime() - yearStart.getTime()) / 86400000 + 1) / 7);
+//   };
 
-export default AdminContent;
+//   const addDeliveryPeriodsNext12Weeks = async () => {
+//     const weekNumber = getWeekNumber(new Date());
+//     for (let index = 0; index < 12; index++) {
+//       const updateWeekNumber = weekNumber + index;
+//       handleRunAddDeliveryPeriods(
+//         "98dc5a67-5832-496c-a6a7-d7bc7200fee7",
+//         updateWeekNumber
+//       );
+//     }
+//   };
+
+//   const resetMessages = () => {
+//     setErrors(null);
+//     setLatestResponse(null);
+//   };
+
+//   return (
+//     <div>
+//       <div className="mx-8 flex gap-8 mt-8 flex-wrap">
+//         <div
+//           onClick={testConnection}
+//           className="drop-shadow w-80 h-36 rounded-lg bg-primary flex flex-col justify-end p-4 hover:-translate-y-2 hover:bg-opacity-90 transition cursor-pointer"
+//         >
+//           <h3 className="font-poppins text-secondary">PING</h3>
+//         </div>
+//         <div
+//           onClick={handleAdminCreation}
+//           className="drop-shadow w-80 h-36 rounded-lg bg-primary flex flex-col justify-end p-4 hover:-translate-y-2 hover:bg-opacity-90 transition cursor-pointer"
+//         >
+//           <h3 className="font-poppins text-secondary">Skapa en admin</h3>
+//         </div>
+//         <div
+//           onClick={checkCustomClaims}
+//           className="drop-shadow w-80 h-36 rounded-lg bg-primary flex flex-col justify-end p-4 hover:-translate-y-2 hover:bg-opacity-90 transition cursor-pointer"
+//         >
+//           <h3 className="font-poppins text-secondary">Kolla claims</h3>
+//         </div>
+//         <div
+//           onClick={displayToken}
+//           className="drop-shadow w-80 h-36 rounded-lg bg-primary flex flex-col justify-end p-4 hover:-translate-y-2 hover:bg-opacity-90 transition cursor-pointer"
+//         >
+//           <h3 className="font-poppins text-secondary">Visa Token</h3>
+//         </div>
+
+//         <div
+//           onClick={() => addProductWithInterval(1)}
+//           className="drop-shadow w-80 h-36 rounded-lg bg-primary flex flex-col justify-end p-4 hover:-translate-y-2 hover:bg-opacity-90 transition cursor-pointer"
+//         >
+//           <h3 className="font-poppins text-secondary">
+//             Lägg till varje vecka product
+//           </h3>
+//         </div>
+//         <div
+//           onClick={handleTestCheckout}
+//           className="drop-shadow w-80 h-36 rounded-lg bg-primary flex flex-col justify-end p-4 hover:-translate-y-2 hover:bg-opacity-90 transition cursor-pointer"
+//         >
+//           <h3 className="font-poppins text-secondary">Checkout</h3>
+//         </div>
+
+//         <div
+//           onClick={handleOpenTerminal}
+//           className="drop-shadow w-80 h-36 rounded-lg bg-primary flex flex-col justify-end p-4 hover:-translate-y-2 hover:bg-opacity-90 transition cursor-pointer"
+//         >
+//           <h3 className="font-poppins text-secondary">Saveabl-terminalen</h3>
+//         </div>
+
+//         <div
+//           onClick={addDeliveryPeriodsNext12Weeks}
+//           className="drop-shadow w-80 h-36 rounded-lg bg-primary flex flex-col justify-end p-4 hover:-translate-y-2 hover:bg-opacity-90 transition cursor-pointer"
+//         >
+//           <h3 className="font-poppins text-secondary">Kör script DP </h3>
+//         </div>
+
+//         <div
+//           onClick={resetMessages}
+//           className="drop-shadow w-80 h-36 rounded-lg bg-primary flex flex-col justify-end p-4 hover:-translate-y-2 hover:bg-opacity-90 transition cursor-pointer"
+//         >
+//           <h3 className="font-poppins text-secondary">RESET</h3>
+//         </div>
+//       </div>
+
+//       {terminalOpen && (
+//         <>
+//           <div className="w-full p-8 flex flex-col">
+//             <BodyText>POST Terminal</BodyText>
+//             <div className="flex gap-4 mb-2 mt-2">
+//               <button
+//                 onClick={() => {
+//                   setCallUrl("areas");
+//                   setCallBody('{"name": "Exempel", "audience": "exempel"}');
+//                 }}
+//                 className="test-sm px-2 py-1 bg-primary rounded-md text-secondary"
+//               >
+//                 New area
+//               </button>
+//               <button
+//                 onClick={() => {
+//                   setCallUrl("areas/{INSERT AREA ID HERE}/postalcode/batch");
+//                   setCallBody('{"postalCodes": [], "country": "SE"}');
+//                 }}
+//                 className="test-sm px-2 py-1 bg-primary rounded-md text-secondary"
+//               >
+//                 Postkoder
+//               </button>
+//               <button
+//                 onClick={() => {
+//                   setCallUrl("products");
+//                   setCallBody(
+//                     '{"type": "subscription" eller "standard" eller "addon","stripeProductId": "PRODUCT_ID FRÅN STRIPE","schedule": (om prenumeration) {"interval": "week","intervalCount": 2}}'
+//                   );
+//                 }}
+//                 className="test-sm px-2 py-1 bg-primary rounded-md text-secondary"
+//               >
+//                 New product
+//               </button>
+//             </div>
+//             <input
+//               onChange={(e) => setCallUrl(e.target.value)}
+//               className="p-2 bg-black bg-opacity-80 text-green-500 placeholder-green-500 border-b border-green-400"
+//               type="text"
+//               placeholder="url"
+//               value={callUrl}
+//             />
+//             <textarea
+//               onChange={(e) => setCallBody(e.target.value)}
+//               className="bg-black bg-opacity-80 text-green-500 placeholder-green-500 p-2 h-96"
+//               value={callBody}
+//             />
+//             <div onClick={handleApiCall} className="flex">
+//               <button className="px-4 py-2 bg-accent-500 text-white mt-4 rounded-md">
+//                 Send to backend
+//               </button>
+//             </div>
+//           </div>
+//           {callResponse && (
+//             <div className="w-full p-8 flex flex-col">
+//               <BodyText>Response</BodyText>
+//               <textarea
+//                 className="bg-black bg-opacity-80 text-green-500 placeholder-green-500 p-2 h-96"
+//                 value={callResponse}
+//               />
+//             </div>
+//           )}
+//         </>
+//       )}
+
+//       {latestResponse && (
+//         <div className="m-8 w-full p-8 rounded-xl bg-green-200">
+//           <div className="flex flex-col gap-4">
+//             <h3 className="font-poppins text-secondary">Senaste svar:</h3>
+//             <p className="">{latestResponse}</p>
+//           </div>
+//         </div>
+//       )}
+
+//       {errors && (
+//         <div className="m-8 w-full p-8 rounded-xl bg-red-300">
+//           <div className="flex flex-col gap-4">
+//             <h3 className="font-poppins text-secondary">Felmeddelande</h3>
+//             <p className="">{errors}</p>
+//           </div>
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default AdminContent;

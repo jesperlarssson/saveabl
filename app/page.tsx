@@ -13,10 +13,11 @@ import { textBannerText } from "@/lib/general";
 import ExplainerVideo from "@/components/section/ExplainerVideo";
 import USP from "@/components/section/USP";
 import ProductGrid from "@/components/section/ProductGrid";
+import { getAllPostsForHome } from "@/lib/hygraph";
 
-export default function Home() {
+export default async function Home() {
 
-   
+  const news = (await getAllPostsForHome(false)) || [];
   return (
     <>
       <div className="absolute w-full min-h-screen flex justify-center items-center z-1">
@@ -28,13 +29,13 @@ export default function Home() {
         {/* <TextBanner>{textBannerText}</TextBanner> */}
         <USP />
         {/* <SellingPoints /> */}
-        <ProductGrid />
+        {/* <ProductGrid /> */}
 
         <CallToAction />
         {/* <TextBanner className="bg-primary">{textBannerText}</TextBanner> */}
         <Reviews />
         <TextBanner className="bg-primary">{textBannerText}</TextBanner>
-        <News />
+        <News news={news}/>
         {/* <TextBanner className="bg-accent">{textBannerText}</TextBanner> */}
         {/* <Merch /> */}
       </div>

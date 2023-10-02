@@ -36,8 +36,8 @@ export const LangProvider = ({ children }: TextProviderProps) => {
       setLang("da");
       setText(daText);
     } else {
-      setLang("sv");
-      setText(svText);
+      setLang("en");
+      setText(enText);
     }
   }, []);
 
@@ -79,35 +79,35 @@ const svText = {
   },
   page: {
     hero: {
-      title: "Färdiga matkassen som gör klimatet en tjänst",
-      subtitle: "Klimatvänligt på en helt ny nivå.",
-      order_now: "Beställ nu",
+      title: "Kockförberedda matkassen med 5 x lägre klimatpåverkan",
+      subtitle: "Recept klara på 15 minuter.",
+      order_now: "Beställ här",
     },
     usp: {
-      title: "Vad innebär vår matkasse?",
+      title: "Såhär fungerar det",
       points: [
         {
-          title: "Vår kock skapar recept",
-          text: "Vi samlar ihop jättegoda råvaror som ser lite tokiga ut och gör goda recept på det.",
+          title: "Vi lagar maten åt dig",
+          text: "Vi tar fram recept på råvaror som ser lite tokiga ut, sedan gör vår stjärnkock Emil de svåra och tidskrävande momenten i matlagningen åt dig!",
         },
         {
-          title: "Maten skickas till dig",
-          text: "Du får din räddade matkasse hemlevererad med det mesta förberett åt dig.",
+          title: "Flexibla leveranser",
+          text: "Du väljer din leveransdag och bestämmer själv om du vill köpa en gång eller prenumerera på vår matkasse, såklart utan bindningstid!",
         },
         {
-          title: "Klimatsmart måltid på 15 min",
-          text: "Du hackar och värmer det sista på 15 minuter, njut av en god och klimatsmart middag!",
+          title: "Klimatsmart middag på 15 min",
+          text: "Du gör de sista stegen i receptet. På 15 minuter kan du servera en hälsosam middag som är snäll mot vårt klimat!",
         },
       ],
     },
+
     call_to_action: {
-      title:
-        "Var med du också och rädda mat på ett enkelt och klimatsmart sätt!",
-      meals: "Måltider",
+      title: "Hjälp oss att rädda bra mat från att slängas, en middag i taget!",
+      meals: "Middagar",
       vegetarian: "Vegetariskt",
-      price_per_portion: "Kr/portion",
+      price_per_portion: "Lägre klimatavtryck",
       cooking_time: "Min tillagning",
-      order_now: "Beställ nu",
+      order_now: "Kom igång",
     },
     news: {
       title: "Följ med på resan - kika in våra senaste nyhetsinlägg!",
@@ -121,36 +121,125 @@ const svText = {
   },
 
   about_us: {
-    title: "Räddningsbar, något som går att rädda",
+    title: "Saveabl - “räddningsbar, något som går att rädda",
     description:
       "På Saveabl. identifierar vi systematiskt svinn hos producenter och grossister, och gör en färdig matkasse baserad på det som behöver räddas! Vår matkasse finns i det magiska gränslandet mellan en traditionell matkasse och färdig hämtmat. Utöver klimatfrågan tror vi starkt på smidighet och har därför tagit fram en matkasse som är klar på 15 minuter. Otroligt smidigt och otroligt gott!",
     sections: [
       {
         title: "Vilka vi är",
-        text: "",
+        text: "Saveabl bestod av tre studenter och en kock när vi öppnade portarna november 2021. Den första idén till det som skulle komma att bli Saveabl. hade Jeroen och Alexander spånat på redan sommaren 2020 när de båda studerade tillsammans och de förväntade sig minst sagt en snabbare och smidigare uppstart än vad som blev verklighet. Idag består teamet på Saveabl av Jeroen som styr skutan. Emil som varje vecka fram nya kreativa recept och ansvarar för det operativa. Louise som ser till att vi når ut till rätt kunder och att vi kan expandera och nå fler och fler kunder. Jesper som designar och skapar en identitet åt Saveabl samt Alexander som ser till att vi har koll på juridiken.",
       },
       {
         title: "Vår matkasse",
-        text: "",
+        text: "Vår matkasse bygger på tre värden: den skall vara klimatsnäll, supersmidig och extremt god, alltså tappa-hakan god. Vi är helt övertygade om att det är möjligt och utan att det ska behöva skena iväg i pris. Hur kan vi göra det tänker du nu. Vi samarbetar med gårdar, producenter och grossister och hjälper dem att rädda matvaror som avviker i form, färg, storlek, är överproduktion eller resultatet av logistik-missar. Det gör att maten du äter är mat som annars hade riskerats att slängas, trots att den smakar helt perfekt. Märkligt va? Men mer om det längre ner! Matkassen är supersmidig då allt är klart inom 15 minuter för att våra kockar förbereder mycket åt dig, det är även det som gör den extremt god!",
       },
       {
         title: "Räddad mat",
-        text: "",
+        text: "Vad innebär räddad mat kanske du undrar? Vi samarbetar med gårdar, matproducenter och grossister och hjälper dem att rädda bra matvaror från att slängas. Idag slängs 45% av allt frukt och grönt som odlas och mycket av detta är 100% bra varor. De vanligaste anledningarna är att de inte uppfyller storlek, form eller färgkraven som butiker sätter, att gårdarna har odlat mer än vad butikerna behöver just då eller att en matgrossist har fått för mycket eller fel varor. I alla dessa fall har vi täta samarbeten med livsmedelsaktörerna så att vi tar hand om dessa varor långt innan de hinner bli dåliga. I många fall kan varorna i våra kassar till och med vara färskare än de du hittar i butiken då våra ofta kommer direkt från bonden.",
       },
       {
         title: "Vår klimatinsats",
-        text: "",
+        text: "Klimatfrågan är enormt viktig för oss och vi försöker bidra på alla sätt vi kan. Med hjälp av RISE har det räknats ut att våra middagar har 5 gånger lägre klimatpåverkan än en genomsnittlig svensk middag. Sättet som vi har uppnått det är genom att rädda bra matvaror från att slängas helt i onödan, vilket i sin tur gör att mindre mat behöver odlas, färre transporter behöver rulla och mindre vatten behövs till jordbruken. Genom att visa på hur otroligt gott det kan vara att äta vegetariskt vill vi inspirera till en kost som är mindre baserad på kött vilket även det leder till en lägre klimatpåverkan och vi jobbar just nu på att ta fram ett retursystem för våra plastburkar till såser tillsammans med Gordon Delivery för att ytterligare minska vår påverkan",
       },
     ],
     faq: "Vanliga frågor",
+  },
+
+  recipes: {
+    title: "Recept",
+    next_week: "Nästa vecka:",
+    this_week: "Denna vecka:",
+  },
+
+  recipe_slug: {
+    contains: "Innehåll",
+    how_to: "Gör så här",
+    saved_ingredients: "Räddade varor i receptet",
+    nutrients: "Näringsvärden",
+    ingredients: "Innehåll & allergener",
+  },
+
+  order: {
+    title: "Vi lanserar på nya orter!",
+    text: "Nu är det dags att köra vår första lansering i Malmö och Köpenhamn och börjar med ett special-erbjudande till våra första kunder här! Fyll i ditt postnummer för att få en erbjudandelänk.",
+    label: "Fyll i ditt postnummer för ett erbjudande",
+  },
+
+  success: {
+    title: "Tack för din beställning!",
+    description:
+      "Logga in på dina sidor för att se information om din beställning.",
+    button: "Till mina sidor",
+  },
+  my_pages: {
+    title_signed_out: "Du är inte inloggad",
+    login_instruction: "Logga in för att se information om dina beställningar.",
+    greeting_prefix: "Hej",
+    greeting_suffix: "!",
+    signed_in_as_prefix: "Du är inloggad som",
+    sign_out_button: "Logga ut",
+    current_subscription_status: "Här är din nuvarande prenumerationsstatus:",
+    subscription_label: "Prenumeration:",
+    weekly: "Varje vecka",
+    biweekly: "Varannan vecka",
+    biweekly_prefix: "Varannan vecka (",
+    biweekly_suffix: ")",
+    even_weeks: "Jämna veckor",
+    odd_weeks: "Udda veckor",
+    monthly: "Varje månad",
+    delivery_day_label_suffix: "ar",
+    delivery_day_label: "Leveransdag:",
+    delivery_address_label: "Leveransadress:",
+    change_button: "Ändra",
+    next_planned_delivery: "Nästa planerade utkörning",
+    mealbox_week_prefix: "Matkasse v.",
+    no_recipes_set: "Recepten är inte ännu satta",
+    change_mealbox_button: "Ändra",
+    pause_mealbox_button: "Pausa",
+    not_in_subscription_prefix: "Matkassen vecka",
+    not_in_subscription_suffix: "ingår inte i din prenumeration.",
+    add_to_subscription: "Lägg till",
+  },
+  my_account: {
+    account_settings: "Kontoinställningar",
+    profile: "Profil",
+    change_password: "Byt lösenord",
+    personal_information: "Personlig information",
+    payment_details: "Betalningsinformation",
+    payment_history: "Betalningshistorik",
+    invoices: "Fakturor",
+    shipping_address: "Leveransadress",
+    billing_address: "Fakturaadress",
+    update_button: "Uppdatera",
+    delete_account: "Radera konto",
+    confirm_delete: "Bekräfta radering",
+    notifications_settings: "Notifikationsinställningar",
+    email_notifications: "E-postnotifikationer",
+    sms_notifications: "SMS-notifikationer",
+    language_preferences: "Språkinställningar",
+    support: "Support",
+    faq: "Vanliga frågor",
+    terms_and_conditions: "Villkor och bestämmelser",
+    privacy_policy: "Integritetspolicy",
+    return_policy: "Returpolicy",
+    order_history: "Orderhistorik",
+    recent_purchases: "Senaste köp",
+    wishlist: "Önskelista",
+    refer_a_friend: "Tipsa en vän",
+    loyalty_program: "Lojalitetsprogram",
+    gift_cards: "Presentkort",
+    subscriptions: "Prenumerationer",
+    apply_promocode: "Använd kampanjkod",
+    feedback: "Feedback",
+    logout: "Logga ut",
   },
 };
 
 const enText = {
   nav: {
-    order: "Order now",
+    order: "Get started",
     about: "About us",
-    recipe: "Recipe",
+    recipe: "Our menus",
     news: "News",
     log_in: "Log in",
     log_out: "Log out",
@@ -159,69 +248,126 @@ const enText = {
   },
   page: {
     hero: {
-      title: "Ready-made food bag that does the climate a favor",
-      subtitle: "Environmentally friendly on a whole new level.",
-      order_now: "Order now",
+      title: "Chef-prepared meal kit with 5 x lower footprint",
+      subtitle: "Michelin-class meals ready within 15 min.",
+      order_now: "Get started",
     },
     usp: {
-      title: "What does our food bag mean?",
+      title: "How it works",
       points: [
         {
-          title: "Our chef creates recipes",
-          text: "We gather delicious ingredients that look a bit quirky and create tasty recipes from them.",
+          title: "We do the cooking",
+          text: "Our michelin experienced chef creates delicious recipes from ingredients that look a bit odd and prepare about 70% of the cooking.",
         },
         {
-          title: "The food is sent to you",
-          text: "You get your rescued food bag delivered with most things prepared for you.",
+          title: "Flexible orders and deliveries",
+          text: "You choose delivery day and whether you want to try only once or start a subscription, of course you can cancel anytime you want.",
         },
         {
-          title: "Climate-smart meal in 15 min",
-          text: "You chop and heat the last part in 15 minutes, enjoy a delicious and climate-smart dinner!",
+          title: "Climate-friendly meal in 15 min",
+          text: "You do the final steps of the recipe. Within 15 minutes, your delicious, climate-friendly dinner is ready to serve!",
         },
       ],
     },
     call_to_action: {
-      title: "Join us and save food in an easy and climate-smart way!",
+      title:
+        "Help us save delicious food from being wasted, one dinner at a time!",
       meals: "Meals",
       vegetarian: "Vegetarian",
-      price_per_portion: "Kr/portion",
+      price_per_portion: "Lower footprint",
       cooking_time: "Min cooking",
-      order_now: "Order now",
+      order_now: "Get started",
     },
     news: {
       title: "Follow the journey - check out our latest news posts!",
-      text: "We develop and test new things. We expand and come up with new stuff. Here we update what's happening in our world.",
+      text: "We're constantly evolving, exploring new horizons, and pushing the boundaries. Step into our world and discover the latest developments in our universe",
     },
     reviews: {
-      title: "Over 20,000 saved dinners, together we make a difference!",
-      text: "Here's what some of our environmental heroes say to customers:",
+      title: "Over 20,000 saved meals, together we make a difference!",
+      text: "Here's what our climate-hero-customers think",
       read_all_reviews: "Read all reviews",
     },
   },
-
   about_us: {
-    title: "Rescuable, something that can be saved",
+    title: "Saveabl, capable of being saved or salvaged",
     description:
-      "At Saveabl, we systematically identify waste among producers and wholesalers, and create a ready-made food bag based on what needs to be rescued! Our food bag exists in the magical borderland between a traditional food bag and ready-made takeaway. In addition to the climate issue, we strongly believe in convenience and have therefore developed a food bag that is ready in 15 minutes. Incredibly smooth and incredibly tasty!",
+      "At Saveabl, we identify avoidable and reoccurring food waste within farms, producers and wholesalers. We then create chef-prepared meal kits using this surplus. Our meal kit seamlessly blends the essence of a classic meal kit with the convenience of take-away. We’re firm believers that climate-conscious choices can also be convenient. This conviction led us to create a meal kit that's ready in 15 minutes - incredibly smooth and incredibly tasty!",
     sections: [
       {
         title: "Who we are",
-        text: "",
+        text: "Saveabl consisted of three students and a chef when they opened their doors in November 2021. The seeds of Saveabl were first sown by Jeroen and Alexander during a summer of shared studies in 2020. They had anticipated a swifter and smoother journey than what unfolded. Today, the Saveabl team comprises Jeroen, steering the ship, Emil, the creative culinary genius responsible for weekly recipe innovations and operations, Louise, our gatekeeper to the right customers and expansion opportunities, Jesper, the visionary behind Saveabl's identity, and Alexander, our compliance guardian, ensuring we play by the rules and regulations.",
       },
       {
-        title: "Our food bag",
-        text: "",
+        title: "Our meal kit",
+        text: "Our meal kit is designed around three core principles: it has to be climate-friendly, supersmooth and delicious. We’re talking mind-blowingly delicious. You might wonder, \"how do we manage all this without breaking the bank?\" well, here's the scoop: we’ve partnered up with farmers, food producers and wholesalers and help them save items that differ in size, colour, shape, have been overproduced or are the result of logistic blunders. That means the food you're savoring could've been discarded, even though it's delicious! But we'll delve deeper into this topic below! Our meal kit is hassle-free, providing every ingredient, and our expert chefs handle most of the cooking, ensuring each dish is ready to serve in just 15 minutes! That’s why the food is so delicious!",
       },
       {
         title: "Rescued food",
-        text: "",
+        text: " What does rescued food mean, you might wonder? We collaborate with farms, food producers, and wholesalers to assist them in saving quality food items from being discarded. Today, a staggering 45% of all grown fruits and vegetables are thrown away, and much of this consists of perfectly good products. The most common reasons include not meeting the size, shape, or color standards set by stores, farms producing more than what stores currently require, or a food wholesaler receiving an excess or incorrect shipment. In all these cases, we maintain close partnerships with food industry players to ensure we rescue these items long before they go bad. In many instances, the products in our meal kits can even be fresher than those you find in stores since they often come directly from the farm.",
       },
       {
         title: "Our climate effort",
-        text: "",
+        text: "The climate issue is enormously important to us, and we are trying to contribute in every way we can. An independent research shows that our meals’ footprint is 5 times lower than the Swedish average. The ways we achieve this is by rescuing good food from being discarded entirely unnecessarily, which in turn reduces the need to cultivate less food, fewer transports are required, and less water is needed for agriculture. By demonstrating how incredibly delicious it can be to eat vegetarian, we aim to inspire a diet that is less dependent on meat which is also a way to achieve a lower climate footprint. Currently we are working on Saveabl Reuse, a return system for our plastic sauce containers in cooperation with Gordon Delivery to further lower our impact.",
       },
     ],
     faq: "Frequently Asked Questions",
+  },
+
+  recipes: {
+    title: "Recipe",
+    next_week: "Next week:",
+    this_week: "This week:",
+  },
+  recipe_slug: {
+    contains: "Contains",
+    how_to: "How to",
+    saved_ingredients: "Saved items in the recipe",
+    nutrients: "Nutritional values",
+    ingredients: "Contents & allergens",
+  },
+
+  order: {
+    title: "We're launching in new cities!",
+    text: "Now it's time to launch in Malmö and Copenhagen and we're starting with a special offer to our first customers here! Enter your zip code to get an offer link.",
+    label: "Enter your zip code for an offer",
+  },
+
+  success: {
+    title: "Thank you for your order!",
+    description: "Log in to your pages to see information about your order.",
+    button: "To my pages",
+  },
+  my_pages: {
+    title_signed_out: "You have not logged in",
+    login_instruction: "Log in to manage your orders",
+    greeting_prefix: "Hey",
+    greeting_suffix: "!",
+    signed_in_as_prefix: "You are signed in as",
+    sign_out_button: "Sign out",
+    current_subscription_status: "Your current subscription plan:",
+    subscription_label: "Subscription:",
+    weekly: "Weekly",
+    biweekly: "Biweekly",
+    biweekly_prefix: "Biweekly (",
+    biweekly_suffix: ")",
+    even_weeks: "Even weeks",
+    odd_weeks: "Odd weeks",
+    monthly: "Monthly",
+    delivery_day_label_suffix: "s",
+    delivery_day_label: "Delivery day:",
+    delivery_address_label: "Delivery Address:",
+    change_button: "Change",
+    next_planned_delivery: "Upcoming delivery",
+    mealbox_week_prefix: "Meal kit w.",
+    no_recipes_set: "We’re still working on the recipes",
+    change_mealbox_button: "Change",
+    pause_mealbox_button: "Pause",
+    not_in_subscription_prefix: "Meal kit week",
+    not_in_subscription_suffix: "Not included in your plan",
+    add_to_subscription: "Add",
+    pause_subscription: "pause my subscription plan",
+    cancel_subscription: "cancel my subscription plan",
+    contact_us: "Contact us",
   },
 };
 
@@ -263,7 +409,7 @@ const daText = {
       title: "Deltag også og red mad på en nem og klimavenlig måde!",
       meals: "Måltider",
       vegetarian: "Vegetarisk",
-      price_per_portion: "Kr/portion",
+      price_per_portion: "Lavere klimaaftryk",
       cooking_time: "Min tilberedning",
       order_now: "Bestil nu",
     },
@@ -300,5 +446,29 @@ const daText = {
       },
     ],
     faq: "Ofte stillede spørgsmål",
+  },
+  recipes: {
+    title: "Opskrift",
+    next_week: "Næste uge:",
+    this_week: "Denne uge:",
+  },
+  recipe_slug: {
+    contains: "Indeholder",
+    how_to: "Sådan gør du",
+    saved_ingredients: "Gemte varer i opskriften",
+    nutrients: "Næringsværdier",
+    ingredients: "Indhold & allergener",
+  },
+
+  order: {
+    title: "Vi lancerer i nye byer!",
+    text: "Nu er det tid til at lancere i Malmö og København, og vi starter med et specielt tilbud til vores første kunder her! Indtast dit postnummer for at få et tilbud.",
+    label: "Indtast dit postnummer for et tilbud",
+  },
+
+  success: {
+    title: "Tak for din bestilling!",
+    description: "Log ind på dine sider for at se oplysninger om din ordre.",
+    button: "Til mine sider",
   },
 };

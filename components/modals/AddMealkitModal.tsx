@@ -42,7 +42,7 @@ const AddMealkitModal = () => {
   };
 
   useEffect(() => {
-    getDeliveryWindowsForPostalCode();
+    // getDeliveryWindowsForPostalCode();
   }, [postalCode]);
 
   const handleAdd = async () => {

@@ -15,7 +15,8 @@ import toast from "react-hot-toast";
 import instance from "@/lib/apiAxios";
 import { DeliveryWindow } from "@/providers/CheckoutProvider";
 import useAddMealkitModal from "@/hooks/useAddMealkitModal";
-
+import useAuthModal from "@/hooks/useAuthModal";
+import { useLang } from "@/hooks/useLang";
 
 const MyPageContent = () => {
   const auth = useAuth();
@@ -26,8 +27,12 @@ const MyPageContent = () => {
     if (signOut) signOut();
   };
 
+  const { lang, text } = useLang();
+
   const { onOpen, setPostalCode, setWeek, setSubscriptionId } =
     useAddMealkitModal();
+
+  const authModal = useAuthModal();
 
   const currentWeekNumber = getWeekNumber(new Date());
 
@@ -163,9 +168,9 @@ const MyPageContent = () => {
       const { intervalCount, interval } =
         userDetails.data.subscription.price.schedule;
       if (intervalCount === 1 && interval === "week") {
-        setSubscriptionFrequency("Varje vecka");
+        setSubscriptionFrequency(text?.my_pages?.weekly ?? "Varje vecka");
       } else if (intervalCount === 2 && interval === "week") {
-        setSubscriptionFrequency("Varannan vecka");
+        setSubscriptionFrequency(text?.my_pages?.biweekly ?? "Varannan vecka");
         const { baseline } = userDetails.data.subscription;
         // Converting the baseline timestamp to a Date object
         const baselineDate: any = new Date(baseline * 1000);
@@ -186,11 +191,14 @@ const MyPageContent = () => {
         // Determining if it's odd or even week
         setOddOrEvenSubscription(
           weekNumber % 2 === 0
-            ? { string: "Jämna veckor", odd: false }
-            : { string: "Udda veckor", odd: true }
+            ? {
+                string: text?.my_pages?.even_weeks ?? "Jämna veckor",
+                odd: false,
+              }
+            : { string: text?.my_pages?.odd_weeks ?? "Udda veckor", odd: true }
         );
       } else if (intervalCount === 1 && interval === "month") {
-        setSubscriptionFrequency("Varje månad");
+        setSubscriptionFrequency(text?.my_pages?.monthly ?? "Varje månad");
       }
     };
 
@@ -219,47 +227,92 @@ const MyPageContent = () => {
     onOpen();
   };
 
+  useEffect(() => {
+    if (!user) authModal.onOpen();
+  }, [user]);
+  if (!user) {
+    return (
+      <div className="flex flex-col items-center mt-10 ">
+        <TitleH2>
+          {text?.my_pages?.title_signed_out ?? "Du är inte inloggad"}
+        </TitleH2>
+        <BodyText>
+          {text?.my_pages?.login_instruction ??
+            "Logga in för att se information om dina beställningar."}
+        </BodyText>
+      </div>
+    );
+  }
+
   return (
     <Section className="pt-10">
-      <TitleH2>Hej {userDetails?.name}!</TitleH2>
-      <BodyText>Du är inloggad som {user?.email}</BodyText>
-      <button onClick={handleSignOut}>Logga ut</button>
+      <TitleH2>
+        {text?.my_pages?.greeting_prefix ?? "Hej"} {userDetails?.name}
+        {text?.my_pages?.greeting_suffix ?? "!"}
+      </TitleH2>
+      <BodyText>
+        {text?.my_pages?.signed_in_as_prefix ?? "Du är inloggad som"}{" "}
+        {user?.email}
+      </BodyText>
+      <button onClick={handleSignOut}>
+        {text?.my_pages?.sign_out_button ?? "Logga ut"}
+      </button>
 
       <div className="grid grid-cols-4 gap-6 mt-4">
+        {subscriptionDetails?.id != "" && (
+          <MyPageTile
+            className="col-span-2"
+            title={
+              text?.my_pages?.current_subscription_status ??
+              "Här är din nuvarande prenumerationsstatus:"
+            }
+          >
+            <div className="text-sm text-secondary">
+              <div className="grid grid-cols-4 gap-4">
+                <p className="font-poppins">
+                  {text?.my_pages?.subscription_label ?? "Prenumeration:"}
+                </p>
+                <p className="col-span-2">{`${subscriptionFrequency} ${
+                  subscriptionFrequency == "Varannan vecka" || "Biweekly"
+                    ? `(${oddOrEvenSubscription?.string})`
+                    : ""
+                }`}</p>
+                <button className="col-span-1 text-right">
+                  {text?.my_pages?.change_button ?? "Ändra"}
+                </button>
+              </div>
+              <div className="grid grid-cols-4 gap-4">
+                <p className="font-poppins">Leveransdag:</p>
+                <p className="col-span-2">
+                  {getDayStringFromNumber(prefferedDeliveryDay)}
+                  {"ar"}
+                  {/**TODO: Update */}
+                </p>
+                <button className="col-span-1 text-right">
+                  {text?.my_pages?.change_button ?? "Ändra"}
+                </button>
+              </div>
+              <div className="grid grid-cols-4 gap-4">
+                <p className="font-poppins">
+                  {text?.my_pages?.delivery_address_label ?? "Leveransadress:"}
+                </p>
+                <p className="col-span-2">
+                  {`${deliveryInfo?.street}, ${deliveryInfo?.postalCode}, ${deliveryInfo?.city}`}
+                  {/**TODO: Update */}
+                </p>
+                <button className="col-span-1 text-right">
+                  {text?.my_pages?.change_button ?? "Ändra"}
+                </button>
+              </div>
+            </div>
+          </MyPageTile>
+        )}
         <MyPageTile
           className="col-span-2"
-          title="Här är din nuvarande prenumerationsstatus:"
+          title={
+            text?.my_pages?.next_planned_delivery ?? "Nästa planerade utkörning"
+          }
         >
-          <div className="text-sm text-secondary">
-            <div className="grid grid-cols-4 gap-4">
-              <p className="font-poppins">Prenumeration:</p>
-              <p className="col-span-2">{`${subscriptionFrequency} ${
-                subscriptionFrequency == "Varannan vecka"
-                  ? `(${oddOrEvenSubscription?.string})`
-                  : ""
-              }`}</p>
-              <button className="col-span-1 text-right">Ändra</button>
-            </div>
-            <div className="grid grid-cols-4 gap-4">
-              <p className="font-poppins">Leveransdag:</p>
-              <p className="col-span-2">
-                {getDayStringFromNumber(prefferedDeliveryDay)}
-                {"ar"}
-                {/**TODO: Update */}
-              </p>
-              <button className="col-span-1 text-right">Ändra</button>
-            </div>
-            <div className="grid grid-cols-4 gap-4">
-              <p className="font-poppins">Leveransadress:</p>
-              <p className="col-span-2">
-                {`${deliveryInfo?.street}, ${deliveryInfo?.postalCode}, ${deliveryInfo?.city}`}
-                {/**TODO: Update */}
-              </p>
-              <button className="col-span-1 text-right">Ändra</button>
-            </div>
-          </div>
-        </MyPageTile>
-        <MyPageTile className="col-span-2" title="Nästa planerade utkörning">
           <h1>{nextDeliveryDate}</h1>
         </MyPageTile>
 
@@ -353,6 +406,7 @@ const MealKitTile: React.FC<{
   },
   active,
 }) => {
+  const { text } = useLang();
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const fetchRecipesForWeek = async () => {
     try {
@@ -392,7 +446,9 @@ const MealKitTile: React.FC<{
           !active && "cursor-none pointer-events-none"
         )}
       >
-        <h3 className="font-poppins text-sm text-secondary mb-2">{`Matkasse v.${weekNumber}`}</h3>
+        <h3 className="font-poppins text-sm text-secondary mb-2">{`${
+          text?.my_pages?.mealbox_week_prefix ?? "Matkasse v."
+        }${weekNumber}`}</h3>
         {recipes.length > 2 ? (
           <div className="grid grid-cols-3 gap-2">
             {recipes.map((recipe: Recipe) => {
@@ -402,7 +458,7 @@ const MealKitTile: React.FC<{
         ) : (
           <div className="flex flex-col items-center justify-center h-full">
             <p className="text-sm text-secondary">
-              Recepten är inte ännu satta
+              {text?.my_pages?.no_recipes_set ?? "Recepten är inte ännu satta"}
             </p>
           </div>
         )}
@@ -413,13 +469,13 @@ const MealKitTile: React.FC<{
               onClick={onChange}
               className="px-4 py-1 border border-secondary rounded-md text-sm font-bold text-secondary"
             >
-              Ändra
+              {text?.my_pages?.change_mealbox_button ?? "Ändra"}
             </button>
             <button
               onClick={onPause}
               className="px-4 py-1 border border-secondary rounded-md text-sm font-bold text-secondary"
             >
-              Pausa
+              {text?.my_pages?.pause_mealbox_button ?? "Pausa"}
             </button>
           </div>
         </div>
@@ -427,13 +483,16 @@ const MealKitTile: React.FC<{
       {!active && (
         <div className="absolute top-0 left-0 rounded-md w-full h-full bg-primary-200 bg-opacity-90 flex flex-col justify-center items-center">
           <p className="font-poppins text-secondary text-sm text-center">
-            Matkassen vecka {weekNumber} ingår inte i din prenumeration.
+            {text?.my_pages?.not_in_subscription_prefix ?? "Matkassen vecka"}{" "}
+            {weekNumber}{" "}
+            {text?.my_pages?.not_in_subscription_suffix ??
+              "ingår inte i din prenumeration."}
           </p>
           <button
             onClick={() => onAddMealkit(weekNumber)}
             className="border rounded-md font-bold border-secondary px-6 py-1 text-sm text-secondary mt-6"
           >
-            Lägg till
+            {text?.my_pages?.add_to_subscription ?? "Lägg till"}
           </button>
         </div>
       )}
