@@ -27,6 +27,7 @@ import { getShippingCostFromPostalCode } from "./lib/getShippingCost";
 import PaymentArea from "./components/paymentArea";
 import Head from "next/head";
 import { useLang } from "@/hooks/useLang";
+import { useSearchParams } from "next/navigation";
 
 // Initialize Stripe
 const stripePromise = loadStripe(
@@ -45,6 +46,10 @@ const variants = {
 
 const Order = () => {
   const [showDeliveryOptions, setShowDeliveryOptions] = useState(false);
+
+  const searchParams = useSearchParams();
+  const id = searchParams.get("id") || "1";
+  const offerId = parseInt(id, 10);
 
   const [deliveryDaysLoading, setDeliveryDaysLoading] = useState(false);
 
@@ -208,17 +213,15 @@ const Order = () => {
     }
   }, [address.postalCode]);
 
-    
+  return (
+    <Section className="pt-16">
+      <div className="w-full flex flex-col items-center ">
+        <Title>{text.order.title}</Title>
+        <BodyText className="text-center max-w-3xl mb-10">
+          {text.order.text}
+        </BodyText>
 
-    return (
-      <Section className="pt-16">
-        <div className="w-full flex flex-col items-center ">
-          <Title>{text.order.title}</Title>
-          <BodyText className="text-center max-w-3xl mb-10">
-           {text.order.text}
-          </BodyText>
-
-          {/* <h3 className="font-poppins text-lg text-secondary ">Vilken typ?</h3>
+        {/* <h3 className="font-poppins text-lg text-secondary ">Vilken typ?</h3>
           <div className="flex gap-4">
             {productTypes.map((productType) => {
               return (
@@ -269,7 +272,12 @@ const Order = () => {
             placeholder="12345"
             className="border border-primary bg-transparent p-2 rounded-md font-bold w-full placeholder-secondary placeholder-opacity-10 text-secondary ring-1 ring-transparent focus:ring-primary focus:outline-none"
           ></input>
-          <button className="w-64 mx-auto py-2 bg-primary mt-4 rounded-full text-secondary font-bold bg-opacity-90 hover:bg-opacity-100" onClick={handleGetLinks}>Hämta erbjudanden</button>
+          <button
+            className="w-64 mx-auto py-2 bg-primary mt-4 rounded-full text-secondary font-bold bg-opacity-90 hover:bg-opacity-100"
+            onClick={handleGetLinks}
+          >
+            Hämta erbjudanden
+          </button>
           {/* {shippingCostInfo && (
             <div className="mt-2 font-bold text-secondary">
               {" "}
@@ -280,7 +288,11 @@ const Order = () => {
 
         <div className="my-8 max-w-4xl w-full h-1 border-b border-primary border-opacity-50"></div>
         {showLinks && (
-          <PaymentArea deliveryWindows={deliveryWindows} dk={isDk} />
+          <PaymentArea
+            deliveryWindows={deliveryWindows}
+            dk={isDk}
+            offerId={offerId}
+          />
         )}
       </div>
     </Section>
