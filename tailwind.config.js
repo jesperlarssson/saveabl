@@ -18,7 +18,7 @@ module.exports = {
           50: "#ffffff",
           100: "#ffffff",
           200: "#fcf7e8", //Current main color
-          300: "#fde9d5",
+          300: "#f9efd2",
           400: "#fbd3ab",
           500: "#eecfaa",
           600: "#c8a37f",
@@ -58,6 +58,28 @@ module.exports = {
         roboto: ["Roboto", "sans-serif"],
         "open-sans": ["Open Sans", "sans-serif"],
       },
+      keyframes: {
+        float: {
+          '0%, 100%': { transform: 'translate(0, 0)' },
+          '25%': { transform: 'translate(10px, -10px)' },
+          '50%': { transform: 'translate(0, 0)' },
+          '75%': { transform: 'translate(-10px, 10px)' },
+        },
+        wiggle: {
+          '0%, 100%': { transform: 'rotate(-4deg)' },
+          '50%': { transform: 'rotate(4deg)' },
+        }
+      },
+      animation: {
+        float: 'float 10s linear infinite',
+        wiggle: 'wiggle 25s ease-in-out infinite',
+      },
+      width: {
+        '128': '36rem',
+      },
+      scale: {
+        '103': '1.03',
+      }
     },
   },
   plugins: [],

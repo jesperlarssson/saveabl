@@ -1,0 +1,77 @@
+{
+  "nav": {
+    "order": "Order now",
+    "about": "About us",
+    "recipe": "Recipe",
+    "news": "News",
+    "log_in": "Log in",
+    "log_out": "Log out",
+    "sign_up": "Sign up",
+    "my_account": "My account"
+  },
+  "page": {
+    "hero": {
+      "title": "Ready-made food bag that does the climate a favor",
+      "subtitle": "Environmentally friendly on a whole new level.",
+      "order_now": "Order now"
+    },
+    "usp": {
+      "title": "What does our food bag mean?",
+      "points": [
+        {
+          "title": "Our chef creates recipes",
+          "text": "We gather delicious ingredients that look a bit quirky and create tasty recipes from them."
+        },
+        {
+          "title": "The food is sent to you",
+          "text": "You get your rescued food bag delivered with most things prepared for you."
+        },
+        {
+          "title": "Climate-smart meal in 15 min",
+          "text": "You chop and heat the last part in 15 minutes, enjoy a delicious and climate-smart dinner!"
+        }
+      ]
+    },
+    "call_to_action": {
+      "title": "Join us and save food in an easy and climate-smart way!",
+      "meals": "Meals",
+      "vegetarian": "Vegetarian",
+      "price_per_portion": "Kr/portion",
+      "cooking_time": "Min cooking",
+      "order_now": "Order now"
+    },
+    "news": {
+      "title": "Follow the journey - check out our latest news posts!",
+      "text": "We develop and test new things. We expand and come up with new stuff. Here we update what's happening in our world."
+    },
+    "reviews": {
+      "title": "Over 20,000 saved dinners, together we make a difference!",
+      "text": "Here's what some of our environmental heroes say to customers:",
+      "read_all_reviews": "Read all reviews"
+    }
+  },
+
+  "about_us": {
+    "title": "Rescuable, something that can be saved",
+    "description": "At Saveabl, we systematically identify waste among producers and wholesalers, and create a ready-made food bag based on what needs to be rescued! Our food bag exists in the magical borderland between a traditional food bag and ready-made takeaway. In addition to the climate issue, we strongly believe in convenience and have therefore developed a food bag that is ready in 15 minutes. Incredibly smooth and incredibly tasty!",
+    "sections": [
+      {
+        "title": "Who we are",
+        "text": ""
+      },
+      {
+        "title": "Our food bag",
+        "text": ""
+      },
+      {
+        "title": "Rescued food",
+        "text": ""
+      },
+      {
+        "title": "Our climate effort",
+        "text": ""
+      }
+    ],
+    "faq": "Frequently Asked Questions"
+  }
+}
