@@ -26,6 +26,10 @@ const SliderCards: React.FC<SliderCardsProps> = ({ children }) => {
         loop={false}
         slidesPerView={1}
         breakpoints={{
+          480: {
+            slidesPerView: 2,
+            width: 480,
+          },
           640: {
             slidesPerView: 2,
             width: 640,

@@ -55,7 +55,33 @@ export const LangProvider = ({ children }: TextProviderProps) => {
       setLang("sv");
       setText(svText);
     }
+    // Store the selected language in localStorage
+    localStorage.setItem("selectedLang", lang);
   };
+
+  useEffect(() => {
+    // Check if there's a language stored in localStorage
+    const storedLang = localStorage.getItem("selectedLang");
+
+    if (storedLang) {
+      handleChangeLang(storedLang as Language);
+    } else {
+      const browserLang = navigator.language;
+      if (browserLang === "sv-SE") {
+        handleChangeLang("sv");
+      } else if (
+        browserLang === "en-GB" ||
+        browserLang === "en-US" ||
+        browserLang === "en"
+      ) {
+        handleChangeLang("en");
+      } else if (browserLang === "da-DK") {
+        handleChangeLang("da");
+      } else {
+        handleChangeLang("en");
+      }
+    }
+  }, []);
 
   const value = {
     lang,
@@ -163,6 +189,7 @@ const svText = {
     title: "Vi lanserar på nya orter!",
     text: "Nu är det dags att köra vår första lansering i Malmö och Köpenhamn och börjar med ett special-erbjudande till våra första kunder här! Fyll i ditt postnummer för att få en erbjudandelänk.",
     label: "Fyll i ditt postnummer för ett erbjudande",
+    button: "Hämta erbjudanden",
   },
 
   success: {
@@ -330,6 +357,7 @@ const enText = {
     title: "We're launching in new cities!",
     text: "Now it's time to launch in Malmö and Copenhagen and we're starting with a special offer to our first customers here! Enter your zip code to get an offer link.",
     label: "Enter your zip code for an offer",
+    button: "Get offer",
   },
 
   success: {
@@ -464,6 +492,7 @@ const daText = {
     title: "Vi lancerer i nye byer!",
     text: "Nu er det tid til at lancere i Malmö og København, og vi starter med et specielt tilbud til vores første kunder her! Indtast dit postnummer for at få et tilbud.",
     label: "Indtast dit postnummer for et tilbud",
+    button: "Få et tilbud",
   },
 
   success: {

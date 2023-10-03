@@ -216,7 +216,7 @@ const Order = () => {
   return (
     <Section className="pt-16">
       <div className="w-full flex flex-col items-center ">
-        <Title>{text.order.title}</Title>
+        <Title className="text-center">{text.order.title}</Title>
         <BodyText className="text-center max-w-3xl mb-10">
           {text.order.text}
         </BodyText>
@@ -262,7 +262,7 @@ const Order = () => {
         <div className="flex flex-col items-start my-4">
           <label
             htmlFor="postalcode"
-            className="font-poppins text-lg mb-2 text-secondary"
+            className="font-poppins text-lg mb-2 text-secondary text-center sm:text-left"
           >
             {text.order.label}
           </label>
@@ -276,7 +276,7 @@ const Order = () => {
             className="w-64 mx-auto py-2 bg-primary mt-4 rounded-full text-secondary font-bold bg-opacity-90 hover:bg-opacity-100"
             onClick={handleGetLinks}
           >
-            Hämta erbjudanden
+           {text.order.button}
           </button>
           {/* {shippingCostInfo && (
             <div className="mt-2 font-bold text-secondary">

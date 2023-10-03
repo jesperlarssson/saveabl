@@ -227,6 +227,13 @@ export async function getAllRecipes() {
         image {
           url(transformation: {image: {resize: {height: 500, width: 700}}})
         }
+        localizations {
+          contentAllergies
+          ingredients
+          nutritionalValues
+          steg
+          title
+        }
       }
     }
   `
@@ -261,6 +268,13 @@ export async function getPaginatedRecipes(
         }
         image {
           url(transformation: {image: {resize: {height: 500, width: 700}}})
+        }
+        localizations {
+          contentAllergies
+          ingredients
+          nutritionalValues
+          steg
+          title
         }
       }
     }
@@ -356,6 +370,13 @@ export async function getRecipesForWeek(week: number) {
         image {
           url(transformation: {image: {resize: {height: 500, width: 700}}})
         }
+        localizations {
+          contentAllergies
+          ingredients
+          nutritionalValues
+          steg
+          title
+        }
       }
     }
   `,
@@ -445,6 +466,15 @@ export async function getRecipeWithSlug(slug: string) {
         }
         image {
           url(transformation: {image: {resize: {height: 800, width: 1200}}})
+        }
+        localizations {
+          contentAllergies
+          ingredients
+          nutritionalValues
+          savedIngredients
+          ingredients
+          steg
+          title
         }
         freezabl
       }

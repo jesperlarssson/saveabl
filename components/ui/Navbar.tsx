@@ -173,7 +173,7 @@ const Navbar = () => {
         >
           <ul className="">
             {navigation.map((item) => (
-              <li key={item.id}>
+              <li onClick={() => setActive(false)} key={item.id}>
                 <NavItem
                   className={twMerge(
                     `-translate-x-full px-8 h-14 flex items-center text-xl font-bold hover:bg-primary hover:shadow-inner bg-opacity-60 transition duration-600`,

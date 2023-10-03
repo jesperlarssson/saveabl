@@ -2,7 +2,7 @@
 import Image from "next/image";
 
 import { Recipe } from "@/types";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Section from "../ui/Section";
 import Card from "../ui/Card";
 import Grid from "../ui/Grid";
@@ -18,6 +18,51 @@ interface RecipeLayoutProps {
 const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
   const { lang, text } = useLang();
 
+  const [recept, setRecept] = useState({
+    title: lang != "sv" ? recipe?.title : recipe?.localizations[0].title,
+    image: recipe?.image?.url || "/images/placeholder.png",
+    ingredients:
+      lang != "sv" ? recipe?.ingredients : recipe?.localizations[0].ingredients,
+    steg: lang != "sv" ? recipe?.steg : recipe?.localizations[0].steg,
+    savedIngredients:
+      lang != "sv"
+        ? recipe?.savedIngredients
+        : recipe?.localizations[0].savedIngredients,
+    nutritionalValues:
+      lang != "sv"
+        ? recipe?.nutritionalValues
+        : recipe?.localizations[0].nutritionalValues,
+    contentAllergies:
+      lang != "sv"
+        ? recipe?.contentAllergies
+        : recipe?.localizations[0].contentAllergies,
+  });
+
+  useEffect(() => {
+    const temp = {
+      title: lang != "sv" ? recipe?.title : recipe?.localizations[0].title,
+      image: recipe?.image?.url || "/images/placeholder.png",
+      ingredients:
+        lang != "sv"
+          ? recipe?.ingredients
+          : recipe?.localizations[0].ingredients,
+      steg: lang != "sv" ? recipe?.steg : recipe?.localizations[0].steg,
+      savedIngredients:
+        lang != "sv"
+          ? recipe?.savedIngredients
+          : recipe?.localizations[0].savedIngredients,
+      nutritionalValues:
+        lang != "sv"
+          ? recipe?.nutritionalValues
+          : recipe?.localizations[0].nutritionalValues,
+      contentAllergies:
+        lang != "sv"
+          ? recipe?.contentAllergies
+          : recipe?.localizations[0].contentAllergies,
+    };
+    setRecept(temp);
+  }, [lang, recipe]);
+
   if (recipe?.deprecated) {
     return <Section className="w-full">Detta är ett gammalt recept</Section>;
   }
@@ -29,7 +74,7 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
           <div className="col-span-4 sm:col-span-1 drop-shadow-md overflow-hidden rounded-lg w-full h-72">
             <Image
               src={recipe?.image?.url || "/images/placeholder.png"}
-              alt={recipe?.title}
+              alt={recept.title}
               width={400}
               height={400}
               className="object-cover w-full h-full"
@@ -38,7 +83,7 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
           <div className="col-span-4 sm:col-span-3 flex flex-col justify-end gap-2">
             {/* <RatingButton recipeId={recipe?.id} /> */}
             <h2 className="  font-poppins text-secondary text-2xl sm:text-4xl">
-              {recipe?.title}
+              {recept.title}
             </h2>
           </div>
 
@@ -47,7 +92,7 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
               {text.recipe_slug.contains}
             </h3>
             <ul className="text-gray-700">
-              {recipe?.ingredients.map((ingredient, index) => (
+              {recept.ingredients.map((ingredient, index) => (
                 <li key={index}>
                   <p>{ingredient}</p>
                 </li>
@@ -57,7 +102,7 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
           <div className="col-span-4 sm:col-span-3">
             <h3 className="font-poppins text-xl">{text.recipe_slug.how_to}</h3>
             <ul className="text-gray-700">
-              {recipe?.steg.map((steg, index) => (
+              {recept.steg.map((steg, index) => (
                 <li className="my-4 flex gap-2" key={index}>
                   <span className=" font-bold">{`${index + 1}.`}</span>
                   <p>{steg}</p>
@@ -73,19 +118,19 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
           <h3 className="text-secondary font-poppins">
             {text.recipe_slug.saved_ingredients}
           </h3>
-          <p className="text-gray-700">{recipe?.savedIngredients}</p>
+          <p className="text-gray-700">{recept.savedIngredients}</p>
         </Card>
         <Card>
           <h3 className="text-secondary font-poppins">
             {text.recipe_slug.nutrients}
           </h3>
-          <p className="text-gray-700">{recipe?.nutritionalValues}</p>
+          <p className="text-gray-700">{recept.nutritionalValues}</p>
         </Card>
         <Card>
           <h3 className="text-secondary font-poppins">
             {text.recipe_slug.ingredients}
           </h3>
-          <p className="text-gray-700">{recipe?.contentAllergies}</p>
+          <p className="text-gray-700">{recept.contentAllergies}</p>
         </Card>
 
         {/* <Card className="text-secondary font-poppins">

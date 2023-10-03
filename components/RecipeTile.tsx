@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -6,6 +6,7 @@ import { Recipe } from "@/types";
 import { getWeekNumber } from "@/helpers/format";
 import { twMerge } from "tailwind-merge";
 import { toast } from "react-hot-toast";
+import { useLang } from "@/hooks/useLang";
 
 interface RecipeTileProps {
   recipe: Recipe;
@@ -19,6 +20,17 @@ const RecipeTile: React.FC<RecipeTileProps> = ({ recipe, fullWidth }) => {
       toast.error("Detta recept är inte längre tillgängligt");
     }
   };
+  const { lang } = useLang();
+  const [recept, setRecept] = useState({
+    title: lang != "sv" ? recipe?.title : recipe?.localizations[0].title,
+  });
+
+  useEffect(() => {
+    const temp = {
+      title: lang != "sv" ? recipe?.title : recipe?.localizations[0].title,
+    };
+    setRecept(temp);
+  }, [lang, recipe]);
   return (
     <Link
       onClick={handleLinkClick}
@@ -36,7 +48,7 @@ const RecipeTile: React.FC<RecipeTileProps> = ({ recipe, fullWidth }) => {
         <div className="relative bg-gray-300 bg-opacity-40   overflow-hidden h-full  ">
           <Image
             src={recipe.image?.url || "/images/placeholder.png"}
-            alt={recipe.title}
+            alt={recept.title}
             width={400}
             height={350}
             className="object-cover w-full h-full"
@@ -50,7 +62,7 @@ const RecipeTile: React.FC<RecipeTileProps> = ({ recipe, fullWidth }) => {
           } ${recipe.deprecated ? "" : `- Dag ${recipe.recipeNumber}`}`}</p>
 
           <h3 className="font-poppins text-primary-200 text-md mt-2 group-hover:underline underline-offset-4 transition-all group-hover:mb-4">
-            {recipe.title}
+            {recept.title}
           </h3>
         </div>
       </div>

@@ -49,7 +49,7 @@ const Recipes = () => {
               </Grid>
             </div>
           )}
-          <h3 className="font-poppins text-3xl text-primary col-span-3 -mb-4">
+          <h3 className="font-poppins text-3xl text-primary col-span-1 md:col-span-3 md:-mb-4 mt-8 md:mt-2">
             {text.recipes.this_week}
           </h3>
           {loading ? (
@@ -62,9 +62,17 @@ const Recipes = () => {
               <div className="h-80 overflow-hidden rounded-xl w-full animate-pulse bg-primary bg-opacity-25" />
             </>
           ) : (
-            prior.map((recipe: Recipe) => {
-              return <RecipeTile key={recipe.id} recipe={recipe} />;
-            })
+            <div className="col-span-3">
+              <Grid className=" gap-8 pt-4">
+                {prior.map((recipe: Recipe) => {
+                  return (
+                    <div key={recipe.id} className="w-full">
+                      <RecipeTile recipe={recipe} />
+                    </div>
+                  );
+                })}
+              </Grid>
+            </div>
           )}
         </Grid>
         <div className="flex justify-center">
