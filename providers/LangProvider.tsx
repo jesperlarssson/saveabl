@@ -187,6 +187,8 @@ const svText = {
 
   order: {
     title: "Vi lanserar på nya orter!",
+    title1: "Fyll in ditt postnummer för att se vi levererar till dig",
+    title2: "Specialerbjudande för att fira vår lansering!",
     text: "Nu är det dags att köra vår första lansering i Malmö och Köpenhamn och börjar med ett special-erbjudande till våra första kunder här! Fyll i ditt postnummer för att få en erbjudandelänk.",
     label: "Fyll i ditt postnummer för ett erbjudande",
     button: "Hämta erbjudanden",
@@ -355,6 +357,8 @@ const enText = {
 
   order: {
     title: "We're launching in new cities!",
+    title1: "Enter your post code to see if you are within our delivery area",
+    title2: "You have been awarded a special gift!",
     text: "Now it's time to launch in Malmö and Copenhagen and we're starting with a special offer to our first customers here! Enter your zip code to get an offer link.",
     label: "Enter your zip code for an offer",
     button: "Get offer",
@@ -490,6 +494,8 @@ const daText = {
 
   order: {
     title: "Vi lancerer i nye byer!",
+    title1: "Indtast dit postnummer for at se, om du er inden for vores leveringsområde",
+    title2: "Du har fået en særlig gave!",
     text: "Nu er det tid til at lancere i Malmö og København, og vi starter med et specielt tilbud til vores første kunder her! Indtast dit postnummer for at få et tilbud.",
     label: "Indtast dit postnummer for et tilbud",
     button: "Få et tilbud",

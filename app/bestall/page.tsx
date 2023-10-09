@@ -216,7 +216,9 @@ const Order = () => {
   return (
     <Section className="pt-16">
       <div className="w-full flex flex-col items-center ">
-        <Title className="text-center">{text.order.title}</Title>
+        <Title className="text-center">
+          {id === "1" ? text.order.title1 : text.order.title2}
+        </Title>
         <BodyText className="text-center max-w-3xl mb-10">
           {text.order.text}
         </BodyText>
