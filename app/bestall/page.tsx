@@ -220,7 +220,7 @@ const Order = () => {
           {id === "1" ? text.order.title1 : text.order.title2}
         </Title>
         <BodyText className="text-center max-w-3xl mb-10">
-          {text.order.text}
+          {id === "1" ? "" : text.order.text}
         </BodyText>
 
         {/* <h3 className="font-poppins text-lg text-secondary ">Vilken typ?</h3>
@@ -261,12 +261,12 @@ const Order = () => {
         </div> */}
 
         <div className="my-8 max-w-4xl w-full h-1 border-b border-primary border-opacity-50"></div>
-        <div className="flex flex-col items-start my-4">
+        <div className="flex flex-col items-center my-4">
           <label
             htmlFor="postalcode"
-            className="font-poppins text-lg mb-2 text-secondary text-center sm:text-left"
+            className="font-poppins text-lg mb-2 text-secondary w-full text-center sm:text-left"
           >
-            {text.order.label}
+            {id === "1" ? text.order.label1 : text.order.label2}
           </label>
           <input
             onChange={handleZipCodeChange}
@@ -278,7 +278,7 @@ const Order = () => {
             className="w-64 mx-auto py-2 bg-primary mt-4 rounded-full text-secondary font-bold bg-opacity-90 hover:bg-opacity-100"
             onClick={handleGetLinks}
           >
-            {text.order.button}
+            {id === "1" ? text.order.button1 : text.order.button2}
           </button>
           {/* {shippingCostInfo && (
             <div className="mt-2 font-bold text-secondary">

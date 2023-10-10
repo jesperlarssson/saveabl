@@ -191,7 +191,11 @@ const svText = {
     title2: "Specialerbjudande för att fira vår lansering!",
     text: "Nu är det dags att köra vår första lansering i Malmö och Köpenhamn och börjar med ett special-erbjudande till våra första kunder här! Fyll i ditt postnummer för att få en erbjudandelänk.",
     label: "Fyll i ditt postnummer för ett erbjudande",
+    label1: "Fyll i ditt postnummer",
+    label2: "Fyll i ditt postnummer för ett erbjudande",
     button: "Hämta erbjudanden",
+    button1: "Hämta",
+    button2: "Hämta erbjudanden",
   },
 
   success: {
@@ -361,7 +365,11 @@ const enText = {
     title2: "You have been awarded a special gift!",
     text: "Now it's time to launch in Malmö and Copenhagen and we're starting with a special offer to our first customers here! Enter your zip code to get an offer link.",
     label: "Enter your zip code for an offer",
+    label1: "Enter your zip code",
+    label2: "Enter your zip code for an offer",
     button: "Get offer",
+    button1: "Get ",
+    button2: "Get offer",
   },
 
   success: {
@@ -498,7 +506,12 @@ const daText = {
     title2: "Du har fået en særlig gave!",
     text: "Nu er det tid til at lancere i Malmö og København, og vi starter med et specielt tilbud til vores første kunder her! Indtast dit postnummer for at få et tilbud.",
     label: "Indtast dit postnummer for et tilbud",
+    label1: "Indtast dit postnummer",
+    label2: "Indtast dit postnummer for et tilbud",
+  
     button: "Få et tilbud",
+    button1: "Hente",
+    button2: "Få et tilbud",
   },
 
   success: {
