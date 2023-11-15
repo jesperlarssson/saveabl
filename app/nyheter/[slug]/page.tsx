@@ -33,22 +33,22 @@ const PostPage: React.FC<PostPageProps> = async ({ params }) => {
   return (
     <>
       <Head>
-        <title>{post.title}</title>
+        <title>{post?.title}</title>
       </Head>
       <Section narrow className="pt-16">
-        <Title>{post.title}</Title>
-        <BodyText className="my-4 mb-8">{post.excerpt}</BodyText>
+        <Title>{post?.title}</Title>
+        <BodyText className="my-4 mb-8">{post?.excerpt}</BodyText>
 
         <div className="relative w-full h-[500px] ">
           <Image
             fill
             className="object-cover w-full h-full"
-            alt={post.title}
-            src={post.coverImage.url}
+            alt={post?.title}
+            src={post?.coverImage?.url}
           />
         </div>
 
-        <BodyContent content={post.content} />
+        <BodyContent content={post?.content} />
       </Section>
 
       <TextBanner>{textBannerText}</TextBanner>

@@ -69,9 +69,6 @@ export const tempPostSlugs = [
     slug: "saveabl-granola",
   },
   {
-    slug: "vilken-aer-den-baesta-matkassen-vi-jaemfoer",
-  },
-  {
     slug: "klimatsmart-hela-vaegen-fran-ravara-till-att-matkassen-star-utanfoer-din-doerr",
   },
   {
@@ -423,22 +420,6 @@ export const tempPosts = [
         url: "https://media.graphassets.com/resize=fit:crop,height:100,width:100/xYjMm7TqQJqtlTcl7ccC",
       },
     },
-  },
-  {
-    id: "clcsyoh2349xg0aujj7cc6dow",
-    title: "Vilken är den bästa matkassen - vi jämför!",
-    excerpt: null,
-    slug: "vilken-aer-den-baesta-matkassen-vi-jaemfoer",
-    tags: [],
-    seoKeywords: [],
-    content: {
-      html: "<p>Pros &amp; cons </p><p></p>",
-    },
-    date: "2021-01-01",
-    postComment: [],
-    ogImage: null,
-    coverImage: null,
-    author: null,
   },
   {
     id: "clck9jpn2mq6e0bt5roxyprsm",

@@ -29,7 +29,7 @@ const Recipes = () => {
           <ThisWeekRecipes />
         </div> */}
 
-          {nextWeek.length > 2 && (
+          {/* {nextWeek.length > 2 && (
             <div className="col-span-3">
               <h3 className="font-poppins text-3xl text-primary">
                 {text.recipes.next_week}
@@ -48,10 +48,10 @@ const Recipes = () => {
                 )}
               </Grid>
             </div>
-          )}
-          <h3 className="font-poppins text-3xl text-primary col-span-1 md:col-span-3 md:-mb-4 mt-8 md:mt-2">
+          )} */}
+          {/* <h3 className="font-poppins text-3xl text-primary col-span-1 md:col-span-3 md:-mb-4 mt-8 md:mt-2">
             {text.recipes.this_week}
-          </h3>
+          </h3> */}
           {loading ? (
             <>
               <div className="h-80 overflow-hidden rounded-xl w-full animate-pulse bg-primary bg-opacity-25" />

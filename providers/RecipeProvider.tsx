@@ -92,7 +92,7 @@ export const RecipeProvider = ({ children }: RecipeProviderProps) => {
         const res = await fetch("/api/recipes", {
           method: "POST",
           body: JSON.stringify({
-            limit: 3,
+            limit: 6,
             offset: 0,
             endDate: getDateForPriorRecipes(),
           }),
