@@ -16,7 +16,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ key, post }) => {
       <article className="overflow-hidden rounded-lg shadow transition hover:shadow-lg hover:-translate-y-2 relative h-96 min-w-96 flex-1 group cursor-pointer">
         <Image
           alt="Office"
-          src={post?.coverImage.url || "/images/placeholder.png"}
+          src={post?.coverImage?.url || "/images/placeholder.png"}
           className="h-full w-full object-cover"
           width={420}
           height={320}
