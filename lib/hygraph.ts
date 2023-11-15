@@ -1,5 +1,6 @@
 import { getDatesFromWeek } from "@/helpers/format";
 import { Post, PostsData } from "@/types";
+import { tempRecipes } from "./tempRecipes";
 
 async function fetchAPI(
   query: string,
@@ -190,6 +191,14 @@ export async function getPaginatedPosts(limit: number, offset: number) {
 }
 
 export async function getLatestPromotionBanner() {
+ const banner = [
+    {
+      "id": "clippe5kmy1t50bt2s6pkbz7y",
+      "content": {
+        "html": "<p>Thank you for choosing 5 x lower carbon footprint &lt;3</p>"
+      },}
+  ];
+  return banner;
   const data = await fetchAPI(
     `
       query GetLatestPromotionBanner {
@@ -247,6 +256,9 @@ export async function getPaginatedRecipes(
   endDate: Date
 ) {
   const variables = { limit, offset, endDate };
+
+  const recipes = tempRecipes.data.recepts.filter((recipe) => new Date(recipe.startDate) <= endDate);
+  return recipes;
   const data = await fetchAPI(
     `
     query GetRecipes($limit: Int!, $offset: Int!, $endDate: Date!) {
@@ -350,40 +362,44 @@ export async function getPaginatedOldRecipes(limit: number, offset: number) {
 }
 
 export async function getRecipesForWeek(week: number) {
-  const data = await fetchAPI(
-    `
-    query GetRecipes($week: Int!) {
-      recepts(
-        orderBy: recipeNumber_ASC, 
-        where: {weekNr: $week}
-      ) {
-        id
-        title
-        slug
-        startDate
-        weekNr
-        recipeNumber
-        chef {
-          name
-          title
-        }
-        image {
-          url(transformation: {image: {resize: {height: 500, width: 700}}})
-        }
-        localizations {
-          contentAllergies
-          ingredients
-          nutritionalValues
-          steg
-          title
-        }
-      }
-    }
-  `,
-    { variables: { week } }
-  );
 
-  return data.recepts;
+  const recipes = tempRecipes.data.recepts.filter((recipe) => recipe.weekNr === week);
+  return recipes;
+
+  // const data = await fetchAPI(
+  //   `
+  //   query GetRecipes($week: Int!) {
+  //     recepts(
+  //       orderBy: recipeNumber_ASC, 
+  //       where: {weekNr: $week}
+  //     ) {
+  //       id
+  //       title
+  //       slug
+  //       startDate
+  //       weekNr
+  //       recipeNumber
+  //       chef {
+  //         name
+  //         title
+  //       }
+  //       image {
+  //         url(transformation: {image: {resize: {height: 500, width: 700}}})
+  //       }
+  //       localizations {
+  //         contentAllergies
+  //         ingredients
+  //         nutritionalValues
+  //         steg
+  //         title
+  //       }
+  //     }
+  //   }
+  // `,
+  //   { variables: { week } }
+  // );
+
+  // return data.recepts;
 }
 
 
@@ -433,6 +449,9 @@ export async function getAllFAQ() {
 // }
 
 export async function getAllRecipesWithSlug() {
+  const slugs = tempRecipes.data.recepts.map((recipe) => recipe.slug);
+  return slugs;
+
   const data = await fetchAPI(
     `
     query GetSlugs {
@@ -446,6 +465,8 @@ export async function getAllRecipesWithSlug() {
 }
 
 export async function getRecipeWithSlug(slug: string) {
+  const recipe = tempRecipes.data.recepts.find((recipe) => recipe.slug === slug);
+  return recipe;
   const data = await fetchAPI(
     `
     query GetRecipe($slug: String!) {
