@@ -1,6 +1,8 @@
 import { getDatesFromWeek } from "@/helpers/format";
 import { Post, PostsData } from "@/types";
 import { tempRecipes } from "./tempRecipes";
+import { tempHomePosts, tempPostSlugs, tempPosts } from "./tempPosts";
+import { tempFaq } from "./tempFaq";
 
 async function fetchAPI(
   query: string,
@@ -47,6 +49,8 @@ export async function sendMutation(
 }
 
 export async function getAllPostsForHome(mutation: boolean): Promise<Post[]> {
+  const posts: Post[] = tempHomePosts;
+  return posts;
   const data: PostsData = await fetchAPI(
     `
       {
@@ -91,6 +95,8 @@ export async function getAllPostsForHome(mutation: boolean): Promise<Post[]> {
 }
 
 export async function getAllPostsWithSlug() {
+  const slugs = tempPostSlugs;
+  return slugs;
   const data = await fetchAPI(
     `
     query GetSlugs {
@@ -104,6 +110,8 @@ export async function getAllPostsWithSlug() {
 }
 
 export async function getPostWithSlug(slug: string) {
+  const post = tempPosts.find((post) => post.slug === slug);
+  return post;
   const data = await fetchAPI(
     `
     query GetPost($slug: String!) {
@@ -146,6 +154,8 @@ export async function getPostWithSlug(slug: string) {
 }
 
 export async function getPaginatedPosts(limit: number, offset: number) {
+  const posts = tempPosts.slice(offset, offset + limit);
+  return posts;
   const variables = { limit, offset };
   const data = await fetchAPI(
     `
@@ -214,6 +224,8 @@ export async function getLatestPromotionBanner() {
 }
 
 export async function getAllRecipes() {
+  const recipes = tempRecipes.data.recepts;
+  return recipes;
   const data = await fetchAPI(
     `
     query GetRecipes {
@@ -257,7 +269,7 @@ export async function getPaginatedRecipes(
 ) {
   const variables = { limit, offset, endDate };
 
-  const recipes = tempRecipes.data.recepts.filter((recipe) => new Date(recipe.startDate) <= endDate);
+  const recipes = tempRecipes.data.recepts.slice(offset, offset + limit);
   return recipes;
   const data = await fetchAPI(
     `
@@ -297,6 +309,7 @@ export async function getPaginatedRecipes(
 }
 
 export async function getPaginatedOldRecipes(limit: number, offset: number) {
+  return [];
   const variables = { limit, offset };
   const data = await fetchAPI(
     `
@@ -404,6 +417,8 @@ export async function getRecipesForWeek(week: number) {
 
 
 export async function getAllFAQ() {
+  const faqs = tempFaq;
+  return faqs;
   const data = await fetchAPI(`
     {
       faqs {
