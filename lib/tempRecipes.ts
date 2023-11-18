@@ -160,99 +160,6 @@ export const tempRecipes = {
         ],
       },
       {
-        id: "clocyk28ktu6j0buqh73olqt5",
-        title:
-          "Our bao buns with homemade 'kimchi' of shredded cabbage, crispy tofu, teriyaki sauce, garlic-roasted pumpkin seeds, and a side of flavored fluffy bulgur.",
-        slug: "recept-our-bao-buns-with-homemade-kimchi-of-shredded-cabbage-crispy-tofu-teriyaki-sauce-garlic-roasted-pumpkin-seeds-and-a-side-of-flavored-fluffy-wheat",
-        startDate: "2023-11-06",
-        weekNr: 45,
-        recipeNumber: 1,
-        steg: [],
-        ingredients: [],
-        nutritionalValues: "Coming soon! ",
-        savedIngredients: "Coming soon! ",
-        contentAllergies: "Coming soon! ",
-        chef: {
-          name: "Emil Petzén",
-          title: "Kökschef / COO",
-        },
-        image: {
-          url: "https://media.graphassets.com/resize=height:500,width:700/29uRr1ULT3emgvQa6xKx",
-        },
-        localizations: [
-          {
-            contentAllergies: "Kommer snart! ",
-            ingredients: [],
-            nutritionalValues: "Kommer snart! ",
-            steg: [],
-            title:
-              "Våra bao buns med egen ”kimchi” på strimlad vitkål, krispig tofu, teriyakisås, vitlöksrostade pumpafrön och en side på smaksatt fluffigt matvete. ",
-          },
-        ],
-      },
-      {
-        id: "clocyhwd7tcqm0bupzuxogmty",
-        title:
-          "Creamy mushroom and tarragon stew with chili-fried soy strips & basmati rice.",
-        slug: "recept-creamy-mushroom-and-tarragon-stew-with-chili-fried-soy-strips-and-basmati-rice",
-        startDate: "2023-11-06",
-        weekNr: 45,
-        recipeNumber: 2,
-        steg: [],
-        ingredients: [],
-        nutritionalValues: "Coming soon! ",
-        savedIngredients: "Coming soon! ",
-        contentAllergies: "Coming soon! ",
-        chef: {
-          name: "Emil Petzén",
-          title: "Kökschef / COO",
-        },
-        image: {
-          url: "https://media.graphassets.com/resize=height:500,width:700/dl7LOcAKQq8qKPC2NW2g",
-        },
-        localizations: [
-          {
-            contentAllergies: "Kommer snart! ",
-            ingredients: [],
-            nutritionalValues: "Kommer snart! ",
-            steg: [],
-            title:
-              "Krämig svamp-/dragongryta med chilistekta soja-strips & basmatiris.   ",
-          },
-        ],
-      },
-      {
-        id: "clocyep0isa3q0bunk95dh1to",
-        title:
-          "Potato gnocchi with spicy, herby tomato sauce, roasted seeds & grated mozzarella.",
-        slug: "recept-potato-gnocchi-with-spicy-herby-tomato-sauce-roasted-seeds-and-grated-mozzarella",
-        startDate: "2023-11-06",
-        weekNr: 45,
-        recipeNumber: 3,
-        steg: [],
-        ingredients: [],
-        nutritionalValues: "Coming soon! ",
-        savedIngredients: "Coming soon! ",
-        contentAllergies: "Coming soon! ",
-        chef: {
-          name: "Emil Petzén",
-          title: "Kökschef / COO",
-        },
-        image: {
-          url: "https://media.graphassets.com/resize=height:500,width:700/HHlHqObQoOwX95KyFaNg",
-        },
-        localizations: [
-          {
-            contentAllergies: "Kommer snart! ",
-            ingredients: [],
-            nutritionalValues: "Kommer snart! ",
-            steg: [],
-            title:
-              "Potatisgnocchi med het, örtig tomatsås, rostade frön & riven mozzarella.",
-          },
-        ],
-      },
-      {
         id: "clon4szat71ye0bul2d0l6vps",
         title:
           "Yellow peas with browned herb butter, charred chili yogurt, flavored quinoa, and pickled cucumber.",
@@ -565,6 +472,99 @@ export const tempRecipes = {
         ],
       },
       {
+        id: "clocyk28ktu6j0buqh73olqt5",
+        title:
+          "Our bao buns with homemade 'kimchi' of shredded cabbage, crispy tofu, teriyaki sauce, garlic-roasted pumpkin seeds, and a side of flavored fluffy bulgur.",
+        slug: "recept-our-bao-buns-with-homemade-kimchi-of-shredded-cabbage-crispy-tofu-teriyaki-sauce-garlic-roasted-pumpkin-seeds-and-a-side-of-flavored-fluffy-wheat",
+        startDate: "2023-11-06",
+        weekNr: 45,
+        recipeNumber: 1,
+        steg: [],
+        ingredients: [],
+        nutritionalValues: "Coming soon! ",
+        savedIngredients: "Coming soon! ",
+        contentAllergies: "Coming soon! ",
+        chef: {
+          name: "Emil Petzén",
+          title: "Kökschef / COO",
+        },
+        image: {
+          url: "https://media.graphassets.com/resize=height:500,width:700/29uRr1ULT3emgvQa6xKx",
+        },
+        localizations: [
+          {
+            contentAllergies: "Kommer snart! ",
+            ingredients: [],
+            nutritionalValues: "Kommer snart! ",
+            steg: [],
+            title:
+              "Våra bao buns med egen ”kimchi” på strimlad vitkål, krispig tofu, teriyakisås, vitlöksrostade pumpafrön och en side på smaksatt fluffigt matvete. ",
+          },
+        ],
+      },
+      {
+        id: "clocyhwd7tcqm0bupzuxogmty",
+        title:
+          "Creamy mushroom and tarragon stew with chili-fried soy strips & basmati rice.",
+        slug: "recept-creamy-mushroom-and-tarragon-stew-with-chili-fried-soy-strips-and-basmati-rice",
+        startDate: "2023-11-06",
+        weekNr: 45,
+        recipeNumber: 2,
+        steg: [],
+        ingredients: [],
+        nutritionalValues: "Coming soon! ",
+        savedIngredients: "Coming soon! ",
+        contentAllergies: "Coming soon! ",
+        chef: {
+          name: "Emil Petzén",
+          title: "Kökschef / COO",
+        },
+        image: {
+          url: "https://media.graphassets.com/resize=height:500,width:700/dl7LOcAKQq8qKPC2NW2g",
+        },
+        localizations: [
+          {
+            contentAllergies: "Kommer snart! ",
+            ingredients: [],
+            nutritionalValues: "Kommer snart! ",
+            steg: [],
+            title:
+              "Krämig svamp-/dragongryta med chilistekta soja-strips & basmatiris.   ",
+          },
+        ],
+      },
+      {
+        id: "clocyep0isa3q0bunk95dh1to",
+        title:
+          "Potato gnocchi with spicy, herby tomato sauce, roasted seeds & grated mozzarella.",
+        slug: "recept-potato-gnocchi-with-spicy-herby-tomato-sauce-roasted-seeds-and-grated-mozzarella",
+        startDate: "2023-11-06",
+        weekNr: 45,
+        recipeNumber: 3,
+        steg: [],
+        ingredients: [],
+        nutritionalValues: "Coming soon! ",
+        savedIngredients: "Coming soon! ",
+        contentAllergies: "Coming soon! ",
+        chef: {
+          name: "Emil Petzén",
+          title: "Kökschef / COO",
+        },
+        image: {
+          url: "https://media.graphassets.com/resize=height:500,width:700/HHlHqObQoOwX95KyFaNg",
+        },
+        localizations: [
+          {
+            contentAllergies: "Kommer snart! ",
+            ingredients: [],
+            nutritionalValues: "Kommer snart! ",
+            steg: [],
+            title:
+              "Potatisgnocchi med het, örtig tomatsås, rostade frön & riven mozzarella.",
+          },
+        ],
+      },
+      {
         id: "clo46khu8ft8g0atf3ld55mw6",
         title:
           "Halloumi and cauliflower stroganoff with flavored basmati rice.",
@@ -717,6 +717,166 @@ export const tempRecipes = {
             ],
             title:
               " Falafelrulle på grilled wrap med carolina reaper majonnäs, yoghurtbaserad coleslaw med picklad mango, rostade solrosfrön, krispig falafel, skivad rödlök & saltgurka.",
+          },
+        ],
+      },
+      {
+        id: "clo45oo19tqxn0burerj8os4n",
+        title:
+          "Miso and honey-roasted carrots with tangy dill yogurt, pickled cucumber, crumbled feta cheese, jalapeño-marinated quinoa & roasted seeds.",
+        slug: "recept-miso-and-honey-roastted-carrots-with-tangy-dill-yogurt-pickled-cucumber-crumbled-feta-cheese-jalapeno-marinated-quinoa-and-roasted-seeds",
+        startDate: "2023-10-02",
+        weekNr: 42,
+        recipeNumber: 1,
+        steg: [
+          "1. Set the oven to 220 degrees hot air. Place the carrots in an ovenproof tray. Roast for about 12 minutes. In the meantime, heat the quinoa in a pan with 1dl of water and heat while stirring on a medium heat until they become clear and warm.",
+          "2. Remove the pickle water from the feta cream jar and the cucumber.",
+          "3. Serving: Take out a large serving dish. Ground with the quinoa, then sprinkle over the carrots. Drizzle over the dill yoghurt, spread out the pickled cucumber, crumble over the feta cheese and then sprinkle over the roasted seeds.\n",
+        ],
+        ingredients: [
+          "1 box of marinated carrots",
+          "1 box of quinoa with jalapeño",
+          "1 jar of dill yoghurt",
+          "1 jar of pickled cucumber",
+          "1 jar of feta cheese",
+          "1 jar of roasted seeds",
+        ],
+        nutritionalValues:
+          "Calculated per portion / 4, Kcal 721, Fat 26g, Protein 34g, Carbohydrates 88g",
+        savedIngredients: "Carrots. Yoghurt. Miso. Dill. Cucumber. ",
+        contentAllergies:
+          "Allergies: Traces of lactose in feta cheese and yoghurt. Carrots. Misopaste. Honey. Jalapeño. Quinoa. Rapeseed oil. Greek yoghurt. Dill. Vinegar. Cucumber. Sugar. Feta cheese. Sunflower seeds. Pumpkin seeds. ",
+        chef: {
+          name: "Emil Petzén",
+          title: "Kökschef / COO",
+        },
+        image: {
+          url: "https://media.graphassets.com/resize=height:500,width:700/kczpvnZQpiHsNs5OjQ1w",
+        },
+        localizations: [
+          {
+            contentAllergies:
+              "Allergier: Spår av laktos i fetaost och yoghurt. Morötter. Misopaste. Honung. Jalapeño. Quinoa. Rapsolja. grekisk yoghurt. Dill. Vinäger. Gurka. Socker. Fetaost. Solrosfrön. Pumpafrön.",
+            ingredients: [
+              "1 låda fetaost",
+              "1 låda quinoa med jalapeño",
+              "1 låda marinerade morötter",
+              "1 burk picklad gurka",
+              "1 burk rostade frön",
+            ],
+            nutritionalValues:
+              "Beräknat per portion / 4, Kcal 721, Fett 26g, Protein 34g, Kolhydrater 88g",
+            steg: [
+              "1. Sätt ugnen på 220 grader varmluft. Lägg morötterna i en ugnsfast form. Rosta av i cirka 12 minuter. Under tiden, värm quinoan i en kastrull med 1dl vatten och värm de under omrörning på medelhög värme tills de blir klara och varma.\n\n",
+              "Häll av spadet från fetaosten och gurkan.\n\n",
+              "Servering: Ta fram ett stort serveringsfat. Bottna med quinoan, sedan strö över morötterna. Ringla över dillyoghurten, disponera ut den inlagda gurkan, smula över fetaosten och strö sedan över solroskärnorna.",
+            ],
+            title:
+              "Miso och honungsrostade morötter med syrlig dillyoghurt, picklad gurka, smulad fetaost, jalapeñomarinerad quinoa & rostade frön.",
+          },
+        ],
+      },
+      {
+        id: "clo45o7c2evkc0atfj2webt43",
+        title:
+          "Crispy chickpea patties with onion & parsley. Served with marinated 'spicy' potato wedges, green garlic mayo, and sautéed broccoli. ",
+        slug: "recept-crispy-chickpea-pattiies-with-onion-and-parsley-served-with-marinated-spicy-potato-wedges-green-garlic-mayo-and-sauteed-broccoli",
+        startDate: "2023-10-02",
+        weekNr: 42,
+        recipeNumber: 2,
+        steg: [
+          "1. Bring forward 2 frying pans. Turn the oven to 220 degrees hot air. Place the potato wedges in a oven tray. Bake until crispy. Meanwhile, fry the chickpea patties in one of the frying pan with some grease on medium high heat until cripsy. Fry the broccoli on high heat until it gets some color. Turn down the heat to zero and drizzle over the soy marinade and coat the broccoli. ",
+          "2. Stir around the green garlic mayo and then serve!",
+        ],
+        ingredients: [
+          "1 box of chickpea patties",
+          "1 box of potato wedges",
+          "1 jar of green garlic mayo",
+          "1 box of broccoli",
+          "1 jar of soy marinade ",
+        ],
+        nutritionalValues:
+          "Calculated per portion / 4, Kcal 890, Fat 34g, Protein 32.9g, Carbohydrates 97g\n\n",
+        savedIngredients:
+          "Chickpea patties. Spicy potato wedges. Broccoli. Garlic. Green onion. Onion. ",
+        contentAllergies:
+          "*chickpea patties are glutenfree aswell.* Patties -Chickpeas (37%), onion, potato, gluten-free crust flour (rice flour, chickpea flour, corn starch, dextrose), water, potato flakes, garlic, parsley, thickener. Potato wedges - Potatoes, sunflower oil, modified starch, rice flour, spices, salt, dextrin, maltodextrin, yeast extract, flavouring, malt. Broccoli. Green garlic mayo - egg yolk, dijon mustard, vinegar, rapeseed oil, onion, green onion, garlic. ",
+        chef: {
+          name: "Emil Petzén",
+          title: "Kökschef / COO",
+        },
+        image: {
+          url: "https://media.graphassets.com/resize=height:500,width:700/03KQtwSZSjCHyMNIyuou",
+        },
+        localizations: [
+          {
+            contentAllergies:
+              "Kikärtor (37%), lök, potatis, glutenfritt skorpmjöl (rismjöl, kikärtsmjöl, majsstärkelse, dextros), vatten, potatisflingor, vitlök, persilja, förtjockningsmedel. Potatisklyftor - Potatis, solrosolja, modifierad stärkelse, rismjöl, kryddor, salt, dextrin, maltodextrin, jästextrakt, arom, malt. Broccoli. Grön vitlöksmajo - äggula, dijonsenap, vinäger, rapsolja, lök, salladslök, vitlök.",
+            ingredients: [
+              "1 låda kikärtsbiffar",
+              "1 låda potatisklyftor",
+              "1 burk green garlic majonnäs ",
+              "1 låda broccoli",
+              "1 burk sojamarinad",
+            ],
+            nutritionalValues:
+              "Beräknat per portion / 4, Kcal 890, Fett 34g, Protein 32,9g, Kolhydrater 97g",
+            steg: [
+              "1. Ta fram 2 stekpannor. Sätt ugnen på 220 grader varmluft. Lägg potatisklyftorna i en ugnsform. Rosta tills det är knaprigt. Stek under tiden kikärtsbiffarna i någon av stekpannorna med lite fett på medelhög värme tills de är knapriga. Stek broccolin på hög värme tills den fått lite färg. Sänk värmen till noll och ringla över sojamarinaden och täck broccolin.",
+              "2. Rör runt i green garlic majonnäsen och servera! ",
+            ],
+            title:
+              "Krispiga kikärtsbiffar med lök & persilja. Serveras med marinerad ”spicy” klyftpotatis, green garlic mayo & sauterad broccoli. ",
+          },
+        ],
+      },
+      {
+        id: "clo45noeiev430atfsiwozcrq",
+        title:
+          "Our herby signature Bolognese with Penne pasta & garlic sour cream. ",
+        slug: "receptt-our-herby-signature-bolognese-with-penne-pasta-and-garlic-sour-cream",
+        startDate: "2023-10-02",
+        weekNr: 42,
+        recipeNumber: 3,
+        steg: [
+          "1. Put the bolognese in a saucepan and put on medium heat, make sure it gets really hot. Add another pan of pasta water. When the water boils, add the pasta and cook for about 6 minutes. Save 2dl of pasta water before straining the pasta. Strain off.",
+          "2. Add 2dl of pasta water to the bolognese. Let it simmer until it becomes creamy. Then pour the pasta into the bolgonese and stir. Place the bolognese with the pasta in a bowl. Stir the garlic sour cream and ringle over the bolognese in the bowl. Serve!",
+        ],
+        ingredients: [
+          "1 box of bolognese",
+          "1 bag of pasta",
+          "1 jar of garlic sour cream",
+        ],
+        nutritionalValues:
+          "Calculated per portion / 4, Kcal 812, Fat 26g, Protein 38.3g, Carbohydrates 112g",
+        savedIngredients:
+          "Tomato, zucchini, garlic, aubuergine, mushrooms, vegetables in stock, maizena.",
+        contentAllergies:
+          "Allergens: Gluten in pasta. Lactose in the garlic cream, Pasta *wheat flour, water*, minced soy, black pepper, thyme, tomatoes, zucchini, aubergine, parsnip, carrot, onion, garlic, vegetable stock *celery, parsley, garlic, yellow onion, maziena*, chili. Sponge. Sour cream, garlic. Info: The Bolognese has been frozen. We recommend that if you want a lunch box, transfer unheated bolognese to the lunch box before you heat everything, to be on the safe side. Do not refreeze the bolognese.",
+        chef: {
+          name: "Emil Petzén",
+          title: "Kökschef / COO",
+        },
+        image: {
+          url: "https://media.graphassets.com/resize=height:500,width:700/1hwkJcZQT2C5UXcNYFaf",
+        },
+        localizations: [
+          {
+            contentAllergies:
+              "Allergener: Gluten i pasta. Laktos i vitlökscrémen, Pasta *vetemjöl, vatten*, sojafärs, svartpeppar, timjan, tomater, zucchini, aubergine, palsternacka, morot, lök, vitlök, grönsaksfond *selleri, persilja, vitlök, gullök, maziena*, chili. Svamp. Gräddfil, vitlök., Info: Bolognesen har varit fryst. Vi rekommenderar om ni önskar matlåda att föra över ovärmd bolognese till matlådan innan ni värmer på allt, för att vara på säkra sidan. Frys helst inte om bolognesen.",
+            ingredients: [
+              "1 låda bolognese",
+              "1 påse pasta",
+              "1 burk vitlöksgräddfil",
+            ],
+            nutritionalValues:
+              "Räknat per portion / 4, Kcal 812, Fett 26g, Protein 38.3g, Kolhydrater 112g",
+            steg: [
+              "1. Lägg bolognese i en kastrull och sätt på medelhög värme, se till att den blir riktigt varm. Sätt på ytterligare en kastrull med pastavatten. När vattnet kokar gå i med pastan och koka i cirka 7 minuter. Spara 2dl pastavatten innan du silar av pastan. Sila av.\n\n",
+              "2. Tillsätt 2dl pastavatten i bolognesen. Låt det sjuda tills den blir krämig. Häll sedan ner pastan i bolgonesen och rör om. Rör runt i vitlöksgräddfilen och ringla över. Servera!\n\n",
+            ],
+            title:
+              "Vår örtiga signaturbolognese med pasta Penne & vitlöksgräddfil.",
           },
         ],
       },
@@ -971,166 +1131,6 @@ export const tempRecipes = {
             ],
             title:
               "Vår krämiga heta Curry Dahl på grön curry, serveras med stekt vitlök/-örtbröd.",
-          },
-        ],
-      },
-      {
-        id: "clo45oo19tqxn0burerj8os4n",
-        title:
-          "Miso and honey-roasted carrots with tangy dill yogurt, pickled cucumber, crumbled feta cheese, jalapeño-marinated quinoa & roasted seeds.",
-        slug: "recept-miso-and-honey-roastted-carrots-with-tangy-dill-yogurt-pickled-cucumber-crumbled-feta-cheese-jalapeno-marinated-quinoa-and-roasted-seeds",
-        startDate: "2023-10-02",
-        weekNr: 42,
-        recipeNumber: 1,
-        steg: [
-          "1. Set the oven to 220 degrees hot air. Place the carrots in an ovenproof tray. Roast for about 12 minutes. In the meantime, heat the quinoa in a pan with 1dl of water and heat while stirring on a medium heat until they become clear and warm.",
-          "2. Remove the pickle water from the feta cream jar and the cucumber.",
-          "3. Serving: Take out a large serving dish. Ground with the quinoa, then sprinkle over the carrots. Drizzle over the dill yoghurt, spread out the pickled cucumber, crumble over the feta cheese and then sprinkle over the roasted seeds.\n",
-        ],
-        ingredients: [
-          "1 box of marinated carrots",
-          "1 box of quinoa with jalapeño",
-          "1 jar of dill yoghurt",
-          "1 jar of pickled cucumber",
-          "1 jar of feta cheese",
-          "1 jar of roasted seeds",
-        ],
-        nutritionalValues:
-          "Calculated per portion / 4, Kcal 721, Fat 26g, Protein 34g, Carbohydrates 88g",
-        savedIngredients: "Carrots. Yoghurt. Miso. Dill. Cucumber. ",
-        contentAllergies:
-          "Allergies: Traces of lactose in feta cheese and yoghurt. Carrots. Misopaste. Honey. Jalapeño. Quinoa. Rapeseed oil. Greek yoghurt. Dill. Vinegar. Cucumber. Sugar. Feta cheese. Sunflower seeds. Pumpkin seeds. ",
-        chef: {
-          name: "Emil Petzén",
-          title: "Kökschef / COO",
-        },
-        image: {
-          url: "https://media.graphassets.com/resize=height:500,width:700/kczpvnZQpiHsNs5OjQ1w",
-        },
-        localizations: [
-          {
-            contentAllergies:
-              "Allergier: Spår av laktos i fetaost och yoghurt. Morötter. Misopaste. Honung. Jalapeño. Quinoa. Rapsolja. grekisk yoghurt. Dill. Vinäger. Gurka. Socker. Fetaost. Solrosfrön. Pumpafrön.",
-            ingredients: [
-              "1 låda fetaost",
-              "1 låda quinoa med jalapeño",
-              "1 låda marinerade morötter",
-              "1 burk picklad gurka",
-              "1 burk rostade frön",
-            ],
-            nutritionalValues:
-              "Beräknat per portion / 4, Kcal 721, Fett 26g, Protein 34g, Kolhydrater 88g",
-            steg: [
-              "1. Sätt ugnen på 220 grader varmluft. Lägg morötterna i en ugnsfast form. Rosta av i cirka 12 minuter. Under tiden, värm quinoan i en kastrull med 1dl vatten och värm de under omrörning på medelhög värme tills de blir klara och varma.\n\n",
-              "Häll av spadet från fetaosten och gurkan.\n\n",
-              "Servering: Ta fram ett stort serveringsfat. Bottna med quinoan, sedan strö över morötterna. Ringla över dillyoghurten, disponera ut den inlagda gurkan, smula över fetaosten och strö sedan över solroskärnorna.",
-            ],
-            title:
-              "Miso och honungsrostade morötter med syrlig dillyoghurt, picklad gurka, smulad fetaost, jalapeñomarinerad quinoa & rostade frön.",
-          },
-        ],
-      },
-      {
-        id: "clo45o7c2evkc0atfj2webt43",
-        title:
-          "Crispy chickpea patties with onion & parsley. Served with marinated 'spicy' potato wedges, green garlic mayo, and sautéed broccoli. ",
-        slug: "recept-crispy-chickpea-pattiies-with-onion-and-parsley-served-with-marinated-spicy-potato-wedges-green-garlic-mayo-and-sauteed-broccoli",
-        startDate: "2023-10-02",
-        weekNr: 42,
-        recipeNumber: 2,
-        steg: [
-          "1. Bring forward 2 frying pans. Turn the oven to 220 degrees hot air. Place the potato wedges in a oven tray. Bake until crispy. Meanwhile, fry the chickpea patties in one of the frying pan with some grease on medium high heat until cripsy. Fry the broccoli on high heat until it gets some color. Turn down the heat to zero and drizzle over the soy marinade and coat the broccoli. ",
-          "2. Stir around the green garlic mayo and then serve!",
-        ],
-        ingredients: [
-          "1 box of chickpea patties",
-          "1 box of potato wedges",
-          "1 jar of green garlic mayo",
-          "1 box of broccoli",
-          "1 jar of soy marinade ",
-        ],
-        nutritionalValues:
-          "Calculated per portion / 4, Kcal 890, Fat 34g, Protein 32.9g, Carbohydrates 97g\n\n",
-        savedIngredients:
-          "Chickpea patties. Spicy potato wedges. Broccoli. Garlic. Green onion. Onion. ",
-        contentAllergies:
-          "*chickpea patties are glutenfree aswell.* Patties -Chickpeas (37%), onion, potato, gluten-free crust flour (rice flour, chickpea flour, corn starch, dextrose), water, potato flakes, garlic, parsley, thickener. Potato wedges - Potatoes, sunflower oil, modified starch, rice flour, spices, salt, dextrin, maltodextrin, yeast extract, flavouring, malt. Broccoli. Green garlic mayo - egg yolk, dijon mustard, vinegar, rapeseed oil, onion, green onion, garlic. ",
-        chef: {
-          name: "Emil Petzén",
-          title: "Kökschef / COO",
-        },
-        image: {
-          url: "https://media.graphassets.com/resize=height:500,width:700/03KQtwSZSjCHyMNIyuou",
-        },
-        localizations: [
-          {
-            contentAllergies:
-              "Kikärtor (37%), lök, potatis, glutenfritt skorpmjöl (rismjöl, kikärtsmjöl, majsstärkelse, dextros), vatten, potatisflingor, vitlök, persilja, förtjockningsmedel. Potatisklyftor - Potatis, solrosolja, modifierad stärkelse, rismjöl, kryddor, salt, dextrin, maltodextrin, jästextrakt, arom, malt. Broccoli. Grön vitlöksmajo - äggula, dijonsenap, vinäger, rapsolja, lök, salladslök, vitlök.",
-            ingredients: [
-              "1 låda kikärtsbiffar",
-              "1 låda potatisklyftor",
-              "1 burk green garlic majonnäs ",
-              "1 låda broccoli",
-              "1 burk sojamarinad",
-            ],
-            nutritionalValues:
-              "Beräknat per portion / 4, Kcal 890, Fett 34g, Protein 32,9g, Kolhydrater 97g",
-            steg: [
-              "1. Ta fram 2 stekpannor. Sätt ugnen på 220 grader varmluft. Lägg potatisklyftorna i en ugnsform. Rosta tills det är knaprigt. Stek under tiden kikärtsbiffarna i någon av stekpannorna med lite fett på medelhög värme tills de är knapriga. Stek broccolin på hög värme tills den fått lite färg. Sänk värmen till noll och ringla över sojamarinaden och täck broccolin.",
-              "2. Rör runt i green garlic majonnäsen och servera! ",
-            ],
-            title:
-              "Krispiga kikärtsbiffar med lök & persilja. Serveras med marinerad ”spicy” klyftpotatis, green garlic mayo & sauterad broccoli. ",
-          },
-        ],
-      },
-      {
-        id: "clo45noeiev430atfsiwozcrq",
-        title:
-          "Our herby signature Bolognese with Penne pasta & garlic sour cream. ",
-        slug: "receptt-our-herby-signature-bolognese-with-penne-pasta-and-garlic-sour-cream",
-        startDate: "2023-10-02",
-        weekNr: 42,
-        recipeNumber: 3,
-        steg: [
-          "1. Put the bolognese in a saucepan and put on medium heat, make sure it gets really hot. Add another pan of pasta water. When the water boils, add the pasta and cook for about 6 minutes. Save 2dl of pasta water before straining the pasta. Strain off.",
-          "2. Add 2dl of pasta water to the bolognese. Let it simmer until it becomes creamy. Then pour the pasta into the bolgonese and stir. Place the bolognese with the pasta in a bowl. Stir the garlic sour cream and ringle over the bolognese in the bowl. Serve!",
-        ],
-        ingredients: [
-          "1 box of bolognese",
-          "1 bag of pasta",
-          "1 jar of garlic sour cream",
-        ],
-        nutritionalValues:
-          "Calculated per portion / 4, Kcal 812, Fat 26g, Protein 38.3g, Carbohydrates 112g",
-        savedIngredients:
-          "Tomato, zucchini, garlic, aubuergine, mushrooms, vegetables in stock, maizena.",
-        contentAllergies:
-          "Allergens: Gluten in pasta. Lactose in the garlic cream, Pasta *wheat flour, water*, minced soy, black pepper, thyme, tomatoes, zucchini, aubergine, parsnip, carrot, onion, garlic, vegetable stock *celery, parsley, garlic, yellow onion, maziena*, chili. Sponge. Sour cream, garlic. Info: The Bolognese has been frozen. We recommend that if you want a lunch box, transfer unheated bolognese to the lunch box before you heat everything, to be on the safe side. Do not refreeze the bolognese.",
-        chef: {
-          name: "Emil Petzén",
-          title: "Kökschef / COO",
-        },
-        image: {
-          url: "https://media.graphassets.com/resize=height:500,width:700/1hwkJcZQT2C5UXcNYFaf",
-        },
-        localizations: [
-          {
-            contentAllergies:
-              "Allergener: Gluten i pasta. Laktos i vitlökscrémen, Pasta *vetemjöl, vatten*, sojafärs, svartpeppar, timjan, tomater, zucchini, aubergine, palsternacka, morot, lök, vitlök, grönsaksfond *selleri, persilja, vitlök, gullök, maziena*, chili. Svamp. Gräddfil, vitlök., Info: Bolognesen har varit fryst. Vi rekommenderar om ni önskar matlåda att föra över ovärmd bolognese till matlådan innan ni värmer på allt, för att vara på säkra sidan. Frys helst inte om bolognesen.",
-            ingredients: [
-              "1 låda bolognese",
-              "1 påse pasta",
-              "1 burk vitlöksgräddfil",
-            ],
-            nutritionalValues:
-              "Räknat per portion / 4, Kcal 812, Fett 26g, Protein 38.3g, Kolhydrater 112g",
-            steg: [
-              "1. Lägg bolognese i en kastrull och sätt på medelhög värme, se till att den blir riktigt varm. Sätt på ytterligare en kastrull med pastavatten. När vattnet kokar gå i med pastan och koka i cirka 7 minuter. Spara 2dl pastavatten innan du silar av pastan. Sila av.\n\n",
-              "2. Tillsätt 2dl pastavatten i bolognesen. Låt det sjuda tills den blir krämig. Häll sedan ner pastan i bolgonesen och rör om. Rör runt i vitlöksgräddfilen och ringla över. Servera!\n\n",
-            ],
-            title:
-              "Vår örtiga signaturbolognese med pasta Penne & vitlöksgräddfil.",
           },
         ],
       },
