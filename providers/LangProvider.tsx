@@ -207,7 +207,7 @@ const svText = {
   my_pages: {
     title_signed_out: "Du är inte inloggad",
     login_instruction: "Logga in för att se information om dina beställningar.",
-    greeting_prefix: "Hej",
+    greeting_prefix: "Hej!",
     greeting_suffix: "!",
     signed_in_as_prefix: "Du är inloggad som",
     sign_out_button: "Logga ut",
@@ -380,7 +380,7 @@ const enText = {
   my_pages: {
     title_signed_out: "You have not logged in",
     login_instruction: "Log in to manage your orders",
-    greeting_prefix: "Hey",
+    greeting_prefix: "Hello!",
     greeting_suffix: "!",
     signed_in_as_prefix: "You are signed in as",
     sign_out_button: "Sign out",

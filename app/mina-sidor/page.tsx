@@ -1,13 +1,9 @@
-
-import MyPageContent from "./components/MyPageContent";
-
+import MyPageTempContent from "./components/MyPageTempContent";
 
 const MinaSidor = async () => {
-
-
   return (
     <div>
-      <MyPageContent />
+      <MyPageTempContent />
     </div>
   );
 };

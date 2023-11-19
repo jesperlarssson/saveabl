@@ -9,7 +9,7 @@ import { twMerge } from "tailwind-merge";
 import { Recipe } from "@/types";
 import Link from "next/link";
 import Image from "next/image";
-import { use, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import { getWeekNumber } from "@/helpers/format";
 import toast from "react-hot-toast";
 import instance from "@/lib/apiAxios";
