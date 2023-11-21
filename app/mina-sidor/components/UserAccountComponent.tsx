@@ -88,7 +88,13 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
                 className="bg-secondary hover:bg-secondary-800 text-white font-bold py-2 px-4 mr-2 mt-4"
                 onClick={handleSubscriptionClick}
               >
-                Hantera Prenumeration
+                Pausa
+              </button>
+              <button
+                className="bg-secondary hover:bg-secondary-800 text-white font-bold py-2 px-4 mr-2 mt-4"
+                onClick={handleSubscriptionClick}
+              >
+                Byt intervall
               </button>
             </div>
           </div>
