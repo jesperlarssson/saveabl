@@ -10,6 +10,7 @@ import axios from "axios";
 import { twMerge } from "tailwind-merge";
 import Button from "../ui/Button";
 import useMessageModal from "@/hooks/useMessageModal";
+import { useLang } from "@/hooks/useLang";
 
 const ManageSubscriptionModal = () => {
   const [toggleType, setToggleType] = useState<boolean>(true);
@@ -21,15 +22,18 @@ const ManageSubscriptionModal = () => {
   const oneMonthFromNow = new Date(today.setMonth(today.getMonth() + 2));
   const formattedOneMonthFromNow = oneMonthFromNow.toISOString().split("T")[0];
   const router = useRouter();
-  const { onClose, isOpen, customerEmail, customerId } =
+  const { onClose, isOpen, customerEmail, customerId, isPaused } =
     useManageSubscriptionModal();
   const { onOpen, forMessage } = useMessageModal();
+  const { text } = useLang();
 
   const onChange = (open: boolean) => {
     if (!open) {
       onClose();
     }
   };
+
+  const textData = text?.my_pages;
 
   const addTodo = async (action: string, wish: string) => {
     try {
@@ -39,9 +43,9 @@ const ManageSubscriptionModal = () => {
         actions: action,
         wish: wish,
       });
-      onClose();
-      forMessage(true, res.data.message);
+      forMessage(true, "");
       onOpen();
+      onClose();
     } catch (error) {
       console.log(error);
     }
@@ -53,6 +57,10 @@ const ManageSubscriptionModal = () => {
 
   const handleOnPauseSubsriptionWithDate = async (until: Date) => {
     addTodo("PAUSE", `Vill pausa tills ${until}`);
+  };
+
+  const handleResumeSubscription = async () => {
+    addTodo("RESUME", "Vill återuppta prenumerationen");
   };
 
   const handleNumberSubmit = (e: any) => {
@@ -71,85 +79,93 @@ const ManageSubscriptionModal = () => {
 
   return (
     <Modal
-      title="Hantera Prenumeration"
-      description="Här kan du pausa, byta intervall eller avbryta din prenumeration."
+      title={textData.modalTitle}
+      description={textData.modalDescription}
       isOpen={isOpen}
       onChange={onChange}
     >
-      <div className="flex flex-col w-full gap-4">
-        <div className="w-full flex">
-          <div
-            onClick={() => setToggleType(true)}
-            className={twMerge(
-              `w-1/2 border-b border-secondary py-2 cursor-pointer flex justify-center text-secondary transition opacity-50 hover:bg-primary-300`,
-              toggleType && "border-b-2 font-bold opacity-100"
-            )}
-          >
-            Antal
-          </div>
-          <div
-            onClick={() => setToggleType(false)}
-            className={twMerge(
-              `w-1/2 border-b border-secondary py-2 cursor-pointer flex justify-center text-secondary transition opacity-50 hover:bg-primary-300`,
-              !toggleType && "border-b-2 font-bold opacity-100"
-            )}
-          >
-            Datum
-          </div>
+      {isPaused ? (
+        <div>
+          <Button onClick={handleResumeSubscription}>
+            {textData.resumeSubscriptionButton}
+          </Button>
         </div>
-        {toggleType ? (
-          <div className="flex flex-col">
-            <form
-              onSubmit={handleNumberSubmit}
-              className="w-full flex flex-col gap-8 p-4"
+      ) : (
+        <div className="flex flex-col w-full gap-4">
+          <div className="w-full flex">
+            <div
+              onClick={() => setToggleType(true)}
+              className={twMerge(
+                `w-1/2 border-b border-secondary py-2 cursor-pointer flex justify-center text-secondary transition opacity-50 hover:bg-primary-300`,
+                toggleType && "border-b-2 font-bold opacity-100"
+              )}
             >
-              <select
-                className={twMerge(
-                  `w-full border col-span-2 border-primary bg-transparent p-2 rounded-md font-bold placeholder-secondary placeholder-opacity-10 text-secondary ring-1 ring-transparent focus:ring-primary focus:outline-none focus:border-secondary focus:ring-1 
+              {textData.numberOfMealKits}
+            </div>
+            <div
+              onClick={() => setToggleType(false)}
+              className={twMerge(
+                `w-1/2 border-b border-secondary py-2 cursor-pointer flex justify-center text-secondary transition opacity-50 hover:bg-primary-300`,
+                !toggleType && "border-b-2 font-bold opacity-100"
+              )}
+            >
+              {textData.date}
+            </div>
+          </div>
+          {toggleType ? (
+            <div className="flex flex-col">
+              <form
+                onSubmit={handleNumberSubmit}
+                className="w-full flex flex-col gap-8 p-4"
+              >
+                <select
+                  className={twMerge(
+                    `w-full border col-span-2 border-primary bg-transparent p-2 rounded-md font-bold placeholder-secondary placeholder-opacity-10 text-secondary ring-1 ring-transparent focus:ring-primary focus:outline-none focus:border-secondary focus:ring-1 
           disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
           invalid:border-accent invalid:text-accent
           focus:invalid:border-accent focus:invalid:ring-accent`
-                )}
-                name="pause"
-                id="pause"
+                  )}
+                  name="pause"
+                  id="pause"
+                >
+                  <option value="1">{textData.pauseOption1}</option>
+                  <option value="2">{textData.pauseOption2}</option>
+                  <option value="3">{textData.pauseOption3}</option>
+                </select>
+                <Button type="submit" className="">
+                  {textData.pauseButton}
+                </Button>
+              </form>
+            </div>
+          ) : (
+            <div className="flex flex-col">
+              <form
+                onSubmit={handleDateSubmit}
+                className="w-full flex flex-col gap-8 p-4"
               >
-                <option value="1">Nästkommande matkasse</option>
-                <option value="2">Nästa två matkassar</option>
-                <option value="3">Nästa tre matkassar</option>
-              </select>
-              <Button type="submit" className="">
-                Pausa
-              </Button>
-            </form>
-          </div>
-        ) : (
-          <div className="flex flex-col">
-            <form
-              onSubmit={handleDateSubmit}
-              className="w-full flex flex-col gap-8 p-4"
-            >
-              <input
-                className={twMerge(
-                  `w-full border col-span-2 border-primary bg-transparent p-2 rounded-md font-bold placeholder-secondary placeholder-opacity-10 text-secondary ring-1 ring-transparent focus:ring-primary focus:outline-none focus:border-secondary focus:ring-1 
+                <input
+                  className={twMerge(
+                    `w-full border col-span-2 border-primary bg-transparent p-2 rounded-md font-bold placeholder-secondary placeholder-opacity-10 text-secondary ring-1 ring-transparent focus:ring-primary focus:outline-none focus:border-secondary focus:ring-1 
         disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
         invalid:border-accent invalid:text-accent
         focus:invalid:border-accent focus:invalid:ring-accent`
-                )}
-                type="date"
-                id="start"
-                name="until"
-                //value={formattedToday}
-                min={formattedToday}
-                max={formattedOneMonthFromNow}
-              ></input>
+                  )}
+                  type="date"
+                  id="start"
+                  name="until"
+                  //value={formattedToday}
+                  min={formattedToday}
+                  max={formattedOneMonthFromNow}
+                ></input>
 
-              <Button type="submit" className="">
-                Pausa
-              </Button>
-            </form>
-          </div>
-        )}
-      </div>
+                <Button type="submit" className="">
+                  {textData.pauseButton}
+                </Button>
+              </form>
+            </div>
+          )}
+        </div>
+      )}
     </Modal>
   );
 };

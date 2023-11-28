@@ -9,6 +9,7 @@ import LocationModal from "@/components/modals/LocationModal";
 import AddMealkitModal from "@/components/modals/AddMealkitModal";
 import ManageSubscriptionModal from "@/components/modals/ManageSubscriptionModal";
 import MessageModal from "@/components/modals/MessageModal";
+import ChangeIntervalModal from "@/components/modals/ChangeIntervallModal";
 
 const ModalProvider = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -25,6 +26,7 @@ const ModalProvider = () => {
     <>
       <AddMealkitModal />
       <MessageModal />
+      <ChangeIntervalModal />
       <ManageSubscriptionModal />
       <AuthModal />
       <LocationModal />

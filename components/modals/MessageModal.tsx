@@ -23,7 +23,7 @@ const MessageModal = () => {
       title={success ? "Begäran är skickad" : "Något gick fel"}
       description={
         success
-          ? "Ditt kontokommer nu justeras. ändringarna kommer att ske inom 6 timmar."
+          ? "Ditt konto kommer nu justeras. Ändringarna kommer synas inom kort."
           : "Något gick fel, försök igen senare."
       }
       isOpen={isOpen}
@@ -31,7 +31,7 @@ const MessageModal = () => {
     >
       <div className="flex flex-col w-full gap-4">
         <p> {message}</p>
-        <Button className="max-w-fit px-8 py-2 mt-4" onClick={onClose}>
+        <Button className=" px-8 py-2 mt-4" onClick={onClose}>
           Stäng
         </Button>
       </div>

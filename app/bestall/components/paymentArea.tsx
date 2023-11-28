@@ -42,13 +42,19 @@ const PaymentArea = ({
   const [links, setLinks] = useState<ResponseLinks[] | null>(null);
 
   useEffect(() => {
+   
     const availableDays = getUniqueWeekdaysFromDeliveryWindows(deliveryWindows);
-
     const links: ResponseLinks[] | null = getResponse(
       availableDays,
       offerId,
       dk
     );
+
+    console.log("offerId", offerId);
+    console.log("dk", dk);
+    console.log("deliveryWindows", deliveryWindows);
+
+    console.log("links", links);
 
     setLinks(links);
   }, [deliveryWindows, dk, offerId]);

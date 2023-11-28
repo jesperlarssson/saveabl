@@ -12,9 +12,6 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { getWeekNumber } from "@/helpers/format";
 import toast from "react-hot-toast";
-import instance from "@/lib/apiAxios";
-import { DeliveryWindow } from "@/providers/CheckoutProvider";
-import useAddMealkitModal from "@/hooks/useAddMealkitModal";
 import useAuthModal from "@/hooks/useAuthModal";
 import { useLang } from "@/hooks/useLang";
 import Button from "@/components/ui/Button";
@@ -104,6 +101,7 @@ const MyPageContent = () => {
       };
       setDeliveryInfo(deliveryAddress);
       const subscriptionInfo = response.data.activeSubscriptions[0]; // Assuming first subscription is the relevant one
+      console.log("subscriptionInfo", subscriptionInfo);
       setActiveSubscription(subscriptionInfo);
       const billingFrequency =
         subscriptionInfo.items.data[0].plan.interval_count === 1
