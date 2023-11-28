@@ -22,14 +22,14 @@ const Recipes = () => {
       <Title>{text.recipes.title}</Title>
       <div className="my-10 min-h-screen">
         <Grid className="">
-          {/* <div className="relative p-4 pt-8 mt-8 min-h-96 scale-103 col-span-3 border-2 border-primary border-opacity-50 rounded-2xl ">
+          <div className="relative p-4 pt-8 mt-8 min-h-96 scale-103 col-span-3 border-2 border-primary border-opacity-50 rounded-2xl ">
           <h3 className=" absolute bg-primary-200 px-4 -top-8 font-poppins text-6xl text-primary">
             Denna vecka
           </h3>
           <ThisWeekRecipes />
-        </div> */}
+        </div>
 
-          {/* {nextWeek.length > 2 && (
+          {nextWeek.length > 2 && (
             <div className="col-span-3">
               <h3 className="font-poppins text-3xl text-primary">
                 {text.recipes.next_week}
@@ -48,10 +48,11 @@ const Recipes = () => {
                 )}
               </Grid>
             </div>
-          )} */}
+          )}
           {/* <h3 className="font-poppins text-3xl text-primary col-span-1 md:col-span-3 md:-mb-4 mt-8 md:mt-2">
             {text.recipes.this_week}
           </h3> */}
+          <div className="w-full border-b col-span-1 md:col-span-3 border-primary-500 border-opacity-50"></div>
           {loading ? (
             <>
               <div className="h-80 overflow-hidden rounded-xl w-full animate-pulse bg-primary bg-opacity-25" />
