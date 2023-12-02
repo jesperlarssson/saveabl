@@ -13,7 +13,7 @@ export async function POST(request: Request) {
       .from("todos")
       .insert([{ customer_id, customer_email, actions, wish }]);
 
-    return Response.json(data);
+    //return Response.json({data});
   } catch (error) {
     throw error;
   }
