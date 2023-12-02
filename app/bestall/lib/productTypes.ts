@@ -16,7 +16,7 @@ export const productTypes = [
     variants: [
       {
         label: "Varje vecka",
-        productId: productIdEveryWeek, //TODO: update for prod env
+        productId: productIdEveryWeek, 
         disabled: false,
         price: "599kr/vecka",
         portionPrice: "50kr/portion",
@@ -24,7 +24,7 @@ export const productTypes = [
       },
       {
         label: "Varannan vecka",
-        productId: productIdEveryOtherWeek, //TODO: update for prod env
+        productId: productIdEveryOtherWeek, 
         disabled: false,
         price: "599kr/varannan vecka",
         portionPrice: "50kr/portion",
@@ -38,7 +38,7 @@ export const productTypes = [
     variants: [
       {
         label: "12 portioner",
-        productId: productIdStandard, //TODO: update for prod env
+        productId: productIdStandard, 
         disabled: false,
         price: "659kr",
         portionPrice: "55kr/portion",
@@ -46,7 +46,7 @@ export const productTypes = [
       },
       {
         label: "8 portioner",
-        productId: productIdStandard8Portions, //TODO: update for prod env
+        productId: productIdStandard8Portions, 
         disabled: false,
         price: "439kr",
         portionPrice: "55kr/portion",
@@ -56,3 +56,29 @@ export const productTypes = [
     ],
   },
 ];
+
+type ProductType = {
+  id: string;
+  label: string;
+  variants: Variant[];
+};
+
+type Variant = {
+  label: string;
+  productId: string;
+  disabled: boolean;
+  price: string;
+  portionPrice: string;
+  priceId: string;
+};
+
+export const isSubscription = (priceId: string | null): boolean => {
+  for (const productType of productTypes) {
+      for (const variant of productType.variants) {
+          if (variant.priceId === priceId) {
+              return productType.id === 'subscription';
+          }
+      }
+  }
+  return false;
+};

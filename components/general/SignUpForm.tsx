@@ -6,6 +6,7 @@ import { toast } from "react-hot-toast";
 import Button from "@/components/ui/Button";
 import { useAuth } from "@/hooks/useAuth";
 import Input from "../ui/Input";
+import { useRouter } from "next/navigation";
 
 const SignUpForm = () => {
   const {
@@ -16,6 +17,7 @@ const SignUpForm = () => {
   } = useForm();
 
   const auth = useAuth();
+  const router = useRouter();
   if (!auth) {
     return null;
   }
@@ -28,10 +30,11 @@ const SignUpForm = () => {
       return;
     }
     try {
-      await signUp(data.email, data.password);
+      const res = await signUp(data.email, data.password);
       toast.success("Ditt konto har skapats!");
+      router.push("/mina-sidor")
     } catch (error: any) {
-      toast.error("Inloggningen misslyckades!");
+      toast.error("Account already exists!");
     }
   };
 

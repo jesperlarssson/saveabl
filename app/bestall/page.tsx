@@ -1,48 +1,32 @@
 "use client";
-
-import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { twMerge } from "tailwind-merge";
-import { createUserWithEmailAndPassword } from "firebase/auth";
 import Button from "@/components/ui/Button";
 import useCheckout from "@/hooks/useCheckout";
-import { productInfo } from "@/lib/mealkits";
-import { addOnsInfo } from "@/lib/addons";
-import React, { ChangeEvent, use, useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import Section from "@/components/ui/Section";
 import { deliveryDayParser, getWeekNumber } from "@/helpers/format";
 import { AnimatePresence, motion } from "framer-motion";
-import AddOnTile from "@/components/general/AddOnTile";
 import Title from "@/components/ui/Title";
 import CheckoutSection from "@/components/ui/CheckoutSection";
 import getDeliveryWindowsForPostalCode from "@/actions/getDeliveryWindowsForPostalCode";
 import { UserInformation } from "@/providers/CheckoutProvider";
-import instance from "@/lib/apiAxios";
-import { priceIdEveryWeek, productTypes } from "./lib/productTypes";
-// Import Stripe
-import { loadStripe } from "@stripe/stripe-js";
+import {
+  isSubscription,
+  priceIdEveryWeek,
+  productTypes,
+} from "./lib/productTypes";
 import Input from "@/components/ui/Input";
 import BodyText from "@/components/ui/BodyText";
 import { getShippingCostFromPostalCode } from "./lib/getShippingCost";
 import PaymentArea from "./components/paymentArea";
-import Head from "next/head";
 import { useLang } from "@/hooks/useLang";
 import { useSearchParams } from "next/navigation";
 import { CheckoutButton } from "./components/CheckoutButton";
-import { auth } from "@/firebase/init";
-import { set } from "date-fns";
 import axios from "axios";
 import { formatEpochToTimeString } from "@/helpers/epochFormat";
 
-// Initialize Stripe
-const stripePromise = loadStripe(
-  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || ""
-);
-
-interface Type {
-  odd: boolean;
-  even: boolean;
-}
 type RowError = {
   message: string | null;
 };
@@ -65,6 +49,7 @@ const variants = {
 const Order = () => {
   const [showDeliveryOptions, setShowDeliveryOptions] = useState(false);
   const [showAddressFields, setShowAddressFields] = useState(false);
+  const [stripeCheckoutIsLoading, setStripeCheckoutIsLoading] = useState(false);
 
   const searchParams = useSearchParams();
   const id = searchParams.get("id") || "1";
@@ -128,6 +113,8 @@ const Order = () => {
     extraInfo: null,
   });
   const [isDk, setIsDk] = useState(false);
+
+  const router = useRouter();
 
   const updateWeekdaysList = (deliveryWindows: any) => {
     // Temp array to keep track of unique weekdays and their day numbers
@@ -240,6 +227,7 @@ const Order = () => {
 
   const handleConfirm = async () => {
     setCountry("SE");
+    setStripeCheckoutIsLoading(true);
 
     //Validate form
     const errors: FormError = {
@@ -290,9 +278,13 @@ const Order = () => {
 
     setFormErrors(errors);
     const hasErrors = Object.values(errors).some((error) => error !== null);
-    if (hasErrors) return;
+    if (hasErrors) {
+      setStripeCheckoutIsLoading(false);
+      return;
+    }
     if (!agreeToTerms) {
       toast.error("Du måste godkänna villkoren för att gå vidare!");
+      setStripeCheckoutIsLoading(false);
       return;
     }
 
@@ -309,20 +301,16 @@ const Order = () => {
       addOns: [],
     };
 
-    console.log("userInformation", userInformation);
-    //TODO: Create user in firebase
     try {
-      // const firebaseUser = await createUserWithEmailAndPassword(
-      //   auth,
-      //   userInformation.email || "",
-      //   userInformation.password || ""
-      // );
-    
       const response = await axios.post("/api/create_stripe_customer", {
         email: userInformation.email,
+        password: userInformation.password,
         name: userInformation.name,
         metadata: {
-          firebaseId: ""//firebaseUser.user.uid,
+          deliveryDay: formatEpochToTimeString({
+            start: deliveryWindow?.start || undefined,
+            end: deliveryWindow?.end || undefined,
+          }),
         },
         address: {
           city: userInformation.address.city,
@@ -333,28 +321,33 @@ const Order = () => {
         description: `Vald leverans: ${formatEpochToTimeString({
           start: deliveryWindow?.start || undefined,
           end: deliveryWindow?.end || undefined,
-        })}`,
+        })} Extra info: ${userInformation.extraInfo}`,
         phone: userInformation.phone,
         extraInfo: userInformation.extraInfo,
-        password: userInformation.password,
       });
+      const stripeUserId = response.data.stripeUser.id;
+      // create checkout session
+      const sessionResponse = await axios.post("/api/checkout_sessions", {
+        customerId: stripeUserId,
+        mode: isSubscription(productId) ? "subscription" : "payment",
+        items: [
+          {
+            price: productId,
+            quantity: 1,
+          },
+        ],
+      });
+
+      router.push(sessionResponse.data.url);
     } catch (error) {
-      console.log(error);
       setFormErrors({
         ...formErrors,
         email: {
           message: "Det finns redan en användare med den e-postadressen",
         },
       });
-      //TODO: If user already exists, log in
+      setStripeCheckoutIsLoading(false);
     }
-    //TODO: add customer to stripe and fetch id
-
-    //TODO: Create session in stripe with id from stripe customer
-    try {
-      //const response = await axios.post("api/checkout_sessions", {});
-    } catch (error) {}
-    //TODO: Redirect to checkout page
   };
 
   useEffect(() => {
@@ -364,303 +357,328 @@ const Order = () => {
   }, [address.postalCode]);
 
   return (
-    <Section className="pt-16">
-      <div className="w-full flex flex-col items-center ">
-        <Title className="text-center">
-          {id === "1" ? text.order.title1 : text.order.title2}
-        </Title>
-        <BodyText className="text-center max-w-3xl mb-10">
-          {id === "1" ? "" : text.order.text}
-        </BodyText>
+    <>
+      <Section className="pt-16">
+        <div className="w-full flex flex-col items-center ">
+          <Title className="text-center">
+            {id === "1" ? text.order.title1 : text.order.title2}
+          </Title>
+          <BodyText className="text-center max-w-3xl mb-10">
+            {id === "1" ? "" : text.order.text}
+          </BodyText>
 
-        <div className="my-8 max-w-4xl w-full h-1 border-b border-primary border-opacity-50"></div>
-        <div className="flex flex-col items-center my-4">
-          <label
-            htmlFor="postalcode"
-            className="font-poppins text-lg mb-2 text-secondary w-full text-center sm:text-left"
-          >
-            {id === "1" ? text.order.label1 : text.order.label2}
-          </label>
-          <input
-            onChange={handleZipCodeChange}
-            id="postalcode"
-            placeholder="12345"
-            className="border border-primary bg-transparent p-2 rounded-md font-bold w-full placeholder-secondary placeholder-opacity-10 text-secondary ring-1 ring-transparent focus:ring-primary focus:outline-none"
-          ></input>
-          <button
-            className="w-64 mx-auto py-2 bg-primary mt-4 rounded-full text-secondary font-bold bg-opacity-90 hover:bg-opacity-100"
-            onClick={handleGetLinks}
-          >
-            {id === "1" ? text.order.button1 : text.order.button2}
-          </button>
-          {/* {shippingCostInfo && (
+          <div className="my-8 max-w-4xl w-full h-1 border-b border-primary border-opacity-50"></div>
+          <div className="flex flex-col items-center my-4">
+            <label
+              htmlFor="postalcode"
+              className="font-poppins text-lg mb-2 text-secondary w-full text-center sm:text-left"
+            >
+              {id === "1" ? text.order.label1 : text.order.label2}
+            </label>
+            <input
+              onChange={handleZipCodeChange}
+              id="postalcode"
+              placeholder="12345"
+              className="border border-primary bg-transparent p-2 rounded-md font-bold w-full placeholder-secondary placeholder-opacity-10 text-secondary ring-1 ring-transparent focus:ring-primary focus:outline-none"
+            ></input>
+            <button
+              className="w-64 mx-auto py-2 bg-primary mt-4 rounded-full text-secondary font-bold bg-opacity-90 hover:bg-opacity-100"
+              onClick={handleGetLinks}
+            >
+              {id === "1" ? text.order.button1 : text.order.button2}
+            </button>
+            {/* {shippingCostInfo && (
             <div className="mt-2 font-bold text-secondary">
               {" "}
               Din fraktkostnad: {shippingCostInfo}
             </div>
           )} */}
-        </div>
+          </div>
 
-        <div className="my-8 max-w-4xl w-full h-1 border-b border-primary border-opacity-50"></div>
-        {showLinks && (
-          <PaymentArea
-            deliveryWindows={deliveryWindows}
-            dk={isDk}
-            offerId={offerId}
-          />
-        )}
-        {showAddressFields && (
-          <CheckoutSection title="Vi kan leverera till dig!">
-            <h3 className="font-poppins text-lg text-secondary ">
-              Vilken typ?
-            </h3>
-            <div className="flex gap-4">
-              {productTypes.map((productType) => {
-                return (
-                  <CheckoutButton
-                    key={productType.label}
-                    selected={productType.id === selectedType.id}
-                    onClick={() => setSelectedType(productType)}
+          <div className="my-8 max-w-4xl w-full h-1 border-b border-primary border-opacity-50"></div>
+          {showLinks && (
+            <>
+              <Title>Vi kan leverera till dig!</Title>
+              <BodyText>Välj en av länkarna nedan för att gå vidare.</BodyText>
+              <PaymentArea
+                deliveryWindows={deliveryWindows}
+                dk={isDk}
+                offerId={offerId}
+              />
+            </>
+          )}
+          {showAddressFields && (
+            <CheckoutSection title="Vi kan leverera till dig!">
+              <h3 className="font-poppins text-lg text-secondary ">
+                Vilken typ?
+              </h3>
+              <div className="flex gap-4">
+                {productTypes.map((productType) => {
+                  return (
+                    <CheckoutButton
+                      key={productType.label}
+                      selected={productType.id === selectedType.id}
+                      onClick={() => setSelectedType(productType)}
+                    >
+                      {productType.label}
+                    </CheckoutButton>
+                  );
+                })}
+              </div>
+              <h3
+                key="interval-title"
+                className="font-poppins text-lg mt-4 text-secondary"
+              >
+                Välj variant:
+              </h3>
+              <div className="flex gap-4">
+                {selectedType.variants.map((variant) => {
+                  return (
+                    <CheckoutButton
+                      key={variant.label}
+                      selected={variant.priceId === productId}
+                      onClick={() => setProductId(variant.priceId)}
+                      disabled={variant.disabled}
+                    >
+                      <span>{variant.label}</span>
+                      <br />
+                      <span className="text-xs">{variant.price}</span>
+                    </CheckoutButton>
+                  );
+                })}
+              </div>
+              <AnimatePresence mode="wait">
+                {showDeliveryOptions && (
+                  <motion.div
+                    key="delivery-options"
+                    initial="closed"
+                    animate="open"
+                    exit="closed"
+                    variants={variants}
+                    className="mt-2"
                   >
-                    {productType.label}
-                  </CheckoutButton>
-                );
-              })}
-            </div>
-            <h3
-              key="interval-title"
-              className="font-poppins text-lg mt-4 text-secondary"
-            >
-              Välj variant:
-            </h3>
-            <div className="flex gap-4">
-              {selectedType.variants.map((variant) => {
-                return (
-                  <CheckoutButton
-                    key={variant.label}
-                    selected={variant.priceId === productId}
-                    onClick={() => setProductId(variant.priceId)}
-                    disabled={variant.disabled}
-                  >
-                    <span>{variant.label}</span>
-                    <br />
-                    <span className="text-xs">{variant.price}</span>
-                  </CheckoutButton>
-                );
-              })}
-            </div>
-            <AnimatePresence mode="wait">
-              {showDeliveryOptions && (
-                <motion.div
-                  key="delivery-options"
-                  initial="closed"
-                  animate="open"
-                  exit="closed"
-                  variants={variants}
-                  className=""
-                >
-                  <h3 key="title-delivery" className="font-poppins text-lg">
-                    Välj leveransdag:
-                  </h3>
-                  {/** TODO: Doesn't work for all zips */}
+                    <h3
+                      key="title-delivery"
+                      className="font-poppins text-lg text-secondary"
+                    >
+                      Välj leveransdag:
+                    </h3>
+                    {/** TODO: Doesn't work for all zips */}
 
-                  <div className="flex gap-4 flex-wrap">
-                    <AnimatePresence mode="wait">
-                      {deliveryWindowsErrors && deliveryWindows.length == 0 ? (
-                        <motion.div
-                          key="error"
-                          initial={{ opacity: 0, y: -10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: -10 }}
-                          className="px-8 py-4 bg-primary text-primary-600 bg-opacity-30 rounded-md"
-                        >
-                          <p className="font-poppins text-md">
-                            {deliveryWindowsErrors}
-                          </p>
-                        </motion.div>
-                      ) : (
-                        weekdaysWithDays.map((day: any, index: number) => (
+                    <div className="flex gap-4 flex-wrap">
+                      <AnimatePresence mode="wait">
+                        {deliveryWindowsErrors &&
+                        deliveryWindows.length == 0 ? (
                           <motion.div
-                            key={day.label}
+                            key="error"
                             initial={{ opacity: 0, y: -10 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -10 }}
-                            transition={{ delay: 0.15 * index }}
+                            className="px-8 py-4 bg-primary text-primary-600 bg-opacity-30 rounded-md"
                           >
-                            <CheckoutButton
-                              className="capitalize"
-                              selected={selectedWeekday == day.days[0]}
-                              onClick={() => {
-                                if (selectedWeekday == day.days[0]) {
-                                  setSelectedWeekday(null);
-                                  return;
-                                }
-                                setSelectedWeekday(day.days[0]);
-                              }}
-                            >
-                              {day.weekday}
-                            </CheckoutButton>
+                            <p className="font-poppins text-md">
+                              {deliveryWindowsErrors}
+                            </p>
                           </motion.div>
-                        ))
-                      )}
-                    </AnimatePresence>
-                  </div>
-                  {selectedWeekday != null && (
-                    <>
-                      <h3 className="font-poppins text-lg mt-4">
-                        När vill du ha din matkasse?
-                      </h3>
-                      <div className="flex gap-4 flex-wrap max-w-xl mb-6">
-                        <AnimatePresence mode="wait">
-                          {deliveryWindows
-                            .filter(({ start }) => {
-                              // Convert UTC seconds to milliseconds and create Date object
-                              const date = new Date(start * 1000);
-                              // Return whether the day of the week matches the target weekday
-                              return date.getDay() === selectedWeekday;
-                            })
-                            .map((window: any, index: number) => (
-                              <motion.div
-                                key={window.label}
-                                initial={{ opacity: 0, y: -10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -10 }}
-                                transition={{ delay: 0.15 * index }}
-                              >
-                                <CheckoutButton
-                                  selected={
-                                    deliveryWindow?.start == window.start
-                                  }
-                                  onClick={() => {
-                                    if (deliveryWindow?.start == window.start) {
-                                      setDeliveryWindow(null);
-                                      return;
-                                    }
-                                    setDeliveryWindow(window);
-                                  }}
-                                >
-                                  {window.label}
-                                </CheckoutButton>
-                              </motion.div>
-                            ))}
-                          {selectedWeekday === null ||
-                          ![0, 1, 6].includes(selectedWeekday!) ||
-                          deliveryWindows.length == 0 ? (
+                        ) : (
+                          weekdaysWithDays.map((day: any, index: number) => (
                             <motion.div
-                              key="error"
+                              key={day.label}
                               initial={{ opacity: 0, y: -10 }}
                               animate={{ opacity: 1, y: 0 }}
                               exit={{ opacity: 0, y: -10 }}
-                              className="px-8 py-4 bg-primary text-primary-600 bg-opacity-30 rounded-md"
+                              transition={{ delay: 0.15 * index }}
                             >
-                              <p className="font-poppins text-md">
-                                Välj en leveransdag först
-                              </p>
+                              <CheckoutButton
+                                className="capitalize"
+                                selected={selectedWeekday == day.days[0]}
+                                onClick={() => {
+                                  if (selectedWeekday == day.days[0]) {
+                                    setSelectedWeekday(null);
+                                    return;
+                                  }
+                                  setSelectedWeekday(day.days[0]);
+                                }}
+                              >
+                                {day.weekday}
+                              </CheckoutButton>
                             </motion.div>
-                          ) : null}
-                        </AnimatePresence>
-                      </div>
-                    </>
-                  )}
-                </motion.div>
-              )}
-            </AnimatePresence>
-            <label htmlFor="address" className="font-poppins text-lg mb-2">
-              Fyll i din leveransadress
-            </label>
-            <div className="grid grid-cols-2 gap-4 items-start my-4">
-              <Input
-                label="Fullständigt namn"
-                onChange={(e) => setName(e.target.value)}
-                type="text"
-                parentClassName="col-span-2"
-                id="name"
-                placeholder="Förnamn Efternamn"
-                error={formErrors.name}
-              />
-
-              <Input
-                label="Adress"
-                onChange={(e) => setStreetAddress(e.target.value)}
-                type="text"
-                id="address"
-                placeholder="Klimatgatan 1"
-                error={formErrors.address}
-              />
-              <Input
-                label="Ort"
-                onChange={(e) => setCity(e.target.value)}
-                type="text"
-                id="city"
-                placeholder="Göteborg"
-                error={formErrors.city}
-              />
-              <div className="w-full col-span-2 -mt-4">
-                <label
-                  htmlFor="extraInfo"
-                  className={twMerge(
-                    `block w-full text-md font-bold text-primary-600 ml-1 px-1 max-w-fit bg-primary-200 translate-y-3 transition`
-                  )}
-                >
-                  Extra Information
-                </label>
-
-                <textarea
-                  id="extraInfo"
-                  placeholder="Till exempel våning, portkod eller annan information som kan vara bra för oss att veta."
-                  onChange={(e) => setExtraInfo(e.target.value)}
-                  className="border w-full border-primary bg-transparent p-2 rounded-md font-bold placeholder-secondary placeholder-opacity-10 text-secondary ring-1 ring-transparent focus:ring-primary focus:outline-none"
-                ></textarea>
-              </div>
-            </div>
-
-            <h3 className="font-poppins text-lg mt-4">Kontaktuppgifter</h3>
-            <div className="grid grid-cols-2 gap-4">
-              <Input
-                onChange={(e) => setPhone(e.target.value)}
-                id="phone"
-                label="Telefonnummer"
-                type="text"
-                placeholder="0701234567"
-                parentClassName="col-span-2 -mt-2"
-                error={formErrors.phone}
-              />
-              <Input
-                onChange={(e) => setEmail(e.target.value)}
-                id="email"
-                label="E-post"
-                type="text"
-                placeholder="E-post"
-                error={formErrors.email}
-              />
-              <Input
-                onChange={(e) => setPassword(e.target.value)}
-                id="password"
-                label="Lösenord"
-                placeholder="Lösenord"
-                type="password"
-                error={formErrors.password}
-              />
-            </div>
-            {/* Checkbox */}
-            <div className="w-full px-2 my-4">
-              <label className="">
-                <input
-                  type="checkbox"
-                  className="mr-2"
-                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                    setAgreeToTerms(e.target.checked)
-                  }
-                />
-                Jag godkänner villkoren och förstår att ett konto kommer att
-                skapas.
+                          ))
+                        )}
+                      </AnimatePresence>
+                    </div>
+                    {selectedWeekday != null && (
+                      <>
+                        <h3 className="font-poppins text-lg mt-4 text-secondary">
+                          När vill du ha din matkasse?
+                        </h3>
+                        <div className="flex gap-4 flex-wrap max-w-xl mb-6">
+                          <AnimatePresence mode="wait">
+                            {deliveryWindows
+                              .filter(({ start }) => {
+                                // Convert UTC seconds to milliseconds and create Date object
+                                const date = new Date(start * 1000);
+                                // Return whether the day of the week matches the target weekday
+                                return date.getDay() === selectedWeekday;
+                              })
+                              .map((window: any, index: number) => (
+                                <motion.div
+                                  key={window.label}
+                                  initial={{ opacity: 0, y: -10 }}
+                                  animate={{ opacity: 1, y: 0 }}
+                                  exit={{ opacity: 0, y: -10 }}
+                                  transition={{ delay: 0.15 * index }}
+                                >
+                                  <CheckoutButton
+                                    selected={
+                                      deliveryWindow?.start == window.start
+                                    }
+                                    onClick={() => {
+                                      if (
+                                        deliveryWindow?.start == window.start
+                                      ) {
+                                        setDeliveryWindow(null);
+                                        return;
+                                      }
+                                      setDeliveryWindow(window);
+                                    }}
+                                  >
+                                    {window.label}
+                                  </CheckoutButton>
+                                </motion.div>
+                              ))}
+                            {selectedWeekday === null ||
+                            ![0, 1, 6].includes(selectedWeekday!) ||
+                            deliveryWindows.length == 0 ? (
+                              <motion.div
+                                key="error"
+                                initial={{ opacity: 0, y: -10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -10 }}
+                                className="px-8 py-4 bg-primary text-primary-600 bg-opacity-30 rounded-md"
+                              >
+                                <p className="font-poppins text-md">
+                                  Välj en leveransdag först
+                                </p>
+                              </motion.div>
+                            ) : null}
+                          </AnimatePresence>
+                        </div>
+                      </>
+                    )}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+              <label
+                htmlFor="address"
+                className="font-poppins text-lg mb-2 mt-2 text-secondary"
+              >
+                Fyll i din leveransadress:
               </label>
-            </div>
-            <Button onClick={handleConfirm}>Registrera och betala</Button>
-          </CheckoutSection>
-        )}
-      </div>
-    </Section>
+              <div className="grid grid-cols-2 gap-4 items-start my-4">
+                <Input
+                  label="Fullständigt namn"
+                  onChange={(e) => setName(e.target.value)}
+                  type="text"
+                  parentClassName="col-span-2"
+                  id="name"
+                  placeholder="Förnamn Efternamn"
+                  error={formErrors.name}
+                />
+
+                <Input
+                  label="Adress"
+                  onChange={(e) => setStreetAddress(e.target.value)}
+                  type="text"
+                  id="address"
+                  placeholder="Klimatgatan 1"
+                  error={formErrors.address}
+                />
+                <Input
+                  label="Ort"
+                  onChange={(e) => setCity(e.target.value)}
+                  type="text"
+                  id="city"
+                  placeholder="Göteborg"
+                  error={formErrors.city}
+                />
+                <div className="w-full col-span-2 -mt-4">
+                  <label
+                    htmlFor="extraInfo"
+                    className={twMerge(
+                      `block w-full text-md font-bold text-primary-600 ml-1 px-1 max-w-fit bg-primary-200 translate-y-3 transition`
+                    )}
+                  >
+                    Extra Information
+                  </label>
+
+                  <textarea
+                    id="extraInfo"
+                    placeholder="Till exempel våning, portkod eller annan information som kan vara bra för oss att veta."
+                    onChange={(e) => setExtraInfo(e.target.value)}
+                    className="border w-full border-primary bg-transparent p-2 rounded-md font-bold placeholder-secondary placeholder-opacity-10 text-secondary ring-1 ring-transparent focus:ring-primary focus:outline-none"
+                  ></textarea>
+                </div>
+              </div>
+
+              <h3 className="font-poppins text-lg mt-4 text-secondary">
+                Kontaktuppgifter
+              </h3>
+              <div className="grid grid-cols-2 gap-4">
+                <Input
+                  onChange={(e) => setPhone(e.target.value)}
+                  id="phone"
+                  label="Telefonnummer"
+                  type="text"
+                  placeholder="0701234567"
+                  parentClassName="col-span-2 -mt-2"
+                  error={formErrors.phone}
+                />
+                <Input
+                  onChange={(e) => setEmail(e.target.value)}
+                  id="email"
+                  label="E-post"
+                  type="text"
+                  placeholder="E-post"
+                  error={formErrors.email}
+                />
+                <Input
+                  onChange={(e) => setPassword(e.target.value)}
+                  id="password"
+                  label="Lösenord"
+                  placeholder="Lösenord"
+                  type="password"
+                  error={formErrors.password}
+                />
+              </div>
+              {/* Checkbox */}
+              <div className="w-full px-2 my-4">
+                <label className="">
+                  <input
+                    type="checkbox"
+                    className="mr-2"
+                    onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                      setAgreeToTerms(e.target.checked)
+                    }
+                  />
+                  Jag godkänner villkoren och förstår att ett konto kommer att
+                  skapas.
+                </label>
+              </div>
+              <Button onClick={handleConfirm}>Registrera och betala</Button>
+            </CheckoutSection>
+          )}
+        </div>
+      </Section>
+      {stripeCheckoutIsLoading && (
+        <div
+          className="fixed top-0 left-0 z-50 w-screen h-screen bg-primary bg-opacity-70 flex justify-center items-center
+      "
+        >
+          <Title>Laddar...</Title>
+        </div>
+      )}
+    </>
   );
 };
 

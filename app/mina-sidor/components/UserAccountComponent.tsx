@@ -5,6 +5,7 @@ import useManageSubscriptionModal from "@/hooks/useManageSubscriptionModal";
 import useChangeIntervalModal from "@/hooks/useChangeIntervalModal";
 import axios from "axios";
 import React, { useEffect } from "react";
+import useChangeDeliveryDayModal from "@/hooks/useChangeDeliveryDayModal";
 
 interface DeliveryInfo {
   city: string;
@@ -42,6 +43,12 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
     onOpen: onOpenInterval,
     forCustomer: forCustomerInterval,
   } = useChangeIntervalModal();
+  const {
+    isOpen: isOpenDeliveryDay,
+    onOpen: onOpenDeliveryDay,
+    forCustomer: forCustomerDeliveryDay,
+  } = useChangeDeliveryDayModal();
+
   const { text } = useLang();
   const handleModifyAccountClick = async () => {
     try {
@@ -81,6 +88,15 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
     onOpenInterval();
   };
 
+  const handleChangeDeliveryDayClick = () => {
+    forCustomerDeliveryDay(
+      stripeResponse.customer.id,
+      deliveryInfo.postal_code,
+      stripeResponse.customer.email,
+      isPaused
+    );
+    onOpenDeliveryDay();
+  };
   useEffect(() => {
     if (activeSubscription?.pause_collection !== null) {
       setIsPaused(true);
@@ -90,7 +106,12 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
   }, [activeSubscription]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex gap-2 items-center">
+        <div className="w-3 h-3 rounded-full animate-pulse bg-accent"></div>{" "}
+        Loading...
+      </div>
+    );
   }
 
   return (
@@ -109,7 +130,7 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
                   : text?.my_pages?.weekly}
               </span>
             </p>
-            {billingFrequency === "bi-weekly" && (
+            {/* {billingFrequency === "bi-weekly" && (
               <p>
                 {!isPaused && (text?.my_pages?.active_on ?? "Active on")}:{" "}
                 {isPaused ? (
@@ -127,8 +148,16 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
                   </span>
                 )}
               </p>
+            )} */}
+            {stripeResponse?.customer?.metadata?.deliveryDay && (
+              <p className="mb-4">
+                {text?.my_pages?.deliveryDay}:{" "}
+                <span className="font-medium">
+                  {stripeResponse.customer.metadata.deliveryDay}
+                </span>
+              </p>
             )}
-            <div className="flex gap-4">
+            <div className="flex gap-2 flex-wrap">
               <button
                 className="bg-secondary hover:bg-secondary-800 text-white font-bold py-2 px-4 mr-2 mt-4"
                 onClick={handleSubscriptionClick}
@@ -145,6 +174,13 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
                   {text?.my_pages?.change_mealbox_button ?? "Change interval"}
                 </button>
               )}
+              <button
+                className="bg-secondary hover:bg-secondary-800 text-white font-bold py-2 px-4 mr-2 mt-4"
+                onClick={handleChangeDeliveryDayClick}
+              >
+                {text?.my_pages?.change_delivery_day_button ??
+                  "Change delivery day"}
+              </button>
             </div>
           </div>
         </>
@@ -153,7 +189,7 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
       <h2 className="text-2xl text-secondary font-semibold mb-4">
         {text?.my_pages?.account_information ?? "Account Information"}
       </h2>
-      {stripeResponse && (
+      {stripeResponse ? (
         <div className="bg-primary bg-opacity-60 shadow-inner rounded px-8 pt-6 pb-8 mb-4">
           <p className="mb-2">
             {text?.my_pages?.email}:{" "}
@@ -180,6 +216,10 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
           >
             {text?.my_pages?.manage_account}
           </button>
+        </div>
+      ) : (
+        <div className="w-full h-36 rounded-lg text-secondary font-semibold text-xl bg-primary-500 bg-opacity-50 flex justify-center items-center">
+          No connected account
         </div>
       )}
     </div>

@@ -7,6 +7,7 @@ import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 import { useAuth } from "@/hooks/useAuth";
 import useAuthModal from "@/hooks/useAuthModal";
+import { useRouter } from "next/navigation";
 
 const SignInForm = () => {
   const { onClose, isOpen } = useAuthModal();
@@ -19,6 +20,7 @@ const SignInForm = () => {
   } = useForm();
 
   const auth = useAuth();
+  const router = useRouter();
   if (!auth) {
     return null;
   }
@@ -29,6 +31,7 @@ const SignInForm = () => {
     try {
       await signIn(data.email, data.password);
       toast.success("Inloggad!");
+      router.push("/mina-sidor");
       onClose();
     } catch (error: any) {
       toast.error("Inloggningen misslyckades!");
@@ -63,8 +66,6 @@ const SignInForm = () => {
       >
         Logga in
       </Button>
-
-     
     </form>
   );
 };

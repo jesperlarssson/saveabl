@@ -6,7 +6,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? "", {
 
 export async function POST(request: Request) {
   const body = await request.json();
-  const { customerId, mode, items } = body.customerId;
+  const { customerId, mode, items } = body;
 
   try {
     // Ensure customerId is provided
@@ -24,7 +24,7 @@ export async function POST(request: Request) {
       success_url: `https://www.saveabl.com/success?session_id={CHECKOUT_SESSION_ID}${
         mode === "subscription" ? "&recurring=true" : ""
       }`,
-      cancel_url: `https://www.saveabl.com/leverans`,
+      cancel_url: `https://www.saveabl.com/bestall`,
     });
 
     return Response.json({ url: session.url });
