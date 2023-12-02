@@ -1,3 +1,4 @@
+import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? "", {
@@ -27,7 +28,7 @@ export async function POST(request: Request) {
       cancel_url: `https://www.saveabl.com/bestall`,
     });
 
-    return Response.json({ url: session.url });
+    return NextResponse.json({ url: session.url });
   } catch (error) {
     throw error;
   }

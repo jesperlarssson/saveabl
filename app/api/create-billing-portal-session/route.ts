@@ -1,3 +1,4 @@
+import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? "", {
@@ -20,7 +21,7 @@ export async function POST(request: Request) {
       return_url: 'https://www.saveabl.com/mina-sidor', // Replace with your return URL
     });
 
-    return Response.json({ url: session.url });
+    return NextResponse.json({ url: session.url });
   } catch (error) {
     throw error;
   }

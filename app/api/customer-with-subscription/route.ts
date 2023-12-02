@@ -1,3 +1,4 @@
+import { NextResponse } from "next/server";
 import Stripe from "stripe";
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? "", {
     apiVersion: '2022-11-15', 
@@ -35,7 +36,7 @@ export async function POST(request: Request) {
     const res = { customer, activeSubscriptions: subscriptions.data };
 
 
-    return Response.json(res);
+    return NextResponse.json(res);
   } catch (error) {
     throw error;
   }
