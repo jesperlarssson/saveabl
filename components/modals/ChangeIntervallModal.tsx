@@ -11,6 +11,7 @@ import { twMerge } from "tailwind-merge";
 import Button from "../ui/Button";
 import useMessageModal from "@/hooks/useMessageModal";
 import { useLang } from "@/hooks/useLang";
+import toast from "react-hot-toast";
 
 const ChangeIntervalModal = () => {
 
@@ -44,7 +45,7 @@ const ChangeIntervalModal = () => {
     }
   };
 
-  const handleOnUpdateInterval = async (desiredInterval: number) => {
+  const handleOnUpdateInterval = async (desiredInterval: string) => {
     addTodo("CHANGE", `Vill uppdatera till ${desiredInterval}.`);
   };
 
@@ -52,7 +53,12 @@ const ChangeIntervalModal = () => {
     e.preventDefault();
     const data = new FormData(e.target);
     const intervalValue = data.get("interval");
-    handleOnUpdateInterval(intervalValue);
+    if (intervalValue && typeof intervalValue === "string") {
+      handleOnUpdateInterval(intervalValue);
+    } else {
+      toast.error("Please select a valid value");
+    }
+   
   };
 
   return (

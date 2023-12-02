@@ -11,6 +11,8 @@ import { twMerge } from "tailwind-merge";
 import Button from "../ui/Button";
 import useMessageModal from "@/hooks/useMessageModal";
 import { useLang } from "@/hooks/useLang";
+import { StringLiteralType } from "typescript";
+import toast from "react-hot-toast";
 
 const ManageSubscriptionModal = () => {
   const [toggleType, setToggleType] = useState<boolean>(true);
@@ -51,11 +53,11 @@ const ManageSubscriptionModal = () => {
     }
   };
 
-  const handleOnPauseSubsription = async (numberOfMealkits: number) => {
+  const handleOnPauseSubsription = async (numberOfMealkits: string) => {
     addTodo("PAUSE", `Vill pausa nästa ${numberOfMealkits} matkassar`);
   };
 
-  const handleOnPauseSubsriptionWithDate = async (until: Date) => {
+  const handleOnPauseSubsriptionWithDate = async (until: string) => {
     addTodo("PAUSE", `Vill pausa tills ${until}`);
   };
 
@@ -67,14 +69,25 @@ const ManageSubscriptionModal = () => {
     e.preventDefault();
     const data = new FormData(e.target);
     const numberOfMealkits = data.get("pause");
-    handleOnPauseSubsription(numberOfMealkits);
+    if (numberOfMealkits && typeof numberOfMealkits === "string") {
+      // Convert numberOfMealkits to a number and pass it to handleOnPauseSubsription
+      handleOnPauseSubsription(numberOfMealkits);
+    } else {
+      toast.error("Please select a valid value");
+    }
   };
 
   const handleDateSubmit = (e: any) => {
     e.preventDefault();
     const data = new FormData(e.target);
     const until = data.get("until");
-    handleOnPauseSubsriptionWithDate(until);
+    if (until && typeof until === "string") {
+      // Convert numberOfMealkits to a number and pass it to handleOnPauseSubsription
+      handleOnPauseSubsriptionWithDate(until);
+    } else {
+      toast.error("Please select a valid value");
+    }
+    
   };
 
   return (

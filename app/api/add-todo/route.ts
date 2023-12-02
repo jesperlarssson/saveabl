@@ -1,4 +1,5 @@
 import { supabase } from "@/supabase/supabaseClient";
+import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   const body = await request.json();
@@ -13,7 +14,7 @@ export async function POST(request: Request) {
       .from("todos")
       .insert([{ customer_id, customer_email, actions, wish }]);
 
-    //return Response.json({data});
+    return NextResponse.json({data});
   } catch (error) {
     throw error;
   }

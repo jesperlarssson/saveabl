@@ -10,6 +10,7 @@ import Button from "../ui/Button";
 import useMessageModal from "@/hooks/useMessageModal";
 import { useLang } from "@/hooks/useLang";
 import getDeliveryWindowsForPostalCode from "@/actions/getDeliveryWindowsForPostalCode";
+import toast from "react-hot-toast";
 
 const ChangeDeliveryDayModal = () => {
   const [options, setOptions] = useState<any[]>([]);
@@ -42,16 +43,25 @@ const ChangeDeliveryDayModal = () => {
     }
   };
 
-  const handleOnUpdateDeliveryDay = async (desiredDay: number) => {
+  const handleOnUpdateDeliveryDay = async (desiredDay: string) => {
     addTodo("CHANGE_DAY", `Vill uppdatera till ${desiredDay}.`);
   };
-
   const handleSubmit = (e: any) => {
     e.preventDefault();
     const data = new FormData(e.target);
+  
+    // Retrieve the value and convert it to a number
     const intervalValue = data.get("toDate");
-    handleOnUpdateDeliveryDay(intervalValue);
+  
+    // Check if intervalValue is not null and is a string
+    if (intervalValue && typeof intervalValue === 'string') {
+      // Convert intervalValue to a number and pass it to handleOnUpdateDeliveryDay
+      handleOnUpdateDeliveryDay(intervalValue);
+    } else {
+      toast.error('Please select a valid value');
+    }
   };
+  
 
   useEffect(() => {
     const getOptions = async () => {
