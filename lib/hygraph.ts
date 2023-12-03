@@ -49,8 +49,8 @@ export async function sendMutation(
 }
 
 export async function getAllPostsForHome(mutation: boolean): Promise<Post[]> {
-  const posts: Post[] = tempHomePosts;
-  return posts;
+  // const posts: Post[] = tempHomePosts;
+  // return posts;
   const data: PostsData = await fetchAPI(
     `
       {
@@ -110,8 +110,8 @@ export async function getAllPostsWithSlug() {
 }
 
 export async function getPostWithSlug(slug: string) {
-  const post = tempPosts.find((post) => post.slug === slug);
-  return post;
+  // const post = tempPosts.find((post) => post.slug === slug);
+  // return post;
   const data = await fetchAPI(
     `
     query GetPost($slug: String!) {
@@ -154,8 +154,8 @@ export async function getPostWithSlug(slug: string) {
 }
 
 export async function getPaginatedPosts(limit: number, offset: number) {
-  const posts = tempPosts.slice(offset, offset + limit);
-  return posts;
+  // const posts = tempPosts.slice(offset, offset + limit);
+  // return posts;
   const variables = { limit, offset };
   const data = await fetchAPI(
     `
@@ -201,14 +201,14 @@ export async function getPaginatedPosts(limit: number, offset: number) {
 }
 
 export async function getLatestPromotionBanner() {
- const banner = [
-    {
-      "id": "clippe5kmy1t50bt2s6pkbz7y",
-      "content": {
-        "html": "<p>Thank you for choosing 5 x lower carbon footprint &lt;3</p>"
-      },}
-  ];
-  return banner;
+//  const banner = [
+//     {
+//       "id": "clippe5kmy1t50bt2s6pkbz7y",
+//       "content": {
+//         "html": "<p>Thank you for choosing 5 x lower carbon footprint &lt;3</p>"
+//       },}
+//   ];
+//   return banner;
   const data = await fetchAPI(
     `
       query GetLatestPromotionBanner {
@@ -224,8 +224,8 @@ export async function getLatestPromotionBanner() {
 }
 
 export async function getAllRecipes() {
-  const recipes = tempRecipes.data.recepts;
-  return recipes;
+  // const recipes = tempRecipes.data.recepts;
+  // return recipes;
   const data = await fetchAPI(
     `
     query GetRecipes {
@@ -269,8 +269,8 @@ export async function getPaginatedRecipes(
 ) {
   const variables = { limit, offset, endDate };
 
-  const recipes = tempRecipes.data.recepts.slice(offset, offset + limit);
-  return recipes;
+  // const recipes = tempRecipes.data.recepts.slice(offset, offset + limit);
+  // return recipes;
   const data = await fetchAPI(
     `
     query GetRecipes($limit: Int!, $offset: Int!, $endDate: Date!) {
@@ -309,7 +309,7 @@ export async function getPaginatedRecipes(
 }
 
 export async function getPaginatedOldRecipes(limit: number, offset: number) {
-  return [];
+  // return [];
   const variables = { limit, offset };
   const data = await fetchAPI(
     `
@@ -376,49 +376,49 @@ export async function getPaginatedOldRecipes(limit: number, offset: number) {
 
 export async function getRecipesForWeek(week: number) {
 
-  const recipes = tempRecipes.data.recepts.filter((recipe) => recipe.weekNr === week);
-  return recipes;
+  // const recipes = tempRecipes.data.recepts.filter((recipe) => recipe.weekNr === week);
+  // return recipes;
 
-  // const data = await fetchAPI(
-  //   `
-  //   query GetRecipes($week: Int!) {
-  //     recepts(
-  //       orderBy: recipeNumber_ASC, 
-  //       where: {weekNr: $week}
-  //     ) {
-  //       id
-  //       title
-  //       slug
-  //       startDate
-  //       weekNr
-  //       recipeNumber
-  //       chef {
-  //         name
-  //         title
-  //       }
-  //       image {
-  //         url(transformation: {image: {resize: {height: 500, width: 700}}})
-  //       }
-  //       localizations {
-  //         contentAllergies
-  //         ingredients
-  //         nutritionalValues
-  //         steg
-  //         title
-  //       }
-  //     }
-  //   }
-  // `,
-  //   { variables: { week } }
-  // );
+  const data = await fetchAPI(
+    `
+    query GetRecipes($week: Int!) {
+      recepts(
+        orderBy: recipeNumber_ASC, 
+        where: {weekNr: $week}
+      ) {
+        id
+        title
+        slug
+        startDate
+        weekNr
+        recipeNumber
+        chef {
+          name
+          title
+        }
+        image {
+          url(transformation: {image: {resize: {height: 500, width: 700}}})
+        }
+        localizations {
+          contentAllergies
+          ingredients
+          nutritionalValues
+          steg
+          title
+        }
+      }
+    }
+  `,
+    { variables: { week } }
+  );
 
-  // return data.recepts;
+  return data.recepts;
 }
 
 
 export async function getAllFAQ() {
-  const faqs = tempFaq;
-  return faqs;
+  // const faqs = tempFaq;
+  // return faqs;
   const data = await fetchAPI(`
     {
       faqs {
@@ -464,8 +464,8 @@ export async function getAllFAQ() {
 // }
 
 export async function getAllRecipesWithSlug() {
-  const slugs = tempRecipes.data.recepts.map((recipe) => recipe.slug);
-  return slugs;
+  // const slugs = tempRecipes.data.recepts.map((recipe) => recipe.slug);
+  // return slugs;
 
   const data = await fetchAPI(
     `
@@ -480,8 +480,8 @@ export async function getAllRecipesWithSlug() {
 }
 
 export async function getRecipeWithSlug(slug: string) {
-  const recipe = tempRecipes.data.recepts.find((recipe) => recipe.slug === slug);
-  return recipe;
+  // const recipe = tempRecipes.data.recepts.find((recipe) => recipe.slug === slug);
+  // return recipe;
   const data = await fetchAPI(
     `
     query GetRecipe($slug: String!) {
