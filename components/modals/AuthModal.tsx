@@ -10,6 +10,7 @@ import Modal from "@/components/ui/Modal";
 import { toast } from "react-hot-toast";
 import SignInForm from "../general/SignInForm";
 import SignUpForm from "../general/SignUpForm";
+import { useLang } from "@/hooks/useLang";
 
 const AuthModal = () => {
   const router = useRouter();
@@ -17,8 +18,7 @@ const AuthModal = () => {
   const [signInOpen, setSignInOpen] = useState<boolean>(true);
   const auth = useAuth();
 
-
-
+  const { text } = useLang();
 
   if (!auth) {
     return null;
@@ -33,7 +33,6 @@ const AuthModal = () => {
     }
   }, [user]);
 
-
   const onChange = (open: boolean) => {
     if (!open) {
       onClose();
@@ -44,27 +43,22 @@ const AuthModal = () => {
     setSignInOpen(!signInOpen);
   };
 
-
   return (
     <Modal
-      title={signInOpen ? "Logga in" : "Registrera dig"}
-      description={
-        signInOpen
-          ? "Logga in för att hantera ditt konto."
-          : "Registrera dig för att skapa ett konto."
-      }
+      title={signInOpen ? text.auth.title1 : text.auth.title2}
+      description={signInOpen ? text.auth.description : text.auth.description2}
       isOpen={isOpen}
       onChange={onChange}
     >
       <div className="flex flex-col w-full gap-4">
         {signInOpen ? <SignInForm /> : <SignUpForm />}
         <p className="mt-4 text-sm text-gray-500 sm:mt-0 w-full text-center">
-          {signInOpen ? "Saknar du konto?" : "Har du ett konto?"}
+          {signInOpen ? text.auth.missing_account : text.auth.has_account}
           <a
             onClick={toggleForm}
             className="text-accent underline cursor-pointer"
           >
-            {signInOpen ? "Skapa konto." : "Logga in."}
+            {signInOpen ? text.auth.title2 : text.auth.title1}
           </a>
         </p>
       </div>
