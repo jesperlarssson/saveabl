@@ -8,6 +8,7 @@ import Input from "@/components/ui/Input";
 import { useAuth } from "@/hooks/useAuth";
 import useAuthModal from "@/hooks/useAuthModal";
 import { useRouter } from "next/navigation";
+import { useLang } from "@/hooks/useLang";
 
 const SignInForm = () => {
   const { onClose, isOpen } = useAuthModal();
@@ -21,6 +22,7 @@ const SignInForm = () => {
 
   const auth = useAuth();
   const router = useRouter();
+  const { text } = useLang();
   if (!auth) {
     return null;
   }
@@ -30,11 +32,11 @@ const SignInForm = () => {
   const onSubmit = async (data: any) => {
     try {
       await signIn(data.email, data.password);
-      toast.success("Inloggad!");
+      toast.success(text.auth.logged_in);
       router.push("/mina-sidor");
       onClose();
     } catch (error: any) {
-      toast.error("Inloggningen misslyckades!");
+      toast.error(text.auth.login_failed);
     }
   };
 
@@ -48,12 +50,12 @@ const SignInForm = () => {
         {...register("email", { required: true })}
         type="email"
         id="Email"
-        label="E-post"
+        label={text.auth.email}
         error={errors.email}
       />
 
       <Input
-        label="Lösenord"
+        label={text.auth.password}
         {...register("password", { required: true })}
         type="password"
         id="Password"
@@ -64,7 +66,7 @@ const SignInForm = () => {
         type="submit"
         className="inline-block shrink-0 w-56 px-12 py-3 text-sm font-medium  transition focus:outline-none focus:ring "
       >
-        Logga in
+        {text.auth.button}
       </Button>
     </form>
   );

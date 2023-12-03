@@ -7,6 +7,7 @@ import Button from "@/components/ui/Button";
 import { useAuth } from "@/hooks/useAuth";
 import Input from "../ui/Input";
 import { useRouter } from "next/navigation";
+import { useLang } from "@/hooks/useLang";
 
 const SignUpForm = () => {
   const {
@@ -15,6 +16,8 @@ const SignUpForm = () => {
     watch,
     formState: { errors },
   } = useForm();
+
+  const { text } = useLang();
 
   const auth = useAuth();
   const router = useRouter();
@@ -26,13 +29,13 @@ const SignUpForm = () => {
 
   const onSubmit = async (data: any) => {
     if (data.password !== data.password_confirmation) {
-      toast.error("Lösenorden matchar inte!");
+      toast.error(text.auth.password_no_match);
       return;
     }
     try {
       const res = await signUp(data.email, data.password);
-      toast.success("Ditt konto har skapats!");
-      router.push("/mina-sidor")
+      toast.success(text.auth.account_created);
+      router.push("/mina-sidor");
     } catch (error: any) {
       toast.error("Account already exists!");
     }
@@ -45,7 +48,7 @@ const SignUpForm = () => {
       onSubmit={handleSubmit(onSubmit)}
     >
       <Input
-        label="Email"
+        label={text.auth.email}
         {...register("email", { required: true })}
         type="email"
         id="Email"
@@ -53,7 +56,7 @@ const SignUpForm = () => {
       />
 
       <Input
-        label="Lösenord"
+        label={text.auth.password}
         {...register("password", { required: true })}
         type="password"
         id="Password"
@@ -61,7 +64,7 @@ const SignUpForm = () => {
       />
 
       <Input
-        label="Bekräfta lösenord"
+        label={text.auth.confirm_password}
         {...register("password_confirmation", { required: true })}
         type="password"
         id="PasswordConfirmation"
@@ -77,22 +80,19 @@ const SignUpForm = () => {
             className="h-5 w-5 rounded-md border-gray-200 bg-white shadow-sm"
           />
 
-          <span className="text-sm text-gray-700">
-            Jag godkänner att ni skickar mig veckans recept och marknadsföring
-            via email.
-          </span>
+          <span className="text-sm text-gray-700">{text.auth.terms}</span>
         </label>
       </div>
 
       <div className="col-span-6">
         <p className="text-sm text-gray-500">
-          Genom att skapa ett konto godkänner du våra
+          {text.auth.terms_and_conditions}
           <a href="#" className="text-gray-700 underline">
-            terms and conditions
+            {text.auth.privacy_policy}
           </a>
-          och vår
+          {text.auth.privacy_policy2}
           <a href="#" className="text-gray-700 underline">
-            privacy policy
+            {text.auth.privacy_policy3}
           </a>
           .
         </p>
@@ -103,7 +103,7 @@ const SignUpForm = () => {
           type="submit"
           className="inline-block shrink-0 w-56 px-12 py-3 text-sm font-medium  transition focus:outline-none focus:ring "
         >
-          Skapa konto
+          {text.auth.sign_up}
         </Button>
       </div>
     </form>
