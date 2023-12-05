@@ -16,11 +16,9 @@ import AddOnTile from "@/components/general/AddOnTile";
 import Title from "@/components/ui/Title";
 import CheckoutSection from "@/components/ui/CheckoutSection";
 import getDeliveryWindowsForPostalCode from "@/actions/getDeliveryWindowsForPostalCode";
-import { createNewCheckout } from "@/actions/createNewCheckout"
 import { UserInformation } from "@/providers/CheckoutProvider";
 import instance from "@/lib/apiAxios";
 import { productTypes } from "./lib/productTypes";
-import { useForm } from "react-hook-form";
 // Import Stripe
 import { loadStripe } from "@stripe/stripe-js";
 import Input from "@/components/ui/Input";
@@ -30,9 +28,6 @@ import PaymentArea from "./components/paymentArea";
 import Head from "next/head";
 import { useLang } from "@/hooks/useLang";
 import { useSearchParams } from "next/navigation";
-import Select from "react-select";
-import DeliverySelect from "./components/deliverySelect";
-import getDeliveryPeriodsById from "@/actions/getDeliveryPeriodById";
 
 // Initialize Stripe
 const stripePromise = loadStripe(
@@ -44,16 +39,6 @@ interface Type {
   even: boolean;
 }
 
-interface DeliveryRange {
-  cutoff: number,
-  cutoffLabel: string,
-  depot: string,
-  end: number,
-  label: string,
-  services: string[],
-  start: number
-}
-
 const variants = {
   open: { opacity: 1, height: "auto", y: 0 },
   closed: { opacity: 0, height: 0, y: -20 },
@@ -61,13 +46,6 @@ const variants = {
 
 const Order = () => {
   const [showDeliveryOptions, setShowDeliveryOptions] = useState(false);
-  const [showCustomerForm, setShowCustomerForm] = useState(false);
-
-  const [startTime, setStartTime] = useState(0);
-  const [endTime, setEndTime] = useState(0);
-
-  const [postCode, setPostCode] = useState("");
-  const [productId, setProductId] = useState("")
 
   const searchParams = useSearchParams();
   const id = searchParams.get("id") || "1";
@@ -82,7 +60,6 @@ const Order = () => {
   const [selectedType, setSelectedType] = useState(productTypes[0]);
   const [deliveryWindows, setDeliveryWindows] = useState([]);
   const [showLinks, setShowLinks] = useState(false);
-  const [deliveryId, setDeliveryId] = useState("");
 
   const [deliveryWindowsErrors, setDeliveryWindowsErrors] = useState<
     string | null
@@ -102,11 +79,6 @@ const Order = () => {
       id: 1,
     },
   ];
-
-  const handleSelectDeliveryInterval = (selectedValue: DeliveryRange) => {
-    setStartTime(selectedValue.start);
-    setEndTime(selectedValue.end);
-  }
 
   const selectDeliveryDay = (day: any) => {
     // toast.success(
@@ -165,31 +137,12 @@ const Order = () => {
     //remove all non numeric characters
     const zipCodeClean = zipCode.replace(/\D/g, "");
     if (zipCodeClean.length === 4) {
-      setPostCode(zipCodeClean);
+      setPostalCode(zipCodeClean);
     }
     if (zipCodeClean.length === 5) {
-      setPostCode(zipCodeClean);
+      setPostalCode(zipCodeClean);
       setShowDeliveryOptions(true);
       //TODO: Actions get delivery windows available
-      if (!postCode || postCode.length < 4) {
-        toast.error("Du måste ange ett postnummer");
-        return;
-      }
-  
-      if (
-        shippingDk.includes(postCode) &&
-        postCode.length === 4
-      ) {
-        setIsDk(true);
-      } else {
-        setIsDk(false);
-      }
-  
-      if (postCode.length === 5) {
-        setIsDk(false);
-      }
-      setShowCustomerForm(false);
-
       try {
         const deliveryWindows = await getDeliveryWindowsForPostalCode(
           zipCode,
@@ -198,95 +151,67 @@ const Order = () => {
         updateWeekdaysList(deliveryWindows);
         setShippingCostInfo(getShippingCostFromPostalCode(zipCode));
         setDeliveryWindows(deliveryWindows.windows);
-        setDeliveryId(deliveryWindows.deliveryPeriodId);
-        console.log(await getDeliveryPeriodsById(deliveryId))
-        console.log(deliveryWindows)
+        setDeliveryPeriodId(deliveryWindows.deliveryPeriodId);
       } catch (error) {
         setDeliveryWindowsErrors("Något gick fel. Kontrollera postkoden!");
       }
     }
   };
 
-  function handleGetLinks() {
-    if (!postCode || postCode.length < 4) {
+  const handleGetLinks = () => {
+    if (!address.postalCode || address.postalCode.length < 4) {
       toast.error("Du måste ange ett postnummer");
       return;
     }
 
     if (
-      shippingDk.includes(postCode) &&
-      postCode.length === 4
+      shippingDk.includes(address.postalCode) &&
+      address.postalCode.length === 4
     ) {
       setIsDk(true);
     } else {
       setIsDk(false);
     }
 
-    if (postCode.length === 5) {
+    if (address.postalCode.length === 5) {
       setIsDk(false);
     }
 
-    setShowCustomerForm(false);
     setShowLinks(true);
   };
 
-  const handleCustomerForm = () => {
-    setShowCustomerForm(true);
-  }
-
-
   const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
+    address,
+    name,
+    extraInfo,
+    phone,
+    productId,
+    deliveryWindow,
+    email,
+    password,
+    deliveryPeriodId,
+    setPostalCode,
+    setStreetAddress,
+    setCity,
+    setCountry,
+    setAddress,
+    setName,
+    setPhone,
+    setExtraInfo,
+    setProductId,
+    setDeliveryWindow,
+    setEmail,
+    setPassword,
+    setDeliveryPeriodId,
+  } = useCheckout();
 
   const { text } = useLang();
 
   useEffect(() => {
-    if (postCode && postCode.length < 4) {
+    if (address.postalCode && address.postalCode.length < 4) {
       setShowLinks(false);
     }
-  }, [postCode]);
-
-  const onSubmit = async (data: any) => {
-    if (data.password !== data.password_repeat) {
-      alert("Passwords do not match!");
-      return;
-    }
-    const checkOutInfo = {
-      address: {
-        street: data.street_address,
-        city: data.city,
-        postalCode: postCode,
-        country: isDk ? 'DK' : 'SE'
-      },
-      name: data.name,
-      phone: data.phone_number,
-      productId: productId, // Check if this is actually correct
-      deliveryWindow: {
-        start: startTime,
-        end: endTime
-      },
-      email: data.email,
-      password: data.password,
-      deliveryPeriodId: deliveryId,
-      extraInfo: data.extra_info
-    }
-    console.log(checkOutInfo)  
-
-    try {  
-      const stripeSession = await createNewCheckout(checkOutInfo)
-      //await purchaseCompleted(stripeSession);
-      //await signUpWithEmailAndPassword(data.email, data.password);
-      //console.log(stripeId)
-      toast.success("Should workey workey!");
-    } catch (error: any) {
-      console.log(error);
-      toast.error(error.message);
-    }
-  };
+  }, [address.postalCode]);
 
   return (
     <Section className="pt-16">
@@ -297,6 +222,43 @@ const Order = () => {
         <BodyText className="text-center max-w-3xl mb-10">
           {id === "1" ? "" : text.order.text}
         </BodyText>
+
+        {/* <h3 className="font-poppins text-lg text-secondary ">Vilken typ?</h3>
+          <div className="flex gap-4">
+            {productTypes.map((productType) => {
+              return (
+                <CheckoutButton
+                key={productType.label}
+                selected={productType.id === selectedType.id}
+                onClick={() => setSelectedType(productType)}
+              >
+                {productType.label}
+              </CheckoutButton>
+            );
+          })}
+        </div>
+        <h3
+          key="interval-title"
+          className="font-poppins text-lg mt-4 text-secondary"
+        >
+          Välj variant:
+        </h3>
+        <div className="flex gap-4">
+          {selectedType.variants.map((variant) => {
+            return (
+              <CheckoutButton
+                key={variant.label}
+                selected={variant.productId === productId}
+                onClick={() => setProductId(variant.productId)}
+                disabled={variant.disabled}
+              >
+                <span>{variant.label}</span>
+                <br />
+                <span className="text-xs">{variant.price}</span>
+              </CheckoutButton>
+            );
+          })}
+        </div> */}
 
         <div className="my-8 max-w-4xl w-full h-1 border-b border-primary border-opacity-50"></div>
         <div className="flex flex-col items-center my-4">
@@ -314,212 +276,26 @@ const Order = () => {
           ></input>
           <button
             className="w-64 mx-auto py-2 bg-primary mt-4 rounded-full text-secondary font-bold bg-opacity-90 hover:bg-opacity-100"
-            onClick={handleCustomerForm}
+            onClick={handleGetLinks}
           >
             {id === "1" ? text.order.button1 : text.order.button2}
           </button>
-          {showCustomerForm && (
-            <form
-              action="#"
-              className="mt-8 grid grid-cols-6 gap-6"
-              onSubmit={handleSubmit(onSubmit)}
-            >
-              <div className="col-span-6 sm:col-span-3">
-                <label
-                  htmlFor="Delivery"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Välj tid
-                </label>
-                <DeliverySelect
-                  times={deliveryWindows}
-                  onSelectionChange={handleSelectDeliveryInterval}
-                ></DeliverySelect>
-              </div>
-
-              <div className="col-span-6 sm:col-span-3">
-                <label
-                  htmlFor="Name"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Namn
-                </label>
-                <input
-                  {...register("name", { required: true })}
-                  type="text"
-                  id="Name"
-                  className="mt-1 h-8 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-                />
-                {errors.name && <span>This field is required</span>}
-              </div>
-
-              <div className="col-span-6 sm:col-span-3">
-                <label
-                  htmlFor="StreetAddress"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Address
-                </label>
-                <input
-                  {...register("street_address", { required: true })}
-                  type="text"
-                  id="StreetAddress"
-                  className="mt-1 h-8 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-                />
-                {errors.street_address && <span>This field is required</span>}
-              </div>
-
-              <div className="col-span-6 sm:col-span-3">
-                <label
-                  htmlFor="City"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Stad
-                </label>
-                <input
-                  {...register("city", { required: true })}
-                  type="text"
-                  id="City"
-                  className="mt-1 h-8 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-                />
-                {errors.city && <span>This field is required</span>}
-              </div>
-
-              <div className="col-span-6">
-                <label
-                  htmlFor="Email"
-                  className="block  text-sm font-medium text-gray-700"
-                >
-                  Email
-                </label>
-
-                <input
-                  {...register("email", { required: true })}
-                  type="email"
-                  id="Email"
-                  className="mt-1 h-8 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-                />
-                {errors.email && <span>This field is required</span>}
-              </div>
-
-              <div className="col-span-6">
-                <label
-                  htmlFor="PhoneNumber"
-                  className="block  text-sm font-medium text-gray-700"
-                >
-                  Telefonnummer
-                </label>
-
-                <input
-                  {...register("phone_number", { required: true })}
-                  type="tel"
-                  id="PhoneNumber"
-                  className="mt-1 h-8 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-                />
-                {errors.phone_number && <span>This field is required</span>}
-              </div>
-
-              <div className="col-span-6">
-                <label
-                  htmlFor="Password"
-                  className="block  text-sm font-medium text-gray-700"
-                >
-                  Välj ett lösenord
-                </label>
-
-                <input
-                  {...register("password", { required: true })}
-                  type="password"
-                  id="Password"
-                  className="mt-1 h-8 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-                />
-                {errors.password && <span>This field is required</span>}
-              </div>
-
-              <div className="col-span-6">
-                <label
-                  htmlFor="PasswordRepeat"
-                  className="block  text-sm font-medium text-gray-700"
-                >
-                  Repetera lösenord
-                </label>
-
-                <input
-                  {...register("password_repeat", { required: true })}
-                  type="password"
-                  id="PasswordRepeat"
-                  className="mt-1 h-8 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-                />
-                {errors.password_repeat && <span>This field is required</span>}
-              </div>
-
-              <div className="col-span-6">
-                <label
-                  htmlFor="PasswordRepeat"
-                  className="block  text-sm font-medium text-gray-700"
-                >
-                  Extra information
-                </label>
-
-                <input
-                  {...register("extra_info", { required: true })}
-                  type="textarea"
-                  id="ExtraInfo"
-                  className="mt-1 h-8 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-                />
-                {errors.extra_info && <span>This field is required</span>}
-              </div>
-
-
-              <h3 className="font-poppins text-lg text-secondary ">Vilken typ?</h3>
-              <div className="flex gap-4">
-                {productTypes.map((productType) => {
-                  return (
-                    <CheckoutButton
-                      key={productType.label}
-                      selected={productType.id === selectedType.id}
-                      onClick={() => setSelectedType(productType)}
-                    >
-                      {productType.label}
-                    </CheckoutButton>
-                  );
-                })}
-              </div>
-              <h3
-                key="interval-title"
-                className="font-poppins text-lg text-secondary"
-              >
-                Välj variant:
-              </h3>
-              <div className="flex gap-4">
-                {selectedType.variants.map((variant) => {
-                  return (
-                    <CheckoutButton
-                      key={variant.label}
-                      selected={variant.productId === productId}
-                      onClick={() => setProductId(variant.productId)}
-                      disabled={variant.disabled}
-                    >
-                      <span>{variant.label}</span>
-                      <br />
-                      <span className="text-xs">{variant.price}</span>
-                    </CheckoutButton>
-                  );
-                })}
-              </div>
-
-
-              <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
-                <Button
-                  type="submit"
-                  className="inline-block shrink-0 w-56 px-12 py-3 text-sm font-medium  transition focus:outline-none focus:ring "
-                >
-                  Lägg beställning
-                </Button>
-              </div>
-            </form>
-          )}
+          {/* {shippingCostInfo && (
+            <div className="mt-2 font-bold text-secondary">
+              {" "}
+              Din fraktkostnad: {shippingCostInfo}
+            </div>
+          )} */}
         </div>
+
+        <div className="my-8 max-w-4xl w-full h-1 border-b border-primary border-opacity-50"></div>
+        {showLinks && (
+          <PaymentArea
+            deliveryWindows={deliveryWindows}
+            dk={isDk}
+            offerId={offerId}
+          />
+        )}
       </div>
     </Section>
   );

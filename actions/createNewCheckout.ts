@@ -6,19 +6,17 @@ export const createNewCheckout = async (
       street: string;
       city: string;
       postalCode: string;
-      country: string;
     };
     name: string;
     phone: string;
     productId: string;
-    deliveryWindow: {
+    deliveryRange: {
       start: number;
       end: number;
     };
     email: string;
     password: string;
-    deliveryPeriodId: string;
-    extraInfo: string;
+    extraInfo: string,
   }
 ) => {
   const url = "http://127.0.0.1:5001/saveabl-development/europe-west3/main/api/checkout"; // Update with your API endpoint
