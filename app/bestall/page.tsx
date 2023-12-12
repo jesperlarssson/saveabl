@@ -196,7 +196,7 @@ const Order = () => {
         );
         updateWeekdaysList(deliveryWindows);
         setShippingCostInfo(getShippingCostFromPostalCode(zipCode));
-        setDeliveryWindows(deliveryWindows.windows);
+        setDeliveryWindows(deliveryWindows.windows);      
         setDeliveryId(deliveryWindows.deliveryPeriodId);
       } catch (error) {
         setDeliveryWindowsErrors("Något gick fel. Kontrollera postkoden!");
