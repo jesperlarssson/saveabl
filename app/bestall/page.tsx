@@ -28,6 +28,10 @@ import PaymentArea from "./components/paymentArea";
 import Head from "next/head";
 import { useLang } from "@/hooks/useLang";
 import { useSearchParams } from "next/navigation";
+import Select from "react-select";
+import DeliverySelect from "./components/deliverySelect";
+import getDeliveryPeriodsById from "@/actions/getDeliveryPeriodById";
+import { db, auth } from "@/firebase/firebaseAdmin";
 
 // Initialize Stripe
 const stripePromise = loadStripe(
@@ -151,7 +155,7 @@ const Order = () => {
         updateWeekdaysList(deliveryWindows);
         setShippingCostInfo(getShippingCostFromPostalCode(zipCode));
         setDeliveryWindows(deliveryWindows.windows);
-        setDeliveryPeriodId(deliveryWindows.deliveryPeriodId);
+        setDeliveryId(deliveryWindows.deliveryPeriodId);
       } catch (error) {
         setDeliveryWindowsErrors("Något gick fel. Kontrollera postkoden!");
       }
@@ -211,7 +215,45 @@ const Order = () => {
     if (address.postalCode && address.postalCode.length < 4) {
       setShowLinks(false);
     }
-  }, [address.postalCode]);
+  }, [postCode]);
+
+  const onSubmit = async (data: any) => {
+    if (data.password !== data.password_repeat) {
+      alert("Passwords do not match!");
+      return;
+    }
+    const checkOutInfo = {
+      address: {
+        street: data.street_address,
+        city: data.city,
+        postalCode: postCode,
+        country: isDk ? 'DK' : 'SE'
+      },
+      name: data.name,
+      phone: data.phone_number,
+      productId: productId,
+      deliveryWindow: {
+        start: startTime,
+        end: endTime
+      },
+      email: data.email,
+      password: data.password,
+      deliveryPeriodId: deliveryId, // Doesn't match with the deliveryId expected from backend for some reason. 
+      extraInfo: data.extra_info
+    }
+    console.log(checkOutInfo)  
+
+    try {  
+      const stripeSession = await createNewCheckout(checkOutInfo)
+      //await purchaseCompleted(stripeSession);
+      //await signUpWithEmailAndPassword(data.email, data.password);
+      //console.log(stripeId)
+      toast.success("Should workey workey!");
+    } catch (error: any) {
+      console.log(error);
+      toast.error(error.message);
+    }
+  };
 
   return (
     <Section className="pt-16">

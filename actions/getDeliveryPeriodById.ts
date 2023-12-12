@@ -1,12 +1,12 @@
 import apiAxios from "@/lib/apiAxios";
+import { db, auth } from "@/firebase/firebaseAdmin";
 
 const getDeliveryPeriodsById = async (
   id: string
 ) => {
   const response = await apiAxios.get(`periods/${id}`, {
     headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_FIREBASE_API_KEY}`,
+        Authorization: process.env.NEXT_PUBLIC_FIREBASE_PRIVATE_KEY
       },
   }
   );
