@@ -3,7 +3,6 @@ import { Figtree } from "next/font/google";
 import ToasterProvider from "@/providers/ToasterProvider";
 import "swiper/css";
 import Script from "next/script";
-// import MessengerCustomerChat from 'react-messenger-customer-chat';
 import { isMobile } from "react-device-detect";
 import Navbar from "@/components/ui/Navbar";
 import Footer from "@/components/ui/Footer";
@@ -70,14 +69,6 @@ export default function RootLayout({
                     </main>
 
                     <Footer />
-
-                    {/* <MessengerCustomerChat
-                pageId="101328788520671"
-                appId="2653211714980474"
-                language="sv_SE"
-                themeColor="#f46649"
-                shouldShowDialog={!isMobile}
-              /> */}
                   </RecipeProvider>
                 </MyParallaxProvider>
                 <CheckoutBasket />
