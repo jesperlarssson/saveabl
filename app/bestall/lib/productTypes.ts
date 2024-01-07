@@ -9,6 +9,10 @@ export const priceIdEveryOtherWeek = "price_1NxtncEhPZIzKmuiNZl0xIxC";
 export const priceIdStandard = "price_1NvlKkEhPZIzKmuiEozTJBYf";
 export const priceIdStandard8Portions = "price_1NvlKfEhPZIzKmuiDximMRN3";
 
+const priceIdDeliveryEveryWeek = "price_1NwPXNEhPZIzKmuiPRhwsPNn";
+const priceIdDeliveryEveryOtherWeek = "price_1NwPp1EhPZIzKmui6bAHHFac";
+const priceIdDeliveryStandard = "price_1NvlQuEhPZIzKmuiG0xEsaxI";
+
 export const productTypes = [
   {
     id: "subscription",
@@ -16,7 +20,7 @@ export const productTypes = [
     variants: [
       {
         label: "Varje vecka",
-        productId: productIdEveryWeek, 
+        productId: productIdEveryWeek,
         disabled: false,
         price: "599kr/vecka",
         portionPrice: "50kr/portion",
@@ -24,7 +28,7 @@ export const productTypes = [
       },
       {
         label: "Varannan vecka",
-        productId: productIdEveryOtherWeek, 
+        productId: productIdEveryOtherWeek,
         disabled: false,
         price: "599kr/varannan vecka",
         portionPrice: "50kr/portion",
@@ -38,7 +42,7 @@ export const productTypes = [
     variants: [
       {
         label: "12 portioner",
-        productId: productIdStandard, 
+        productId: productIdStandard,
         disabled: false,
         price: "659kr",
         portionPrice: "55kr/portion",
@@ -46,7 +50,7 @@ export const productTypes = [
       },
       {
         label: "8 portioner",
-        productId: productIdStandard8Portions, 
+        productId: productIdStandard8Portions,
         disabled: false,
         price: "439kr",
         portionPrice: "55kr/portion",
@@ -74,11 +78,26 @@ type Variant = {
 
 export const isSubscription = (priceId: string | null): boolean => {
   for (const productType of productTypes) {
-      for (const variant of productType.variants) {
-          if (variant.priceId === priceId) {
-              return productType.id === 'subscription';
-          }
+    for (const variant of productType.variants) {
+      if (variant.priceId === priceId) {
+        return productType.id === "subscription";
       }
+    }
   }
   return false;
+};
+
+export const getShippingCostForProductId = (id: string | null) => {
+  switch (id) {
+    case priceIdEveryWeek:
+      return priceIdDeliveryEveryWeek;
+    case priceIdEveryOtherWeek:
+      return priceIdDeliveryEveryOtherWeek;
+    case priceIdStandard:
+      return priceIdDeliveryStandard;
+    case priceIdStandard8Portions:
+      return priceIdDeliveryStandard;
+    default:
+      throw new Error("No shipping cost found for product id: " + id);
+  }
 };

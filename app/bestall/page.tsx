@@ -13,6 +13,7 @@ import CheckoutSection from "@/components/ui/CheckoutSection";
 import getDeliveryWindowsForPostalCode from "@/actions/getDeliveryWindowsForPostalCode";
 import { UserInformation } from "@/providers/CheckoutProvider";
 import {
+  getShippingCostForProductId,
   isSubscription,
   priceIdEveryWeek,
   productTypes,
@@ -326,6 +327,7 @@ const Order = () => {
         extraInfo: userInformation.extraInfo,
       });
       const stripeUserId = response.data.stripeUser.id;
+      const shippingPriceId = getShippingCostForProductId(productId);
       // create checkout session
       const sessionResponse = await axios.post("/api/checkout_sessions", {
         customerId: stripeUserId,
@@ -335,6 +337,10 @@ const Order = () => {
             price: productId,
             quantity: 1,
           },
+          {
+            price: shippingPriceId,
+            quantity: 1,
+          }
         ],
       });
 
