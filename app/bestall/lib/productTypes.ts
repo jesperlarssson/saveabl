@@ -22,7 +22,7 @@ const priceIdDeliveryStandard = "price_1NvlQuEhPZIzKmuiG0xEsaxI";
 const priceIdDeliveryStockholmEveryWeek = "price_1OY5DpEhPZIzKmuidVt8MLqm";
 const priceIdDeliveryStockholmEveryOtherWeek =
   "price_1OY5FsEhPZIzKmuiu5PVEK6o";
-const priceIdDeliveryStockholmStandard = "price_1OY5DpEhPZIzKmuidVt8MLqm";
+const priceIdDeliveryStockholmStandard = "price_1OYG3tEhPZIzKmuiT4C0NZtl";
 
 
 export const productTypes = [
