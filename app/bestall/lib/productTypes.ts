@@ -9,9 +9,21 @@ export const priceIdEveryOtherWeek = "price_1NxtncEhPZIzKmuiNZl0xIxC";
 export const priceIdStandard = "price_1NvlKkEhPZIzKmuiEozTJBYf";
 export const priceIdStandard8Portions = "price_1NvlKfEhPZIzKmuiDximMRN3";
 
+export const priceIdStockholmEveryWeek = "price_1OY5CQEhPZIzKmuiYkWX6DrL";
+export const priceIdStockholmEveryOtherWeek =
+  "price_1OY5F0EhPZIzKmuinFbez8qr";
+export const priceIdStockholmStandard = "price_1OY5GmEhPZIzKmuip8JKjcVY";
+export const priceIdStockholmStandard8Portions = "price_1OY5JkEhPZIzKmuiY9xTWk0K";
+
 const priceIdDeliveryEveryWeek = "price_1NwPXNEhPZIzKmuiPRhwsPNn";
 const priceIdDeliveryEveryOtherWeek = "price_1NwPp1EhPZIzKmui6bAHHFac";
 const priceIdDeliveryStandard = "price_1NvlQuEhPZIzKmuiG0xEsaxI";
+
+const priceIdDeliveryStockholmEveryWeek = "price_1OY5DpEhPZIzKmuidVt8MLqm";
+const priceIdDeliveryStockholmEveryOtherWeek =
+  "price_1OY5FsEhPZIzKmuiu5PVEK6o";
+const priceIdDeliveryStockholmStandard = "price_1OY5DpEhPZIzKmuidVt8MLqm";
+
 
 export const productTypes = [
   {
@@ -25,6 +37,7 @@ export const productTypes = [
         price: "599kr/vecka",
         portionPrice: "50kr/portion",
         priceId: priceIdEveryWeek,
+        stockholmPriceId: priceIdStockholmEveryWeek,
       },
       {
         label: "Varannan vecka",
@@ -33,6 +46,7 @@ export const productTypes = [
         price: "599kr/varannan vecka",
         portionPrice: "50kr/portion",
         priceId: priceIdEveryOtherWeek,
+        stockholmPriceId: priceIdStockholmEveryOtherWeek,
       },
     ],
   },
@@ -47,6 +61,7 @@ export const productTypes = [
         price: "659kr",
         portionPrice: "55kr/portion",
         priceId: priceIdStandard,
+        stockholmPriceId: priceIdStockholmStandard,
       },
       {
         label: "8 portioner",
@@ -56,6 +71,7 @@ export const productTypes = [
         portionPrice: "55kr/portion",
 
         priceId: priceIdStandard8Portions,
+        stockholmPriceId: priceIdStockholmStandard8Portions,
       },
     ],
   },
@@ -79,7 +95,7 @@ type Variant = {
 export const isSubscription = (priceId: string | null): boolean => {
   for (const productType of productTypes) {
     for (const variant of productType.variants) {
-      if (variant.priceId === priceId) {
+      if (variant.priceId === priceId || variant.stockholmPriceId === priceId) {
         return productType.id === "subscription";
       }
     }
@@ -97,6 +113,15 @@ export const getShippingCostForProductId = (id: string | null) => {
       return priceIdDeliveryStandard;
     case priceIdStandard8Portions:
       return priceIdDeliveryStandard;
+    case priceIdStockholmEveryWeek:
+      return priceIdDeliveryStockholmEveryWeek;
+    case priceIdStockholmEveryOtherWeek:
+      return priceIdDeliveryStockholmEveryOtherWeek;
+    case priceIdStockholmStandard:
+      return priceIdDeliveryStockholmStandard;
+    case priceIdStockholmStandard8Portions:
+      return priceIdDeliveryStockholmStandard;
+
     default:
       throw new Error("No shipping cost found for product id: " + id);
   }
