@@ -48,7 +48,7 @@ export interface UserInformation {
   extraInfo: string | null;
   phone: string | null;
   productId: string | null;
-  deliveryWindow: DeliveryWindow | null;
+  deliveryWindow: any | null;
   email: string | null;
   password: string | null;
   deliveryPeriodId: string | null;

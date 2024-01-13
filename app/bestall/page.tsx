@@ -27,6 +27,13 @@ import { useSearchParams } from "next/navigation";
 import { CheckoutButton } from "./components/CheckoutButton";
 import axios from "axios";
 import { formatEpochToTimeString } from "@/helpers/epochFormat";
+import {
+  free,
+  shippingCostStage1,
+  shippingCostStage2,
+  stockholmPostalCodes,
+} from "@/lib/zipCodes";
+import { Description } from "@radix-ui/react-dialog";
 
 type RowError = {
   message: string | null;
@@ -164,6 +171,7 @@ const Order = () => {
           zipCode,
           "se"
         );
+
         updateWeekdaysList(deliveryWindows);
         setShippingCostInfo(getShippingCostFromPostalCode(zipCode));
         setDeliveryWindows(deliveryWindows.windows);
@@ -188,7 +196,13 @@ const Order = () => {
       setIsDk(true);
       setShowLinks(true);
       setShowAddressFields(false);
-    } else if (address.postalCode.length === 5) {
+    } else if (
+      address.postalCode.length === 5 &&
+      (stockholmPostalCodes.includes(address.postalCode) ||
+        shippingCostStage2.includes(address.postalCode) ||
+        shippingCostStage1.includes(address.postalCode) ||
+        free.includes(address.postalCode))
+    ) {
       setIsDk(false);
       setShowLinks(false);
       setShowAddressFields(true);
@@ -319,10 +333,11 @@ const Order = () => {
           line1: userInformation.address.street,
           postal_code: userInformation.address.postalCode,
         },
-        description: `Vald leverans: ${formatEpochToTimeString({
-          start: deliveryWindow?.start || undefined,
-          end: deliveryWindow?.end || undefined,
-        })} Extra info: ${userInformation.extraInfo}`,
+        description: `Vald leverans: ${deliveryWindow?.label} Extra info: ${userInformation.extraInfo}`,
+        // description: `Vald leverans: ${formatEpochToTimeString({
+        //   start: deliveryWindow?.start || undefined,
+        //   end: deliveryWindow?.end || undefined,
+        // })} Extra info: ${userInformation.extraInfo}`,
         phone: userInformation.phone,
         extraInfo: userInformation.extraInfo,
       });
@@ -340,7 +355,7 @@ const Order = () => {
           {
             price: shippingPriceId,
             quantity: 1,
-          }
+          },
         ],
       });
 
@@ -439,16 +454,18 @@ const Order = () => {
               </h3>
               <div className="flex gap-4">
                 {selectedType.variants.map((variant) => {
+                  const postalCode = address.postalCode || "";
+                  const sthlmCustomer = stockholmPostalCodes.includes(postalCode);
                   return (
                     <CheckoutButton
                       key={variant.label}
-                      selected={variant.priceId === productId}
-                      onClick={() => setProductId(variant.priceId)}
+                      selected={sthlmCustomer ? variant.stockholmPriceId === productId : variant.priceId === productId}
+                      onClick={() => setProductId(stockholmPostalCodes.includes(postalCode) ? variant.stockholmPriceId : variant.priceId)}
                       disabled={variant.disabled}
                     >
                       <span>{variant.label}</span>
                       <br />
-                      <span className="text-xs">{variant.price}</span>
+                      {/* <span className="text-xs">{variant.price}</span> */}
                     </CheckoutButton>
                   );
                 })}
@@ -473,7 +490,33 @@ const Order = () => {
 
                     <div className="flex gap-4 flex-wrap">
                       <AnimatePresence mode="wait">
-                        {deliveryWindowsErrors &&
+                        {deliveryDaysToChoose.map((day: any, index: number) => (
+                          <motion.div
+                            key={day.label}
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -10 }}
+                            transition={{ delay: 0.15 * index }}
+                          >
+                            <CheckoutButton
+                              className="capitalize"
+                              selected={selectedWeekday == day.id}
+                              onClick={() => {
+                                if (selectedWeekday == day.id) {
+                                  setSelectedWeekday(null);
+                                  setDeliveryWindow(null);
+                                  return;
+                                }
+                                setSelectedWeekday(day.id);
+                                setDeliveryWindow(day);
+                              }}
+                            >
+                              {day.label}
+                            </CheckoutButton>
+                          </motion.div>
+                        ))}
+
+                        {/* {deliveryWindowsErrors &&
                         deliveryWindows.length == 0 ? (
                           <motion.div
                             key="error"
@@ -510,10 +553,10 @@ const Order = () => {
                               </CheckoutButton>
                             </motion.div>
                           ))
-                        )}
+                        )} */}
                       </AnimatePresence>
                     </div>
-                    {selectedWeekday != null && (
+                    {/* {selectedWeekday != null && (
                       <>
                         <h3 className="font-poppins text-lg mt-4 text-secondary">
                           När vill du ha din matkasse?
@@ -571,7 +614,7 @@ const Order = () => {
                           </AnimatePresence>
                         </div>
                       </>
-                    )}
+                    )} */}
                   </motion.div>
                 )}
               </AnimatePresence>
