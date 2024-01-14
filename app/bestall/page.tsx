@@ -13,6 +13,7 @@ import CheckoutSection from "@/components/ui/CheckoutSection";
 import getDeliveryWindowsForPostalCode from "@/actions/getDeliveryWindowsForPostalCode";
 import { UserInformation } from "@/providers/CheckoutProvider";
 import {
+  getProductCostForPriceId,
   getShippingCostForProductId,
   isSubscription,
   priceIdEveryWeek,
@@ -460,12 +461,12 @@ const Order = () => {
                     <CheckoutButton
                       key={variant.label}
                       selected={sthlmCustomer ? variant.stockholmPriceId === productId : variant.priceId === productId}
-                      onClick={() => setProductId(stockholmPostalCodes.includes(postalCode) ? variant.stockholmPriceId : variant.priceId)}
+                      onClick={() => setProductId(sthlmCustomer ? variant.stockholmPriceId : variant.priceId)}
                       disabled={variant.disabled}
                     >
                       <span>{variant.label}</span>
                       <br />
-                      {/* <span className="text-xs">{variant.price}</span> */}
+                      <span className="text-xs">{getProductCostForPriceId(sthlmCustomer ? variant.stockholmPriceId : variant.priceId)}</span> 
                     </CheckoutButton>
                   );
                 })}
