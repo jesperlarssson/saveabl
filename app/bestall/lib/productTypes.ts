@@ -138,9 +138,9 @@ export const getProductCostForPriceId = (id: string | null) => {
     case priceIdStandard8Portions:
       return "439kr";
     case priceIdStockholmEveryWeek:
-      return "648kr/vecka";
+      return "649kr/vecka";
     case priceIdStockholmEveryOtherWeek:
-      return "648kr/varannan vecka";
+      return "649kr/varannan vecka";
     case priceIdStockholmStandard:
       return "719kr";
     case priceIdStockholmStandard8Portions:
