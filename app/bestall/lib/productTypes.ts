@@ -126,3 +126,27 @@ export const getShippingCostForProductId = (id: string | null) => {
       throw new Error("No shipping cost found for product id: " + id);
   }
 };
+
+export const getProductCostForPriceId = (id: string | null) => {
+  switch (id) {
+    case priceIdEveryWeek:
+      return "599kr/vecka";
+    case priceIdEveryOtherWeek:
+      return "599kr/varannan vecka";
+    case priceIdStandard:
+      return "659kr";
+    case priceIdStandard8Portions:
+      return "439kr";
+    case priceIdStockholmEveryWeek:
+      return "648kr/vecka";
+    case priceIdStockholmEveryOtherWeek:
+      return "648kr/varannan vecka";
+    case priceIdStockholmStandard:
+      return "719kr";
+    case priceIdStockholmStandard8Portions:
+      return "479kr";
+
+    default:
+      throw new Error("No product id found for price id: " + id);
+  }
+}
