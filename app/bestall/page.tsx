@@ -93,6 +93,13 @@ const Order = () => {
     },
   ];
 
+  const getDayLabelFromId = (id: number | null | undefined) => {
+    if (id === null || id === undefined) {
+      return "Nånting gick fel.";
+    }
+    return deliveryDaysToChoose.find((day) => day.id === id)?.label;
+  }
+
   const selectDeliveryDay = (day: any) => {
     // toast.success(
     //   `Du har valt ${day.label} som leveransdag med start: ${day.start} och slut: ${day.end}`
@@ -334,7 +341,7 @@ const Order = () => {
           line1: userInformation.address.street,
           postal_code: userInformation.address.postalCode,
         },
-        description: `Vald leverans: ${deliveryWindow?.label} Extra info: ${userInformation.extraInfo}`,
+        description: `Vald leverans: ${getDayLabelFromId(selectedWeekday)} Extra info: ${userInformation.extraInfo}`,
         // description: `Vald leverans: ${formatEpochToTimeString({
         //   start: deliveryWindow?.start || undefined,
         //   end: deliveryWindow?.end || undefined,

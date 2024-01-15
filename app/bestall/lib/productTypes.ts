@@ -130,17 +130,17 @@ export const getShippingCostForProductId = (id: string | null) => {
 export const getProductCostForPriceId = (id: string | null) => {
   switch (id) {
     case priceIdEveryWeek:
-      return "599kr/vecka";
+      return "12 portioner - 599kr/vecka";
     case priceIdEveryOtherWeek:
-      return "599kr/varannan vecka";
+      return "12 portioner - 599kr/varannan vecka";
     case priceIdStandard:
       return "659kr";
     case priceIdStandard8Portions:
       return "439kr";
     case priceIdStockholmEveryWeek:
-      return "649kr/vecka";
+      return "12 portioner -  649kr/vecka";
     case priceIdStockholmEveryOtherWeek:
-      return "649kr/varannan vecka";
+      return "12 portioner - 649kr/varannan vecka";
     case priceIdStockholmStandard:
       return "719kr";
     case priceIdStockholmStandard8Portions:
