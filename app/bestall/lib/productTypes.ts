@@ -55,7 +55,7 @@ export const productTypes = [
     label: "Engångsköp",
     variants: [
       {
-        label: "12 portioner",
+        label: "Engångsköp",
         productId: productIdStandard,
         disabled: false,
         price: "659kr",
@@ -64,7 +64,7 @@ export const productTypes = [
         stockholmPriceId: priceIdStockholmStandard,
       },
       {
-        label: "8 portioner",
+        label: "Prova-på kasse",
         productId: productIdStandard8Portions,
         disabled: false,
         price: "439kr",
@@ -134,17 +134,17 @@ export const getProductCostForPriceId = (id: string | null) => {
     case priceIdEveryOtherWeek:
       return "12 portioner - 599kr/varannan vecka";
     case priceIdStandard:
-      return "659kr";
+      return "12 portioner - 659kr";
     case priceIdStandard8Portions:
-      return "439kr";
+      return "8 portioner - 439kr";
     case priceIdStockholmEveryWeek:
       return "12 portioner -  649kr/vecka";
     case priceIdStockholmEveryOtherWeek:
       return "12 portioner - 649kr/varannan vecka";
     case priceIdStockholmStandard:
-      return "719kr";
+      return "12 portioner - 719kr";
     case priceIdStockholmStandard8Portions:
-      return "479kr";
+      return "8 portioner - 79kr";
 
     default:
       throw new Error("No product id found for price id: " + id);
