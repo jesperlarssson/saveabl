@@ -144,7 +144,7 @@ export const getProductCostForPriceId = (id: string | null) => {
     case priceIdStockholmStandard:
       return "12 portioner - 719kr";
     case priceIdStockholmStandard8Portions:
-      return "8 portioner - 79kr";
+      return "8 portioner - 479kr";
 
     default:
       throw new Error("No product id found for price id: " + id);
