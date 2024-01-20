@@ -218,8 +218,9 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
           </button>
         </div>
       ) : (
-        <div className="w-full h-36 rounded-lg text-secondary font-semibold text-xl bg-primary-500 bg-opacity-50 flex justify-center items-center">
-          No connected account
+        <div className="w-full h-36 rounded-lg text-secondary font-semibold text-xl bg-primary-500 bg-opacity-50 flex flex-col justify-center items-center">
+           <div>{text?.my_pages?.no_connection}</div>
+           <div className="font-light text-sm">{text?.my_pages?.no_connection_desc}</div>
         </div>
       )}
     </div>

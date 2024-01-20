@@ -165,6 +165,14 @@ const MyPageContent = () => {
         activeSubscription={activeSubscription}
         deliveryInfo={deliveryInfo}
       />
+      <Button
+        className="max-w-fit px-8 py-2 mt-4 mr-4 bg-primary-500 text-secondary hover:bg-primary-600"
+        onClick={() => {
+          window.location.href = "mailto:hello@saveabl.se";
+        }}
+      >
+        {text?.my_pages?.contact_button ?? "Kontakta oss"}
+      </Button>
       <Button className="max-w-fit px-8 py-2 mt-4" onClick={handleSignOut}>
         {text?.my_pages?.sign_out_button ?? "Logga ut"}
       </Button>
