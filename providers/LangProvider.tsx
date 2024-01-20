@@ -201,7 +201,9 @@ const svText = {
   success: {
     title: "Tack för din beställning!",
     description:
-      "Logga in på dina sidor för att se information om din beställning.",
+      "Vi har nu mottagit din beställning. Leveransinformation kommer att skickas till ditt mobilnummer från vår partner Gordon Delivery när de planerat upp rutten. Har du frågor? Tveka inte att kontakta oss på hello@saveabl.se.",
+    recurring:
+      "Du har nu ett aktivt abonnemang. Du kan hantera ditt abonnemang på dina sidor. Leveransinformation kommer att skickas till ditt mobilnummer från vår partner Gordon Delivery när de planerat upp rutten. Har du frågor? Tveka inte att kontakta oss på hello@saveabl.se.",
     button: "Till mina sidor",
   },
   auth: {
@@ -218,7 +220,8 @@ const svText = {
     forgot_password: "Glömt lösenord?",
     no_account: "Har du inget konto?",
     sign_up: "Skapa konto",
-    terms: "Jag godkänner att ni skickar mig veckans recept och marknadsföring via email.",
+    terms:
+      "Jag godkänner att ni skickar mig veckans recept och marknadsföring via email.",
     terms_and_conditions: " Genom att skapa ett konto godkänner du våra",
     privacy_policy: "villkor och bestämmelser",
     privacy_policy2: "och vår",
@@ -227,7 +230,6 @@ const svText = {
     login_failed: "Inloggningen misslyckades!",
     missing_account: "Har du inget konto?",
     has_account: "Har du redan ett konto?",
-  
   },
   my_pages: {
     title_signed_out: "Du är inte inloggad",
@@ -236,6 +238,7 @@ const svText = {
     greeting_suffix: "!",
     signed_in_as_prefix: "Du är inloggad som",
     sign_out_button: "Logga ut",
+    contact_button: "Kontakta oss",
     current_subscription_status: "Här är din nuvarande prenumerationsstatus:",
     subscription_label: "Prenumeration:",
     weekly: "Varje vecka",
@@ -288,6 +291,8 @@ const svText = {
     dayModalTitle: "Ändra leveransdag",
     dayModalDescription: "Välj vilken leveransdag du vill ha.",
     deliveryDayModalPlaceholder: "Välj leveransdag",
+    no_connection: "Ingen aktiv prenumeration",
+    no_connection_desc: "Vi stödjer tyvärr inte att visa upp engångsköp ännu.",
   },
   my_account: {
     account_settings: "Kontoinställningar",
@@ -430,7 +435,10 @@ const enText = {
 
   success: {
     title: "Thank you for your order!",
-    description: "Log in to your pages to see information about your order.",
+    description:
+      "We have now received your order. Delivery information will be sent to your mobile number from our partner Gordon Delivery when they have planned the route. Do you have any questions? Do not hesitate to contact us at hello@saveabl.se",
+    recurring:
+      "You now have an active subscription. You can manage your subscription on your pages. Delivery information will be sent to your mobile number from our partner Gordon Delivery when they have planned the route. Do you have any questions? Do not hesitate to contact us at hello@saveabl.se",
     button: "To my pages",
   },
   auth: {
@@ -519,6 +527,8 @@ const enText = {
     dayModalTitle: "Change delivery day",
     dayModalDescription: "Choose which delivery day you want.",
     deliveryDayModalPlaceholder: "Choose delivery day",
+    no_connection: "No active subscription",
+    no_connection_desc: "We do not support showing one-time purchases yet.",
   },
 };
 
@@ -628,7 +638,10 @@ const daText = {
 
   success: {
     title: "Tak for din bestilling!",
-    description: "Log ind på dine sider for at se oplysninger om din ordre.",
+    description:
+      "Vi har nu modtaget din bestilling. Leveringsinformation sendes til dit mobilnummer fra vores partner Gordon Delivery, når de har planlagt ruten. Har du spørgsmål? Tøv ikke med at kontakte os på",
+    recurring:
+      "Du har nu et aktivt abonnement. Du kan administrere dit abonnement på dine sider. Leveringsinformation sendes til dit mobilnummer fra vores partner Gordon Delivery, når de har planlagt ruten. Har du spørgsmål? Tøv ikke med at kontakte os på hello@saveabl.se",
     button: "Til mine sider",
   },
   auth: {
@@ -645,7 +658,8 @@ const daText = {
     forgot_password: "Glemt adgangskode?",
     no_account: "Har du ikke en konto?",
     sign_up: "Tilmeld dig",
-    terms: "Jeg accepterer at modtage ugentlige opskrifter og markedsføring via e-mail.",
+    terms:
+      "Jeg accepterer at modtage ugentlige opskrifter og markedsføring via e-mail.",
     terms_and_conditions: "Ved at oprette en konto accepterer du vores",
     privacy_policy: "vilkår og betingelser",
     privacy_policy2: "og vores",
@@ -693,5 +707,7 @@ const daText = {
     dayModalTitle: "Skift leveringsdag",
     dayModalDescription: "Vælg hvilken leveringsdag du ønsker.",
     deliveryDayModalPlaceholder: "Vælg leveringsdag",
+    no_connection: "Ingen aktiv abonnement",
+    no_connection_desc: "Vi understøtter desværre ikke visning af engangskøb endnu.",
   },
 };

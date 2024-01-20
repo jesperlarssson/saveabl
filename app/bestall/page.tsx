@@ -35,6 +35,7 @@ import {
   stockholmPostalCodes,
 } from "@/lib/zipCodes";
 import { Description } from "@radix-ui/react-dialog";
+import { add } from "date-fns";
 
 type RowError = {
   message: string | null;
@@ -78,27 +79,27 @@ const Order = () => {
     string | null
   >(null);
 
-  const deliveryDaysToChoose = [
+  const [deliveryDaysToChoose, setDeliveryDaysToChoose] = useState<any[]>([
     {
-      label: "Lördag",
+      label: "Lördag 09.00-18.00",
       id: 6,
     },
     {
-      label: "Söndag",
+      label: "Söndag 10.00-17.00",
       id: 0,
     },
     {
-      label: "Måndag",
+      label: "Måndag 16.00-22.00",
       id: 1,
     },
-  ];
+  ]);
 
   const getDayLabelFromId = (id: number | null | undefined) => {
     if (id === null || id === undefined) {
       return "Nånting gick fel.";
     }
     return deliveryDaysToChoose.find((day) => day.id === id)?.label;
-  }
+  };
 
   const selectDeliveryDay = (day: any) => {
     // toast.success(
@@ -341,7 +342,9 @@ const Order = () => {
           line1: userInformation.address.street,
           postal_code: userInformation.address.postalCode,
         },
-        description: `Vald leverans: ${getDayLabelFromId(selectedWeekday)} Extra info: ${userInformation.extraInfo}`,
+        description: `Vald leverans: ${getDayLabelFromId(
+          selectedWeekday
+        )} Extra info: ${userInformation.extraInfo}`,
         // description: `Vald leverans: ${formatEpochToTimeString({
         //   start: deliveryWindow?.start || undefined,
         //   end: deliveryWindow?.end || undefined,
@@ -382,6 +385,18 @@ const Order = () => {
   useEffect(() => {
     if (address.postalCode && address.postalCode.length < 4) {
       setShowLinks(false);
+    }
+    if (address.postalCode && stockholmPostalCodes.includes(address.postalCode)) {
+      setDeliveryDaysToChoose([
+        {
+          label: "Söndag 10.00-17.00",
+          id: 0,
+        },
+        {
+          label: "Måndag 16.00-22.00",
+          id: 1,
+        },
+      ]);
     }
   }, [address.postalCode]);
 
@@ -463,17 +478,34 @@ const Order = () => {
               <div className="flex gap-4">
                 {selectedType.variants.map((variant) => {
                   const postalCode = address.postalCode || "";
-                  const sthlmCustomer = stockholmPostalCodes.includes(postalCode);
+                  const sthlmCustomer =
+                    stockholmPostalCodes.includes(postalCode);
                   return (
                     <CheckoutButton
                       key={variant.label}
-                      selected={sthlmCustomer ? variant.stockholmPriceId === productId : variant.priceId === productId}
-                      onClick={() => setProductId(sthlmCustomer ? variant.stockholmPriceId : variant.priceId)}
+                      selected={
+                        sthlmCustomer
+                          ? variant.stockholmPriceId === productId
+                          : variant.priceId === productId
+                      }
+                      onClick={() =>
+                        setProductId(
+                          sthlmCustomer
+                            ? variant.stockholmPriceId
+                            : variant.priceId
+                        )
+                      }
                       disabled={variant.disabled}
                     >
                       <span>{variant.label}</span>
                       <br />
-                      <span className="text-xs">{getProductCostForPriceId(sthlmCustomer ? variant.stockholmPriceId : variant.priceId)}</span> 
+                      <span className="text-xs">
+                        {getProductCostForPriceId(
+                          sthlmCustomer
+                            ? variant.stockholmPriceId
+                            : variant.priceId
+                        )}
+                      </span>
                     </CheckoutButton>
                   );
                 })}
