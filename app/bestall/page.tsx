@@ -96,7 +96,9 @@ const Order = () => {
 
   const getDayLabelFromId = (id: number | null | undefined) => {
     if (id === null || id === undefined) {
-      return "Nånting gick fel.";
+      return deliveryDaysToChoose.find(
+        (day) => day.id === deliveryDaysToChoose[0].id
+      )?.label;
     }
     return deliveryDaysToChoose.find((day) => day.id === id)?.label;
   };
@@ -386,7 +388,10 @@ const Order = () => {
     if (address.postalCode && address.postalCode.length < 4) {
       setShowLinks(false);
     }
-    if (address.postalCode && stockholmPostalCodes.includes(address.postalCode)) {
+    if (
+      address.postalCode &&
+      stockholmPostalCodes.includes(address.postalCode)
+    ) {
       setDeliveryDaysToChoose([
         {
           label: "Söndag 10.00-17.00",
