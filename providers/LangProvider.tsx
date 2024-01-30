@@ -105,7 +105,7 @@ const svText = {
   },
   page: {
     hero: {
-      title: "Kockförberedda matkassen med 5 x lägre klimatpåverkan",
+      title: "Kockförberedda matkassen med 5 x lägre klimatpåverkan!",
       subtitle: "Recept klara på 15 minuter.",
       order_now: "Beställ här",
     },
