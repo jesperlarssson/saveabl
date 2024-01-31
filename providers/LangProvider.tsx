@@ -655,7 +655,7 @@ const daText = {
     button1: "Hente",
     button2: "Få et tilbud",
     linkTitle: "Vi kan levere til dig!",
-    linkDescription: "om mandagen mellem 16.00-22.00 om mandagen mellem 16.00-22.00.<br />👨‍🍳 Vegetarkassen med kokken inkluderet.<br />👨‍👩‍👧‍👦 Aftensmad til hele familien på blot 15 min.<br />✅ Ingen bindingsperiode, opsig når du vil.",
+    linkDescription: "om mandagen mellem 16.00-22.00",
     type: "Vilken typ?",
     variant: "Välj variant:",
     deliveryDay: "Välj leveransdag:",
