@@ -13,7 +13,7 @@ interface LangContextInterface {
 export const LangContext = createContext<LangContextInterface>({
   lang: null,
   text: null,
-  handleChangeLang: () => {},
+  handleChangeLang: () => { },
 });
 
 interface TextProviderProps {
@@ -196,6 +196,16 @@ const svText = {
     button: "Hämta erbjudanden",
     button1: "Hämta",
     button2: "Hämta erbjudanden",
+    linkTitle: "Vi kan leverera till dig!",
+    linkDescription: "Välj en av länkarna nedan för att gå vidare.",
+    type: "Vilken typ?",
+    variant: "Välj variant:",
+    deliveryDay: "Välj leveransdag:",
+    address: "Fyll i din leveransadress:",
+    extra: "Extra information",
+    contact: "Kontaktuppgifter",
+    terms: "Jag godkänner villkoren och förstår att ett konto kommer att skapas.",
+    payButton: "Registrera och betala",
   },
 
   success: {
@@ -431,6 +441,16 @@ const enText = {
     button: "Get offer",
     button1: "Get ",
     button2: "Get offer",
+    linkTitle: "Vi kan leverera till dig!",
+    linkDescription: "Välj en av länkarna nedan för att gå vidare.",
+    type: "Vilken typ?",
+    variant: "Välj variant:",
+    deliveryDay: "Välj leveransdag:",
+    address: "Fyll i din leveransadress:",
+    extra: "Extra information",
+    contact: "Kontaktuppgifter",
+    terms: "Jag godkänner villkoren och förstår att ett konto kommer att skapas.",
+    payButton: "Registrera och betala",
   },
 
   success: {
@@ -624,7 +644,7 @@ const daText = {
   order: {
     title: "Vi lancerer i nye byer!",
     title1:
-      "Indtast dit postnummer for at se, om du er inden for vores leveringsområde",
+      "Find din levereringsdag",
     title2: "Du har fået en særlig gave!",
     text: "Nu er det tid til at lancere i Malmö og København, og vi starter med et specielt tilbud til vores første kunder her! Indtast dit postnummer for at få et tilbud.",
     label: "Indtast dit postnummer for et tilbud",
@@ -634,6 +654,17 @@ const daText = {
     button: "Få et tilbud",
     button1: "Hente",
     button2: "Få et tilbud",
+    linkTitle: "Vi kan leverera till dig!",
+    linkDescription: "Välj en av länkarna nedan för att gå vidare.",
+    type: "Vilken typ?",
+    variant: "Välj variant:",
+    deliveryDay: "Välj leveransdag:",
+    address: "Fyll i din leveransadress:",
+    extra: "Extra information",
+    contact: "Kontaktuppgifter",
+    terms: "Jag godkänner villkoren och förstår att ett konto kommer att skapas.",
+    payButton: "Registrera och betala",
+
   },
 
   success: {
