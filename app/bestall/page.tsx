@@ -81,15 +81,15 @@ const Order = () => {
 
   const [deliveryDaysToChoose, setDeliveryDaysToChoose] = useState<any[]>([
     {
-      label: "Lördag 09.00-18.00",
+      label: "Lördag 3 feb. kl. 9-18",
       id: 6,
     },
     {
-      label: "Söndag 10.00-17.00",
+      label: "Söndag 4 feb. kl. 10-17",
       id: 0,
     },
     {
-      label: "Måndag 16.00-22.00",
+      label: "Måndag 5 feb. kl. 16-22",
       id: 1,
     },
   ]);
