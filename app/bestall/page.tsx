@@ -447,8 +447,8 @@ const Order = () => {
           <div className="my-8 max-w-4xl w-full h-1 border-b border-primary border-opacity-50"></div>
           {showLinks && (
             <>
-              <Title>Vi kan leverera till dig!</Title>
-              <BodyText>Välj en av länkarna nedan för att gå vidare.</BodyText>
+              <Title>{text.order.linkTitle}</Title>
+              <BodyText> {text.order.linkDescription}</BodyText>
               <PaymentArea
                 deliveryWindows={deliveryWindows}
                 dk={isDk}
@@ -457,9 +457,10 @@ const Order = () => {
             </>
           )}
           {showAddressFields && (
-            <CheckoutSection title="Vi kan leverera till dig!">
+            <CheckoutSection title={text.order.linkTitle}>
               <h3 className="font-poppins text-lg text-secondary ">
-                Vilken typ?
+              {text.order.type}
+               
               </h3>
               <div className="flex gap-4">
                 {productTypes.map((productType) => {
@@ -478,7 +479,8 @@ const Order = () => {
                 key="interval-title"
                 className="font-poppins text-lg mt-4 text-secondary"
               >
-                Välj variant:
+                {text.order.variant}
+                
               </h3>
               <div className="flex gap-4">
                 {selectedType.variants.map((variant) => {
@@ -529,7 +531,8 @@ const Order = () => {
                       key="title-delivery"
                       className="font-poppins text-lg text-secondary"
                     >
-                      Välj leveransdag:
+                      {text.order.deliveryDay}
+                
                     </h3>
                     {/** TODO: Doesn't work for all zips */}
 
@@ -666,8 +669,8 @@ const Order = () => {
               <label
                 htmlFor="address"
                 className="font-poppins text-lg mb-2 mt-2 text-secondary"
-              >
-                Fyll i din leveransadress:
+              >{text.order.address}
+                
               </label>
               <div className="grid grid-cols-2 gap-4 items-start my-4">
                 <Input
@@ -703,7 +706,7 @@ const Order = () => {
                       `block w-full text-md font-bold text-primary-600 ml-1 px-1 max-w-fit bg-primary-200 translate-y-3 transition`
                     )}
                   >
-                    Extra Information
+                    {text.order.extra}
                   </label>
 
                   <textarea
@@ -716,7 +719,7 @@ const Order = () => {
               </div>
 
               <h3 className="font-poppins text-lg mt-4 text-secondary">
-                Kontaktuppgifter
+              {text.order.contact} 
               </h3>
               <div className="grid grid-cols-2 gap-4">
                 <Input
@@ -755,11 +758,11 @@ const Order = () => {
                       setAgreeToTerms(e.target.checked)
                     }
                   />
-                  Jag godkänner villkoren och förstår att ett konto kommer att
-                  skapas.
+                  {text.order.terms}
+                  
                 </label>
               </div>
-              <Button onClick={handleConfirm}>Registrera och betala</Button>
+              <Button onClick={handleConfirm}>{text.order.payButton}</Button>
             </CheckoutSection>
           )}
         </div>

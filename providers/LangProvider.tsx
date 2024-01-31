@@ -655,7 +655,7 @@ const daText = {
     button1: "Hente",
     button2: "Få et tilbud",
     linkTitle: "Vi kan levere til dig!",
-    linkDescription: "Välj en av länkarna nedan för att gå vidare.",
+    linkDescription: "om mandagen mellem 16.00-22.00.",
     type: "Vilken typ?",
     variant: "Välj variant:",
     deliveryDay: "Välj leveransdag:",
