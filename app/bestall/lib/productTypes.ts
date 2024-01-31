@@ -15,9 +15,9 @@ export const priceIdStockholmEveryOtherWeek =
 export const priceIdStockholmStandard = "price_1OY5GmEhPZIzKmuip8JKjcVY";
 export const priceIdStockholmStandard8Portions = "price_1OY5JkEhPZIzKmuiY9xTWk0K";
 
-const priceIdDeliveryEveryWeek = "price_1NwPXNEhPZIzKmuiPRhwsPNn";
-const priceIdDeliveryEveryOtherWeek = "price_1NwPp1EhPZIzKmui6bAHHFac";
-const priceIdDeliveryStandard = "price_1NvlQuEhPZIzKmuiG0xEsaxI";
+const priceIdDeliveryEveryWeek = "price_1OcTOIEhPZIzKmuiCg2jb9DS";
+const priceIdDeliveryEveryOtherWeek = "price_1OcTOnEhPZIzKmuiCjVP0IIQ";
+const priceIdDeliveryStandard = "price_1OcT1KEhPZIzKmuiJrGPIrzQ";
 
 const priceIdDeliveryStockholmEveryWeek = "price_1OY5DpEhPZIzKmuidVt8MLqm";
 const priceIdDeliveryStockholmEveryOtherWeek =
