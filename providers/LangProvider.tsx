@@ -199,7 +199,7 @@ const svText = {
     linkTitle: "Vi kan leverera till dig!",
     linkDescription: "Välj en av länkarna nedan för att gå vidare.",
     type: "Vilken typ?",
-    variant: "Välj variant:",
+    variant: "Välj variant: (3-4 portioner per recept)",
     deliveryDay: "Välj leveransdag:",
     address: "Fyll i din leveransadress:",
     extra: "Extra information",
