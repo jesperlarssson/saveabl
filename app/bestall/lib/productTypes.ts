@@ -130,21 +130,21 @@ export const getShippingCostForProductId = (id: string | null) => {
 export const getProductCostForPriceId = (id: string | null) => {
   switch (id) {
     case priceIdEveryWeek:
-      return "3 recept - 599kr + frakt";
+      return "3 recept/vecka 599kr + frakt";
     case priceIdEveryOtherWeek:
-      return "3 recept - 599kr + frakt";
+      return "3 recept/varannan vecka 599kr + frakt";
     case priceIdStandard:
-      return "3 recept - 659kr + frakt";
+      return "3 recept, 3-4 pers 659kr + frakt";
     case priceIdStandard8Portions:
-      return "2 recept - 439kr + frakt";
+      return "2 recept, 3-4 pers 439kr + frakt";
     case priceIdStockholmEveryWeek:
-      return "3 recept -  649kr + frakt";
+      return "3 recept/vecka 649kr + frakt";
     case priceIdStockholmEveryOtherWeek:
-      return "3 recept - 649kr + frakt";
+      return "3 recept/varannan vecka 649kr + frakt";
     case priceIdStockholmStandard:
-      return "3 recept - 719kr + frakt";
+      return "3 recept, 3-4 pers 719kr + frakt";
     case priceIdStockholmStandard8Portions:
-      return "2 recept - 479kr + frakt";
+      return "2 recept, 3-4 pers 479kr + frakt";
 
     default:
       throw new Error("No product id found for price id: " + id);
