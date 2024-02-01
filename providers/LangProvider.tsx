@@ -203,7 +203,7 @@ const svText = {
     deliveryDay: "Leveransalternativ:",
     address: "Leveransinfo:",
     extra: "Extra info",
-    contact: "Kontaktuppgifter",
+    contact: "Kontaktuppgifter:",
     terms: "Jag godkänner villkoren och att mitt konto kommer att skapas.",
     payButton: "Gå vidare",
   },

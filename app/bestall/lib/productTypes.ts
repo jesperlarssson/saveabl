@@ -132,7 +132,7 @@ export const getProductCostForPriceId = (id: string | null) => {
     case priceIdEveryWeek:
       return "3 recept/vecka 599kr + frakt";
     case priceIdEveryOtherWeek:
-      return "3 recept/varannan vecka 599kr + frakt";
+      return "3 recept/varannan v. 599kr + frakt";
     case priceIdStandard:
       return "3 recept, 3-4 pers 659kr + frakt";
     case priceIdStandard8Portions:
@@ -140,7 +140,7 @@ export const getProductCostForPriceId = (id: string | null) => {
     case priceIdStockholmEveryWeek:
       return "3 recept/vecka 649kr + frakt";
     case priceIdStockholmEveryOtherWeek:
-      return "3 recept/varannan vecka 649kr + frakt";
+      return "3 recept/varannan v. 649kr + frakt";
     case priceIdStockholmStandard:
       return "3 recept, 3-4 pers 719kr + frakt";
     case priceIdStockholmStandard8Portions:
