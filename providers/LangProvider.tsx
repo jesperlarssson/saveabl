@@ -187,7 +187,7 @@ const svText = {
 
   order: {
     title: "Vi lanserar på nya orter!",
-    title1: "Fyll in ditt postnummer för att se om vi levererar till dig",
+    title1: "Fyll i ditt postnummer för att se om vi levererar till dig",
     title2: "Specialerbjudande för att fira vår lansering!",
     text: "Nu är det dags att köra vår första lansering i Malmö och Köpenhamn och börjar med ett special-erbjudande till våra första kunder här! Fyll i ditt postnummer för att få en erbjudandelänk.",
     label: "Fyll i ditt postnummer för ett erbjudande",
