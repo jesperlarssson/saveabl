@@ -1,4 +1,3 @@
-
 import { navigation } from "@/lib/navigation";
 import NavItem from "./NavItem";
 import Section from "./Section";
@@ -14,7 +13,7 @@ const Footer = () => {
   const date = new Date();
   const bannerText =
     "save time • save food • save earth • save time • save food • save earth • save time • save food • save earth • save time • save food • save earth • save time • save food • save earth • save time • save food • save earth •  ";
- 
+
   return (
     <>
       {/* <TextBanner>{bannerText}</TextBanner> */}
@@ -70,6 +69,12 @@ const Footer = () => {
             559266-3149. VAT number: SE559266314901.
           </p>
 
+          <div>
+            <p className="mt-12 text-center text-3xl sm:text-4xl font-bold hover:underline text-primary-200">
+              <a href="mailto:hello@saveabl.se">hello@saveabl.se</a>
+            </p>
+          </div>
+
           {/* <ul className="mt-12 flex flex-wrap justify-center gap-6 md:gap-8 lg:gap-12">
             {navigation.map((item) => (
               <li key={item.id}>
@@ -117,5 +122,3 @@ const Footer = () => {
 };
 
 export default Footer;
-
-
