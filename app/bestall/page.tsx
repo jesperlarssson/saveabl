@@ -449,6 +449,11 @@ const Order = () => {
             <>
               <Title>{text.order.linkTitle}</Title>
               <BodyText> {text.order.linkDescription}</BodyText>
+              <div className="flex flex-col text-gray-700 mt-4 mb-4">
+                <p>{text.order.bullet1}</p>
+                <p>{text.order.bullet2}</p>
+                <p>{text.order.bullet3}</p>
+              </div>
               <PaymentArea
                 deliveryWindows={deliveryWindows}
                 dk={isDk}
@@ -459,8 +464,7 @@ const Order = () => {
           {showAddressFields && (
             <CheckoutSection title={text.order.linkTitle}>
               <h3 className="font-poppins text-lg text-secondary ">
-              {text.order.type}
-               
+                {text.order.type}
               </h3>
               <div className="flex gap-4">
                 {productTypes.map((productType) => {
@@ -480,7 +484,6 @@ const Order = () => {
                 className="font-poppins text-lg mt-4 text-secondary"
               >
                 {text.order.variant}
-                
               </h3>
               <div className="flex gap-4">
                 {selectedType.variants.map((variant) => {
@@ -532,7 +535,6 @@ const Order = () => {
                       className="font-poppins text-lg text-secondary"
                     >
                       {text.order.deliveryDay}
-                
                     </h3>
                     {/** TODO: Doesn't work for all zips */}
 
@@ -669,8 +671,8 @@ const Order = () => {
               <label
                 htmlFor="address"
                 className="font-poppins text-lg mb-2 mt-2 text-secondary"
-              >{text.order.address}
-                
+              >
+                {text.order.address}
               </label>
               <div className="grid grid-cols-2 gap-4 items-start my-4">
                 <Input
@@ -719,7 +721,7 @@ const Order = () => {
               </div>
 
               <h3 className="font-poppins text-lg mt-4 text-secondary">
-              {text.order.contact} 
+                {text.order.contact}
               </h3>
               <div className="grid grid-cols-2 gap-4">
                 <Input
@@ -759,7 +761,6 @@ const Order = () => {
                     }
                   />
                   {text.order.terms}
-                  
                 </label>
               </div>
               <Button onClick={handleConfirm}>{text.order.payButton}</Button>
