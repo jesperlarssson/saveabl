@@ -20,10 +20,10 @@ const MessageModal = () => {
 
   return (
     <Modal
-      title={success ? "Begäran är skickad" : "Något gick fel"}
+      title={success ? "Nu är det klart!" : "Något gick fel"}
       description={
         success
-          ? "Ditt konto kommer nu justeras. Ändringarna kommer synas inom kort."
+          ? "Allt är fixat! Det kan ta en liten stund innan det syns på din sida."
           : "Något gick fel, försök igen senare."
       }
       isOpen={isOpen}

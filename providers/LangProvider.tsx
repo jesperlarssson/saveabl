@@ -285,9 +285,9 @@ const svText = {
     address: "Adress",
     manage_account: "Hantera konto",
     paused_until: "Pausad till",
-    modalTitle: "Hantera Prenumeration",
+    modalTitle: "Pausa din leverans",
     modalDescription:
-      "Här kan du pausa, byta intervall eller avbryta din prenumeration. Du kan pausa din kommande matkasse till och med onsdagen före leverans.",
+      "Du kan pausa din kommande matkasse till och med onsdagen före leverans. Pausar du efter onsdagen gäller det för matkassen därpå.",
     resumeSubscriptionButton: "Återuppta prenumeration",
     pauseOption1: "Nästkommande matkasse",
     pauseOption2: "Nästa två matkassar",
