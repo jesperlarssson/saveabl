@@ -23,7 +23,7 @@ const MessageModal = () => {
       title={success ? "Nu är det klart!" : "Något gick fel"}
       description={
         success
-          ? "Allt är fixat! Det kan ta en liten stund innan det syns på din sida."
+          ? "Oroa dig inte, allt är fixat! Men det kan ta en liten stund innan det syns på din sida. Hojta till om du har några frågor, vi hjälper dig mer än gärna!"
           : "Något gick fel, försök igen senare."
       }
       isOpen={isOpen}
