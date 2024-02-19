@@ -167,7 +167,7 @@ const Navbar = () => {
 
         <div
           className={twMerge(
-            `flex flex-col fixed top-20 left-0 md:hidden h-screen w-screen opacity-0 bg-primary-200 transition duration-300 -translate-x-full`,
+            `flex flex-col fixed top-14 left-0 md:hidden h-screen w-screen opacity-0 bg-primary-200 transition duration-300 -translate-x-full`,
             active && "translate-x-0 opacity-100"
           )}
         >
@@ -192,6 +192,23 @@ const Navbar = () => {
                 </NavItem>
               </li>
             ))}
+            {!user ? (
+              <button
+                onClick={authModal.onOpen}
+                className="flex md:hidden mx-4 mt-8 justify-center w-40 px-8 py-3 rounded-full bg-accent text-primary-200  text-sm font-poppins tracking-wider border border-transparent disabled:cursor-not-allowed disabled:opacity-50 hover:bg-accent-600 hover:drop-shadow-md transition"
+              >
+                {text.nav.log_in}
+              </button>
+            ) : (
+              <div className="flex md:hidden items-center gap-x-4">
+                <Link
+                  href="/mina-sidor"
+                  className=" px-8 py-3 mx-4 mt-8 justify-center w-40 rounded-full bg-primary text-primary-900  text-sm font-poppins tracking-wider border border-transparent disabled:cursor-not-allowed disabled:opacity-50 hover:bg-primary-500 hover:drop-shadow-md transition"
+                >
+                 {text.nav.my_account}
+                </Link>
+              </div>
+            )}
           </ul>
         </div>
       </div>
