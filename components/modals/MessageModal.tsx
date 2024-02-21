@@ -20,10 +20,10 @@ const MessageModal = () => {
 
   return (
     <Modal
-      title={success ? "Nu är det klart!" : "Något gick fel"}
+      title={success ? "Now it's fixed!" : "Något gick fel"}
       description={
         success
-          ? "Oroa dig inte, allt är fixat! Men det kan ta en liten stund innan det syns på din sida. Hojta till om du har några frågor, vi hjälper dig gärna på hello@saveabl.se 💌"
+          ? "Don't worry, everything is fixed! It may take a little while before it appears on your page. Give us a shout if you have any questions, we're happy to help at hello@saveabl.se 💌"
           : "Något gick fel, försök igen senare."
       }
       isOpen={isOpen}

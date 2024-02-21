@@ -534,9 +534,9 @@ const enText = {
     address: "Address",
     manage_account: "Manage account",
     paused_until: "Paused until",
-    modalTitle: "Manage Subscription",
+    modalTitle: "Pause your delivery",
     modalDescription:
-      "Here you can pause, change interval or cancel your subscription.",
+      "You can pause your upcoming meal kit until the Wednesday before delivery. If you pause after Wednesday, it will apply to the following meal kit.",
     resumeSubscriptionButton: "Resume subscription",
     pauseOption1: "Next meal kit",
     pauseOption2: "Next two meal kits",
@@ -728,9 +728,9 @@ const daText = {
     address: "Adresse",
     manage_account: "Administrer konto",
     paused_until: "Pauset indtil",
-    modalTitle: "Administrer abonnement",
+    modalTitle: "Pause din levering",
     modalDescription:
-      "Her kan du sætte på pause, ændre interval eller annullere dit abonnement.",
+      "Du kan sætte din kommende madkasse på pause indtil onsdagen før leveringen. Hvis du sætter den på pause efter onsdag, gælder det for den næste madkasse.",
     resumeSubscriptionButton: "Genoptag abonnement",
     pauseOption1: "Næste madkasse",
     pauseOption2: "Næste to madkasser",
