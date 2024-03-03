@@ -676,17 +676,17 @@ const Order = () => {
               </label>
               <div className="grid grid-cols-2 gap-4 items-start my-4">
                 <Input
-                  label="Fullständigt namn"
+                  label={text.order.full_name}
                   onChange={(e) => setName(e.target.value)}
                   type="text"
                   parentClassName="col-span-2"
                   id="name"
-                  placeholder="Förnamn Efternamn"
+                  placeholder={text.order.name_example}
                   error={formErrors.name}
                 />
 
                 <Input
-                  label="Adress"
+                  label={text.order.delivery_address}
                   onChange={(e) => setStreetAddress(e.target.value)}
                   type="text"
                   id="address"
@@ -694,11 +694,11 @@ const Order = () => {
                   error={formErrors.address}
                 />
                 <Input
-                  label="Ort"
+                  label={text.order.city}
                   onChange={(e) => setCity(e.target.value)}
                   type="text"
                   id="city"
-                  placeholder="Göteborg"
+                  placeholder={text.order.city_example}
                   error={formErrors.city}
                 />
                 <div className="w-full col-span-2 -mt-4">
@@ -708,12 +708,12 @@ const Order = () => {
                       `block w-full text-md font-bold text-primary-600 ml-1 px-1 max-w-fit bg-primary-200 translate-y-3 transition`
                     )}
                   >
-                    {text.order.extra}
+                    {text.order.extra_info}
                   </label>
 
                   <textarea
                     id="extraInfo"
-                    placeholder="Till exempel våning, portkod eller annan information som kan vara bra för oss att veta."
+                    placeholder={text.order.extra_example}
                     onChange={(e) => setExtraInfo(e.target.value)}
                     className="border w-full border-primary bg-transparent p-2 rounded-md font-bold placeholder-secondary placeholder-opacity-10 text-secondary ring-1 ring-transparent focus:ring-primary focus:outline-none"
                   ></textarea>
@@ -727,7 +727,7 @@ const Order = () => {
                 <Input
                   onChange={(e) => setPhone(e.target.value)}
                   id="phone"
-                  label="Telefonnummer"
+                  label={text.order.phonenumber}
                   type="text"
                   placeholder="0701234567"
                   parentClassName="col-span-2 -mt-2"
@@ -736,16 +736,16 @@ const Order = () => {
                 <Input
                   onChange={(e) => setEmail(e.target.value)}
                   id="email"
-                  label="E-post"
+                  label={text.order.email}
                   type="text"
-                  placeholder="E-post"
+                  placeholder={text.order.email_example}
                   error={formErrors.email}
                 />
                 <Input
                   onChange={(e) => setPassword(e.target.value)}
                   id="password"
-                  label="Lösenord"
-                  placeholder="Lösenord"
+                  label={text.order.password}
+                  placeholder={text.order.password_example}
                   type="password"
                   error={formErrors.password}
                 />

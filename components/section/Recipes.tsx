@@ -24,7 +24,7 @@ const Recipes = () => {
         <Grid className="">
           <div className="relative p-4 pt-8 mt-8 min-h-96 scale-103 col-span-3 border-2 border-primary border-opacity-50 rounded-2xl ">
           <h3 className=" absolute bg-primary-200 px-4 -top-8 font-poppins text-6xl text-primary">
-            Denna vecka
+            {text.recipes.this_week}
           </h3>
           <ThisWeekRecipes />
         </div>
