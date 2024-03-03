@@ -5,6 +5,7 @@ import {
   onAuthStateChanged,
   User,
   createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signOut as firebaseSignOut,
 } from "@firebase/auth";
@@ -17,6 +18,7 @@ interface AuthContextInterface {
   signUp: (email: string, password: string) => Promise<User | null>;
   signIn: (email: string, password: string) => Promise<User | null>;
   signOut: () => Promise<void>;
+  forgotPassword: (email: string) => Promise<void>;
 }
 
 export const AuthContext = createContext<AuthContextInterface | null>({
@@ -29,6 +31,9 @@ export const AuthContext = createContext<AuthContextInterface | null>({
     throw new Error("AuthProvider not ready");
   },
   signOut: async () => {
+    throw new Error("AuthProvider not ready");
+  },
+  forgotPassword: async () => {
     throw new Error("AuthProvider not ready");
   },
 });
@@ -44,7 +49,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   async function signUp(email: string, password: string) {
     try {
-      const credential = await createUserWithEmailAndPassword(auth, email, password);
+      const credential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
       setUser(credential.user);
       return credential.user;
     } catch (err: any) {
@@ -55,7 +64,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   async function signIn(email: string, password: string) {
     try {
-      const credential = await signInWithEmailAndPassword(auth, email, password);
+      const credential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
       setUser(credential.user);
       return credential.user;
     } catch (err: any) {
@@ -68,6 +81,14 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     try {
       await firebaseSignOut(auth);
       setUser(null);
+    } catch (err: any) {
+      setError(err.message);
+    }
+  }
+
+  async function forgotPassword(email: string) {
+    try {
+      await sendPasswordResetEmail(auth, email);
     } catch (err: any) {
       setError(err.message);
     }
@@ -88,7 +109,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   }
 
   return (
-    <AuthContext.Provider value={{ user, error, signUp, signIn, signOut }}>
+    <AuthContext.Provider
+      value={{ user, error, signUp, signIn, signOut, forgotPassword }}
+    >
       {children}
     </AuthContext.Provider>
   );

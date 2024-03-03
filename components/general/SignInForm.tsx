@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import Button from "@/components/ui/Button";
@@ -12,6 +12,8 @@ import { useLang } from "@/hooks/useLang";
 
 const SignInForm = () => {
   const { onClose, isOpen } = useAuthModal();
+
+  const [email, setEmail] = useState<string>("");
 
   const {
     register,
@@ -40,6 +42,19 @@ const SignInForm = () => {
     }
   };
 
+  const onForgotPassword = () => {
+    if (!email) {
+      toast.error(text.auth.email_required);
+      return;
+    }
+    try {
+      auth.forgotPassword(email);
+      toast.success(text.auth.reset_email_sent);
+    } catch (error: any) {
+      toast.error(text.auth.reset_email_failed);
+    }
+  };
+
   return (
     <form
       action="#"
@@ -50,6 +65,7 @@ const SignInForm = () => {
         {...register("email", { required: true })}
         type="email"
         id="Email"
+        onChange={(e) => setEmail(e.target.value)}
         label={text.auth.email}
         error={errors.email}
       />
@@ -62,6 +78,8 @@ const SignInForm = () => {
         error={errors.password}
       />
 
+      <a className="underline text-gray-700 w-full flex justify-end cursor-pointer text-sm" onClick={onForgotPassword}>Glömt lösenord?</a>
+    
       <Button
         type="submit"
         className="inline-block shrink-0 w-56 px-12 py-3 text-sm font-medium  transition focus:outline-none focus:ring "
