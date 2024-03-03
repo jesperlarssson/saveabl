@@ -255,6 +255,9 @@ const svText = {
     login_failed: "Inloggningen misslyckades!",
     missing_account: "Har du inget konto?",
     has_account: "Har du redan ett konto?",
+    email_required: "E-post är obligatoriskt",
+    reset_email_sent: "Ett mail har skickats till din e-postadress",
+    reset_email_failed: "Det gick inte att skicka mail till din e-postadress",
   },
   my_pages: {
     title_signed_out: "Du är inte inloggad",
@@ -514,6 +517,9 @@ const enText = {
     login_failed: "Login failed!",
     missing_account: "Don't have an account?",
     has_account: "Already have an account?",
+    email_required: "Email is required",
+    reset_email_sent: "An email has been sent to your email address",
+    reset_email_failed: "Failed to send email to your email address",
   },
   my_pages: {
     title_signed_out: "You have not logged in",
@@ -732,6 +738,9 @@ const daText = {
     login_failed: "Login mislykkedes!",
     missing_account: "Har du ikke en konto?",
     has_account: "Har du allerede en konto?",
+    email_required: "Email er påkrævet",
+    reset_email_sent: "En e-mail er sendt til din e-mail-adresse",
+    reset_email_failed: "Det lykkedes ikke at sende e-mail til din e-mail-adresse",
   },
   my_pages: {
     subscription_details: "Abonnementsdetaljer",
