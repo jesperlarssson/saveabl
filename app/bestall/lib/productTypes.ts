@@ -24,7 +24,20 @@ const priceIdDeliveryStockholmEveryOtherWeek =
   "price_1OY5FsEhPZIzKmuiu5PVEK6o";
 const priceIdDeliveryStockholmStandard = "price_1OYG3tEhPZIzKmuiT4C0NZtl";
 
-
+export const getProductTypesFromLngCode = (lngCode: string): ProductType[] => {
+  console.log("lngCode", lngCode);
+  switch (lngCode) {
+    case "se":
+      return productTypesSe;
+    case "en":
+      console.log("en");
+      return productTypesEn;
+    case "dk":
+      return productTypesDk;
+    default:
+      return productTypes;
+  }
+}
 
 export const productTypes = [
   {
@@ -131,7 +144,7 @@ export const productTypesSe = [
 export const productTypesEn = [
   {
     id: "subscription",
-    label: "Prenumeration",
+    label: "Subscription",
     variants: [
       {
         label: "Varje vecka",

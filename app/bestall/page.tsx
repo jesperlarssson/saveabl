@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import { twMerge } from "tailwind-merge";
 import Button from "@/components/ui/Button";
 import useCheckout from "@/hooks/useCheckout";
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, use, useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import Section from "@/components/ui/Section";
 import { deliveryDayParser, getWeekNumber } from "@/helpers/format";
@@ -17,7 +17,7 @@ import {
   getShippingCostForProductId,
   isSubscription,
   priceIdEveryWeek,
-  productTypes,
+  getProductTypesFromLngCode,
 } from "./lib/productTypes";
 import Input from "@/components/ui/Input";
 import BodyText from "@/components/ui/BodyText";
@@ -34,8 +34,6 @@ import {
   shippingCostStage2,
   stockholmPostalCodes,
 } from "@/lib/zipCodes";
-import { Description } from "@radix-ui/react-dialog";
-import { add } from "date-fns";
 
 type RowError = {
   message: string | null;
@@ -57,9 +55,19 @@ const variants = {
 };
 
 const Order = () => {
+  const { text, lang } = useLang();
+
   const [showDeliveryOptions, setShowDeliveryOptions] = useState(false);
   const [showAddressFields, setShowAddressFields] = useState(false);
   const [stripeCheckoutIsLoading, setStripeCheckoutIsLoading] = useState(false);
+
+  const [productTypes, setProductTypes] = useState<any[]>(
+    getProductTypesFromLngCode(lang)
+  );
+
+  useEffect(() => {
+    setProductTypes(getProductTypesFromLngCode(lang));
+  }, [lang]);
 
   const searchParams = useSearchParams();
   const id = searchParams.get("id") || "1";
@@ -248,8 +256,6 @@ const Order = () => {
     setPassword,
     setDeliveryPeriodId,
   } = useCheckout();
-
-  const { text } = useLang();
 
   const handleConfirm = async () => {
     setCountry("SE");
@@ -486,7 +492,7 @@ const Order = () => {
                 {text.order.variant}
               </h3>
               <div className="flex gap-4">
-                {selectedType.variants.map((variant) => {
+                {selectedType.variants.map((variant: any) => {
                   const postalCode = address.postalCode || "";
                   const sthlmCustomer =
                     stockholmPostalCodes.includes(postalCode);
