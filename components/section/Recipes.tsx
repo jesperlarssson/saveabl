@@ -83,7 +83,7 @@ const Recipes = () => {
             onClick={fetchMorePrior}
           >
             {!loading ? (
-              " Hämta äldre recept"
+              text.recipes.older_recipes
             ) : (
               <div role="status" className=" w-full flex justify-center">
                 <svg

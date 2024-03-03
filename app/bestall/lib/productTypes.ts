@@ -147,19 +147,19 @@ export const productTypesEn = [
     label: "Subscription",
     variants: [
       {
-        label: "Varje vecka",
+        label: "Every week",
         productId: productIdEveryWeek,
         disabled: false,
-        price: "599kr/vecka",
+        price: "599kr/week",
         portionPrice: "50kr/portion",
         priceId: priceIdEveryWeek,
         stockholmPriceId: priceIdStockholmEveryWeek,
       },
       {
-        label: "Varannan vecka",
+        label: "Every other week",
         productId: productIdEveryOtherWeek,
         disabled: false,
-        price: "599kr/varannan vecka",
+        price: "599kr/every other week",
         portionPrice: "50kr/portion",
         priceId: priceIdEveryOtherWeek,
         stockholmPriceId: priceIdStockholmEveryOtherWeek,
@@ -168,10 +168,10 @@ export const productTypesEn = [
   },
   {
     id: "standard",
-    label: "Engångsköp",
+    label: "One time order",
     variants: [
       {
-        label: "Engångsköp",
+        label: "One time order",
         productId: productIdStandard,
         disabled: false,
         price: "659kr",
@@ -180,7 +180,7 @@ export const productTypesEn = [
         stockholmPriceId: priceIdStockholmStandard,
       },
       {
-        label: "Prova-på kasse",
+        label: "Saveabl taste teaser",
         productId: productIdStandard8Portions,
         disabled: false,
         price: "439kr",
@@ -294,24 +294,25 @@ export const getShippingCostForProductId = (id: string | null) => {
   }
 };
 
-export const getProductCostForPriceId = (id: string | null) => {
+export const getProductCostForPriceId = (id: string | null, lang: string) => {
+  const eng = lang !== "sv"
   switch (id) {
     case priceIdEveryWeek:
-      return "3 recept/vecka 599kr + frakt";
+      return eng ? "3 recipes/week 599kr + delivery" : "3 recept/vecka 599kr + frakt";
     case priceIdEveryOtherWeek:
-      return "3 recept/varannan v. 599kr + frakt";
+      return eng ? "3 recipes/every other week 599kr + delivery" : "3 recept/varannan v. 599kr + frakt";
     case priceIdStandard:
-      return "3 recept, 3-4 pers 659kr + frakt";
+      return eng ? "3 recipes, 3-4 pers 659kr + delivery" : "3 recept, 3-4 pers 659kr + frakt";
     case priceIdStandard8Portions:
-      return "2 recept, 3-4 pers 439kr + frakt";
+      return eng ? "2 recipes, 3-4 pers 439kr + delivery" : "2 recept, 3-4 pers 439kr + frakt";
     case priceIdStockholmEveryWeek:
-      return "3 recept/vecka 649kr + frakt";
+      return eng ? "3 recipes/week 649kr + delivery" : "3 recept/vecka 649kr + frakt";
     case priceIdStockholmEveryOtherWeek:
-      return "3 recept/varannan v. 649kr + frakt";
+      return eng ? "3 recipes/every other week 649kr + delivery" : "3 recept/varannan v. 649kr + frakt";
     case priceIdStockholmStandard:
-      return "3 recept, 3-4 pers 719kr + frakt";
+      return eng ? "3 recipes, 3-4 pers 719kr + delivery" : "3 recept, 3-4 pers 719kr + frakt";
     case priceIdStockholmStandard8Portions:
-      return "2 recept, 3-4 pers 479kr + frakt";
+      return eng ? "2 recipes, 3-4 pers 479kr + delivery" : "2 recept, 3-4 pers 479kr + frakt";
 
     default:
       throw new Error("No product id found for price id: " + id);

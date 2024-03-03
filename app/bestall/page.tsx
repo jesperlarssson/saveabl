@@ -89,15 +89,15 @@ const Order = () => {
 
   const [deliveryDaysToChoose, setDeliveryDaysToChoose] = useState<any[]>([
     {
-      label: "Lördag 9/3 kl. 09-18",
+      label: text.order.delivery_saturday,
       id: 6,
     },
     {
-      label: "Söndag 10/3 kl. 10-17",
+      label: text.order.delivery_sunday,
       id: 0,
     },
     {
-      label: "Måndag 11/3 kl. 16-22",
+      label: text.order.delivery_monday,
       id: 1,
     },
   ]);
@@ -400,11 +400,11 @@ const Order = () => {
     ) {
       setDeliveryDaysToChoose([
         {
-          label: "Söndag 10/3 kl. 10-17",
+          label: text.order.stockholm_sunday, 
           id: 0,
         },
         {
-          label: "Måndag 11/3 kl. 16-22",
+          label: text.order.stockholm_monday,
           id: 1,
         },
       ]);
@@ -519,7 +519,7 @@ const Order = () => {
                         {getProductCostForPriceId(
                           sthlmCustomer
                             ? variant.stockholmPriceId
-                            : variant.priceId
+                            : variant.priceId, lang
                         )}
                       </span>
                     </CheckoutButton>

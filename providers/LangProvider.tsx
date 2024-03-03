@@ -175,6 +175,7 @@ const svText = {
     title: "Recept",
     next_week: "Nästa vecka:",
     this_week: "Denna vecka:",
+    older_recipes: "Hämta äldre recept"
   },
 
   recipe_slug: {
@@ -204,6 +205,11 @@ const svText = {
     type: "Gör dina val nedan:",
     variant: "Recept utformade för familjer på 3-4 pers:",
     deliveryDay: "Leveransalternativ:",
+    delivery_saturday: "Lördag 9/3 kl. 09-18",
+    delivery_sunday: "Söndag 10/3 kl. 10-17",
+    delivery_monday: "Måndag 11/3 kl. 16-22",
+    stockholm_sunday: "Söndag 10/3 kl. 10-17",
+    stockholm_monday: "Måndag 11/3 kl. 16-22",
     address: "Leveransinfo:",
     extra: "Extra info",
     contact: "Kontaktuppgifter:",
@@ -436,6 +442,7 @@ const enText = {
     title: "Recipe",
     next_week: "Next week:",
     this_week: "This week:",
+    older_recipes: "Load older recipes"
   },
   recipe_slug: {
     contains: "Contains",
@@ -464,6 +471,11 @@ const enText = {
     type: "Which type?",
     variant: "Select variant:",
     deliveryDay: "Choose delivery day:",
+    delivery_saturday: "Saturday 9/3 at 09-18",
+    delivery_sunday: "Sunday 10/3 at 10-17",
+    delivery_monday: "Monday 11/3 at 16-22",
+    stockholm_sunday: "Sunday 10/3 at 10-17",
+    stockholm_monday: "Monday 11/3 at 16-22",
     address: "Fill in your delivery address:",
     extra: "Extra information",
     contact: "Contact details",
@@ -662,6 +674,7 @@ const daText = {
     title: "Opskrift",
     next_week: "Næste uge:",
     this_week: "Denne uge:",
+    older_recipes: "Hent ældre opskrifter"
   },
   recipe_slug: {
     contains: "Indeholder",
