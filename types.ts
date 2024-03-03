@@ -88,6 +88,7 @@ export interface Recipe {
   contentAllergies: string;
   chef: Chef;
   image: HyImage;
+  recipeComments: any[];
   freezabl: boolean;
 }
 
@@ -125,4 +126,3 @@ export interface Post {
 export interface PostsData {
   posts: Post[];
 }
-

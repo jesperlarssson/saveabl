@@ -10,6 +10,7 @@ import ThisWeekRecipes from "./ThisWeekRecipes";
 import CommentSection from "../section/CommentSection";
 import RatingButton from "../ui/RatingButton";
 import { useLang } from "@/hooks/useLang";
+import CommentForm from "./CommentForm";
 
 interface RecipeLayoutProps {
   recipe: Recipe;
@@ -17,6 +18,12 @@ interface RecipeLayoutProps {
 
 const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
   const { lang, text } = useLang();
+
+  const [comments, setComments] = useState(recipe?.recipeComments || []);
+  const handleNewComment = (comment: any) => {
+    setComments(allComments => [...allComments, comment]);
+  };
+  const [ratingSum, setRatingSum] = useState<number>();
 
   const [recept, setRecept] = useState({
     title: lang != "sv" ? recipe?.title : recipe?.localizations[0].title,
@@ -36,7 +43,17 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
       lang != "sv"
         ? recipe?.contentAllergies
         : recipe?.localizations[0].contentAllergies,
+    recipeComments: recipe?.recipeComments,
   });
+
+  const calculateRating = () => {
+    var sum = 0;
+    for (let index = 0; index < comments.length; index++) {
+      const comment = comments[index];
+      sum += comment.rating;
+    }
+    setRatingSum(sum / comments.length);
+  };
 
   useEffect(() => {
     const temp = {
@@ -59,8 +76,12 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
         lang != "sv"
           ? recipe?.contentAllergies
           : recipe?.localizations[0].contentAllergies,
+      recipeComments: recipe?.recipeComments,
     };
     setRecept(temp);
+    calculateRating();
+
+    
   }, [lang, recipe]);
 
   if (recipe?.deprecated) {
@@ -141,7 +162,8 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
           )}
         </Card> */}
       </Grid>
-      {/* <CommentSection /> */}
+      {comments.length > 0 && <CommentSection comments={comments} />}
+      <CommentForm  recipeId={recipe.id} onNewComment={handleNewComment} />
     </Section>
   );
 };
