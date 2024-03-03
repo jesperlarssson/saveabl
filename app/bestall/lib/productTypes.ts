@@ -25,7 +25,161 @@ const priceIdDeliveryStockholmEveryOtherWeek =
 const priceIdDeliveryStockholmStandard = "price_1OYG3tEhPZIzKmuiT4C0NZtl";
 
 
+
 export const productTypes = [
+  {
+    id: "subscription",
+    label: "Prenumeration",
+    variants: [
+      {
+        label: "Varje vecka",
+        productId: productIdEveryWeek,
+        disabled: false,
+        price: "599kr/vecka",
+        portionPrice: "50kr/portion",
+        priceId: priceIdEveryWeek,
+        stockholmPriceId: priceIdStockholmEveryWeek,
+      },
+      {
+        label: "Varannan vecka",
+        productId: productIdEveryOtherWeek,
+        disabled: false,
+        price: "599kr/varannan vecka",
+        portionPrice: "50kr/portion",
+        priceId: priceIdEveryOtherWeek,
+        stockholmPriceId: priceIdStockholmEveryOtherWeek,
+      },
+    ],
+  },
+  {
+    id: "standard",
+    label: "Engångsköp",
+    variants: [
+      {
+        label: "Engångsköp",
+        productId: productIdStandard,
+        disabled: false,
+        price: "659kr",
+        portionPrice: "55kr/portion",
+        priceId: priceIdStandard,
+        stockholmPriceId: priceIdStockholmStandard,
+      },
+      {
+        label: "Prova-på kasse",
+        productId: productIdStandard8Portions,
+        disabled: false,
+        price: "439kr",
+        portionPrice: "55kr/portion",
+
+        priceId: priceIdStandard8Portions,
+        stockholmPriceId: priceIdStockholmStandard8Portions,
+      },
+    ],
+  },
+];
+export const productTypesSe = [
+  {
+    id: "subscription",
+    label: "Prenumeration",
+    variants: [
+      {
+        label: "Varje vecka",
+        productId: productIdEveryWeek,
+        disabled: false,
+        price: "599kr/vecka",
+        portionPrice: "50kr/portion",
+        priceId: priceIdEveryWeek,
+        stockholmPriceId: priceIdStockholmEveryWeek,
+      },
+      {
+        label: "Varannan vecka",
+        productId: productIdEveryOtherWeek,
+        disabled: false,
+        price: "599kr/varannan vecka",
+        portionPrice: "50kr/portion",
+        priceId: priceIdEveryOtherWeek,
+        stockholmPriceId: priceIdStockholmEveryOtherWeek,
+      },
+    ],
+  },
+  {
+    id: "standard",
+    label: "Engångsköp",
+    variants: [
+      {
+        label: "Engångsköp",
+        productId: productIdStandard,
+        disabled: false,
+        price: "659kr",
+        portionPrice: "55kr/portion",
+        priceId: priceIdStandard,
+        stockholmPriceId: priceIdStockholmStandard,
+      },
+      {
+        label: "Prova-på kasse",
+        productId: productIdStandard8Portions,
+        disabled: false,
+        price: "439kr",
+        portionPrice: "55kr/portion",
+
+        priceId: priceIdStandard8Portions,
+        stockholmPriceId: priceIdStockholmStandard8Portions,
+      },
+    ],
+  },
+];
+export const productTypesEn = [
+  {
+    id: "subscription",
+    label: "Prenumeration",
+    variants: [
+      {
+        label: "Varje vecka",
+        productId: productIdEveryWeek,
+        disabled: false,
+        price: "599kr/vecka",
+        portionPrice: "50kr/portion",
+        priceId: priceIdEveryWeek,
+        stockholmPriceId: priceIdStockholmEveryWeek,
+      },
+      {
+        label: "Varannan vecka",
+        productId: productIdEveryOtherWeek,
+        disabled: false,
+        price: "599kr/varannan vecka",
+        portionPrice: "50kr/portion",
+        priceId: priceIdEveryOtherWeek,
+        stockholmPriceId: priceIdStockholmEveryOtherWeek,
+      },
+    ],
+  },
+  {
+    id: "standard",
+    label: "Engångsköp",
+    variants: [
+      {
+        label: "Engångsköp",
+        productId: productIdStandard,
+        disabled: false,
+        price: "659kr",
+        portionPrice: "55kr/portion",
+        priceId: priceIdStandard,
+        stockholmPriceId: priceIdStockholmStandard,
+      },
+      {
+        label: "Prova-på kasse",
+        productId: productIdStandard8Portions,
+        disabled: false,
+        price: "439kr",
+        portionPrice: "55kr/portion",
+
+        priceId: priceIdStandard8Portions,
+        stockholmPriceId: priceIdStockholmStandard8Portions,
+      },
+    ],
+  },
+];
+export const productTypesDk = [
   {
     id: "subscription",
     label: "Prenumeration",
