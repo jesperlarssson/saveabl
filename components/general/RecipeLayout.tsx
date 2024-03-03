@@ -10,6 +10,27 @@ import ThisWeekRecipes from "./ThisWeekRecipes";
 import CommentSection from "../section/CommentSection";
 import RatingButton from "../ui/RatingButton";
 import { useLang } from "@/hooks/useLang";
+import CommentForm from "./CommentForm";
+import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs';
+
+export const getStars = (rating: number) => {
+  const stars = [<BsStar key={0} />, <BsStar key={1} />, <BsStar key={2} />, <BsStar key={3} />, <BsStar key={4} />];
+
+  for (let index = 0; index < stars.length; index++) {
+    if (index <= rating - 1) {
+      stars[index] = <BsStarFill />;
+    }
+    if (rating - 1 - index <= 0.65 && rating - 1 - index >= 0.2) {
+      stars[index + 1] = <BsStarHalf />;
+    } else if (rating - 1 - index >= 0.65) {
+      stars[index + 1] = <BsStarFill />;
+    }
+  }
+
+  return stars.map((star, index) => (
+    <div key={`star-${index}`}>{star}</div>
+  ));
+};
 
 interface RecipeLayoutProps {
   recipe: Recipe;
@@ -17,6 +38,12 @@ interface RecipeLayoutProps {
 
 const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
   const { lang, text } = useLang();
+
+  const [comments, setComments] = useState(recipe?.recipeComments || []);
+  const handleNewComment = (comment: any) => {
+    setComments((allComments) => [...allComments, comment]);
+  };
+  const [ratingSum, setRatingSum] = useState<number>(0);
 
   const [recept, setRecept] = useState({
     title: lang != "sv" ? recipe?.title : recipe?.localizations[0].title,
@@ -36,7 +63,17 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
       lang != "sv"
         ? recipe?.contentAllergies
         : recipe?.localizations[0].contentAllergies,
+    recipeComments: recipe?.recipeComments,
   });
+
+  const calculateRating = () => {
+    var sum = 0;
+    for (let index = 0; index < comments.length; index++) {
+      const comment = comments[index];
+      sum += comment.rating;
+    }
+    setRatingSum(sum / comments.length);
+  };
 
   useEffect(() => {
     const temp = {
@@ -59,8 +96,10 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
         lang != "sv"
           ? recipe?.contentAllergies
           : recipe?.localizations[0].contentAllergies,
+      recipeComments: recipe?.recipeComments,
     };
     setRecept(temp);
+    calculateRating();
   }, [lang, recipe]);
 
   if (recipe?.deprecated) {
@@ -82,6 +121,9 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
           </div>
           <div className="col-span-4 sm:col-span-3 flex flex-col justify-end gap-2">
             {/* <RatingButton recipeId={recipe?.id} /> */}
+            <div className="flex mt-2 text-star">
+              {ratingSum > 1 && getStars(ratingSum)}
+            </div>
             <h2 className="  font-poppins text-secondary text-2xl sm:text-4xl">
               {recept.title}
             </h2>
@@ -141,7 +183,8 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
           )}
         </Card> */}
       </Grid>
-      {/* <CommentSection /> */}
+      {comments.length > 0 && <CommentSection comments={comments} />}
+      <CommentForm recipeId={recipe.id} onNewComment={handleNewComment} />
     </Section>
   );
 };

@@ -512,6 +512,12 @@ export async function getRecipeWithSlug(slug: string) {
           steg
           title
         }
+        recipeComments {
+          comment
+          createdAt
+          name
+          rating
+        }
         freezabl
       }
     }
