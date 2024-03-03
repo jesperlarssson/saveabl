@@ -11,6 +11,26 @@ import CommentSection from "../section/CommentSection";
 import RatingButton from "../ui/RatingButton";
 import { useLang } from "@/hooks/useLang";
 import CommentForm from "./CommentForm";
+import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs';
+
+export const getStars = (rating: number) => {
+  const stars = [<BsStar key={0} />, <BsStar key={1} />, <BsStar key={2} />, <BsStar key={3} />, <BsStar key={4} />];
+
+  for (let index = 0; index < stars.length; index++) {
+    if (index <= rating - 1) {
+      stars[index] = <BsStarFill />;
+    }
+    if (rating - 1 - index <= 0.65 && rating - 1 - index >= 0.2) {
+      stars[index + 1] = <BsStarHalf />;
+    } else if (rating - 1 - index >= 0.65) {
+      stars[index + 1] = <BsStarFill />;
+    }
+  }
+
+  return stars.map((star, index) => (
+    <div key={`star-${index}`}>{star}</div>
+  ));
+};
 
 interface RecipeLayoutProps {
   recipe: Recipe;
@@ -21,9 +41,9 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
 
   const [comments, setComments] = useState(recipe?.recipeComments || []);
   const handleNewComment = (comment: any) => {
-    setComments(allComments => [...allComments, comment]);
+    setComments((allComments) => [...allComments, comment]);
   };
-  const [ratingSum, setRatingSum] = useState<number>();
+  const [ratingSum, setRatingSum] = useState<number>(0);
 
   const [recept, setRecept] = useState({
     title: lang != "sv" ? recipe?.title : recipe?.localizations[0].title,
@@ -80,8 +100,6 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
     };
     setRecept(temp);
     calculateRating();
-
-    
   }, [lang, recipe]);
 
   if (recipe?.deprecated) {
@@ -103,6 +121,9 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
           </div>
           <div className="col-span-4 sm:col-span-3 flex flex-col justify-end gap-2">
             {/* <RatingButton recipeId={recipe?.id} /> */}
+            <div className="flex mt-2 text-star">
+              {ratingSum > 1 && getStars(ratingSum)}
+            </div>
             <h2 className="  font-poppins text-secondary text-2xl sm:text-4xl">
               {recept.title}
             </h2>
@@ -163,7 +184,7 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
         </Card> */}
       </Grid>
       {comments.length > 0 && <CommentSection comments={comments} />}
-      <CommentForm  recipeId={recipe.id} onNewComment={handleNewComment} />
+      <CommentForm recipeId={recipe.id} onNewComment={handleNewComment} />
     </Section>
   );
 };

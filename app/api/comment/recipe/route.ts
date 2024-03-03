@@ -14,8 +14,6 @@ const graphCmsMutationClient = new GraphQLClient(
   }
 )
 
-export { graphCmsClient, graphCmsMutationClient }
-
 export async function POST(request: Request) {
     const body = await request.json();
     const { comment, name, rating, recipeId } = body;
