@@ -1,7 +1,10 @@
+"use client";
+
 import React from "react";
 
 import { BsStar, BsStarFill, BsStarHalf } from "react-icons/bs";
 import Card from "../ui/Card";
+import { useLang } from "@/hooks/useLang";
 
 export const getStars = (rating: number) => {
   const stars = [
@@ -31,10 +34,11 @@ interface CommentSectionProps {
 }
 
 const CommentSection: React.FC<CommentSectionProps> = ({ comments }) => {
+  const { text } = useLang();
   if (!comments) return null;
   return (
     <div className="border-t border-primary border-opacity-50 py-20 text-secondary">
-      <h2 className="text-2xl font-bold mb-10 ">Kommentarer</h2>
+      <h2 className="text-2xl font-bold mb-10 ">{text.recipes.comment}</h2>
       <div>
         {comments?.map((comment) => {
           return (

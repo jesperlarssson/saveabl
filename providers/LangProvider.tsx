@@ -175,7 +175,8 @@ const svText = {
     title: "Recept",
     next_week: "Nästa vecka:",
     this_week: "Denna vecka:",
-    older_recipes: "Hämta äldre recept"
+    older_recipes: "Hämta äldre recept",
+    comment: "Kommentarer"
   },
 
   recipe_slug: {
@@ -445,7 +446,8 @@ const enText = {
     title: "Recipe",
     next_week: "Next week:",
     this_week: "This week:",
-    older_recipes: "Load older recipes"
+    older_recipes: "Load older recipes",
+    comment: "Comments"
   },
   recipe_slug: {
     contains: "Contains",
@@ -471,15 +473,15 @@ const enText = {
     bullet1: "",
     bullet2: "",
     bullet3: "",
-    type: "Which type?",
-    variant: "Select variant:",
-    deliveryDay: "Choose delivery day:",
+    type: "Make your choices below:",
+    variant: "Recipes designed for families of 3-4 people:",
+    deliveryDay: "Delivery options:",
     delivery_saturday: "Saturday 9/3 at 09-18",
     delivery_sunday: "Sunday 10/3 at 10-17",
     delivery_monday: "Monday 11/3 at 16-22",
     stockholm_sunday: "Sunday 10/3 at 10-17",
     stockholm_monday: "Monday 11/3 at 16-22",
-    address: "Fill in your delivery address:",
+    address: "Delivery info:",
     extra: "Extra information",
     contact: "Contact details",
     terms: "I accept the terms and understand that an account will be created.",
@@ -680,7 +682,8 @@ const daText = {
     title: "Opskrift",
     next_week: "Næste uge:",
     this_week: "Denne uge:",
-    older_recipes: "Hent ældre opskrifter"
+    older_recipes: "Hent ældre opskrifter",
+    comment: "Kommentarer",
   },
   recipe_slug: {
     contains: "Indeholder",
