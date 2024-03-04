@@ -176,7 +176,11 @@ const svText = {
     next_week: "Nästa vecka:",
     this_week: "Denna vecka:",
     older_recipes: "Hämta äldre recept",
-    comment: "Kommentarer"
+    comment: "Kommentarer",
+    comment_name: "Namn",
+    rate: "Betyg:",
+    write_comment: "Kommentera",
+    send_comment: "Kommentera",
   },
 
   recipe_slug: {
@@ -447,7 +451,11 @@ const enText = {
     next_week: "Next week:",
     this_week: "This week:",
     older_recipes: "Load older recipes",
-    comment: "Comments"
+    comment: "Comments",
+    comment_name: "Name",
+    rate: "Rate:", 
+    write_comment: "Comment", 
+    send_comment: "Comment"
   },
   recipe_slug: {
     contains: "Contains",
@@ -684,6 +692,11 @@ const daText = {
     this_week: "Denne uge:",
     older_recipes: "Hent ældre opskrifter",
     comment: "Kommentarer",
+    comment_name: "Navn",
+    rate: "Bedømme:",
+    write_comment: "Kommentar",
+    send_comment: "Kommentere",
+  
   },
   recipe_slug: {
     contains: "Indeholder",

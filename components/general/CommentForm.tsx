@@ -2,6 +2,8 @@ import React, { useState, FormEvent } from "react";
 import axios from "axios";
 import Button from "../ui/Button";
 import { twMerge } from "tailwind-merge";
+import { useLang } from "@/hooks/useLang";
+
 
 interface CommentFormProps {
   recipeId: string;
@@ -18,6 +20,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
   const [nameError, setNameError] = useState("");
   const [commentError, setCommentError] = useState("");
 
+  const { text, lang } = useLang();
   const stars = [1, 2, 3, 4, 5];
   const [rating, setRating] = useState(-1);
   const [hoveredRating, setHoveredRating] = useState(-1);
@@ -81,7 +84,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
   return (
     <div className="relative">
       <form onSubmit={onSubmitComment} className="p-4 flex flex-col">
-        <label className="mt-4 text-dark font-open-sans text-secondary text-xl font-bold mb-2">Namn</label>
+        <label className="mt-4 text-dark font-open-sans text-secondary text-xl font-bold mb-2">{text.recipes.comment_name} </label>
         <input
           type="text"
           value={name}
@@ -101,7 +104,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
         )}
 
         <div className="flex w-36 justify-between items-center  text-xl mt-8">
-          <span className="font-bold text-secondary mr-2">Betyg:</span>
+          <span className="font-bold text-secondary mr-2">{text.recipes.rate}</span>
           {stars.map((star, index) => (
             <div key={star}>
               <svg
@@ -135,7 +138,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
           </span>
         )}
 
-        <label className="mt-8 text-secondary text-xl font-bold font-open-sans mb-2">Kommentar</label>
+        <label className="mt-8 text-secondary text-xl font-bold font-open-sans mb-2">{text.recipes.write_comment} </label>
         <textarea
           value={comment}
           onChange={(e) => setComment(e.target.value)}
@@ -154,7 +157,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
         )}
 
         <Button className="max-w-xs mt-8" type="submit">
-          Kommentera
+          {text.recipes.send_comment}
         </Button>
       </form>
 
