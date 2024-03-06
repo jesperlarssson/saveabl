@@ -96,7 +96,7 @@ const svText = {
   nav: {
     order: "Beställ nu",
     about: "Om oss",
-    recipe: "Recept",
+    recipe: "Menyer",
     news: "Nyheter",
     log_in: "Logga in",
     log_out: "Logga ut",
@@ -105,8 +105,8 @@ const svText = {
   },
   page: {
     hero: {
-      title: "Kockförberedda matkassen med 5 x lägre klimatpåverkan",
-      subtitle: "Recept klara på 15 minuter.",
+      title: "Kockförberedda matkassen som gör klimatet en tjänst",
+      subtitle: "",
       order_now: "Beställ här",
     },
     usp: {
@@ -382,8 +382,8 @@ const enText = {
   },
   page: {
     hero: {
-      title: "Chef-prepared meal kit with 5 x lower footprint",
-      subtitle: "Michelin-class meals ready within 15 min.",
+      title: "Chef-prepared meal kit that benefits the climate",
+      subtitle: "",
       order_now: "Get started",
     },
     usp: {
@@ -615,7 +615,7 @@ const daText = {
   nav: {
     order: "Bestil nu",
     about: "Om os",
-    recipe: "Opskrift",
+    recipe: "Menuer",
     news: "Nyheder",
     log_in: "Log ind",
     log_out: "Log ud",
@@ -625,7 +625,7 @@ const daText = {
   page: {
     hero: {
       title: "Færdiglavede madkasse der gør klimaet en tjeneste",
-      subtitle: "Miljøvenlig på et helt nyt niveau.",
+      subtitle: "",
       order_now: "Bestil nu",
     },
     usp: {
