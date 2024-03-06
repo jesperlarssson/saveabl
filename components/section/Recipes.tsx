@@ -22,8 +22,8 @@ const Recipes = () => {
       <Title>{text.recipes.title}</Title>
       <div className="my-10 min-h-screen">
         <Grid className="">
-          <div className="relative p-4 pt-8 mt-8 min-h-96 scale-103 col-span-3 border-2 border-primary border-opacity-50 rounded-2xl ">
-          <h3 className=" absolute bg-primary-200 px-4 -top-8 font-poppins text-6xl text-primary">
+          <div className="relative p-4 pt-0 mt-0 min-h-96 scale-103 col-span-3 border-1 border-primary border-opacity-50 rounded-2xl ">
+          <h3 className=" font-poppins text-3xl text-primary">
             {text.recipes.this_week}
           </h3>
           <ThisWeekRecipes />
