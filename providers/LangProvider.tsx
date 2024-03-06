@@ -332,6 +332,7 @@ const svText = {
     deliveryDayModalPlaceholder: "Välj leveransdag",
     no_connection: "Ingen aktiv prenumeration",
     no_connection_desc: "Vi stödjer tyvärr inte att visa upp engångsköp ännu.",
+    contact_us: "Kontakta oss",
   },
   my_account: {
     account_settings: "Kontoinställningar",
