@@ -139,11 +139,11 @@ const MyPageContent = () => {
     return (
       <div className="flex flex-col items-center mt-10 ">
         <TitleH2>
-          {text?.my_pages?.title_signed_out ?? "Du är inte inloggad"}
+          {text?.my_pages?.title_signed_out ?? text.my_pages.title_signed_out}
         </TitleH2>
         <BodyText>
           {text?.my_pages?.login_instruction ??
-            "Logga in för att se information om dina beställningar."}
+            text.my_pages.login_instruction}
         </BodyText>
       </div>
     );

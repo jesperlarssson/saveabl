@@ -32,7 +32,7 @@ const MessageModal = () => {
       <div className="flex flex-col w-full gap-4">
         <p> {message}</p>
         <Button className=" px-8 py-2 mt-4" onClick={onClose}>
-          Stäng
+          Close
         </Button>
       </div>
     </Modal>

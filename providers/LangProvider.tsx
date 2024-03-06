@@ -168,7 +168,7 @@ const svText = {
         text: "Klimatfrågan är enormt viktig för oss och vi försöker bidra på alla sätt vi kan. Med hjälp av RISE har det räknats ut att våra middagar har 5 gånger lägre klimatpåverkan än en genomsnittlig svensk middag. Sättet som vi har uppnått det är genom att rädda bra matvaror från att slängas helt i onödan, vilket i sin tur gör att mindre mat behöver odlas, färre transporter behöver rulla och mindre vatten behövs till jordbruken. Genom att visa på hur otroligt gott det kan vara att äta vegetariskt vill vi inspirera till en kost som är mindre baserad på kött vilket även det leder till en lägre klimatpåverkan och vi jobbar just nu på att ta fram ett retursystem för våra plastburkar till såser tillsammans med Gordon Delivery för att ytterligare minska vår påverkan.",
       },
     ],
-    faq: "Vanliga frågor",
+    faq: "",
   },
 
   recipes: {
@@ -444,7 +444,7 @@ const enText = {
         text: "The climate issue is enormously important to us, and we are trying to contribute in every way we can. An independent research shows that our meals’ footprint is 5 times lower than the Swedish average. The ways we achieve this is by rescuing good food from being discarded entirely unnecessarily, which in turn reduces the need to cultivate less food, fewer transports are required, and less water is needed for agriculture. By demonstrating how incredibly delicious it can be to eat vegetarian, we aim to inspire a diet that is less dependent on meat which is also a way to achieve a lower climate footprint. Currently we are working on Saveabl Reuse, a return system for our plastic sauce containers in cooperation with Gordon Delivery to further lower our impact.",
       },
     ],
-    faq: "Frequently Asked Questions",
+    faq: "",
   },
 
   recipes: {
@@ -551,6 +551,7 @@ const enText = {
     greeting_suffix: "!",
     signed_in_as_prefix: "You are signed in as",
     sign_out_button: "Sign out",
+    contact_button: "Contact us",
     current_subscription_status: "Your current subscription plan:",
     subscription_label: "Subscription:",
     weekly: "Weekly",
@@ -685,7 +686,7 @@ const daText = {
         text: "Klimaspørgsmålet er enormt vigtigt for os og vi forsøger at bidrage på alle måder vi kan. Ved hjælp af RISE er det blevet beregnet at vores middage har en 5 gange lavere klimapåvirkning end en gennemsnitlig svensk middag. Den måde vi har opnået dette på er ved at redde gode madvarer fra at blive smidt ud helt unødvendigt, hvilket igen betyder, at mindre mad behøver dyrkes, færre transporter er nødvendige og mindre vand er nødvendigt til landbruget. Ved at vise hvor utroligt lækkert det kan være at spise vegetarisk ønsker vi at inspirere til en kost der er mindre baseret på kød, hvilket også fører til en lavere klimapåvirkning. Vi arbejder i øjeblikket på at udvikle et retursystem for vores plastikbøtter til saucer i samarbejde med Gordon Delivery for yderligere at mindske vores påvirkning.",
       },
     ],
-    faq: "Ofte stillede spørgsmål",
+    faq: "",
   },
   recipes: {
     title: "Opskrift",
@@ -773,6 +774,9 @@ const daText = {
     reset_email_failed: "Det lykkedes ikke at sende e-mail til din e-mail-adresse",
   },
   my_pages: {
+    title_signed_out: "Du er ikke logget ind",
+    login_instruction: "Log ind for at se information om dine ordrer.",
+    signed_in_as_prefix: "Du er logget ind som",
     subscription_details: "Abonnementsdetaljer",
     billing_frequency: "Faktureringsfrekvens",
     weekly: "Ugentlig",
@@ -812,5 +816,7 @@ const daText = {
     deliveryDayModalPlaceholder: "Vælg leveringsdag",
     no_connection: "Ingen aktiv abonnement",
     no_connection_desc: "Vi understøtter desværre ikke visning af engangskøb endnu.",
+    sign_out_button: "Log ud",
+    contact_button: "Kontakt os",
   },
 };

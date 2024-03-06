@@ -78,7 +78,7 @@ const SignInForm = () => {
         error={errors.password}
       />
 
-      <a className="underline text-gray-700 w-full flex justify-end cursor-pointer text-sm" onClick={onForgotPassword}>Glömt lösenord?</a>
+      <a className="underline text-gray-700 w-full flex justify-end cursor-pointer text-sm" onClick={onForgotPassword}>{text.auth.forgot_password} </a>
     
       <Button
         type="submit"
