@@ -382,7 +382,7 @@ const enText = {
   },
   page: {
     hero: {
-      title: "Chef-prepared meal kit that benefits the climate",
+      title: "The meal kit that benefits the climate",
       subtitle: "",
       order_now: "Get started",
     },
