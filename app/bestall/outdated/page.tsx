@@ -542,7 +542,7 @@ const Order = () => {
           </div>
         </div>
 
-        <h3 className="font-poppins text-lg mt-2">Kontaktuppgifter</h3>
+        <h3 className="font-poppins text-lg mt-4">Kontaktuppgifter</h3>
         <div className="grid grid-cols-2 gap-4">
           <Input
             onChange={(e) => setPhone(e.target.value)}

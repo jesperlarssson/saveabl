@@ -726,7 +726,7 @@ const Order = () => {
                 </div>
               </div>
 
-              <h3 className="font-poppins text-lg mt-4 text-secondary">
+              <h3 className="font-poppins text-lg mt-3 text-secondary">
                 {text.order.contact}
               </h3>
               <div className="grid grid-cols-2 gap-4">
