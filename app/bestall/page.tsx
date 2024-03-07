@@ -491,7 +491,6 @@ const Order = () => {
               >
                 {text.order.variant}
               </h3>
-              <div className="flex gap-4">
               <div className="flex gap-4 mb-4">
                 {selectedType.variants.map((variant: any) => {
                   const postalCode = address.postalCode || "";
