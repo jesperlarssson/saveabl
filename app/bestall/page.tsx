@@ -492,6 +492,7 @@ const Order = () => {
                 {text.order.variant}
               </h3>
               <div className="flex gap-4">
+              <div className="flex gap-4 mb-4">
                 {selectedType.variants.map((variant: any) => {
                   const postalCode = address.postalCode || "";
                   const sthlmCustomer =
@@ -534,7 +535,7 @@ const Order = () => {
                     animate="open"
                     exit="closed"
                     variants={variants}
-                    className="mt-2"
+                    className="mt-2 mb-4"
                   >
                     <h3
                       key="title-delivery"
@@ -680,7 +681,7 @@ const Order = () => {
               >
                 {text.order.address}
               </label>
-              <div className="grid grid-cols-2 gap-4 items-start my-4">
+              <div className="grid grid-cols-2 gap-4 items-start my-2">
                 <Input
                   label={text.order.full_name}
                   onChange={(e) => setName(e.target.value)}

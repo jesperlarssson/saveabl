@@ -22,7 +22,7 @@ const Recipes = () => {
       <Title>{text.recipes.title}</Title>
       <div className="my-10 min-h-screen">
         <Grid className="">
-          <div className="relative p-4 pt-0 mt-0 min-h-96 scale-103 col-span-3 border-1 border-primary border-opacity-50 rounded-2xl ">
+          <div className="relative p-4 pt-0 mt-0 min-h-96 scale-103 col-span-3 border-0 border-primary border-opacity-50 rounded-2xl "> 
           <h3 className=" font-poppins text-3xl text-primary">
             {text.recipes.this_week}
           </h3>
@@ -31,7 +31,7 @@ const Recipes = () => {
 
           {nextWeek.length > 2 && (
             <div className="col-span-3">
-              <h3 className="font-poppins text-3xl text-primary">
+              <h3 className="font-poppins text-3xl text-primary mt-4">
                 {text.recipes.next_week}
               </h3>
               <Grid className=" gap-8 pt-4">
