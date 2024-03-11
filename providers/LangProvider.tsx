@@ -667,14 +667,14 @@ const daText = {
   about_us: {
     title: "Redningsbar, noget der kan reddes",
     description:
-      "Hos Saveabl identificerer vi systematisk spild hos producenter og grossister og laver en færdig madpose baseret på det, der skal reddes! Vores madpose findes i det magiske grænseland mellem en traditionel madpose og færdiglavet takeaway. Ud over klimaspørgsmålet tror vi stærkt på bekvemmelighed og har derfor udviklet en madpose, der er klar på 15 minutter. Utroligt smidigt og utroligt lækkert!",
+      "Hos Saveabl identificerer vi systematisk spild hos producenter og grossister og laver en færdig måltidskasse baseret på det, der skal reddes! Vores måltidskasse findes i det magiske grænseland mellem en traditionel måltidskasse og færdiglavet takeaway. Ud over klimaspørgsmålet tror vi stærkt på bekvemmelighed og har derfor udviklet en måltidskasse, der er klar på 15 minutter. Utroligt smidigt og utroligt lækkert!",
     sections: [
       {
         title: "Hvem vi er",
         text: "Saveabl bestod af tre studerende og en kok, da vi åbnede dørene i november 2021. Den første idé til det, der skulle komme til at blive Saveabl, var opstået sommeren 2020, da Jeroen og Alexander studerede sammen. De forventede sig mindst sagt en hurtigere og smidigere opstart end virkeligheden viste sig at være. I dag består teamet af Jeroen, der styrer skuden, Emil, der hver uge fremkommer med nye kreative opskrifter og har ansvar for det operationelle. Louise sikrer, at vi når ud til de rigtige kunder og kan ekspandere. Hassan har ansvaret for pakningen og sikrer, at vores kunder mødes af en behagelig syn hver uge. Jesper designer og skaber en identitet for Saveabl, og Alexander sørger for, at vi har styr på juraen.",
       },
       {
-        title: "Vores madpose",
+        title: "Vores måltidskasse",
         text: "Vores madkasse bygger på tre værdier: den skal være klimavenlig, super praktisk og ekstremt lækker, altså næsten ufatteligt lækker. Vi er fuldstændig overbeviste om at det er muligt uden at prisen bliver for høj. Hvordan kan vi gøre det, tænker du måske nu? Vi samarbejder med gårde, producenter og grossister og hjælper dem med at redde madvarer der afviger i form, farve, størrelse, er overskud eller resultatet af logistikfejl. Det betyder at den mad du spiser er mad der ellers ville være blevet kasseret, selvom den smager helt perfekt. Mærkeligt, ikke sandt? Men mere om det længere nede! Madkassen er super praktisk da alt er klart inden for 15 minutter, for vores kokke forbereder meget for dig og det er også det der gør den ekstremt lækker!",
       },
       {
