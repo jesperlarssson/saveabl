@@ -67,6 +67,7 @@ const SignInForm = () => {
         id="Email"
         onChange={(e) => setEmail(e.target.value)}
         label={text.auth.email}
+        placeholder={text.auth.email_instructions}
         error={errors.email}
       />
 
