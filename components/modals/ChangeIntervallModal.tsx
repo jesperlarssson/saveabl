@@ -88,6 +88,9 @@ const ChangeIntervalModal = () => {
               <option value="varannan vecka">
                 {textData?.intervalOption2}
               </option>
+              <option value="varannan vecka">
+                {textData?.intervalOption3}
+              </option>
             </select>
             <Button type="submit" className="">
               {textData?.intervalButton}
