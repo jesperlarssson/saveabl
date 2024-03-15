@@ -70,7 +70,7 @@ const Footer = () => {
           </p>
 
           <div>
-            <p className="mt-12 text-center text-3xl sm:text-4xl font-bold hover:underline text-primary-200">
+            <p className="mt-6 text-center text-3xl sm:text-25xl font-bold hover:underline text-primary-200">
               <a href="mailto:hello@saveabl.se">hello@saveabl.se</a>
             </p>
           </div>
@@ -90,21 +90,21 @@ const Footer = () => {
             ))}
           </ul> */}
 
-          <ul className="mt-12 flex justify-center gap-6 md:gap-8">
+          <ul className="mt-6 flex justify-center gap-6 md:gap-8">
             <li className="h-14 w-14 drop-shadow-lg flex justify-center items-center transition bg-accent hover:bg-accent/75 text-white hover:text-white/75 rounded-full p-3">
-              <a href="/" rel="noreferrer" target="_blank">
+              <a href="https://www.facebook.com/saveablfood/" rel="noreferrer" target="_blank">
                 <span className="sr-only">Facebook</span>
                 <FaFacebookF size={26} />
               </a>
             </li>
             <li className="h-14 w-14 drop-shadow-lg flex justify-center items-center transition bg-accent hover:bg-accent/75 text-white hover:text-white/75 rounded-full p-3">
-              <a href="/" rel="noreferrer" target="_blank">
+              <a href="https://www.instagram.com/saveabl/" rel="noreferrer" target="_blank">
                 <span className="sr-only">Instagram</span>
                 <FaInstagram size={26} />
               </a>
             </li>
             <li className="h-14 w-14 drop-shadow-lg flex justify-center items-center transition bg-accent hover:bg-accent/75 text-white hover:text-white/75 rounded-full p-3">
-              <a href="/" rel="noreferrer" target="_blank">
+              <a href="https://se.linkedin.com/company/saveabl" rel="noreferrer" target="_blank">
                 <span className="sr-only">LinkedIn</span>
                 <FaLinkedinIn size={26} />
               </a>
