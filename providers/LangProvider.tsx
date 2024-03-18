@@ -1,5 +1,6 @@
 "use client";
 
+import Footer from "@/components/ui/Footer";
 import React, { useEffect, useState, createContext, ReactNode } from "react";
 
 type Language = "sv" | "en" | "da";
@@ -369,6 +370,11 @@ const svText = {
     feedback: "Feedback",
     logout: "Logga ut",
   },
+    Footer: {
+      questions: "Några frågor? Kontakta oss gärna!"
+    },
+  
+  
 };
 
 const enText = {
@@ -614,6 +620,9 @@ const enText = {
     no_connection: "No active subscription",
     no_connection_desc: "We do not support showing one-time purchases yet.",
   },
+  Footer: {
+    questions: "Any questions? Feel free to contact us!"
+  },
 };
 
 const daText = {
@@ -824,5 +833,8 @@ const daText = {
     no_connection_desc: "Vi understøtter desværre ikke visning af engangskøb endnu.",
     sign_out_button: "Log ud",
     contact_button: "Kontakt os",
+  },
+  Footer: {
+    questions: "Nogle spørgsmål? Kontakt os gerne!"
   },
 };
