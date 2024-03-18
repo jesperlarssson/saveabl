@@ -1,3 +1,6 @@
+"use client";
+
+import { useLang } from "@/hooks/useLang";
 import { navigation } from "@/lib/navigation";
 import NavItem from "./NavItem";
 import Section from "./Section";
@@ -13,6 +16,7 @@ const Footer = () => {
   const date = new Date();
   const bannerText =
     "save time • save food • save earth • save time • save food • save earth • save time • save food • save earth • save time • save food • save earth • save time • save food • save earth • save time • save food • save earth •  ";
+  const { text, lang } = useLang();
 
   return (
     <>
@@ -66,7 +70,7 @@ const Footer = () => {
 
           <div>
             <p className="mx-auto mt-6 mb-2 max-w-md text-center leading-relaxed text-primary-200 font-bold">
-             Några frågor? Kontakta oss gärna!
+             {text.my_pages.questions}
             </p>
           </div>
 
