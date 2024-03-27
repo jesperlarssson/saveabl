@@ -336,6 +336,7 @@ const svText = {
     no_connection: "Ingen aktiv prenumeration",
     no_connection_desc: "Vi stödjer tyvärr inte att visa upp engångsköp ännu.",
     contact_us: "Kontakta oss",
+    questions: "Har du några frågor? Kontakta oss gärna!",
   },
   my_account: {
     account_settings: "Kontoinställningar",
@@ -617,6 +618,7 @@ const enText = {
     deliveryDayModalPlaceholder: "Choose delivery day",
     no_connection: "No active subscription",
     no_connection_desc: "We do not support showing one-time purchases yet.",
+    questions: "Do you have any questions? Please feel free to contact us!",
   },
   
 };
@@ -829,6 +831,7 @@ const daText = {
     no_connection_desc: "Vi understøtter desværre ikke visning af engangskøb endnu.",
     sign_out_button: "Log ud",
     contact_button: "Kontakt os",
+    questions: "Har du nogen spørgsmål? Kontakt os gerne!", 
   },
   
 };
