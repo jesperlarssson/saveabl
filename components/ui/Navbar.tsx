@@ -124,10 +124,11 @@ const Navbar = () => {
               </button>
             ) : (
               <div className="hidden md:flex items-center gap-x-4">
-                <Link href="/mina-sidor">
-                   <a className="px-8 py-3 rounded-full bg-primary text-primary-900 text-sm font-poppins tracking-wider border border-transparent disabled:cursor-not-allowed disabled:opacity-50 hover:bg-primary-500 hover:drop-shadow-md transition">
-                   {text.nav.my_account}
-                  </a>
+                <Link
+                  href="/mina-sidor"
+                  className=" px-8 py-3 rounded-full bg-primary text-primary-900  text-sm font-poppins tracking-wider border border-transparent disabled:cursor-not-allowed disabled:opacity-50 hover:bg-primary-500 hover:drop-shadow-md transition"
+                >
+                 {text.nav.my_account}
                 </Link>
               </div>
             )}
@@ -200,10 +201,11 @@ const Navbar = () => {
               </button>
             ) : (
               <div className="flex md:hidden items-center gap-x-4">
-                <Link href="/mina-sidor">
-                   <a className="px-8 py-3 mx-4 mt-8 justify-center w-40 rounded-full bg-primary text-primary-900  text-sm font-poppins tracking-wider border border-transparent disabled:cursor-not-allowed disabled:opacity-50 hover:bg-primary-500 hover:drop-shadow-md transition">
-                   {text.nav.my_account}
-                  </a>
+                <Link
+                  href="/mina-sidor"
+                  className=" px-8 py-3 mx-4 mt-8 justify-center w-40 rounded-full bg-primary text-primary-900  text-sm font-poppins tracking-wider border border-transparent disabled:cursor-not-allowed disabled:opacity-50 hover:bg-primary-500 hover:drop-shadow-md transition"
+                >
+                 {text.nav.my_account}
                 </Link>
               </div>
             )}
