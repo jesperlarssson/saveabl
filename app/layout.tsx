@@ -16,6 +16,8 @@ import { CheckoutProvider } from "@/providers/CheckoutProvider";
 import CheckoutBasket from "@/components/section/CheckoutBasket";
 import { LangProvider } from "@/providers/LangProvider";
 import MetaPixel from "@/components/MetaPixel";
+import React from 'react';
+import { Helmet } from 'react-helmet';
 
 const font = Figtree({ subsets: ["latin"] });
 export const revalidate = 1; // revalidate this page every 60 seconds
@@ -76,6 +78,10 @@ export default function RootLayout({
             </AuthProvider>
           </LangProvider>
         </GeoProvider>
+        <Helmet>
+          <title>{"Sveriges klimatsmartaste matkasse"}</title>
+          <meta name="Minska klimatavtrycket och njut av högklassig restaurangmat hemma. Endast 15 minuters tillagningstid!" content={metadata.description} />
+        </Helmet>
       </body>
     </html>
   );
