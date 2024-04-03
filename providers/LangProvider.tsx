@@ -328,7 +328,7 @@ const svText = {
     intervalOption3: "Leverans ojämna veckor", 
     intervalButton: "Ändra",
     intervalModalTitle: "Ändra intervall",
-    intervalModalDescription: "Ändringar innan torsdag gäller för kommande matkasse. Därefter gäller det för matkassen därpå.",
+    intervalModalDescription: "Ändringar innan torsdag gäller för kommande matkasse. Därefter gäller det för matkassen därpå. Obs, vid byte till varannan vecka börjar perioden med en matkassevecka.",
     change_delivery_day_button: "Ändra leveransdag",
     dayModalTitle: "Ändra leveransdag",
     dayModalDescription: "Kontakta oss på hello@saveabl.se för att byta leveransdag 💌",
