@@ -45,7 +45,7 @@ export default function RootLayout({
           }}
         />
         {/* Meta-taggar för SEO */}
-         <title>"Saveabl: Sveriges klimatsmartaste matkasse"</title>
+         <title>{"Saveabl: Sveriges klimatsmartaste matkasse"}</title>
           <meta name="description" content="Minska klimatavtrycket och njut av högklassig restaurangmat hemma. Det enda du behöver är 15 minuter!" />
         </head>
       <body className={font.className}>
