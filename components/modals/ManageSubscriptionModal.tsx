@@ -1,9 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-
 import { useRouter } from "next/navigation";
-
 import useManageSubscriptionModal from "@/hooks/useManageSubscriptionModal";
 import Modal from "@/components/ui/Modal";
 import axios from "axios";
@@ -11,15 +9,55 @@ import { twMerge } from "tailwind-merge";
 import Button from "../ui/Button";
 import useMessageModal from "@/hooks/useMessageModal";
 import { useLang } from "@/hooks/useLang";
-import { StringLiteralType } from "typescript";
 import toast from "react-hot-toast";
+
+// Funktion för att få veckonumret från ett datum
+function getWeekNumber(date: Date) {
+  var d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+  d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7));
+
+  // Justera startdatumet för året till den första torsdagen
+  const year = d.getFullYear(); // Hämta det aktuella året
+  var yearStart = new Date(Date.UTC(year, 0, 1)); // Skapa ett datumobjekt för den första januari i det aktuella året
+
+  // Loopa igenom dagarna från den första januari tills vi når en torsdag (dag 4, där söndag är 0)
+  while (yearStart.getDay() !== 4) { // 4 motsvarar torsdag
+      yearStart.setDate(yearStart.getDate() + 1); // Öka datumet med en dag
+  }
+
+  var weekNo = Math.ceil((((d.getTime() - yearStart.getTime()) / 86400000) + 1) / 7) + 3;
+  return weekNo; 
+}
+
 
 const ManageSubscriptionModal = () => {
   const [toggleType, setToggleType] = useState<boolean>(true);
-  const { onClose, isOpen, customerEmail, customerId, isPaused } =
-    useManageSubscriptionModal();
+  const { onClose, isOpen, customerEmail, customerId, isPaused } = useManageSubscriptionModal();
   const { onOpen, forMessage } = useMessageModal();
   const { text } = useLang();
+
+  const [pauseOptions, setPauseOptions] = useState<React.ReactNode[]>([]);
+
+  useEffect(() => {
+    // Hämta den nuvarande veckan med JavaScript
+    const today = new Date();
+    const currentWeek = getWeekNumber(today);
+
+    // Uppdatera texten för varje "pauseoption" med aktuella veckor
+    const updatedPauseOptions = [
+      text?.my_pages.pauseOption1,
+      text?.my_pages.pauseOption2,
+      text?.my_pages.pauseOption3
+    ].map((option, index) => {
+      return (
+        <option key={index} value={currentWeek + index}>
+          {option} ({text.my_pages.weekOption} {currentWeek + index})
+        </option>
+      );
+    });
+
+    setPauseOptions(updatedPauseOptions);
+  }, []);
 
   const addTodo = async (action: string, wish: string) => {
     try {
@@ -88,9 +126,7 @@ const ManageSubscriptionModal = () => {
                 name="pause"
                 id="pause"
               >
-                <option value="1">{text?.my_pages.pauseOption1}</option>
-                <option value="2">{text?.my_pages.pauseOption2}</option>
-                <option value="3">{text?.my_pages.pauseOption3}</option>
+                {pauseOptions}
               </select>
               
               <Button type="submit">
@@ -103,4 +139,6 @@ const ManageSubscriptionModal = () => {
     </Modal>
   );
 };
+
 export default ManageSubscriptionModal;
+
