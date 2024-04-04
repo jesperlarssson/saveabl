@@ -51,7 +51,7 @@ const ManageSubscriptionModal = () => {
     ].map((option, index) => {
       return (
         <option key={index} value={currentWeek + index}>
-          {option} ({text.my_pages.weekOption} {currentWeek + index})
+          {option} {text.my_pages.weekOption} {currentWeek + index}
         </option>
       );
     });
