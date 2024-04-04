@@ -20,10 +20,6 @@ import MetaPixel from "@/components/MetaPixel";
 const font = Figtree({ subsets: ["latin"] });
 export const revalidate = 1; // revalidate this page every 60 seconds
 
-export const metadata = {
-  title: "Saveabl",
-  description: "Matkassar",
-};
 
 export default function RootLayout({
   children,
@@ -46,7 +42,9 @@ export default function RootLayout({
         />
         {/* Meta-taggar för SEO */}
          <title>{"Saveabl: Sveriges klimatsmartaste matkasse"}</title>
-          <meta name="description" content="Minska klimatavtrycket och njut av högklassig restaurangmat hemma. Det enda du behöver är 15 minuter!" />
+          <meta name="description" content="Saveabl är din klimatsmarta lösning för att få ihop livspusslet. Våra proffskockar lagar dina middagar som du färdigställer på endast 15 minuter. 
+" />
+          <link rel="icon" href="/favicon.ico" />
         </head>
       <body className={font.className}>
         {/* Google Tag Manager (noscript) */}
