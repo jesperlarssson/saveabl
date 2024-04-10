@@ -108,7 +108,7 @@ const svText = {
     hero: {
       title: "Kockförberedd matkasse som gör klimatet en tjänst",
       subtitle: "",
-      order_now: "Beställ din matkasse här",
+      order_now: "Beställ här",
     },
     usp: {
       title: "Såhär fungerar vår matkasse:",
