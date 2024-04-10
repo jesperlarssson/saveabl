@@ -106,16 +106,16 @@ const svText = {
   },
   page: {
     hero: {
-      title: "Kockförberedda matkassen som gör klimatet en tjänst",
+      title: "Kockförberedd matkasse som gör klimatet en tjänst",
       subtitle: "",
-      order_now: "Beställ här",
+      order_now: "Beställ din matkasse här",
     },
     usp: {
-      title: "Såhär fungerar det",
+      title: "Såhär fungerar vår matkasse:",
       points: [
         {
           title: "Vi lagar maten åt dig",
-          text: "Vi tar fram recept på råvaror som ser lite tokiga ut, sedan gör vår stjärnkock Emil de svåra och tidskrävande momenten i matlagningen åt dig!",
+          text: "Vi tar fram recept på råvaror som ser lite tokiga ut, sedan gör vår stjärnkock Emil de svåra och tidskrävande momenten i matlagningen åt dig. Och voila du har en kockpreppad matkasse!",
         },
         {
           title: "Flexibla leveranser",
@@ -211,11 +211,11 @@ const svText = {
     type: "Gör dina val nedan:",
     variant: "Recept utformade för familjer på 3-4 pers:",
     deliveryDay: "Leveransalternativ:",
-    delivery_saturday: "Lördag 13/4 kl. 09-18",
-    delivery_sunday: "Söndag 14/4 kl. 10-17",
-    delivery_monday: "Måndag 15/4 kl. 16-22",
-    stockholm_sunday: "Söndag 14/4 kl. 10-17",
-    stockholm_monday: "Måndag 15/4 kl. 16-22",
+    delivery_saturday: "Lördag 20/4 kl. 09-18",
+    delivery_sunday: "Söndag 21/4 kl. 10-17",
+    delivery_monday: "Måndag 22/4 kl. 16-22",
+    stockholm_sunday: "Söndag 21/4 kl. 10-17",
+    stockholm_monday: "Måndag 22/4 kl. 16-22",
     address: "Leveransinfo:",
     extra: "Extra info",
     contact: "Kontaktuppgifter:",
@@ -336,7 +336,7 @@ const svText = {
     no_connection: "Ingen aktiv prenumeration",
     no_connection_desc: "Vi stödjer tyvärr inte att visa upp engångsköp ännu.",
     contact_us: "Kontakta oss",
-    questions: "Har du några frågor? Kontakta oss gärna!",
+    questions: "Har du några frågor om vår matkasse? Kontakta oss gärna!",
   },
   my_account: {
     account_settings: "Kontoinställningar",
@@ -398,7 +398,7 @@ const enText = {
       points: [
         {
           title: "We do the cooking",
-          text: "Our michelin experienced chef creates delicious recipes from ingredients that look a bit odd and prepare about 70% of the cooking.",
+          text: "Our michelin experienced chef creates delicious recipes from ingredients that look a bit odd and prepare about 70% of the cooking. And voila, you have a chef prepared meal kit!",
         },
         {
           title: "Flexible orders and deliveries",
@@ -618,7 +618,7 @@ const enText = {
     deliveryDayModalPlaceholder: "Choose delivery day",
     no_connection: "No active subscription",
     no_connection_desc: "We do not support showing one-time purchases yet.",
-    questions: "Do you have any questions? Please feel free to contact us!",
+    questions: "Do you have any questions about the meal kit? Please feel free to contact us!",
   },
   
 };
@@ -645,7 +645,7 @@ const daText = {
       points: [
         {
           title: "Vores kok skaber opskrifter",
-          text: "Vi samler lækre råvarer, der ser lidt skøre ud, og laver lækre opskrifter på det.",
+          text: "Vi samler lækre råvarer, der ser lidt skøre ud, og laver lækre opskrifter på det. Og voila, du har en kokkeforberedt madkasse!",
         },
         {
           title: "Mad leveres til dig",
@@ -733,7 +733,7 @@ const daText = {
     button1: "Hente",
     button2: "Få et tilbud",
     linkTitle: "Vi kan levere til dig!",
-    linkDescription: "om mandagen 15/4 mellem 16.00-22.00",
+    linkDescription: "om mandagen 22/4 mellem 16.00-22.00",
     bullet1: "👨‍🍳 Vegetarkassen med kokken inkluderet.",
     bullet2: "👨‍👩‍👧‍👦  Aftensmad till hele familien på blot 15 min.",
     bullet3: "✅  Ingen bindingsperiode, opsig når du vil.",
@@ -831,7 +831,7 @@ const daText = {
     no_connection_desc: "Vi understøtter desværre ikke visning af engangskøb endnu.",
     sign_out_button: "Log ud",
     contact_button: "Kontakt os",
-    questions: "Har du nogen spørgsmål? Kontakt os gerne!", 
+    questions: "Har du nogen spørgsmål om vores madkasse? Kontakt os gerne!", 
   },
   
 };
