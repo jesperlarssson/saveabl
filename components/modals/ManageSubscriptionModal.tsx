@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import useManageSubscriptionModal from "@/hooks/useManageSubscriptionModal";
 import Modal from "@/components/ui/Modal";
 import axios from "axios";
-import { twMerge } from "tailwind-merge";
 import Button from "../ui/Button";
 import useMessageModal from "@/hooks/useMessageModal";
 import { useLang } from "@/hooks/useLang";
@@ -25,10 +24,9 @@ function getWeekNumber(date: Date) {
       yearStart.setDate(yearStart.getDate() + 1); // Öka datumet med en dag
   }
 
-  var weekNo = Math.ceil((((d.getTime() - yearStart.getTime()) / 86400000) + 1) / 7) + 3;
+  var weekNo = Math.ceil((((d.getTime() - yearStart.getTime()) / 86400000) + 1) / 7) + 2;
   return weekNo; 
 }
-
 
 const ManageSubscriptionModal = () => {
   const [toggleType, setToggleType] = useState<boolean>(true);
@@ -37,27 +35,50 @@ const ManageSubscriptionModal = () => {
   const { text } = useLang();
 
   const [pauseOptions, setPauseOptions] = useState<React.ReactNode[]>([]);
+  const [firstWeek, setFirstWeek] = useState<number>(0); // Lagrar den första veckan
 
   useEffect(() => {
-    // Hämta den nuvarande veckan med JavaScript
+    // Hämta den aktuella tiden med JavaScript
     const today = new Date();
-    const currentWeek = getWeekNumber(today);
+    
+    // Justera veckonumret baserat på veckobyten på torsdagar
+    const currentWeek = getWeekNumber(today) + (today.getDay() >= 4 ? 1 : 0); // Om dagen är torsdag eller senare, lägg till en vecka
 
-    // Uppdatera texten för varje "pauseoption" med aktuella veckor
-    const updatedPauseOptions = [
-      text?.my_pages.pauseOption1,
-      text?.my_pages.pauseOption2,
-      text?.my_pages.pauseOption3
-    ].map((option, index) => {
-      return (
-        <option key={index} value={currentWeek + index}>
-          {option} {text.my_pages.weekOption} {currentWeek + index}
-        </option>
-      );
-    });
+    // Uppdatera veckonumret för den första veckan om det inte är inställt
+    if (firstWeek === 0) {
+      // Sätt den första veckan till vecka 18
+      const newFirstWeek = 18;
+      setFirstWeek(newFirstWeek);
 
-    setPauseOptions(updatedPauseOptions);
-  }, []);
+      // Uppdatera veckonumret för pauseoptions
+      const updatedPauseOptions = [
+        text?.my_pages.pauseOption1,
+        text?.my_pages.pauseOption2,
+        text?.my_pages.pauseOption3
+      ].map((option, index) => {
+        return (
+          <option key={index} value={newFirstWeek + index}>
+            {option} {text.my_pages.weekOption} {newFirstWeek + index}
+          </option>
+        );
+      });
+      setPauseOptions(updatedPauseOptions);
+    } else {
+      // Uppdatera veckonumret för pauseoptions baserat på den första veckan
+      const updatedPauseOptions = [
+        text?.my_pages.pauseOption1,
+        text?.my_pages.pauseOption2,
+        text?.my_pages.pauseOption3
+      ].map((option, index) => {
+        return (
+          <option key={index} value={firstWeek + index}>
+            {option} {text.my_pages.weekOption} {firstWeek + index}
+          </option>
+        );
+      });
+      setPauseOptions(updatedPauseOptions);
+    }
+  }, [firstWeek]);
 
   const addTodo = async (action: string, wish: string) => {
     try {
