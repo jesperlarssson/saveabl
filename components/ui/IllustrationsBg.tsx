@@ -19,8 +19,8 @@ const IllustrationsBg = () => {
           animate={{ opacity: 1, scale: 1 }}
         >
           <Image
-            width={300}
-            height={300}
+            width={150}
+            height={150}
             className="hidden md:block object-contain animate-wiggle"
             alt={illustration[0].alt}
             src={illustration[0].path}
@@ -34,8 +34,8 @@ const IllustrationsBg = () => {
             transition={{ delay: 0.5 }}
           >
             <Image
-              width={400}
-              height={400}
+              width={0}
+              height={0}
               className="md:block object-contain animate-wiggle"
               alt={illustration[2].alt}
               src={illustration[2].path}
@@ -45,7 +45,7 @@ const IllustrationsBg = () => {
             <div className="animate-wiggle">
               <LottieAnimation
                 animationData={matkasseAnimation}
-                style={{ height: 440 }}
+                style={{ height: 220 }}
               />
             </div>
           </div>
