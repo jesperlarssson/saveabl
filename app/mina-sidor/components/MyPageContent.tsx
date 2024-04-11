@@ -9,7 +9,7 @@ import { twMerge } from "tailwind-merge";
 import { Recipe } from "@/types";
 import Link from "next/link";
 import Image from "next/image";
-import {  useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getWeekNumber } from "@/helpers/format";
 import toast from "react-hot-toast";
 import instance from "@/lib/apiAxios";
@@ -29,8 +29,7 @@ const MyPageContent = () => {
 
   const { lang, text } = useLang();
 
-  const { onOpen, setPostalCode, setWeek, setSubscriptionId } =
-    useAddMealkitModal();
+  const { onOpen, setPostalCode, setWeek, setSubscriptionId } = useAddMealkitModal();
 
   const authModal = useAuthModal();
 
@@ -135,7 +134,10 @@ const MyPageContent = () => {
       setUserDetails(userDetails.data);
       setSubscriptionDetails(userDetails.data.subscription);
       setUserMealkits(userDetails.data.mealKits);
-      setDeliveryInfo(userDetails.data.address);
+      setDeliveryInfo({
+        ...userDetails.data.address,
+        email: userDetails.data.email.toLowerCase(), // Konvertera e-postadressen till små bokstäver
+      });
       setPrefferedDeliveryDay(userDetails.data.subscription.weeklyDeliveryDay);
 
       console.log("userDetails", userDetails.data);

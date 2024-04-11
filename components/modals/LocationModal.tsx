@@ -23,7 +23,7 @@ const LocationModal = () => {
   return (
     <Modal
       title="Din plats"
-      description="Logga in för att hantera ditt konto."
+      description="för att hantera ditt konto."
       isOpen={isOpen}
       onChange={onChange}
     >
