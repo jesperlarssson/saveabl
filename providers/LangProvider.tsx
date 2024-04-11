@@ -255,7 +255,7 @@ const svText = {
     password_no_match: "Lösenorden matchar inte",
     account_created: "Ditt konto har skapats!",
     button: "Logga in",
-    forgot_password: "Glömt lösenord?",
+    forgot_password: "Glömt lösenord/Verifiera konto",
     no_account: "Har du inget konto?",
     sign_up: "Skapa konto",
     terms:
@@ -536,7 +536,7 @@ const enText = {
     password_no_match: "Passwords do not match",
     account_created: "Your account has been created!",
     button: "Log in",
-    forgot_password: "Forgot password?",
+    forgot_password: "Forgot password/Verify account",
     no_account: "Don't have an account?",
     sign_up: "Sign up",
     terms: "I agree to receive weekly recipes and marketing via email.",
@@ -768,7 +768,7 @@ const daText = {
     password_no_match: "Adgangskoderne stemmer ikke overens",
     account_created: "Din konto er oprettet!",
     button: "Log ind",
-    forgot_password: "Glemt adgangskode?",
+    forgot_password: "Glemt adgangskode/Bekræft konto",
     no_account: "Har du ikke en konto?",
     sign_up: "Tilmeld dig",
     terms:
