@@ -1,5 +1,7 @@
 "use client";
 
+"use client";
+
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
@@ -33,7 +35,8 @@ const SignInForm = () => {
 
   const onSubmit = async (data: any) => {
     try {
-      await signIn(data.email, data.password);
+      const lowercaseEmail = data.email.toLowerCase(); // Konvertera mejladressen till små bokstäver
+      await signIn(lowercaseEmail, data.password); // Använd den konverterade mejladressen
       toast.success(text.auth.logged_in);
       router.push("/mina-sidor");
       onClose();
@@ -48,7 +51,7 @@ const SignInForm = () => {
       return;
     }
     try {
-      auth.forgotPassword(email);
+      auth.forgotPassword(email); 
       toast.success(text.auth.reset_email_sent);
     } catch (error: any) {
       toast.error(text.auth.reset_email_failed);
