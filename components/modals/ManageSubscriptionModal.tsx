@@ -25,7 +25,7 @@ function getWeekNumber(date: Date) {
       yearStart.setDate(yearStart.getDate() + 1); // Öka datumet med en dag
   }
 
-  var weekNo = Math.ceil((((d.getTime() - yearStart.getTime()) / 86400000) + 1) / 7) + 2;
+  var weekNo = Math.ceil((((d.getTime() - yearStart.getTime()) / 86400000) + 1) / 7) + 3;
   return weekNo; 
 }
 
