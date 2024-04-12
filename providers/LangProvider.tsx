@@ -371,6 +371,30 @@ const svText = {
     feedback: "Feedback",
     logout: "Logga ut",
   },
+  terms: {
+    title: "Villkor",
+    subtitle1: "Allmänna villkor Saveabl",
+    description1: "När du handlar på Saveabls hemsida ingås alla avtal med Foody Impact AB (”Saveabl”, ”vi”, ”vår”, eller ”oss”), organisationsnummer 559266-3149, med adress Övre Kaserngården 12, 415 27 Göteborg. I samband med ett köp hos oss accepterar du de här allmänna villkoren. Enbart privatpersoner, eller representanter för företag, som är över 18 år och har full juridisk rätt att ingå avtal får handla Saveabls produkter.",
+    subtitle2: "Betalning, beställning och priser", 
+    description2: "Alla priser anges i svenska kronor och är inklusive mervärdesskatt (s.k. moms) och avgifter, om inte annat anges. På Saveabls hemsida kan följande  debit- eller kreditkort användas för betalning: Visa, MasterCard, American Express, Discover & Diners Club och China UnionPay. Därtill acccepteras också betalning via Klarna Bank AB, Sveavägen 46, 111 34 Stockholm (”Klarna”). Om du betalar via Klarna godkänner du också deras villkor, som du hittar här. Efter godkänd betalning skickas en orderbekräftelse till den e-postadress kunden angivit vid beställningen eller vid skapandet av användarkontot. Saveabl tar inget ansvar för om kunden angivit fel e-postadress.",
+    subtitle3: "Leverans",
+    description3: "Leveransdatum stipuleras på sidan där du gör ditt köp. Leveransen görs till adressen som kunden angivit vid registrering eller köp. Saveabl tar inget ansvar för att hålla uppgifter om kunders adresser uppdaterade och det är kunden själv som ansvarar för att deras adress är korrekt och uppdaterad.", 
+    subtitle4: "Reservation för informationsfel",
+    description4: "Saveabl reserverar sig för eventuella skrivfel på hemsidan såsom felaktiga priser, fel i produktbeskrivningen och felaktig lagerstatus av matkassar. Saveabl förbehåller sig rätten att korrigera eventuella fel. Om felaktigt pris har angivits på hemsidan förbehåller sig Saveabl rätten att korrigera priset och eventuellt ta bort varan från beställningar. Alla bilder som presenteras på hemsidan ska ses som exempelbilder och garanterar inte att spegla maträtternas exakta utseende.",
+    subtitle5: "Reklamation",
+    description5: "Om du önskar reklamera en vara på grund av att något fel upptäcks ska du kontakta oss så snart som möjligt. Det här ska dock som senast ske inom 14 dagar. Du når oss på ",
+    subtitle6: "Force Majeure",
+    description6: "Om Saveabl på grund av någon omständighet eller omständigheter som anses ligga bortom vår kontroll (s.k. ”Force Majeure”) förhindras att utföra våra åtaganden gentemot våra kunder utgör detta inte ett avtalsbrott.", 
+    subtitle7: "Tvist",
+    description7: "Vid en eventuell tvist hänvisar Saveabl till Allmänna Reklamationsnämnden.", 
+    subtitle8: "Behandling av personuppgifter", 
+    description8: "Saveabl samlar in och behandlar dina personuppgifter för att skapa en så bra köpupplevelse som möjligt för dig som kund. För att läsa mer om vår behandling av dina personuppgifter, se vår ",
+    subtitle9: "Upphovsrätt", 
+    description9: "All data och programvara på vår hemsida, tillhör Saveabl och är endast tillgängliga för privat bruk i samband med köp och korrespondens med Saveabl. Annat användande såsom reproduktion, redistribution, ändring, bearbetning eller publicering av innehållet på Saveabls webbplats, såväl för kommersiella som privata syften, är inte tillåtet utan uttryckligt medgivande från Saveabl.",
+    subtitle10: "Ångerrätt", 
+    description10: "Enligt lagen om distansavtal och avtal utanför affärslokaler (SFS 2005:59) gäller ej ångerrätt för livsmedel eller andra dagligvaror. Du som kund har alltså inte ångerrätt för köpta varor.",
+
+  },
     
   
   
@@ -620,6 +644,30 @@ const enText = {
     no_connection_desc: "We do not support showing one-time purchases yet.",
     questions: "Do you have any questions about the meal kit? Please feel free to contact us!",
   },
+  terms: {
+    title: "Terms",
+    subtitle1: "General terms of Saveabl",
+    description1: "When you shop on Saveabl's website, all agreements are made with Foody Impact AB ('Saveabl', 'we', 'our', or 'us'), organization number 559266-3149, with address Övre Kaserngården 12, 415 27 Gothenburg. By making a purchase from us, you accept these general terms and conditions. Only individuals, or representatives of companies, who are over 18 years old and have full legal capacity to enter into agreements may purchase Saveabl's products.",
+    subtitle2: "Payment, ordering, and prices",
+    description2: "All prices are stated in Swedish kronor and include value added tax (VAT) and fees, unless otherwise stated. On Saveabl's website, the following debit or credit cards can be used for payment: Visa, MasterCard, American Express, Discover & Diners Club, and China UnionPay. In addition, payment via Klarna Bank AB, Sveavägen 46, 111 34 Stockholm ('Klarna') is accepted. If you pay via Klarna, you also accept their terms, which you can find here. After approved payment, an order confirmation is sent to the email address provided by the customer when ordering or when creating the user account. Saveabl is not responsible if the customer has provided the wrong email address.",
+    subtitle3: "Delivery",
+    description3: "The delivery date is specified on the page where you make your purchase. The delivery is made to the address provided by the customer at registration or purchase. Saveabl is not responsible for keeping customer address information updated, and it is the customer's responsibility to ensure that their address is correct and up to date.",
+    subtitle4: "Disclaimer for errors",
+    description4: "Saveabl reserves the right to correct any errors on the website, such as incorrect prices, errors in product descriptions, and incorrect stock status of food packages. Saveabl reserves the right to correct any errors. If an incorrect price has been stated on the website, Saveabl reserves the right to correct the price and possibly remove the item from orders. All images presented on the website should be seen as example images and do not guarantee to reflect the exact appearance of the dishes.",
+    subtitle5: "Complaints",
+    description5: "If you wish to complain about a product due to any discovered faults, you should contact us as soon as possible. However, this must be done no later than within 14 days. You can reach us at ",
+    subtitle6: "Force Majeure",
+    description6: "If Saveabl, due to any circumstance or circumstances considered beyond our control ('Force Majeure'), is prevented from fulfilling our obligations to our customers, this does not constitute a breach of contract.",
+    subtitle7: "Dispute",
+    description7: "In the event of a dispute, Saveabl refers to the Swedish National Board for Consumer Disputes ('Allmänna Reklamationsnämnden').",
+    subtitle8: "Processing of personal data",
+    description8: "Saveabl collects and processes your personal data to create the best possible shopping experience for you as a customer. To read more about our processing of your personal data, see our ",
+    subtitle9: "Copyright",
+    description9: "All data and software on our website belong to Saveabl and are only available for private use in connection with purchases and correspondence with Saveabl. Other uses such as reproduction, redistribution, modification, processing, or publication of the content on Saveabl's website, both for commercial and private purposes, are not allowed without explicit consent from Saveabl.",
+    subtitle10: "Right of withdrawal",
+    description10: "According to the Distance Contracts and Contracts Outside Business Premises Act (SFS 2005:59), there is no right of withdrawal for food or other groceries. Therefore, you as a customer do not have a right of withdrawal for purchased goods.",
+    },
+  
   
 };
 
@@ -833,5 +881,30 @@ const daText = {
     contact_button: "Kontakt os",
     questions: "Har du nogen spørgsmål om vores madkasse? Kontakt os gerne!", 
   },
+  
+  terms: {
+    title: "Betingelser",
+    subtitle1: "Generelle betingelser for Saveabl",
+    description1: "Når du handler på Saveabls hjemmeside, indgås alle aftaler med Foody Impact AB ('Saveabl', 'vi', 'vores' eller 'os'), organisationsnummer 559266-3149, med adresse Övre Kaserngården 12, 415 27 Göteborg. Ved at foretage et køb hos os, accepterer du disse generelle betingelser og vilkår. Kun enkeltpersoner eller repræsentanter for virksomheder, der er over 18 år og har fuld juridisk kapacitet til at indgå aftaler, må købe Saveabls produkter.",
+    subtitle2: "Betaling, bestilling og priser",
+    description2: "Alle priser er angivet i svenske kroner og inkluderer moms og gebyrer, medmindre andet er angivet. På Saveabls hjemmeside kan følgende debet- eller kreditkort bruges til betaling: Visa, MasterCard, American Express, Discover & Diners Club og China UnionPay. Derudover accepteres betaling via Klarna Bank AB, Sveavägen 46, 111 34 Stockholm ('Klarna'). Hvis du betaler via Klarna, accepterer du også deres vilkår, som du kan finde her. Efter godkendt betaling sendes en ordrebekræftelse til den e-mailadresse, kunden har angivet ved bestillingen eller ved oprettelsen af brugerkontoen. Saveabl påtager sig intet ansvar, hvis kunden har angivet en forkert e-mailadresse.",
+    subtitle3: "Levering",
+    description3: "Leveringsdatoen er angivet på siden, hvor du foretager dit køb. Leveringen sker til den adresse, kunden har angivet ved registrering eller køb. Saveabl påtager sig intet ansvar for at holde kundeoplysninger opdateret, og det er kundens ansvar at sikre, at deres adresse er korrekt og ajourført.",
+    subtitle4: "Ansvarsfraskrivelse for fejl",
+    description4: "Saveabl forbeholder sig ret til at rette eventuelle fejl på hjemmesiden, såsom forkerte priser, fejl i produktbeskrivelser og forkert lagerstatus af madpakker. Saveabl forbeholder sig ret til at rette eventuelle fejl. Hvis en forkert pris er angivet på hjemmesiden, forbeholder Saveabl sig ret til at rette prisen og eventuelt fjerne varen fra ordrer. Alle billeder, der præsenteres på hjemmesiden, skal betragtes som eksempelbilleder og garanterer ikke at afspejle retternes nøjagtige udseende.",
+    subtitle5: "Klager",
+    description5: "Hvis du ønsker at klage over et produkt på grund af opdagede fejl, skal du kontakte os så hurtigt som muligt. Dette skal dog gøres senest inden for 14 dage. Du kan kontakte os på ",
+    subtitle6: "Force Majeure",
+    description6: "Hvis Saveabl på grund af omstændigheder, der anses for at ligge uden for vores kontrol ('Force Majeure'), forhindres i at opfylde vores forpligtelser over for vores kunder, udgør dette ikke et kontraktbrud.",
+    subtitle7: "Tvist",
+    description7: "I tilfælde af tvist henviser Saveabl til den svenske Nationale Forbrugerklagenævn ('Allmänna Reklamationsnämnden').",
+    subtitle8: "Behandling af personoplysninger",
+    description8: "Saveabl indsamler og behandler dine personoplysninger for at skabe den bedst mulige købsoplevelse for dig som kunde. Hvis du vil vide mere om vores behandling af dine personoplysninger, kan du se vores ",
+    subtitle9: "Ophavsret",
+    description9: "Alle data og software på vores hjemmeside tilhører Saveabl og er kun tilgængelige til privat brug i forbindelse med køb og korrespondance med Saveabl. Anden brug såsom reproduktion, redistribution, ændring, bearbejdning eller offentliggørelse af indholdet på Saveabls hjemmeside, både til kommercielle og private formål, er ikke tilladt uden udtrykkelig tilladelse fra Saveabl.",
+    subtitle10: "Fortrydelsesret",
+    description10: "Ifølge loven om fjernkontrakter og kontrakter uden for forretningslokaler (SFS 2005:59) gælder der ikke fortrydelsesret for mad eller andre dagligvarer. Derfor har du som kunde ikke fortrydelsesret for købte varer.",
+    },
+    
   
 };
