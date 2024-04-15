@@ -393,9 +393,54 @@ const svText = {
     description9: "All data och programvara på vår hemsida, tillhör Saveabl och är endast tillgängliga för privat bruk i samband med köp och korrespondens med Saveabl. Annat användande såsom reproduktion, redistribution, ändring, bearbetning eller publicering av innehållet på Saveabls webbplats, såväl för kommersiella som privata syften, är inte tillåtet utan uttryckligt medgivande från Saveabl.",
     subtitle10: "Ångerrätt", 
     description10: "Enligt lagen om distansavtal och avtal utanför affärslokaler (SFS 2005:59) gäller ej ångerrätt för livsmedel eller andra dagligvaror. Du som kund har alltså inte ångerrätt för köpta varor.",
-
-  },
-    
+   },
+   integrity_policy: {
+    introduction: "Integritetspolicy",
+    section_1: {
+      title: "1. Introduktion",
+      description: "Den här integritetspolicyn (”Policyn”) beskriver hur varumärket Saveabl via företaget Foody Impact AB (”Vi”, ”vår” och ”oss”) (organisationsnummer 559266-3149), adress Övre Kaserngården 12, 415 27 Göteborg, hanterar personuppgifter. Vi värnar om våra kunders personliga integritet och är måna om att alla kunder och besökare på hemsidans trygghet i vår behandling av personuppgifter. Vi har i den här policyn samlat information om hur vi hanterar dina personuppgifter som du lämnat till oss i samband med att du använt våra tjänster samt de personuppgifter vi på andra sätt fått tillgång till. Vi har en skyldighet att se till att behandlingen av dina personuppgifter utförs i enlighet med denna Policy och gällande personuppgiftlagstiftning."
+    },
+    section_2: {
+      title: "2. Hur Saveabl behandlar dina personuppgifter",
+      description: "Saveabls behandling av dina personuppgifter kan skilja sig åt beroende på din relation till oss. Om du är besökare på vår hemsida utan att skapa ett användarkonto sparar vi enbart cookies, och eventuellt material som uppstått i samband med kontakt med vår kundtjänst.",
+      subsection_1: {
+        title: "2.1 Varifrån samlar vi in personuppgifter?",
+        description: "Vi behandlar personuppgifter som lämnas av dig när du skapar ett användarkonto och handlar via vår hemsida saveabl.se. Uppgifter som vi samlar in i samband med det här inkluderar, men är inte enbart, namn, telefonnummer, adress, e-mailadress m.m. Vidare behandlar vi personuppgifter som uppkommer när du använder vår hemsida för att köpa varor, som t ex köpta varor, belopp, datum för inköp och betalsätt. Vi samlar också in information i samband med inloggningen på ditt användarkonto, såsom besökshistorik. Därtill sparar vi kommentarer som gjorts på hemsidan."
+      },
+      subsection_2: {
+        title: "2.2 Hur länge sparar vi dina personuppgifter?",
+        description: "Om inte en särskild lagringsperiod stipuleras i svensk lagstiftning sparar vi dina personuppgifter, till exempel att vi i enlighet med bokföringslagen är skyldiga att spara vissa uppgifter, sparas dina personuppgifter i längst 3 år från ditt senaste inköp. I tidigare nämnda undantagsfall stipulerade av svensk lagstiftning sparas dina personuppgifter i längst 7 år från ditt senaste inköp."
+      }
+    },
+    section_3: {
+      title: "3. Dina rättigheter",
+      description: "Du har ett antal rättigheter i förhållande till vår behandling av dina personuppgifter. Har du ytterligare frågor rörande dina rättigheter är du välkommen att höra av dig till oss på hello@saveabl.se.",
+      subsection_1: {
+        title: "3.1 Rätt till tillgång",
+        description: "Vi strävar efter att vara så transparenta som möjligt i behandlingen av dina personuppgifter. Om du vill få information om eller insyn i hur vi hanterar dina personuppgifter kan du begära tillgång till uppgifterna. Vid begäran om tillgång kommer vi att fråga om ytterligare uppgifter för att säkerställa att uppgifterna lämnas ut till rätt person samt vilka uppgifter du vill ta del av. En sådan begäran görs lättast tillhello@saveabl.se."
+      },
+      subsection_2: {
+        title: "3.2 Rätt till rättelse",
+        description: "Du har rätt till att utan onödigt dröjsmål få eventuellt felaktiga uppgifter om dig rättade, samt komplettera onödiga uppgifter."
+      },
+      subsection_3: {
+        title: "3.3 Rätt till radering",
+        description: "Du har rätt att begära radering av personuppgifter som vi behandlar om något av följande inträffar: Uppgifterna inte längre är nödvändiga för ändamålen de samlades in för eller på något annat sätt behandlas; Du återkallar ditt samtycke för en behandling av dina personuppgifter som stött sig på ditt tidigare samtycke och det inte finns någon annan typ av rättslig grund för behandlingen; Du invänder mot en intresseavvägning som vi har gjort och berättigat intresse som väger tyngre å vår sida saknas; Personuppgifterna har behandlats eller behandlas på ett olagligt sätt; Personuppgifterna måste raderas för att vi ska uppfylla en rättslig förpliktelse vi omfattas av."
+      },
+      subsection_4: {
+        title: "3.4 Rätt till begränsning",
+        description: "Du har rätt att begära att behandlingen av dina personuppgifter begränsas om: Du bestrider personuppgifternas korrekthet, under en tid som ger oss möjlighet att kontrollera om de är korrekta; Behandlingen av personuppgifterna är olaglig och du motsätter dig att de raderas och istället begär en begränsning av vår användning; Vi inte längre behöver personuppgifterna för ändamålen med behandlingen men du behöver dem för att fastställa, göra gällande, eller försvara rättsliga anspråk; Du har invänt mot en intresseavvägd behandling som vi har angivit som ändamål."
+      },
+      subsection_5: {
+        title: "3.5 Rätt att göra invändningar mot behandling av personuppgifter för direktmarknadsföring",
+        description: "Du har rätt till att invända mot att dina personuppgifter används för direktmarknadsföring."
+      },
+      subsection_6: {
+        title: "3.6 Rätt till dataportabilitet",
+        description: "Om vår personuppgiftsbehandling sker automatiserat och grundar sig på ditt samtycke, alternativt fullgörande av avtal, har du rätt att begära att de uppgifter som berör dig och som du har lämnat till oss ska överföras till en annan personuppgiftsansvarig. Förutsättningen för det här är att behandlingen kan ske automatiserat och är tekniskt möjlig."
+      }
+    }
+  }
   
   
 };
@@ -667,7 +712,53 @@ const enText = {
     subtitle10: "Right of withdrawal",
     description10: "According to the Distance Contracts and Contracts Outside Business Premises Act (SFS 2005:59), there is no right of withdrawal for food or other groceries. Therefore, you as a customer do not have a right of withdrawal for purchased goods.",
     },
-  
+    integrity_policy: {
+      introduction: "Privacy Policy",
+      section_1: {
+        title: "1. Introduction",
+        description: "This privacy policy ('Policy') describes how the brand Saveabl, through the company Foody Impact AB ('We', 'Our' and 'Us') (registration number 559266-3149), located at Övre Kaserngården 12, 415 27 Gothenburg, handles personal data. We value the personal integrity of our customers and are committed to ensuring the safety of all customers and visitors to our website in our handling of personal data. In this policy, we have collected information on how we handle your personal data that you have provided to us in connection with your use of our services, as well as the personal data we have otherwise accessed. We have an obligation to ensure that the processing of your personal data is carried out in accordance with this Policy and applicable data protection legislation."
+      },
+      section_2: {
+        title: "2. How Saveabl handles your personal data",
+        description: "Saveabl's handling of your personal data may vary depending on your relationship with us. If you are a visitor to our website without creating a user account, we only save cookies, and potentially any material that has arisen in connection with contact with our customer service.",
+        subsection_1: {
+          title: "2.1 Where do we collect personal data from?",
+          description: "We process personal data provided by you when you create a user account and make purchases through our website saveabl.se. The information we collect in connection with this includes, but is not limited to, name, phone number, address, email address, etc. Furthermore, we process personal data that arises when you use our website to purchase goods, such as purchased items, amounts, purchase dates, and payment methods. We also collect information related to logging into your user account, such as browsing history. Additionally, we store comments made on the website."
+        },
+        subsection_2: {
+          title: "2.2 How long do we keep your personal data?",
+          description: "If no specific storage period is stipulated in Swedish legislation, we retain your personal data for a maximum of 3 years from your last purchase, for example, as required by accounting law. In the previously mentioned exceptional cases stipulated by Swedish legislation, your personal data is retained for a maximum of 7 years from your last purchase."
+        }
+      },
+      section_3: {
+        title: "3. Your rights",
+        description: "You have a number of rights regarding our processing of your personal data. If you have any further questions regarding your rights, please feel free to contact us at hello@saveabl.se.",
+        subsection_1: {
+          title: "3.1 Right to access",
+          description: "We strive to be as transparent as possible in the processing of your personal data. If you want information about or insight into how we handle your personal data, you can request access to the data. Upon request for access, we will ask for additional information to ensure that the data is provided to the right person and which data you want to access. Such a request is easiest made to hello@saveabl.se."
+        },
+        subsection_2: {
+          title: "3.2 Right to rectification",
+          description: "You have the right to have any inaccurate personal data about you corrected without undue delay and to have incomplete personal data completed."
+        },
+        subsection_3: {
+          title: "3.3 Right to erasure",
+          description: "You have the right to request the erasure of personal data that we process if any of the following occurs: The data is no longer necessary for the purposes for which it was collected or otherwise processed; You withdraw your consent for processing of your personal data which relied on your prior consent and there is no other legal ground for the processing; You object to a balancing of interests that we have made, and there is no overriding legitimate interest on our part; The personal data has been unlawfully processed or must be erased to comply with a legal obligation to which we are subject."
+        },
+        subsection_4: {
+          title: "3.4 Right to restriction",
+          description: "You have the right to request that the processing of your personal data be restricted if: You dispute the accuracy of the personal data, for a period enabling us to verify the accuracy of the data; The processing of the personal data is unlawful, and you oppose the erasure of the data and request the restriction of its use instead; We no longer need the personal data for the purposes of the processing, but you require them for the establishment, exercise, or defense of legal claims; You have objected to processing pending the verification of whether our legitimate grounds override yours."
+        },
+        subsection_5: {
+          title: "3.5 Right to object to the processing of personal data for direct marketing",
+          description: "You have the right to object to the use of your personal data for direct marketing."
+        },
+        subsection_6: {
+          title: "3.6 Right to data portability",
+          description: "If our processing of personal data is automated and based on your consent or the fulfillment of a contract, you have the right to request that the data concerning you and that you have provided to us be transferred to another data controller. The precondition for this is that the processing can be automated and is technically feasible."
+        }
+      }
+    }
   
 };
 
@@ -905,6 +996,53 @@ const daText = {
     subtitle10: "Fortrydelsesret",
     description10: "Ifølge loven om fjernkontrakter og kontrakter uden for forretningslokaler (SFS 2005:59) gælder der ikke fortrydelsesret for mad eller andre dagligvarer. Derfor har du som kunde ikke fortrydelsesret for købte varer.",
     },
-    
+  
+integrity_policy: {
+  introduction: "Integritetspolitik",
+  section_1: {
+  title: "1. Introduktion",
+  description: "Denne integritetspolitik ('Politik') beskriver, hvordan brandet Saveabl, gennem virksomheden Foody Impact AB ('Vi', 'Vores' og 'Os') (registreringsnummer 559266-3149), beliggende på Övre Kaserngården 12, 415 27 Göteborg, håndterer personoplysninger. Vi værdsætter vores kunders personlige integritet og er forpligtede til at sikre sikkerheden for alle kunder og besøgende på vores hjemmeside i vores håndtering af personoplysninger. I denne politik har vi samlet information om, hvordan vi behandler dine personoplysninger, som du har givet os i forbindelse med din brug af vores tjenester, samt de personoplysninger, vi på anden vis har adgang til. Vi har en forpligtelse til at sikre, at behandlingen af dine personoplysninger udføres i overensstemmelse med denne politik og gældende databeskyttelseslovgivning."
+  },
+  section_2: {
+  title: "2. Hvordan Saveabl håndterer dine personoplysninger",
+  description: "Saveabls behandling af dine personoplysninger kan variere afhængigt af din relation til os. Hvis du er en besøgende på vores hjemmeside uden at oprette en brugerkonto, gemmer vi kun cookies og eventuelt materiale, der er opstået i forbindelse med kontakt til vores kundeservice.",
+  subsection_1: {
+  title: "2.1 Hvor indsamler vi personoplysninger fra?",
+  description: "Vi behandler personoplysninger, som du giver os, når du opretter en brugerkonto og foretager køb gennem vores hjemmeside saveabl.se. Oplysninger, vi indsamler i forbindelse med dette, inkluderer, men er ikke begrænset til, navn, telefonnummer, adresse, e-mailadresse osv. Derudover behandler vi personoplysninger, der opstår, når du bruger vores hjemmeside til at købe varer, såsom købte varer, beløb, købsdatoer og betalingsmetoder. Vi indsamler også oplysninger i forbindelse med login på din brugerkonto, såsom gennemsehistorik. Derudover gemmer vi kommentarer, der er foretaget på hjemmesiden."
+  },
+  subsection_2: {
+  title: "2.2 Hvor længe opbevarer vi dine personoplysninger?",
+  description: "Hvis der ikke er fastsat en specifik opbevaringsperiode i svensk lovgivning, opbevarer vi dine personoplysninger i højst 3 år fra dit seneste køb, f.eks. som krævet af regnskabsloven. I de tidligere nævnte undtagelsestilfælde fastsat af svensk lovgivning opbevares dine personoplysninger i højst 7 år fra dit seneste køb."
+  }
+  },
+  section_3: {
+  title: "3. Dine rettigheder",
+  description: "Du har en række rettigheder vedrørende vores behandling af dine personoplysninger. Hvis du har yderligere spørgsmål vedrørende dine rettigheder, er du velkommen til at kontakte os på hello@saveabl.se.",
+  subsection_1: {
+  title: "3.1 Rettighed til adgang",
+  description: "Vi stræber efter at være så gennemsigtige som muligt i behandlingen af dine personoplysninger. Hvis du ønsker oplysninger om eller indsigt i, hvordan vi behandler dine personoplysninger, kan du anmode om adgang til dataene. Ved anmodning om adgang vil vi bede om yderligere oplysninger for at sikre, at dataene gives til den rette person, og hvilke data du ønsker adgang til. En sådan anmodning er nemmest at foretage til hello@saveabl.se."
+  },
+  subsection_2: {
+  title: "3.2 Rettighed til rettelse",
+  description: "Du har ret til at få eventuelle unøjagtige personoplysninger om dig rettet uden unødig forsinkelse og til at få ufuldstændige personoplysninger udfyldt."
+  },
+  subsection_3: {
+  title: "3.3 Rettighed til sletning",
+  description: "Du har ret til at anmode om sletning af personoplysninger, som vi behandler, hvis en af følgende situationer opstår: Dataene er ikke længere nødvendige til de formål, de blev indsamlet til, eller på anden måde behandlet; Du tilbagekalder dit samtykke til behandling af dine personoplysninger, som støttede sig på dit tidligere samtykke, og der ikke er andre juridiske grundlag for behandlingen; Du gør indsigelse mod en afvejning af interesser, som vi har foretaget, og der ikke er overvejende legitime grunde til vores behandling; De personoplysninger er blevet behandlet ulovligt, eller de skal slettes for at overholde en retlig forpligtelse, som vi er underlagt."
+  },
+  subsection_4: {
+  title: "3.4 Rettighed til begrænsning",
+  description: "Du har ret til at anmode om, at behandlingen af dine personoplysninger begrænses, hvis: Du bestrider personoplysningernes nøjagtighed i en periode, der giver os mulighed for at kontrollere nøjagtigheden af dataene; Behandlingen af personoplysningerne er ulovlig, og du modsætter dig sletningen af dataene og i stedet anmoder om begrænsning af deres brug; Vi ikke længere har brug for personoplysningerne til behandlingsformål, men du har brug for dem til etablering, udøvelse eller forsvar af juridiske krav; Du har gjort indsigelse mod behandling i afventning af verifikation af, om vores legitime grunde overstiger dine."
+  },
+  subsection_5: {
+  title: "3.5 Rettighed til at gøre indsigelse mod behandling af personoplysninger til direkte markedsføring",
+  description: "Du har ret til at gøre indsigelse mod brugen af dine personoplysninger til direkte markedsføring."
+  },
+  subsection_6: {
+  title: "3.6 Rettighed til databærbarhed",
+  description: "Hvis vores behandling af personoplysninger er automatiseret og baseret på dit samtykke eller opfyldelse af en kontrakt, har du ret til at anmode om, at dataene vedrørende dig og de oplysninger, du har givet os, overføres til en anden dataansvarlig. Forudsætningen for dette er, at behandlingen kan automatiseres og er teknisk mulig."
+  }
+  }
+  }
   
 };
