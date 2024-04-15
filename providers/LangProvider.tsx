@@ -11,6 +11,7 @@ interface LangContextInterface {
   handleChangeLang: (lang: Language) => void;
 }
 
+
 export const LangContext = createContext<LangContextInterface>({
   lang: null,
   text: null,
@@ -417,7 +418,7 @@ const svText = {
       description: "Du har ett antal rättigheter i förhållande till vår behandling av dina personuppgifter. Har du ytterligare frågor rörande dina rättigheter är du välkommen att höra av dig till oss på hello@saveabl.se.",
       subsection_1: {
         title: "3.1 Rätt till tillgång",
-        description: "Vi strävar efter att vara så transparenta som möjligt i behandlingen av dina personuppgifter. Om du vill få information om eller insyn i hur vi hanterar dina personuppgifter kan du begära tillgång till uppgifterna. Vid begäran om tillgång kommer vi att fråga om ytterligare uppgifter för att säkerställa att uppgifterna lämnas ut till rätt person samt vilka uppgifter du vill ta del av. En sådan begäran görs lättast tillhello@saveabl.se."
+        description: "Vi strävar efter att vara så transparenta som möjligt i behandlingen av dina personuppgifter. Om du vill få information om eller insyn i hur vi hanterar dina personuppgifter kan du begära tillgång till uppgifterna. Vid begäran om tillgång kommer vi att fråga om ytterligare uppgifter för att säkerställa att uppgifterna lämnas ut till rätt person samt vilka uppgifter du vill ta del av. En sådan begäran görs lättast till hello@saveabl.se."
       },
       subsection_2: {
         title: "3.2 Rätt till rättelse",
@@ -440,8 +441,11 @@ const svText = {
         description: "Om vår personuppgiftsbehandling sker automatiserat och grundar sig på ditt samtycke, alternativt fullgörande av avtal, har du rätt att begära att de uppgifter som berör dig och som du har lämnat till oss ska överföras till en annan personuppgiftsansvarig. Förutsättningen för det här är att behandlingen kan ske automatiserat och är tekniskt möjlig."
       }
     }
-  }
-  
+  }, 
+  footer: {
+    terms: "Allmänna villkor", 
+    integrity: "Integritetspolicy",
+  }, 
   
 };
 
@@ -758,7 +762,11 @@ const enText = {
           description: "If our processing of personal data is automated and based on your consent or the fulfillment of a contract, you have the right to request that the data concerning you and that you have provided to us be transferred to another data controller. The precondition for this is that the processing can be automated and is technically feasible."
         }
       }
-    }
+    }, 
+    footer: {
+      terms: "Terms and Conditions", 
+      integrity: "Privacy Policy",
+    }, 
   
 };
 
@@ -1043,6 +1051,10 @@ integrity_policy: {
   description: "Hvis vores behandling af personoplysninger er automatiseret og baseret på dit samtykke eller opfyldelse af en kontrakt, har du ret til at anmode om, at dataene vedrørende dig og de oplysninger, du har givet os, overføres til en anden dataansvarlig. Forudsætningen for dette er, at behandlingen kan automatiseres og er teknisk mulig."
   }
   }
-  }
+  }, 
+  footer: {
+    terms: "Generelle vilkår", 
+    integrity: "Integritetspolitik",
+  }, 
   
 };

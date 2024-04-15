@@ -766,7 +766,11 @@ const Order = () => {
                       setAgreeToTerms(e.target.checked)
                     }
                   />
-                  {text.order.terms}
+
+                   <span>
+          {lang.order}{' '}
+          <a href="https://www.saveabl.com/villkor" style={{ textDecoration: 'underline' }}>  {text.order.terms}</a>
+        </span>
                 </label>
               </div>
               <Button onClick={handleConfirm}>{text.order.payButton}</Button>

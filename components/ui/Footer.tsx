@@ -119,6 +119,20 @@ const Footer = () => {
             Övre Kaserngården 12, 415 27 Göteborg, Sweden, Org. number:
             559266-3149. VAT number: SE559266314901.
           </p>
+          <div>
+          <p className="mx-auto mt-6 mb-1 max-w-md text-center leading-relaxed hover:underline text-primary-200">
+        <a href="https://www.saveabl.com/villkor" target="_blank" rel="noopener noreferrer">
+          {text.footer.terms}
+        </a>
+      </p>
+          </div>
+          <div>
+          <p className="mx-auto mt-1 mb-2 max-w-md text-center leading-relaxed hover:underline text-primary-200">
+        <a href="https://www.saveabl.com/villkor/integritetspolicy" target="_blank" rel="noopener noreferrer">
+          {text.footer.integrity}
+        </a>
+      </p>
+          </div>
           <div className="w-full mt-10 pt-10 border-t border-secondary-900 border-opacity-30">
             <div className="text-center text-primary opacity-50">
               <p>Copyright © {date.getFullYear()} Foody Impact AB</p>
