@@ -12,7 +12,6 @@ const Integritetspolicy = () => {
       textAlign: 'left',
       marginLeft: '5%',
       marginRight: '5%',
-      fontFamily: 'Poppins', // Typsnitt för hela container
     },
     sectionTitle: {
       color: '#6E2936',
@@ -20,7 +19,6 @@ const Integritetspolicy = () => {
       fontSize: '2rem',
       marginBottom: '10px',
       marginTop: '20px',
-      fontFamily: 'Poppins', // Typsnitt för sektionstitlar
     },
     subsectionTitle: {
       color: '#6E2936',
@@ -28,13 +26,11 @@ const Integritetspolicy = () => {
       fontSize: '1rem',
       marginBottom: '5px',
       marginTop: '20px',
-      fontFamily: 'Poppins', // Typsnitt för delavsnittstitlar
     },
     text: {
       color: 'black',
       fontSize: '1rem',
       marginBottom: '5px',
-      fontFamily: 'Poppins', // Typsnitt för brödtext
     },
     lastText: {
       marginBottom: '40px', // Margin bottom för sista texten
