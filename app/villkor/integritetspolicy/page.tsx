@@ -1,12 +1,30 @@
 "use client";
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLang } from '@/hooks/useLang';
 
 const Integritetspolicy = () => {
+  const [integrityPolicyData, setIntegrityPolicyData] = useState<any>(null); // Använd 'any' här
+
   const { text } = useLang();
 
-  // Stilobjekt för olika element
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await text.integrity_policy;
+        setIntegrityPolicyData(data);
+      } catch (error) {
+        console.error('Error fetching integrity policy data:', error);
+      }
+    };
+
+    fetchData();
+  }, [text]);
+
+  if (!integrityPolicyData) {
+    return <div>Loading...</div>; // Loader component while data is fetching
+  }
+
   const styles = {
     container: {
       textAlign: 'left',
@@ -20,10 +38,18 @@ const Integritetspolicy = () => {
       marginBottom: '10px',
       marginTop: '20px',
     },
-    subsectionTitle: {
+    subtitle: {
       color: '#6E2936',
       fontWeight: 'bold',
-      fontSize: '1rem',
+      fontSize: '1.4rem', // Större storlek för subtitle
+      marginBottom: '5px',
+      marginTop: '20px',
+    },
+    subsubtitle: {
+      color: '#6E2936',
+      fontFamily: 'Poppins',
+      fontWeight: 'bold',
+      fontSize: '1rem', // Mindre storlek för subsubtitle
       marginBottom: '5px',
       marginTop: '20px',
     },
@@ -40,20 +66,16 @@ const Integritetspolicy = () => {
   return (
     <div style={styles.container as React.CSSProperties}>
       {/* Titel */}
-      <h2 style={styles.sectionTitle}>{text.integrity_policy.introduction}</h2>
+      <h2 style={styles.sectionTitle}>{integrityPolicyData.introduction}</h2>
       
       {/* Loop genom textobjektet och rendera mellanrubriker, brödtext och länkar */}
-      {Object.keys(text.integrity_policy).map((key) => {
+      {Object.keys(integrityPolicyData).map((key) => {
         if (key.startsWith('section')) {
-          const section = text.integrity_policy[key];
+          const section = integrityPolicyData[key];
           return (
             <div key={key}>
               {/* Rendera huvudrubrik */}
-              {key === 'section_1' || key === 'section_2' || key === 'section_3' ? (
-                <h3 style={styles.subsectionTitle}>{section.title}</h3>
-              ) : (
-                <h3 style={styles.subsectionTitle}>{section.title}</h3>
-              )}
+              <h3 style={styles.subtitle}>{section.title}</h3> 
               {/* Rendera brödtext */}
               <div style={styles.text}>{section.description}</div>
               {/* Loop genom eventuella underavdelningar */}
@@ -63,7 +85,7 @@ const Integritetspolicy = () => {
                   return (
                     <div key={subKey}>
                       {/* Rendera underrubrik */}
-                      <h4 style={styles.subsectionTitle}>{subsection.title}</h4>
+                      <h4 style={styles.subsubtitle}>{subsection.title}</h4>
                       {/* Rendera underavdelningens beskrivning */}
                       <div style={styles.text}>{subsection.description}</div>
                     </div>
@@ -78,8 +100,8 @@ const Integritetspolicy = () => {
         if (key === 'section_3') {
           return (
             <div key={key}>
-              <h3 style={styles.subsectionTitle}>{text.integrity_policy.section_3.title}</h3>
-              <div style={styles.text}>{text.integrity_policy.section_3.description}</div>
+              <h3 style={styles.subsubtitle}>{integrityPolicyData.section_3.title}</h3>
+              <div style={styles.text}>{integrityPolicyData.section_3.description}</div>
               <div style={styles.text}>Har du ytterligare frågor? Kontakta oss på <a href="mailto:hello@saveabl.se">hello@saveabl.se</a>.</div>
             </div>
           );
@@ -93,4 +115,5 @@ const Integritetspolicy = () => {
 };
 
 export default Integritetspolicy;
+
 
