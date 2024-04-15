@@ -47,7 +47,6 @@ const Integritetspolicy = () => {
     },
     subsubtitle: {
       color: '#6E2936',
-      fontFamily: 'Poppins',
       fontWeight: 'bold',
       fontSize: '1rem', // Mindre storlek för subsubtitle
       marginBottom: '5px',
