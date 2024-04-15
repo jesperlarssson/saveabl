@@ -1,7 +1,5 @@
 "use client";
 
-"use client";
-
 import React from 'react';
 import { useLang } from '@/hooks/useLang';
 
@@ -14,36 +12,29 @@ const Integritetspolicy = () => {
       textAlign: 'left',
       marginLeft: '5%',
       marginRight: '5%',
+      fontFamily: 'Poppins', // Typsnitt för hela container
     },
     sectionTitle: {
       color: '#6E2936',
-      fontFamily: 'Poppins',
       fontWeight: 'bold',
       fontSize: '2rem',
       marginBottom: '10px',
       marginTop: '20px',
+      fontFamily: 'Poppins', // Typsnitt för sektionstitlar
     },
     subsectionTitle: {
       color: '#6E2936',
-      fontFamily: 'Poppins',
       fontWeight: 'bold',
       fontSize: '1rem',
       marginBottom: '5px',
       marginTop: '20px',
-    },
-    subsubsectionTitle: { // Stil för större underrubriker
-      color: '#6E2936',
-      fontFamily: 'Poppins',
-      fontWeight: 'bold',
-      fontSize: '1.5rem', // Större storlek än underrubriker
-      marginBottom: '5px',
-      marginTop: '20px',
+      fontFamily: 'Poppins', // Typsnitt för delavsnittstitlar
     },
     text: {
       color: 'black',
-      fontFamily: 'Poppins',
       fontSize: '1rem',
       marginBottom: '5px',
+      fontFamily: 'Poppins', // Typsnitt för brödtext
     },
     lastText: {
       marginBottom: '40px', // Margin bottom för sista texten
@@ -63,7 +54,7 @@ const Integritetspolicy = () => {
             <div key={key}>
               {/* Rendera huvudrubrik */}
               {key === 'section_1' || key === 'section_2' || key === 'section_3' ? (
-                <h3 style={styles.subsubsectionTitle}>{section.title}</h3>
+                <h3 style={styles.subsectionTitle}>{section.title}</h3>
               ) : (
                 <h3 style={styles.subsectionTitle}>{section.title}</h3>
               )}

@@ -12,32 +12,34 @@ const Villkor = () => {
       textAlign: 'left',
       marginLeft: '5%',
       marginRight: '5%',
+      fontFamily: 'Poppins', // Typsnitt för hela container
     },
     title: {
       color: '#6E2936',
-      fontFamily: 'Poppins',
       fontWeight: 'bold',
       fontSize: '2rem',
       marginBottom: '10px',
       marginTop: '20px',
+      fontFamily: 'Poppins', // Typsnitt för titeln
     },
     subtitle: {
       color: '#6E2936',
-      fontFamily: 'Poppins',
       fontWeight: 'bold',
       fontSize: '1rem',
       marginBottom: '5px',
       marginTop: '20px',
+      fontFamily: 'Poppins', // Typsnitt för underrubriker
     },
     text: {
       color: 'black',
-      fontFamily: 'Poppins',
       fontSize: '1rem',
       marginBottom: '5px',
+      fontFamily: 'Poppins', // Typsnitt för brödtext
     },
     link: {
       color: 'inherit',
       textDecoration: 'underline',
+      fontFamily: 'Poppins', // Typsnitt för länkar
     },
     lastText: {
       marginBottom: '40px', // Margin bottom för sista texten
