@@ -787,20 +787,20 @@ const daText = {
   },
   page: {
     hero: {
-      title: "Færdiglavede madkasse der gør klimaet en tjeneste",
+      title: "Færdiglavede måltidskasse der gør klimaet en tjeneste",
       subtitle: "",
       order_now: "Bestil nu",
     },
     usp: {
-      title: "Hvad indebærer vores madkasse?",
+      title: "Hvad indebærer vores måltidskasse?",
       points: [
         {
           title: "Vores kok skaber opskrifter",
-          text: "Vi samler lækre råvarer, der ser lidt skøre ud, og laver lækre opskrifter på det. Og voila, du har en kokkeforberedt madkasse!",
+          text: "Vi samler lækre råvarer, der ser lidt skøre ud, og laver lækre opskrifter på det. Og voila, du har en kokkeforberedt måltidskasse!",
         },
         {
           title: "Mad leveres til dig",
-          text: "Du får din reddede madkasse leveret med det meste forberedt for dig.",
+          text: "Du får din reddede måltidskasse leveret med det meste forberedt for dig.",
         },
         {
           title: "Klimavenligt måltid på 15 min",
@@ -837,7 +837,7 @@ const daText = {
       },
       {
         title: "Vores måltidskasse",
-        text: "Vores madkasse bygger på tre værdier: den skal være klimavenlig, super praktisk og ekstremt lækker, altså næsten ufatteligt lækker. Vi er fuldstændig overbeviste om at det er muligt uden at prisen bliver for høj. Hvordan kan vi gøre det, tænker du måske nu? Vi samarbejder med gårde, producenter og grossister og hjælper dem med at redde madvarer der afviger i form, farve, størrelse, er overskud eller resultatet af logistikfejl. Det betyder at den mad du spiser er mad der ellers ville være blevet kasseret, selvom den smager helt perfekt. Mærkeligt, ikke sandt? Men mere om det længere nede! Madkassen er super praktisk da alt er klart inden for 15 minutter, for vores kokke forbereder meget for dig og det er også det der gør den ekstremt lækker!",
+        text: "Vores måltidskasse bygger på tre værdier: den skal være klimavenlig, super praktisk og ekstremt lækker, altså næsten ufatteligt lækker. Vi er fuldstændig overbeviste om at det er muligt uden at prisen bliver for høj. Hvordan kan vi gøre det, tænker du måske nu? Vi samarbejder med gårde, producenter og grossister og hjælper dem med at redde madvarer der afviger i form, farve, størrelse, er overskud eller resultatet af logistikfejl. Det betyder at den mad du spiser er mad der ellers ville være blevet kasseret, selvom den smager helt perfekt. Mærkeligt, ikke sandt? Men mere om det længere nede! Måltidskassen er super praktisk da alt er klart inden for 15 minutter, for vores kokke forbereder meget for dig og det er også det der gør den ekstremt lækker!",
       },
       {
         title: "Reddet mad",
@@ -973,7 +973,7 @@ const daText = {
     intervalOption2: "Hver anden uge",
     intervalButton: "Skift",
     intervalModalTitle: "Skift interval",
-    intervalModalDescription: "Ændringer foretaget inden torsdag gælder for den kommende måltidskasse. Herefter gælder det for den næstkommende måltidskasse. Bemærk, når du skifter til hver anden uge, starter perioden med en madkasseuge.",
+    intervalModalDescription: "Ændringer foretaget inden torsdag gælder for den kommende måltidskasse. Herefter gælder det for den næstkommende måltidskasse. Bemærk, når du skifter til hver anden uge, starter perioden med en måltidskasseuge.",
     change_delivery_day_button: "Skift leveringsdag",
     dayModalTitle: "Kontakt os på hello@saveabl.se for at ændre leveringsdagen 💌",
     dayModalDescription: "Vælg hvilken leveringsdag du ønsker.",
@@ -982,7 +982,7 @@ const daText = {
     no_connection_desc: "Vi understøtter desværre ikke visning af engangskøb endnu.",
     sign_out_button: "Log ud",
     contact_button: "Kontakt os",
-    questions: "Har du nogen spørgsmål om vores madkasse? Kontakt os gerne!", 
+    questions: "Har du nogen spørgsmål om vores måltidskasse? Kontakt os gerne!", 
   },
   
   terms: {
