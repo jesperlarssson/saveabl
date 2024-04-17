@@ -170,7 +170,45 @@ const svText = {
         text: "Klimatfrågan är enormt viktig för oss och vi försöker bidra på alla sätt vi kan. Med hjälp av RISE har det räknats ut att våra middagar har 5 gånger lägre klimatpåverkan än en genomsnittlig svensk middag. Sättet som vi har uppnått det är genom att rädda bra matvaror från att slängas helt i onödan, vilket i sin tur gör att mindre mat behöver odlas, färre transporter behöver rulla och mindre vatten behövs till jordbruken. Genom att visa på hur otroligt gott det kan vara att äta vegetariskt vill vi inspirera till en kost som är mindre baserad på kött vilket även det leder till en lägre klimatpåverkan och vi jobbar just nu på att ta fram ett retursystem för våra plastburkar till såser tillsammans med Gordon Delivery för att ytterligare minska vår påverkan.",
       },
     ],
-    faq: "",
+    faq: "Vanliga frågor",
+    faqItems: [
+      {
+        question: "Prenumeration, vad gäller?",
+        answer: "Våra prenumerationer är helt utan bindningstid, vilket innebär att du kan pausa och avbryta när du vill. För att pausa eller avbryta din prenumeration loggar du enkelt in på ditt konto, alternativt kontaktar oss via mejl så ordnar vi det. Pausningar/uppsägningar behöver komma in till oss innan torsdagen inför leverans. Detta då vi bokar leveranserna denna dag, samt så vi ska kunna planera exakt antal matkassar med våra kockar.",
+      },
+      {
+        question: "15 minuter, hur då?",
+        answer: "Våra kockar gör de svåraste och mest tidskrävande stegen åt dig, så när matkassen levereras utanför din dörr är den klar till ungefär 70%. Vilket innebär att du endast behöver göra de sista, roliga stegen för att färdigställa middagen! Oftast handlar det om att rosta av något i ugnen, koka upp något eller värma en sås. Och på så vis har du dina kockpreppade middagar klara på endast 15 minuter!",
+      },
+      {
+        question: "Vad innebär räddad mat?",
+        answer: "Vi samarbetar med gårdar, matproducenter och grossister och hjälper dem att rädda bra matvaror från att slängas. Ofta handlar det om frukt och grönt som inte uppfyller butikernas krav på storlek, form eller färg. Vi ser till att dessa utmärkta varor inte går till spillo. I många fall är maten i våra kassar till och med färskare än butikens, eftersom den ofta kommer direkt från bonden.",
+      },
+      {
+        question: "Har matens bäst-före datum passerat?",
+        answer: "Nej, inget som vi skickar ut har passerat bäst före-datum. All mat som vi skickar ut i matkassen ska hålla i minst 7 dagar från att den når våra kunder, då vi räknar med att maten äts upp inom loppet av en vecka.",
+      },
+      {
+        question: "Behöver jag ha några ingredienser hemma?", 
+        answer: "Du behöver bara ha någon typ av matlagningsolja hemma, lite salt och peppar och sen har vi tillsatt ALLT annat! Njut av smidigheten.", 
+      },
+      {
+        question: "Hur stor andel är räddad mat och hur bidrar det till en hållbarare middag?", 
+        answer: "Du hittar den exakta andelen räddad mat under varje enskilt recept. Vi strävar efter att ungefär 70% av ingredienserna ska vara räddade. Vår målsättning är att hitta den perfekta balansen mellan att skapa fantastiska och fullständiga rätter samtidigt som vi har en positiv inverkan på klimatet. En sammanställning gjord i samarbete med RISE visar att vårt klimatavtryck är hela 5 gånger lägre än en genomsnittlig svensk middag. Så ja, vi är definitivt på rätt väg mot en mer hållbar framtid!", 
+      },
+      {
+        question: "Täcker ni alla allergier?", 
+        answer: "Tyvärr kan vi inte lösa alla allergier, skicka oss gärna ett mail så kan vi titta närmare på om vi kan ordna en matkasse som passar just din allergi.", 
+      },
+      {
+        question: "Kan jag välja rätterna själv i matkassen?", 
+        answer: "Inte just nu, men vi hoppas på att kunna erbjuda det i framtiden. Att ge mer valfrihet gör våra inköp mindre förutsägbara och svinnet hamnar hos oss istället. Vi försöker hitta rätt balans mellan valfrihet och hållbarhet för att erbjuda så mycket som möjligt utan att äventyra vårt klimatarbete.", 
+      },
+      {
+        question: "Vad händer om jag inte är hemma tiden för leverans?", 
+        answer: "Våra matkassar levereras av Gordon Delivery, du får ett sms med uppskattad leveranstid redan 3-4 dagar innan leverans. Skulle du inte vara hemma när kassen levereras kan Gordon lämna den utanför din dörr och då klarar sig maten bra i 1-2 timmar. Vi brukar alltid frysa ner en behållare och på så vis ha något som håller maten kall utan att behöva använda extra material.", 
+      },
+    ],
   },
 
   recipes: {
@@ -526,7 +564,45 @@ const enText = {
         text: "The climate issue is enormously important to us, and we are trying to contribute in every way we can. An independent research shows that our meals’ footprint is 5 times lower than the Swedish average. The ways we achieve this is by rescuing good food from being discarded entirely unnecessarily, which in turn reduces the need to cultivate less food, fewer transports are required, and less water is needed for agriculture. By demonstrating how incredibly delicious it can be to eat vegetarian, we aim to inspire a diet that is less dependent on meat which is also a way to achieve a lower climate footprint. Currently we are working on Saveabl Reuse, a return system for our plastic sauce containers in cooperation with Gordon Delivery to further lower our impact.",
       },
     ],
-    faq: "",
+    faq: "Common questions",
+    faqItems: [
+      {
+        question: "Subscription, what applies?", 
+        answer: "Our subscriptions are completely commitment-free, which means you can pause and cancel whenever you want. To pause or cancel your subscription, simply log in to your account, alternatively, contact us via email, and we'll take care of it. Pauses/cancellations need to be communicated to us before Thursday ahead of the delivery. This is because we schedule deliveries on this day, and so we can plan the exact number of meal kits with our chefs.", 
+      },
+      {
+        question: "15 minutes, how so?", 
+        answer: "Our chefs handle the most challenging and time-consuming steps for you, so when the meal kit arrives at your doorstep, it's already about 70% ready. That means you only need to take care of the final, enjoyable steps to complete your dinner! It usually involves roasting something in the oven, boiling something, or heating a sauce. And that's how you have your chef-prepped dinners ready in just 15 minutes!", 
+      },
+      {
+        question: "What does rescued food mean?", 
+        answer: "We collaborate with farms, food producers, and wholesalers to help rescue quality food items from being discarded. Often, this involves fruits and vegetables that don't meet the size, shape, or color standards set by stores. In many instances, the rescued products in our meal kits can even be fresher than those you find in stores since they often come directly from the farm.", 
+      },
+      {
+        question: "Has the food passed its expiration date?", 
+        answer: "No, nothing we send out has passed the expiration date. All the food we include in our meal kit is guaranteed to have at least 7 days of shelf life from the moment it reaches our customers, as we assume that the food will be consumed within a week.", 
+      },
+      {
+        question: "Do I need to have any ingredients at home?", 
+        answer: "You only need to have some type of cooking oil, a bit of salt, and pepper at home, as we've added EVERYTHING else! Enjoy the convenience.", 
+      },
+      {
+        question: "What is the proportion of rescued food, and how does it contribute to a more sustainable dinner?", 
+        answer: "You can find the exact proportion of rescued food in each individual recipe. We aim for approximately 70% of the ingredients to be rescued. Our goal is to strike the perfect balance between creating fantastic and complete dishes while making a positive impact on the environment. A survey conducted in collaboration with RISE (Research Institutes of Sweden) shows that our carbon footprint is a whopping 5 times lower than that of an average Swedish dinner. So, yes, we're definitely on the right track toward a more sustainable future!", 
+      },
+      {
+        question: "Do you cover all allergies?", 
+        answer: "Unfortunately, we can't accommodate all allergies. Please send us an email, and we will explore the possibility of arranging a meal kit that suits your specific allergy.", 
+      },
+      {
+        question: "Can I choose the dishes in the meal kit myself?", 
+        answer: "Not at the moment, but we hope to offer that in the future. Providing more choices can make our purchases less predictable and increase waste on our end. We are striving to strike the right balance between flexibility and sustainability to provide as much as we can without compromising our environmental efforts.", 
+      },
+      {
+        question: "What happens if I'm not home at the time of delivery?", 
+        answer: "Our meal kits are delivered by Gordon Delivery, and you'll receive an SMS with the estimated delivery time 3-4 days prior. If you're not home when the kit is delivered, Gordon can leave it outside your door, and the food will remain fresh for 1-2 hours. We typically include a frozen container to keep the food cool without the need for extra materials.", 
+      },
+    ],
   },
 
   recipes: {
@@ -848,7 +924,45 @@ const daText = {
         text: "Klimaspørgsmålet er enormt vigtigt for os og vi forsøger at bidrage på alle måder vi kan. Ved hjælp af RISE er det blevet beregnet at vores middage har en 5 gange lavere klimapåvirkning end en gennemsnitlig svensk middag. Den måde vi har opnået dette på er ved at redde gode madvarer fra at blive smidt ud helt unødvendigt, hvilket igen betyder, at mindre mad behøver dyrkes, færre transporter er nødvendige og mindre vand er nødvendigt til landbruget. Ved at vise hvor utroligt lækkert det kan være at spise vegetarisk ønsker vi at inspirere til en kost der er mindre baseret på kød, hvilket også fører til en lavere klimapåvirkning. Vi arbejder i øjeblikket på at udvikle et retursystem for vores plastikbøtter til saucer i samarbejde med Gordon Delivery for yderligere at mindske vores påvirkning.",
       },
     ],
-    faq: "",
+    faq: "Almindelige spørgsmål",
+    faqItems: [
+      {
+        question: "Abonnement, hvad gælder?", 
+        answer: "Vores abonnementer er helt uden forpligtelser, hvilket betyder, at du kan sætte på pause og annullere når som helst. For at sætte på pause eller annullere dit abonnement, skal du blot logge ind på din konto, eller alternativt kontakte os via e-mail, og vi tager os af det. Pauser/annulleringer skal kommunikeres til os inden torsdag inden leveringen. Dette skyldes, at vi planlægger leverancer på denne dag, og så vi kan planlægge det præcise antal måltidskasser med vores kokke.", 
+      },
+      {
+        question: "15 minutter, hvordan så?", 
+        answer: "Vores kokke tager sig af de mest udfordrende og tidskrævende trin for dig, så når måltidskassen ankommer til din dør, er den allerede omkring 70% klar. Det betyder, at du kun behøver at tage dig af de sidste, fornøjelige skridt for at færdiggøre din middag! Det involverer normalt at riste noget i ovnen, koge noget, eller opvarme en sauce. Og sådan har du dine kokkeforberedte middage klar på kun 15 minutter!", 
+      },
+      {
+        question: "Hvad betyder reddet mad?", 
+        answer: "Vi samarbejder med landbrug, fødevareproducenter og grossister for at hjælpe med at redde kvalitetsfødevarer fra at blive smidt ud. Ofte drejer det sig om frugt og grøntsager, der ikke opfylder butikkernes standarder for størrelse, form eller farve. I mange tilfælde kan de reddede produkter i vores måltidskasser endda være friskere end dem, du finder i butikkerne, da de ofte kommer direkte fra landbrugene.", 
+      },
+      {
+        question: "Er maden overskredet sin bedst-før-dato?", 
+        answer: "Nej, intet af det, vi sender ud, har overskredet sin bedst-før-dato. Alt den mad, vi inkluderer i vores måltidskasse, garanteres at have mindst 7 dages holdbarhed fra det øjeblik, det når vores kunder, da vi antager, at maden bliver spist inden for en uge.", 
+      },
+      {
+        question: "Skal jeg have nogle ingredienser derhjemme?", 
+        answer: "Du behøver kun at have en slags madolie, lidt salt og peber derhjemme, da vi har tilsat ALT andet! Nyd bekvemmeligheden.", 
+      },
+      {
+        question: "Hvor stor en del er reddet mad, og hvordan bidrager det til en mere bæredygtig middag?", 
+        answer: "Du finder den præcise andel af reddet mad under hvert enkelt opskrift. Vi stræber efter, at cirka 70% af ingredienserne er reddede. Vores mål er at finde den perfekte balance mellem at skabe fantastiske og fuldendte retter samtidig med at vi har en positiv indvirkning på klimaet. En sammenstilling lavet i samarbejde med RISE viser, at vores klimaaftryk er hele 5 gange lavere end en gennemsnitlig svensk middag. Så ja, vi er helt sikkert på vej mod en mere bæredygtig fremtid!", 
+      },
+      {
+        question: "Dækker I alle allergier?", 
+        answer: "Desværre kan vi ikke imødekomme alle allergier. Send os venligst en e-mail, og vi vil undersøge muligheden for at arrangere en måltidskasse, der passer til din specifikke allergi.", 
+      },
+      {
+        question: "Kan jeg selv vælge retterne i måltidskassen?", 
+        answer: "Ikke på nuværende tidspunkt, men vi håber at tilbyde det i fremtiden. At give flere valgmuligheder kan gøre vores indkøb mindre forudsigelige og resultere i madspild på vores side. Vi arbejder hårdt på at finde den rette balance mellem fleksibilitet og bæredygtighed for at kunne tilbyde så meget som muligt uden at gå på kompromis med vores miljøindsats.", 
+      },
+      {
+        question: "Hvad sker der, hvis jeg ikke er hjemme ved leveringstidspunktet?", 
+        answer: "Vores måltidskasser leveres af Gordon Delivery, og du vil modtage en SMS med det estimerede leveringstidspunkt 3-4 dage før. Hvis du ikke er hjemme, når kassen bliver leveret, kan Gordon efterlade den udenfor din dør, og maden vil blive frisk i 1-2 timer. Vi inkluderer normalt en frossen beholder for at holde maden kølig uden behov for ekstra materialer.", 
+      },
+    ],
   },
   recipes: {
     title: "Menuer",

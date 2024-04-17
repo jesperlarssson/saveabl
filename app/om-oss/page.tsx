@@ -147,7 +147,7 @@ const OmOss = () => {
         imageUrl="/images/green-landscape.png"
       />
       <div id="vanliga-fragor">
-        <Accordion faqs={[]} title={text.about_us.faq} />
+        <Accordion faqs={text.about_us.faqItems} title={text.about_us.faq} />
       </div>
     </>
   );

@@ -116,7 +116,9 @@ const AboutUsContent = () => {
                 height={50}
                 className="object-contain w-full h-full"
               />
-            </div>
+            </div><div id="vanliga-fragor">
+  <Accordion faqs={text.about_us.faqItems} title={text.about_us.faq} />
+</div>
             <p className="text-sm md:text-base">{text.about_us.faq}</p>
           </a>
         </div>
