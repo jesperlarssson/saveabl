@@ -209,7 +209,7 @@ const svText = {
     bullet1: "",
     bullet2: "",
     bullet3: "",
-    type: "Gör dina val nedan:",
+    type: "Gör dina val nedan (utan bindningstid på samtliga):",
     variant: "Recept utformade för familjer på 3-4 pers:",
     deliveryDay: "Leveransalternativ:",
     delivery_saturday: "Lördag 20/4 kl. 09-18",
@@ -374,6 +374,8 @@ const svText = {
   },
   terms: {
     title: "Villkor",
+    subtitle: "Prenumeration", 
+    description: "Våra prenumerationer är helt utan bindningstid, vilket innebär att du kan pausa och avbryta när du vill. För att pausa eller avbryta din prenumeration loggar du enkelt in på ditt konto, alternativt kontaktar oss via mejl så ordnar vi det. Pausningar/uppsägningar behöver komma in till oss innan torsdagen inför leverans. Detta då vi bokar leveranserna denna dag, samt så vi ska kunna planera exakt antal matkassar med våra kockar.",
     subtitle1: "Allmänna villkor Saveabl",
     description1: "När du handlar på Saveabls hemsida ingås alla avtal med Foody Impact AB (”Saveabl”, ”vi”, ”vår”, eller ”oss”), organisationsnummer 559266-3149, med adress Övre Kaserngården 12, 415 27 Göteborg. I samband med ett köp hos oss accepterar du de här allmänna villkoren. Enbart privatpersoner, eller representanter för företag, som är över 18 år och har full juridisk rätt att ingå avtal får handla Saveabls produkter.",
     subtitle2: "Betalning, beställning och priser", 
@@ -562,7 +564,7 @@ const enText = {
     bullet1: "",
     bullet2: "",
     bullet3: "",
-    type: "Make your choices below:",
+    type: "Make your selections below (without commitment on any):",
     variant: "Recipes designed for families of 3-4 people:",
     deliveryDay: "Delivery options:",
     delivery_saturday: "Saturday 23/3 at 09-18",
@@ -695,6 +697,8 @@ const enText = {
   },
   terms: {
     title: "Terms",
+    subtitle: "Subscription", 
+    description: "Our subscriptions are completely commitment-free, which means you can pause or cancel whenever you want. To pause or cancel your subscription, simply log in to your account, or alternatively contact us via email and we'll take care of it. Pauses/cancellations need to be communicated to us before Thursday ahead of the delivery. This is because we schedule deliveries on this day, and so we can plan the exact number of meal kits with our chefs.",
     subtitle1: "General terms of Saveabl",
     description1: "When you shop on Saveabl's website, all agreements are made with Foody Impact AB ('Saveabl', 'we', 'our', or 'us'), organization number 559266-3149, with address Övre Kaserngården 12, 415 27 Gothenburg. By making a purchase from us, you accept these general terms and conditions. Only individuals, or representatives of companies, who are over 18 years old and have full legal capacity to enter into agreements may purchase Saveabl's products.",
     subtitle2: "Payment, ordering, and prices",
@@ -983,6 +987,8 @@ const daText = {
   
   terms: {
     title: "Betingelser",
+    subtitle: "Abonnement", 
+    description: "Vores abonnementer er helt uden forpligtelser, hvilket betyder, at du kan sætte på pause eller annullere, når du ønsker det. For at sætte på pause eller annullere dit abonnement, skal du blot logge ind på din konto, eller alternativt kontakte os via e-mail, og vi sørger for det. Pauser/annulleringer skal kommunikeres til os inden torsdag inden leveringen. Dette skyldes, at vi planlægger leverancer på denne dag, og så vi kan planlægge det præcise antal måltidskasser med vores kokke.",
     subtitle1: "Generelle betingelser for Saveabl",
     description1: "Når du handler på Saveabls hjemmeside, indgås alle aftaler med Foody Impact AB ('Saveabl', 'vi', 'vores' eller 'os'), organisationsnummer 559266-3149, med adresse Övre Kaserngården 12, 415 27 Göteborg. Ved at foretage et køb hos os, accepterer du disse generelle betingelser og vilkår. Kun enkeltpersoner eller repræsentanter for virksomheder, der er over 18 år og har fuld juridisk kapacitet til at indgå aftaler, må købe Saveabls produkter.",
     subtitle2: "Betaling, bestilling og priser",

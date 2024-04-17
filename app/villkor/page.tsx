@@ -45,17 +45,24 @@ const Villkor = () => {
     <div style={styles.container as React.CSSProperties}>
       {/* Titel */}
       <h2 style={styles.title}>{text.terms.title}</h2>
-      
-      {/* Loop genom textobjektet och rendera mellanrubriker, brödtext och länkar */}
+
+      {/* Rendera description för rubriken "Villkor" */}
       {Object.keys(text.terms).map((key) => {
-        if (key.startsWith('subtitle')) {
+        if (key === "description") {
+          return (
+            <p key={key} style={styles.text}>
+              {text.terms[key]}
+            </p>
+          );
+        }
+        if (key.startsWith("subtitle")) {
           const index = parseInt(key.substring(8));
           return (
             <React.Fragment key={key}>
               <p style={styles.subtitle}>{text.terms[key]}</p>
               {/* Placera texten och länken på samma rad */}
               <div style={styles.text}>
-                <span>{text.terms['description' + index]}</span>
+                <span>{text.terms["description" + index]}</span>
                 {/* Placera länken till mejlen efter "på" */}
                 {index === 5 && (
                   <React.Fragment>
@@ -92,6 +99,7 @@ const Villkor = () => {
 };
 
 export default Villkor;
+
 
 
 
