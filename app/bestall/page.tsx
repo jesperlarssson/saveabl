@@ -387,7 +387,7 @@ const Order = () => {
       setFormErrors({
         ...formErrors,
         email: {
-          message: "Det finns redan en användare med den e-postadressen",
+          message: "Kontrollera att alla rutor är ifyllda korrekt",
         },
       });
       setStripeCheckoutIsLoading(false);
@@ -784,10 +784,6 @@ const Order = () => {
           )}
         </div>
       </Section>
-      <div id="vanliga-fragor">
-        {/* Använd dina FAQ-frågor från text.about_us.faqItems */}
-        <Accordion faqs={text.order.faqItems} title={text.order.faq} />
-      </div>
       {stripeCheckoutIsLoading && (
         <div
           className="fixed top-0 left-0 z-50 w-screen h-screen bg-primary bg-opacity-70 flex justify-center items-center
@@ -796,7 +792,10 @@ const Order = () => {
           <Title>Laddar...</Title>
         </div>
       )}
-      
+      <div id="vanliga-fragor">
+        {/* Använd dina FAQ-frågor från text.about_us.faqItems */}
+        <Accordion faqs={text.order.faqItems} title={text.order.faq} />
+      </div>
     </>
   );
 };

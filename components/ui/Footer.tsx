@@ -121,7 +121,7 @@ const Footer = () => {
           </p>
 
           <div>
-          <p className="mx-auto mt-1 mb-1 max-w-md text-center leading-relaxed hover:underline text-primary-200">
+          <p className="mx-auto mt-6 mb-1 max-w-md text-center leading-relaxed hover:underline text-primary-200">
         <a href="https://www.saveabl.com/villkor" target="_blank" rel="noopener noreferrer">
           {text.footer.terms}
         </a>
