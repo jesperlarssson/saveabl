@@ -120,7 +120,14 @@ const Footer = () => {
             559266-3149. VAT number: SE559266314901.
           </p>
           <div>
-          <p className="mx-auto mt-6 mb-1 max-w-md text-center leading-relaxed hover:underline text-primary-200">
+          <p className="mx-auto mt-6 max-w-md text-center leading-relaxed hover:underline text-primary-200">
+        <a href="https://www.saveabl.com/om-oss#vanliga-fragor" target="_blank" rel="noopener noreferrer">
+          {text.footer.faq}
+        </a>
+      </p>
+          </div>
+          <div>
+          <p className="mx-auto mt-1 mb-1 max-w-md text-center leading-relaxed hover:underline text-primary-200">
         <a href="https://www.saveabl.com/villkor" target="_blank" rel="noopener noreferrer">
           {text.footer.terms}
         </a>

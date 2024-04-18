@@ -1,5 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
+import Accordion from "@/components/ui/Accordion";
 import { twMerge } from "tailwind-merge";
 import Button from "@/components/ui/Button";
 import useCheckout from "@/hooks/useCheckout";
@@ -55,6 +56,7 @@ const variants = {
 };
 
 const Order = () => {
+
   const { text, lang } = useLang();
 
   const [showDeliveryOptions, setShowDeliveryOptions] = useState(false);
@@ -72,6 +74,8 @@ const Order = () => {
   const searchParams = useSearchParams();
   const id = searchParams.get("id") || "1";
   const offerId = parseInt(id, 10);
+
+  
 
   const [deliveryDaysLoading, setDeliveryDaysLoading] = useState(false);
 
@@ -780,6 +784,10 @@ const Order = () => {
           )}
         </div>
       </Section>
+      <div id="vanliga-fragor">
+        {/* Använd dina FAQ-frågor från text.about_us.faqItems */}
+        <Accordion faqs={text.order.faqItems} title={text.order.faq} />
+      </div>
       {stripeCheckoutIsLoading && (
         <div
           className="fixed top-0 left-0 z-50 w-screen h-screen bg-primary bg-opacity-70 flex justify-center items-center
@@ -788,6 +796,7 @@ const Order = () => {
           <Title>Laddar...</Title>
         </div>
       )}
+      
     </>
   );
 };

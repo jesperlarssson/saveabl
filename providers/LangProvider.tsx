@@ -97,7 +97,7 @@ export const LangProvider = ({ children }: TextProviderProps) => {
 const svText = {
   nav: {
     order: "Beställ nu",
-    about: "Om oss",
+    about: "Mission",
     faq: "Vanliga frågor",
     recipe: "Menyer",
     news: "Nyheter",
@@ -273,6 +273,25 @@ const svText = {
     email_example: "E-post",
     password: "Lösenord",
     password_example: "Lösenord",
+    faq: "Frågor som kan uppstå:",
+    faqItems: [ 
+      {
+        question: "Prenumeration, vad gäller?",
+        answer: "Våra prenumerationer är helt utan bindningstid, vilket innebär att du kan pausa och avbryta när du vill. För att pausa eller avbryta din prenumeration loggar du enkelt in på ditt konto, alternativt kontaktar oss via mejl så ordnar vi det. Pausningar/uppsägningar behöver komma in till oss innan torsdagen inför leverans. Detta då vi bokar leveranserna denna dag, samt så vi ska kunna planera exakt antal matkassar med våra kockar.",
+      },
+      {
+        question: "Täcker ni alla allergier?", 
+        answer: "Tyvärr kan vi inte lösa alla allergier, skicka oss gärna ett mail så kan vi titta närmare på om vi kan ordna en matkasse som passar just din allergi.", 
+      },
+      {
+        question: "Vad händer om jag inte är hemma tiden för leverans?", 
+        answer: "Våra matkassar levereras av Gordon Delivery, du får ett sms med uppskattad leveranstid redan 3-4 dagar innan leverans. Skulle du inte vara hemma när kassen levereras kan Gordon lämna den utanför din dörr och då klarar sig maten bra i 1-2 timmar. Vi brukar alltid frysa ner en behållare och på så vis ha något som håller maten kall utan att behöva använda extra material.", 
+      },
+      {
+        question: "Behöver jag ha några ingredienser hemma?", 
+        answer: "Du behöver bara ha någon typ av matlagningsolja hemma, lite salt och peppar och sen har vi tillsatt ALLT annat! Njut av smidigheten.", 
+      },
+    ],
   },
 
   success: {
@@ -484,6 +503,7 @@ const svText = {
     }
   }, 
   footer: {
+    faq: "Vanliga frågor",
     terms: "Allmänna villkor", 
     integrity: "Integritetspolicy",
   }, 
@@ -493,7 +513,7 @@ const svText = {
 const enText = {
   nav: {
     order: "Get started",
-    about: "About us",
+    about: "Mission",
     faq: "Common questions",
     recipe: "Our menus",
     news: "News",
@@ -667,6 +687,25 @@ const enText = {
     email_example: "Mail address",
     password: "Password",
     password_example: "Password",
+    faq: "Questions that may arise:",
+    faqItems: [ 
+      {
+        question: "Subscription, what applies?", 
+        answer: "Our subscriptions are completely commitment-free, which means you can pause and cancel whenever you want. To pause or cancel your subscription, simply log in to your account, alternatively, contact us via email, and we'll take care of it. Pauses/cancellations need to be communicated to us before Thursday ahead of the delivery. This is because we schedule deliveries on this day, and so we can plan the exact number of meal kits with our chefs.", 
+      },
+      {
+        question: "Do you cover all allergies?", 
+        answer: "Unfortunately, we can't accommodate all allergies. Please send us an email, and we will explore the possibility of arranging a meal kit that suits your specific allergy.", 
+      },
+      {
+        question: "What happens if I'm not home at the time of delivery?", 
+        answer: "Our meal kits are delivered by Gordon Delivery, and you'll receive an SMS with the estimated delivery time 3-4 days prior. If you're not home when the kit is delivered, Gordon can leave it outside your door, and the food will remain fresh for 1-2 hours. We typically include a frozen container to keep the food cool without the need for extra materials.", 
+      },
+      {
+        question: "Do I need to have any ingredients at home?", 
+        answer: "You only need to have some type of cooking oil, a bit of salt, and pepper at home, as we've added EVERYTHING else! Enjoy the convenience.", 
+      },
+    ],
   },
 
   success: {
@@ -846,6 +885,7 @@ const enText = {
       }
     }, 
     footer: {
+      faq: "Common questions",
       terms: "Terms and Conditions", 
       integrity: "Privacy Policy",
     }, 
@@ -855,7 +895,7 @@ const enText = {
 const daText = {
   nav: {
     order: "Bestil nu",
-    about: "Om os",
+    about: "Mission",
     faq: "Almindelige spørgsmål",
     recipe: "Menuer",
     news: "Nyheder",
@@ -1013,6 +1053,25 @@ const daText = {
     contact: "Kontaktuppgifter",
     terms: "Jag godkänner villkoren och förstår att ett konto kommer att skapas.",
     payButton: "Registrera och betala",
+    faq: "Spørgsmål der kan opstå:",
+    faqItems: [ 
+      {
+        question: "Abonnement, hvad gælder?", 
+        answer: "Vores abonnementer er helt uden forpligtelser, hvilket betyder, at du kan sætte på pause og annullere når som helst. For at sætte på pause eller annullere dit abonnement, skal du blot logge ind på din konto, eller alternativt kontakte os via e-mail, og vi tager os af det. Pauser/annulleringer skal kommunikeres til os inden torsdag inden leveringen. Dette skyldes, at vi planlægger leverancer på denne dag, og så vi kan planlægge det præcise antal måltidskasser med vores kokke.", 
+      },
+      {
+        question: "Dækker I alle allergier?", 
+        answer: "Desværre kan vi ikke imødekomme alle allergier. Send os venligst en e-mail, og vi vil undersøge muligheden for at arrangere en måltidskasse, der passer til din specifikke allergi.", 
+      },
+      {
+        question: "Hvad sker der, hvis jeg ikke er hjemme ved leveringstidspunktet?", 
+        answer: "Vores måltidskasser leveres af Gordon Delivery, og du vil modtage en SMS med det estimerede leveringstidspunkt 3-4 dage før. Hvis du ikke er hjemme, når kassen bliver leveret, kan Gordon efterlade den udenfor din dør, og maden vil blive frisk i 1-2 timer. Vi inkluderer normalt en frossen beholder for at holde maden kølig uden behov for ekstra materialer.", 
+      },
+      {
+        question: "Skal jeg have nogle ingredienser derhjemme?", 
+        answer: "Du behøver kun at have en slags madolie, lidt salt og peber derhjemme, da vi har tilsat ALT andet! Nyd bekvemmeligheden.", 
+      },
+    ],
 
   },
 
@@ -1176,6 +1235,7 @@ integrity_policy: {
   }
   }, 
   footer: {
+    faq: "Almindelige spørgsmål",
     terms: "Generelle vilkår", 
     integrity: "Integritetspolitik",
   }, 
