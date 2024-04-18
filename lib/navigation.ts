@@ -30,12 +30,19 @@ export const navigation: NavigationItem[] = [
     path: "/nyheter",
     disabled: false,
   },
+
   // {
   //   id: 5,
   //   name: "Restaurangen",
   //   path: "/restaurangen",
   //   disabled: true,
   // },
+  {
+    id: 6,
+    name: "Vanliga frågor", 
+    path: "/om-oss#vanliga-fragor", 
+    disabled: false,
+  },
 ];
 
 export const socials: NavigationItem[] = [

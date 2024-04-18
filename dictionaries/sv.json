@@ -2,11 +2,11 @@
   "nav": {
     "order": "Beställ nu",
     "about": "Om oss",
+    "faq": "Vanliga frågor",
     "recipe": "Recept",
     "news": "Nyheter",
     "log_in": "Logga in",
     "log_out": "Logga ut",
-    "sign_up": "Registrera dig",
     "my_account": "Mina sidor"
   },
   "page": {

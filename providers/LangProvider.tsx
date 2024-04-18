@@ -494,6 +494,7 @@ const enText = {
   nav: {
     order: "Get started",
     about: "About us",
+    faq: "Common questions",
     recipe: "Our menus",
     news: "News",
     log_in: "Log in",
@@ -855,6 +856,7 @@ const daText = {
   nav: {
     order: "Bestil nu",
     about: "Om os",
+    faq: "Almindelige spørgsmål",
     recipe: "Menuer",
     news: "Nyheder",
     log_in: "Log ind",

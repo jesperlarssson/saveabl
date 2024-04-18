@@ -19,6 +19,8 @@ const Navbar = () => {
 
   const { text } = useLang();
 
+  const navLinkFaqClass = "ml-[-10px]";
+
   interface NavigationItem {
     id: number;
     name: string;
@@ -57,6 +59,12 @@ const Navbar = () => {
     //   path: "/restaurangen",
     //   disabled: true,
     // },
+    {
+      id: 5,
+      name: text.nav.faq,
+      path: "/om-oss#vanliga-fragor",
+      disabled: false,
+    },
   ];
 
   const auth = useAuth();
@@ -101,6 +109,7 @@ const Navbar = () => {
                       pathname === item.path && "bg-primary",
                       item.disabled &&
                         "cursor-not-allowed opacity-50 hover:bg-primary-200",
+                        item.name === text.nav.faq && navLinkFaqClass
                     ]
                   )}
                   active={pathname === item.path}
