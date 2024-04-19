@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import useManageSubscriptionModal from "@/hooks/useManageSubscriptionModal";
 import Modal from "@/components/ui/Modal";
 import axios from "axios";
@@ -24,16 +23,15 @@ function getWeekNumber(date: Date) {
       yearStart.setDate(yearStart.getDate() + 1); // Öka datumet med en dag
   }
 
-  var weekNo = Math.ceil((((d.getTime() - yearStart.getTime()) / 86400000) + 1) / 7) + 2;
+  // Beräkna veckonumret baserat på den första torsdagen (vecka 19)
+  var weekNo = Math.ceil((((d.getTime() - yearStart.getTime()) / 86400000) + 1) / 7) + 18; // Lägg till 18 för att starta från vecka 19
   return weekNo; 
 }
 
 const ManageSubscriptionModal = () => {
-  const [toggleType, setToggleType] = useState<boolean>(true);
   const { onClose, isOpen, customerEmail, customerId, isPaused } = useManageSubscriptionModal();
   const { onOpen, forMessage } = useMessageModal();
   const { text } = useLang();
-
   const [pauseOptions, setPauseOptions] = useState<React.ReactNode[]>([]);
   const [firstWeek, setFirstWeek] = useState<number>(0); // Lagrar den första veckan
 
@@ -46,8 +44,8 @@ const ManageSubscriptionModal = () => {
 
     // Uppdatera veckonumret för den första veckan om det inte är inställt
     if (firstWeek === 0) {
-      // Sätt den första veckan till vecka 18
-      const newFirstWeek = 18;
+      // Sätt den första veckan till vecka 19
+      const newFirstWeek = 19;
       setFirstWeek(newFirstWeek);
 
       // Uppdatera veckonumret för pauseoptions
@@ -162,4 +160,7 @@ const ManageSubscriptionModal = () => {
 };
 
 export default ManageSubscriptionModal;
+
+
+
 
