@@ -152,7 +152,7 @@ const svText = {
   about_us: {
     title: "Saveabl - “räddningsbar, något som går att rädda",
     description:
-      "På Saveabl. identifierar vi systematiskt svinn hos producenter och grossister, och gör en färdig matkasse baserad på det som behöver räddas! Vår matkasse finns i det magiska gränslandet mellan en traditionell matkasse och färdig hämtmat. Utöver klimatfrågan tror vi starkt på smidighet och har därför tagit fram en matkasse som är klar på 15 minuter. Otroligt smidigt och otroligt gott!",
+     "På Saveabl. identifierar vi systematiskt svinn hos producenter och grossister, och gör en färdig matkasse baserad på det som behöver räddas! Vår matkasse finns i det magiska gränslandet mellan en traditionell matkasse och färdig hämtmat. Utöver klimatfrågan tror vi starkt på smidighet och har därför tagit fram en matkasse som är klar på 15 minuter. Otroligt smidigt och otroligt gott!",
     sections: [
       {
         title: "Vilka vi är",
@@ -210,6 +210,7 @@ const svText = {
         answer: "Våra matkassar levereras av Gordon Delivery, du får ett sms med uppskattad leveranstid redan 3-4 dagar innan leverans. Skulle du inte vara hemma när kassen levereras kan Gordon lämna den utanför din dörr och då klarar sig maten bra i 1-2 timmar. Vi brukar alltid frysa ner en behållare och på så vis ha något som håller maten kall utan att behöva använda extra material.", 
       },
     ],
+    button: "Beställ nu"
   },
 
   recipes: {
@@ -625,6 +626,7 @@ const enText = {
         answer: "Our meal kits are delivered by Gordon Delivery, and you'll receive an SMS with the estimated delivery time 3-4 days prior. If you're not home when the kit is delivered, Gordon can leave it outside your door, and the food will remain fresh for 1-2 hours. We typically include a frozen container to keep the food cool without the need for extra materials.", 
       },
     ],
+    button: "Order now", 
   },
 
   recipes: {
@@ -1006,6 +1008,7 @@ const daText = {
         answer: "Vores måltidskasser leveres af Gordon Delivery, og du vil modtage en SMS med det estimerede leveringstidspunkt 3-4 dage før. Hvis du ikke er hjemme, når kassen bliver leveret, kan Gordon efterlade den udenfor din dør, og maden vil blive frisk i 1-2 timer. Vi inkluderer normalt en frossen beholder for at holde maden kølig uden behov for ekstra materialer.", 
       },
     ],
+    button: "Bestil nu"
   },
   recipes: {
     title: "Menuer",

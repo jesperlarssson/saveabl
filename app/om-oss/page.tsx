@@ -146,9 +146,16 @@ const OmOss = () => {
         text={text.about_us.sections[3].text}
         imageUrl="/images/green-landscape.png"
       />
-      <div id="vanliga-fragor">
-        <Accordion faqs={text.about_us.faqItems} title={text.about_us.faq} />
-      </div>
+     <div id="vanliga-fragor"> 
+  <Accordion faqs={text.about_us.faqItems} title={text.about_us.faq} />
+  <div style={{ backgroundColor: '#6E2936' }} className="py-0">
+    <div id="order-button" className="flex justify-center">
+      <a href="https://www.saveabl.com/bestall" className="bg-[#F4664A] text-white py-3 px-14 rounded-md font-bold text-lg hover:bg-accent/75 transition duration-300 mb-12">
+        {text.about_us.button}
+      </a>
+    </div>
+  </div>
+</div>
     </>
   );
 };

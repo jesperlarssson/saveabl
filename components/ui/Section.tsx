@@ -16,7 +16,7 @@ const Section: React.FC<SectionProps> = ({
 }) => {
   return (
     <>
-      <section className={twMerge(`w-full py-28 relative`, className)}>
+      <section className={twMerge(`w-full py-20 relative`, className)}>
         {bgIllustrationComponent && (
           <div className="absolute top-0 left-0 w-full h-full z-0 pointer-events-none">
             {bgIllustrationComponent}
