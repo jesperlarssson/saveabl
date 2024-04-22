@@ -1,32 +1,32 @@
 export const reviews = [
   {
     id: 1,
-    name: "Elaine",
-    title: "Fantastisk och snabb mat!",
+    name: "Alexander",
+    title: "Saveabl är en win-win-win",
     review:
-      "Jättegod mat som levereras till dörren och tar mindre än 10 minuter att laga/förbereda.",
+      "Saveabl är fantastiskt. Sättet det har underlättat vardagspusslet med två barn är otroligt, helt plötsligt har vi tid att hänga med barnen, träna eller bara få egentid på kvällarna. Maten är överlag väldigt god och uppskattad även av de små. Uppskattar att vissa rätter återkommer då och då. Men det kanske bästa är ändå att veta att den här matkassen bidrar till en bättre miljö. Helt enkelt en win-win-win!",
     rating: 5,
-    date: "2023-05-10",
-    url: "https://se.trustpilot.com/reviews/646a5e32746ca7dfea218aef",
+    date: "2024-04-13",
+    url: "https://se.trustpilot.com/reviews/661afa5898613cce1ecc71a1",
   },
   {
     id: 2,
-    name: "Philip",
-    title: "Riktigt god och bra mat",
+    name: "Niklas",
+    title: "Väldigt god men samtidigt enkel mat",
     review:
-      "Riktigt god och bra mat. Om det inte vore för Saveabl skulle jag aldrig testat dessa maträtter och då skulle jag verkligen gått miste om något. Enkelheten i att få klara goda recept som går snabbt att tillaga är en perfekt kombination, att det dessutom är bra för klimatet är bara en superbra bonus. Priset, kvalitén och variationen gör detta till en otroligt prisvärd kasse!",
+      "Väldigt god men samtidigt enkel mat! Istället för att få alla råvaror och behöva göra det från grunden så är det här ett perfekt substitut för att slänga ihop en snabb middag mitt i vardagen! Och smaker som inte tagit genvägar heller, enkelt och sjukt gott helt enkelt!",
     rating: 5,
-    date: "2022-01-13",
-    url: "https://se.trustpilot.com/reviews/61e09c6be1196e51d7632ccb",
+    date: "2024-01-31",
+    url: "https://se.trustpilot.com/reviews/65cd1846358cb4bb2f35c5a9",
   },
   {
     id: 3,
-    name: "Tova",
-    title: "Gott och enkelt!",
+    name: "Anneli",
+    title: "Absolut den bästa matkassen vi testat",
     review:
-      "Jag har varken tid eller lust att spendera lång tid i köket, men vill ändå äta riktigt bra och god mat och därför är Saveabl perfekt för mig! Gott, enkelt och dessutom bra för planeten!",
+      "Absolut den bästa matkassen vi testat. Vet inte hur vi överlevde innan! Jättegoda och varierande smaker, och maten blir klar på max en kvart varje kväll. Fantastiskt under småbarnsåren när maten snabbt ska fram. Generösa portioner också, för oss som är 2 vuxna och 1 barn räcker det ofta till 5-6 måltider.",
     rating: 5,
-    date: "2023-02-20",
-    url: "https://se.trustpilot.com/reviews/63f4d5336f3134764b70055f",
+    date: "2023-12-18",
+    url: "https://se.trustpilot.com/reviews/65804ae9054828d5f4bada17",
   },
 ];
