@@ -67,7 +67,6 @@ const Footer = () => {
               </g>
             </svg>
           </div>
-
           <div>
             <p className="mx-auto mt-6 mb-2 max-w-md text-center leading-relaxed text-primary-200 font-bold">
              {text.my_pages.questions}
@@ -115,7 +114,12 @@ const Footer = () => {
               </a>
             </li>
           </ul>
-          <p className="mx-auto mt-10 max-w-md text-center leading-relaxed text-primary-200">
+          <div className="flex justify-center mt-7 mb-1">
+            <a href="https://se.trustpilot.com/review/saveabl.se" target="_blank" rel="noopener noreferrer">
+            <img src="/images/trustpilotpicture.png" alt="Trustpilot" className="h-12 w-auto" />
+           </a>
+          </div>
+          <p className="mx-auto mt-7 max-w-md text-center leading-relaxed text-primary-200">
             Övre Kaserngården 12, 415 27 Göteborg, Sweden, Org. number:
             559266-3149. VAT number: SE559266314901.
           </p>
