@@ -17,6 +17,9 @@ const SignIn = () => {
 
   const onSubmit = async (data: any) => {
     try {
+      // Konvertera e-postadressen till små bokstäver
+      data.email = data.email.toLowerCase();
+
       if (data.password !== data.password_confirmation) {
         alert("Passwords do not match!");
         return;
