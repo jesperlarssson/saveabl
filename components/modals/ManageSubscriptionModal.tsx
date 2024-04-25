@@ -11,21 +11,15 @@ import toast from "react-hot-toast";
 
 // Funktion för att få veckonumret från ett datum
 function getWeekNumber(date: Date) {
-  var d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
-  d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7));
+  const startOfYear = new Date(date.getFullYear(), 0, 1);
+  const firstThursday = new Date(startOfYear.getTime() +
+    ((4 - startOfYear.getDay() + 7) % 7) * 86400000); // Antal millisekunder på en dag
+  const thisThursday = new Date(date.getTime() +
+    ((4 - date.getDay() + 7) % 7) * 86400000); // Antal millisekunder på en dag
 
-  // Justera startdatumet för året till den första torsdagen
-  const year = d.getFullYear(); // Hämta det aktuella året
-  var yearStart = new Date(Date.UTC(year, 0, 1)); // Skapa ett datumobjekt för den första januari i det aktuella året
+  const weekNum = Math.ceil((thisThursday.getTime() - firstThursday.getTime()) / 604800000);
 
-  // Loopa igenom dagarna från den första januari tills vi når en torsdag (dag 4, där söndag är 0)
-  while (yearStart.getDay() !== 4) { // 4 motsvarar torsdag
-      yearStart.setDate(yearStart.getDate() + 1); // Öka datumet med en dag
-  }
-
-  // Beräkna veckonumret baserat på den första torsdagen (vecka 19)
-  var weekNo = Math.ceil((((d.getTime() - yearStart.getTime()) / 86400000) + 1) / 7) + 18; // Lägg till 18 för att starta från vecka 19
-  return weekNo; 
+  return weekNum; // Veckonummer utan att lägga till 19
 }
 
 const ManageSubscriptionModal = () => {
@@ -38,14 +32,14 @@ const ManageSubscriptionModal = () => {
   useEffect(() => {
     // Hämta den aktuella tiden med JavaScript
     const today = new Date();
-    
+
     // Justera veckonumret baserat på veckobyten på torsdagar
-    const currentWeek = getWeekNumber(today) + (today.getDay() >= 4 ? 1 : 0); // Om dagen är torsdag eller senare, lägg till en vecka
+    const currentWeek = getWeekNumber(today);
 
     // Uppdatera veckonumret för den första veckan om det inte är inställt
-    if (firstWeek === 0) {
-      // Sätt den första veckan till vecka 19
-      const newFirstWeek = 19;
+    if (firstWeek === 0 || (today.getDay() === 4 && currentWeek !== firstWeek)) {
+      // Sätt den första veckan till 20 om det är före nästa torsdag, annars öka med 1
+      const newFirstWeek = today.getDay() === 4 ? 20 : 20 + 1;
       setFirstWeek(newFirstWeek);
 
       // Uppdatera veckonumret för pauseoptions
@@ -57,20 +51,6 @@ const ManageSubscriptionModal = () => {
         return (
           <option key={index} value={newFirstWeek + index}>
             {option} {text.my_pages.weekOption} {newFirstWeek + index}
-          </option>
-        );
-      });
-      setPauseOptions(updatedPauseOptions);
-    } else {
-      // Uppdatera veckonumret för pauseoptions baserat på den första veckan
-      const updatedPauseOptions = [
-        text?.my_pages.pauseOption1,
-        text?.my_pages.pauseOption2,
-        text?.my_pages.pauseOption3
-      ].map((option, index) => {
-        return (
-          <option key={index} value={firstWeek + index}>
-            {option} {text.my_pages.weekOption} {firstWeek + index}
           </option>
         );
       });
@@ -160,7 +140,3 @@ const ManageSubscriptionModal = () => {
 };
 
 export default ManageSubscriptionModal;
-
-
-
-
