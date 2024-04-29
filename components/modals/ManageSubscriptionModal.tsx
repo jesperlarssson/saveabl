@@ -27,36 +27,31 @@ const ManageSubscriptionModal = () => {
   const { onOpen, forMessage } = useMessageModal();
   const { text } = useLang();
   const [pauseOptions, setPauseOptions] = useState<React.ReactNode[]>([]);
-  const [firstWeek, setFirstWeek] = useState<number>(0); // Lagrar den första veckan
+  const [selectedWeek, setSelectedWeek] = useState<number>(20); // Initialt veckonummer 20
+  const [firstWeek, setFirstWeek] = useState<number>(20); // Initialt veckonummer 20
 
   useEffect(() => {
-    // Hämta den aktuella tiden med JavaScript
     const today = new Date();
-
-    // Justera veckonumret baserat på veckobyten på torsdagar
     const currentWeek = getWeekNumber(today);
 
-    // Uppdatera veckonumret för den första veckan om det inte är inställt
-    if (firstWeek === 0 || (today.getDay() === 4 && currentWeek !== firstWeek)) {
-      // Sätt den första veckan till 20 om det är före nästa torsdag, annars öka med 1
-      const newFirstWeek = today.getDay() === 4 ? 20 : 20 + 1;
-      setFirstWeek(newFirstWeek);
-
-      // Uppdatera veckonumret för pauseoptions
-      const updatedPauseOptions = [
-        text?.my_pages.pauseOption1,
-        text?.my_pages.pauseOption2,
-        text?.my_pages.pauseOption3
-      ].map((option, index) => {
-        return (
-          <option key={index} value={newFirstWeek + index}>
-            {option} {text.my_pages.weekOption} {newFirstWeek + index}
-          </option>
-        );
-      });
-      setPauseOptions(updatedPauseOptions);
+    // Uppdatera veckonumret för den första veckan endast om det är torsdag
+    if (today.getDay() === 4 && (currentWeek !== firstWeek)) {
+      setFirstWeek(currentWeek);
     }
   }, [firstWeek]);
+
+  useEffect(() => {
+    // Skapa en lista över veckor baserat på firstWeek
+    const weeks = [];
+    for (let i = firstWeek; i <= firstWeek + 2; i++) {
+      weeks.push(
+        <option key={i} value={i}>
+          {text?.my_pages.weekOption} {i}
+        </option>
+      );
+    }
+    setPauseOptions(weeks);
+  }, [firstWeek, text]);
 
   const addTodo = async (action: string, wish: string) => {
     try {
@@ -124,6 +119,8 @@ const ManageSubscriptionModal = () => {
         focus:invalid:border-accent focus:invalid:ring-accent"
                 name="pause"
                 id="pause"
+                value={selectedWeek}
+                onChange={(e) => setSelectedWeek(parseInt(e.target.value))}
               >
                 {pauseOptions}
               </select>
@@ -140,3 +137,4 @@ const ManageSubscriptionModal = () => {
 };
 
 export default ManageSubscriptionModal;
+
