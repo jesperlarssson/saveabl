@@ -33,6 +33,7 @@ import {
   free,
   shippingCostStage1,
   shippingCostStage2,
+  shippingCostStage3,
   stockholmPostalCodes,
 } from "@/lib/zipCodes";
 
@@ -222,6 +223,7 @@ const Order = () => {
     } else if (
       address.postalCode.length === 5 &&
       (stockholmPostalCodes.includes(address.postalCode) ||
+        shippingCostStage3.includes(address.postalCode) ||
         shippingCostStage2.includes(address.postalCode) ||
         shippingCostStage1.includes(address.postalCode) ||
         free.includes(address.postalCode))
@@ -399,8 +401,9 @@ const Order = () => {
       setShowLinks(false);
     }
     if (
-      address.postalCode &&
-      stockholmPostalCodes.includes(address.postalCode)
+      typeof address.postalCode === 'string' &&
+      (stockholmPostalCodes.includes(address.postalCode) ||
+        (shippingCostStage3 && shippingCostStage3.includes(address.postalCode)))
     ) {
       setDeliveryDaysToChoose([
         {
@@ -500,33 +503,42 @@ const Order = () => {
                   const postalCode = address.postalCode || "";
                   const sthlmCustomer =
                     stockholmPostalCodes.includes(postalCode);
+                  const skaneCustomer = shippingCostStage3.includes(postalCode);
+
                   return (
                     <CheckoutButton
-                      key={variant.label}
-                      selected={
-                        sthlmCustomer
-                          ? variant.stockholmPriceId === productId
-                          : variant.priceId === productId
-                      }
-                      onClick={() =>
-                        setProductId(
-                          sthlmCustomer
-                            ? variant.stockholmPriceId
-                            : variant.priceId
-                        )
-                      }
-                      disabled={variant.disabled}
-                    >
-                      <span>{variant.label}</span>
-                      <br />
-                      <span className="text-xs">
-                        {getProductCostForPriceId(
-                          sthlmCustomer
-                            ? variant.stockholmPriceId
-                            : variant.priceId, lang
-                        )}
-                      </span>
-                    </CheckoutButton>
+          key={variant.label}
+          selected={
+            sthlmCustomer
+              ? variant.stockholmPriceId === productId
+              : skaneCustomer
+                ? variant.skanePriceId === productId
+                : variant.priceId === productId
+          }
+          onClick={() =>
+            setProductId(
+              sthlmCustomer
+                ? variant.stockholmPriceId
+                : skaneCustomer
+                  ? variant.skanePriceId
+                  : variant.priceId
+            )
+          }
+          disabled={variant.disabled}
+        >
+          <span>{variant.label}</span>
+          <br />
+          <span className="text-xs">
+            {getProductCostForPriceId(
+              sthlmCustomer
+                ? variant.stockholmPriceId
+                : skaneCustomer
+                  ? variant.skanePriceId
+                  : variant.priceId,
+              lang
+            )}
+          </span>
+        </CheckoutButton>
                   );
                 })}
               </div>
