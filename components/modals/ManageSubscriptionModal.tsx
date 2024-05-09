@@ -27,16 +27,20 @@ const ManageSubscriptionModal = () => {
   const { onOpen, forMessage } = useMessageModal();
   const { text } = useLang();
   const [pauseOptions, setPauseOptions] = useState<React.ReactNode[]>([]);
-  const [selectedWeek, setSelectedWeek] = useState<number>(20); // Initialt veckonummer 20
-  const [firstWeek, setFirstWeek] = useState<number>(20); // Initialt veckonummer för den första veckan för pausningsalternativ
+  const [selectedWeek, setSelectedWeek] = useState<number>(22); // Initialt veckonummer 20
+  const [firstWeek, setFirstWeek] = useState<number>(22); // Initialt veckonummer för den första veckan för pausningsalternativ
 
   useEffect(() => {
-    const today = new Date();
-    // Kontrollera om dagens veckodag är torsdag och om ja, öka första veckan med en
-    if (today.getDay() === 4) {
-      setFirstWeek((prevWeek) => prevWeek + 1);
-    }
+    const intervalId = setInterval(() => {
+      const today = new Date();
+      if (today.getDay() === 4) {
+        setFirstWeek((prevWeek) => prevWeek + 1);
+      }
+    }, 24 * 60 * 60 * 1000); // Körs en gång per dag
+
+    return () => clearInterval(intervalId);
   }, []);
+
 
   // Skapa en lista över veckor baserat på firstWeek
   useEffect(() => {
