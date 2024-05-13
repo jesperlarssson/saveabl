@@ -16,6 +16,15 @@ import { useLang } from "@/hooks/useLang";
 const Hero = () => {
   const { lang, text } = useLang();
 
+  const bylineImage =
+    lang === "sv"
+      ? "/images/byline.png"
+      : lang === "en"
+      ? "/images/byline_eng.png"
+      : lang === "da"
+      ? "/images/byline_da.png"
+      : undefined; // Om språk inte matchar, blir bylineImage undefined
+
   return (
     <div className="w-full h-screen -mt-32 flex flex-col justify-center">
       <Section>
@@ -31,12 +40,18 @@ const Hero = () => {
               />
             </div> */}
             <div className="-ml-8">
+              {/* Rendera bara Image-komponenten om bylineImage är definierad */}
+          {bylineImage && (
+            <div className="byline-image-wrapper">
               <Image
                 width={660 / 2}
                 height={140 / 2}
                 alt="Hand scribbles"
-                src={"/images/byline.png"}
+                src={bylineImage}
+                className="byline-image"
               />
+               </div>
+          )}
               <motion.h1
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}

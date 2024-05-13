@@ -12,12 +12,23 @@ import { useRouter } from "next/navigation"
 
 const CallToAction = () => {
   const locationModal = useLocationModal();
-  const { text } = useLang();
+  const { lang, text } = useLang();
   const [compText, setCompText] = useState(text.page.call_to_action);
   const router = useRouter();
   useEffect(() => {
     setCompText(text.page.call_to_action);
   }, [text]);
+  
+
+  const sMatkassenImage =
+    lang === "sv"
+      ? "/images/s-matkassen.png"
+      : lang === "en"
+      ? "/images/s-matkassen_en.png"
+      : lang === "da"
+      ? "/images/s-matkassen_da.png"
+      : "/images/s-matkassen.png"; // Om språk inte matchar, använd en standardbild
+
   return (
     <Section className="bg-primary-200 w-full relative pt-0">
       <div className="flex flex-col justify-center items-center">
@@ -84,13 +95,16 @@ const CallToAction = () => {
             </motion.div>
           </div>
         </div>
+        {/* Rendera bara Image-komponenten om sMatkassenImage är definierad */}
+        {sMatkassenImage && (
         <Image
           width={170}
           height={100}
           className="w-40 -mb-16 z-20"
           alt="scribble matkassen"
-          src="/images/s-matkassen.png"
+          src={sMatkassenImage}
         />
+        )}
         <Title className="text-center mt-8">{compText.title}</Title>
         <div className="mt-10 mb-5 grid grid-cols-2 sm:grid-cols-4 gap-4 text-secondary ">
           <motion.div
