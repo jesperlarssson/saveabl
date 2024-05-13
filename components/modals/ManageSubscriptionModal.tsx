@@ -33,11 +33,13 @@ const ManageSubscriptionModal = () => {
   useEffect(() => {
     const intervalId = setInterval(() => {
       const today = new Date();
-      if (today.getDay() === 4) {
+      const isMidnight = today.getHours() === 0 && today.getMinutes() === 0; // Kontrollera om det är midnatt
+  
+      if (isMidnight) {
         setFirstWeek((prevWeek) => prevWeek + 1);
       }
-    }, 24 * 60 * 60 * 1000); // Körs en gång per dag
-
+    }, 60 * 1000); // Körs en gång per minut
+  
     return () => clearInterval(intervalId);
   }, []);
 
