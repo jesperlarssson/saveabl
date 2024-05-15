@@ -17,6 +17,9 @@ import CheckoutBasket from "@/components/section/CheckoutBasket";
 import { LangProvider } from "@/providers/LangProvider";
 import MetaPixel from "@/components/MetaPixel";
 
+
+
+
 const font = Figtree({ subsets: ["latin"] });
 export const revalidate = 1; // revalidate this page every 60 seconds
 
@@ -39,6 +42,14 @@ export default function RootLayout({
                 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
               })(window,document,'script','dataLayer','GTM-PBCCL8GC');`,
           }}
+        />
+        {/* Mailchimp-koden */}
+        <Script
+          id="mcjs"
+          strategy="lazyOnload"
+          src="https://chimpstatic.com/mcjs-connected/js/users/5facf7154c63e29f04ee4d772/b8f51307c75377d7248ee44d6.js"
+          async
+          defer
         />
         {/* Meta-taggar för SEO */}
          <title>{"Saveabl: Sveriges klimatsmartaste matkasse"}</title>
