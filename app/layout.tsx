@@ -44,13 +44,19 @@ export default function RootLayout({
           }}
         />
         {/* Mailchimp-koden */}
-        <Script
-          id="mcjs"
-          strategy="lazyOnload"
-          src="https://chimpstatic.com/mcjs-connected/js/users/5facf7154c63e29f04ee4d772/b8f51307c75377d7248ee44d6.js"
-          async
-          defer
-        />
+        <Script id="mcjs" strategy="lazyOnload">
+          {`
+            !function(c,h,i,m,p){
+              m=c.createElement(h),
+              p=c.getElementsByTagName(h)[0],
+              m.async=1,
+              m.src=i,
+              p.parentNode.insertBefore(m,p)
+            }
+            (document,"script","https://chimpstatic.com/mcjs-connected/js/users/5facf7154c63e29f04ee4d772/b8f51307c75377d7248ee44d6.js");
+          `}
+        </Script>
+        
         {/* Meta-taggar för SEO */}
          <title>{"Saveabl: Sveriges klimatsmartaste matkasse"}</title>
           <meta name="description" content="Saveabl är din klimatsmarta lösning för att få ihop livspusslet. Våra proffskockar lagar dina middagar som du färdigställer på endast 15 minuter. 
