@@ -33,6 +33,14 @@ export default function RootLayout({
     <html lang="sv">
       <head>
         <MetaPixel pixelId="995084671596511" />
+
+     {/* Mailchimp-koden */}
+        <script 
+          id="mcjs"
+          dangerouslySetInnerHTML={{
+          __html: `!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/5facf7154c63e29f04ee4d772/b8f51307c75377d7248ee44d6.js");`,
+          }}
+        />
         <Script
           id="google-tag-manager"
           dangerouslySetInnerHTML={{
@@ -43,19 +51,6 @@ export default function RootLayout({
               })(window,document,'script','dataLayer','GTM-PBCCL8GC');`,
           }}
         />
-        {/* Mailchimp-koden */}
-        <Script id="mcjs" strategy="lazyOnload">
-          {`
-            !function(c,h,i,m,p){
-              m=c.createElement(h),
-              p=c.getElementsByTagName(h)[0],
-              m.async=1,
-              m.src=i,
-              p.parentNode.insertBefore(m,p)
-            }
-            (document,"script","https://chimpstatic.com/mcjs-connected/js/users/5facf7154c63e29f04ee4d772/b8f51307c75377d7248ee44d6.js");
-          `}
-        </Script>
         
         {/* Meta-taggar för SEO */}
          <title>{"Saveabl: Sveriges klimatsmartaste matkasse"}</title>
