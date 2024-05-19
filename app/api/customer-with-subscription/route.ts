@@ -30,7 +30,6 @@ export async function POST(request: Request) {
     // Fetch active subscriptions for the customer
     const subscriptions = await stripe.subscriptions.list({
       customer: customer.id,
-      status: "active",
     });
 
     const res = { customer, activeSubscriptions: subscriptions.data };
