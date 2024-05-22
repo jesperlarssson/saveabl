@@ -53,6 +53,7 @@ const Navbar = () => {
       path: "/nyheter",
       disabled: false,
     },
+    
     // {
     //   id: 5,
     //   name: "Restaurangen",
@@ -79,7 +80,6 @@ const Navbar = () => {
   };
 
   return (
-    <>
       <div
         className={twMerge(
           `sticky top-0 w-full bg-primary-200 border-b border-primary border-opacity-25 drop-shadow-sm  z-30 transition`,
@@ -223,7 +223,6 @@ const Navbar = () => {
           </ul>
         </div>
       </div>
-    </>
   );
 };
 

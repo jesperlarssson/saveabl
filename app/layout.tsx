@@ -16,7 +16,7 @@ import { CheckoutProvider } from "@/providers/CheckoutProvider";
 import CheckoutBasket from "@/components/section/CheckoutBasket";
 import { LangProvider } from "@/providers/LangProvider";
 import MetaPixel from "@/components/MetaPixel";
-
+import MailchimpBanner from "@/components/mailchimpbanner";
 
 
 
@@ -34,6 +34,8 @@ export default function RootLayout({
       <head>
         <MetaPixel pixelId="995084671596511" />
 
+        <MailchimpBanner />
+       
      {/* Mailchimp-koden */}
         <script 
           id="mcjs"

@@ -1,28 +1,21 @@
 import axios from "axios";
 
 const getAccessToken = async () => {
-  try {
-    const result = await axios.post(
-      "https://backend.staging.gordondelivery.com/oauth/token", // Uppdatera här med den nya Token URL:en
-      {
-        client_id: process.env.GORDON_CLIENT_ID,
-        client_secret: process.env.GORDON_CLIENT_SECRET,
-        audience: "https://gordonapi.herokuapp.com/",
-        grant_type: "client_credentials",
-      }
-    );
+  const result = await axios.post(process.env.GORDON_ACCESS_URL!, {
+    client_id: process.env.GORDON_CLIENT_ID,
+    client_secret: process.env.GORDON_CLIENT_SECRET,
+    audience: "https://gordonapi.herokuapp.com/",
+    grant_type: "client_credentials",
+  });
 
-    return result.data.access_token;
-  } catch (error) {
-    console.error("Error getting access token:", error);
-    throw error;
-  }
+  return result.data.access_token;
 };
 
 export async function POST(request: Request) {
   try {
     const accessToken = await getAccessToken();
     const body = await request.json();
+
     // If its thursday, friday or saturday we check for deliverydays starting next monday.
     // If not, check from current day.
 

@@ -30,7 +30,7 @@ export const navigation: NavigationItem[] = [
     path: "/nyheter",
     disabled: false,
   },
-
+  
   // {
   //   id: 5,
   //   name: "Restaurangen",
