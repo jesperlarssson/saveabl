@@ -503,6 +503,24 @@ const svText = {
       }
     }
   }, 
+  newsletter: {
+    title: "Bli en klimathjälte idag!", 
+    subtitle: "Vi utvecklas och vi testar nytt. Vi expanderar och hittar på nya grejer. Häng med på resan och bli den första som får ta del av recept, nyheter och erbjudanden.", 
+    indicatesRequired: "obligatoriskt",
+    emailLabel: "Mejladress",
+    nameLabel: "Namn",
+    locationLabel: "Vart bor du?",
+    locations: [
+      { value: "Sverige", label: "Sverige" },
+      { value: "Danmark", label: "Danmark" }
+    ],
+    subscribeButton: "Häng med!"
+  },
+newsletter_success: {
+  title: "Tack för din prenumeration!",
+  subtitle: "Du kommer nu att få vårt nyhetsbrev med de senaste uppdateringarna."
+},
+
   footer: {
     faq: "Vanliga frågor",
     terms: "Allmänna villkor", 
@@ -886,6 +904,23 @@ const enText = {
         }
       }
     }, 
+    newsletter: {
+      title: "Become a climate hero today!", 
+      subtitle: "We evolve and we test new things. We expand and come up with new stuff. Join us on the journey and be the first to access recipes, news, and offers.", 
+      indicatesRequired: "Indicates required",
+      emailLabel: "Email address",
+      nameLabel: "Name",
+      locationLabel: "Where do you live?",
+      locations: [
+        { value: "Sweden", label: "Sweden" },
+        { value: "Denmark", label: "Denmark" }
+      ],
+      subscribeButton: "Come along!"
+    },
+  newsletter_success: {
+    title: "Tack för din prenumeration!",
+    subtitle: "Du kommer nu att få vårt nyhetsbrev med de senaste uppdateringarna."
+  },  
     footer: {
       faq: "Common questions",
       terms: "Terms and Conditions", 
@@ -1237,6 +1272,23 @@ integrity_policy: {
   }
   }
   }, 
+  newsletter: {
+    title: "Bliv en klimahelt i dag!", 
+    subtitle: "Vi udvikler os, og vi tester nye ting. Vi udvider og finder på nyt. Kom med på rejsen og vær den første til at få adgang til opskrifter, nyheder og tilbud.", 
+    indicatesRequired: "Angiver påkrævet",
+    emailLabel: "Emailadresse",
+    nameLabel: "Navn",
+    locationLabel: "Hvor bor du?",
+    locations: [
+      { value: "Sverige", label: "Sverige" },
+      { value: "Denmark", label: "Denmark" }
+    ],
+    subscribeButton: "Kom med!"
+  },
+newsletter_success: {
+  title: "Tack för din prenumeration!",
+  subtitle: "Du kommer nu att få vårt nyhetsbrev med de senaste uppdateringarna."
+},  
   footer: {
     faq: "Almindelige spørgsmål",
     terms: "Generelle vilkår", 
