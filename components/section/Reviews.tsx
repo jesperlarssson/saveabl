@@ -39,9 +39,12 @@ const Reviews = () => {
           </>
         }
       >
-        <div className="w-full sm:w-128 mb-8 -ml-20">
-          <TrustPilotWidget />
-        </div>
+    
+        <div className="w-full sm:w-128 mb-8 -ml-10">
+            <a href="https://se.trustpilot.com/review/saveabl.se" target="_blank" rel="noopener noreferrer">
+            <img src="/images/trustpilotpic.png" alt="Trustpilot" className="h-12 w-auto" />
+           </a>
+          </div>
 
         <Title>{compText.title}</Title>
         <BodyText>{compText.text} </BodyText>
