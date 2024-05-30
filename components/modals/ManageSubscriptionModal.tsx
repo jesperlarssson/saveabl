@@ -27,8 +27,8 @@ const ManageSubscriptionModal = () => {
   const { onOpen, forMessage } = useMessageModal();
   const { text } = useLang();
   const [pauseOptions, setPauseOptions] = useState<React.ReactNode[]>([]);
-  const [selectedWeek, setSelectedWeek] = useState<number>(24); // Initialt veckonummer 20
-  const [firstWeek, setFirstWeek] = useState<number>(24); // Initialt veckonummer för den första veckan för pausningsalternativ
+  const [selectedWeek, setSelectedWeek] = useState<number>(25); // Initialt veckonummer 20
+  const [firstWeek, setFirstWeek] = useState<number>(25); // Initialt veckonummer för den första veckan för pausningsalternativ
 
   useEffect(() => {
     const intervalId = setInterval(() => {
