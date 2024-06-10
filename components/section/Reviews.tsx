@@ -33,9 +33,9 @@ const Reviews = () => {
             <div className="absolute left-20 bottom-2 opacity-50 w-96 h-96 z-0">
               <LottieAnimation animationData={globAnimation} />
             </div>
-            <div className="absolute right-10 top-10 opacity-50 w-128 h-96 z-0">
+            <div className="absolute right-5 top-10 opacity-50 w-0 h-0 md:w-64 md:h-48 lg:w-128 lg:h-96 z-0">
               <LottieAnimation animationData={clockAnimation} />
-            </div>
+           </div>
           </>
         }
       >
