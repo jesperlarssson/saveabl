@@ -678,7 +678,7 @@ const enText = {
     button1: "Get ",
     button2: "Get offer",
     linkTitle: "We deliver to you!",
-    linkDescription: "Order by Thursday at 4 PM for delivery on the following Monday.",
+    linkDescription: "Order by Thursday at 4 PM for delivery on the following Monday (sold out for week 25).",
     bullet1: "👨‍🍳 Vegetarian meal kit with the chef included.",
     bullet2: "👨‍👩‍👧‍👦 Dinner for the whole family in just 15 minutes.",
     bullet3: "✅ No binding period, cancel whenever you want.",
