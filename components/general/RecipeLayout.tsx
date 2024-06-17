@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-
 import { Recipe } from "@/types";
 import React, { useEffect, useState } from "react";
 import Section from "../ui/Section";
@@ -14,7 +13,13 @@ import CommentForm from "./CommentForm";
 import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs';
 
 export const getStars = (rating: number) => {
-  const stars = [<BsStar key={0} />, <BsStar key={1} />, <BsStar key={2} />, <BsStar key={3} />, <BsStar key={4} />];
+  const stars = [
+    <BsStar key={0} />,
+    <BsStar key={1} />,
+    <BsStar key={2} />,
+    <BsStar key={3} />,
+    <BsStar key={4} />
+  ];
 
   for (let index = 0; index < stars.length; index++) {
     if (index <= rating - 1) {
@@ -48,26 +53,16 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
   const [recept, setRecept] = useState({
     title: lang != "sv" ? recipe?.title : recipe?.localizations[0].title,
     image: recipe?.image?.url || "/images/placeholder.png",
-    ingredients:
-      lang != "sv" ? recipe?.ingredients : recipe?.localizations[0].ingredients,
+    ingredients: lang != "sv" ? recipe?.ingredients : recipe?.localizations[0].ingredients,
     steg: lang != "sv" ? recipe?.steg : recipe?.localizations[0].steg,
-    savedIngredients:
-      lang != "sv"
-        ? recipe?.savedIngredients
-        : recipe?.localizations[0].savedIngredients,
-    nutritionalValues:
-      lang != "sv"
-        ? recipe?.nutritionalValues
-        : recipe?.localizations[0].nutritionalValues,
-    contentAllergies:
-      lang != "sv"
-        ? recipe?.contentAllergies
-        : recipe?.localizations[0].contentAllergies,
+    savedIngredients: lang != "sv" ? recipe?.savedIngredients : recipe?.localizations[0].savedIngredients,
+    nutritionalValues: lang != "sv" ? recipe?.nutritionalValues : recipe?.localizations[0].nutritionalValues,
+    contentAllergies: lang != "sv" ? recipe?.contentAllergies : recipe?.localizations[0].contentAllergies,
     recipeComments: recipe?.recipeComments,
   });
 
   const calculateRating = () => {
-    var sum = 0;
+    let sum = 0;
     for (let index = 0; index < comments.length; index++) {
       const comment = comments[index];
       sum += comment.rating;
@@ -79,23 +74,11 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
     const temp = {
       title: lang != "sv" ? recipe?.title : recipe?.localizations[0].title,
       image: recipe?.image?.url || "/images/placeholder.png",
-      ingredients:
-        lang != "sv"
-          ? recipe?.ingredients
-          : recipe?.localizations[0].ingredients,
+      ingredients: lang != "sv" ? recipe?.ingredients : recipe?.localizations[0].ingredients,
       steg: lang != "sv" ? recipe?.steg : recipe?.localizations[0].steg,
-      savedIngredients:
-        lang != "sv"
-          ? recipe?.savedIngredients
-          : recipe?.localizations[0].savedIngredients,
-      nutritionalValues:
-        lang != "sv"
-          ? recipe?.nutritionalValues
-          : recipe?.localizations[0].nutritionalValues,
-      contentAllergies:
-        lang != "sv"
-          ? recipe?.contentAllergies
-          : recipe?.localizations[0].contentAllergies,
+      savedIngredients: lang != "sv" ? recipe?.savedIngredients : recipe?.localizations[0].savedIngredients,
+      nutritionalValues: lang != "sv" ? recipe?.nutritionalValues : recipe?.localizations[0].nutritionalValues,
+      contentAllergies: lang != "sv" ? recipe?.contentAllergies : recipe?.localizations[0].contentAllergies,
       recipeComments: recipe?.recipeComments,
     };
     setRecept(temp);
@@ -108,9 +91,9 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
 
   return (
     <Section className="w-full">
-      <Card className="my-0 text-secondary">
-        <div className="grid grid-cols-4 gap-8">
-          <div className="col-span-4 sm:col-span-1 drop-shadow-md overflow-hidden rounded-lg w-full h-72">
+      <Card className="my-0 text-secondary relative">
+        <div className="grid grid-cols-4 gap-8 relative">
+          <div className="col-span-4 sm:col-span-1 drop-shadow-md overflow-hidden rounded-lg relative">
             <Image
               src={recipe?.image?.url || "/images/placeholder.png"}
               alt={recept.title}
@@ -119,12 +102,11 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
               className="object-cover w-full h-full"
             />
           </div>
-          <div className="col-span-4 sm:col-span-3 flex flex-col justify-end gap-2">
-            {/* <RatingButton recipeId={recipe?.id} /> */}
+          <div className="col-span-4 sm:col-span-3 flex flex-col justify-end gap-2 relative">
             <div className="flex mt-2 text-star">
               {ratingSum > 1 && getStars(ratingSum)}
             </div>
-            <h2 className="  font-poppins text-secondary text-2xl sm:text-4xl">
+            <h2 className="font-poppins text-secondary text-2xl sm:text-4xl">
               {recept.title}
             </h2>
           </div>
@@ -141,36 +123,18 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
               ))}
             </ul>
           </div>
-          <div className="col-span-4 sm:col-span-3">
+          <div className="col-span-4 sm:col-span-3 relative">
             <h3 className="font-poppins text-xl">{text.recipe_slug.how_to}</h3>
             <ul className="text-gray-700">
               {recept.steg.map((steg, index) => (
                 <li className="my-4 flex gap-2" key={index}>
-                  <span className=" font-bold">{`${index + 1}.`}</span>
+                  <span className="font-bold">{`${index + 1}.`}</span>
                   <p>{steg}</p>
                 </li>
               ))}
             </ul>
           </div>
         </div>
-        <div className="absolute top-0 right-0 mt-1 mr-12 w-40 h-40 rounded-full overflow-hidden shadow-lg" style={{ border: '2px solid #EECFAA' }}>
-          <Image
-            src="/images/emil_kock.png"
-            alt="Chef"
-            className="object-cover w-full h-full"
-            width={400}
-            height={400}
-          />
-        </div>
-        <div className="absolute top-36 right-0 mt-1 mr-12 w-40 h-10">
-            <Image
-              src="/images/emil_recept.png"
-              alt="Emil Petzen"
-              className="object-cover w-full h-full"
-              width={200}
-              height={50}
-            />
-          </div>
       </Card>
 
       <Grid>
@@ -192,15 +156,8 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
           </h3>
           <p className="text-gray-700">{recept.contentAllergies}</p>
         </Card>
-
-        {/* <Card className="text-secondary font-poppins">
-          {recipe.freezabl ? (
-            <p>Detta recept går bra att frysa</p>
-          ) : (
-            <p>Frys helst inte detta.</p>
-          )}
-        </Card> */}
       </Grid>
+
       {comments.length > 0 && <CommentSection comments={comments} />}
       <CommentForm recipeId={recipe.id} onNewComment={handleNewComment} />
     </Section>
