@@ -153,6 +153,24 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
             </ul>
           </div>
         </div>
+        <div className="absolute top-0 right-0 mt-1 mr-12 w-40 h-40 rounded-full overflow-hidden shadow-lg" style={{ border: '2px solid #EECFAA' }}>
+          <Image
+            src="/images/emil_kock.png"
+            alt="Chef"
+            className="object-cover w-full h-full"
+            width={400}
+            height={400}
+          />
+        </div>
+        <div className="absolute top-36 right-0 mt-1 mr-12 w-40 h-10">
+            <Image
+              src="/images/emil_recept.png"
+              alt="Emil Petzen"
+              className="object-cover w-full h-full"
+              width={200}
+              height={50}
+            />
+          </div>
       </Card>
 
       <Grid>
