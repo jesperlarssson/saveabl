@@ -103,6 +103,16 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
             />
           </div>
           <div className="col-span-4 sm:col-span-3 flex flex-col justify-end gap-2 relative">
+            <div className="flex items-center gap-2 mt-2">
+              <Image
+                src="/images/emil_kock.png"
+                alt="Chef Emil Petzén"
+                width={120}
+                height={120}
+                className="rounded-full"
+              />
+              <h3 className="text-secondary font-poppins text-xl">Emil Petzén</h3>
+            </div>
             <div className="flex mt-2 text-star">
               {ratingSum > 1 && getStars(ratingSum)}
             </div>
@@ -165,3 +175,4 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
 };
 
 export default RecipeLayout;
+
