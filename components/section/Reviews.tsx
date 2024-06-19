@@ -40,7 +40,7 @@ const Reviews = () => {
         }
       >
     
-        <div className="w-full sm:w-128 mb-8">
+        <div className="w-full sm:w-128 mb-4 -mt-4">
             <a href="https://se.trustpilot.com/review/saveabl.se" target="_blank" rel="noopener noreferrer">
             <img src="/images/trustpilot_review.png" alt="Trustpilot" className="h-12 w-auto" />
            </a>
