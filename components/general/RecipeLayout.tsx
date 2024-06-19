@@ -110,6 +110,8 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
                 width={120}
                 height={120}
                 className="rounded-full"
+                sizes="(max-width: 120px) 100vw, 120px" 
+                quality={100}
               />
               <h3 className="text-secondary font-poppins text-xl">Emil Petzén</h3>
             </div>
