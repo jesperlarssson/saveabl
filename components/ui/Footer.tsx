@@ -116,7 +116,7 @@ const Footer = () => {
           </ul>
           <div className="flex justify-center mt-7 mb-1">
             <a href="https://se.trustpilot.com/review/saveabl.se" target="_blank" rel="noopener noreferrer">
-            <img src="/images/trustpilotpicture.png" alt="Trustpilot" className="h-12 w-auto" />
+            <img src="/images/trustpilot.png" alt="Trustpilot" className="h-12 w-auto" />
            </a>
           </div>
           <p className="mx-auto mt-7 max-w-md text-center leading-relaxed text-primary-200">
