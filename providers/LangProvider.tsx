@@ -254,7 +254,7 @@ const svText = {
     deliveryDay: "Leveransalternativ:",
     delivery_saturday: "Lördag 29/6 kl. 09-18",
     delivery_sunday: "Söndag 30/6 kl. 10-17",
-    delivery_monday: "Måndag 1// kl. 16-22",
+    delivery_monday: "Måndag 1/7 kl. 16-22",
     stockholm_sunday: "Söndag 30/6 kl. 10-17",
     stockholm_monday: "Måndag 1/7 kl. 16-22",
     address: "Leveransinfo:",
