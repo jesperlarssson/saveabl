@@ -74,7 +74,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <p className="mt-3 text-center text-2xl sm:text-25xl font-bold hover:underline text-primary-200">
+            <p className="mt-3 text-center font-bold hover:underline text-primary-200">
               <a href="mailto:hello@saveabl.se">hello@saveabl.se</a>
             </p>
           </div>
@@ -116,7 +116,7 @@ const Footer = () => {
           </ul>
           <div className="flex justify-center mt-7 mb-1">
             <a href="https://se.trustpilot.com/review/saveabl.se" target="_blank" rel="noopener noreferrer">
-            <img src="/images/trustpilot.png" alt="Trustpilot" className="h-12 w-auto" />
+            <img src="/images/trustpilot_score.png" alt="Trustpilot" className="h-12 w-auto" />
            </a>
           </div>
           <p className="mx-auto mt-7 max-w-md text-center leading-relaxed text-primary-200">
