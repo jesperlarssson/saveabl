@@ -27,8 +27,8 @@ const ManageSubscriptionModal = () => {
   const { onOpen, forMessage } = useMessageModal();
   const { text } = useLang();
   const [pauseOptions, setPauseOptions] = useState<React.ReactNode[]>([]);
-  const [selectedWeek, setSelectedWeek] = useState<number>(29); // Initialt veckonummer 20
-  const [firstWeek, setFirstWeek] = useState<number>(29); // Initialt veckonummer för den första veckan för pausningsalternativ
+  const [selectedWeek, setSelectedWeek] = useState<number>(29); // Initialt veckonummer 29
+  const [weeks, setWeeks] = useState<number[]>([29, 30, 33]); // Initiala veckonummer för alternativen
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -36,30 +36,26 @@ const ManageSubscriptionModal = () => {
       const isMidnight = today.getHours() === 0 && today.getMinutes() === 0; // Kontrollera om det är midnatt
   
       if (isMidnight) {
-        setFirstWeek((prevWeek) => prevWeek + 1);
+        setWeeks((prevWeeks) => prevWeeks.map(week => week + 1));
       }
     }, 60 * 1000); // Körs en gång per minut
   
     return () => clearInterval(intervalId);
   }, []);
 
-
-  // Skapa en lista över veckor baserat på firstWeek
+  // Skapa en lista över veckor baserat på weeks
   useEffect(() => {
-    const weeks = [];
-    for (let i = firstWeek; i <= firstWeek + 2; i++) {
-      weeks.push(
-        <option key={i} value={i}>
-          {text?.my_pages.weekOption} {i}
-        </option>
-      );
-    }
-    setPauseOptions(weeks);
-  }, [firstWeek, text]);
+    const options = weeks.map((week, index) => (
+      <option key={index} value={week}>
+        {text?.my_pages.weekOption} {week}
+      </option>
+    ));
+    setPauseOptions(options);
+  }, [weeks, text]);
 
   const addTodo = async (action: string, wish: string) => {
     try {
-      const res = await axios.post("/api/add-todo", {
+      await axios.post("/api/add-todo", {
         customer_email: customerEmail,
         customer_id: customerId,
         actions: action,
@@ -73,7 +69,7 @@ const ManageSubscriptionModal = () => {
     }
   };
 
-  const handleOnPauseSubsription = async (numberOfMealkits: string) => {
+  const handleOnPauseSubscription = async (numberOfMealkits: string) => {
     addTodo("PAUSE", `Vill pausa nästa ${numberOfMealkits} matkassar`);
   };
 
@@ -86,7 +82,7 @@ const ManageSubscriptionModal = () => {
     const data = new FormData(e.target);
     const numberOfMealkits = data.get("pause");
     if (numberOfMealkits && typeof numberOfMealkits === "string") {
-      handleOnPauseSubsription(numberOfMealkits);
+      handleOnPauseSubscription(numberOfMealkits);
     } else {
       toast.error("Please select a valid value");
     }
@@ -141,5 +137,3 @@ const ManageSubscriptionModal = () => {
 };
 
 export default ManageSubscriptionModal;
-
-
