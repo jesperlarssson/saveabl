@@ -226,50 +226,64 @@ const NewsletterForm = () => {
         font-size: 30px;
         margin-top: 5px; /* Flytta upp titeln */
         margin-bottom: 10px;
-        text-align: left; /* Vänstercentrerad text */
-        padding-left: 10px; /* In-line with input fields */
+        text-align: left; /* Justera till vänster */
       }
     
       .page-subtitle {
         font-size: 18px;
         margin-top: 5px;
         margin-bottom: 30px;
-        text-align: left; /* Vänstercentrerad text */
-        padding-left: 10px; /* In-line with input fields */
+        text-align: left; /* Justera till vänster */
       }
     
       .input-group {
-        margin-bottom: 30px; /* Öka avståndet mellan fälten */
-        padding-left: 10px; /* In-line with input fields */
-        padding-right: 10px; /* In-line with input fields */
+        margin-bottom: 20px; /* Jämna ut avståndet mellan fälten */
       }
     
       .input-group label {
         font-size: 16px;
+        display: block; /* Gör labeln blockelement för bättre centrering */
+        text-align: left; /* Justera till vänster */
+        padding-left: 10px; /* Gör labeln vänsterjusterad inom input-gruppen */
+        margin-bottom: 5px; /* Mindre mellanrum mellan label och input */
       }
     
       input[type="text"],
       input[type="email"] {
         font-size: 14px;
         padding: 10px;
-        width: calc(100% - 20px); /* Förhindra att fälten blir bredare än skärmen */
-        margin: 0 auto; /* Centrera fälten */
-        box-sizing: border-box;
+        width: calc(100% - 20px); /* Fyll hela containerns bredd och förhindra overflow */
+        max-width: 100%; /* Förhindra att fälten blir bredare än skärmen */
+        margin-bottom: 15px; /* Mer mellanrum mellan fälten */
+        box-sizing: border-box; /* Behåll padding och border inom bredden */
+      }
+    
+      .consent-container {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 10px; /* Jämna ut avståndet mellan fälten */
+      }
+    
+      .consent-container input[type="checkbox"] {
+        margin-right: 10px;
+        margin-top: 5px;
+        transform: scale(1);
       }
     
       .consent-text {
         font-size: 14px;
-        text-align: left; /* Håll texten vänsterjusterad */
-        padding-left: 10px; /* In-line with input fields */
-        padding-right: 10px; /* In-line with input fields */
+        text-align: left; /* Justera till vänster */
       }
     
       button[type="submit"] {
         font-size: 18px;
         padding: 10px 20px;
-        margin-top: 20px; /* Flytta upp knappen */
         margin-bottom: 10px;
-        margin-left: 10px; /* In-line with input fields */
+        display: block; /* Gör knappen blockelement för bättre centrering */
+        margin: 20px 0 10px 0; /* Centrera knappen horisontellt med mer utrymme */
+        width: 100%; /* Fyll hela containerns bredd */
+        box-sizing: border-box; /* Behåll padding och border inom bredden */
+        text-align: left; /* Justera till vänster */
       }
     
       .matkasse-image {
@@ -277,22 +291,21 @@ const NewsletterForm = () => {
       }
     
       .morot-image-container {
-        display: none;
+        display: none; /* Göm Morot-bilden på mindre skärmar */
       }
     
       .thank-you h2 {
         font-size: 30px;
         margin-top: 10px;
-        text-align: left;
-        padding-left: 10px; /* In-line with input fields */
+        text-align: left; /* Justera till vänster */
       }
     
       .thank-you p {
         font-size: 18px;
-        text-align: left;
-        padding-left: 10px; /* In-line with input fields */
+        text-align: left; /* Justera till vänster */
       }
     }
+    
     
   `;
 
