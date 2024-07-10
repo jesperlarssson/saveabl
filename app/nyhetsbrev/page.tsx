@@ -238,11 +238,13 @@ const NewsletterForm = () => {
     
       .input-group {
         margin-bottom: 20px; /* Jämna ut avståndet mellan fälten */
+        display: flex;
+        align-items: center; /* Centrera innehållet vertikalt */
       }
     
       .input-group label {
         font-size: 16px;
-        display: block; /* Gör labeln blockelement för bättre centrering */
+        width: 30%; /* Bredden på labeln för att behålla samma bredd */
         text-align: left; /* Justera till vänster */
         padding-left: 10px; /* Gör labeln vänsterjusterad inom input-gruppen */
         margin-bottom: 5px; /* Mindre mellanrum mellan label och input */
@@ -252,7 +254,7 @@ const NewsletterForm = () => {
       input[type="email"] {
         font-size: 14px;
         padding: 10px;
-        width: calc(100% - 20px); /* Fyll hela containerns bredd och förhindra overflow */
+        width: 70%; /* Justera bredden för att anpassa till resten av fälten */
         max-width: 100%; /* Förhindra att fälten blir bredare än skärmen */
         margin-bottom: 15px; /* Mer mellanrum mellan fälten */
         box-sizing: border-box; /* Behåll padding och border inom bredden */
@@ -280,10 +282,10 @@ const NewsletterForm = () => {
         padding: 10px 20px;
         margin-bottom: 10px;
         display: block; /* Gör knappen blockelement för bättre centrering */
-        margin: 20px 0 10px 0; /* Centrera knappen horisontellt med mer utrymme */
+        margin-top: 20px; /* Högre upp placering av knappen */
         width: 100%; /* Fyll hela containerns bredd */
         box-sizing: border-box; /* Behåll padding och border inom bredden */
-        text-align: left; /* Justera till vänster */
+        text-align: center; 
       }
     
       .matkasse-image {
