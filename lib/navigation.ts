@@ -43,6 +43,12 @@ export const navigation: NavigationItem[] = [
     path: "/om-oss#vanliga-fragor", 
     disabled: false,
   },
+  {
+    id: 7,
+    name: "Nyhetsbrev",
+    path: "/nyhetsbrev",
+    disabled: false,
+  },
 ];
 
 export const socials: NavigationItem[] = [

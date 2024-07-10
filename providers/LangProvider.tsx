@@ -105,6 +105,7 @@ const svText = {
     log_out: "Logga ut",
     sign_up: "Registrera dig",
     my_account: "Mina sidor",
+    newsletter: ""
   },
   page: {
     hero: {
@@ -504,21 +505,20 @@ const svText = {
     }
   }, 
   newsletter: {
-    title: "Bli en klimathjälte idag!", 
-    subtitle: "Vi utvecklas och vi testar nytt. Vi expanderar och hittar på nya grejer. Häng med på resan och bli den första som får ta del av recept, nyheter och erbjudanden.", 
-    indicatesRequired: "obligatoriskt",
-    emailLabel: "Mejladress",
-    nameLabel: "Namn",
-    locationLabel: "Vart bor du?",
-    locations: [
-      { value: "Sverige", label: "Sverige" },
-      { value: "Danmark", label: "Danmark" }
-    ],
-    subscribeButton: "Häng med!"
-  },
-newsletter_success: {
-  title: "Tack för din prenumeration!",
-  subtitle: "Du kommer nu att få vårt nyhetsbrev med de senaste uppdateringarna."
+    header_title: "Prenumerera & vinn!", 
+    header_subtitle: "Varje månad lottar vi ut en matkasse till någon av våra mejlkompisar. Är du den lyckliga vinnaren & redan har köpt en matkasse återbetalar vi dig. Vinnarna kontaktas via mejl. Lycka till!", 
+    email: "anna.andersson@exempel.com",
+    name: "Anna",
+    country: "SE eller DK",
+    email_label: "Email",
+    name_label: "Namn",
+    country_label: "Vart bor du? (SE/DK)", 
+    consent_text: "Jag vill få nyheter, erbjudanden etc. skickade till mig & kan avprenumerera när jag vill.",
+    submit: "Häng med!",
+    error_consent: "Fyll i mig", 
+    error_submit: "Du har missat något", 
+    thank_you_title: "Välkommen!",
+    thank_you_message: "Du är nu med i utlottningen av en matkasse och kommer hållas uppdaterad om vad som händer i vår värld :)", 
 },
 
   footer: {
@@ -905,22 +905,21 @@ const enText = {
       }
     }, 
     newsletter: {
-      title: "Become a climate hero today!", 
-      subtitle: "We evolve and we test new things. We expand and come up with new stuff. Join us on the journey and be the first to access recipes, news, and offers.", 
-      indicatesRequired: "Indicates required",
-      emailLabel: "Email address",
-      nameLabel: "Name",
-      locationLabel: "Where do you live?",
-      locations: [
-        { value: "Sweden", label: "Sweden" },
-        { value: "Denmark", label: "Denmark" }
-      ],
-      subscribeButton: "Come along!"
+      header_title: "Subscribe & win!", 
+      header_subtitle: "Every month, we raffle off a meal kit to one of our email buddies. If you are the lucky winner and have already purchased a meal kit, we will refund you. Winners will be contacted via email. Good luck!", 
+      email: "anna.andersson@exempel.com",
+      name: "Anna",
+      country: "SE or DK",
+      email_label: "Email",
+      name_label: "Name",
+      country_label: "Where do you live? (SE/DK)", 
+      consent_text: "I want to receive news, offers, etc. sent to me and can unsubscribe anytime.",
+      submit: "Come along!",
+      error_consent: "Fill me in", 
+      error_submit: "You have missed something", 
+      thank_you_title: "Welcome!",
+      thank_you_message: "You are now entered into the raffle for a meal kit and will be kept updated on what's happening in our world :)",
     },
-  newsletter_success: {
-    title: "Tack för din prenumeration!",
-    subtitle: "Du kommer nu att få vårt nyhetsbrev med de senaste uppdateringarna."
-  },  
     footer: {
       faq: "Common questions",
       terms: "Terms and Conditions", 
@@ -1273,22 +1272,21 @@ integrity_policy: {
   }
   }, 
   newsletter: {
-    title: "Bliv en klimahelt i dag!", 
-    subtitle: "Vi udvikler os, og vi tester nye ting. Vi udvider og finder på nyt. Kom med på rejsen og vær den første til at få adgang til opskrifter, nyheder og tilbud.", 
-    indicatesRequired: "Angiver påkrævet",
-    emailLabel: "Emailadresse",
-    nameLabel: "Navn",
-    locationLabel: "Hvor bor du?",
-    locations: [
-      { value: "Sverige", label: "Sverige" },
-      { value: "Denmark", label: "Denmark" }
-    ],
-    subscribeButton: "Kom med!"
+    header_title: "Tilmeld og vind!", 
+    header_subtitle: "Hver måned trækker vi lod om en madkasse til en af vores emailvenner. Hvis du er den heldige vinder og allerede har købt en madkasse, vil vi refundere dig. Vinderne vil blive kontaktet via email. Held og lykke!", 
+    email: "anna.andersson@exempel.com",
+    name: "Anna",
+    country: "SE eller DK",
+    email_label: "Email",
+    name_label: "Navn",
+    country_label: "Hvor bor du? (SE/DK)", 
+    consent_text: "Jeg vil modtage nyheder, tilbud osv. og kan afmelde når som helst.",
+    submit: "Hæng med!",
+    error_consent: "Udfyld mig", 
+    error_submit: "Du har glemt noget", 
+    thank_you_title: "Velkommen!",
+    thank_you_message: "Du er nu med i lodtrækningen om en måltidskasse og vil blive opdateret om hvad der sker i vores verden :)",
   },
-newsletter_success: {
-  title: "Tack för din prenumeration!",
-  subtitle: "Du kommer nu att få vårt nyhetsbrev med de senaste uppdateringarna."
-},  
   footer: {
     faq: "Almindelige spørgsmål",
     terms: "Generelle vilkår", 
