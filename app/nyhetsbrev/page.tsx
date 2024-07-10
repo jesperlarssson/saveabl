@@ -228,7 +228,6 @@ const NewsletterForm = () => {
       margin-top: 5px;
       margin-bottom: 10px;
       text-align: left;
-      width: calc(100% - 20px);
     }
 
     .page-subtitle {
@@ -236,7 +235,6 @@ const NewsletterForm = () => {
       margin-top: 5px;
       margin-bottom: 30px;
       text-align: left;
-      width: calc(100% - 20px);
     }
 
     .input-group {
@@ -265,20 +263,17 @@ const NewsletterForm = () => {
       display: flex;
       align-items: flex-start;
       margin-bottom: 10px;
-      width: calc(100% - 20px);
     }
 
     .consent-container input[type="checkbox"] {
       margin-right: 10px;
       margin-top: 5px;
       transform: scale(1);
-      width: calc(100% - 20px);
     }
 
     .consent-text {
       font-size: 14px;
       text-align: left;
-      width: calc(100% - 20px);
     }
 
     button[type="submit"] {
