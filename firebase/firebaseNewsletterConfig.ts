@@ -11,9 +11,14 @@ const firebaseNewsletterConfig = {
   appId: process.env.NEXT_PUBLIC_NEWSLETTER_FIREBASE_APP_ID,
 };
 
-// Initialize Firebase app
+console.log('Firebase Config:', firebaseNewsletterConfig);  // Loggar konfigurationen för att verifiera att miljövariablerna laddas korrekt
+
+// Initialisera Firebase-appen med konfigurationen
 const newsletterApp = initializeApp(firebaseNewsletterConfig, 'newsletterApp');
+console.log('Firebase app initialized:', newsletterApp.name);  // Loggar appnamnet för att verifiera att Firebase initialiseras korrekt
+
+// Hämta Firestore-databasreferensen
 const db = getFirestore(newsletterApp);
+console.log('Firestore initialized:', db);  // Loggar Firestore-instansen för att verifiera åtkomst till Firestore
 
 export { db };
-

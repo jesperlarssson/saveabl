@@ -3,15 +3,13 @@ import React, { useState } from 'react';
 import { db } from '@/firebase/firebaseNewsletterConfig';
 import { collection, addDoc } from 'firebase/firestore';
 import { useLang } from "@/hooks/useLang";
-import Image from 'next/image'; // Importera next/image
+import Image from 'next/image';
 import MatkasseImage from '../../public/images/illustrations/Matkasse.png';
 import morotImage from '../../public/images/illustrations/morot.png';
-
-
 import HeaderImage from '../../public/images/newsletter_header.png';
 
 const NewsletterForm = () => {
-  const { lang, text } = useLang(); // Hämta lang och text från useLang
+  const { lang, text } = useLang();
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -28,7 +26,7 @@ const NewsletterForm = () => {
       return;
     }
 
-    console.log('Submitting form with data:', { name, email, country });
+    console.log('Submitting form with data:', { name, email, country });  // Loggar data som skickas
 
     try {
       const docRef = await addDoc(collection(db, 'newslettersubscribers'), {
@@ -38,7 +36,7 @@ const NewsletterForm = () => {
         timestamp: new Date().toISOString(),
       });
 
-      console.log('Document written with ID: ', docRef.id);
+      console.log('Document written with ID: ', docRef.id);  // Loggar dokument-ID efter lyckad skrivning
 
       setSubmitted(true);
       setName('');
@@ -47,7 +45,7 @@ const NewsletterForm = () => {
       setConsent(false);
       setError('');
     } catch (error) {
-      console.error('Error adding document:', error);
+      console.error('Error adding document:', error);  // Loggar felmeddelande om något går fel
       setError('Something went wrong, please try again later.');
     }
   };
