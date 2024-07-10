@@ -217,17 +217,6 @@ const NewsletterForm = () => {
   }
 
   @media (max-width: 600px) {
-    .header-image-container {
-      width: 95%;
-      height: auto;
-      position: relative;
-    }
-  
-    .header-image {
-      width: 95%;
-      height: auto;
-      object-fit: cover;
-    }
     .container {
       width: 95%;
       margin: 10px auto;
@@ -235,17 +224,19 @@ const NewsletterForm = () => {
     }
 
     .page-title {
-      font-size: 25px;
+      font-size: 30px;
       margin-top: 5px;
       margin-bottom: 10px;
       text-align: left;
+      width: calc(100% - 20px);
     }
 
     .page-subtitle {
-      font-size: 16px;
+      font-size: 18px;
       margin-top: 5px;
       margin-bottom: 30px;
       text-align: left;
+      width: calc(100% - 20px);
     }
 
     .input-group {
@@ -274,17 +265,20 @@ const NewsletterForm = () => {
       display: flex;
       align-items: flex-start;
       margin-bottom: 10px;
+      width: calc(100% - 20px);
     }
 
     .consent-container input[type="checkbox"] {
       margin-right: 10px;
       margin-top: 5px;
       transform: scale(1);
+      width: calc(100% - 20px);
     }
 
     .consent-text {
       font-size: 14px;
       text-align: left;
+      width: calc(100% - 20px);
     }
 
     button[type="submit"] {
