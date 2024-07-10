@@ -87,13 +87,14 @@ const NewsletterForm = () => {
       font-size: 20px;
       margin-top: 15px;
       margin-bottom: 40px;
+      text-align: center; /* Centrera subtiteln */
     }
     
     form {
       display: flex;
       flex-direction: column;
-      text-align: left;
-      margin-bottom: 20px; /* Minska avståndet mellan fälten för mobila enheter */
+      text-align: center; /* Centrera texten i formuläret */
+      margin-bottom: 10px;
     }
     
     .input-group {
@@ -211,25 +212,30 @@ const NewsletterForm = () => {
       font-size: 20px;
       margin-top: 15px;
       margin-bottom: 40px;
+      text-align: center; /* Centrera tack-texten */
     }
     
     @media (max-width: 600px) {
       .container {
         width: 95%;
-        margin: 20px auto;
+        margin: 10px auto; /* Minska avståndet för att flytta upp allt */
         padding: 10px;
       }
     
       .page-title {
         font-size: 30px;
-        margin-top: 10px;
+        margin-top: 5px; /* Flytta upp titeln */
         margin-bottom: 10px;
       }
     
       .page-subtitle {
         font-size: 18px;
-        margin-top: 10px;
+        margin-top: 5px;
         margin-bottom: 20px;
+      }
+    
+      .input-group {
+        margin-bottom: 20px; /* Jämna ut avståndet mellan fälten */
       }
     
       .input-group label {
@@ -240,6 +246,8 @@ const NewsletterForm = () => {
       input[type="email"] {
         font-size: 14px;
         padding: 10px;
+        max-width: calc(100% - 20px); /* Förhindra att fälten blir bredare än skärmen */
+        margin: 0 auto; /* Centrera fälten */
       }
     
       .consent-text {
@@ -249,7 +257,8 @@ const NewsletterForm = () => {
       button[type="submit"] {
         font-size: 18px;
         padding: 10px 20px;
-        margin-top: 20px;
+        margin-top: 10px; /* Flytta upp knappen */
+        margin-bottom: 10px;
       }
     
       .matkasse-image {
@@ -257,7 +266,8 @@ const NewsletterForm = () => {
       }
     
       .morot-image-container {
-        top: 100px; /* Justera vertikal position för Morot-bilden för mobila enheter */
+        display: block; /* Visa Morot-bilden på mindre skärmar */
+        top: 50px; /* Justera vertikal position för Morot-bilden för mobila enheter */
         left: 50%;
         transform: translateX(-50%);
         width: 200px; /* Justera storleken på Morot-bilden för mobila enheter */
@@ -274,6 +284,7 @@ const NewsletterForm = () => {
       }
     }
   `;
+
 
 
   return (
