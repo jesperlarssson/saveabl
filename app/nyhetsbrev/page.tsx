@@ -217,8 +217,19 @@ const NewsletterForm = () => {
   }
 
   @media (max-width: 600px) {
+    .header-image-container {
+      width: 95%;
+      height: auto;
+      position: relative;
+    }
+  
+    .header-image {
+      width: 95%;
+      height: auto;
+      object-fit: cover;
+    }
     .container {
-      width: 80%;
+      width: 95%;
       margin: 10px auto;
       padding: 10px;
     }
