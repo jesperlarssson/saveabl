@@ -63,7 +63,7 @@ const NewsletterForm = () => {
       object-fit: cover;
     }
     
-    .container {
+    .form-container {
       width: 80%;
       max-width: 750px;
       margin: 40px auto;
@@ -115,7 +115,7 @@ const NewsletterForm = () => {
     
     input[type="text"],
     input[type="email"] {
-      width: 100%;
+      width: calc(100% - 22px); /* Justera bredden för att kompensera för padding och border */
       padding: 15px;
       border: 2px solid #6e2936;
       border-radius: 5px;
@@ -216,7 +216,7 @@ const NewsletterForm = () => {
     }
     
     @media (max-width: 600px) {
-      .container {
+      .form-container {
         width: calc(100% - 20px);
         margin: 10px auto;
         padding: 10px;
@@ -251,8 +251,8 @@ const NewsletterForm = () => {
       input[type="text"],
       input[type="email"] {
         font-size: 14px;
-        padding: 10px;
-        width: calc(100% - 20px);
+        padding: 15px;
+        width: calc(100% - 22px); /* Justera bredden för att kompensera för padding och border */
         margin-bottom: 15px;
       }
     
@@ -267,7 +267,7 @@ const NewsletterForm = () => {
     
       button[type="submit"] {
         font-size: 18px;
-        padding: 10px 20px;
+        padding: 15px 20px; /* Justera padding för knappen */
         margin-bottom: 10px;
         margin: 20px 0 10px 0;
       }
@@ -283,6 +283,8 @@ const NewsletterForm = () => {
       }
     }
 `;
+
+
 
 
   return (
