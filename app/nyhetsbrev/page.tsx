@@ -6,7 +6,7 @@ import { useLang } from "@/hooks/useLang";
 import Image from 'next/image';
 import MatkasseImage from '../../public/images/illustrations/Matkasse.png';
 import morotImage from '../../public/images/illustrations/morot.png';
-import HeaderImage from '../../public/images/newsletter_subscribe.png';
+import HeaderImage from '../../public/images/subscribe_newsletter.png';
 
 const NewsletterForm = () => {
   const { lang, text } = useLang();
@@ -78,7 +78,7 @@ const NewsletterForm = () => {
       font-size: 45px;
       font-weight: bold;
       margin-bottom: 15px;
-      margin-top: -25px;
+      margin-top: -30px;
       text-align: center;
     }
     
@@ -192,7 +192,7 @@ const NewsletterForm = () => {
     
     .morot-image-container {
       position: absolute;
-      top: 300px;
+      top: 350px;
       left: 170px;
       width: 300px;
       height: 300px;
