@@ -226,18 +226,22 @@ const NewsletterForm = () => {
         font-size: 30px;
         margin-top: 5px; /* Flytta upp titeln */
         margin-bottom: 10px;
-        text-align: left;
+        text-align: left; /* Vänstercentrerad text */
+        padding-left: 10px; /* In-line with input fields */
       }
     
       .page-subtitle {
         font-size: 18px;
         margin-top: 5px;
         margin-bottom: 30px;
-        text-align: left;
+        text-align: left; /* Vänstercentrerad text */
+        padding-left: 10px; /* In-line with input fields */
       }
     
       .input-group {
-        margin-bottom: 20px; /* Jämna ut avståndet mellan fälten */
+        margin-bottom: 30px; /* Öka avståndet mellan fälten */
+        padding-left: 10px; /* In-line with input fields */
+        padding-right: 10px; /* In-line with input fields */
       }
     
       .input-group label {
@@ -247,20 +251,25 @@ const NewsletterForm = () => {
       input[type="text"],
       input[type="email"] {
         font-size: 14px;
-        padding: 20px;
-        max-width: calc(100% - 20px); /* Förhindra att fälten blir bredare än skärmen */
+        padding: 10px;
+        width: calc(100% - 20px); /* Förhindra att fälten blir bredare än skärmen */
         margin: 0 auto; /* Centrera fälten */
+        box-sizing: border-box;
       }
     
       .consent-text {
         font-size: 14px;
-        text-align: left;
+        text-align: left; /* Håll texten vänsterjusterad */
+        padding-left: 10px; /* In-line with input fields */
+        padding-right: 10px; /* In-line with input fields */
       }
     
       button[type="submit"] {
         font-size: 18px;
         padding: 10px 20px;
+        margin-top: 20px; /* Flytta upp knappen */
         margin-bottom: 10px;
+        margin-left: 10px; /* In-line with input fields */
       }
     
       .matkasse-image {
@@ -274,12 +283,17 @@ const NewsletterForm = () => {
       .thank-you h2 {
         font-size: 30px;
         margin-top: 10px;
+        text-align: left;
+        padding-left: 10px; /* In-line with input fields */
       }
     
       .thank-you p {
         font-size: 18px;
+        text-align: left;
+        padding-left: 10px; /* In-line with input fields */
       }
     }
+    
   `;
 
 
