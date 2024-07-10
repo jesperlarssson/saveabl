@@ -121,7 +121,7 @@ const NewsletterForm = () => {
     border: 2px solid #6e2936;
     border-radius: 5px;
     box-sizing: border-box;
-    font-size: 16px;
+    font-size: 16px;  /* Öka till 16px */
     text-align: left;
     background-color: #fcf7e8;
     transition: border-color 0.3s ease;
@@ -137,7 +137,7 @@ const NewsletterForm = () => {
   input::placeholder {
     text-align: left;
     color: #d3a181;
-    font-size: 16px;
+    font-size: 16px;  /* Öka till 16px */
     opacity: 0.5;
   }
 
@@ -251,7 +251,7 @@ const NewsletterForm = () => {
 
     input[type="text"],
     input[type="email"] {
-      font-size: 14px;
+      font-size: 16px;  /* Ändrad från 14px till 16px */
       padding: 10px;
       width: calc(100% - 20px);
       max-width: 100%;
@@ -307,9 +307,6 @@ const NewsletterForm = () => {
     }
   }
 `;
-
-
-
 
   return (
     <div>
