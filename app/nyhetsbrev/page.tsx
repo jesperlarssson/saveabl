@@ -6,7 +6,7 @@ import { useLang } from "@/hooks/useLang";
 import Image from 'next/image';
 import MatkasseImage from '../../public/images/illustrations/Matkasse.png';
 import morotImage from '../../public/images/illustrations/morot.png';
-import HeaderImage from '../../public/images/newsletter_header.png';
+import HeaderImage from '../../public/images/newsletter_subscribe.png';
 
 const NewsletterForm = () => {
   const { lang, text } = useLang();
@@ -78,7 +78,7 @@ const NewsletterForm = () => {
       font-size: 45px;
       font-weight: bold;
       margin-bottom: 15px;
-      margin-top: 5px;
+      margin-top: -25px;
       text-align: center;
     }
     
@@ -87,13 +87,13 @@ const NewsletterForm = () => {
       font-size: 20px;
       margin-top: 15px;
       margin-bottom: 40px;
-      text-align: left
+      text-align: left;
     }
     
     form {
       display: flex;
       flex-direction: column;
-      text-align: center; /* Centrera texten i formuläret */
+      text-align: left; /* Centrera texten i formuläret */
       margin-bottom: 10px;
     }
     
@@ -192,7 +192,7 @@ const NewsletterForm = () => {
     
     .morot-image-container {
       position: absolute;
-      top: 250px;
+      top: 300px;
       left: 170px;
       width: 300px;
       height: 300px;
