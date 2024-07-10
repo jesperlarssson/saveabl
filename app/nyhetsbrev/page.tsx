@@ -214,7 +214,6 @@ const NewsletterForm = () => {
       margin-bottom: 40px;
       text-align: center; /* Centrera tack-texten */
     }
-    
     @media (max-width: 600px) {
       .container {
         width: 95%;
@@ -223,17 +222,17 @@ const NewsletterForm = () => {
       }
     
       .page-title {
-        font-size: 30px;
-        margin-top: 5px;
+        font-size: 24px; /* Anpassad storlek för mindre skärmar */
+        margin-top: 10px;
         margin-bottom: 10px;
-        text-align: left;
+        text-align: center; /* Centrera titeln på mindre skärmar */
       }
     
       .page-subtitle {
-        font-size: 18px;
+        font-size: 16px; /* Anpassad storlek för mindre skärmar */
         margin-top: 5px;
-        margin-bottom: 20px; /* Anpassa vid behov för att minska avståndet */
-        text-align: left;
+        margin-bottom: 20px;
+        text-align: center; /* Centrera underrubrik på mindre skärmar */
       }
     
       .input-group {
@@ -241,10 +240,9 @@ const NewsletterForm = () => {
       }
     
       .input-group label {
-        font-size: 16px;
+        font-size: 14px; /* Anpassad storlek för mindre skärmar */
         display: block;
         text-align: left;
-        padding-left: 10px;
         margin-bottom: 5px;
       }
     
@@ -259,9 +257,14 @@ const NewsletterForm = () => {
       }
     
       .consent-container {
-        display: flex;
-        align-items: center; /* Centrera innehållet vertikalt */
         margin-bottom: 15px; /* Behåll avståndet mellan fälten */
+      }
+    
+      .consent-container label {
+        font-size: 14px; /* Anpassad storlek för mindre skärmar */
+        display: flex;
+        align-items: center; /* Centrera texten vertikalt med checkbox */
+        margin-bottom: 5px;
       }
     
       .consent-container input[type="checkbox"] {
@@ -270,12 +273,12 @@ const NewsletterForm = () => {
       }
     
       .consent-text {
-        font-size: 14px;
+        font-size: 14px; /* Anpassad storlek för mindre skärmar */
         text-align: left;
       }
     
       button[type="submit"] {
-        font-size: 18px;
+        font-size: 16px; /* Anpassad storlek för mindre skärmar */
         padding: 10px 20px;
         margin-bottom: 10px;
         width: 100%;
@@ -283,25 +286,18 @@ const NewsletterForm = () => {
         text-align: center;
       }
     
-      .matkasse-image {
-        display: none;
-      }
-    
+      .matkasse-image,
       .morot-image-container {
-        display: none;
+        display: none; /* Göm bilder på mindre skärmar */
       }
     
-      .thank-you h2 {
-        font-size: 30px;
-        margin-top: 10px;
-        text-align: left;
-      }
-    
+      .thank-you h2,
       .thank-you p {
-        font-size: 18px;
-        text-align: left;
+        font-size: 18px; /* Anpassad storlek för mindre skärmar */
+        text-align: center; /* Centrera texten på mindre skärmar */
       }
     }
+    
     
     
     
