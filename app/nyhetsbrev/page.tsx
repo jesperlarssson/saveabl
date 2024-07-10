@@ -214,6 +214,7 @@ const NewsletterForm = () => {
       margin-bottom: 40px;
       text-align: center; /* Centrera tack-texten */
     }
+    
     @media (max-width: 600px) {
       .container {
         width: 95%;
@@ -222,25 +223,25 @@ const NewsletterForm = () => {
       }
     
       .page-title {
-        font-size: 24px; /* Anpassad storlek för mindre skärmar */
+        font-size: 24px;
         margin-top: 10px;
         margin-bottom: 10px;
-        text-align: center; /* Centrera titeln på mindre skärmar */
+        text-align: center;
       }
     
       .page-subtitle {
-        font-size: 16px; /* Anpassad storlek för mindre skärmar */
+        font-size: 16px;
         margin-top: 5px;
         margin-bottom: 20px;
-        text-align: center; /* Centrera underrubrik på mindre skärmar */
+        text-align: center;
       }
     
       .input-group {
-        margin-bottom: 15px; /* Behåll avståndet mellan fälten */
+        margin-bottom: 15px;
       }
     
       .input-group label {
-        font-size: 14px; /* Anpassad storlek för mindre skärmar */
+        font-size: 14px;
         display: block;
         text-align: left;
         margin-bottom: 5px;
@@ -250,20 +251,21 @@ const NewsletterForm = () => {
       input[type="email"] {
         font-size: 14px;
         padding: 10px;
-        width: calc(100% - 20px); /* Anpassa bredden för fälten */
+        width: calc(100% - 20px);
         max-width: 100%;
         margin-bottom: 15px;
         box-sizing: border-box;
       }
     
       .consent-container {
-        margin-bottom: 15px; /* Behåll avståndet mellan fälten */
+        margin-bottom: 15px;
       }
     
       .consent-container label {
-        font-size: 14px; /* Anpassad storlek för mindre skärmar */
+        font-size: 14px;
         display: flex;
-        align-items: center; /* Centrera texten vertikalt med checkbox */
+        align-items: center;
+        text-align: left; /* Vänsterställ texten */
         margin-bottom: 5px;
       }
     
@@ -273,12 +275,12 @@ const NewsletterForm = () => {
       }
     
       .consent-text {
-        font-size: 14px; /* Anpassad storlek för mindre skärmar */
+        font-size: 14px;
         text-align: left;
       }
     
       button[type="submit"] {
-        font-size: 16px; /* Anpassad storlek för mindre skärmar */
+        font-size: 16px;
         padding: 10px 20px;
         margin-bottom: 10px;
         width: 100%;
@@ -288,18 +290,15 @@ const NewsletterForm = () => {
     
       .matkasse-image,
       .morot-image-container {
-        display: none; /* Göm bilder på mindre skärmar */
+        display: none;
       }
     
       .thank-you h2,
       .thank-you p {
-        font-size: 18px; /* Anpassad storlek för mindre skärmar */
-        text-align: center; /* Centrera texten på mindre skärmar */
+        font-size: 18px;
+        text-align: center;
       }
     }
-    
-    
-    
     
   `;
 
