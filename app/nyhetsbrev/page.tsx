@@ -51,263 +51,263 @@ const NewsletterForm = () => {
   };
 
   const styles = `
-    .header-image-container {
-      width: 100%;
-      height: auto;
-      position: relative;
-    }
-    
-    .header-image {
-      width: 100%;
-      height: auto;
-      object-fit: cover;
-    }
-    
+  .header-image-container {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+
+  .header-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  .container {
+    width: 80%;
+    max-width: 750px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #fcf7e8;
+    text-align: left;
+    position: relative;
+  }
+
+  .page-title {
+    color: #6e2936;
+    font-size: 45px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    margin-top: -30px;
+    text-align: center;
+  }
+
+  .page-subtitle {
+    color: black;
+    font-size: 20px;
+    margin-top: 15px;
+    margin-bottom: 40px;
+    text-align: left;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-bottom: 10px;
+  }
+
+  .input-group {
+    position: relative;
+    margin-bottom: 40px;
+  }
+
+  .input-group label {
+    position: absolute;
+    top: -12px;
+    left: 10px;
+    background-color: #fcf7e8;
+    padding: 0 5px;
+    color: #6e2936;
+    font-weight: bold;
+    font-size: 19px;
+  }
+
+  input[type="text"],
+  input[type="email"] {
+    width: calc(100% - 20px);
+    max-width: 100%;
+    padding: 15px;
+    border: 2px solid #6e2936;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+    text-align: left;
+    background-color: #fcf7e8;
+    transition: border-color 0.3s ease;
+  }
+
+  input[type="text"]:focus,
+  input[type="email"]:focus {
+    border-color: #eecfaa;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(238, 207, 170, 0.5);
+  }
+
+  input::placeholder {
+    text-align: left;
+    color: #d3a181;
+    font-size: 16px;
+    opacity: 0.5;
+  }
+
+  .consent-container {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 40px;
+  }
+
+  .consent-container input[type="checkbox"] {
+    margin-right: 10px;
+    margin-top: 5px;
+    transform: scale(1.2);
+  }
+
+  .consent-text {
+    font-size: 16px;
+  }
+
+  button[type="submit"] {
+    background-color: #f4664a;
+    color: #fcf7e8;
+    border: none;
+    padding: 15px 25px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    text-align: center;
+    max-width: 300px;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: normal;
+    height: 60px;
+    margin-top: 50px;
+    transition: background-color 0.3s ease;
+    margin: 0 auto;
+  }
+
+  button[type="submit"]:hover {
+    background-color: rgba(244, 102, 74, 0.8);
+  }
+
+  .matkasse-image {
+    position: absolute;
+    bottom: 10px;
+    right: -250px;
+    width: 230px;
+    height: 230px;
+  }
+
+  .morot-image-container {
+    position: absolute;
+    top: 350px;
+    left: 170px;
+    width: 300px;
+    height: 300px;
+  }
+
+  .thank-you h2 {
+    color: #6e2936;
+    font-size: 45px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    margin-top: 5px;
+    text-align: left;
+  }
+
+  .thank-you p {
+    color: black;
+    font-size: 20px;
+    margin-top: 15px;
+    margin-bottom: 40px;
+    text-align: left;
+  }
+
+  @media (max-width: 600px) {
     .container {
-      width: 80%;
-      max-width: 750px;
-      margin: 40px auto;
-      padding: 20px;
-      background-color: #fcf7e8;
-      text-align: left;
-      position: relative;
+      width: 95%;
+      margin: 10px auto;
+      padding: 10px;
     }
-    
+
     .page-title {
-      color: #6e2936;
-      font-size: 45px;
-      font-weight: bold;
-      margin-bottom: 15px;
-      margin-top: -30px;
-      text-align: center;
-    }
-    
-    .page-subtitle {
-      color: black;
-      font-size: 20px;
-      margin-top: 15px;
-      margin-bottom: 40px;
+      font-size: 30px;
+      margin-top: 5px;
+      margin-bottom: 10px;
       text-align: left;
     }
-    
-    form {
-      display: flex;
-      flex-direction: column;
-      text-align: left; /* Centrera texten i formuläret */
-      margin-bottom: 10px;
+
+    .page-subtitle {
+      font-size: 18px;
+      margin-top: 5px;
+      margin-bottom: 30px;
+      text-align: left;
     }
-    
+
     .input-group {
-      position: relative;
-      margin-bottom: 40px;
+      margin-bottom: 20px;
     }
-    
+
     .input-group label {
-      position: absolute;
-      top: -12px;
-      left: 10px;
-      background-color: #fcf7e8;
-      padding: 0 5px;
-      color: #6e2936;
-      font-weight: bold;
-      font-size: 19px;
+      font-size: 16px;
+      display: block;
+      text-align: left;
+      padding-left: 10px;
+      margin-bottom: 5px;
     }
-    
+
     input[type="text"],
     input[type="email"] {
-      width: 100%;
-      padding: 15px;
-      border: 2px solid #6e2936;
-      border-radius: 5px;
+      font-size: 14px;
+      padding: 10px;
+      width: calc(100% - 20px);
+      max-width: 100%;
+      margin-bottom: 15px;
       box-sizing: border-box;
-      font-size: 16px;
-      text-align: left;
-      background-color: #fcf7e8;
-      transition: border-color 0.3s ease;
     }
-    
-    input[type="text"]:focus,
-    input[type="email"]:focus {
-      border-color: #eecfaa;
-      outline: none;
-      box-shadow: 0 0 0 3px rgba(238, 207, 170, 0.5);
-    }
-    
-    input::placeholder {
-      text-align: left;
-      color: #d3a181;
-      font-size: 16px;
-      opacity: 0.5;
-    }
-    
+
     .consent-container {
       display: flex;
       align-items: flex-start;
-      margin-bottom: 40px;
+      margin-bottom: 10px;
     }
-    
+
     .consent-container input[type="checkbox"] {
       margin-right: 10px;
       margin-top: 5px;
-      transform: scale(1.2);
+      transform: scale(1);
     }
-    
+
     .consent-text {
-      font-size: 16px;
+      font-size: 14px;
+      text-align: left;
     }
-    
+
     button[type="submit"] {
-      background-color: #f4664a;
-      color: #fcf7e8;
-      border: none;
-      padding: 15px 25px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 20px;
-      text-align: center;
-      max-width: 300px;
+      font-size: 18px;
+      padding: 10px 20px;
+      margin-bottom: 10px;
+      display: block;
+      margin: 20px 0 10px 0;
       width: 100%;
       box-sizing: border-box;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      line-height: normal;
-      height: 60px;
-      margin-top: 50px;
-      transition: background-color 0.3s ease;
-      margin: 0 auto;
-    }
-    
-    button[type="submit"]:hover {
-      background-color: rgba(244, 102, 74, 0.8);
-    }
-    
-    .matkasse-image {
-      position: absolute;
-      bottom: 10px;
-      right: -250px;
-      width: 230px;
-      height: 230px;
-    }
-    
-    .morot-image-container {
-      position: absolute;
-      top: 350px;
-      left: 170px;
-      width: 300px;
-      height: 300px;
-    }
-    
-    .thank-you h2 {
-      color: #6e2936;
-      font-size: 45px;
-      font-weight: bold;
-      margin-bottom: 15px;
-      margin-top: 5px;
       text-align: center;
     }
-    
+
+    .matkasse-image {
+      display: none;
+    }
+
+    .morot-image-container {
+      display: none;
+    }
+
+    .thank-you h2 {
+      font-size: 30px;
+      margin-top: 10px;
+      text-align: left;
+    }
+
     .thank-you p {
-      color: black;
-      font-size: 20px;
-      margin-top: 15px;
-      margin-bottom: 40px;
-      text-align: center; /* Centrera tack-texten */
+      font-size: 18px;
+      text-align: left;
     }
-    
-    @media (max-width: 600px) {
-      .container {
-        width: 95%;
-        margin: 10px auto; /* Minska avståndet för att flytta upp allt */
-        padding: 10px;
-      }
-    
-      .page-title {
-        font-size: 30px;
-        margin-top: 5px; /* Flytta upp titeln */
-        margin-bottom: 10px;
-        text-align: left; /* Justera till vänster */
-      }
-    
-      .page-subtitle {
-        font-size: 18px;
-        margin-top: 5px;
-        margin-bottom: 30px;
-        text-align: left; /* Justera till vänster */
-      }
-    
-      .input-group {
-        margin-bottom: 20px; /* Jämna ut avståndet mellan fälten */
-      }
-    
-      .input-group label {
-        font-size: 16px;
-        display: block; /* Gör labeln blockelement för bättre centrering */
-        text-align: left; /* Justera till vänster */
-        padding-left: 10px; /* Gör labeln vänsterjusterad inom input-gruppen */
-        margin-bottom: 5px; /* Mindre mellanrum mellan label och input */
-      }
-    
-      input[type="text"],
-      input[type="email"] {
-        font-size: 14px;
-        padding: 10px;
-        width: calc(100% - 20px); /* Fyll hela containerns bredd och förhindra overflow */
-        max-width: 100%; /* Förhindra att fälten blir bredare än skärmen */
-        margin-bottom: 15px; /* Mer mellanrum mellan fälten */
-        box-sizing: border-box; /* Behåll padding och border inom bredden */
-      }
-    
-      .consent-container {
-        display: flex;
-        align-items: flex-start;
-        margin-bottom: 10px; /* Jämna ut avståndet mellan fälten */
-      }
-    
-      .consent-container input[type="checkbox"] {
-        margin-right: 10px;
-        margin-top: 5px;
-        transform: scale(1);
-      }
-    
-      .consent-text {
-        font-size: 14px;
-        text-align: left; /* Justera till vänster */
-      }
-    
-      button[type="submit"] {
-        font-size: 18px;
-        padding: 10px 20px;
-        margin-bottom: 10px;
-        display: block; /* Gör knappen blockelement för bättre centrering */
-        margin: 20px 0 10px 0; /* Centrera knappen horisontellt med mer utrymme */
-        width: 100%; /* Fyll hela containerns bredd */
-        box-sizing: border-box; /* Behåll padding och border inom bredden */
-        text-align: center; /* Justera till vänster */
-      }
-    
-      .matkasse-image {
-        display: none; /* Göm Matkasse-bilden på mindre skärmar */
-      }
-    
-      .morot-image-container {
-        display: none; /* Göm Morot-bilden på mindre skärmar */
-      }
-    
-      .thank-you h2 {
-        font-size: 30px;
-        margin-top: 10px;
-        text-align: left; /* Justera till vänster */
-      }
-    
-      .thank-you p {
-        font-size: 18px;
-        text-align: left; /* Justera till vänster */
-      }
-    }
-    
-    
-  `;
+  }
+`;
+
 
 
 
