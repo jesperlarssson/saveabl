@@ -93,7 +93,7 @@ const NewsletterForm = () => {
       display: flex;
       flex-direction: column;
       text-align: left;
-      margin-bottom: 10px;
+      margin-bottom: 20px; /* Minska avståndet mellan fälten för mobila enheter */
     }
     
     .input-group {
@@ -253,17 +253,14 @@ const NewsletterForm = () => {
       }
     
       .matkasse-image {
-        width: 150px;
-        height: 150px;
-        right: 0;
-        bottom: 10px;
+        display: none; /* Göm Matkasse-bilden på mindre skärmar */
       }
     
       .morot-image-container {
-        top: 200px;
+        top: 100px; /* Justera vertikal position för Morot-bilden för mobila enheter */
         left: 50%;
         transform: translateX(-50%);
-        width: 200px;
+        width: 200px; /* Justera storleken på Morot-bilden för mobila enheter */
         height: 200px;
       }
     
@@ -277,6 +274,7 @@ const NewsletterForm = () => {
       }
     }
   `;
+
 
   return (
     <div>
