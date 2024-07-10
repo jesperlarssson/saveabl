@@ -54,177 +54,242 @@ const NewsletterForm = () => {
 
   const styles = `
 
-    .header-image-container {
-      width: 100%;
-      height: auto;
-      position: relative;
-    }
-
-    .header-image {
-      width: 100%;
-      height: auto;
-      object-fit: cover;
-    }
-    
-    /* Container för rubrik och underrubrik samt formulär */
+  .header-image-container {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  
+  .header-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  
+  /* Container för rubrik och underrubrik samt formulär */
+  .container {
+    width: 80%;
+    max-width: 750px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #fcf7e8;
+    text-align: left;
+    position: relative;
+  }
+  
+  /* Rubriken */
+  .page-title {
+    color: #6e2936;
+    font-size: 45px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    margin-top: 5px;
+    text-align: center;
+  }
+  
+  /* Underrubriken */
+  .page-subtitle {
+    color: black;
+    font-size: 20px;
+    margin-top: 15px;
+    margin-bottom: 40px;
+  }
+  
+  /* Formulärstyling */
+  form {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-bottom: 10px;
+  }
+  
+  /* Stil för inmatningsfälten */
+  .input-group {
+    position: relative;
+    margin-bottom: 40px;
+  }
+  
+  .input-group label {
+    position: absolute;
+    top: -12px;
+    left: 10px;
+    background-color: #fcf7e8;
+    padding: 0 5px;
+    color: #6e2936;
+    font-weight: bold;
+    font-size: 19px;
+  }
+  
+  input[type="text"],
+  input[type="email"] {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #6e2936;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+    text-align: left;
+    background-color: #fcf7e8;
+    transition: border-color 0.3s ease;
+  }
+  
+  input[type="text"]:focus,
+  input[type="email"]:focus {
+    border-color: #eecfaa;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(238, 207, 170, 0.5);
+  }
+  
+  input::placeholder {
+    text-align: left;
+    color: #d3a181;
+    font-size: 16px;
+    opacity: 0.5;
+  }
+  
+  /* Stil för kryssrutan */
+  .consent-container {
+    display: flex;
+    align-items: flex-start; /* Se till att checkboxen och texten är linjerade upptill */
+    margin-bottom: 40px;
+  }
+  
+  .consent-container input[type="checkbox"] {
+    margin-right: 10px;
+    margin-top: 5px; /* Justera för att centrera bättre vertikalt */
+    transform: scale(1.2); /* Gör kryssrutan något större */
+  }
+  
+  /* Stil för consent texten */
+  .consent-text {
+    font-size: 16px;
+  }
+  
+  /* Stil för skicka-knappen */
+  button[type="submit"] {
+    background-color: #f4664a;
+    color: #fcf7e8;
+    border: none;
+    padding: 15px 25px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    text-align: center;
+    max-width: 300px;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: normal;
+    height: 60px;
+    margin-top: 50px;
+    transition: background-color 0.3s ease;
+    /* Centrera knappen horisontellt */
+    margin: 0 auto;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: rgba(244, 102, 74, 0.8);
+  }
+  
+  .matkasse-image {
+    position: absolute;
+    bottom: 10px;
+    right: -250px;
+    width: 230px; /* Anpassa bredden efter behov */
+    height: 230px; /* Anpassa höjden efter behov */
+  }
+  
+  /* Stil för morot.png */
+  .morot-image-container {
+    position: absolute;
+    top: 250px; /* Justera detta värde för att placera bilden under headerbilden */
+    left: 170px; /* Justera detta värde för att placera bilden till vänster */
+    width: 300px; /* Anpassa bredden efter behov */
+    height: 300px; /* Anpassa höjden efter behov */
+  }
+  
+  .thank-you h2 {
+    color: #6e2936;
+    font-size: 45px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    margin-top: 5px;
+    text-align: center;
+  }
+  
+  .thank-you p {
+    color: black;
+    font-size: 20px;
+    margin-top: 15px;
+    margin-bottom: 40px;
+  }
+  
+  /* Media Queries för mobilanpassning */
+  @media (max-width: 600px) {
     .container {
-      width: 80%;
-      max-width: 750px;
-      margin: 40px auto;
-      padding: 20px;
-      background-color: #FCF7E8;
-      text-align: left;
-      position: relative;
+      width: 95%;
+      margin: 20px auto;
+      padding: 10px;
     }
-
-    /* Rubriken */
+  
     .page-title {
-      color: #6E2936;
-      font-size: 45px;
-      font-weight: bold;
-      margin-bottom: 15px;
-      margin-top: 5px;
-      text-align: center;
-    }
-
-    /* Underrubriken */
-    .page-subtitle {
-      color: black;
-      font-size: 20px;
-      margin-top: 15px;
-      margin-bottom: 40px;
-    }
-
-    /* Formulärstyling */
-    form {
-      display: flex;
-      flex-direction: column;
-      text-align: left;
+      font-size: 30px;
+      margin-top: 10px;
       margin-bottom: 10px;
     }
-
-    /* Stil för inmatningsfälten */
-    .input-group {
-      position: relative;
-      margin-bottom: 40px;
+  
+    .page-subtitle {
+      font-size: 18px;
+      margin-top: 10px;
+      margin-bottom: 20px;
     }
-
+  
     .input-group label {
-      position: absolute;
-      top: -12px;
-      left: 10px;
-      background-color: #FCF7E8;
-      padding: 0 5px;
-      color: #6E2936;
-      font-weight: bold;
-      font-size: 19px;
+      font-size: 16px;
     }
-
+  
     input[type="text"],
     input[type="email"] {
-      width: 100%;
-      padding: 15px;
-      border: 2px solid #6E2936;
-      border-radius: 5px;
-      box-sizing: border-box;
-      font-size: 16px;
-      text-align: left;
-      background-color: #FCF7E8;
-      transition: border-color 0.3s ease;
+      font-size: 14px;
+      padding: 10px;
     }
-
-    input[type="text"]:focus,
-    input[type="email"]:focus {
-      border-color: #EECFAA;
-      outline: none;
-      box-shadow: 0 0 0 3px rgba(238, 207, 170, 0.5);
-    }
-
-    input::placeholder {
-      text-align: left;
-      color: #D3A181;
-      font-size: 16px;
-      opacity: 0.5;
-    }
-
-    /* Stil för kryssrutan */
-    .consent-container {
-      display: flex;
-      align-items: flex-start; /* Se till att checkboxen och texten är linjerade upptill */
-      margin-bottom: 40px;
-    }
-
-    .consent-container input[type="checkbox"] {
-      margin-right: 10px;
-      margin-top: 5px; /* Justera för att centrera bättre vertikalt */
-      transform: scale(1.2); /* Gör kryssrutan något större */
-    }
-
-    /* Stil för consent texten */
+  
     .consent-text {
-      font-size: 16px;
+      font-size: 14px;
     }
-
-    /* Stil för skicka-knappen */
+  
     button[type="submit"] {
-      background-color: #F4664A;
-      color: #FCF7E8;
-      border: none;
-      padding: 15px 25px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 20px;
-      text-align: center;
-      max-width: 300px;
-      width: 100%;
-      box-sizing: border-box;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      line-height: normal;
-      height: 60px;
-      margin-top: 50px;
-      transition: background-color 0.3s ease;
-      /* Centrera knappen horisontellt */
-      margin: 0 auto;
+      font-size: 18px;
+      padding: 10px 20px;
+      margin-top: 20px;
     }
-
-    button[type="submit"]:hover {
-      background-color: rgba(244, 102, 74, 0.8);
-    }
-
+  
     .matkasse-image {
-      position: absolute;
+      width: 150px;
+      height: 150px;
+      right: 0;
       bottom: 10px;
-      right: -250px;
-      width: 230px; /* Anpassa bredden efter behov */
-      height: 230px; /* Anpassa höjden efter behov */
     }
-
-    /* Stil för morot.png */
+  
     .morot-image-container {
-      position: absolute;
-      top: 250px; /* Justera detta värde för att placera bilden under headerbilden */
-      left: 170px; /* Justera detta värde för att placera bilden till vänster */
-      width: 300px; /* Anpassa bredden efter behov */
-      height: 300px; /* Anpassa höjden efter behov */
+      top: 200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      height: 200px;
     }
-
+  
     .thank-you h2 {
-      color: #6E2936;
-      font-size: 45px;
-      font-weight: bold;
-      margin-bottom: 15px;
-      margin-top: 5px;
-      text-align: center;
+      font-size: 30px;
+      margin-top: 10px;
     }
-
+  
     .thank-you p {
-      color: black;
-      font-size: 20px;
-      margin-top: 15px;
-      margin-bottom: 40px;
+      font-size: 18px;
     }
+  }  
   `;
 
   return (
