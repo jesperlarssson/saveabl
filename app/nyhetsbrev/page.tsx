@@ -218,7 +218,7 @@ const NewsletterForm = () => {
 
   @media (max-width: 600px) {
     .container {
-      width: 100%;
+      width: 80%;
       margin: 10px auto;
       padding: 10px;
     }
