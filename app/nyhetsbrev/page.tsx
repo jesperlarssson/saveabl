@@ -218,20 +218,20 @@ const NewsletterForm = () => {
 
   @media (max-width: 600px) {
     .container {
-      width: 95%;
+      width: 100%;
       margin: 10px auto;
       padding: 10px;
     }
 
     .page-title {
-      font-size: 30px;
+      font-size: 25px;
       margin-top: 5px;
       margin-bottom: 10px;
       text-align: left;
     }
 
     .page-subtitle {
-      font-size: 18px;
+      font-size: 16px;
       margin-top: 5px;
       margin-bottom: 30px;
       text-align: left;
