@@ -87,7 +87,7 @@ const NewsletterForm = () => {
       font-size: 20px;
       margin-top: 15px;
       margin-bottom: 40px;
-      text-align: center; /* Centrera subtiteln */
+      text-align: left
     }
     
     form {
@@ -232,6 +232,7 @@ const NewsletterForm = () => {
         font-size: 18px;
         margin-top: 5px;
         margin-bottom: 20px;
+        text-align: center;
       }
     
       .input-group {
@@ -252,6 +253,7 @@ const NewsletterForm = () => {
     
       .consent-text {
         font-size: 14px;
+        text-align: center;
       }
     
       button[type="submit"] {
