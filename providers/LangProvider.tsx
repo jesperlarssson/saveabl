@@ -685,7 +685,7 @@ const enText = {
     type: "Make your selections below (without commitment on any):",
     variant: "Recipes designed for families of 3-4 people:",
     deliveryDay: "Delivery options:",
-    delivery_: "Saturday 6/7 at 09-18",
+    delivery_saturday: "Saturday 13/7 at 09-18",
     delivery_sunday: "Sunday 14/7 at 10-17",
     delivery_monday: "Monday 15/7 at 16-22",
     stockholm_sunday: "Sunday 14/7 at 10-17",
