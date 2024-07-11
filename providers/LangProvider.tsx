@@ -907,7 +907,7 @@ const enText = {
     newsletter: {
       header_title: "Subscribe & win!", 
       header_subtitle: "Every month, we raffle off a meal kit to one of our email buddies. If you are the lucky winner and have already purchased a meal kit, we will refund you. Winners will be contacted via email. Good luck!", 
-      email: "anna.andersson@exempel.com",
+      email: "anna.andersson@example.com",
       name: "Anna",
       country: "SE or DK",
       email_label: "Email",
@@ -1274,7 +1274,7 @@ integrity_policy: {
   newsletter: {
     header_title: "Tilmeld og vind!", 
     header_subtitle: "Hver måned trækker vi lod om en madkasse til en af vores emailvenner. Hvis du er den heldige vinder og allerede har købt en madkasse, vil vi refundere dig. Vinderne vil blive kontaktet via email. Held og lykke!", 
-    email: "anna.andersson@exempel.com",
+    email: "anna.andersson@eksempel.com",
     name: "Anna",
     country: "SE eller DK",
     email_label: "Email",
