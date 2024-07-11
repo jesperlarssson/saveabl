@@ -177,6 +177,7 @@ const NewsletterForm = () => {
     margin-top: 50px;
     transition: background-color 0.3s ease;
     margin: 0 auto;
+    font-weight: bold;
   }
 
   button[type="submit"]:hover {
@@ -285,6 +286,7 @@ const NewsletterForm = () => {
       width: 100%;
       box-sizing: border-box;
       text-align: center;
+      font-weight: bold;
     }
 
     .matkasse-image {
