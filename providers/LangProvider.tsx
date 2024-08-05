@@ -217,7 +217,7 @@ const svText = {
   recipes: {
     title: "Menyer",
     next_week: "Nästa vecka:",
-    this_week: "Denna vecka:",
+    this_week: "",
     older_recipes: "Hämta äldre recept",
     comment: "Kommentarer",
     comment_name: "Namn",
