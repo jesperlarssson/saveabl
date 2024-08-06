@@ -651,7 +651,7 @@ const enText = {
   recipes: {
     title: "Menus",
     next_week: "Next week:",
-    this_week: "This week:",
+    this_week: "",
     older_recipes: "Load older recipes",
     comment: "Comments",
     comment_name: "Name",
@@ -1049,7 +1049,7 @@ const daText = {
   recipes: {
     title: "Menuer",
     next_week: "Næste uge:",
-    this_week: "Denne uge:",
+    this_week: "",
     older_recipes: "Hent ældre opskrifter",
     comment: "Kommentarer",
     comment_name: "Navn",
