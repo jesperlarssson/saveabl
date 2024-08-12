@@ -176,7 +176,7 @@ const Navbar = () => {
       >
         {/* Stäng knappen */}
         <button
-          className="absolute top-1 right-4 p-2 text-3xl text-[#EECFAA] hover:text-opacity-75"
+          className="absolute top-[-2px] right-4 p-2 text-3xl text-[#EECFAA] hover:text-opacity-75"
           onClick={handleClick}
         >
           &times;
