@@ -217,7 +217,7 @@ const svText = {
   recipes: {
     title: "Menyer",
     next_week: "Nästa vecka:",
-    this_week: "",
+    this_week: "Denna vecka:",
     older_recipes: "Hämta äldre recept",
     comment: "Kommentarer",
     comment_name: "Namn",
@@ -651,7 +651,7 @@ const enText = {
   recipes: {
     title: "Menus",
     next_week: "Next week:",
-    this_week: "",
+    this_week: "This week:",
     older_recipes: "Load older recipes",
     comment: "Comments",
     comment_name: "Name",
@@ -1049,7 +1049,7 @@ const daText = {
   recipes: {
     title: "Menuer",
     next_week: "Næste uge:",
-    this_week: "",
+    this_week: "Denne uge:",
     older_recipes: "Hent ældre opskrifter",
     comment: "Kommentarer",
     comment_name: "Navn",
