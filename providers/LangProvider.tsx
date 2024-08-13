@@ -525,7 +525,7 @@ const svText = {
     faq: "Vanliga frågor",
     terms: "Allmänna villkor", 
     integrity: "Integritetspolicy",
-    newsletter: "Prenumerera & vinn!",
+    newsletter: "Prenumerera & vinn",
   }, 
   
 };
@@ -925,7 +925,7 @@ const enText = {
       faq: "Common questions",
       terms: "Terms and Conditions", 
       integrity: "Privacy Policy",
-      newsletter: "Subscribe & win!", 
+      newsletter: "Subscribe & win", 
     }, 
   
 };
@@ -1293,7 +1293,7 @@ integrity_policy: {
     faq: "Almindelige spørgsmål",
     terms: "Generelle vilkår", 
     integrity: "Integritetspolitik",
-    newsletter: "Tilmeld & vind!", 
+    newsletter: "Tilmeld & vind", 
   }, 
   
 };
