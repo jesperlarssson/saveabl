@@ -176,13 +176,13 @@ const Navbar = () => {
       >
         {/* Stäng knappen */}
         <button
-          className="absolute top-[-8px] right-4 p-2 text-4xl text-[#EECFAA] hover:text-opacity-75"
+          className="absolute top-[-6px] right-4 p-2 text-4xl text-[#EECFAA] hover:text-opacity-75"
           onClick={handleClick}
         >
           &times;
         </button>
 
-        <ul className="mt-12">
+        <ul className="mt-20">
           {navigation.map((item) => (
             <li onClick={() => setActive(false)} key={item.id}>
               <NavItem
