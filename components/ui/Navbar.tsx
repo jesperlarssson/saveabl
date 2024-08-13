@@ -182,7 +182,7 @@ const Navbar = () => {
           &times;
         </button>
 
-        <ul className="mt-8">
+        <ul className="mt-12">
           {navigation.map((item) => (
             <li onClick={() => setActive(false)} key={item.id}>
               <NavItem
