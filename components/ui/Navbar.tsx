@@ -79,7 +79,7 @@ const Navbar = () => {
         active && ""
       )}
     >
-      <nav className="w-full  flex items-center justify-between max-w-screen-2xl mx-auto px-2 sm:px-4 md:px-8">
+      <nav className="w-full flex items-center justify-between max-w-screen-2xl mx-auto px-2 sm:px-4 md:px-8">
         <Link
           href={"/"}
           className=" px-4 h-14 flex items-center rounded-md hover:shadow-inner hover:scale-95 transition-all"
@@ -102,7 +102,7 @@ const Navbar = () => {
                     pathname === item.path && "bg-primary",
                     item.disabled &&
                       "cursor-not-allowed opacity-50 hover:bg-primary-200",
-                    item.name === text.nav.faq && navLinkFaqClass
+                    item.name === text.nav.faq && navLinkFaqClass,
                   ]
                 )}
                 active={pathname === item.path}
@@ -120,7 +120,7 @@ const Navbar = () => {
           {!user ? (
             <button
               onClick={authModal.onOpen}
-              className="hidden md:flex px-8 py-3 rounded-full bg-accent text-primary-200  text-sm font-poppins tracking-wider border border-transparent disabled:cursor-not-allowed disabled:opacity-50 hover:bg-accent-600 hover:drop-shadow-md transition"
+              className="hidden md:flex px-8 py-3 rounded-full bg-accent text-primary-200 text-sm font-poppins tracking-wider border border-transparent disabled:cursor-not-allowed disabled:opacity-50 hover:bg-accent-600 hover:drop-shadow-md transition"
             >
               {text.nav.log_in}
             </button>
@@ -129,7 +129,7 @@ const Navbar = () => {
               <Link
                 href="/mina-sidor"
                 onClick={() => setActive(false)}
-                className=" px-8 py-3 rounded-full bg-primary text-primary-900  text-sm font-poppins tracking-wider border border-transparent disabled:cursor-not-allowed disabled:opacity-50 hover:bg-primary-500 hover:drop-shadow-md transition"
+                className=" px-8 py-3 rounded-full bg-primary text-primary-900 text-sm font-poppins tracking-wider border border-transparent disabled:cursor-not-allowed disabled:opacity-50 hover:bg-primary-500 hover:drop-shadow-md transition"
               >
                 {text.nav.my_account}
               </Link>
@@ -170,13 +170,13 @@ const Navbar = () => {
 
       <div
         className={twMerge(
-          `flex flex-col fixed top-14 left-0 md:hidden h-screen w-screen opacity-0 bg-primary-200 transition duration-300 -translate-x-full`,
+          `flex flex-col fixed top-0 left-0 md:hidden h-[calc(100vh+2rem)] w-screen opacity-0 bg-primary-200 transition duration-300 -translate-x-full`,
           active && "translate-x-0 opacity-100"
         )}
       >
         {/* Stäng knappen */}
         <button
-          className="absolute top-[-6px] right-4 p-2 text-3xl text-[#EECFAA] hover:text-opacity-75"
+          className="absolute top-2 right-4 p-2 text-3xl text-[#EECFAA] hover:text-opacity-75"
           onClick={handleClick}
         >
           &times;
@@ -206,7 +206,7 @@ const Navbar = () => {
           {!user ? (
             <button
               onClick={authModal.onOpen}
-              className="flex md:hidden mx-4 mt-8 justify-center w-40 px-8 py-3 rounded-full bg-accent text-primary-200  text-sm font-poppins tracking-wider border border-transparent disabled:cursor-not-allowed disabled:opacity-50 hover:bg-accent-600 hover:drop-shadow-md transition"
+              className="flex md:hidden mx-4 mt-8 justify-center w-40 px-8 py-3 rounded-full bg-accent text-primary-200 text-sm font-poppins tracking-wider border border-transparent disabled:cursor-not-allowed disabled:opacity-50 hover:bg-accent-600 hover:drop-shadow-md transition"
             >
               {text.nav.log_in}
             </button>
@@ -215,7 +215,7 @@ const Navbar = () => {
               <Link
                 href="/mina-sidor"
                 onClick={() => setActive(false)}
-                className=" px-8 py-3 mx-4 mt-8 justify-center w-40 rounded-full bg-primary text-primary-900  text-sm font-poppins tracking-wider border border-transparent disabled:cursor-not-allowed disabled:opacity-50 hover:bg-primary-500 hover:drop-shadow-md transition"
+                className=" px-8 py-3 mx-4 mt-8 justify-center w-40 rounded-full bg-primary text-primary-900 text-sm font-poppins tracking-wider border border-transparent disabled:cursor-not-allowed disabled:opacity-50 hover:bg-primary-500 hover:drop-shadow-md transition"
               >
                 {text.nav.my_account}
               </Link>
@@ -228,4 +228,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
