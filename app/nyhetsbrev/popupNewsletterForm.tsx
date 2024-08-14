@@ -227,71 +227,83 @@ button[type="submit"]:hover {
 }
 
 @media (max-width: 600px) {
-    .popup {
-        width: 100%;
-        height: 100vh;
-        bottom: 0;
-        right: 0;
-        border-radius: 0;
-    }
+  .popup {
+      width: 100%;
+      height: 100vh;
+      bottom: 0;
+      right: 0;
+      border-radius: 0;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto; /* Tillåter vertikal rullning om innehållet är för stort */
+  }
 
-    .header-image-container {
-        height: 15vh; /* Justerad höjd för att minska utrymmet */
-        margin-bottom: 0; /* Ta bort eventuella marginaler */
-    }
+  .header-image-container {
+      height: 15vh; /* Justerad höjd för att minska utrymmet */
+      margin-bottom: 0; /* Ta bort eventuell marginal */
+  }
 
-    .page-title {
-        font-size: 30px;
-        margin-top: 5px; /* Minska övre marginalen */
-        margin-bottom: 5px; /* Justera nedre marginalen */
-    }
+  .page-title {
+      font-size: 30px;
+      margin-top: 5px; /* Minska övre marginalen */
+      margin-bottom: 5px; /* Justera nedre marginalen */
+  }
 
-    .page-subtitle {
-        font-size: 18px;
-        margin-top: 0; /* Minska övre marginalen */
-        margin-bottom: 10px; /* Justera nedre marginalen */
-    }
+  .page-subtitle {
+      font-size: 18px;
+      margin-top: 0; /* Minska övre marginalen */
+      margin-bottom: 10px; /* Justera nedre marginalen */
+  }
 
-    .input-group {
-        margin-bottom: 12px;
-    }
+  .input-group {
+      margin-bottom: 12px;
+  }
 
-    .input-group label {
-        font-size: 16px; /* Justerat för bättre läsbarhet */
-    }
+  .input-group label {
+      font-size: 16px; /* Justerat för bättre läsbarhet */
+  }
 
-    input[type="text"],
-    input[type="email"] {
-        font-size: 16px; /* Justerat för bättre läsbarhet */
-        padding: 12px;
-    }
+  input[type="text"],
+  input[type="email"] {
+      font-size: 16px; /* Justerat för bättre läsbarhet */
+      padding: 12px;
+      width: calc(100% - 24px); /* Justerar bredden för att ta hänsyn till padding */
+  }
 
-    .consent-container {
-        margin-bottom: 12px;
-    }
+  .consent-container {
+      margin-bottom: 12px;
+  }
 
-    .consent-container input[type="checkbox"] {
-        margin-right: 7px;
-    }
+  .consent-container input[type="checkbox"] {
+      margin-right: 7px;
+  }
 
-    .consent-text {
-        font-size: 12px; /* Justerat för bättre läsbarhet */
-    }
+  .consent-text {
+      font-size: 12px; /* Justerat för bättre läsbarhet */
+  }
 
-    button[type="submit"] {
-        font-size: 16px; /* Större för bättre synlighet */
-        padding: 15px; /* Ökad padding för bättre klickyta */
-        font-weight: bold;
-    }
+  button[type="submit"] {
+      font-size: 16px; /* Större för bättre synlighet */
+      padding: 15px; /* Ökad padding för bättre klickyta */
+      font-weight: bold;
+      width: calc(100% - 30px); /* Justerar bredden för att ta hänsyn till padding */
+      margin: 10px; /* Lägger till marginal runt knappen */
+  }
 
-    .thank-you h2 {
-        font-size: 30px; /* Justerat för bättre synlighet */
-    }
+  .thank-you {
+      padding: 10px;
+      text-align: center;
+  }
 
-    .thank-you p {
-        font-size: 18px; /* Justerat för bättre läsbarhet */
-    }
+  .thank-you h2 {
+      font-size: 30px; /* Justerat för bättre synlighet */
+  }
+
+  .thank-you p {
+      font-size: 18px; /* Justerat för bättre läsbarhet */
+  }
 }
+
   `;
 
   return (
