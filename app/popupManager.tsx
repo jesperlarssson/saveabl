@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import PopupNewsletterForm from "./nyhetsbrev/PopupNewsletterForm"; // Importera från nyhetsbrevsmappen
+import PopupNewsletterForm from "./nyhetsbrev/popupNewsletterForm"; 
 
 export default function PopupManager() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
