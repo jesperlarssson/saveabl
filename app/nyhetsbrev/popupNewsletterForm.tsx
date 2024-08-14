@@ -7,7 +7,7 @@ import Image from 'next/image';
 import HeaderImage from '../../public/images/subscribe_newsletter.png';
 
 const PopupNewsletterForm = ({ onClose }: { onClose: () => void }) => {
-    console.log('PopupNewsletterForm component rendered');
+    console.log('popupNewsletterForm component rendered');
     const { lang, text = { popup: {} } } = useLang();
 
 
@@ -241,13 +241,13 @@ button[type="submit"]:hover {
     }
 
     .page-title {
-        font-size: 18px;
+        font-size: 30px;
         margin-top: 5px; /* Minska övre marginalen */
         margin-bottom: 5px; /* Justera nedre marginalen */
     }
 
     .page-subtitle {
-        font-size: 12px;
+        font-size: 18px;
         margin-top: 0; /* Minska övre marginalen */
         margin-bottom: 10px; /* Justera nedre marginalen */
     }
@@ -257,12 +257,12 @@ button[type="submit"]:hover {
     }
 
     .input-group label {
-        font-size: 12px; /* Justerat för bättre läsbarhet */
+        font-size: 16px; /* Justerat för bättre läsbarhet */
     }
 
     input[type="text"],
     input[type="email"] {
-        font-size: 12px; /* Justerat för bättre läsbarhet */
+        font-size: 16px; /* Justerat för bättre läsbarhet */
         padding: 12px;
     }
 
@@ -279,17 +279,17 @@ button[type="submit"]:hover {
     }
 
     button[type="submit"] {
-        font-size: 14px; /* Större för bättre synlighet */
+        font-size: 16px; /* Större för bättre synlighet */
         padding: 15px; /* Ökad padding för bättre klickyta */
         font-weight: bold;
     }
 
     .thank-you h2 {
-        font-size: 16px; /* Justerat för bättre synlighet */
+        font-size: 30px; /* Justerat för bättre synlighet */
     }
 
     .thank-you p {
-        font-size: 12px; /* Justerat för bättre läsbarhet */
+        font-size: 18px; /* Justerat för bättre läsbarhet */
     }
 }
   `;
