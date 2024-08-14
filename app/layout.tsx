@@ -14,14 +14,12 @@ import { RecipeProvider } from "@/providers/RecipeProvider";
 import { GeoProvider } from "@/providers/GeoProvider";
 import { CheckoutProvider } from "@/providers/CheckoutProvider";
 import CheckoutBasket from "@/components/section/CheckoutBasket";
-import { LangProvider } from "@/providers/LangProvider";
 import MetaPixel from "@/components/MetaPixel";
-
-
+import { LangProvider } from "@/providers/LangProvider";
+import PopupManager from "@/app/popupManager"; // Importera PopupManager från app
 
 const font = Figtree({ subsets: ["latin"] });
 export const revalidate = 1; // revalidate this page every 60 seconds
-
 
 export default function RootLayout({
   children,
@@ -32,14 +30,7 @@ export default function RootLayout({
     <html lang="sv">
       <head>
         <MetaPixel pixelId="995084671596511" />
-       
-     {/* Mailchimp-koden */}
-        <script 
-          id="mcjs"
-          dangerouslySetInnerHTML={{
-          __html: `!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/5facf7154c63e29f04ee4d772/b8f51307c75377d7248ee44d6.js");`,
-          }}
-        />
+        
         <Script
           id="google-tag-manager"
           dangerouslySetInnerHTML={{
@@ -50,13 +41,15 @@ export default function RootLayout({
               })(window,document,'script','dataLayer','GTM-PBCCL8GC');`,
           }}
         />
-        
+
         {/* Meta-taggar för SEO */}
-         <title>{"Saveabl: Sveriges klimatsmartaste matkasse"}</title>
-          <meta name="description" content="Saveabl är din klimatsmarta lösning för att få ihop livspusslet. Våra proffskockar lagar dina middagar som du färdigställer på endast 15 minuter. 
-" />
-          <link rel="icon" href="/favicon.ico" />
-        </head>
+        <title>{"Saveabl: Sveriges klimatsmartaste matkasse"}</title>
+        <meta
+          name="description"
+          content="Saveabl är din klimatsmarta lösning för att få ihop livspusslet. Våra proffskockar lagar dina middagar som du färdigställer på endast 15 minuter."
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </head>
       <body className={font.className}>
         {/* Google Tag Manager (noscript) */}
         <noscript
@@ -81,6 +74,7 @@ export default function RootLayout({
                     </main>
 
                     <Footer />
+                    <PopupManager /> {/* Lägg till PopupManager här */}
                   </RecipeProvider>
                 </MyParallaxProvider>
                 <CheckoutBasket />
@@ -92,3 +86,5 @@ export default function RootLayout({
     </html>
   );
 }
+
+
