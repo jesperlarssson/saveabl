@@ -1125,7 +1125,7 @@ const daText = {
     button1: "Hente",
     button2: "Få et tilbud",
     linkTitle: "Vi kan levere til dig!",
-    linkDescription: "Bestil senest torsdag klokken 16 for levering mandag den 19/8.",
+    linkDescription: "Bestil senest torsdag klokken 16 for levering mandag den 26/8.",
     bullet1: "👨‍🍳 Vegetarkassen med kokken inkluderet.",
     bullet2: "👨‍👩‍👧‍👦  Aftensmad till hele familien på blot 15 min.",
     bullet3: "✅  Ingen bindingsperiode, opsig når du vil.",
