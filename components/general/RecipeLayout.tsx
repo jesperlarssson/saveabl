@@ -50,36 +50,54 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
   };
   const [ratingSum, setRatingSum] = useState<number>(0);
 
+  // Helper function to get localization index based on language
+  const getLocalizationIndex = (lang: string) => {
+    switch (lang) {
+      case 'da':
+        return 1;
+      case 'en':
+        return 2;
+      case 'sv':
+      default:
+        return 0;
+    }
+  };
+
   const [recept, setRecept] = useState({
-    title: lang != "sv" ? recipe?.title : recipe?.localizations[0].title,
+    title: recipe?.title,
     image: recipe?.image?.url || "/images/placeholder.png",
-    ingredients: lang != "sv" ? recipe?.ingredients : recipe?.localizations[0].ingredients,
-    steg: lang != "sv" ? recipe?.steg : recipe?.localizations[0].steg,
-    savedIngredients: lang != "sv" ? recipe?.savedIngredients : recipe?.localizations[0].savedIngredients,
-    nutritionalValues: lang != "sv" ? recipe?.nutritionalValues : recipe?.localizations[0].nutritionalValues,
-    contentAllergies: lang != "sv" ? recipe?.contentAllergies : recipe?.localizations[0].contentAllergies,
-    recipeComments: recipe?.recipeComments,
+    ingredients: recipe?.ingredients || [],
+    steg: recipe?.steg || [],
+    savedIngredients: recipe?.savedIngredients || "",
+    nutritionalValues: recipe?.nutritionalValues || "",
+    contentAllergies: recipe?.contentAllergies || "",
+    recipeComments: recipe?.recipeComments || [],
   });
 
   const calculateRating = () => {
     let sum = 0;
-    for (let index = 0; index < comments.length; index++) {
-      const comment = comments[index];
-      sum += comment.rating;
+    if (comments.length > 0) {
+      for (let index = 0; index < comments.length; index++) {
+        const comment = comments[index];
+        sum += comment.rating;
+      }
+      setRatingSum(sum / comments.length);
+    } else {
+      setRatingSum(0);
     }
-    setRatingSum(sum / comments.length);
   };
 
   useEffect(() => {
+    const localizationIndex = getLocalizationIndex(lang);
     const temp = {
-      title: lang != "sv" ? recipe?.title : recipe?.localizations[0].title,
+      title: recipe?.localizations[localizationIndex]?.title || recipe?.title,
       image: recipe?.image?.url || "/images/placeholder.png",
-      ingredients: lang != "sv" ? recipe?.ingredients : recipe?.localizations[0].ingredients,
-      steg: lang != "sv" ? recipe?.steg : recipe?.localizations[0].steg,
-      savedIngredients: lang != "sv" ? recipe?.savedIngredients : recipe?.localizations[0].savedIngredients,
-      nutritionalValues: lang != "sv" ? recipe?.nutritionalValues : recipe?.localizations[0].nutritionalValues,
-      contentAllergies: lang != "sv" ? recipe?.contentAllergies : recipe?.localizations[0].contentAllergies,
-      recipeComments: recipe?.recipeComments,
+      ingredients: recipe?.localizations[localizationIndex]?.ingredients || recipe?.ingredients,
+      steg: recipe?.localizations[localizationIndex]?.steg || recipe?.steg,
+      savedIngredients: recipe?.localizations[localizationIndex]?.savedIngredients || recipe?.savedIngredients,
+      nutritionalValues: recipe?.localizations[localizationIndex]?.nutritionalValues || recipe?.nutritionalValues,
+      contentAllergies: recipe?.localizations[localizationIndex]?.contentAllergies || recipe?.contentAllergies,
+      recipeComments: recipe?.recipeComments || [],
     };
     setRecept(temp);
     calculateRating();
@@ -95,7 +113,7 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
         <div className="grid grid-cols-4 gap-8 relative">
           <div className="col-span-4 sm:col-span-1 drop-shadow-md overflow-hidden rounded-lg relative">
             <Image
-              src={recipe?.image?.url || "/images/placeholder.png"}
+              src={recept.image}
               alt={recept.title}
               width={400}
               height={400}
@@ -110,7 +128,7 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
                 width={120}
                 height={120}
                 className="rounded-full"
-                sizes="(max-width: 120px) 100vw, 120px" 
+                sizes="(max-width: 120px) 100vw, 120px"
                 quality={100}
               />
               <h3 className="text-secondary font-poppins text-xl">Emil Petzén</h3>
@@ -128,22 +146,30 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
               {text.recipe_slug.contains}
             </h3>
             <ul className="text-gray-700">
-              {recept.ingredients.map((ingredient, index) => (
-                <li key={index}>
-                  <p>{ingredient}</p>
-                </li>
-              ))}
+              {recept.ingredients.length > 0 ? (
+                recept.ingredients.map((ingredient, index) => (
+                  <li key={index}>
+                    <p>{ingredient}</p>
+                  </li>
+                ))
+              ) : (
+                <li>Inga ingredienser listade</li>
+              )}
             </ul>
           </div>
           <div className="col-span-4 sm:col-span-3 relative">
             <h3 className="font-poppins text-xl">{text.recipe_slug.how_to}</h3>
             <ul className="text-gray-700">
-              {recept.steg.map((steg, index) => (
-                <li className="my-4 flex gap-2" key={index}>
-                  <span className="font-bold">{`${index + 1}.`}</span>
-                  <p>{steg}</p>
-                </li>
-              ))}
+              {recept.steg.length > 0 ? (
+                recept.steg.map((steg, index) => (
+                  <li className="my-4 flex gap-2" key={index}>
+                    <span className="font-bold">{`${index + 1}.`}</span>
+                    <p>{steg}</p>
+                  </li>
+                ))
+              ) : (
+                <li>Inga steg listade</li>
+              )}
             </ul>
           </div>
         </div>
@@ -171,10 +197,9 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
       </Grid>
 
       {comments.length > 0 && <CommentSection comments={comments} />}
-      <CommentForm recipeId={recipe.id} onNewComment={handleNewComment} />
+      <CommentForm recipeId={recipe.id || ''} onNewComment={handleNewComment} />
     </Section>
   );
 };
 
 export default RecipeLayout;
-
