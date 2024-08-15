@@ -22,19 +22,19 @@ export const priceIdSkaneStandard = "price_1PDOthEhPZIzKmuiqiW23r7x";
 export const priceIdSkaneStandard8Portions = "price_1PDOv0EhPZIzKmuiDcrV96Sz";
 
 
-const priceIdDeliveryEveryWeek = "price_1OcTOIEhPZIzKmuiCg2jb9DS";
-const priceIdDeliveryEveryOtherWeek = "price_1OcTOnEhPZIzKmuiCjVP0IIQ";
-const priceIdDeliveryStandard = "price_1OcT1KEhPZIzKmuiJrGPIrzQ";
+const priceIdDeliveryEveryWeek = "price_1OY5DpEhPZIzKmuidVt8MLqm";
+const priceIdDeliveryEveryOtherWeek = "price_1OY5FsEhPZIzKmuiu5PVEK6o";
+const priceIdDeliveryStandard = "price_1Po3RKEhPZIzKmuiaAytTZTa";
 
 const priceIdDeliveryStockholmEveryWeek = "price_1OY5DpEhPZIzKmuidVt8MLqm";
 const priceIdDeliveryStockholmEveryOtherWeek =
   "price_1OY5FsEhPZIzKmuiu5PVEK6o";
-const priceIdDeliveryStockholmStandard = "price_1OYG3tEhPZIzKmuiT4C0NZtl";
+const priceIdDeliveryStockholmStandard = "price_1Po3RKEhPZIzKmuiaAytTZTa";
 
-const priceIdDeliverySkaneEveryWeek = "price_1PDOwWEhPZIzKmuiEGVsM1uc";
+const priceIdDeliverySkaneEveryWeek = "price_1OY5DpEhPZIzKmuidVt8MLqm";
 const priceIdDeliverySkaneEveryOtherWeek =
-  "price_1PDOxMEhPZIzKmui1lsahWXU";
-const priceIdDeliverySkaneStandard = "price_1PDOznEhPZIzKmuiDcluA09F";
+  "price_1OY5FsEhPZIzKmuiu5PVEK6o";
+const priceIdDeliverySkaneStandard = "price_1Po3RKEhPZIzKmuiaAytTZTa";
 
 
 export const getProductTypesFromLngCode = (lngCode: string): ProductType[] => {
