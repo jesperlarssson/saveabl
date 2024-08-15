@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-
 import { Recipe } from "@/types";
 import { getWeekNumber } from "@/helpers/format";
 import { twMerge } from "tailwind-merge";
@@ -14,23 +13,42 @@ interface RecipeTileProps {
 }
 
 const RecipeTile: React.FC<RecipeTileProps> = ({ recipe, fullWidth }) => {
+  const { lang } = useLang();
+
+  // Helper function to get localization index based on language
+  const getLocalizationIndex = (lang: string) => {
+    switch (lang) {
+      case 'da':
+        return 1;
+      case 'en':
+        return 2;
+      case 'sv':
+      default:
+        return 0;
+    }
+  };
+
+  const [recept, setRecept] = useState({
+    title: recipe.title, // Initial title as default
+  });
+
+  useEffect(() => {
+    const localizationIndex = getLocalizationIndex(lang);
+
+    const temp = {
+      title: recipe?.localizations[localizationIndex]?.title || recipe?.title,
+    };
+
+    setRecept(temp);
+  }, [lang, recipe]);
+
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (recipe.deprecated) {
       e.preventDefault();
       toast.error("Detta recept är inte längre tillgängligt");
     }
   };
-  const { lang } = useLang();
-  const [recept, setRecept] = useState({
-    title: lang != "sv" ? recipe?.title : recipe?.localizations[0].title,
-  });
 
-  useEffect(() => {
-    const temp = {
-      title: lang != "sv" ? recipe?.title : recipe?.localizations[0].title,
-    };
-    setRecept(temp);
-  }, [lang, recipe]);
   return (
     <Link
       onClick={handleLinkClick}
@@ -45,7 +63,7 @@ const RecipeTile: React.FC<RecipeTileProps> = ({ recipe, fullWidth }) => {
         {/** TailwindCss gradient background to transparent */}
         <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent h-full"></div>
 
-        <div className="relative bg-gray-300 bg-opacity-40   overflow-hidden h-full  ">
+        <div className="relative bg-gray-300 bg-opacity-40 overflow-hidden h-full">
           <Image
             src={recipe.image?.url || "/images/placeholder.png"}
             alt={recept.title}
@@ -54,12 +72,14 @@ const RecipeTile: React.FC<RecipeTileProps> = ({ recipe, fullWidth }) => {
             className="object-cover w-full h-full"
           />
         </div>
-        <div className="bg-gradient-to-t from-secondary to-transparent  h-fit w-full sm:p-6 text-primary-200 absolute bottom-0 left-0 p-4">
-          <p className="text-primary ">{`Vecka ${
-            recipe.deprecated
-              ? getWeekNumber(new Date(recipe.createdAt))
-              : recipe.weekNr
-          } ${recipe.deprecated ? "" : `- Dag ${recipe.recipeNumber}`}`}</p>
+        <div className="bg-gradient-to-t from-secondary to-transparent h-fit w-full sm:p-6 text-primary-200 absolute bottom-0 left-0 p-4">
+          <p className="text-primary">
+            {`Vecka ${
+              recipe.deprecated
+                ? getWeekNumber(new Date(recipe.createdAt))
+                : recipe.weekNr
+            } ${recipe.deprecated ? "" : `- Dag ${recipe.recipeNumber}`}`}
+          </p>
 
           <h3 className="font-poppins text-primary-200 text-md mt-2 group-hover:underline underline-offset-4 transition-all group-hover:mb-4">
             {recept.title}
