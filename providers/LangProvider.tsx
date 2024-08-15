@@ -142,6 +142,8 @@ const svText = {
     news: {
       title: "Följ med på resan - kika in våra senaste nyhetsinlägg!",
       text: "Vi utvecklas och vi testar nytt. Vi expanderar och hittar på nya grejer. Här uppdaterar vi vad som händer i vår värld.",
+      title_2: "Följ med på resan - kika in våra senaste nyhetsinlägg!", 
+      description: "Vi utvecklas och vi testar nytt. Vi expanderar och hittar på nya grejer. Här uppdaterar vi vad som händer i vår värld.",
     },
     reviews: {
       title: "Över 20 000 räddade middagar, tillsammans gör vi skillnad!",
@@ -253,11 +255,11 @@ const svText = {
     type: "Gör dina val nedan (utan bindningstid på samtliga):",
     variant: "Recept utformade för familjer på 3-4 pers:",
     deliveryDay: "Leveransdag:",
-    delivery_saturday: "Lördag 17/8 kl. 09-18",
-    delivery_sunday: "Söndag 18/8 kl. 10-17",
-    delivery_monday: "Måndag 19/8 kl. 16-22",
-    stockholm_sunday: "Söndag 18/8 kl. 10-17",
-    stockholm_monday: "Måndag 19/8 kl. 16-22",
+    delivery_saturday: "Lördag 24/8 kl. 09-18",
+    delivery_sunday: "Söndag 25/8 kl. 10-17",
+    delivery_monday: "Måndag 26/8 kl. 16-22",
+    stockholm_sunday: "Söndag 25/8 kl. 10-17",
+    stockholm_monday: "Måndag 26/8 kl. 16-22",
     address: "Leveransinfo:",
     extra: "Extra info",
     contact: "Kontaktuppgifter:",
@@ -504,6 +506,10 @@ const svText = {
       }
     }
   }, 
+  blog: {
+    title: "Följ med på resan!", 
+    description: "Vi utvecklas och vi testar nytt. Vi expanderar och hittar på nya grejer. Här uppdaterar vi vad som händer i vår värld.",
+  },
   newsletter: {
     header_title: "Prenumerera & vinn!", 
     header_subtitle: "Varje månad lottar vi ut en matkasse till någon av våra mejlkompisar. Är du den lyckliga vinnaren & redan har köpt en matkasse återbetalar vi dig. Vinnarna kontaktas via mejl. Lycka till!", 
@@ -593,6 +599,8 @@ const enText = {
     news: {
       title: "Follow the journey - check out our latest news posts!",
       text: "We're constantly evolving, exploring new horizons, and pushing the boundaries. Step into our world and discover the latest developments in our universe",
+      title_2: "Follow the journey - check out our latest news posts!",
+      description: "We're constantly evolving, exploring new horizons, and pushing the boundaries. Step into our world and discover the latest developments in our universe",
     },
     reviews: {
       title: "Over 20,000 saved meals, together we make a difference!",
@@ -702,11 +710,11 @@ const enText = {
     type: "Make your selections below (without commitment on any):",
     variant: "Recipes designed for families of 3-4 people:",
     deliveryDay: "Day of delivery:",
-    delivery_saturday: "Saturday 17/8 at 09-18",
-    delivery_sunday: "Sunday 18/8 at 10-17",
-    delivery_monday: "Monday 19/8 at 16-22",
-    stockholm_sunday: "Sunday 18/8 at 10-17",
-    stockholm_monday: "Monday 19/8 at 16-22",
+    delivery_saturday: "Saturday 24/8 at 09-18",
+    delivery_sunday: "Sunday 25/8 at 10-17",
+    delivery_monday: "Monday 26/8 at 16-22",
+    stockholm_sunday: "Sunday 25/8 at 10-17",
+    stockholm_monday: "Monday 26/8 at 16-22",
     address: "Delivery info:",
     extra: "Extra information",
     contact: "Contact details",
@@ -921,6 +929,10 @@ const enText = {
         }
       }
     }, 
+    blog: {
+      title: "Follow the journey!", 
+      description: "We're constantly evolving, exploring new horizons, and pushing the boundaries. Step into our world and discover the latest developments in our universe!",
+    },
     newsletter: {
       header_title: "Subscribe & win!", 
       header_subtitle: "Every month, we raffle off a meal kit to one of our email buddies. If you are the lucky winner and have already purchased a meal kit, we will refund you. Winners will be contacted via email. Good luck!", 
@@ -1306,6 +1318,10 @@ integrity_policy: {
   }
   }
   }, 
+  blog: {
+    title: "Følg med på rejsen!", 
+    description: "Vi udvikler og tester nyt. Vi ekspanderer og finder på nye ting. Her opdaterer vi, hvad der sker i vores verden!",
+  },
   newsletter: {
     header_title: "Tilmeld og vind!", 
     header_subtitle: "Hver måned trækker vi lod om en madkasse til en af vores emailvenner. Hvis du er den heldige vinder og allerede har købt en madkasse, vil vi refundere dig. Vinderne vil blive kontaktet via email. Held og lykke!", 
@@ -1345,5 +1361,6 @@ integrity_policy: {
     integrity: "Integritetspolitik",
     newsletter: "Tilmeld & vind", 
   }, 
+
   
 };
