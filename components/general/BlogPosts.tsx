@@ -5,6 +5,7 @@ import { Post } from "@/types";
 import BlogPost from "./BlogPost";
 import { toast } from "react-hot-toast";
 import Button from "../ui/Button";
+import { useLang } from "@/hooks/useLang";
 
 interface BlogPostsProps {
   posts: Post[];
@@ -14,6 +15,8 @@ const BlogPosts: React.FC<BlogPostsProps> = ({ posts }) => {
   const [blogPosts, setBlogPosts] = useState<Post[]>(posts);
   const [hasMore, setHasMore] = useState<boolean>(true);
   const [loadingMore, setLoadingMore] = useState<boolean>(false);
+
+  const { text } = useLang();
 
   const fetchMoreRecipes = async () => {
     if (!hasMore || loadingMore) return;
@@ -59,7 +62,7 @@ const BlogPosts: React.FC<BlogPostsProps> = ({ posts }) => {
           }}
         >
           {!loadingMore ? (
-            "Ladda fler"
+            text.blog.loadmore 
           ) : (
             <div role="status" className=" w-full flex justify-center">
               <svg

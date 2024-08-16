@@ -509,6 +509,7 @@ const svText = {
   blog: {
     title: "Följ med på resan!", 
     description: "Vi utvecklas och vi testar nytt. Vi expanderar och hittar på nya grejer. Här uppdaterar vi vad som händer i vår värld.",
+    loadmore: "Ladda fler", 
   },
   newsletter: {
     header_title: "Prenumerera & vinn!", 
@@ -932,6 +933,7 @@ const enText = {
     blog: {
       title: "Follow the journey!", 
       description: "We're constantly evolving, exploring new horizons, and pushing the boundaries. Step into our world and discover the latest developments in our universe!",
+      loadmore: "Load more", 
     },
     newsletter: {
       header_title: "Subscribe & win!", 
@@ -1321,6 +1323,7 @@ integrity_policy: {
   blog: {
     title: "Følg med på rejsen!", 
     description: "Vi udvikler og tester nyt. Vi ekspanderer og finder på nye ting. Her opdaterer vi, hvad der sker i vores verden!",
+    loadmore: "Indlæs flere", 
   },
   newsletter: {
     header_title: "Tilmeld og vind!", 
