@@ -488,7 +488,12 @@ const Order = () => {
                       onClick={() => setSelectedType(productType)}
                     >
                       {productType.label}
-                    </CheckoutButton>
+                      <br />
+                      <span className="text-xs">{productType.recipes}</span> {/* Visa antal recept */}
+                      <br />
+                      <span className="text-xs">{productType.persons}</span> {/* Visa antal personer */}
+                      </CheckoutButton>
+                   
                   );
                 })}
               </div>
