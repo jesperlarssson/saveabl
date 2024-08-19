@@ -499,7 +499,7 @@ const Order = () => {
               </div>
               <h3
                 key="interval-title"
-                className="font-poppins text-lg mt-4 text-secondary text-left"
+                className="font-poppins text-lg mt-6 text-secondary text-left"
               >
                 {text.order.variant}
               </h3>
@@ -530,7 +530,7 @@ const Order = () => {
             )
           }
           disabled={variant.disabled}
-          className="mt-2 mb-1 max-w-full max-w-xs sm:max-w-xxxxxs"
+          className="mt-1 mb-0 gap-4 max-w-full max-w-xs sm:max-w-xxs"
       
         >
          <span className="text-center">{variant.label}</span>
