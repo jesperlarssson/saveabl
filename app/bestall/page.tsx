@@ -503,7 +503,7 @@ const Order = () => {
               >
                 {text.order.variant}
               </h3>
-              <div className="flex flex-col sm:flex-row gap-4 mb-4 max-w-full sm:max-w-xxxs text-left">
+              <div className="flex flex-col sm:flex-row gap-4 mb-4 max-w-full sm:max-w-xxxs">
                 {selectedType.variants.map((variant: any) => {
                   const postalCode = address.postalCode || "";
                   const sthlmCustomer =
@@ -530,12 +530,12 @@ const Order = () => {
             )
           }
           disabled={variant.disabled}
-          className="mt-1 mb-0 gap-4 max-w-full max-w-xs sm:max-w-xxs"
+          className="mt-2 mb-0 max-w-full max-w-xs sm:max-w-xxs"
       
         >
-         <span className="text-left">{variant.label}</span>
+         <span className="text-center">{variant.label}</span>
           <br />
-          <span className="text-xs text-left">
+          <span className="text-xs text-center">
             {getProductCostForPriceId(
               sthlmCustomer
                 ? variant.stockholmPriceId
@@ -561,13 +561,13 @@ const Order = () => {
                   >
                     <h3
                       key="title-delivery"
-                      className="font-poppins text-lg text-secondary"
+                      className="font-poppins mt-6 text-lg text-secondary"
                     >
                       {text.order.deliveryDay}
                     </h3>
                     {/** TODO: Doesn't work for all zips */}
 
-                    <div className="flex gap-4 flex-wrap">
+                    <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap">
                       <AnimatePresence mode="wait">
                         {deliveryDaysToChoose.map((day: any, index: number) => (
                           <motion.div
@@ -578,7 +578,7 @@ const Order = () => {
                             transition={{ delay: 0.15 * index }}
                           >
                             <CheckoutButton
-                              className="capitalize"
+                              className="mt-2 mb-0 w-full max-w-xs sm:max-w-xxxs"
                               selected={selectedWeekday == day.id}
                               onClick={() => {
                                 if (selectedWeekday == day.id) {
@@ -699,7 +699,7 @@ const Order = () => {
               </AnimatePresence>
               <label
                 htmlFor="address"
-                className="font-poppins text-lg mb-2 mt-2 text-secondary"
+                className="font-poppins mt-6 text-lg mb-2 text-secondary"
               >
                 {text.order.address}
               </label>
