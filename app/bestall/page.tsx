@@ -499,11 +499,11 @@ const Order = () => {
               </div>
               <h3
                 key="interval-title"
-                className="font-poppins text-lg mt-4 text-secondary"
+                className="font-poppins text-lg mt-4 text-secondary text-left"
               >
                 {text.order.variant}
               </h3>
-              <div className="flex gap-4 mb-4">
+              <div className="flex flex-col sm:flex-row gap-4 mb-4">
                 {selectedType.variants.map((variant: any) => {
                   const postalCode = address.postalCode || "";
                   const sthlmCustomer =
