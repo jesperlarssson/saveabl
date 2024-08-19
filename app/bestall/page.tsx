@@ -699,7 +699,7 @@ const Order = () => {
               </AnimatePresence>
               <label
                 htmlFor="address"
-                className="font-poppins mt-6 text-lg mb-2 text-secondary"
+                className="font-poppins mt-8 text-lg mb-2 text-secondary"
               >
                 {text.order.address}
               </label>
