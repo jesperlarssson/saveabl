@@ -503,7 +503,7 @@ const Order = () => {
               >
                 {text.order.variant}
               </h3>
-              <div className="flex flex-col sm:flex-row gap-4 mb-4 max-w-full sm:max-w-xxxs">
+              <div className="flex flex-col sm:flex-row gap-4 mb-4 max-w-full sm:max-w-xxxs text-left">
                 {selectedType.variants.map((variant: any) => {
                   const postalCode = address.postalCode || "";
                   const sthlmCustomer =
@@ -533,9 +533,9 @@ const Order = () => {
           className="mt-1 mb-0 gap-4 max-w-full max-w-xs sm:max-w-xxs"
       
         >
-         <span className="text-center">{variant.label}</span>
+         <span className="text-left">{variant.label}</span>
           <br />
-          <span className="text-xs text-center">
+          <span className="text-xs text-left">
             {getProductCostForPriceId(
               sthlmCustomer
                 ? variant.stockholmPriceId
