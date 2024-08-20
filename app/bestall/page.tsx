@@ -96,14 +96,17 @@ const Order = () => {
     {
       label: text.order.delivery_saturday,
       id: 6,
+      description: text.order.saturday_description,
     },
     {
       label: text.order.delivery_sunday,
       id: 0,
+      description: text.order.sunday_description,
     },
     {
       label: text.order.delivery_monday,
       id: 1,
+      description: text.order.monday_description,
     },
   ]);
 
@@ -409,10 +412,12 @@ const Order = () => {
         {
           label: text.order.stockholm_sunday, 
           id: 0,
+          description: text.order.sunday_description_stockholm,
         },
         {
           label: text.order.stockholm_monday,
           id: 1,
+          description: text.order.monday_description_stockholm,
         },
       ]);
     }
@@ -486,6 +491,7 @@ const Order = () => {
                       key={productType.label}
                       selected={productType.id === selectedType.id}
                       onClick={() => setSelectedType(productType)}
+                      className="w-full sm:w-auto"
                     >
                       {productType.label}
                       <br />
@@ -503,7 +509,7 @@ const Order = () => {
               >
                 {text.order.variant}
               </h3>
-              <div className="flex flex-col sm:flex-row gap-4 mb-4 max-w-full sm:max-w-xxxs">
+              <div className="flex flex-col sm:flex-row gap-4 mb-4 max-w-full sm:max-w-xxs">
                 {selectedType.variants.map((variant: any) => {
                   const postalCode = address.postalCode || "";
                   const sthlmCustomer =
@@ -530,7 +536,7 @@ const Order = () => {
             )
           }
           disabled={variant.disabled}
-          className="mt-2 mb-0 max-w-full max-w-xs sm:max-w-xxs"
+          className="mt-2 mb-0 max-w-full max-w-md"
       
         >
          <span className="text-center">{variant.label}</span>
@@ -578,7 +584,7 @@ const Order = () => {
                             transition={{ delay: 0.15 * index }}
                           >
                             <CheckoutButton
-                              className="mt-2 mb-0 w-full max-w-xs sm:max-w-xxxs"
+                              className="mt-2 mb-0 w-full max-w-md"
                               selected={selectedWeekday == day.id}
                               onClick={() => {
                                 if (selectedWeekday == day.id) {
@@ -591,6 +597,7 @@ const Order = () => {
                               }}
                             >
                               {day.label}
+                              <p className="text-xs mt-1">{day.description}</p>
                             </CheckoutButton>
                           </motion.div>
                         ))}
