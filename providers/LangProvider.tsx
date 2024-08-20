@@ -719,7 +719,7 @@ const enText = {
     delivery_saturday: "Saturday 31/8",
     delivery_sunday: "Sunday 1/9",
     delivery_monday: "Monday 2/9",
-    aturday_description: "at 09-18", 
+    saturday_description: "at 09-18", 
     sunday_description: "at 10-17", 
     monday_description: "at 16-22",
     stockholm_sunday: "Sunday 1/9",
