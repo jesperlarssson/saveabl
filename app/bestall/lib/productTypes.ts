@@ -265,7 +265,7 @@ export const productTypesEn = [
     persons: "3-4 pers",
     variants: [
       {
-        label: "Varje vecka",
+        label: "Every week",
         productId: productIdEveryWeek,
         disabled: false,
         price: "599kr/vecka",
@@ -276,7 +276,7 @@ export const productTypesEn = [
         skanePriceId: priceIdSkaneEveryWeek,
       },
       {
-        label: "Varannan vecka",
+        label: "Every other week",
         productId: productIdEveryOtherWeek,
         disabled: false,
         price: "599kr/varannan vecka",
@@ -287,7 +287,7 @@ export const productTypesEn = [
         skanePriceId: priceIdSkaneEveryOtherWeek,
       },
       {
-       label: "Engångsköp",
+       label: "One time order",
        productId: productIdStandard,
        disabled: false,
        price: "659kr",
@@ -305,7 +305,7 @@ export const productTypesEn = [
    persons: "2-3 pers",
    variants: [
      {
-       label: "Varje vecka",
+       label: "Every week",
        productId: productIdEveryWeekSambo,
        disabled: false,
        price: "599kr/vecka",
@@ -316,7 +316,7 @@ export const productTypesEn = [
        skanePriceId: priceIdSkaneEveryWeekSambo,
      },
      {
-       label: "Varannan vecka",
+       label: "Every other week",
        productId: productIdEveryOtherWeekSambo,
        disabled: false,
        price: "599kr/varannan vecka",
@@ -327,7 +327,7 @@ export const productTypesEn = [
        skanePriceId: priceIdSkaneEveryOtherWeekSambo,
      },
      {
-      label: "Engångsköp",
+      label: "One time order",
       productId: productIdStandardSambo,
       disabled: false,
       price: "659kr",
