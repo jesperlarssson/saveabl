@@ -188,6 +188,23 @@ const Order = () => {
     const zipCodeClean = zipCode.replace(/\D/g, "");
     if (zipCodeClean.length === 4) {
       setPostalCode(zipCodeClean);
+  
+      // Kontrollera om postnumret är ett Köpenhamns-postnummer
+      if (shippingDk.includes(zipCodeClean)) {
+        setShowDeliveryOptions(true);
+        // Hämta leveransfönster för Köpenhamn
+        try {
+          const deliveryWindows = await getDeliveryWindowsForPostalCode(zipCodeClean, "dk");
+          updateWeekdaysList(deliveryWindows.windows);
+          setShippingCostInfo(getShippingCostFromPostalCode(zipCodeClean));
+          setDeliveryWindows(deliveryWindows.windows);
+          setDeliveryPeriodId(deliveryWindows.deliveryPeriodId);
+        } catch (error) {
+          setDeliveryWindowsErrors("Något gick fel. Kontrollera postkoden!");
+        }
+        setIsDk(true); // Om Köpenhamn räknas som danskt
+        return;
+      }
     }
     if (zipCodeClean.length === 5) {
       setPostalCode(zipCodeClean);
@@ -216,14 +233,6 @@ const Order = () => {
     }
 
     if (
-      shippingDk.includes(address.postalCode) &&
-      address.postalCode.length === 4
-    ) {
-      console.log("DK");
-      setIsDk(true);
-      setShowLinks(true);
-      setShowAddressFields(false);
-    } else if (
       address.postalCode.length === 5 &&
       (stockholmPostalCodes.includes(address.postalCode) ||
         shippingCostStage3.includes(address.postalCode) ||
@@ -234,7 +243,16 @@ const Order = () => {
       setIsDk(false);
       setShowLinks(false);
       setShowAddressFields(true);
-    } else {
+    } 
+    else if (
+      address.postalCode.length === 4 &&
+      shippingDk.includes(address.postalCode)
+    ) {
+      setIsDk(true);
+      setShowLinks(false); // Ta bort länkar för danska postnummer
+      setShowAddressFields(true); // Visa adressfält
+    } 
+    else {
       setShowLinks(false);
       setShowAddressFields(false);
       toast.error("Vi kan tyvärr inte leverera till ditt postnummer");
@@ -267,7 +285,9 @@ const Order = () => {
   } = useCheckout();
 
   const handleConfirm = async () => {
-    setCountry("SE");
+    // Ställ in vilket land som ska användas
+    const country = isDk ? "DK" : "SE";
+    setCountry(country);
     setStripeCheckoutIsLoading(true);
 
     //Validate form
@@ -295,7 +315,7 @@ const Order = () => {
 
     if (!phone || phone.length < 2) {
       errors.phone = {
-        message: "Fyll i ditt telefonnummer",
+        message: country === "SE" ? "Fyll i ditt telefonnummer" : "Fyll i ditt telefonnummer (DK)",
       };
     }
 
@@ -313,7 +333,7 @@ const Order = () => {
 
     if (!address.city || address.city.length < 2) {
       errors.city = {
-        message: "Fyll i din stad",
+        message: country === "SE" ? "Fyll i din stad" : "Fyll i din stad (DK)",
       };
     }
 
@@ -421,6 +441,18 @@ const Order = () => {
         },
       ]);
     }
+    if (
+      typeof address.postalCode === 'string' &&
+      (shippingDk.includes(address.postalCode))
+    ) {
+      setDeliveryDaysToChoose([
+        {
+          label: text.order.copenhagen_monday,
+          id: 0,
+          description: text.order.monday_description_copenhagen,
+        },
+      ]);
+    }
   }, [address.postalCode]);
 
   return (
@@ -515,43 +547,50 @@ const Order = () => {
                   const sthlmCustomer =
                     stockholmPostalCodes.includes(postalCode);
                   const skaneCustomer = shippingCostStage3.includes(postalCode);
+                  const dkCustomer = shippingDk.includes(postalCode);
 
                   return (
                     <CheckoutButton
-          key={variant.label}
-          selected={
-            sthlmCustomer
-              ? variant.stockholmPriceId === productId
-              : skaneCustomer
-                ? variant.skanePriceId === productId
-                : variant.priceId === productId
-          }
-          onClick={() =>
-            setProductId(
-              sthlmCustomer
-                ? variant.stockholmPriceId
-                : skaneCustomer
-                  ? variant.skanePriceId
-                  : variant.priceId
-            )
-          }
-          disabled={variant.disabled}
-          className="mt-2 mb-0 max-w-full max-w-md"
-      
-        >
-         <span className="text-center">{variant.label}</span>
-          <br />
-          <span className="text-xs text-center">
-            {getProductCostForPriceId(
-              sthlmCustomer
-                ? variant.stockholmPriceId
-                : skaneCustomer
-                  ? variant.skanePriceId
-                  : variant.priceId,
-              lang
-            )}
-          </span>
-        </CheckoutButton>
+                    key={variant.label}
+                    selected={
+                      sthlmCustomer
+                        ? variant.stockholmPriceId === productId
+                        : skaneCustomer
+                          ? variant.skanePriceId === productId
+                          : dkCustomer // Kontrollera om det är danskt postnummer
+                            ? variant.danishPriceId === productId // Lägg till en variant för danska priser
+                            : variant.priceId === productId
+                      }
+                      onClick={() =>
+                        setProductId(
+                          sthlmCustomer
+                            ? variant.stockholmPriceId
+                            : skaneCustomer
+                              ? variant.skanePriceId
+                              : dkCustomer 
+                                ? variant.danishPriceId 
+                                : variant.priceId
+                        )
+                      }
+                      disabled={variant.disabled}
+                      className="mt-2 mb-0 max-w-full max-w-md"
+                  
+                    >
+                    <span className="text-center">{variant.label}</span>
+                      <br />
+                      <span className="text-xs text-center">
+                        {getProductCostForPriceId(
+                          sthlmCustomer
+                            ? variant.stockholmPriceId
+                            : skaneCustomer
+                              ? variant.skanePriceId
+                              : dkCustomer 
+                                ? variant.danishPriceId 
+                              : variant.priceId,
+                          lang
+                        )}
+                      </span>
+                    </CheckoutButton>
                   );
                 })}
               </div>

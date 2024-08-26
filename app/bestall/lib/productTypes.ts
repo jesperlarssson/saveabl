@@ -9,6 +9,15 @@ export const productIdStandard8Portions =
  export const productIdStandardSambo =
  "prod_PuEPfAjQdxFwRI";
 
+ export const productIdEveryWeekDk = "prod_OjDodUaLk1sKL7";
+ export const productIdEveryOtherWeekDk = "prod_OjDo2XfLRppIPa"; 
+ export const productIdStandardDk = "prod_OjDoIv8e5Zzek2"; 
+ 
+ export const productIdEveryWeekSamboDk = "prod_PdHycyUnOkL6TL"; 
+ export const productIdEveryOtherWeekSamboDk = "prod_QhdGye2ZZDVipp"; 
+ export const productIdStandardSamboDk = "prod_OjDo5pqjEixNw4"; 
+ 
+
 export const priceIdEveryWeek = "price_1Nxu8QEhPZIzKmuikn7uAHzK";
 export const priceIdEveryOtherWeek = "price_1NxtncEhPZIzKmuiNZl0xIxC";
 export const priceIdStandard = "price_1NvlKkEhPZIzKmuiEozTJBYf";
@@ -41,6 +50,13 @@ export const priceIdSkaneEveryOtherWeekSambo =
  export const priceIdSkaneStandardSambo = "price_1PpRz2EhPZIzKmuia3MD9OxT";
 
 
+ export const priceIdEveryWeekDk = "price_1PqUqrEhPZIzKmuiAy9PVxzP"; 
+ export const priceIdEveryOtherWeekDk = "price_1PqUsUEhPZIzKmuitr57359j"; 
+ export const priceIdStandardDk = "price_1PqUv2EhPZIzKmuil2ZtEFj8"; 
+ 
+ export const priceIdEveryWeekSamboDk = "price_1PqV1aEhPZIzKmuitBsfWuJi"; 
+ export const priceIdEveryOtherWeekSamboDk = "price_1PqDzsEhPZIzKmui73YrZ1Qk"; 
+ export const priceIdStandardSamboDk = "price_1PqUyBEhPZIzKmuiPYwFaNl9"; 
 
 const priceIdDeliveryEveryWeek = "price_1OY5DpEhPZIzKmuidVt8MLqm";
 const priceIdDeliveryEveryOtherWeek = "price_1OY5FsEhPZIzKmuiu5PVEK6o";
@@ -75,6 +91,15 @@ const priceIdDeliverySkaneEveryOtherWeekSambo =
 const priceIdDeliverySkaneStandardSambo = "price_1Po3RKEhPZIzKmuiaAytTZTa";
 
 
+const priceIdDeliveryEveryWeekDk = "price_1PqV3UEhPZIzKmui1FiI9ISs";
+const priceIdDeliveryEveryOtherWeekDk = "price_1PqV4eEhPZIzKmuiY9zhqVmT";
+const priceIdDeliveryStandardDk = "price_1PqV5TEhPZIzKmuiFAPTHZt8";
+
+const priceIdDeliveryEveryWeekSamboDk = "price_1PqV3UEhPZIzKmui1FiI9ISs";
+const priceIdDeliveryEveryOtherWeekSamboDk = "price_1PqV4eEhPZIzKmuiY9zhqVmT";
+const priceIdDeliveryStandardSamboDk = "price_1PqV5TEhPZIzKmuiFAPTHZt8";
+
+
 
 export const getProductTypesFromLngCode = (lngCode: string): ProductType[] => {
  console.log("lngCode", lngCode);
@@ -84,7 +109,7 @@ export const getProductTypesFromLngCode = (lngCode: string): ProductType[] => {
    case "en":
      console.log("en");
      return productTypesEn;
-   case "dk":
+   case "da":
      return productTypesDk;
    default:
      return productTypes;
@@ -102,6 +127,7 @@ export const productTypes = [
      {
        label: "Varje vecka",
        productId: productIdEveryWeek,
+       productIdDk: productIdEveryWeekDk,
        disabled: false,
        price: "599kr/vecka",
        portionPrice: "50kr/portion",
@@ -109,10 +135,12 @@ export const productTypes = [
        priceId: priceIdEveryWeek,
        stockholmPriceId: priceIdStockholmEveryWeek,
        skanePriceId: priceIdSkaneEveryWeek,
+       danishPriceId: priceIdEveryWeekDk,
      },
      {
        label: "Varannan vecka",
        productId: productIdEveryOtherWeek,
+       productIdDk: productIdEveryOtherWeekDk, 
        disabled: false,
        price: "599kr/varannan vecka",
        portionPrice: "50kr/portion",
@@ -120,16 +148,19 @@ export const productTypes = [
        priceId: priceIdEveryOtherWeek,
        stockholmPriceId: priceIdStockholmEveryOtherWeek,
        skanePriceId: priceIdSkaneEveryOtherWeek,
+       danishPriceId: priceIdEveryOtherWeekDk,
      },
      {
       label: "Engångsköp",
       productId: productIdStandard,
+      productIdDk: productIdStandardDk,
       disabled: false,
       price: "659kr",
       portionPrice: "55kr/portion",
       priceId: priceIdStandard,
       stockholmPriceId: priceIdStockholmStandard,
       skanePriceId: priceIdSkaneStandard,
+      danishPriceId: priceIdStandardDk,
     },
    ],
  },
@@ -142,6 +173,7 @@ export const productTypes = [
     {
       label: "Varje vecka",
       productId: productIdEveryWeekSambo,
+      productIdDk: productIdEveryWeekSamboDk,
       disabled: false,
       price: "599kr/vecka",
       portionPrice: "50kr/portion",
@@ -149,10 +181,12 @@ export const productTypes = [
       priceId: priceIdEveryWeekSambo,
       stockholmPriceId: priceIdStockholmEveryWeekSambo,
       skanePriceId: priceIdSkaneEveryWeekSambo,
+      danishPriceId: priceIdEveryWeekSamboDk,
     },
     {
       label: "Varannan vecka",
       productId: productIdEveryOtherWeekSambo,
+      productIdDk: productIdEveryOtherWeekSamboDk,
       disabled: false,
       price: "599kr/varannan vecka",
       portionPrice: "50kr/portion",
@@ -160,16 +194,20 @@ export const productTypes = [
       priceId: priceIdEveryOtherWeekSambo,
       stockholmPriceId: priceIdStockholmEveryOtherWeekSambo,
       skanePriceId: priceIdSkaneEveryOtherWeekSambo,
+      danishPriceId: priceIdEveryOtherWeekSamboDk,
     },
     {
      label: "Engångsköp",
      productId: productIdStandardSambo,
+     productIdDk: productIdStandardSamboDk,
      disabled: false,
      price: "659kr",
      portionPrice: "55kr/portion",
      priceId: priceIdStandardSambo,
      stockholmPriceId: priceIdStockholmStandardSambo,
      skanePriceId: priceIdSkaneStandardSambo,
+     danishPriceId: priceIdStandardSamboDk,
+
    },
   ],
 },
@@ -184,6 +222,7 @@ export const productTypesSe = [
       {
         label: "Varje vecka",
         productId: productIdEveryWeek,
+        productIdDk: productIdEveryWeekDk,
         disabled: false,
         price: "599kr/vecka",
         portionPrice: "50kr/portion",
@@ -191,10 +230,12 @@ export const productTypesSe = [
         priceId: priceIdEveryWeek,
         stockholmPriceId: priceIdStockholmEveryWeek,
         skanePriceId: priceIdSkaneEveryWeek,
+        danishPriceId: priceIdEveryWeekDk,
       },
       {
         label: "Varannan vecka",
         productId: productIdEveryOtherWeek,
+        productIdDk: productIdEveryOtherWeekDk,
         disabled: false,
         price: "599kr/varannan vecka",
         portionPrice: "50kr/portion",
@@ -202,16 +243,19 @@ export const productTypesSe = [
         priceId: priceIdEveryOtherWeek,
         stockholmPriceId: priceIdStockholmEveryOtherWeek,
         skanePriceId: priceIdSkaneEveryOtherWeek,
+        danishPriceId: priceIdEveryOtherWeekDk,
       },
       {
        label: "Engångsköp",
        productId: productIdStandard,
+       productIdDk: productIdStandardDk,
        disabled: false,
        price: "659kr",
        portionPrice: "55kr/portion",
        priceId: priceIdStandard,
        stockholmPriceId: priceIdStockholmStandard,
        skanePriceId: priceIdSkaneStandard,
+       danishPriceId: priceIdStandardDk,
      },
     ],
   },
@@ -224,6 +268,7 @@ export const productTypesSe = [
      {
        label: "Varje vecka",
        productId: productIdEveryWeekSambo,
+       productIdDk: productIdEveryWeekSamboDk,
        disabled: false,
        price: "599kr/vecka",
        portionPrice: "50kr/portion",
@@ -231,10 +276,12 @@ export const productTypesSe = [
        priceId: priceIdEveryWeekSambo,
        stockholmPriceId: priceIdStockholmEveryWeekSambo,
        skanePriceId: priceIdSkaneEveryWeekSambo,
+       danishPriceId: priceIdEveryWeekSamboDk,
      },
      {
        label: "Varannan vecka",
        productId: productIdEveryOtherWeekSambo,
+       productIdDk: productIdEveryOtherWeekSamboDk,
        disabled: false,
        price: "599kr/varannan vecka",
        portionPrice: "50kr/portion",
@@ -242,16 +289,19 @@ export const productTypesSe = [
        priceId: priceIdEveryOtherWeek,
        stockholmPriceId: priceIdStockholmEveryOtherWeekSambo,
        skanePriceId: priceIdSkaneEveryOtherWeekSambo,
+       danishPriceId: priceIdEveryOtherWeekDk, 
      },
      {
       label: "Engångsköp",
       productId: productIdStandardSambo,
+      productIdDk: productIdStandardSamboDk,
       disabled: false,
       price: "659kr",
       portionPrice: "55kr/portion",
       priceId: priceIdStandardSambo,
       stockholmPriceId: priceIdStockholmStandardSambo,
       skanePriceId: priceIdSkaneStandardSambo,
+      danishPriceId: priceIdStandardSamboDk,
     },
    ],
  },
@@ -267,6 +317,7 @@ export const productTypesEn = [
       {
         label: "Every week",
         productId: productIdEveryWeek,
+        productIdDk: productIdEveryWeekDk,
         disabled: false,
         price: "599kr/vecka",
         portionPrice: "50kr/portion",
@@ -274,10 +325,12 @@ export const productTypesEn = [
         priceId: priceIdEveryWeek,
         stockholmPriceId: priceIdStockholmEveryWeek,
         skanePriceId: priceIdSkaneEveryWeek,
+        danishPriceId: priceIdEveryWeekDk,
       },
       {
         label: "Every other week",
         productId: productIdEveryOtherWeek,
+        productIdDk: productIdEveryOtherWeekDk,
         disabled: false,
         price: "599kr/varannan vecka",
         portionPrice: "50kr/portion",
@@ -285,16 +338,19 @@ export const productTypesEn = [
         priceId: priceIdEveryOtherWeek,
         stockholmPriceId: priceIdStockholmEveryOtherWeek,
         skanePriceId: priceIdSkaneEveryOtherWeek,
+        danishPriceId: priceIdEveryOtherWeekDk,
       },
       {
        label: "One time order",
        productId: productIdStandard,
+       productIdDk: productIdStandardDk,
        disabled: false,
        price: "659kr",
        portionPrice: "55kr/portion",
        priceId: priceIdStandard,
        stockholmPriceId: priceIdStockholmStandard,
        skanePriceId: priceIdSkaneStandard,
+       danishPriceId: priceIdStandardDk,
      },
     ],
   },
@@ -307,6 +363,7 @@ export const productTypesEn = [
      {
        label: "Every week",
        productId: productIdEveryWeekSambo,
+       productIdDk: productIdEveryWeekSamboDk,
        disabled: false,
        price: "599kr/vecka",
        portionPrice: "50kr/portion",
@@ -314,10 +371,12 @@ export const productTypesEn = [
        priceId: priceIdEveryWeekSambo,
        stockholmPriceId: priceIdStockholmEveryWeekSambo,
        skanePriceId: priceIdSkaneEveryWeekSambo,
+       danishPriceId: priceIdEveryWeekSamboDk, 
      },
      {
        label: "Every other week",
        productId: productIdEveryOtherWeekSambo,
+       productIdDk: productIdEveryOtherWeekSamboDk,
        disabled: false,
        price: "599kr/varannan vecka",
        portionPrice: "50kr/portion",
@@ -325,16 +384,19 @@ export const productTypesEn = [
        priceId: priceIdEveryOtherWeekSambo,
        stockholmPriceId: priceIdStockholmEveryOtherWeekSambo,
        skanePriceId: priceIdSkaneEveryOtherWeekSambo,
+       danishPriceId: priceIdEveryOtherWeekSamboDk,
      },
      {
       label: "One time order",
       productId: productIdStandardSambo,
+      productIdDk: productIdStandardSamboDk,
       disabled: false,
       price: "659kr",
       portionPrice: "55kr/portion",
       priceId: priceIdStandardSambo,
       stockholmPriceId: priceIdStockholmStandardSambo,
       skanePriceId: priceIdSkaneStandardSambo,
+      danishPriceId: priceIdStandardSamboDk,
     },
    ],
  },
@@ -342,13 +404,13 @@ export const productTypesEn = [
 export const productTypesDk = [
   {
     id: "Familybox",
-    label: "Familjekasse",
-    recipes: "3 recipes",
+    label: "Familiekassen",
+    recipes: "3 opskrifter",
     persons: "3-4 pers",
     variants: [
       {
-        label: "Varje vecka",
-        productId: productIdEveryWeek,
+        label: "Hver uge",
+        productId: productIdEveryWeekDk,
         disabled: false,
         price: "599kr/vecka",
         portionPrice: "50kr/portion",
@@ -356,10 +418,11 @@ export const productTypesDk = [
         priceId: priceIdEveryWeek,
         stockholmPriceId: priceIdStockholmEveryWeek,
         skanePriceId: priceIdSkaneEveryWeek,
+        danishPriceId: priceIdEveryWeekDk, 
       },
       {
-        label: "Varannan vecka",
-        productId: productIdEveryOtherWeek,
+        label: "Hver anden uge",
+        productId: productIdEveryOtherWeekDk,
         disabled: false,
         price: "599kr/varannan vecka",
         portionPrice: "50kr/portion",
@@ -367,28 +430,30 @@ export const productTypesDk = [
         priceId: priceIdEveryOtherWeek,
         stockholmPriceId: priceIdStockholmEveryOtherWeek,
         skanePriceId: priceIdSkaneEveryOtherWeek,
+        danishPriceId: priceIdEveryOtherWeekDk, 
       },
       {
-       label: "Engångsköp",
-       productId: productIdStandard,
+       label: "Engangskøb",
+       productId: productIdStandardDk,
        disabled: false,
        price: "659kr",
        portionPrice: "55kr/portion",
        priceId: priceIdStandard,
        stockholmPriceId: priceIdStockholmStandard,
        skanePriceId: priceIdSkaneStandard,
+       danishPriceId: priceIdStandardDk,
      },
     ],
   },
   {
    id: "Couplebox",
-   label: "Sambokasse",
-   recipes: "3 recipes",
+   label: "Sambokassen",
+   recipes: "3 opskrifter",
    persons: "2-3 pers",
    variants: [
      {
-       label: "Varje vecka",
-       productId: productIdEveryWeekSambo,
+       label: "Hver uge",
+       productId: productIdEveryWeekSamboDk,
        disabled: false,
        price: "599kr/vecka",
        portionPrice: "50kr/portion",
@@ -396,10 +461,11 @@ export const productTypesDk = [
        priceId: priceIdEveryWeekSambo,
        stockholmPriceId: priceIdStockholmEveryWeekSambo,
        skanePriceId: priceIdSkaneEveryWeekSambo,
+       danishPriceId: priceIdEveryWeekSamboDk,
      },
      {
-       label: "Varannan vecka",
-       productId: productIdEveryOtherWeekSambo,
+       label: "Hver anden uge",
+       productId: productIdEveryOtherWeekSamboDk,
        disabled: false,
        price: "599kr/varannan vecka",
        portionPrice: "50kr/portion",
@@ -407,16 +473,18 @@ export const productTypesDk = [
        priceId: priceIdEveryOtherWeekSambo,
        stockholmPriceId: priceIdStockholmEveryOtherWeekSambo,
        skanePriceId: priceIdSkaneEveryOtherWeekSambo,
+       danishPriceId: priceIdEveryOtherWeekSamboDk, 
      },
      {
-      label: "Engångsköp",
-      productId: productIdStandardSambo,
+      label: "Engangskøb",
+      productId: productIdStandardSamboDk,
       disabled: false,
       price: "659kr",
       portionPrice: "55kr/portion",
       priceId: priceIdStandardSambo,
       stockholmPriceId: priceIdStockholmStandardSambo,
       skanePriceId: priceIdSkaneStandardSambo,
+      danishPriceId: priceIdStandardSamboDk, 
     },
    ],
  },
@@ -447,7 +515,8 @@ export const isSubscription = (priceId: string | null): boolean => {
       if (
         variant.priceId === priceId ||
         variant.stockholmPriceId === priceId ||
-        variant.skanePriceId === priceId
+        variant.skanePriceId === priceId ||
+        variant.danishPriceId === priceId
       ) {
         return variant.id === "subscription"; // Kolla om varianten är en prenumeration
       }
@@ -504,6 +573,19 @@ export const getShippingCostForProductId = (id: string | null) => {
           return priceIdDeliverySkaneEveryOtherWeekSambo;
     case priceIdSkaneStandardSambo:
           return priceIdDeliverySkaneStandardSambo;
+
+    case priceIdEveryWeekDk:
+            return priceIdDeliveryEveryWeekDk;
+    case priceIdEveryOtherWeekDk:
+            return priceIdDeliveryEveryOtherWeekDk;
+    case priceIdStandardDk:
+            return priceIdDeliveryStandardDk;
+    case priceIdEveryWeekSamboDk:
+        return priceIdDeliveryEveryWeekSamboDk;
+    case priceIdEveryOtherWeekSamboDk:
+        return priceIdDeliveryEveryOtherWeekSamboDk;
+    case priceIdStandardSamboDk:
+        return priceIdDeliveryStandardSamboDk;
   
 
    default:
@@ -512,8 +594,10 @@ export const getShippingCostForProductId = (id: string | null) => {
 };
 
 
+
 export const getProductCostForPriceId = (id: string | null, lang: string) => {
  const eng = lang !== "sv"
+ const dk = lang === "da";
  switch (id) {
    case priceIdEveryWeek:
      return eng ? "50kr/portion" : "50kr/portion";
@@ -560,6 +644,19 @@ export const getProductCostForPriceId = (id: string | null, lang: string) => {
         return eng ? "60kr/portionr" : "60kr/portion";
      case priceIdSkaneStandardSambo:
         return eng ? "65kr/portion" : "65kr/portion";
+
+     case priceIdEveryWeekDk:
+        return dk ? "Kuvertpris 45kr" : "45kr/portion";
+     case priceIdEveryOtherWeekDk:
+        return dk ? "Kuvertpris 45kr" : "45kr/portion";
+     case priceIdStandardDk:
+        return dk ? "Kuvertpris 50kr" : "50kr/portion";
+     case priceIdEveryWeekSamboDk:
+        return dk ? "Kuvertpris 50kr" : "50kr/portion";
+     case priceIdEveryOtherWeekSamboDk:
+        return dk ? "Kuvertpris 50kr" : "50kr/portion";
+     case priceIdStandardSamboDk:
+        return dk ? "Kuvertpris 58kr" : "58kr/portion";
 
    default:
      throw new Error("No product id found for price id: " + id);
