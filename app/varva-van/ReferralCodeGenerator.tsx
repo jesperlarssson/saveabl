@@ -49,12 +49,12 @@ const ReferralCodeGenerator: React.FC = () => {
       display: flex;
       flex-direction: column;
       text-align: left;
-      margin-bottom: 10px;
+      margin-bottom: 20px; /* Standardiserad marginal för alla element */
     }
 
     .input-group {
       position: relative;
-      margin-bottom: 40px;
+      margin-bottom: 20px; /* Standardiserad marginal för alla element */
     }
 
     .input-group label {
@@ -80,6 +80,7 @@ const ReferralCodeGenerator: React.FC = () => {
       text-align: left;
       background-color: #fcf7e8;
       transition: border-color 0.3s ease;
+      margin-bottom: 20px; /* Standardiserad marginal för alla element */
     }
 
     input[type="text"]:focus,
@@ -100,8 +101,8 @@ const ReferralCodeGenerator: React.FC = () => {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 40px; /* Avstånd mellan knapparna */
-      margin-top: 40px; /* Ökat avstånd till underrubriken */
+      gap: 20px; /* Lika avstånd mellan knapparna */
+      margin-top: 20px; /* Lika avstånd till andra element */
     }
 
     button.submit-button {
@@ -121,9 +122,9 @@ const ReferralCodeGenerator: React.FC = () => {
       align-items: center;
       line-height: normal;
       height: 60px;
-      margin-top: 50px;
-      transition: background-color 0.3s ease;
       margin: 0 auto;
+      margin-top: 20px; /* Lika avstånd till andra element */
+      transition: background-color 0.3s ease;
       font-weight: bold;
     }
 
@@ -149,6 +150,8 @@ const ReferralCodeGenerator: React.FC = () => {
       height: 60px;
       transition: background-color 0.3s ease, color 0.3s ease;
       font-weight: bold;
+      max-width: 300px;
+      min-width: 240px;
     }
 
     button.custom-button:hover {
@@ -158,26 +161,21 @@ const ReferralCodeGenerator: React.FC = () => {
 
     .thank-you {
       text-align: center;
-      margin-top: 50px;
+      margin-top: 20px; /* Lika avstånd till andra element */
     }
 
     .thank-you h2 {
       font-size: 45px;
       color: #6E2936;
       font-weight: bold;
-      margin-bottom: 20px;
+      margin-bottom: 20px; /* Lika avstånd till andra element */
     }
 
     .thank-you p {
       font-size: 20px;
       color: black;
-      margin-bottom: 40px; /* Ökat avstånd till knapparna */
+      margin-bottom: 20px; /* Lika avstånd till andra element */
     }
-
-    button.custom-button {
-        max-width: 300px;
-        min-width: 240px;
-      }
 
     @media (max-width: 600px) {
       .input-group {
@@ -190,20 +188,19 @@ const ReferralCodeGenerator: React.FC = () => {
         padding: 10px;
         width: calc(100% - 20px);
         max-width: 100%;
-        margin-bottom: 15px;
+        margin-bottom: 20px; /* Lika avstånd till andra element */
         box-sizing: border-box;
       }
 
       .button-group {
-        gap: 20px; /* Minskad gap på mobila enheter */
+        gap: 20px; /* Lika avstånd på mobila enheter */
       }
 
       button.submit-button {
         font-size: 18px;
         padding: 10px 20px;
-        margin-bottom: 10px;
+        margin-bottom: 20px; /* Lika avstånd till andra element */
         display: block;
-        margin: 20px 0 10px 0;
         width: 100%;
         box-sizing: border-box;
         text-align: center;
@@ -232,7 +229,6 @@ const ReferralCodeGenerator: React.FC = () => {
       }
     }
   `;
-
   return (
     <div>
       <style>{styles}</style>

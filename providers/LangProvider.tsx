@@ -559,8 +559,8 @@ popup: {
   }, 
   referral: {
     header_title: "Bjud in dina vänner: tjäna 100kr!",
-    subtitle: "Hjälp oss sprida ordet om Saveabl och få en extra treat.",
-    header_subtitle: "Fyll i dina uppgifter nedan för att hämta och dela din personliga kod. Både du och din vän får sedan 100kr rabatt på matkassen!",
+    subtitle: "",
+    header_subtitle: "Fyll i dina uppgifter nedan för att hämta och dela din personliga kod. Både du och dina vänner får sedan 100kr rabatt på matkassen!",
     name_label: "Namn",
     name_placeholder: "För- och efternamn",
     email_label: "E-post",
