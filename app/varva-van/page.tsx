@@ -5,29 +5,29 @@ import ReferralCodeGenerator from './ReferralCodeGenerator'; // Importerar från
 const ReferralCodePage: React.FC = () => {
   const styles = `
     .container {
-      width: 80%;
+      width: 100%;
       max-width: 750px;
-      margin: 40px auto;
+      margin: 20px auto;
       padding: 20px;
       background-color: #fcf7e8;
-      text-align: left;
+      text-align: center;
       position: relative;
     }
 
     .page-title {
       color: #6e2936;
-      font-size: 45px;
+      font-size: 30px;
       font-weight: bold;
-      margin-bottom: 15px;
+      margin-bottom: 5px; /* Behåll detta som tidigare */
       text-align: center;
     }
 
     .page-subtitle {
       color: black;
       font-size: 20px;
-      margin-top: 15px;
-      margin-bottom: 40px;
-      text-align: left;
+      margin-top: 5px; /* Behåll detta som tidigare */
+      margin-bottom: 40px; /* Öka denna marginal för mer avstånd */
+      text-align: center;
     }
 
     @media (max-width: 600px) {
@@ -38,16 +38,16 @@ const ReferralCodePage: React.FC = () => {
       }
 
       .page-title {
-        font-size: 30px;
-        margin-bottom: 10px;
-        text-align: left;
+        font-size: 24px;
+        margin-bottom: 0px;
+        text-align: center;
       }
 
       .page-subtitle {
         font-size: 18px;
-        margin-top: 5px;
-        margin-bottom: 30px;
-        text-align: left;
+        margin-top: 0px;
+        margin-bottom: 30px; /* Öka denna marginal för mer avstånd på mobilen */
+        text-align: center;
       }
     }
   `;

@@ -570,6 +570,7 @@ popup: {
     thank_you_subtitle: "Tack för att du hjälper oss att sprida ordet om Saveabl! Dela koden med dina vänner och tjäna 100kr per kund du värvar.", 
     copy_button: "Kopiera kod",
     share_button: "Dela på Messenger",
+    messenger_message: "Hej! Med min kod får du 100kr rabatt på Saveabl. Ange den i checkouten när du gör din beställning :)", 
     share_email_button: "Dela via e-post", 
     email_subject: "Din personliga värvningskod från Saveabl!",
     email_body: "Hej!\n\nJag ville dela min värvningskod med dig. Använd koden {referralCode} för att få en rabatt på din nästa beställning hos Saveabl.\n\nHälsningar,\n{userName}",
