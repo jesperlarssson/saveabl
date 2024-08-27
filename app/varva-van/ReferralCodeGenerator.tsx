@@ -23,15 +23,24 @@ const ReferralCodeGenerator: React.FC = () => {
   const shareOnMessenger = () => {
     const baseUrl = "https://www.saveabl.com";
     const urlWithCode = `${baseUrl}?referralCode=${encodeURIComponent(referralCode)}`;
-  
+    
     // Hämta texten från lang
     const message = text.referral.messenger_message
       .replace("{referralCode}", referralCode)
       .replace("{urlWithCode}", urlWithCode);
+    
+    const messengerUrl = `fb-messenger://share?link=${encodeURIComponent(urlWithCode)}&quote=${encodeURIComponent(message)}`;
   
-    const messengerUrl = `fb-messenger://share?link=${encodeURIComponent(urlWithCode)}&app_id=123456789&quote=${encodeURIComponent(message)}`;
+    // För webversionen, vilket ibland kan vara mer robust.
+    const webMessengerUrl = `https://www.facebook.com/dialog/send?link=${encodeURIComponent(urlWithCode)}&app_id=123456789&quote=${encodeURIComponent(message)}&redirect_uri=${encodeURIComponent(baseUrl)}`;
   
+    // Försök först att öppna i Messenger-appen
     window.location.href = messengerUrl;
+  
+    // Fallback till webMessenger
+    setTimeout(() => {
+      window.location.href = webMessengerUrl;
+    }, 500);
   };
 
   const shareOnEmail = () => {
