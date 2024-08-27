@@ -557,6 +557,26 @@ popup: {
     integrity: "Integritetspolicy",
     newsletter: "Prenumerera & vinn",
   }, 
+  referral: {
+    header_title: "Bjud in dina vänner: tjäna 100kr!",
+    subtitle: "Hjälp oss sprida ordet om Saveabl och få en extra treat.",
+    header_subtitle: "Fyll i dina uppgifter nedan för att hämta och dela din personliga kod. Både du och din vän får sedan 100kr rabatt på matkassen!",
+    name_label: "Namn",
+    name_placeholder: "För- och efternamn",
+    email_label: "E-post",
+    email_placeholder: "Ange din e-postadress",
+    submit_button: "Visa kod",
+    code_label: "Din kod är",
+    thank_you_subtitle: "Tack för att du hjälper oss att sprida ordet om Saveabl! Dela koden med dina vänner och tjäna 100kr per kund du värvar.", 
+    copy_button: "Kopiera kod",
+    share_button: "Dela på Messenger",
+    share_email_button: "Dela via e-post", 
+    email_subject: "Din personliga värvningskod från Saveabl!",
+    email_body: "Hej!\n\nJag ville dela min värvningskod med dig. Använd koden {referralCode} för att få en rabatt på din nästa beställning hos Saveabl.\n\nHälsningar,\n{userName}",
+    not_found: "Vi kunde inte hitta dig som kund :( Kontakta oss gärna om vi har fel!",
+    copy_success: "Koden är kopierad!",
+    copy_fail: "Misslyckades att kopiera koden"
+  }
   
 };
 
@@ -988,6 +1008,26 @@ const enText = {
       integrity: "Privacy Policy",
       newsletter: "Subscribe & win", 
     }, 
+    referral: {
+      header_title: "Värva en vän",
+      subtitle: "Hjälp oss sprida ordet om Saveabl samtidigt som du och din vän får en extra treat.",
+      header_subtitle: "Fyll i dina uppgifter nedan för att generera och dela din värvningskod.",
+      name_label: "Namn",
+      name_placeholder: "Ange ditt namn",
+      email_label: "E-post",
+      email_placeholder: "Ange din e-postadress",
+      submit_button: "Visa kod",
+      code_label: "Din kod är",
+      thank_you_subtitle: "Tack för att du delar!", 
+      copy_button: "Kopiera kod",
+      share_button: "Dela på Messenger",
+      share_email_button: "Dela via e-post", 
+      email_subject: "Din personliga värvningskod från Saveabl!",
+      email_body: "Hej!\n\nJag ville dela min värvningskod med dig. Använd koden {referralCode} för att få en rabatt på din nästa beställning hos Saveabl.\n\nHälsningar,\n{userName}",
+      not_found: "Kund ej hittad",
+      copy_success: "Koden kopierades till urklipp!",
+      copy_fail: "Misslyckades att kopiera koden"
+    }
   
 };
 
@@ -1391,6 +1431,26 @@ integrity_policy: {
     integrity: "Integritetspolitik",
     newsletter: "Tilmeld & vind", 
   }, 
+  referral: {
+    header_title: "Värva en vän",
+    subtitle: "Hjälp oss sprida ordet om Saveabl samtidigt som du och din vän får en extra treat.",
+    header_subtitle: "Fyll i dina uppgifter nedan för att generera och dela din värvningskod.",
+    name_label: "Namn",
+    name_placeholder: "Ange ditt namn",
+    email_label: "E-post",
+    email_placeholder: "Ange din e-postadress",
+    submit_button: "Visa kod",
+    code_label: "Din kod är",
+    thank_you_subtitle: "Tack för att du delar!", 
+    copy_button: "Kopiera kod",
+    share_button: "Dela på Messenger",
+    share_email_button: "Dela via e-post", 
+    email_subject: "Din personliga värvningskod från Saveabl!",
+    email_body: "Hej!\n\nJag ville dela min värvningskod med dig. Använd koden {referralCode} för att få en rabatt på din nästa beställning hos Saveabl.\n\nHälsningar,\n{userName}",
+    not_found: "Kund ej hittad",
+    copy_success: "Koden kopierades till urklipp!",
+    copy_fail: "Misslyckades att kopiera koden"
+  }
 
   
 };
