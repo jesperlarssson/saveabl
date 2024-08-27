@@ -10,15 +10,15 @@ const ReferralCodePage: React.FC = () => {
       margin: 20px auto;
       padding: 20px;
       background-color: #fcf7e8;
-      text-align: center;
+      text-align: left;
       position: relative;
     }
 
     .page-title {
       color: #6e2936;
-      font-size: 30px;
+      font-size: 35px;
       font-weight: bold;
-      margin-bottom: 5px; /* Behåll detta som tidigare */
+      margin-bottom: 15px; /* Behåll detta som tidigare */
       text-align: center;
     }
 
@@ -38,13 +38,13 @@ const ReferralCodePage: React.FC = () => {
       }
 
       .page-title {
-        font-size: 30px;
+        font-size: 35px;
         margin-bottom: 5px;
-        text-align: center;
+        text-align: left;
       }
 
       .page-subtitle {
-        font-size: 18px;
+        font-size: 20px;
         margin-top: 10px;
         margin-bottom: 30px; /* Öka denna marginal för mer avstånd på mobilen */
         text-align: left;

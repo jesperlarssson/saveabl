@@ -109,7 +109,7 @@ const ReferralCodeGenerator: React.FC = () => {
   .button-group {
     display: flex;
     flex-direction: column;
-    align-items: left;
+    align-items: center;
     gap: 15px; 
     margin-top: 15px; 
   }
@@ -118,7 +118,7 @@ const ReferralCodeGenerator: React.FC = () => {
     background-color: #f4664a;
     color: #fcf7e8;
     border: none;
-    padding: 12px 20px;
+    padding: 15px 25px;
     border-radius: 10px;
     cursor: pointer;
     font-size: 18px;
@@ -130,10 +130,10 @@ const ReferralCodeGenerator: React.FC = () => {
     justify-content: center;
     align-items: center;
     line-height: normal;
-    height: 50px;
-    margin: 0 auto;
-    margin-top: 15px; 
+    height: 60px;
+    margin-top: 70px;
     transition: background-color 0.3s ease;
+    margin: 0 auto;
     font-weight: bold;
   }
 
@@ -183,7 +183,7 @@ const ReferralCodeGenerator: React.FC = () => {
   .thank-you p {
     font-size: 18px;
     color: black;
-    margin-bottom: 15px; 
+    margin-bottom: 20px; 
   }
 
   @media (max-width: 600px) {
@@ -206,15 +206,22 @@ const ReferralCodeGenerator: React.FC = () => {
     }
 
     button.submit-button {
-      font-size: 16px;
-      padding: 10px 15px;
-      margin-bottom: 10px; 
+      font-size: 18px;
+      padding: 10px 20px;
+      margin-bottom: 10px;
       display: block;
+      margin: 20px 0 10px 0;
       width: 100%;
       box-sizing: border-box;
       text-align: center;
       font-weight: bold;
     }
+    @media (min-width: 601px) {
+        button.submit-button {
+          max-width: 300px; /* Begränsad bredd för att centrera på datorn */
+          margin: 0 auto; /* Centrerar knappen på datorn */
+        }
+      }
 
     .thank-you h2 {
       font-size: 28px;
@@ -222,8 +229,8 @@ const ReferralCodeGenerator: React.FC = () => {
     }
 
     .thank-you p {
-      font-size: 16px;
-      margin-bottom: 20px; 
+      font-size: 18px;
+      margin-bottom: 35px; 
     }
   }
 
