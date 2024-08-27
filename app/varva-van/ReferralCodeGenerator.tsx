@@ -33,7 +33,7 @@ const ReferralCodeGenerator: React.FC = () => {
   
     window.location.href = messengerUrl;
   };
-  
+
   const shareOnEmail = () => {
     const subject = encodeURIComponent(text.referral.email_subject);
     const body = encodeURIComponent(
@@ -57,7 +57,7 @@ const ReferralCodeGenerator: React.FC = () => {
   form {
     display: flex;
     flex-direction: column;
-    text-align: center;
+    text-align: left;
     margin-bottom: 10px; 
   }
 
@@ -109,7 +109,7 @@ const ReferralCodeGenerator: React.FC = () => {
   .button-group {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: left;
     gap: 15px; 
     margin-top: 15px; 
   }
@@ -188,13 +188,13 @@ const ReferralCodeGenerator: React.FC = () => {
 
   @media (max-width: 600px) {
     .input-group {
-      margin-bottom: 10px;
+      margin-bottom: 15px;
     }
 
     input[type="text"],
     input[type="email"] {
       font-size: 16px;
-      padding: 10px;
+      padding: 15px;
       width: calc(100% - 20px);
       max-width: 100%;
       margin-bottom: 10px; 
@@ -248,7 +248,6 @@ const ReferralCodeGenerator: React.FC = () => {
       {!submitted ? (
         <>
           <h1 className="page-title">{text.referral.header_title}</h1>
-          <p className="page-subtitle">{text.referral.subtitle}</p> {/* Ny extra underrubrik */}
           <p className="page-subtitle">{text.referral.header_subtitle}</p> {/* Befintlig underrubrik */}
           <form onSubmit={(e) => { e.preventDefault(); generateReferralCode(); }}>
             <div className="input-group">

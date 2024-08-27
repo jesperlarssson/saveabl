@@ -38,16 +38,16 @@ const ReferralCodePage: React.FC = () => {
       }
 
       .page-title {
-        font-size: 24px;
-        margin-bottom: 0px;
+        font-size: 30px;
+        margin-bottom: 5px;
         text-align: center;
       }
 
       .page-subtitle {
         font-size: 18px;
-        margin-top: 0px;
+        margin-top: 10px;
         margin-bottom: 30px; /* Öka denna marginal för mer avstånd på mobilen */
-        text-align: center;
+        text-align: left;
       }
     }
   `;
