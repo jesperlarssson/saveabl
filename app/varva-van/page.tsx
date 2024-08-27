@@ -16,10 +16,11 @@ const ReferralCodePage: React.FC = () => {
 
     .page-title {
       color: #6e2936;
-      font-size: 35px;
+      font-size: 40px;
       font-weight: bold;
-      margin-bottom: 15px; /* Behåll detta som tidigare */
+      margin-bottom: 20px; /* Behåll detta som tidigare */
       text-align: center;
+      margin-top: 10px;
     }
 
     .page-subtitle {
@@ -41,6 +42,7 @@ const ReferralCodePage: React.FC = () => {
         font-size: 35px;
         margin-bottom: 5px;
         text-align: left;
+        margin-top: 10px;
       }
 
       .page-subtitle {

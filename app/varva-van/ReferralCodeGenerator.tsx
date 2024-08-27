@@ -1,6 +1,9 @@
 "use client";
 import React, { useState } from 'react';
 import { useLang } from "@/hooks/useLang"; // Importera useLang hook
+import Image from 'next/image';
+import MatkasseImage from '../../public/images/illustrations/Matkasse.png';
+import morotImage from '../../public/images/illustrations/morot.png';
 
 const ReferralCodeGenerator: React.FC = () => {
   const { lang, text } = useLang(); // Hämta språket och texten baserat på valt språk
@@ -98,7 +101,7 @@ const ReferralCodeGenerator: React.FC = () => {
     text-align: left;
     background-color: #fcf7e8;
     transition: border-color 0.3s ease;
-    margin-bottom: 15px; 
+    margin-bottom: 30px; 
   }
 
   input[type="text"]:focus,
@@ -195,6 +198,14 @@ const ReferralCodeGenerator: React.FC = () => {
     margin-bottom: 20px; 
   }
 
+  .morot-image-container {
+    position: absolute;
+    top: 400px;
+    left: 50px;
+    width: 130px;
+    height: 130px;
+  }
+
   @media (max-width: 600px) {
     .input-group {
       margin-bottom: 15px;
@@ -209,6 +220,14 @@ const ReferralCodeGenerator: React.FC = () => {
       margin-bottom: 10px; 
       box-sizing: border-box;
     }
+
+    .morot-image-container {
+        position: absolute;
+        top: 400px;
+        left: 260px;
+        width: 130px;
+        height: 130px;
+      }
 
     .button-group {
       gap: 15px; 
@@ -263,6 +282,9 @@ const ReferralCodeGenerator: React.FC = () => {
       <style>{styles}</style>
       {!submitted ? (
         <>
+        <div className="morot-image-container">
+          <Image src={morotImage} alt="morot" layout="fixed" width={130} height={130} />
+        </div>
           <h1 className="page-title">{text.referral.header_title}</h1>
           <p className="page-subtitle">{text.referral.header_subtitle}</p> {/* Befintlig underrubrik */}
           <form onSubmit={(e) => { e.preventDefault(); generateReferralCode(); }}>
