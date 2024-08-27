@@ -317,8 +317,8 @@ const ReferralCodeGenerator: React.FC = () => {
           <p>{text.referral.thank_you_subtitle}</p> {/* Lägg till underrubrik här */}
           <div className="button-group">
             <button onClick={copyToClipboard} className="custom-button">{text.referral.copy_button}</button>
-            <button onClick={shareOnMessenger} className="custom-button">{text.referral.share_button}</button>
             <button onClick={shareOnEmail} className="custom-button">{text.referral.share_email_button}</button>
+            <button onClick={shareOnMessenger} className="custom-button">{text.referral.share_button}</button>
           </div>
         </div>
       )}
