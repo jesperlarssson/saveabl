@@ -32,12 +32,7 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
   activeSubscription,
   deliveryInfo,
 }) => {
-  const [isPaused, setIsPaused] = React.useState<boolean>(
-    activeSubscription?.pause_collection !== null
-  );
-  const resumeDate = activeSubscription?.pause_collection?.resumes_at
-    ? new Date(activeSubscription?.pause_collection?.resumes_at * 1000)
-    : "unknown";
+  const [isPaused, setIsPaused] = React.useState<boolean>(false);
   const { isOpen, onClose, onOpen, forCustomer } = useManageSubscriptionModal();
   const {
     isOpen: isOpenInterval,
@@ -60,9 +55,13 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
 
   const { referralCode } = authContext;
   
+  // useEffect kallad direkt och alltid
+  useEffect(() => {
+    setIsPaused(activeSubscription?.pause_collection !== null);
+  }, [activeSubscription]);
+
   const handleModifyAccountClick = async () => {
     try {
-      //setLoading(true); // Assuming you have a loading state
       const response = await axios.post("/api/create-billing-portal-session", {
         customerId: stripeResponse.customer.id,
       });
@@ -74,9 +73,6 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
       }
     } catch (error) {
       console.error("Error redirecting to billing portal:", error);
-      // Handle error (e.g., show an error message)
-    } finally {
-      //setLoading(false);
     }
   };
 
@@ -107,6 +103,7 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
     );
     onOpenDeliveryDay();
   };
+
   const shareOnSms = () => {
     const baseUrl = "https://www.saveabl.com";
     const urlWithCode = `${baseUrl}?referralCode=${encodeURIComponent(referralCode || "")}`;
@@ -128,14 +125,6 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
     });
   };
 
-  useEffect(() => {
-    if (activeSubscription?.pause_collection !== null) {
-      setIsPaused(true);
-    } else {
-      setIsPaused(false);
-    }
-  }, [activeSubscription]);
-
   if (loading) {
     return (
       <div className="flex gap-2 items-center">
@@ -146,10 +135,9 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
   }
 
   return (
-    
     <div className="w-full">
-       {/* Ny sektion för Värva en Vän */}
-   <h2 className="text-2xl text-secondary font-semibold mb-4">
+      {/* Ny sektion för Värva en Vän */}
+      <h2 className="text-2xl text-secondary font-semibold mb-4">
         {text?.my_pages?.referral_title ?? "Värva en vän"}
       </h2>
       {referralCode ? (
@@ -196,26 +184,6 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
                   : text?.my_pages?.weekly}
               </span>
             </p>
-            {/* {billingFrequency === "bi-weekly" && (
-              <p>
-                {!isPaused && (text?.my_pages?.active_on ?? "Active on")}:{" "}
-                {isPaused ? (
-                  <span className="font-medium">
-                    {text?.my_pages?.paused_until ?? "Paused until"}{" "}
-                    {resumeDate instanceof Date
-                      ? resumeDate.toLocaleDateString()
-                      : "unknown"}
-                  </span>
-                ) : (
-                  <span className="font-medium">
-                    {isEvenWeek
-                      ? text?.my_pages?.even_weeks
-                      : text?.my_pages?.odd_weeks}
-                  </span>
-                )}
-              </p>
-            )} */}
-            
             {stripeResponse?.customer?.metadata?.deliveryDay && (
               <p className="mb-4">
                 {text?.my_pages?.deliveryDay}:{" "}
@@ -290,7 +258,6 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
            <div className="font-light text-sm">{text?.my_pages?.no_connection_desc}</div>
         </div>
       )}
-      
   
     </div>
   );
