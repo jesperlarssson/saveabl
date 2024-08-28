@@ -73,9 +73,8 @@ const Order = () => {
   }, [lang]);
 
   const searchParams = useSearchParams();
-  const id = searchParams.get("id") || "1";
+  const id = searchParams?.get("id") || "1";
   const offerId = parseInt(id, 10);
-
   
 
   const [deliveryDaysLoading, setDeliveryDaysLoading] = useState(false);

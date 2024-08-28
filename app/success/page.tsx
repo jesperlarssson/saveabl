@@ -13,7 +13,7 @@ const SuccessPage: React.FC = () => {
   const { lang, text } = useLang();
   const searchParams = useSearchParams();
 
-  const recurring = searchParams.get("recurring");
+  const recurring = searchParams?.get("recurring");
 
   return (
     <div className="flex items-center mt-10 justify-center">
