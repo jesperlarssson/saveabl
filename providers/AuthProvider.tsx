@@ -19,6 +19,7 @@ interface AuthContextInterface {
   signIn: (email: string, password: string) => Promise<User | null>;
   signOut: () => Promise<void>;
   forgotPassword: (email: string) => Promise<void>;
+  referralCode: string | null;
 }
 
 export const AuthContext = createContext<AuthContextInterface | null>({
@@ -36,6 +37,7 @@ export const AuthContext = createContext<AuthContextInterface | null>({
   forgotPassword: async () => {
     throw new Error("AuthProvider not ready");
   },
+  referralCode: null, 
 });
 
 interface AuthProviderProps {
@@ -46,6 +48,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [referralCode, setReferralCode] = useState<string | null>(null);
 
   async function signUp(email: string, password: string) {
     try {
@@ -95,12 +98,26 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   }
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setUser(user);
       setLoading(false);
+
+      if (user) {
+        try {
+          const response = await fetch(`/api/getReferralCode?uid=${user.uid}`);
+          const data = await response.json();
+
+          if (response.ok && data.referralCode) {
+            setReferralCode(data.referralCode);
+          } else {
+            console.error("Failed to fetch referral code:", data.error);
+          }
+        } catch (error) {
+          console.error("Error fetching referral code:", error);
+        }
+      }
     });
 
-    // Cleanup subscription on unmount
     return () => unsubscribe();
   }, []);
 
@@ -110,7 +127,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, error, signUp, signIn, signOut, forgotPassword }}
+      value={{ user, error, signUp, signIn, signOut, forgotPassword, referralCode }}
     >
       {children}
     </AuthContext.Provider>

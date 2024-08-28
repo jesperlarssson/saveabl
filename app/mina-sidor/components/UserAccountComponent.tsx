@@ -4,8 +4,9 @@ import { useLang } from "@/hooks/useLang";
 import useManageSubscriptionModal from "@/hooks/useManageSubscriptionModal";
 import useChangeIntervalModal from "@/hooks/useChangeIntervalModal";
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import useChangeDeliveryDayModal from "@/hooks/useChangeDeliveryDayModal";
+import { AuthContext } from "@/providers/AuthProvider"; 
 
 interface DeliveryInfo {
   city: string;
@@ -50,6 +51,15 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
   } = useChangeDeliveryDayModal();
 
   const { text } = useLang();
+
+  const authContext = useContext(AuthContext);
+
+  if (!authContext) {
+    return <div>Error: AuthContext is not available.</div>;
+  }
+
+  const { referralCode } = authContext;
+  
   const handleModifyAccountClick = async () => {
     try {
       //setLoading(true); // Assuming you have a loading state
@@ -97,6 +107,27 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
     );
     onOpenDeliveryDay();
   };
+  const shareOnSms = () => {
+    const baseUrl = "https://www.saveabl.com";
+    const urlWithCode = `${baseUrl}?referralCode=${encodeURIComponent(referralCode || "")}`;
+    
+    const message = text.referral.sms_message
+      .replace("{referralCode}", referralCode || "")
+      .replace("{urlWithCode}", urlWithCode);
+  
+    const smsLink = `sms:?&body=${encodeURIComponent(message)}`;
+  
+    window.location.href = smsLink;
+  };
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(referralCode || "").then(() => {
+      alert(text.referral.copy_success);
+    }).catch(err => {
+      alert(text.referral.copy_fail + ': ' + err);
+    });
+  };
+
   useEffect(() => {
     if (activeSubscription?.pause_collection !== null) {
       setIsPaused(true);
@@ -115,7 +146,42 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
   }
 
   return (
+    
     <div className="w-full">
+       {/* Ny sektion för Värva en Vän */}
+   <h2 className="text-2xl text-secondary font-semibold mb-4">
+        {text?.my_pages?.referral_title ?? "Värva en vän"}
+      </h2>
+      {referralCode ? (
+        <div className="bg-primary bg-opacity-60 shadow-inner rounded px-8 pt-6 pb-8 mb-4">
+          <p className="mb-4 font-medium">
+            {text?.my_pages?.referral_explanation ?? "Dela din värvningskod med vänner och få belöningar!"}
+          </p>
+          <p className="mb-4 text-medium font-bold">
+            {text?.my_pages?.referral_your_code ?? "Din värvningskod"}:{" "}
+            <span className="font-bold">{referralCode}</span>
+          </p>
+          <div className="flex gap-2 flex-wrap">
+            <button
+              className="bg-secondary hover:bg-secondary-800 text-white font-bold py-2 px-4 mr-2 mt-4"
+              onClick={copyToClipboard}
+            >
+              {text?.my_pages?.referral_copy_button ?? "Kopiera kod"}
+            </button>
+            <button
+              className="bg-secondary hover:bg-secondary-800 text-white font-bold py-2 px-4 mr-2 mt-4"
+              onClick={shareOnSms}
+            >
+              {text?.my_pages?.referral_share_sms_button ?? "Dela via SMS"}
+            </button>
+            {/* Du kan lägga till fler delningsalternativ här */}
+          </div>
+        </div>
+      ) : (
+        <div className="w-full h-36 rounded-lg text-secondary font-semibold text-xl bg-primary-500 bg-opacity-50 flex flex-col justify-center items-center">
+          <div>{text?.my_pages?.referral_no_code ?? "Ingen värvningskod tillgänglig"}</div>
+        </div>
+      )}
       {activeSubscription && (
         <>
           <h3 className="text-2xl text-secondary font-semibold mb-3">
@@ -149,6 +215,7 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
                 )}
               </p>
             )} */}
+            
             {stripeResponse?.customer?.metadata?.deliveryDay && (
               <p className="mb-4">
                 {text?.my_pages?.deliveryDay}:{" "}
@@ -223,6 +290,8 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
            <div className="font-light text-sm">{text?.my_pages?.no_connection_desc}</div>
         </div>
       )}
+      
+  
     </div>
   );
 };

@@ -407,6 +407,12 @@ const svText = {
     no_connection_desc: "Vi stödjer tyvärr inte att visa upp engångsköp ännu.",
     contact_us: "Kontakta oss",
     questions: "Har du några frågor om vår matkasse? Kontakta oss gärna!",
+    referral_title: "Tipsa en vän",
+    referral_explanation: "Dela din personliga kod med dina vänner för att ge och få 100kr rabatt. Du får automatiskt 100kr rabatt för varje vän du värvar!",
+    referral_your_code: "Din personliga kod",
+    referral_copy_button: "Kopiera kod",
+    referral_share_sms_button: "Dela via SMS",
+    referral_no_code: "Ingen värvningskod tillgänglig"
   },
   my_account: {
     account_settings: "Kontoinställningar",
@@ -569,11 +575,10 @@ popup: {
     code_label: "Din kod är",
     thank_you_subtitle: "Tack för att du hjälper oss att sprida ordet om Saveabl! Dela koden med dina vänner och tjäna 100kr per kund du värvar.", 
     copy_button: "Kopiera kod",
+    share_sms_button: "Dela via SMS", 
     share_button: "Dela på Messenger",
     messenger_message: "Hej! Med min kod får du 100kr rabatt på Saveabl. Ange den i checkouten när du gör din beställning :)", 
-    share_email_button: "Dela via E-post", 
-    email_subject: "100kr rabatt på klimatsmarta middagar!",
-    email_body: "Hej!\n\n Med min kod {referralCode} får du 100kr rabatt på Saveabl. Ange den i checkouten när du gör din beställning :)\n\nHälsningar,\n{userName}",
+    sms_message: "Hej! Med min kod {referralCode} får du 100kr rabatt på www.saveabl.com. Ange den i checkouten när du gör din beställning :)", 
     not_found: "Vi kunde inte hitta dig som kund :( Kontakta oss gärna om vi har fel!",
     copy_success: "Koden är kopierad!",
     copy_fail: "Misslyckades att kopiera koden"
@@ -892,6 +897,12 @@ const enText = {
     no_connection: "No active subscription",
     no_connection_desc: "We do not support showing one-time purchases yet.",
     questions: "Do you have any questions about the meal kit? Please feel free to contact us!",
+    referral_title: "Invite a friend",
+    referral_explanation: "Share your personal code with your friends to give and receive a 100kr discount. You automatically get a 100kr discount for each friend you refer!",
+    referral_your_code: "Your personal code",
+    referral_copy_button: "Copy code",
+    referral_share_sms_button: "Share via SMS",
+    referral_no_code: "No referral code available"
   },
   terms: {
     title: "Terms",
@@ -1021,11 +1032,10 @@ const enText = {
       code_label: "Your code is",
       thank_you_subtitle: "Thank you for helping us spread the word about Saveabl! Share the code with your friends and earn 100kr for each customer you refer.", 
       copy_button: "Copy code",
+      share_sms_button: "Share via SMS", 
       share_button: "Share on Messenger",
-      messenger_message: "Hi! With my code, you'll get a 100 SEK discount on Saveabl. Enter it at checkout when you place your order :)", 
-      share_email_button: "Share via Email", 
-      email_subject: "100kr discount on climate friendly meals!",
-      email_body: "Hi! With my code {referralCode}, you'll get a 100 SEK discount on Saveabl. Enter it at checkout when you place your order :) Best regards, {userName}",
+      messenger_message: "Hi! With my code, you'll get a 100kr discount on Saveabl. Enter it at checkout when you place your order :)", 
+      sms_message: "Hi! With my code {referralCode} you'll get a 100kr discount on www.saveabl.com. Enter it at checkout when you place your order :)", 
       not_found: "We couldn't find you as a customer :( Please contact us if this is a mistake!",
       copy_success: "The code has been copied!",
       copy_fail: "Failed to copy the code"
@@ -1314,6 +1324,12 @@ const daText = {
     sign_out_button: "Log ud",
     contact_button: "Kontakt os",
     questions: "Har du nogen spørgsmål om vores måltidskasse? Kontakt os gerne!", 
+    referral_title: "Tip en ven",
+    referral_explanation: "Del din personlige kode med dine venner for at give og få 100 kr rabat. Du får automatisk 100 kr rabat for hver ven du henviser!",
+    referral_your_code: "Din personlige kode",
+    referral_copy_button: "Kopier kode",
+    referral_share_sms_button: "Del via SMS",
+    referral_no_code: "Ingen henvisningskode tilgængelig"
   },
   
   terms: {
@@ -1445,11 +1461,10 @@ integrity_policy: {
     code_label: "Din kode er",
     thank_you_subtitle: "Tak for at du hjælper os med at sprede budskabet om Saveabl! Del koden med dine venner og tjen 100 kr pr. kunde, du rekrutterer.", 
     copy_button: "Kopiér kode",
+    share_sms_button: "Del via SMS", 
     share_button: "Del på Messenger",
     messenger_message: "Hej! Med min kode får du 100 kr rabat på Saveabl. Indtast den ved checkout, når du laver din bestilling :)", 
-    share_email_button: "Del via e-mail", 
-    email_subject: "100 kr rabat på klimavenlige middage!",
-    email_body: "Hej! Med min kode {referralCode} får du 100 kr rabat på Saveabl. Indtast den ved checkout, når du laver din bestilling :) Venlig hilsen, {userName}",
+    sms_message: "Hej! Med min kode {referralCode} får du 100kr rabat på wwww.saveabl.com. Indtast den ved checkout, når du laver din bestilling :)",
     not_found: "Vi kunne ikke finde dig som kunde :( Kontakt os gerne, hvis vi tager fejl!",
     copy_success: "Koden er kopieret!",
     copy_fail: "Kunne ikke kopiere koden"
