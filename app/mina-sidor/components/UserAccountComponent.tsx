@@ -4,9 +4,9 @@ import { useLang } from "@/hooks/useLang";
 import useManageSubscriptionModal from "@/hooks/useManageSubscriptionModal";
 import useChangeIntervalModal from "@/hooks/useChangeIntervalModal";
 import axios from "axios";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import useChangeDeliveryDayModal from "@/hooks/useChangeDeliveryDayModal";
-import { AuthContext } from "@/providers/AuthProvider"; 
+import { AuthContext } from "@/providers/AuthProvider";
 
 interface DeliveryInfo {
   city: string;
@@ -32,30 +32,17 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
   activeSubscription,
   deliveryInfo,
 }) => {
-  const [isPaused, setIsPaused] = React.useState<boolean>(false);
+  const [isPaused, setIsPaused] = useState<boolean>(false);
+
   const { isOpen, onClose, onOpen, forCustomer } = useManageSubscriptionModal();
-  const {
-    isOpen: isOpenInterval,
-    onOpen: onOpenInterval,
-    forCustomer: forCustomerInterval,
-  } = useChangeIntervalModal();
-  const {
-    isOpen: isOpenDeliveryDay,
-    onOpen: onOpenDeliveryDay,
-    forCustomer: forCustomerDeliveryDay,
-  } = useChangeDeliveryDayModal();
+  const { isOpen: isOpenInterval, onOpen: onOpenInterval, forCustomer: forCustomerInterval } = useChangeIntervalModal();
+  const { isOpen: isOpenDeliveryDay, onOpen: onOpenDeliveryDay, forCustomer: forCustomerDeliveryDay } = useChangeDeliveryDayModal();
 
   const { text } = useLang();
-
   const authContext = useContext(AuthContext);
 
-  if (!authContext) {
-    return <div>Error: AuthContext is not available.</div>;
-  }
+  const { referralCode } = authContext || {};
 
-  const { referralCode } = authContext;
-  
-  // useEffect kallad direkt och alltid
   useEffect(() => {
     setIsPaused(activeSubscription?.pause_collection !== null);
   }, [activeSubscription]);
@@ -77,43 +64,30 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
   };
 
   const handleSubscriptionClick = () => {
-    forCustomer(
-      stripeResponse.customer.id,
-      stripeResponse.customer.email,
-      isPaused
-    );
+    forCustomer(stripeResponse.customer.id, stripeResponse.customer.email, isPaused);
     onOpen();
   };
 
   const handleChangeIntervalClick = () => {
-    forCustomerInterval(
-      stripeResponse.customer.id,
-      stripeResponse.customer.email,
-      isPaused
-    );
+    forCustomerInterval(stripeResponse.customer.id, stripeResponse.customer.email, isPaused);
     onOpenInterval();
   };
 
   const handleChangeDeliveryDayClick = () => {
-    forCustomerDeliveryDay(
-      stripeResponse.customer.id,
-      deliveryInfo.postal_code,
-      stripeResponse.customer.email,
-      isPaused
-    );
+    forCustomerDeliveryDay(stripeResponse.customer.id, deliveryInfo.postal_code, stripeResponse.customer.email, isPaused);
     onOpenDeliveryDay();
   };
 
   const shareOnSms = () => {
     const baseUrl = "https://www.saveabl.com";
     const urlWithCode = `${baseUrl}?referralCode=${encodeURIComponent(referralCode || "")}`;
-    
+
     const message = text.referral.sms_message
       .replace("{referralCode}", referralCode || "")
       .replace("{urlWithCode}", urlWithCode);
-  
+
     const smsLink = `sms:?&body=${encodeURIComponent(message)}`;
-  
+
     window.location.href = smsLink;
   };
 
@@ -258,9 +232,9 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
            <div className="font-light text-sm">{text?.my_pages?.no_connection_desc}</div>
         </div>
       )}
-  
     </div>
   );
 };
 
 export default UserAccountComponent;
+
