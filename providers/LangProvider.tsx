@@ -1199,7 +1199,7 @@ const daText = {
     type: "Gør dine valg nedenfor (uden bindingstid på alle):",
     variant: "Vælg hvor ofte du vil modtage din madkasse:",
     deliveryDay: "Næste tilgængelige leveringsdato:",
-    copenhagen_monday: "Mandag 2/9", 
+    copenhagen_monday: "Mandag 9/9", 
     monday_description_copenhagen: "kl. 16-22", 
     address: "Leveringsinfo:",
     extra: "Ekstra info:",
