@@ -312,7 +312,18 @@ const svText = {
     nextStepsDescription: "Har du startat en prenumeration har du nu ett aktivt konto. Du kan se detaljer och hantera din prenumeration på dina sidor.", 
     button: "Till mina sidor",
     contactTitle: "Några frågor?", 
-    contactDescription: "Tveka inte att kontakta oss på "
+    contactDescription: "Tveka inte att kontakta oss på ", 
+    feedbackTitle: "Hur hittade du oss?",
+    feedbackSubtitle: "Vi hade blivit så tacksamma om du vill ange hur du hittade till Saveabl :)",
+    options: {
+      friend: "Via en vän",
+      socialMedia: "Sociala medier",
+      other: "Annat"
+    },
+    placeholderOther: "Ange hur du hittade oss",
+    submitButton: "Skicka", 
+    thankYouTitle: "Stort tack!", 
+    thankYouDescription: "Tusen tack för hjälpen. Njut av middagarna! <3"
   },
   auth: {
     title1: "Logga in",
@@ -802,7 +813,18 @@ const enText = {
     nextStepsDescription: "If you have started a subscription, you now have an active account. You can view details and manage your subscription on your pages.", 
     button: "To my pages",
     contactTitle: "Any questions?", 
-    contactDescription: "Don't hesitate to contact us at "
+    contactDescription: "Don't hesitate to contact us at ", 
+    feedbackTitle: "How did you find us?",
+    options: {
+      friend: "Through a friend",
+      socialMedia: "Social media",
+      other: "Other"
+    },
+    placeholderOther: "Please specify how you found us",
+    feedbackSubtitle: "We would be so grateful if you could let us know how you found Saveabl :)", 
+    submitButton: "Send", 
+    thankYouTitle: "Thank you so much!", 
+    thankYouDescription: "We are so happy that you wanted to help us. Enjoy your dinners <3"
   },
   auth: {
     title1: "Log in",
@@ -1249,7 +1271,18 @@ const daText = {
     nextStepsDescription: "Har du startet et abonnement, har du nu en aktiv konto. Du kan se detaljer og administrere dit abonnement på dine sider.", 
     button: "Til mine sider",
     contactTitle: "Nogle spørgsmål?", 
-    contactDescription: "Tøv ikke med at kontakte os på "
+    contactDescription: "Tøv ikke med at kontakte os på ", 
+    feedbackTitle: "Hvordan fandt du os?",
+    feedbackSubtitle: "Vi ville være meget taknemmelige hvis du vil angive hvordan du fandt til Saveabl :)", 
+    options: {
+      friend: "Gennem en ven",
+      socialMedia: "Sociale medier",
+      other: "Andet"
+    },
+    placeholderOther: "Angiv hvordan du fandt os",
+    submitButton: "Send", 
+    thankYouTitle: "Stort tak!", 
+    thankYouDescription: "Vi er så glade for at du ville hjælpe os. Nyd middagerne <3"
   },
   auth: {
     title1: "Log ind",
