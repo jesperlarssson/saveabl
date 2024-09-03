@@ -162,8 +162,8 @@ const SuccessPage: React.FC = () => {
           .morot-image-container {
             width: 150px; /* Mindre storlek på bilden för mobil */
             height: 150px;
-            top: 620px; /* Annan placering för mobil */
-            right: -30px;
+            top: 580px; /* Annan placering för mobil */
+            right: -25px;
           }
         }
       `}</style>
