@@ -308,10 +308,11 @@ const svText = {
   success: {
     title: "Tack för din beställning!",
     description:
-      "Vi har nu mottagit din beställning. Leveransinformation kommer att skickas till ditt mobilnummer från vår partner Gordon Delivery när de planerat upp rutten. Har du frågor? Tveka inte att kontakta oss på hello@saveabl.se.",
-    recurring:
-      "Du har nu ett aktivt abonnemang. Du kan hantera ditt abonnemang på dina sidor. Leveransinformation kommer att skickas till ditt mobilnummer från vår partner Gordon Delivery när de planerat upp rutten. Har du frågor? Tveka inte att kontakta oss på hello@saveabl.se.",
+      "Vi har nu mottagit din beställning. Leveransinformation kommer att skickas till ditt mobilnummer från vår partner Gordon Delivery när de planerat upp rutten.",
+    nextStepsDescription: "Har du startat en prenumeration har du nu ett aktivt konto. Du kan se detaljer och hantera din prenumeration på dina sidor.", 
     button: "Till mina sidor",
+    contactTitle: "Några frågor?", 
+    contactDescription: "Tveka inte att kontakta oss på "
   },
   auth: {
     title1: "Logga in",
@@ -795,12 +796,13 @@ const enText = {
   },
 
   success: {
-    title: "Thank you for your order!",
+    title: "Thanks for your order!",
     description:
-      "We have now received your order. Delivery information will be sent to your mobile number from our partner Gordon Delivery when they have planned the route. Do you have any questions? Do not hesitate to contact us at hello@saveabl.se",
-    recurring:
-      "You now have an active subscription. You can manage your subscription on your pages. Delivery information will be sent to your mobile number from our partner Gordon Delivery when they have planned the route. Do you have any questions? Do not hesitate to contact us at hello@saveabl.se",
+      "We have now received your order. Delivery information will be sent to your mobile number from our partner Gordon Delivery when they have planned the route.",
+    nextStepsDescription: "If you have started a subscription, you now have an active account. You can view details and manage your subscription on your pages.", 
     button: "To my pages",
+    contactTitle: "Any questions?", 
+    contactDescription: "Don't hesitate to contact us at "
   },
   auth: {
     title1: "Log in",
@@ -1243,10 +1245,11 @@ const daText = {
   success: {
     title: "Tak for din bestilling!",
     description:
-      "Vi har nu modtaget din bestilling. Leveringsinformation sendes til dit mobilnummer fra vores partner Gordon Delivery, når de har planlagt ruten. Har du spørgsmål? Tøv ikke med at kontakte os på",
-    recurring:
-      "Du har nu et aktivt abonnement. Du kan administrere dit abonnement på dine sider. Leveringsinformation sendes til dit mobilnummer fra vores partner Gordon Delivery, når de har planlagt ruten. Har du spørgsmål? Tøv ikke med at kontakte os på hello@saveabl.se",
+      "Vi har nu modtaget din bestilling. Leveringsinformation sendes til dit mobilnummer fra vores partner Gordon Delivery, når de har planlagt ruten.",
+    nextStepsDescription: "Har du startet et abonnement, har du nu en aktiv konto. Du kan se detaljer og administrere dit abonnement på dine sider.", 
     button: "Til mine sider",
+    contactTitle: "Nogle spørgsmål?", 
+    contactDescription: "Tøv ikke med at kontakte os på "
   },
   auth: {
     title1: "Log ind",
