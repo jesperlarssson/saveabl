@@ -3,24 +3,27 @@
 import BodyText from "@/components/ui/BodyText";
 import Button from "@/components/ui/Button";
 import { useLang } from "@/hooks/useLang";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react"; // Importera useContext
 import { db } from '@/firebase/init'; // Använder init.ts
 import { collection, addDoc } from "firebase/firestore";
 import Image from 'next/image';
-import MatkasseImage from '../../public/images/illustrations/Matkasse.png';
+import { CheckoutContext } from "@/providers/CheckoutProvider"; // Importera CheckoutContext
 import morotImage from '../../public/images/illustrations/morot.png';
 
 const SuccessPage: React.FC = () => {
   const { text } = useLang();
+  const { state } = useContext(CheckoutContext); // Få åtkomst till checkout-information
   const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [otherText, setOtherText] = useState<string>("");
 
   const handleFeedback = async () => {
-    console.log("Firestore instance:", db);
+    const email = state.email; // Hämta e-posten från checkout-state
+
     const feedbackData = {
+      email: email, // Inkludera e-post i feedbackData
       source: selectedOption === text?.success?.options?.other ? otherText : selectedOption,
-      timestamp: Date.now()
+      timestamp: Date.now(),
     };
     
     try {
@@ -65,44 +68,40 @@ const SuccessPage: React.FC = () => {
           left: 50%;
           transform: translate(-50%, -50%);
         }
-        
+
         /* Ändra ramfärgen på inputfältet vid focus */
         input[type="text"]:focus {
           outline: none;
           border-color: #6E2936;
           box-shadow: 0 0 0 2px rgba(110, 41, 54, 0.5);
         }
-        
-        /* Gör rutan längre */
+
         input[type="text"] {
-          width: 100%; /* Full bredd inom sin container */
-          max-width: 320px; /* Sätter maxbredd för att göra rutan längre */
+          width: 100%; 
+          max-width: 320px;
           padding: 0.5rem;
           border: 2px solid #6E2936;
           border-radius: 5px;
-          box-sizing: border-box; /* Se till att padding inkluderas i bredden */
+          box-sizing: border-box;
         }
-        
-        /* Container som håller textfältet */
+
         .feedback-input-container {
           width: 100%;
           display: flex;
-          justify-content: flex-start; /* Vänstercentrerar textfältet på alla skärmar */
+          justify-content: flex-start;
         }
 
-        /* Placera alternativen under varandra */
         .feedback-options {
           display: flex;
-          flex-direction: column; /* Ändrar riktningen till kolumn för att placera alternativen vertikalt */
-          align-items: flex-start; /* Justerar innehållet till vänster */
+          flex-direction: column;
+          align-items: flex-start;
           width: 100%;
         }
 
         .feedback-options label {
-          margin-bottom: 1rem; /* Ger lite utrymme mellan alternativen */
+          margin-bottom: 1rem;
         }
 
-        /* Centrera översta delen på datorn */
         .centered-section {
           margin-bottom: 2rem;
         }
@@ -111,12 +110,11 @@ const SuccessPage: React.FC = () => {
           .centered-section {
             display: flex;
             flex-direction: column;
-            align-items: center; /* Centrera innehållet horisontellt */
+            align-items: center;
             text-align: center;
           }
         }
 
-        /* Centrera knappen "Till mina sidor" på datorn */
         .centered-button {
           display: flex;
           justify-content: center;
@@ -124,11 +122,10 @@ const SuccessPage: React.FC = () => {
         }
 
         .centered-button .button {
-          max-width: 200px; /* Sätt maxbredd för att hålla knappen liten */
+          max-width: 200px;
           width: 100%;
         }
 
-        /* Vänsterjustera knappen "Skicka" */
         .left-aligned-buttons {
           display: flex;
           justify-content: flex-start;
@@ -136,40 +133,39 @@ const SuccessPage: React.FC = () => {
         }
 
         .left-aligned-buttons .button {
-          max-width: 200px; /* Sätt maxbredd för att hålla knappen liten */
+          max-width: 200px;
           width: 100%;
         }
-        /* Stil för bildcontainer */
+
         .morot-image-container {
-          position: absolute; /* Gör bilden absolut placerad */
-          top: 640px; /* Justerar placeringen beroende på var du vill ha bilden */
-          right: 40px; /* Flyttar bilden ut till höger */
-          z-index: 0; /* Ser till att bilden ligger bakom texten */
-          opacity: 0.8; /* Gör bilden transparent så att den inte tar över sidan */
+          position: absolute;
+          top: 640px;
+          right: 40px;
+          z-index: 0;
+          opacity: 0.8;
         }
-        /* Anpassa bildstorlek och position för dator */
+
         @media (min-width: 641px) {
           .morot-image-container {
-            width: 500px; /* Storlek på bilden för dator */
+            width: 500px;
             height: 500px;
-            top: 450px; /* Placering på dator */
+            top: 450px;
             right: -200px;
           }
         }
 
-        /* Anpassa bildstorlek och position för mobil */
         @media (max-width: 640px) {
           .morot-image-container {
-            width: 150px; /* Mindre storlek på bilden för mobil */
+            width: 150px;
             height: 150px;
-            top: 610px; /* Annan placering för mobil */
+            top: 610px;
             right: -25px;
           }
         }
       `}</style>
 
       <div className="flex items-center mt-10 justify-center px-4">
-        <div className="max-w-3xl flex flex-col items-start text-left"> {/* Texten är vänstercentrerad */}
+        <div className="max-w-3xl flex flex-col items-start text-left">
           <div className="centered-section">
             <h1 className="w-full text-3xl sm:text-4xl font-bold" style={{ color: '#6E2936' }}>
               {text?.success?.title ?? "Tack för din beställning!"}
@@ -186,33 +182,31 @@ const SuccessPage: React.FC = () => {
             </BodyText>
             
             <div className="centered-buttons mt-6 mb-2">
-  <Button
-    onClick={() => window.location.href = "https://www.saveabl.com/mina-sidor"}
-    className="button"
-    style={{
-      backgroundColor: "#6E2936",
-      color: "#FFFFFF",
-      width: "auto", // Säkerställer att knappen inte sträcker sig utanför innehållets bredd
-      maxWidth: "340px", // Sätter maxbredd till en mindre storlek
-      padding: "10px 110px", // Justerar padding för att få en mindre knapp
-    }}
-  >
-    {text?.success?.button ?? "Gå till Mina sidor"}
-  </Button>
-</div>
+              <Button
+                onClick={() => window.location.href = "https://www.saveabl.com/mina-sidor"}
+                className="button"
+                style={{
+                  backgroundColor: "#6E2936",
+                  color: "#FFFFFF",
+                  width: "auto",
+                  maxWidth: "340px",
+                  padding: "10px 110px",
+                }}
+              >
+                {text?.success?.button ?? "Gå till Mina sidor"}
+              </Button>
+            </div>
           </div>
 
-          {/* Lägg till bilden som ligger bakom texten */}
           <div className="morot-image-container">
-              <Image
-                src={morotImage}
-                alt="morot"
-                layout="fixed"
-                width={150}
-                height={150}
-              />
-            </div>
-      
+            <Image
+              src={morotImage}
+              alt="morot"
+              layout="fixed"
+              width={150}
+              height={150}
+            />
+          </div>
 
           {!feedbackSubmitted ? (
             <>
@@ -271,25 +265,25 @@ const SuccessPage: React.FC = () => {
                 </div>
               )}
 
-<div className="left-aligned-buttons mt-6 mb-4">
-  <Button
-    onClick={handleFeedback}
-    className="button"
-    style={{
-      backgroundColor: "#6E2936",
-      color: "#FFFFFF",
-      width: "auto", // Detta säkerställer att knappen inte sträcker sig utanför innehållets bredd
-      maxWidth: "340px", // Sätter maxbredd till en mindre storlek
-      padding: "10px 135px", // Justerar padding för att få en mindre knapp
-    }}
-    disabled={
-      !selectedOption ||
-      (selectedOption === (text?.success?.options?.other ?? "Annat") && !otherText)
-    }
-  >
-    {text?.success?.submitButton ?? "Skicka"}
-  </Button>
-</div>
+              <div className="left-aligned-buttons mt-6 mb-4">
+                <Button
+                  onClick={handleFeedback}
+                  className="button"
+                  style={{
+                    backgroundColor: "#6E2936",
+                    color: "#FFFFFF",
+                    width: "auto",
+                    maxWidth: "340px",
+                    padding: "10px 135px",
+                  }}
+                  disabled={
+                    !selectedOption ||
+                    (selectedOption === (text?.success?.options?.other ?? "Annat") && !otherText)
+                  }
+                >
+                  {text?.success?.submitButton ?? "Skicka"}
+                </Button>
+              </div>
             </>
           ) : (
             <div className="mt-2">
@@ -319,7 +313,3 @@ const SuccessPage: React.FC = () => {
 };
 
 export default SuccessPage;
-
-
-
-

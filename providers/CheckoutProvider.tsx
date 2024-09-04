@@ -89,7 +89,7 @@ const initialState: UserInformation =
           localStorage.getItem("deliveryWindow") ||
             '{"start": null, "end": null}'
         ),
-        email: null,
+        email: JSON.parse(localStorage.getItem("email") || "null"),
         password: null,
         deliveryPeriodId: JSON.parse(
           localStorage.getItem("deliveryPeriodId") || "null"
@@ -243,6 +243,7 @@ export const CheckoutProvider: React.FC<CheckoutProviderProps> = ({
 
   useEffect(() => {
     localStorage.setItem("name", JSON.stringify(state.name));
+    localStorage.setItem("email", JSON.stringify(state.email)); 
     localStorage.setItem("productId", JSON.stringify(state.productId));
     localStorage.setItem(
       "deliveryWindow",
