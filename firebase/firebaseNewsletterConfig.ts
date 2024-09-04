@@ -1,6 +1,4 @@
-// firebaseNewsletterConfig.ts
-
-import { initializeApp } from 'firebase/app';
+import { initializeApp, getApps, getApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
@@ -12,10 +10,15 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_NEWSLETTER_FIREBASE_APP_ID,
 };
 
-// Initialisera Firebase-appen med konfigurationen för nyhetsbrevet
-const newsletterApp = initializeApp(firebaseConfig, 'newsletterApp');
+// Kontrollera om nyhetsbrevsappen redan är initierad, annars initiera den med ett specifikt namn
+let newsletterApp;
+if (!getApps().some((app) => app.name === "newsletterApp")) {
+  newsletterApp = initializeApp(firebaseConfig, "newsletterApp");
+} else {
+  newsletterApp = getApp("newsletterApp");
+}
 
-// Hämta Firestore-databasreferensen för nyhetsbrevet
 const db = getFirestore(newsletterApp);
 
 export { db };
+

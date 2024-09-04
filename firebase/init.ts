@@ -1,6 +1,6 @@
-import { initializeApp, getApps, getApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
+import { initializeApp, getApps, getApp } from 'firebase/app';
+import { getAuth } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -11,9 +11,15 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
+// Kontrollera om en app med namnet "mainApp" redan finns, annars initiera en ny
+let app;
+if (!getApps().some((app) => app.name === "mainApp")) {
+  app = initializeApp(firebaseConfig, "mainApp");
+} else {
+  app = getApp("mainApp");
+}
 
-const db = getFirestore(app);
 const auth = getAuth(app);
+const db = getFirestore(app);
 
 export { db, auth };
