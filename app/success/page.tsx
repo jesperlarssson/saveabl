@@ -3,32 +3,39 @@
 import BodyText from "@/components/ui/BodyText";
 import Button from "@/components/ui/Button";
 import { useLang } from "@/hooks/useLang";
-import React, { useState, useContext } from "react"; // Importera useContext
-import { db } from '@/firebase/init'; // Använder init.ts
-import { collection, addDoc } from "firebase/firestore";
+import React, { useState, useContext } from "react"; 
+import { db } from '@/firebase/init'; 
+import { collection, doc, setDoc } from "firebase/firestore"; 
 import Image from 'next/image';
-import { CheckoutContext } from "@/providers/CheckoutProvider"; // Importera CheckoutContext
+import { CheckoutContext } from "@/providers/CheckoutProvider"; 
 import morotImage from '../../public/images/illustrations/morot.png';
 
 const SuccessPage: React.FC = () => {
   const { text } = useLang();
-  const { state } = useContext(CheckoutContext); // Få åtkomst till checkout-information
+  const { state } = useContext(CheckoutContext); 
   const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [otherText, setOtherText] = useState<string>("");
 
   const handleFeedback = async () => {
-    const email = state.email; // Hämta e-posten från checkout-state
+    // Säkerställ att email inte är null
+    const email = state.email; 
+
+    // Om email är null, visa ett felmeddelande eller returnera för att förhindra vidare körning
+    if (!email) {
+      console.error("Ingen e-postadress tillgänglig.");
+      return;
+    }
 
     const feedbackData = {
       email: email, // Inkludera e-post i feedbackData
       source: selectedOption === text?.success?.options?.other ? otherText : selectedOption,
-      timestamp: Date.now(),
+      timestamp: Date.now(), // Timestamp för sortering
     };
     
     try {
-      const feedbackCollectionRef = collection(db, "feedback"); 
-      await addDoc(feedbackCollectionRef, feedbackData); 
+      const feedbackDocRef = doc(db, "feedback", email); // Använd e-posten som dokument-ID
+      await setDoc(feedbackDocRef, feedbackData); // Spara feedback med setDoc
       setFeedbackSubmitted(true);
     } catch (error) {
       console.error('Error saving feedback:', error);
@@ -69,7 +76,6 @@ const SuccessPage: React.FC = () => {
           transform: translate(-50%, -50%);
         }
 
-        /* Ändra ramfärgen på inputfältet vid focus */
         input[type="text"]:focus {
           outline: none;
           border-color: #6E2936;
