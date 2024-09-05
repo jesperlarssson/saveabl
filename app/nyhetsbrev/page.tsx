@@ -288,7 +288,7 @@ const NewsletterForm = () => {
   
     .page-title {
       font-size: 23px;
-      margin-top: 35px;
+      margin-top: 25px;
       margin-bottom: 10px;
       text-align: left;
       line-height: 1.3;
@@ -296,7 +296,7 @@ const NewsletterForm = () => {
   
     .page-subtitle {
       font-size: 18px;
-      margin-top: 5px;
+      margin-top: 10px;
       margin-bottom: 20px;
       text-align: left;
     }
@@ -384,7 +384,7 @@ const NewsletterForm = () => {
     /* CSS för svenska */
     .visste-du-att-image.sv {
       position: absolute;
-      top: 117px;
+      top: 105px;
       left: -7px;
       width: 180px;
       z-index: 1;
@@ -393,7 +393,7 @@ const NewsletterForm = () => {
     /* CSS för engelska */
     .visste-du-att-image.en {
       position: absolute;
-      top: 117px;
+      top: 110px;
       left: 2px;
       width: 230px;
       z-index: 1;
@@ -402,7 +402,7 @@ const NewsletterForm = () => {
     /* CSS för danska */
     .visste-du-att-image.da {
       position: absolute;
-      top: 117px;
+      top: 105px;
       left: -10px;
       width: 180px;
       z-index: 1;
