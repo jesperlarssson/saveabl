@@ -316,7 +316,7 @@ const NewsletterForm = () => {
   
     .additional-section h2 {
       color: #6e2936;
-      font-size: 24px;
+      font-size: 23px;
       font-weight: bold;
       margin-bottom: 7px;
       margin-top: 10px;
@@ -367,7 +367,12 @@ const NewsletterForm = () => {
     }
   
     .morot-image-container {
-      display: none;
+    position: absolute;
+    top: 80px;
+    left: 330px;
+    width: 60px;
+    height: 60px;
+    z-index: 10; 
     }
   
     .thank-you h2 {
