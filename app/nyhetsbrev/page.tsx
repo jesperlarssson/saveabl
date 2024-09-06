@@ -318,7 +318,7 @@ const NewsletterForm = () => {
       color: #6e2936;
       font-size: 24px;
       font-weight: bold;
-      margin-bottom: 10px;
+      margin-bottom: 7px;
       margin-top: 10px;
     }
   
