@@ -119,9 +119,6 @@ const Order = () => {
   };
 
   const selectDeliveryDay = (day: any) => {
-    // toast.success(
-    //   `Du har valt ${day.label} som leveransdag med start: ${day.start} och slut: ${day.end}`
-    // );
     const selectedDay = new Date(0);
     selectedDay.setUTCSeconds(day.start);
   };
@@ -151,7 +148,6 @@ const Order = () => {
   const router = useRouter();
 
   const updateWeekdaysList = (deliveryWindows: any) => {
-    // Temp array to keep track of unique weekdays and their day numbers
     const tempWeekdaysWithDays: { weekday: string; days: number[] }[] = [];
 
     deliveryWindows.windows.forEach((window: any) => {
@@ -159,7 +155,6 @@ const Order = () => {
       const weekday = date.toLocaleDateString("sv-SE", { weekday: "long" });
       const day = date.getDay();
 
-      // Skip Tuesdays for now
       if (day === 2) {
         return;
       }
@@ -175,7 +170,6 @@ const Order = () => {
       }
     });
 
-    // Update the state variable
     setWeekdaysWithDays(tempWeekdaysWithDays);
   };
 
@@ -183,15 +177,12 @@ const Order = () => {
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     const zipCode = e.target.value;
-    //remove all non numeric characters
     const zipCodeClean = zipCode.replace(/\D/g, "");
     if (zipCodeClean.length === 4) {
       setPostalCode(zipCodeClean);
   
-      // Kontrollera om postnumret är ett Köpenhamns-postnummer
       if (shippingDk.includes(zipCodeClean)) {
         setShowDeliveryOptions(true);
-        // Hämta leveransfönster för Köpenhamn
         try {
           const deliveryWindows = await getDeliveryWindowsForPostalCode(zipCodeClean, "dk");
           updateWeekdaysList(deliveryWindows.windows);
@@ -201,14 +192,13 @@ const Order = () => {
         } catch (error) {
           setDeliveryWindowsErrors("Något gick fel. Kontrollera postkoden!");
         }
-        setIsDk(true); // Om Köpenhamn räknas som danskt
+        setIsDk(true);
         return;
       }
     }
     if (zipCodeClean.length === 5) {
       setPostalCode(zipCodeClean);
       setShowDeliveryOptions(true);
-      //TODO: Actions get delivery windows available
       try {
         const deliveryWindows = await getDeliveryWindowsForPostalCode(
           zipCode,
@@ -248,8 +238,8 @@ const Order = () => {
       shippingDk.includes(address.postalCode)
     ) {
       setIsDk(true);
-      setShowLinks(false); // Ta bort länkar för danska postnummer
-      setShowAddressFields(true); // Visa adressfält
+      setShowLinks(false);
+      setShowAddressFields(true);
     } 
     else {
       setShowLinks(false);
@@ -284,12 +274,10 @@ const Order = () => {
   } = useCheckout();
 
   const handleConfirm = async () => {
-    // Ställ in vilket land som ska användas
     const country = isDk ? "DK" : "SE";
     setCountry(country);
     setStripeCheckoutIsLoading(true);
 
-    //Validate form
     const errors: FormError = {
       name: null,
       address: null,
@@ -381,16 +369,11 @@ const Order = () => {
         description: `Vald leverans: ${getDayLabelFromId(
           selectedWeekday
         )} Extra info: ${userInformation.extraInfo}`,
-        // description: `Vald leverans: ${formatEpochToTimeString({
-        //   start: deliveryWindow?.start || undefined,
-        //   end: deliveryWindow?.end || undefined,
-        // })} Extra info: ${userInformation.extraInfo}`,
         phone: userInformation.phone,
         extraInfo: userInformation.extraInfo,
       });
       const stripeUserId = response.data.stripeUser.id;
       const shippingPriceId = getShippingCostForProductId(productId);
-      // create checkout session
       const sessionResponse = await axios.post("/api/checkout_sessions", {
         customerId: stripeUserId,
         mode: isSubscription(productId) ? "subscription" : "payment",
@@ -485,12 +468,6 @@ const Order = () => {
             >
               {id === "1" ? text.order.button1 : text.order.button2}
             </button>
-            {/* {shippingCostInfo && (
-            <div className="mt-2 font-bold text-secondary">
-              {" "}
-              Din fraktkostnad: {shippingCostInfo}
-            </div>
-          )} */}
           </div>
 
           <div className="my-8 max-w-4xl w-full h-1 border-b border-primary border-opacity-50"></div>
@@ -526,11 +503,10 @@ const Order = () => {
                     >
                       {productType.label}
                       <br />
-                      <span className="text-xs">{productType.recipes}</span> {/* Visa antal recept */}
+                      <span className="text-xs">{productType.recipes}</span>
                       <br />
-                      <span className="text-xs">{productType.persons}</span> {/* Visa antal personer */}
-                      </CheckoutButton>
-                   
+                      <span className="text-xs">{productType.persons}</span>
+                    </CheckoutButton>
                   );
                 })}
               </div>
@@ -556,8 +532,8 @@ const Order = () => {
                         ? variant.stockholmPriceId === productId
                         : skaneCustomer
                           ? variant.skanePriceId === productId
-                          : dkCustomer // Kontrollera om det är danskt postnummer
-                            ? variant.danishPriceId === productId // Lägg till en variant för danska priser
+                          : dkCustomer 
+                            ? variant.danishPriceId === productId
                             : variant.priceId === productId
                       }
                       onClick={() =>
@@ -609,7 +585,6 @@ const Order = () => {
                     >
                       {text.order.deliveryDay}
                     </h3>
-                    {/** TODO: Doesn't work for all zips */}
 
                     <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap">
                       <AnimatePresence mode="wait">
@@ -639,106 +614,8 @@ const Order = () => {
                             </CheckoutButton>
                           </motion.div>
                         ))}
-
-                        {/* {deliveryWindowsErrors &&
-                        deliveryWindows.length == 0 ? (
-                          <motion.div
-                            key="error"
-                            initial={{ opacity: 0, y: -10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -10 }}
-                            className="px-8 py-4 bg-primary text-primary-600 bg-opacity-30 rounded-md"
-                          >
-                            <p className="font-poppins text-md">
-                              {deliveryWindowsErrors}
-                            </p>
-                          </motion.div>
-                        ) : (
-                          weekdaysWithDays.map((day: any, index: number) => (
-                            <motion.div
-                              key={day.label}
-                              initial={{ opacity: 0, y: -10 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              exit={{ opacity: 0, y: -10 }}
-                              transition={{ delay: 0.15 * index }}
-                            >
-                              <CheckoutButton
-                                className="capitalize"
-                                selected={selectedWeekday == day.days[0]}
-                                onClick={() => {
-                                  if (selectedWeekday == day.days[0]) {
-                                    setSelectedWeekday(null);
-                                    return;
-                                  }
-                                  setSelectedWeekday(day.days[0]);
-                                }}
-                              >
-                                {day.weekday}
-                              </CheckoutButton>
-                            </motion.div>
-                          ))
-                        )} */}
                       </AnimatePresence>
                     </div>
-                    {/* {selectedWeekday != null && (
-                      <>
-                        <h3 className="font-poppins text-lg mt-4 text-secondary">
-                          När vill du ha din matkasse?
-                        </h3>
-                        <div className="flex gap-4 flex-wrap max-w-xl mb-6">
-                          <AnimatePresence mode="wait">
-                            {deliveryWindows
-                              .filter(({ start }) => {
-                                // Convert UTC seconds to milliseconds and create Date object
-                                const date = new Date(start * 1000);
-                                // Return whether the day of the week matches the target weekday
-                                return date.getDay() === selectedWeekday;
-                              })
-                              .map((window: any, index: number) => (
-                                <motion.div
-                                  key={window.label}
-                                  initial={{ opacity: 0, y: -10 }}
-                                  animate={{ opacity: 1, y: 0 }}
-                                  exit={{ opacity: 0, y: -10 }}
-                                  transition={{ delay: 0.15 * index }}
-                                >
-                                  <CheckoutButton
-                                    selected={
-                                      deliveryWindow?.start == window.start
-                                    }
-                                    onClick={() => {
-                                      if (
-                                        deliveryWindow?.start == window.start
-                                      ) {
-                                        setDeliveryWindow(null);
-                                        return;
-                                      }
-                                      setDeliveryWindow(window);
-                                    }}
-                                  >
-                                    {window.label}
-                                  </CheckoutButton>
-                                </motion.div>
-                              ))}
-                            {selectedWeekday === null ||
-                            ![0, 1, 6].includes(selectedWeekday!) ||
-                            deliveryWindows.length == 0 ? (
-                              <motion.div
-                                key="error"
-                                initial={{ opacity: 0, y: -10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -10 }}
-                                className="px-8 py-4 bg-primary text-primary-600 bg-opacity-30 rounded-md"
-                              >
-                                <p className="font-poppins text-md">
-                                  Välj en leveransdag först
-                                </p>
-                              </motion.div>
-                            ) : null}
-                          </AnimatePresence>
-                        </div>
-                      </>
-                    )} */}
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -802,8 +679,10 @@ const Order = () => {
                   onChange={(e) => setPhone(e.target.value)}
                   id="phone"
                   label={text.order.phonenumber}
-                  type="text"
-                  placeholder="0701234567"
+                  type="tel"
+                  inputMode="tel"  // Allows the phone keypad on mobile devices
+                  pattern="[\+]*[0-9\- ]*"  // This pattern allows an optional "+" followed by numbers
+                  placeholder=""
                   parentClassName="col-span-2 -mt-2"
                   error={formErrors.phone}
                 />
@@ -824,7 +703,6 @@ const Order = () => {
                   error={formErrors.password}
                 />
               </div>
-              {/* Checkbox */}
               <div className="w-full px-2 my-4">
                 <label className="">
                   <input
@@ -857,7 +735,6 @@ const Order = () => {
         </div>
       )}
       <div id="vanliga-fragor">
-        {/* Använd dina FAQ-frågor från text.about_us.faqItems */}
         <Accordion faqs={text.order.faqItems} title={text.order.faq} />
       </div>
     </>
