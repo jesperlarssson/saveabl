@@ -39,12 +39,12 @@ export const priceIdStockholmEveryOtherWeekSambo =
  export const priceIdStockholmStandardSambo = "price_1PpS0MEhPZIzKmuia0jpXicc";
 
 
-export const priceIdSkaneEveryWeek = "price_1PpRu2EhPZIzKmuinWGZBdiX";
+export const priceIdSkaneEveryWeek = "price_1PDOpXEhPZIzKmuiIXimOxOH";
 export const priceIdSkaneEveryOtherWeek =
  "price_1PDOr7EhPZIzKmui4MUY0nvi";
 export const priceIdSkaneStandard = "price_1PDOthEhPZIzKmuiqiW23r7x";
 export const priceIdSkaneStandard8Portions = "price_1PDOv0EhPZIzKmuiDcrV96Sz";
-export const priceIdSkaneEveryWeekSambo = "price_1P4PcfEhPZIzKmuigZevK5c2";
+export const priceIdSkaneEveryWeekSambo = "price_1PxUJQEhPZIzKmuimedluh0N";
 export const priceIdSkaneEveryOtherWeekSambo =
  "price_1PpRweEhPZIzKmuinrNVWFZ6";
  export const priceIdSkaneStandardSambo = "price_1PpRz2EhPZIzKmuia3MD9OxT";

@@ -252,7 +252,7 @@ const svText = {
     bullet1: "",
     bullet2: "",
     bullet3: "",
-    type: "Gör dina val nedan (utan bindningstid på samtliga):",
+    type: "Gör dina val - utan bindningstid på samtliga:",
     variant: "Välj hur ofta du vill få din matkasse:",
     deliveryDay: "Välj leveransdag:",
     delivery_saturday: "Lördag 14/9",
@@ -285,6 +285,11 @@ const svText = {
     email_example: "E-post",
     password: "Lösenord",
     password_example: "Lösenord",
+    step1_button: "Leveransdag", 
+    back_button: "Tillbaka", 
+    step2_button: "Leveransinfo", 
+    loading: "Laddar...", 
+    pay: "Till betalning", 
     faq: "Frågor som kan uppstå:",
     faqItems: [ 
       {
@@ -757,7 +762,7 @@ const enText = {
     bullet1: "👨‍🍳 Vegetarian meal kit with the chef included.",
     bullet2: "👨‍👩‍👧‍👦 Dinner for the whole family in just 15 minutes.",
     bullet3: "✅ No binding period, cancel whenever you want.",
-    type: "Make your selections below (without commitment on any):",
+    type: "Make your selections - without commitment on any:",
     variant: "Choose how often you want to receive your meal kit:",
     deliveryDay: "Choose day of delivery:",
     delivery_saturday: "Saturday 14/9",
@@ -790,6 +795,11 @@ const enText = {
     email_example: "Mail address",
     password: "Password",
     password_example: "Password",
+    step1_button: "Delivery day", 
+    back_button: "Back", 
+    step2_button: "Delivery info", 
+    loading: "Loading...", 
+    pay: "Payment", 
     faq: "Questions that may arise:",
     faqItems: [ 
       {
@@ -1228,7 +1238,7 @@ const daText = {
     bullet1: "👨‍🍳 Vegetarkassen med kokken inkluderet.",
     bullet2: "👨‍👩‍👧‍👦  Aftensmad till hele familien på blot 15 min.",
     bullet3: "✅  Ingen bindingsperiode, opsig når du vil.",
-    type: "Gør dine valg nedenfor (uden bindingstid på alle):",
+    type: "Gør dine valg - uden bindingstid på alle:",
     variant: "Vælg hvor ofte du vil modtage din madkasse:",
     deliveryDay: "Næste tilgængelige leveringsdato:",
     copenhagen_monday: "Mandag 16/9", 
@@ -1251,6 +1261,11 @@ const daText = {
     email_example: "E-mail",
     password: "Adgangskode",
     password_example: "Adgangskode",
+    step1_button: "Leveringsdato", 
+    back_button: "Tilbage", 
+    step2_button: "Levereringsinfo", 
+    loading: "Indlæser...", 
+    pay: "Til betaling", 
     faq: "Spørgsmål der kan opstå:",
     faqItems: [ 
       {
