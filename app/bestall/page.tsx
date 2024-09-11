@@ -13,6 +13,8 @@ import Title from "@/components/ui/Title";
 import CheckoutSection from "@/components/ui/CheckoutSection";
 import getDeliveryWindowsForPostalCode from "@/actions/getDeliveryWindowsForPostalCode";
 import { UserInformation } from "@/providers/CheckoutProvider";
+import OrderWizard from './OrderWizard';
+import OrderSummary from './OrderSummary'; 
 import {
   getProductCostForPriceId,
   getShippingCostForProductId,
@@ -60,6 +62,12 @@ const Order = () => {
 
   const { text, lang } = useLang();
 
+  
+  const [selectedVariant, setSelectedVariant] = useState<string | null>(null); // Hur ofta matkassen ska levereras
+  const [selectedDay, setSelectedDay] = useState<any>(null); // Kan lagra hela objektet
+
+
+
   const [showDeliveryOptions, setShowDeliveryOptions] = useState(false);
   const [showAddressFields, setShowAddressFields] = useState(false);
   const [stripeCheckoutIsLoading, setStripeCheckoutIsLoading] = useState(false);
@@ -71,6 +79,8 @@ const Order = () => {
   useEffect(() => {
     setProductTypes(getProductTypesFromLngCode(lang));
   }, [lang]);
+
+  
 
   const searchParams = useSearchParams();
   const id = searchParams?.get("id") || "1";
@@ -447,7 +457,7 @@ const Order = () => {
           <BodyText className="text-center max-w-3xl mb-10">
             {id === "1" ? "" : text.order.text}
           </BodyText>
-
+  
           <div className="my-8 max-w-4xl w-full h-1 border-b border-primary border-opacity-50"></div>
           <div className="flex flex-col items-center my-4">
             <label
@@ -469,7 +479,7 @@ const Order = () => {
               {id === "1" ? text.order.button1 : text.order.button2}
             </button>
           </div>
-
+  
           <div className="my-8 max-w-4xl w-full h-1 border-b border-primary border-opacity-50"></div>
           {showLinks && (
             <>
@@ -487,263 +497,306 @@ const Order = () => {
               />
             </>
           )}
+          
           {showAddressFields && (
-            <CheckoutSection title={text.order.linkTitle}>
-              <h3 className="font-poppins text-lg text-secondary ">
-                {text.order.type}
-              </h3>
-              <div className="flex gap-4">
-                {productTypes.map((productType) => {
-                  return (
-                    <CheckoutButton
-                      key={productType.label}
-                      selected={productType.id === selectedType.id}
-                      onClick={() => setSelectedType(productType)}
-                      className="w-full sm:w-auto"
-                    >
-                      {productType.label}
-                      <br />
-                      <span className="text-xs">{productType.recipes}</span>
-                      <br />
-                      <span className="text-xs">{productType.persons}</span>
-                    </CheckoutButton>
-                  );
-                })}
-              </div>
-              <h3
-                key="interval-title"
-                className="font-poppins text-lg mt-6 text-secondary text-left"
-              >
-                {text.order.variant}
-              </h3>
-              <div className="flex flex-col sm:flex-row gap-4 mb-4 max-w-full sm:max-w-xxs">
-                {selectedType.variants.map((variant: any) => {
-                  const postalCode = address.postalCode || "";
-                  const sthlmCustomer =
-                    stockholmPostalCodes.includes(postalCode);
-                  const skaneCustomer = shippingCostStage3.includes(postalCode);
-                  const dkCustomer = shippingDk.includes(postalCode);
-
-                  return (
-                    <CheckoutButton
-                    key={variant.label}
-                    selected={
-                      sthlmCustomer
-                        ? variant.stockholmPriceId === productId
-                        : skaneCustomer
-                          ? variant.skanePriceId === productId
-                          : dkCustomer 
+            
+            <OrderWizard 
+            handleConfirm={handleConfirm}
+            stripeCheckoutIsLoading={stripeCheckoutIsLoading}
+            selectedType={selectedType} // Matkasse-val
+            selectedVariant={selectedVariant} // Hur ofta-val
+            selectedDay={selectedDay} // Leveransdag
+             >
+              {/* Steg 1: Välj matkasse */}
+              <>
+              <h1 className="font-bold font-poppins text-secondary text-3xl sm:text-5xl max-w-4xl mb-4 col-span-2 px-2">
+               {text.order.linkTitle}
+               </h1>
+                  <h3 className="font-poppins text-lg text-secondary px-2">
+                    {text.order.type}
+                  </h3> 
+                  <div className="flex gap-4 px-2">
+                    {productTypes.map((productType) => {
+                      return (
+                        <CheckoutButton
+                          key={productType.label}
+                          selected={productType.id === selectedType.id}
+                          onClick={() => setSelectedType(productType)}
+                          className="w-full sm:w-auto"
+                        >
+                          {productType.label}
+                          <br />
+                          <span className="text-xs">{productType.recipes}</span>
+                          <br />
+                          <span className="text-xs">{productType.persons}</span>
+                        </CheckoutButton>
+                      );
+                    })}
+                  </div>
+                
+  
+                <h3
+                  key="interval-title"
+                  className="font-poppins text-lg mt-6 text-secondary text-left px-2"
+                >
+                  {text.order.variant}
+                </h3>
+                <div className="flex flex-col sm:flex-row gap-4 mb-4 max-w-full sm:max-w-xxs px-2">
+                  {selectedType.variants.map((variant: any) => {
+                    const postalCode = address.postalCode || "";
+                    const sthlmCustomer = stockholmPostalCodes.includes(postalCode);
+                    const skaneCustomer = shippingCostStage3.includes(postalCode);
+                    const dkCustomer = shippingDk.includes(postalCode);
+  
+                    return (
+                      <CheckoutButton
+                        key={variant.label}
+                        selected={
+                          sthlmCustomer
+                            ? variant.stockholmPriceId === productId
+                            : skaneCustomer
+                            ? variant.skanePriceId === productId
+                            : dkCustomer
                             ? variant.danishPriceId === productId
                             : variant.priceId === productId
-                      }
-                      onClick={() =>
-                        setProductId(
-                          sthlmCustomer
-                            ? variant.stockholmPriceId
-                            : skaneCustomer
+                        }
+                        onClick={() => {
+                          setProductId(
+                            sthlmCustomer
+                              ? variant.stockholmPriceId
+                              : skaneCustomer
                               ? variant.skanePriceId
-                              : dkCustomer 
-                                ? variant.danishPriceId 
-                                : variant.priceId
-                        )
-                      }
-                      disabled={variant.disabled}
-                      className="mt-2 mb-0 max-w-full max-w-md"
-                  
-                    >
-                    <span className="text-center">{variant.label}</span>
-                      <br />
-                      <span className="text-xs text-center">
-                        {getProductCostForPriceId(
-                          sthlmCustomer
-                            ? variant.stockholmPriceId
-                            : skaneCustomer
+                              : dkCustomer
+                              ? variant.danishPriceId
+                              : variant.priceId
+                          );
+                          setSelectedVariant(variant); // Uppdatera selectedVariant när användaren gör ett val
+                        }}
+                        disabled={variant.disabled}
+                        className="mt-2 mb-0 max-w-full max-w-md"
+                      >
+                        <span className="text-center">{variant.label}</span>
+                        <br />
+                        <span className="text-xs text-center">
+                          {getProductCostForPriceId(
+                            sthlmCustomer
+                              ? variant.stockholmPriceId
+                              : skaneCustomer
                               ? variant.skanePriceId
-                              : dkCustomer 
-                                ? variant.danishPriceId 
+                              : dkCustomer
+                              ? variant.danishPriceId
                               : variant.priceId,
-                          lang
-                        )}
-                      </span>
-                    </CheckoutButton>
-                  );
-                })}
-              </div>
-              <AnimatePresence mode="wait">
-                {showDeliveryOptions && (
-                  <motion.div
-                    key="delivery-options"
-                    initial="closed"
-                    animate="open"
-                    exit="closed"
-                    variants={variants}
-                    className="mt-2 mb-4"
-                  >
-                    <h3
-                      key="title-delivery"
-                      className="font-poppins mt-6 text-lg text-secondary"
-                    >
-                      {text.order.deliveryDay}
-                    </h3>
-
-                    <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap">
-                      <AnimatePresence mode="wait">
-                        {deliveryDaysToChoose.map((day: any, index: number) => (
-                          <motion.div
-                            key={day.label}
-                            initial={{ opacity: 0, y: -10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -10 }}
-                            transition={{ delay: 0.15 * index }}
-                          >
-                            <CheckoutButton
-                              className="mt-2 mb-0 w-full max-w-md"
-                              selected={selectedWeekday == day.id}
-                              onClick={() => {
-                                if (selectedWeekday == day.id) {
-                                  setSelectedWeekday(null);
-                                  setDeliveryWindow(null);
-                                  return;
-                                }
-                                setSelectedWeekday(day.id);
-                                setDeliveryWindow(day);
-                              }}
-                            >
-                              {day.label}
-                              <p className="text-xs mt-1">{day.description}</p>
-                            </CheckoutButton>
-                          </motion.div>
-                        ))}
-                      </AnimatePresence>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-              <label
-                htmlFor="address"
-                className="font-poppins mt-8 text-lg mb-2 text-secondary"
-              >
-                {text.order.address}
-              </label>
-              <div className="grid grid-cols-2 gap-4 items-start my-2">
-                <Input
-                  label={text.order.full_name}
-                  onChange={(e) => setName(e.target.value)}
-                  type="text"
-                  parentClassName="col-span-2"
-                  id="name"
-                  placeholder={text.order.name_example}
-                  error={formErrors.name}
-                />
-
-                <Input
-                  label={text.order.delivery_address}
-                  onChange={(e) => setStreetAddress(e.target.value)}
-                  type="text"
-                  id="address"
-                  placeholder="Klimatgatan 1"
-                  error={formErrors.address}
-                />
-                <Input
-                  label={text.order.city}
-                  onChange={(e) => setCity(e.target.value)}
-                  type="text"
-                  id="city"
-                  placeholder={text.order.city_example}
-                  error={formErrors.city}
-                />
-                <div className="w-full col-span-2 -mt-4">
-                  <label
-                    htmlFor="extraInfo"
-                    className={twMerge(
-                      `block w-full text-md font-bold text-primary-600 ml-1 px-1 max-w-fit bg-primary-200 translate-y-3 transition`
-                    )}
-                  >
-                    {text.order.extra_info}
-                  </label>
-
-                  <textarea
-                    id="extraInfo"
-                    placeholder={text.order.extra_example}
-                    onChange={(e) => setExtraInfo(e.target.value)}
-                    className="border w-full border-primary bg-transparent p-2 rounded-md font-bold placeholder-secondary placeholder-opacity-10 text-secondary ring-1 ring-transparent focus:ring-primary focus:outline-none"
-                  ></textarea>
+                            lang
+                          )}
+                        </span>
+                      </CheckoutButton>
+                    );
+                  })}
                 </div>
-              </div>
+              </>
+  
+              <>
+  {/* Steg 3: Välj leveransdag */}
+  <AnimatePresence mode="wait">
+    {showDeliveryOptions && (
+      <motion.div
+        key="delivery-options"
+        initial="closed"
+        animate="open"
+        exit="closed"
+        variants={variants}
+        className="mt-2 mb-4"
+      >
+        <h3
+          key="title-delivery"
+          className="font-poppins mt-2 text-lg text-secondary text-left px-4"
+        >
+          {text.order.deliveryDay}
+        </h3>
 
-              <h3 className="font-poppins text-lg mt-3 text-secondary">
-                {text.order.contact}
-              </h3>
-              <div className="grid grid-cols-2 gap-4">
-                <Input
-                  onChange={(e) => setPhone(e.target.value)}
-                  id="phone"
-                  label={text.order.phonenumber}
-                  type="tel"
-                  inputMode="tel"  // Allows the phone keypad on mobile devices
-                  pattern="[\+]*[0-9\- ]*"  // This pattern allows an optional "+" followed by numbers
-                  placeholder=""
-                  parentClassName="col-span-2 -mt-2"
-                  error={formErrors.phone}
-                />
-                <Input
-                  onChange={(e) => setEmail(e.target.value)}
-                  id="email"
-                  label={text.order.email}
-                  type="text"
-                  placeholder={text.order.email_example}
-                  error={formErrors.email}
-                />
-                <Input
-                  onChange={(e) => setPassword(e.target.value)}
-                  id="password"
-                  label={text.order.password}
-                  placeholder={text.order.password_example}
-                  type="password"
-                  error={formErrors.password}
-                />
-              </div>
-              <div className="w-full px-2 my-4">
-                <label className="">
-                  <input
-                    type="checkbox"
-                    className="mr-2"
-                    onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                      setAgreeToTerms(e.target.checked)
+        <div className="flex flex-col sm:flex-row sm:flex-wrap w-screen sm:w-auto gap-4 px-4">
+          <AnimatePresence mode="wait">
+            {deliveryDaysToChoose.map((day: any, index: number) => (
+              <motion.div
+                key={day.label}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ delay: 0.15 * index }}
+                className="w-full sm:w-auto"
+              >
+                <CheckoutButton
+                  className={`w-full sm:w-auto px-8 py-4 border bg-transparent text-neutral-700 font-medium border-primary rounded-md transition-all hover:bg-primary ${
+                    selectedDay?.id === day.id ? "bg-primary text-[#6E2936] font-bold" : ""
+                  }`}
+                  selected={selectedWeekday == day.id}
+                  onClick={() => {
+                    if (selectedWeekday == day.id) {
+                      setSelectedWeekday(null);
+                      setDeliveryWindow(null);
+                      setSelectedDay(null);
+                      return;
                     }
-                  />
+                    setSelectedWeekday(day.id);
+                    setDeliveryWindow(day);
+                    setSelectedDay(day);
+                  }}
+                >
+                  {day.label}
+                  <p className="text-xs mt-1">{day.description}</p>
+                </CheckoutButton>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </div>
+      </motion.div>
+    )}
 
-                   <span>
-                   {lang.order}{' '}
-                    <a href="https://www.saveabl.com/villkor" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'underline' }}>
-                   {text.order.terms}
-                    </a>
-                  </span>
+    {/* OrderSummary visas här om variant och dag är valda */}
+    {selectedVariant && selectedDay && (
+      <OrderSummary
+        selectedType={selectedType} // Vald matkasse, t.ex. "Familjekassen"
+    selectedVariant={selectedVariant} // Den valda varianten, t.ex. "Prenumeration" eller "Engångsköp"
+    selectedDay={selectedDay} // Vald leveransdag
+    postalCode={address.postalCode} // Postnummer
+    isDk={isDk} // Om postnumret tillhör Danmark
+    productTypes={productTypes} // Skicka med produktdata
+  lang={lang} // Skicka med det aktuella språket
+      />
+    )}
+  </AnimatePresence>
+</>
+
+  
+              {/* Steg 4: Adress- och kontaktinformation */}
+              <>
+                <label
+                  htmlFor="address"
+                  className="font-poppins mt-8 text-lg mb-2 text-secondary"
+                >
+                  {text.order.address}
                 </label>
-              </div>
-              <Button onClick={handleConfirm}>{text.order.payButton}</Button>
-            </CheckoutSection>
+                <div className="grid grid-cols-2 gap-4 items-start my-2">
+                  <Input
+                    label={text.order.full_name}
+                    onChange={(e) => setName(e.target.value)}
+                    type="text"
+                    parentClassName="col-span-2"
+                    id="name"
+                    placeholder={text.order.name_example}
+                    error={formErrors.name}
+                  />
+                  <Input
+                    label={text.order.delivery_address}
+                    onChange={(e) => setStreetAddress(e.target.value)}
+                    type="text"
+                    id="address"
+                    placeholder="Klimatgatan 1"
+                    error={formErrors.address}
+                  />
+                  <Input
+                    label={text.order.city}
+                    onChange={(e) => setCity(e.target.value)}
+                    type="text"
+                    id="city"
+                    placeholder={text.order.city_example}
+                    error={formErrors.city}
+                  />
+                  <div className="w-full col-span-2 -mt-4">
+                    <label
+                      htmlFor="extraInfo"
+                      className={twMerge(
+                        `block w-full text-md font-bold text-primary-600 ml-1 px-1 max-w-fit bg-primary-200 translate-y-3 transition`
+                      )}
+                    >
+                      {text.order.extra_info}
+                    </label>
+  
+                    <textarea
+                      id="extraInfo"
+                      placeholder={text.order.extra_example}
+                      onChange={(e) => setExtraInfo(e.target.value)}
+                      className="border w-full border-primary bg-transparent p-2 rounded-md font-bold placeholder-secondary placeholder-opacity-10 text-secondary ring-1 ring-transparent focus:ring-primary focus:outline-none"
+                    ></textarea>
+                  </div>
+                </div>
+          
+                <h3 className="font-poppins text-lg mt-3 text-secondary">
+                  {text.order.contact}
+                </h3>
+                <div className="grid grid-cols-2 gap-4">
+                  <Input
+                    onChange={(e) => setPhone(e.target.value)}
+                    id="phone"
+                    label={text.order.phonenumber}
+                    type="text"
+                    inputMode="tel" // Allows the phone keypad on mobile devices
+                    pattern="[\+]*[0-9\- ]*" // This pattern allows an optional "+" followed by numbers
+                    placeholder={text.order.phonenumber_example}
+                    parentClassName="col-span-2 -mt-2"
+                    error={formErrors.phone}
+                  />
+                  <Input
+                    onChange={(e) => setEmail(e.target.value)}
+                    id="email"
+                    label={text.order.email}
+                    type="text"
+                    placeholder={text.order.email_example}
+                    error={formErrors.email}
+                  />
+                  <Input
+                    onChange={(e) => setPassword(e.target.value)}
+                    id="password"
+                    label={text.order.password}
+                    placeholder={text.order.password_example}
+                    type="password"
+                    error={formErrors.password}
+                  />
+                </div>
+                <div className="w-full px-2 my-4">
+                  <label className="">
+                    <input
+                      type="checkbox"
+                      className="mr-2"
+                      onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                        setAgreeToTerms(e.target.checked)
+                      }
+                    />
+                    <span>
+                      {lang.order}{' '}
+                      <a
+                        href="https://www.saveabl.com/villkor"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ textDecoration: 'underline' }}
+                      >
+                        {text.order.terms}
+                      </a>
+                    </span>
+                  </label>
+                </div>
+              </>
+            </OrderWizard>
+          )}
+  
+          {stripeCheckoutIsLoading && (
+            <div className="fixed top-0 left-0 z-50 w-screen h-screen bg-primary bg-opacity-70 flex justify-center items-center">
+              <Title>Laddar...</Title>
+            </div>
           )}
         </div>
       </Section>
-      {stripeCheckoutIsLoading && (
-        <div
-          className="fixed top-0 left-0 z-50 w-screen h-screen bg-primary bg-opacity-70 flex justify-center items-center
-      "
-        >
-          <Title>Laddar...</Title>
-        </div>
-      )}
-      <div id="vanliga-fragor">
-        <Accordion faqs={text.order.faqItems} title={text.order.faq} />
-      </div>
+       {/* Behåller FAQ och andra avsnitt */}
+       <div id="vanliga-fragor">
+            <Accordion faqs={text.order.faqItems} title={text.order.faq} />
+          </div>
     </>
-  );
-};
-
-export default Order;
-
-const shippingDk = [
+  )};
+  
+  // Export statement and shipping constants
+  export default Order;
+  
+  const shippingDk = [
   "2620",
   "3450",
   "2880",
@@ -1434,4 +1487,4 @@ const shippingDk = [
   "4760",
   "4873",
   "4894",
-];
+]; 

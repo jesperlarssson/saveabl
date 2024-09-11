@@ -290,6 +290,12 @@ const svText = {
     step2_button: "Leveransinfo", 
     loading: "Laddar...", 
     pay: "Till betalning", 
+    summaryTitle: "Dina val:",
+    mealKit: "Matkasse",
+    frequency: "Leveransfrekvens",
+    deliveryDaysummary: "Leveransdag",
+    totalPrice: "Totalpris",
+    shipping: "+ frakt", 
     faq: "Frågor som kan uppstå:",
     faqItems: [ 
       {
@@ -800,6 +806,12 @@ const enText = {
     step2_button: "Delivery info", 
     loading: "Loading...", 
     pay: "Payment", 
+    summaryTitle: "Your choices:",
+    mealKit: "Meal kit",
+    frequency: "Delivery frequency",
+    deliveryDaysummary: "Delivery day",
+    totalPrice: "Total price",
+    shipping: "+ shipping",
     faq: "Questions that may arise:",
     faqItems: [ 
       {
@@ -1266,6 +1278,12 @@ const daText = {
     step2_button: "Levereringsinfo", 
     loading: "Indlæser...", 
     pay: "Til betaling", 
+    summaryTitle: "Dine valg:",
+    mealKit: "Måltidskasse",
+    frequency: "Leveringsfrekvens",
+    deliveryDaysummary: "Leveringsdag",
+    totalPrice: "Totalpris",
+    shipping: "+ fragt",
     faq: "Spørgsmål der kan opstå:",
     faqItems: [ 
       {
