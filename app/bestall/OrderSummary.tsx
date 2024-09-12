@@ -143,8 +143,8 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({ selectedType, selectedVaria
   const totalPrice = calculateTotalPrice(postalCode);
 
   return (
-    <><div className="order-summary border-2 border-[#6E2936] p-4 rounded-lg shadow-md mt-6 mx-auto max-w-full sm:max-w-[500px]">
-          <h3 className="text-xl font-bold mb-2 text-[#6E2936]">{text.order.summaryTitle}</h3>
+    <><div className="order-summary border-2 border-[#6E2936] p-4 rounded-lg mt-6 mx-auto max-w-full sm:max-w-[500px]">
+          <h3 className="text-lg font-bold mb-2 text-[#6E2936]">{text.order.summaryTitle}</h3>
           <p className="text-[#6E2936]"><strong>{text.order.mealKit}:</strong> {getProductName(selectedType.label, lang)}</p>
           <p className="text-[#6E2936]"><strong>{text.order.frequency}:</strong> {getVariantName(typeof selectedVariant === 'string' ? selectedVariant : selectedVariant.label, lang)}</p>
           <p className="text-[#6E2936]"><strong>{text.order.deliveryDaysummary}:</strong> {selectedDay.label}</p>

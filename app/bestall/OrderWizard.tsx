@@ -48,21 +48,32 @@ const OrderWizard = ({
   // Unika stilar och egenskaper för varje steg
   const buttonStyles = {
     common: {
-            backgroundColor: "#F4664A", // Färgen som ska vara gemensam
-            padding: "10px 20px",
-            color: "white",
-            width: "100%", // Full bredd på mobilen
-            maxWidth: "600px", // Mindre bredd på större skärmar
-            margin: "10px auto", // Centrera på större skärmar
-            display: "flex", // Flexbox för layout
-            justifyContent: "center", // Centrerar horisontellt
-            alignItems: "center", // Centrerar vertikalt
-            textAlign: "center", // Centrerar texten horisontellt
-            flexGrow: 1, // Låter knappen växa
-            minWidth: "150px", // Minsta bredd
-            height: "auto", // Se till att höjden inte begränsar texten
-            lineHeight: "normal", // Se till att texten visas korrekt
-          } as React.CSSProperties,
+      padding: "10px 20px",
+      width: "100%", // Full bredd på mobilen
+      maxWidth: "600px", // Mindre bredd på större skärmar
+      margin: "10px auto", // Centrera på större skärmar
+      display: "flex", // Flexbox för layout
+      justifyContent: "center", // Centrerar horisontellt
+      alignItems: "center", // Centrerar vertikalt
+      textAlign: "center", // Centrerar texten horisontellt
+      flexGrow: 1, // Låter knappen växa
+      minWidth: "150px", // Minsta bredd
+      height: "auto", // Se till att höjden inte begränsar texten
+      lineHeight: "normal", // Se till att texten visas korrekt
+      borderRadius: "4px", // Ger en liten rundning på hörnen
+      cursor: "pointer", // Visar att det är en klickbar knapp
+    } as React.CSSProperties,
+
+    confirm: {
+      backgroundColor: "#F4664A", // Orange bakgrund
+      color: "white", // Vit text
+    },
+
+    back: {
+      backgroundColor: "transparent", // Transparent bakgrund
+      border: "2px solid #EECFAA", // Orange ram
+      color: "#EECFAA", // Orange text
+    },
   };
 
   return (
@@ -73,7 +84,7 @@ const OrderWizard = ({
       <div className="flex justify-center gap-4 mt-4 px-4">
         {/* Hantering av knappar för första steget */}
         {currentStep === 1 && (
-          <Button onClick={nextStep} style={buttonStyles.common} disabled={!step1ChoicesMade}>
+          <Button onClick={nextStep} style={{ ...buttonStyles.common, ...buttonStyles.confirm }} disabled={!step1ChoicesMade}>
             {text.order.step1_button}
           </Button>
         )}
@@ -81,24 +92,24 @@ const OrderWizard = ({
         {/* Hantering av knappar för andra steget */}
         {currentStep === 2 && (
           <>
-            <Button onClick={prevStep} style={buttonStyles.common}>
+            <Button onClick={prevStep} style={{ ...buttonStyles.common, ...buttonStyles.back }}>
               {text.order.back_button}
             </Button>
-            <Button onClick={nextStep} style={buttonStyles.common} disabled={!step2ChoicesMade}>
-            {text.order.step2_button} 
-           </Button>
+            <Button onClick={nextStep} style={{ ...buttonStyles.common, ...buttonStyles.confirm }} disabled={!step2ChoicesMade}>
+              {text.order.step2_button}
+            </Button>
           </>
         )}
 
         {/* Hantering av knappar för sista steget */}
         {currentStep === 3 && (
           <>
-            <Button onClick={prevStep} style={buttonStyles.common}>
+            <Button onClick={prevStep} style={{ ...buttonStyles.common, ...buttonStyles.back }}>
               {text.order.back_button}
             </Button>
             <Button
               onClick={handleConfirm}
-              style={buttonStyles.common}
+              style={{ ...buttonStyles.common, ...buttonStyles.confirm }}
               disabled={stripeCheckoutIsLoading} // Deaktivera knappen om betalning pågår
             >
               {stripeCheckoutIsLoading ? text.order.loading : text.order.pay}
