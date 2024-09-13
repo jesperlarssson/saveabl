@@ -3,9 +3,11 @@
 import { useLang } from "@/hooks/useLang";
 import useManageSubscriptionModal from "@/hooks/useManageSubscriptionModal";
 import useChangeIntervalModal from "@/hooks/useChangeIntervalModal";
+import useChangeDeliveryDayModal from "@/hooks/useChangeDeliveryDayModal";
+import useManageAddressModal from "@/hooks/useManageAddressModal"; // Hook för adressändring
+import ManageAddressModal from "@/components/modals/ManageAddressModal"; // Importera adressändringsmodalen
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import useChangeDeliveryDayModal from "@/hooks/useChangeDeliveryDayModal";
 import { AuthContext } from "@/providers/AuthProvider";
 
 interface DeliveryInfo {
@@ -17,10 +19,10 @@ interface DeliveryInfo {
 
 interface UserAccountProps {
   loading: boolean;
-  stripeResponse: any; // Consider defining a more specific type for this
+  stripeResponse: any;
   billingFrequency: string;
   isEvenWeek: boolean | null;
-  activeSubscription: any; // Consider defining a more specific type for this
+  activeSubscription: any;
   deliveryInfo: DeliveryInfo;
 }
 
@@ -35,8 +37,14 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
   const [isPaused, setIsPaused] = useState<boolean>(false);
 
   const { isOpen, onClose, onOpen, forCustomer } = useManageSubscriptionModal();
-  const { isOpen: isOpenInterval, onOpen: onOpenInterval, forCustomer: forCustomerInterval } = useChangeIntervalModal();
-  const { isOpen: isOpenDeliveryDay, onOpen: onOpenDeliveryDay, forCustomer: forCustomerDeliveryDay } = useChangeDeliveryDayModal();
+  const { isOpen: isOpenInterval, onOpen: onOpenInterval, forCustomer: forCustomerInterval } =
+    useChangeIntervalModal();
+  const {
+    isOpen: isOpenDeliveryDay,
+    onOpen: onOpenDeliveryDay,
+    forCustomer: forCustomerDeliveryDay,
+  } = useChangeDeliveryDayModal();
+  const { onOpen: onOpenAddress, forCustomer: forCustomerAddress } = useManageAddressModal(); // Hook för adressmodal
 
   const { text } = useLang();
   const authContext = useContext(AuthContext);
@@ -74,7 +82,12 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
   };
 
   const handleChangeDeliveryDayClick = () => {
-    forCustomerDeliveryDay(stripeResponse.customer.id, deliveryInfo.postal_code, stripeResponse.customer.email, isPaused);
+    forCustomerDeliveryDay(
+      stripeResponse.customer.id,
+      deliveryInfo.postal_code,
+      stripeResponse.customer.email,
+      isPaused
+    );
     onOpenDeliveryDay();
   };
 
@@ -102,8 +115,7 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
   if (loading) {
     return (
       <div className="flex gap-2 items-center">
-        <div className="w-3 h-3 rounded-full animate-pulse bg-accent"></div>{" "}
-        Loading...
+        <div className="w-3 h-3 rounded-full animate-pulse bg-accent"></div> Loading...
       </div>
     );
   }
@@ -215,10 +227,24 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
           <p>
             {text?.my_pages?.address}:{" "}
             <span className="font-medium">
-              {deliveryInfo.line1}, {deliveryInfo.city},{" "}
-              {deliveryInfo.postal_code}, {deliveryInfo.country}
+              {deliveryInfo.line1}, {deliveryInfo.city}, {deliveryInfo.postal_code}, {deliveryInfo.country}
             </span>
           </p>
+          {/* Knapp för att öppna adressändringsmodalen */}
+          <button
+            className="bg-secondary hover:bg-secondary-800 text-white font-bold py-2 px-4 mr-2 mt-4"
+            onClick={() =>
+              forCustomerAddress(
+                stripeResponse.customer.id,
+                stripeResponse.customer.email,
+                stripeResponse.customer.phone,
+                deliveryInfo.line1
+              )
+            }
+          >
+            {text?.my_pages?.change_address_button ?? "Ändra adress och telefonnummer"}
+          </button>
+
           <button
             className="bg-secondary hover:bg-secondary-800 text-white font-bold py-2 px-4 mr-2 mt-4"
             onClick={handleModifyAccountClick}
@@ -228,13 +254,15 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
         </div>
       ) : (
         <div className="w-full h-36 rounded-lg text-secondary font-semibold text-xl bg-primary-500 bg-opacity-50 flex flex-col justify-center items-center">
-           <div>{text?.my_pages?.no_connection}</div>
-           <div className="font-light text-sm">{text?.my_pages?.no_connection_desc}</div>
+          <div>{text?.my_pages?.no_connection}</div>
+          <div className="font-light text-sm">{text?.my_pages?.no_connection_desc}</div>
         </div>
       )}
+
+      {/* Inkludera adressändringsmodalen */}
+      <ManageAddressModal />
     </div>
   );
 };
 
 export default UserAccountComponent;
-

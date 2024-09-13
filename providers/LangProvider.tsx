@@ -454,7 +454,8 @@ const svText = {
     success_title: "Nu är det fixat!", 
     success_description: "Det kan ta ett en liten stund innan det syns på din sida. Hör av dig om du har några frågor, vi hjälper dig gärna på hello@saveabl.se 💌", 
     error_title: "Något gick fel!", 
-    error_descriptio: "Försök igen eller kontakta oss om problemet kvarstår!"
+    error_description: "Försök igen eller kontakta oss om problemet kvarstår!", 
+    close_button: "Stäng", 
   },
   my_account: {
     account_settings: "Kontoinställningar",
@@ -989,7 +990,8 @@ const enText = {
     success_title: "Now it's fixed!",
     success_description: "It may take a moment before it shows on your page. Give us a shout if you have any questions, we're happy to help at hello@saveabl.se 💌",
     error_title: "Something went wrong!",
-    error_description: "Please try again or contact us if the issue persists!"
+    error_description: "Please try again or contact us if the issue persists!", 
+    close_button: "Close"
   },
   terms: {
     title: "Terms",
@@ -1461,7 +1463,8 @@ const daText = {
     success_title: "Nu er det fikset!",
     success_description: "Det kan tage et øjeblik, før det vises på din side. Kontakt os, hvis du har spørgsmål, vi hjælper dig gerne på hello@saveabl.se 💌",
     error_title: "Noget gik galt!",
-    error_description: "Prøv igen, eller kontakt os, hvis problemet fortsætter!"
+    error_description: "Prøv igen, eller kontakt os, hvis problemet fortsætter!", 
+    close_button: "Luk"
   },
   
   terms: {
