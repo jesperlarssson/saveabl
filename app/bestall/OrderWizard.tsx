@@ -66,14 +66,14 @@ const OrderWizard = ({
 
     confirm: {
       backgroundColor: "#F4664A", // Orange bakgrund
-      color: "white", // Vit text
+      color: "#FCF7E8", // Vit text
     },
 
     back: {
-      backgroundColor: "transparent", // Transparent bakgrund
-      border: "2px solid #EECFAA", // Orange ram
-      color: "#EECFAA", // Orange text
-    },
+        backgroundColor: "#EECFAA", // Bakgrundsfärg till orange
+        border: "2px solid #EECFAA", // Samma orange färg för ramen
+        color: "#6E2936", // Textfärg till ljus krämfärg
+      },
   };
 
   return (
