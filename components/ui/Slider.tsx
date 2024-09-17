@@ -23,7 +23,7 @@ const Slider: React.FC<SliderProps> = ({ children }) => {
     <div className="relative flex items-center">
       <IconButton
         onClick={() => swiperRef.current.slidePrev()}
-        className="hidden sm:flex absolute left-0 -ml-10"
+        className="hidden sm:flex absolute left-0 -ml-10 "
       >
         <BsChevronLeft size={28} />
       </IconButton>
@@ -32,20 +32,15 @@ const Slider: React.FC<SliderProps> = ({ children }) => {
           swiperRef.current = swiper;
         }}
         modules={[Navigation, Pagination]}
-        spaceBetween={10} // Minskat avstånd för att passa bättre på mobilen
-        slidesPerView={1} // Standard för små skärmar
+        spaceBetween={30}
+        slidesPerView={1}
         breakpoints={{
-          // När fönsterbredden är >= 320px (mobil)
-          320: {
-            slidesPerView: 3, // Visa alla 3 slides på mobil
-            spaceBetween: 10, // Mindre avstånd mellan slides på mobil
-          },
-          // När fönsterbredden är >= 640px
+          // when window width is >= 640px
           640: {
             slidesPerView: 2,
-            spaceBetween: 20,
+            spaceBetween: 30,
           },
-          // När fönsterbredden är >= 768px
+          // when window width is >= 768px
           768: {
             slidesPerView: 3,
             spaceBetween: 30,
@@ -59,7 +54,7 @@ const Slider: React.FC<SliderProps> = ({ children }) => {
       </Swiper>
       <IconButton
         onClick={() => swiperRef.current.slideNext()}
-        className="hidden sm:flex absolute right-0 -mr-10"
+        className="hidden sm:flex absolute right-0  -mr-10"
       >
         <BsChevronRight size={28} />
       </IconButton>
