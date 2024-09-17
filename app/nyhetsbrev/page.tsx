@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from 'react';
 import { db } from '@/firebase/firebaseNewsletterConfig';
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, doc, setDoc } from 'firebase/firestore';
 import { useLang } from "@/hooks/useLang";
 import Image from 'next/image';
 import MatkasseImage from '../../public/images/illustrations/Matkasse.png';
@@ -39,21 +39,22 @@ const NewsletterForm = () => {
     e.preventDefault();
 
     if (!consent) {
-      setError('You must consent to receive marketing emails.');
+      setError(text.newsletter.consent_error); // Antag att du har en översatt text för detta också
       return;
     }
 
     console.log('Submitting form with data:', { name, email, country });
 
     try {
-      const docRef = await addDoc(collection(db, 'newslettersubscribers'), {
+      // Skapa ett dokument med användarens mejladress som ID
+      await setDoc(doc(db, 'newsletter', email), {
         'Namn': name,
         'Mejl': email,
         'Land': country,
         timestamp: new Date().toISOString(),
       });
 
-      console.log('Document written with ID: ', docRef.id);
+      console.log('Document successfully written with email as ID: ', email);
 
       setSubmitted(true);
       setName('');
@@ -63,7 +64,7 @@ const NewsletterForm = () => {
       setError('');
     } catch (error) {
       console.error('Error adding document:', error);
-      setError('Something went wrong, please try again later.');
+      setError(text.newsletter.error_message); // Hämta felmeddelandet från lang
     }
   };
 
@@ -427,14 +428,16 @@ const NewsletterForm = () => {
         <div className="morot-image-container">
           <Image src={morotImage} alt="morot" layout="fixed" width={150} height={150} />
         </div>
-        {/* Använd getVissteDuAttImage för att få rätt bild baserat på språk */}
-        <Image
-          src={getVissteDuAttImage()}
-          alt={lang === 'sv' ? 'Visste du att' : lang === 'en' ? 'Did you know' : 'Vidste du at'}
-          className={`visste-du-att-image ${lang}`} // Dynamisk klass baserat på språk
-          width={200}
-          height={200}
-        />
+        {/* Använd getVissteDuAttImage för att få rätt bild baserat på språk, visas endast om formuläret inte är inskickat */}
+        {!submitted && (
+          <Image
+            src={getVissteDuAttImage()}
+            alt={lang === 'sv' ? 'Visste du att' : lang === 'en' ? 'Did you know' : 'Vidste du at'}
+            className={`visste-du-att-image ${lang}`} // Dynamisk klass baserat på språk
+            width={200}
+            height={200}
+          />
+        )}
       </div>
       <div className="container">
         {!submitted && (

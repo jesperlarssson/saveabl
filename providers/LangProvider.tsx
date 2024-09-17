@@ -590,7 +590,9 @@ const svText = {
     error_consent: "Fyll i mig", 
     error_submit: "Du har missat något", 
     thank_you_title: "Välkommen!",
-    thank_you_message: "Du är nu med i utlottningen av en matkasse och kommer hållas uppdaterad om vad som händer i vår värld :)", 
+    thank_you_message: "Du kommer nu hållas uppdaterad om vad som händer i vår värld! PS. Håll koll på din inkorg, det kan trilla in en överraskning där inom kort :)", 
+    consent_error: "Något gick fel!", 
+    error_message: "Din mejladress är redan registrerad hos oss, kontakta oss gärna om detta inte skulle stämma!"
 },
 popup: {
   first_title: "Vinn en matkasse!", 
@@ -1099,7 +1101,9 @@ const enText = {
       error_consent: "Fill me in", 
       error_submit: "You have missed something", 
       thank_you_title: "Welcome!",
-      thank_you_message: "You are now entered into the raffle for a meal kit and will be kept updated on what's happening in our world :)",
+      thank_you_message: "You will now stay updated on what's happening in our world! PS. Keep an eye on your inbox, a surprise might land there soon :)",
+      consent_error: "Something went wrong!", 
+      error_message: "Your email address is already registered with us, feel free to contact us if this is incorrect!"
     },
     popup: {
       first_title: "Win a meal kit!", 
@@ -1581,7 +1585,9 @@ integrity_policy: {
     error_consent: "Udfyld mig", 
     error_submit: "Du har glemt noget", 
     thank_you_title: "Velkommen!",
-    thank_you_message: "Du er nu med i lodtrækningen om en måltidskasse og vil blive opdateret om hvad der sker i vores verden :)",
+    thank_you_message: "Du vil nu blive opdateret om hvad der sker i vores verden! PS. Hold øje med din indbakke, der kan dukke en overraskelse op snart :)",
+    consent_error: "Noget gik galt!", 
+    error_message: "Din e-mailadresse er allerede registreret hos os, kontakt os gerne hvis dette ikke skulle stemme!"
   },
     popup: {
       first_title: "Vind en måltidskasse!", 
