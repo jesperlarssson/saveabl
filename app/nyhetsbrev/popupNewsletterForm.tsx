@@ -255,7 +255,7 @@ const PopupNewsletterForm = ({ onClose }: { onClose: () => void }) => {
         }
 
         .input-group {
-            margin-bottom: 12px;
+            margin-bottom: 20px;
         }
 
         .input-group label {
