@@ -1302,7 +1302,7 @@ const daText = {
     linkTitle: "Vi kan levere til dig!",
     linkDescription: "om mandagen 7/10 mellem 16.00-22.00.",
     bullet1: "👨‍🍳 Vegetarkassen med kokken inkluderet.",
-    bullet2: "👨‍👩‍👧‍👦  Aftensmad till hele familien på blot 15 min.",
+    bullet2: "👨‍👩‍👧 Aftensmad till hele familien på blot 15 min.",
     bullet3: "✅  Ingen bindingsperiode, opsig når du vil.",
     type: "Gør dine valg - uden bindingstid på alle:",
     variant: "Vælg hvor ofte du vil modtage din madkasse:",
