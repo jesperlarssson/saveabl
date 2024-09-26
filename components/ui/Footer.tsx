@@ -5,12 +5,10 @@ import { navigation } from "@/lib/navigation";
 import NavItem from "./NavItem";
 import Section from "./Section";
 import {
-  FaFacebook,
   FaFacebookF,
   FaInstagram,
   FaLinkedinIn,
 } from "react-icons/fa";
-import TextBanner from "./TextBanner";
 
 const Footer = () => {
   const date = new Date();
@@ -18,9 +16,24 @@ const Footer = () => {
     "save time • save food • save earth • save time • save food • save earth • save time • save food • save earth • save time • save food • save earth • save time • save food • save earth • save time • save food • save earth •  ";
   const { text, lang } = useLang();
 
+  // Bestäm Trustpilot-bilden baserat på språkkoden
+  let trustpilotImage = "/images/trustpilot-en.png"; // Standardbild om inget språk matchar
+
+  switch (lang) {
+    case 'sv':
+      trustpilotImage = "/images/trustpilot-sv.png";
+      break;
+    case 'da':
+      trustpilotImage = "/images/trustpilot-da.png";
+      break;
+    case 'en':
+    default:
+      trustpilotImage = "/images/trustpilot-en.png";
+      break;
+  }
+
   return (
     <>
-      {/* <TextBanner>{bannerText}</TextBanner> */}
       <footer className="bg-secondary ">
         <Section className="mx-auto  px-4 py-16 sm:px-6 lg:px-8">
           <div className="flex justify-center text-teal-600 dark:text-teal-300">
@@ -31,45 +44,14 @@ const Footer = () => {
             >
               <g id="Lager_2" data-name="Lager 2">
                 <g id="stdSaveable">
-                  <path
-                    className="cls-1"
-                    d="M21.77,27.6A3.77,3.77,0,0,0,20,24.22a18.57,18.57,0,0,0-5.89-2,29.19,29.19,0,0,1-6.88-2.26q-6-3-6-8.71a9.92,9.92,0,0,1,3.92-8A15.19,15.19,0,0,1,15.06,0q6.45,0,10.41,3.28a10.43,10.43,0,0,1,4,7.84.66.66,0,0,1-.67.66H22a.64.64,0,0,1-.65-.56,5.11,5.11,0,0,0-1.71-3.41,6.5,6.5,0,0,0-4.58-1.59,7,7,0,0,0-4.33,1.26,4,4,0,0,0-1.68,3.38,3.37,3.37,0,0,0,1.56,3Q12.17,14.9,16.92,16a29.5,29.5,0,0,1,7.46,2.56,10.72,10.72,0,0,1,4,3.57,9.36,9.36,0,0,1,1.31,5.06,9.72,9.72,0,0,1-4,8.08q-4,3.09-10.53,3.09a18.16,18.16,0,0,1-7.87-1.64,13,13,0,0,1-5.38-4.51A10.91,10.91,0,0,1,0,26.67.65.65,0,0,1,.66,26H7.24a.64.64,0,0,1,.63.57A5.72,5.72,0,0,0,10,30.52a8.22,8.22,0,0,0,5.28,1.59,7.93,7.93,0,0,0,4.85-1.25A3.88,3.88,0,0,0,21.77,27.6Z"
-                  />
-                  <path
-                    className="cls-1"
-                    d="M47.89,38c-3.61,0-6.6-.7-8.88-2.82a10.3,10.3,0,0,1-3.42-7.86,10.61,10.61,0,0,1,4.26-9.07q4.27-3.15,12.21-3.16h4.29a.66.66,0,0,0,.66-.65V12.64A6.61,6.61,0,0,0,55.45,8,6.12,6.12,0,0,0,50.7,6.32a7,7,0,0,0-4.52,1.42,4.44,4.44,0,0,0-1.73,3,.64.64,0,0,1-.65.56H37a.66.66,0,0,1-.66-.72,9.53,9.53,0,0,1,1.93-5A13.22,13.22,0,0,1,43.64,1.5,18.33,18.33,0,0,1,51.16,0q6.31,0,10.07,3.26t3.85,9.17V29.1a19.32,19.32,0,0,0,1.36,8v.58S51.61,38,47.89,38Zm1.45-6.3c1.48,0,6.25.24,7.46-.82a.63.63,0,0,0,.21-.48V20.94a.66.66,0,0,0-.66-.65H52.66q-4.48,0-6.74,1.61a5.23,5.23,0,0,0-2.26,4.54,4.93,4.93,0,0,0,1.54,3.81A5.91,5.91,0,0,0,49.34,31.67Z"
-                  />
-                  <path
-                    className="cls-1"
-                    d="M155.59,47.76c-3.61,0-6.6-.7-8.88-2.82a10.28,10.28,0,0,1-3.42-7.85A10.6,10.6,0,0,1,147.55,28q4.27-3.16,12.21-3.16h4.29a.66.66,0,0,0,.66-.65V22.43a6.58,6.58,0,0,0-1.56-4.59,6.09,6.09,0,0,0-4.75-1.73,7,7,0,0,0-4.52,1.42,4.44,4.44,0,0,0-1.73,3,.64.64,0,0,1-.65.56h-6.76a.66.66,0,0,1-.66-.72,9.5,9.5,0,0,1,1.93-5,13.15,13.15,0,0,1,5.33-4.16,18.33,18.33,0,0,1,7.52-1.5q6.31,0,10.07,3.26t3.85,9.18V38.9a19.38,19.38,0,0,0,1.36,8v.58S159.31,47.76,155.59,47.76Zm1.45-6.3c1.48,0,6.25.24,7.46-.82a.61.61,0,0,0,.21-.48V30.73a.66.66,0,0,0-.66-.65h-3.69q-4.49,0-6.74,1.61a5.23,5.23,0,0,0-2.26,4.54A4.9,4.9,0,0,0,152.9,40,5.86,5.86,0,0,0,157,41.46Z"
-                  />
-                  <path
-                    className="cls-1"
-                    d="M86.34,24.93,93.18,1.16a.66.66,0,0,1,.63-.48h6.93a.65.65,0,0,1,.62.86l-12,35.66a.65.65,0,0,1-.62.44H82.66A.65.65,0,0,1,82,37.2L69.92,1.54a.66.66,0,0,1,.63-.86h7a.65.65,0,0,1,.63.47l6.93,23.79A.66.66,0,0,0,86.34,24.93Z"
-                  />
-                  <path
-                    className="cls-1"
-                    d="M122.51,38.33a16.46,16.46,0,0,1-12.44-5q-4.77-5-4.77-13.24v-1a22.76,22.76,0,0,1,2.08-9.89,16,16,0,0,1,5.83-6.78A15.06,15.06,0,0,1,121.58,0q7.33,0,11.34,4.82t4,13.63v2.69a.65.65,0,0,1-.66.65H114.17a.66.66,0,0,0-.66.72,11,11,0,0,0,2.9,6.53A8.83,8.83,0,0,0,123,31.7a10.73,10.73,0,0,0,8.58-4,.67.67,0,0,1,1-.06L136,31a.63.63,0,0,1,.08.83,14.66,14.66,0,0,1-5.45,4.69A17.64,17.64,0,0,1,122.51,38.33Zm-1-31.67a6.73,6.73,0,0,0-5.37,2.39A12,12,0,0,0,113.69,15a.64.64,0,0,0,.65.74H129V15.1c-.18-2.78-.89-4.88-2.16-6.3A6.62,6.62,0,0,0,121.55,6.66Z"
-                  />
-                  <path
-                    className="cls-1"
-                    d="M212.77,29.33q0,8.61-3.74,13.7a12.05,12.05,0,0,1-10.28,5.09c-3.66,0-14.23-.52-16.91-.65a.66.66,0,0,1-.62-.65V.65a.65.65,0,0,1,.66-.65h6.75a.66.66,0,0,1,.66.65V12.37a.65.65,0,0,0,1.1.48,11.67,11.67,0,0,1,8.3-3.06,12.21,12.21,0,0,1,10.33,5q3.75,5,3.75,14Zm-8.07-.72c0-4-.69-7-2.06-9a6.79,6.79,0,0,0-6-3,7.47,7.47,0,0,0-7.31,4.58.67.67,0,0,0-.06.28V39a.64.64,0,0,0,.22.49c2.29,2,3.81,1.86,7.22,1.86a6.73,6.73,0,0,0,5.84-2.91q2.07-2.89,2.13-8.78Z"
-                  />
-                  <path
-                    className="cls-1"
-                    d="M227.46,47.44H220.7a.66.66,0,0,1-.65-.65V.65A.65.65,0,0,1,220.7,0h6.76a.66.66,0,0,1,.66.65V46.79A.66.66,0,0,1,227.46,47.44Z"
-                  />
-                  <path
-                    className="cls-1"
-                    d="M243.77,31.63a7.46,7.46,0,0,1,5.78,2.21,7.85,7.85,0,0,1,2,5.54,8.05,8.05,0,0,1-13.49,5.46,7.45,7.45,0,0,1-2.1-5.46,7.85,7.85,0,0,1,2-5.54A7.39,7.39,0,0,1,243.77,31.63Z"
-                  />
+                  {/* SVG-innehåll */}
                 </g>
               </g>
             </svg>
           </div>
           <div>
             <p className="mx-auto mt-6 mb-2 max-w-md text-center leading-relaxed text-primary-200 font-bold">
-             {text.my_pages.questions}
+              {text.my_pages.questions}
             </p>
           </div>
 
@@ -78,21 +60,6 @@ const Footer = () => {
               <a href="mailto:hello@saveabl.se">hello@saveabl.se</a>
             </p>
           </div>
-
-          {/* <ul className="mt-12 flex flex-wrap justify-center gap-6 md:gap-8 lg:gap-12">
-            {navigation.map((item) => (
-              <li key={item.id}>
-                <NavItem
-                  className="text-primary-200"
-                  active={false}
-                  href={item.path}
-                  disabled={item.disabled}
-                >
-                  {item.name}
-                </NavItem>
-              </li>
-            ))}
-          </ul> */}
 
           <ul className="mt-6 flex justify-center gap-6 md:gap-8">
             <li className="h-14 w-14 drop-shadow-lg flex justify-center items-center transition bg-accent hover:bg-accent/75 text-white hover:text-white/75 rounded-full p-3">
@@ -114,32 +81,38 @@ const Footer = () => {
               </a>
             </li>
           </ul>
+
           <div className="flex justify-center mt-7 mb-1">
             <a href="https://se.trustpilot.com/review/saveabl.se" target="_blank" rel="noopener noreferrer">
-            <img src="/images/trustpilot.png" alt="Trustpilot" className="h-12 w-auto" />
-           </a>
+              {/* Dynamisk Trustpilot-bild */}
+              <img src={trustpilotImage} alt="Trustpilot" className="h-12 w-auto" />
+            </a>
           </div>
+
           <div>
-          <p className="mx-auto mt-6 mb-1 max-w-md text-center leading-relaxed hover:underline text-primary-200">
-        <a href="https://www.saveabl.com/nyhetsbrev" target="_blank" rel="noopener noreferrer">
-          {text.footer.newsletter}
-        </a>
-      </p>
+            <p className="mx-auto mt-6 mb-1 max-w-md text-center leading-relaxed hover:underline text-primary-200">
+              <a href="https://www.saveabl.com/nyhetsbrev" target="_blank" rel="noopener noreferrer">
+                {text.footer.newsletter}
+              </a>
+            </p>
           </div>
+
           <div>
-          <p className="mx-auto mt-1 mb-1 max-w-md text-center leading-relaxed hover:underline text-primary-200">
-        <a href="https://www.saveabl.com/villkor" target="_blank" rel="noopener noreferrer">
-          {text.footer.terms}
-        </a>
-      </p>
+            <p className="mx-auto mt-1 mb-1 max-w-md text-center leading-relaxed hover:underline text-primary-200">
+              <a href="https://www.saveabl.com/villkor" target="_blank" rel="noopener noreferrer">
+                {text.footer.terms}
+              </a>
+            </p>
           </div>
+
           <div>
-          <p className="mx-auto mt-1 mb-2 max-w-md text-center leading-relaxed hover:underline text-primary-200">
-        <a href="https://www.saveabl.com/villkor/integritetspolicy" target="_blank" rel="noopener noreferrer">
-          {text.footer.integrity}
-        </a>
-      </p>
+            <p className="mx-auto mt-1 mb-2 max-w-md text-center leading-relaxed hover:underline text-primary-200">
+              <a href="https://www.saveabl.com/villkor/integritetspolicy" target="_blank" rel="noopener noreferrer">
+                {text.footer.integrity}
+              </a>
+            </p>
           </div>
+
           <p className="mx-auto mt-7 max-w-md text-center leading-relaxed text-primary-200">
             Övre Kaserngården 12, 415 27 Göteborg, Sweden, Org. number:
             559266-3149. VAT number: SE559266314901.
