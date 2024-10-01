@@ -77,7 +77,7 @@ const PromotionBanner = () => {
     href="https://www.eubusinessnews.com/winners/saveabl/"
     target="_blank"
     rel="noopener noreferrer"
-    className="text-xs md:text-[14px] mt-2 mb-2 text-white hover:underline transition-all font-sans"
+    className="text-xs md:text-[13px] mt-2 mb-2 text-white hover:underline transition-all font-sans"
   >
     {promotionText}
   </a>
