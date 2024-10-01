@@ -638,7 +638,7 @@ popup: {
     copy_fail: "Misslyckades att kopiera koden"
   }, 
   promotionbanner: {
-    promotiontext: "Bästa klimatvänliga matkassen enligt EU Business news"
+    promotiontext: "Bästa klimatvänliga matkassen - EU Business news"
   }
   
 };
@@ -1152,7 +1152,7 @@ const enText = {
       copy_fail: "Failed to copy the code"
     },
     promotionbanner: {
-      promotiontext: "Best Eco-Friendly meal kit per EU Business news"
+      promotiontext: "Best Eco-Friendly meal kit - EU Business news"
     }
 };
 
@@ -1638,6 +1638,6 @@ integrity_policy: {
     copy_fail: "Kunne ikke kopiere koden"
   }, 
   promotionbanner: {
-    promotiontext: "Bedste miljøvenlige måltidskasse ifølge EU Business news"
+    promotiontext: "Bedste miljøvenlige måltidskasse - EU Business news"
   }
 };
