@@ -81,6 +81,7 @@ const ChangeDeliveryDayModal = () => {
 
         let allowedDays: number[] = [];
 
+        // Postnummer-logik
         if (free.includes(sanitizedPostalCode) || shippingCostStage1.includes(sanitizedPostalCode) || shippingCostStage2.includes(sanitizedPostalCode)) {
           allowedDays = [6, 0, 1]; // Lör, Sön, Mån
         } else if (shippingCostStage3.includes(sanitizedPostalCode) || stockholmPostalCodes.includes(sanitizedPostalCode)) {
@@ -91,15 +92,16 @@ const ChangeDeliveryDayModal = () => {
 
         const filteredOptions = deliveryWindows.filter((option: any) => {
           const startTime = new Date(option.start * 1000);
-          const endTime = new Date(option.end * 1000);
           const dayOfWeek = startTime.getDay();
           const startHour = startTime.getHours();
-          const endHour = endTime.getHours();
+          const endHour = new Date(option.end * 1000).getHours();
 
-          // Filtrera för Lördag 9-18, Söndag 10-17, Måndag 16-22
-          if (dayOfWeek === 6 && startHour === 9 && endHour === 18) return true;
-          if (dayOfWeek === 0 && startHour === 10 && endHour <= 17) return true;
-          if (dayOfWeek === 1 && startHour === 16 && endHour === 22) return true;
+          // Filtrera på tillåtna dagar
+          if (allowedDays.includes(dayOfWeek)) {
+            if (dayOfWeek === 6 && startHour === 9 && endHour === 18) return true; // Lördag 9-18
+            if (dayOfWeek === 0 && startHour === 10 && endHour <= 17) return true; // Söndag 10-17
+            if (dayOfWeek === 1 && startHour === 16 && endHour === 22) return true; // Måndag 16-22
+          }
           return false;
         });
 
@@ -108,7 +110,6 @@ const ChangeDeliveryDayModal = () => {
           const dayOfWeek = startTime.getDay();
           const dayLabel = getDayLabel(dayOfWeek, lang); // Passera språkkoden
 
-          // Datumformat "DD/MM"
           return {
             ...option,
             label: `${dayLabel}, ${startTime.getDate()}/${startTime.getMonth() + 1} ${startTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - ${new Date(option.end * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`,
@@ -180,47 +181,46 @@ const ChangeDeliveryDayModal = () => {
             </select>
 
             <div>
-  <label className="flex items-center space-x-3">
-    <input
-      type="checkbox"
-      onChange={(e) => setAlwaysUseThisDay(e.target.checked)}
-      className="custom-checkbox"
-    />
-    <span>{textData?.always_use_this_day || "Använd alltid denna leveransdag"}</span>
-  </label>
-</div>
+              <label className="flex items-center space-x-3">
+                <input
+                  type="checkbox"
+                  onChange={(e) => setAlwaysUseThisDay(e.target.checked)}
+                  className="custom-checkbox"
+                />
+                <span>{textData?.always_use_this_day || "Använd alltid denna leveransdag"}</span>
+              </label>
+            </div>
 
-<style jsx>{`
-  .custom-checkbox {
-    width: 20px;
-    height: 20px;
-    border: 2px solid #6E2936; /* Border färg */
-    appearance: none;
-    background-color: white;
-    cursor: pointer;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+            <style jsx>{`
+              .custom-checkbox {
+                width: 20px;
+                height: 20px;
+                border: 2px solid #6E2936; /* Border färg */
+                appearance: none;
+                background-color: white;
+                cursor: pointer;
+                position: relative;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              }
 
-  .custom-checkbox:checked {
-    background-color: #6E2936;
-    border-color: #6E2936;
-  }
+              .custom-checkbox:checked {
+                background-color: #6E2936;
+                border-color: #6E2936;
+              }
 
-  .custom-checkbox:checked::before {
-    content: "✔";
-    color: white;
-    font-size: 14px; /* Ändra storlek om du vill justera */
-    font-weight: bold;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); /* Centrera ✔ */
-  }
-`}</style>
-
+              .custom-checkbox:checked::before {
+                content: "✔";
+                color: white;
+                font-size: 14px; /* Ändra storlek om du vill justera */
+                font-weight: bold;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%); /* Centrera ✔ */
+              }
+            `}</style>
 
             <Button type="submit" className="">
               {textData?.change_delivery_day_button || "Ändra leveransdag"}
@@ -233,6 +233,7 @@ const ChangeDeliveryDayModal = () => {
 };
 
 export default ChangeDeliveryDayModal;
+
 
 const shippingDk = [
   "2620",
