@@ -636,6 +636,9 @@ popup: {
     not_found: "Vi kunde inte hitta dig som kund :( Kontakta oss gärna om vi har fel!",
     copy_success: "Koden är kopierad!",
     copy_fail: "Misslyckades att kopiera koden"
+  }, 
+  promotionbanner: {
+    promotiontext: "Bästa klimatvänliga matkassen enligt EU Business news"
   }
   
 };
@@ -1147,8 +1150,10 @@ const enText = {
       not_found: "We couldn't find you as a customer :( Please contact us if this is a mistake!",
       copy_success: "The code has been copied!",
       copy_fail: "Failed to copy the code"
+    },
+    promotionbanner: {
+      promotiontext: "Best Eco-Friendly meal kit per EU Business news"
     }
-  
 };
 
 const daText = {
@@ -1631,5 +1636,8 @@ integrity_policy: {
     not_found: "Vi kunne ikke finde dig som kunde :( Kontakt os gerne, hvis vi tager fejl!",
     copy_success: "Koden er kopieret!",
     copy_fail: "Kunne ikke kopiere koden"
+  }, 
+  promotionbanner: {
+    promotiontext: "Bedste miljøvenlige måltidskasse ifølge EU Business news"
   }
 };
