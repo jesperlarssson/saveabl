@@ -91,7 +91,7 @@ const PromotionBanner = () => {
           href="https://www.eubusinessnews.com/winners/saveabl/"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center mr-2 mt-2 md:hidden"
+          className="flex items-center mr-2 mt-1 md:hidden"
         >
           <Image
             src={eubusinessImage}  // Dynamisk bild baserat på språket
