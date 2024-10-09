@@ -30,19 +30,23 @@ const PromotionBanner = () => {
     setPromotionText(text.promotionbanner.promotiontext);  // Uppdatera promotionText när text ändras
   }, [text]);
 
-  // Bestäm Trustpilot-bilden baserat på språkkoden
+  // Bestäm bilder baserat på språkkoden
   let trustpilotImage = "/images/trustpilot-en.png"; // Standardbild om inget språk matchar
+  let eubusinessImage = "/images/eubusinessnews-en.png"; // Standardbild för eubusiness om inget språk matchar
 
   switch (lang) {
     case 'sv':
       trustpilotImage = "/images/trustpilot-sv.png";
+      eubusinessImage = "/images/eubusinessnews-se.png";
       break;
     case 'da':
       trustpilotImage = "/images/trustpilot-da.png";
+      eubusinessImage = "/images/eubusinessnews-da.png";
       break;
     case 'en':
     default:
       trustpilotImage = "/images/trustpilot-en.png";
+      eubusinessImage = "/images/eubusinessnews-en.png";
       break;
   }
 
@@ -53,35 +57,49 @@ const PromotionBanner = () => {
         <div dangerouslySetInnerHTML={{ __html: bannerContent[0].content.html }} />
       )}
 
-<div className="flex items-center justify-center mt-0 max-w-screen-md mx-auto">
-  {/* Trustpilot-bilden länkar till Trustpilot */}
-  <a
-    href="https://se.trustpilot.com/review/saveabl.se"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="flex items-center ml-3 md:ml-6"  // Extra marginal på datorer
-  >
-    <Image
-      src={trustpilotImage}  // Dynamisk bild baserat på språket
-      alt="Trustpilot"
-      width={250}  // Justera bredden
-      height={30}  // Justera höjden
-    />
-  </a>
+      <div className="flex items-center justify-center mt-0 max-w-screen-md mx-auto">
+        {/* Trustpilot-bilden länkar till Trustpilot */}
+        <a
+          href="https://se.trustpilot.com/review/saveabl.se"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center ml-1 md:ml-6"
+        >
+          <Image
+            src={trustpilotImage}  // Dynamisk bild baserat på språket
+            alt="Trustpilot"
+            width={250}
+            height={30}
+          />
+        </a>
 
-  {/* Lodrätt streck */}
-  <div className="ml-2 mr-2 md:ml-4 md:mr-4 h-5 border-l border-white"></div>  {/* Öka avstånd på större skärmar */}
+        {/* Lodrätt streck */}
+        <div className="ml-2 mr-2 md:ml-4 md:mr-4 h-5 border-l border-white"></div>
 
-  {/* Länktext som länkar till eubusinessnews */}
-  <a
-    href="https://www.eubusinessnews.com/winners/saveabl/"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="text-xs md:text-[13px] mt-2 mb-2 text-white hover:underline transition-all font-sans"
-  >
-    {promotionText}
-  </a>
+        {/* Länktext som länkar till eubusinessnews - endast på dator */}
+        <a
+          href="https://www.eubusinessnews.com/winners/saveabl/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-xs md:text-[13px] mt-2 mb-2 text-white hover:underline transition-all font-sans hidden md:block"
+        >
+          {promotionText}
+        </a>
 
+        {/* Eubusinessnews-bilden - endast på mobil */}
+        <a
+          href="https://www.eubusinessnews.com/winners/saveabl/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center mr-2 mt-1 md:hidden"
+        >
+          <Image
+            src={eubusinessImage}  // Dynamisk bild baserat på språket
+            alt="Eubusiness News"
+            width={250}
+            height={30}
+          />
+        </a>
 
       </div>
     </div>
@@ -89,4 +107,3 @@ const PromotionBanner = () => {
 };
 
 export default PromotionBanner;
-
