@@ -618,7 +618,7 @@ popup: {
     faq: "Vanliga frågor",
     terms: "Allmänna villkor", 
     integrity: "Integritetspolicy",
-    newsletter: "Håll dig uppdaterad!",
+    newsletter: "Håll dig uppdaterad",
   }, 
   referral: {
     header_title: "Bjud in dina vänner: tjäna 100kr!",
@@ -1132,7 +1132,7 @@ const enText = {
       faq: "Common questions",
       terms: "Terms and Conditions", 
       integrity: "Privacy Policy",
-      newsletter: "Stay updated!", 
+      newsletter: "Stay updated", 
     }, 
     referral: {
       header_title: "Invite your friends: earn 100kr!",
@@ -1618,7 +1618,7 @@ integrity_policy: {
     faq: "Almindelige spørgsmål",
     terms: "Generelle vilkår", 
     integrity: "Integritetspolitik",
-    newsletter: "Hold dig opdateret!", 
+    newsletter: "Hold dig opdateret", 
   }, 
   referral: {
     header_title: "Invitér dine venner: tjen 100 kr!",
