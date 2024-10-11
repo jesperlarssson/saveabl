@@ -234,9 +234,12 @@ const svText = {
     saved_ingredients: "Räddade varor i receptet",
     nutrients: "Näringsvärden",
     ingredients: "Innehåll & allergener",
+    comment: "Recensera recept", 
+    share: "Dela recept", 
     share_message: "Spana in detta receptet!",
     share_button: "Dela recept",
     share_not_supported: "Delning stöds inte på denna enhet"
+  
   },
 
   order: {
@@ -783,6 +786,11 @@ const enText = {
     saved_ingredients: "Saved items in the recipe",
     nutrients: "Nutritional values",
     ingredients: "Contents & allergens",
+    comment: "Review recipe", 
+    share: "Share recipe", 
+    share_message: "Check out this recipe!", 
+    share_button: "Share recipe", 
+    share_not_supported: "Sharing is not supported on this device", 
   },
 
   order: {
@@ -1293,6 +1301,11 @@ const daText = {
     saved_ingredients: "Gemte varer i opskriften",
     nutrients: "Næringsværdier",
     ingredients: "Indhold & allergener",
+    comment: "Anmeld opskrift", 
+    share: "Del opskrift", 
+    share_message: "Tjek denne opskrift ud!", 
+    share_button: "Del opskrift", 
+    share_not_supported: "Deling understøttes ikke på denne enhed"
   },
 
   order: {

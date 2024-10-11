@@ -5,9 +5,7 @@ import React, { useEffect, useState } from "react";
 import Section from "../ui/Section";
 import Card from "../ui/Card";
 import Grid from "../ui/Grid";
-import ThisWeekRecipes from "./ThisWeekRecipes";
 import CommentSection from "../section/CommentSection";
-import RatingButton from "../ui/RatingButton";
 import { useLang } from "@/hooks/useLang";
 import CommentForm from "./CommentForm";
 import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs';
@@ -50,7 +48,6 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
   };
   const [ratingSum, setRatingSum] = useState<number>(0);
 
-  // Helper function to get localization index based on language
   const getLocalizationIndex = (lang: string) => {
     switch (lang) {
       case 'da':
@@ -111,7 +108,8 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
     <Section className="w-full">
       <Card className="my-0 text-secondary relative">
         <div className="grid grid-cols-4 gap-8 relative">
-          <div className="col-span-4 sm:col-span-1 drop-shadow-md overflow-hidden rounded-lg relative">
+          {/* Receptbild */}
+          <div className="col-span-4 sm:col-span-1 drop-shadow-md overflow-hidden rounded-lg relative mb-2">
             <Image
               src={recept.image}
               alt={recept.title}
@@ -120,6 +118,8 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
               className="object-cover w-full h-full"
             />
           </div>
+
+          {/* Innehåll till höger om receptbilden */}
           <div className="col-span-4 sm:col-span-3 flex flex-col justify-end gap-2 relative">
             <div className="flex items-center gap-2 mt-2">
               <Image
@@ -140,11 +140,52 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
               {recept.title}
             </h2>
           </div>
+        </div>
 
+        {/* Ikoner och text direkt nedanför receptbilden */}
+        <div className="mt-4 flex items-center gap-4">
+          <div
+            className="flex items-center cursor-pointer"
+            onClick={() => {
+              document.querySelector("#comment-form")?.scrollIntoView({ behavior: "smooth" });
+            }}
+          >
+            <Image
+              src="/images/comment_recipe.png"
+              alt="Comment Recipe"
+              width={32}
+              height={32}
+            />
+            <span className="ml-2 text-[#6E2936] hover:underline">
+              {text.recipe_slug.comment}
+            </span>
+          </div>
+          <div
+  className="flex items-center cursor-pointer"
+  onClick={() => {
+    if (navigator.share) {
+      navigator.share({
+        text: `${text.recipe_slug.share_message}\n\n${recept.title}\n\n${window.location.href}`, // Share_message först, sen mellanrum, sen titel
+      });
+    }
+  }}
+>
+            <Image
+              src="/images/share_recipe.png"
+              alt="Share Recipe"
+              width={32}
+              height={32}
+            />
+            <span className="ml-2 text-[#6E2936] hover:underline">
+              {text.recipe_slug.share}
+            </span>
+          </div>
+        </div>
+
+        {/* Innehåll (ingredienser) och Gör så här nedanför ikonerna */}
+        <div className="grid grid-cols-4 gap-8 mt-4">
           <div className="col-span-4 sm:col-span-1">
-            <h3 className="font-poppins text-xl">
-              {text.recipe_slug.contains}
-            </h3>
+            <h3 className="font-poppins text-xl">{text.recipe_slug.contains}</h3>
             <ul className="text-gray-700">
               {recept.ingredients.length > 0 ? (
                 recept.ingredients.map((ingredient, index) => (
@@ -175,6 +216,7 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
         </div>
       </Card>
 
+      {/* Grid layout for Räddade varor, Näringsvärden, and Innehåll & allergener */}
       <Grid>
         <Card>
           <h3 className="text-secondary font-poppins">
@@ -196,10 +238,29 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
         </Card>
       </Grid>
 
-      {comments.length > 0 && <CommentSection comments={comments} />}
-      <CommentForm recipeId={recipe.id || ''} onNewComment={handleNewComment} />
+      <div id="comment-section">
+        {comments.length > 0 && <CommentSection comments={comments} />}
+      </div>
+
+      {/* Kommentarsformulär med id för att länka till */}
+      <div id="comment-form">
+        <CommentForm recipeId={recipe.id || ''} onNewComment={handleNewComment} />
+      </div>
     </Section>
   );
 };
 
 export default RecipeLayout;
+
+
+
+
+
+
+
+
+
+
+
+
+
