@@ -358,7 +358,7 @@ const Order = () => {
       deliveryPeriodId,
       addOns: [],
     };
-
+       userInformation.address.country = country;
     try {
       const response = await axios.post("/api/create_stripe_customer", {
         email: userInformation.email,
