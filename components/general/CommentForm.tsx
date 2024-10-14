@@ -56,7 +56,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
     e.preventDefault();
     if (!validateForm()) return;
 
-    setLoading(true);
+    setLoading(true); // Inaktiverar knappen vid start av förfrågan
     try {
       const response = await axios.post("/api/comment/recipe", {
         name,
@@ -72,12 +72,13 @@ const CommentForm: React.FC<CommentFormProps> = ({
         recipeId,
         id: response.data.id,
       });
-      setLoading(false);
+      setLoading(false); // Aktiverar knappen när förfrågan är klar
       setRating(-1);
       setName("");
       setComment("");
     } catch (error) {
       console.log(error);
+      setLoading(false); // Om det sker ett fel återaktiveras knappen
     }
   };
 
@@ -147,7 +148,6 @@ const CommentForm: React.FC<CommentFormProps> = ({
           disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
           invalid:border-accent invalid:text-accent
           focus:invalid:border-accent focus:invalid:ring-accent`,
-            
           )}
         ></textarea>
         {commentError && (
@@ -156,14 +156,13 @@ const CommentForm: React.FC<CommentFormProps> = ({
           </span>
         )}
 
-        <Button className="max-w-xs mt-8" type="submit">
-          {text.recipes.send_comment}
+        <Button className="max-w-xs mt-8" type="submit" disabled={loading}>
+          {loading ? "Skickar..." : text.recipes.send_comment}
         </Button>
       </form>
-
-      {/* ... loading overlay if needed ... */}
     </div>
   );
 };
 
 export default CommentForm;
+
