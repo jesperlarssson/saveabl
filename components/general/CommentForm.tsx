@@ -157,7 +157,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
         )}
 
         <Button className="max-w-xs mt-8" type="submit" disabled={loading}>
-          {loading ? "Skickar..." : text.recipes.send_comment}
+          {loading ? text.recipes.sending_comment : text.recipes.send_comment}
         </Button>
       </form>
     </div>

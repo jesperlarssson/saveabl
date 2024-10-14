@@ -226,6 +226,7 @@ const svText = {
     rate: "Betyg:",
     write_comment: "Kommentera",
     send_comment: "Kommentera",
+    sending_comment: "Skickar..."
   },
 
   recipe_slug: {
@@ -778,7 +779,8 @@ const enText = {
     comment_name: "Name",
     rate: "Rate:", 
     write_comment: "Comment", 
-    send_comment: "Comment"
+    send_comment: "Comment", 
+    sending_comment: "Sending..."
   },
   recipe_slug: {
     contains: "Contains",
@@ -1293,6 +1295,7 @@ const daText = {
     rate: "Bedømme:",
     write_comment: "Kommentar",
     send_comment: "Kommentere",
+    sending_comment: "Sender...", 
   
   },
   recipe_slug: {
