@@ -92,7 +92,7 @@ const Order = () => {
       const minutes = now.getMinutes();
 
       if (
-        (day === 2 && (hours > 19 || (hours === 19 && minutes >= 7))) || // Tisdag efter 19:07
+        (day === 2 && (hours > 18 || (hours === 18 && minutes >= 7))) || // Tisdag efter 19:07
         (day === 3 && hours < 24) // Hela onsdag
       ) {
         setShowUrgency(true);
