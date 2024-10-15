@@ -80,7 +80,32 @@ const Order = () => {
     setProductTypes(getProductTypesFromLngCode(lang));
   }, [lang]);
 
-  
+  // --- NYTT: State för att hantera underrubriken "Fåtal kvar för dessa datum" ---
+  const [showUrgency, setShowUrgency] = useState(false);
+
+  // --- NYTT: useEffect för att kontrollera tiden och visa underrubriken ---
+  useEffect(() => {
+    const checkTime = () => {
+      const now = new Date();
+      const day = now.getDay(); // 2 = tisdag, 3 = onsdag
+      const hours = now.getHours();
+      const minutes = now.getMinutes();
+
+      if (
+        (day === 2 && (hours > 19 || (hours === 19 && minutes >= 7))) || // Tisdag efter 19:07
+        (day === 3 && hours < 24) // Hela onsdag
+      ) {
+        setShowUrgency(true);
+      } else {
+        setShowUrgency(false);
+      }
+    };
+
+    checkTime(); // Kör direkt när komponenten laddas
+    const interval = setInterval(checkTime, 60000); // Kontrollera tiden varje minut
+
+    return () => clearInterval(interval); // Rensa intervallet när komponenten unmountas
+  }, []);
 
   const searchParams = useSearchParams();
   const id = searchParams?.get("id") || "1";
@@ -613,6 +638,12 @@ const Order = () => {
         >
           {text.order.deliveryDay}
         </h3>
+        {/* --- NYTT: Visar underrubriken beroende på showUrgency --- */}
+        {showUrgency && (
+              <h4 className="font-poppins text-xs text-#6E2936 text-left px-4 mt-2 mb-3">
+                {text.order.urgency}
+              </h4>
+            )}
 
         <div className="flex flex-col sm:flex-row sm:flex-wrap w-screen sm:w-auto gap-4 px-4">
           <AnimatePresence mode="wait">
