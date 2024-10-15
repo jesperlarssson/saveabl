@@ -239,7 +239,9 @@ const svText = {
     share: "Dela recept", 
     share_message: "Spana in detta receptet!",
     share_button: "Dela recept",
-    share_not_supported: "Delning stöds inte på denna enhet"
+    share_not_supported: "Delning stöds inte på denna enhet", 
+    no_ingredients: "Inga ingredienser listade än - kommer snart!", 
+    no_steps: "Inga steg listade än - kommer snart!"
   
   },
 
@@ -793,6 +795,8 @@ const enText = {
     share_message: "Check out this recipe!", 
     share_button: "Share recipe", 
     share_not_supported: "Sharing is not supported on this device", 
+    no_ingredients: "No ingredients listed yet - coming soon!", 
+    no_steps: "No steps listed yet - coming soon!"
   },
 
   order: {
@@ -1308,7 +1312,9 @@ const daText = {
     share: "Del opskrift", 
     share_message: "Tjek denne opskrift ud!", 
     share_button: "Del opskrift", 
-    share_not_supported: "Deling understøttes ikke på denne enhed"
+    share_not_supported: "Deling understøttes ikke på denne enhed",
+    no_ingredients: "Ingen ingredienser listet endnu - kommer snart!",
+    no_steps: "Ingen trin listet endnu - kommer snart!"
   },
 
   order: {

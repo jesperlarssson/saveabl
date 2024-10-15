@@ -194,7 +194,7 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
                   </li>
                 ))
               ) : (
-                <li>Inga ingredienser listade</li>
+                <li>{text.recipe_slug.no_steps}</li>
               )}
             </ul>
           </div>
@@ -209,7 +209,7 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
                   </li>
                 ))
               ) : (
-                <li>Inga steg listade</li>
+                <li>{text.recipe_slug.no_ingredients}</li>
               )}
             </ul>
           </div>
