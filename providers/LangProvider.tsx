@@ -1340,7 +1340,7 @@ const daText = {
     variant: "Vælg hvor ofte du vil modtage din madkasse:",
     urgency: "Få tilbage", 
     deliveryDay: "Næste tilgængelige leveringsdato:",
-    copenhagen_monday: "Mandag 21/10", 
+    copenhagen_monday: "Mandag 28/10", 
     monday_description_copenhagen: "kl. 16-22", 
     address: "Leveringsinfo:",
     extra: "Ekstra info:",
