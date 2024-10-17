@@ -638,12 +638,6 @@ const Order = () => {
         >
           {text.order.deliveryDay}
         </h3>
-        {/* --- NYTT: Visar underrubriken beroende på showUrgency --- */}
-        {showUrgency && (
-              <h4 className="font-poppins text-xs text-#6E2936 text-left px-4 mt-2 mb-3">
-                {text.order.urgency}
-              </h4>
-            )}
 
         <div className="flex flex-col sm:flex-row sm:flex-wrap w-screen sm:w-auto gap-4 px-4">
           <AnimatePresence mode="wait">
@@ -675,6 +669,12 @@ const Order = () => {
                 >
                   {day.label}
                   <p className="text-xs mt-1">{day.description}</p>
+                  {/* --- NYTT: Visar underrubriken beroende på showUrgency --- */}
+        {showUrgency && (
+              <h4 className="text-xs mt-2">
+                {text.order.urgency}
+              </h4>
+            )}
                 </CheckoutButton>
               </motion.div>
             ))}
