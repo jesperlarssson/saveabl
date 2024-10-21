@@ -32,11 +32,18 @@ import { CheckoutButton } from "./components/CheckoutButton";
 import axios from "axios";
 import { formatEpochToTimeString } from "@/helpers/epochFormat";
 import {
-  free,
-  shippingCostStage1,
-  shippingCostStage2,
-  shippingCostStage3,
-  stockholmPostalCodes,
+  stockholmPostalCodes1,
+  stockholmPostalCodes2,
+  stockholmPostalCodes3,
+  skanePostalCodes1,
+  skanePostalCodes2,
+  vastPostalCodes1,
+  vastPostalCodes2,
+  vastPostalCodes3,
+  vastPostalCodes4,
+  vastPostalCodes5,
+  vastPostalCodes6,
+  vastPostalCodes7,
 } from "@/lib/zipCodes";
 
 type RowError = {
@@ -258,11 +265,20 @@ const Order = () => {
 
     if (
       address.postalCode.length === 5 &&
-      (stockholmPostalCodes.includes(address.postalCode) ||
-        shippingCostStage3.includes(address.postalCode) ||
-        shippingCostStage2.includes(address.postalCode) ||
-        shippingCostStage1.includes(address.postalCode) ||
-        free.includes(address.postalCode))
+      (stockholmPostalCodes1.includes(address.postalCode) ||
+      stockholmPostalCodes2.includes(address.postalCode) ||
+      stockholmPostalCodes3.includes(address.postalCode) ||
+      skanePostalCodes1.includes(address.postalCode) ||
+      skanePostalCodes2.includes(address.postalCode) ||
+      vastPostalCodes1.includes(address.postalCode) ||
+      vastPostalCodes2.includes(address.postalCode) ||
+      vastPostalCodes3.includes(address.postalCode) ||
+      vastPostalCodes4.includes(address.postalCode) ||
+      vastPostalCodes5.includes(address.postalCode) ||
+      vastPostalCodes6.includes(address.postalCode) ||
+      vastPostalCodes7.includes(address.postalCode) 
+      
+      )
     ) {
       setIsDk(false);
       setShowLinks(false);
@@ -440,28 +456,151 @@ const Order = () => {
     if (address.postalCode && address.postalCode.length < 4) {
       setShowLinks(false);
     }
-    if (
-      typeof address.postalCode === 'string' &&
-      (stockholmPostalCodes.includes(address.postalCode) ||
-        (shippingCostStage3 && shippingCostStage3.includes(address.postalCode)))
-    ) {
-      setDeliveryDaysToChoose([
-        {
-          label: text.order.stockholm_sunday, 
-          id: 0,
-          description: text.order.sunday_description_stockholm,
-        },
-        {
-          label: text.order.stockholm_monday,
-          id: 1,
-          description: text.order.monday_description_stockholm,
-        },
-      ]);
+    
+    // Hantering för Stockholm-grupper
+    if (typeof address.postalCode === 'string') {
+      if (stockholmPostalCodes1.includes(address.postalCode)) {
+        setDeliveryDaysToChoose([
+          {
+            label: text.order.stockholm_sunday,
+            id: 0,
+            description: text.order.sunday_description_stockholm,
+          },
+          {
+            label: text.order.stockholm_monday,
+            id: 1,
+            description: text.order.monday_description_stockholm,
+          },
+        ]);
+      } else if (stockholmPostalCodes2.includes(address.postalCode)) {
+        setDeliveryDaysToChoose([
+          {
+            label: text.order.stockholm_sunday,
+            id: 0,
+            description: text.order.sunday_description_stockholm,
+          },
+        ]);
+      } else if (stockholmPostalCodes3.includes(address.postalCode)) {
+        setDeliveryDaysToChoose([
+          {
+            label: text.order.stockholm_monday,
+            id: 1,
+            description: text.order.monday_description_stockholm,
+          },
+        ]);
+      }
+      
+      // Hantering för Skåne-grupper
+      else if (skanePostalCodes1.includes(address.postalCode)) {
+        setDeliveryDaysToChoose([
+          {
+            label: text.order.delivery_sunday,
+            id: 0,
+            description: text.order.sunday_description,
+          },
+          {
+            label: text.order.delivery_monday,
+            id: 1,
+            description: text.order.monday_description,
+          },
+        ]);
+      } else if (skanePostalCodes2.includes(address.postalCode)) {
+        setDeliveryDaysToChoose([
+          {
+            label: text.order.delivery_monday,
+            id: 1,
+            description: text.order.monday_description,
+          },
+        ]);
+      }
+  
+      // Hantering för Västra Götaland-grupper
+      else if (vastPostalCodes1.includes(address.postalCode)) {
+        setDeliveryDaysToChoose([
+          {
+            label: text.order.delivery_saturday,
+            id: 6,
+            description: text.order.saturday_description,
+          },
+          {
+            label: text.order.delivery_sunday,
+            id: 0,
+            description: text.order.sunday_description,
+          },
+          {
+            label: text.order.delivery_monday,
+            id: 1,
+            description: text.order.monday_description,
+          },
+        ]);
+      } else if (vastPostalCodes2.includes(address.postalCode)) {
+        setDeliveryDaysToChoose([
+          {
+            label: text.order.delivery_saturday,
+            id: 6,
+            description: text.order.saturday_description,
+          },
+          {
+            label: text.order.delivery_monday,
+            id: 1,
+            description: text.order.monday_description,
+          },
+        ]);
+      } else if (vastPostalCodes3.includes(address.postalCode)) {
+        setDeliveryDaysToChoose([
+          {
+            label: text.order.delivery_monday,
+            id: 1,
+            description: text.order.monday_description,
+          },
+        ]);
+      } else if (vastPostalCodes4.includes(address.postalCode)) {
+        setDeliveryDaysToChoose([
+          {
+            label: text.order.delivery_saturday,
+            id: 6,
+            description: text.order.saturday_description,
+          },
+        ]);
+      } else if (vastPostalCodes5.includes(address.postalCode)) {
+        setDeliveryDaysToChoose([
+          {
+            label: text.order.delivery_sunday,
+            id: 0,
+            description: text.order.sunday_description,
+          },
+        ]);
+      } else if (vastPostalCodes6.includes(address.postalCode)) {
+        setDeliveryDaysToChoose([
+          {
+            label: text.order.delivery_saturday,
+            id: 6,
+            description: text.order.saturday_description,
+          },
+          {
+            label: text.order.delivery_sunday,
+            id: 0,
+            description: text.order.sunday_description,
+          },
+        ]);
+      } else if (vastPostalCodes7.includes(address.postalCode)) {
+        setDeliveryDaysToChoose([
+          {
+            label: text.order.delivery_sunday,
+            id: 0,
+            description: text.order.sunday_description,
+          },
+          {
+            label: text.order.delivery_monday,
+            id: 1,
+            description: text.order.monday_description,
+          },
+        ]);
+      }
     }
-    if (
-      typeof address.postalCode === 'string' &&
-      (shippingDk.includes(address.postalCode))
-    ) {
+  
+    // Hantering för Danmark
+    if (typeof address.postalCode === 'string' && shippingDk.includes(address.postalCode)) {
       setDeliveryDaysToChoose([
         {
           label: text.order.copenhagen_monday,
@@ -471,7 +610,7 @@ const Order = () => {
       ]);
     }
   }, [address.postalCode]);
-
+  
   return (
     <>
       <Section className="pt-16">
@@ -569,8 +708,13 @@ const Order = () => {
                 <div className="flex flex-col sm:flex-row gap-4 mb-4 max-w-full sm:max-w-xxs px-2">
                   {selectedType.variants.map((variant: any) => {
                     const postalCode = address.postalCode || "";
-                    const sthlmCustomer = stockholmPostalCodes.includes(postalCode);
-                    const skaneCustomer = shippingCostStage3.includes(postalCode);
+                    const sthlmCustomer = 
+                    stockholmPostalCodes1.includes(postalCode) ||
+                    stockholmPostalCodes2.includes(postalCode) ||
+                    stockholmPostalCodes3.includes(postalCode);
+                    const skaneCustomer = 
+                    skanePostalCodes1.includes(postalCode) ||
+                    skanePostalCodes2.includes(postalCode);
                     const dkCustomer = shippingDk.includes(postalCode);
   
                     return (

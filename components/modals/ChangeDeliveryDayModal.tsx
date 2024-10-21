@@ -10,11 +10,18 @@ import useMessageModal from "@/hooks/useMessageModal";
 import { useLang } from "@/hooks/useLang";
 import toast from "react-hot-toast";
 import {
-  free,
-  shippingCostStage1,
-  shippingCostStage2,
-  shippingCostStage3,
-  stockholmPostalCodes,
+  stockholmPostalCodes1,
+  stockholmPostalCodes2,
+  stockholmPostalCodes3,
+  skanePostalCodes1,
+  skanePostalCodes2,
+  vastPostalCodes1,
+  vastPostalCodes2,
+  vastPostalCodes3,
+  vastPostalCodes4,
+  vastPostalCodes5,
+  vastPostalCodes6,
+  vastPostalCodes7,
 } from "@/lib/zipCodes"; // Importera alla postnummer
 
 const ChangeDeliveryDayModal = () => {
@@ -81,14 +88,34 @@ const ChangeDeliveryDayModal = () => {
 
         let allowedDays: number[] = [];
 
-        // Postnummer-logik
-        if (free.includes(sanitizedPostalCode) || shippingCostStage1.includes(sanitizedPostalCode) || shippingCostStage2.includes(sanitizedPostalCode)) {
-          allowedDays = [6, 0, 1]; // Lör, Sön, Mån
-        } else if (shippingCostStage3.includes(sanitizedPostalCode) || stockholmPostalCodes.includes(sanitizedPostalCode)) {
-          allowedDays = [0, 1]; // Sön, Mån
-        } else if (shippingDk.includes(sanitizedPostalCode)) {
-          allowedDays = [1]; // Mån
-        }
+       // Postnummer-logik
+       if (stockholmPostalCodes1.includes(sanitizedPostalCode)) {
+        allowedDays = [0, 1]; // Sön och Mån
+      } else if (stockholmPostalCodes2.includes(sanitizedPostalCode)) {
+        allowedDays = [0]; // Sön
+      } else if (stockholmPostalCodes3.includes(sanitizedPostalCode)) {
+        allowedDays = [1]; // Mån
+      } else if (skanePostalCodes1.includes(sanitizedPostalCode)) {
+        allowedDays = [0, 1]; // Sön och Mån
+      } else if (skanePostalCodes2.includes(sanitizedPostalCode)) {
+        allowedDays = [1]; // Mån
+      } else if (vastPostalCodes1.includes(sanitizedPostalCode)) {
+        allowedDays = [6, 0, 1]; // Lör, Sön, Mån
+      } else if (vastPostalCodes2.includes(sanitizedPostalCode)) {
+        allowedDays = [6, 1]; // Lör och Mån
+      } else if (vastPostalCodes3.includes(sanitizedPostalCode)) {
+        allowedDays = [1]; // Mån
+      } else if (vastPostalCodes4.includes(sanitizedPostalCode)) {
+        allowedDays = [6]; // Lör
+      } else if (vastPostalCodes5.includes(sanitizedPostalCode)) {
+        allowedDays = [0]; // Sön
+      } else if (vastPostalCodes6.includes(sanitizedPostalCode)) {
+        allowedDays = [6, 0]; // Lör och Sön
+      } else if (vastPostalCodes7.includes(sanitizedPostalCode)) {
+        allowedDays = [0, 1]; // Sön och Mån
+      } else if (shippingDk.includes(sanitizedPostalCode)) {
+        allowedDays = [1]; // Mån
+      }
 
         const filteredOptions = deliveryWindows.filter((option: any) => {
           const startTime = new Date(option.start * 1000);

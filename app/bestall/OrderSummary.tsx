@@ -1,5 +1,18 @@
 import React from 'react';
-import { stockholmPostalCodes, shippingCostStage1, shippingCostStage2, shippingCostStage3, free } from '@/lib/zipCodes';
+import { 
+  stockholmPostalCodes1,
+  stockholmPostalCodes2,
+  stockholmPostalCodes3,
+  skanePostalCodes1,
+  skanePostalCodes2,
+  vastPostalCodes1,
+  vastPostalCodes2,
+  vastPostalCodes3,
+  vastPostalCodes4,
+  vastPostalCodes5,
+  vastPostalCodes6,
+  vastPostalCodes7,
+ } from '@/lib/zipCodes';
 import { useLang } from '@/hooks/useLang'; 
 
 interface SelectedType {
@@ -127,13 +140,27 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({ selectedType, selectedVaria
   
   // Funktionen för att beräkna totalpriset
   const calculateTotalPrice = (postalCode: string | null) => {
-    if (!postalCode) return getPriceForStages(); 
-  
-    if (stockholmPostalCodes.includes(postalCode)) {
+    if (!postalCode) return getPriceForStages();
+
+    if (
+      stockholmPostalCodes1.includes(postalCode) ||
+      stockholmPostalCodes2.includes(postalCode) ||
+      stockholmPostalCodes3.includes(postalCode)
+    ) {
       return getPriceForStockholm();
     } else if (isDk) {
       return getPriceForDenmark();
-    } else if (shippingCostStage3.includes(postalCode) || shippingCostStage1.includes(postalCode) || shippingCostStage2.includes(postalCode)) {
+    } else if (
+      skanePostalCodes1.includes(postalCode) ||
+      skanePostalCodes2.includes(postalCode) ||
+      vastPostalCodes1.includes(postalCode) ||
+      vastPostalCodes2.includes(postalCode) ||
+      vastPostalCodes3.includes(postalCode) ||
+      vastPostalCodes4.includes(postalCode) ||
+      vastPostalCodes5.includes(postalCode)||
+      vastPostalCodes6.includes(postalCode)||
+      vastPostalCodes7.includes(postalCode)
+    ) {
       return getPriceForStages();
     } else {
       return getPriceForStages();
