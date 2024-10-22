@@ -91,19 +91,6 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
     onOpenDeliveryDay();
   };
 
-  const shareOnSms = () => {
-    const baseUrl = "https://www.saveabl.com";
-    const urlWithCode = `${baseUrl}?referralCode=${encodeURIComponent(referralCode || "")}`;
-
-    const message = text.referral.sms_message
-      .replace("{referralCode}", referralCode || "")
-      .replace("{urlWithCode}", urlWithCode);
-
-    const smsLink = `sms:?&body=${encodeURIComponent(message)}`;
-
-    window.location.href = smsLink;
-  };
-
   const copyToClipboard = () => {
     navigator.clipboard.writeText(referralCode || "").then(() => {
       alert(text.referral.copy_success);
@@ -111,6 +98,26 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
       alert(text.referral.copy_fail + ': ' + err);
     });
   };
+
+  const shareCode = () => {
+    if (navigator.share) {
+      // Hämta meddelandet från `lang` och sätt in värvningskoden
+      const message = text?.referral?.sms_message ?? 
+      "Hej! Med min kod får du 100kr rabatt på www.saveabl.com. Ange den i checkouten när du gör din beställning :)";
+
+      // Ersätt en placeholder med värvningskoden, t.ex. {referralCode}
+      const formattedMessage = message.replace("{referralCode}", referralCode);
+      
+      // Lägg till länken i slutet av meddelandet
+      const fullMessage = `${formattedMessage}\n\nhttps://www.saveabl.com`;
+
+      navigator.share({
+        text: fullMessage,
+      }).catch((error) => console.error("Delning misslyckades:", error));
+    } else {
+      alert("Delning stöds inte på denna enhet");
+    }
+};
 
   if (loading) {
     return (
@@ -144,11 +151,10 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
             </button>
             <button
               className="bg-secondary hover:bg-secondary-800 text-white font-bold py-2 px-4 mr-2 mt-4"
-              onClick={shareOnSms}
+              onClick={shareCode}
             >
-              {text?.my_pages?.referral_share_sms_button ?? "Dela via SMS"}
+              {text?.my_pages?.referral_share_button ?? "Dela kod"}
             </button>
-            {/* Du kan lägga till fler delningsalternativ här */}
           </div>
         </div>
       ) : (
@@ -266,3 +272,4 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
 };
 
 export default UserAccountComponent;
+

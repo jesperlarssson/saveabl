@@ -14,52 +14,10 @@ const ReferralCodeGenerator: React.FC = () => {
 
   const generateReferralCode = () => {
     const standardizedKey = `${name.trim().toLowerCase()}|${email.trim().toLowerCase()}`;
-    const code = predefinedCodes[standardizedKey];
-    if (code) {
-      setReferralCode(code);
-    } else {
-      setReferralCode(text.referral.not_found); // Visa "Kund ej hittad" på valt språk
-    }
+    setReferralCode(standardizedKey); // Generera värvningskod baserat på namn och e-post
     setSubmitted(true);
   };
 
-  const shareOnMessenger = () => {
-    const baseUrl = "https://www.saveabl.com";
-    const urlWithCode = `${baseUrl}?referralCode=${encodeURIComponent(referralCode)}`;
-    
-    // Hämta texten från lang
-    const message = text.referral.messenger_message
-      .replace("{referralCode}", referralCode)
-      .replace("{urlWithCode}", urlWithCode);
-    
-    const messengerUrl = `fb-messenger://share?link=${encodeURIComponent(urlWithCode)}&quote=${encodeURIComponent(message)}`;
-  
-    // För webversionen, vilket ibland kan vara mer robust.
-    const webMessengerUrl = `https://www.facebook.com/dialog/send?link=${encodeURIComponent(urlWithCode)}&app_id=123456789&quote=${encodeURIComponent(message)}&redirect_uri=${encodeURIComponent(baseUrl)}`;
-  
-    // Försök först att öppna i Messenger-appen
-    window.location.href = messengerUrl;
-  
-    // Fallback till webMessenger
-    setTimeout(() => {
-      window.location.href = webMessengerUrl;
-    }, 500);
-  };
-
-  const shareOnSms = () => {
-    const baseUrl = "https://www.saveabl.com";
-    const urlWithCode = `${baseUrl}?referralCode=${encodeURIComponent(referralCode)}`;
-    
-    // Hämta texten från lang
-    const message = text.referral.sms_message
-      .replace("{referralCode}", referralCode)
-      .replace("{urlWithCode}", urlWithCode);
-  
-    const smsLink = `sms:?&body=${encodeURIComponent(message)}`;
-  
-    window.location.href = smsLink;
-  };
-  
   const copyToClipboard = () => {
     navigator.clipboard.writeText(referralCode).then(() => {
       alert(text.referral.copy_success); // Visa "Koden kopierades till urklipp!" på valt språk
@@ -320,8 +278,6 @@ const ReferralCodeGenerator: React.FC = () => {
           <p>{text.referral.thank_you_subtitle}</p> {/* Lägg till underrubrik här */}
           <div className="button-group">
             <button onClick={copyToClipboard} className="custom-button">{text.referral.copy_button}</button>
-            <button onClick={shareOnSms} className="custom-button">{text.referral.share_sms_button}</button>
-            <button onClick={shareOnMessenger} className="custom-button">{text.referral.share_button}</button>
           </div>
         </div>
       )}
@@ -330,47 +286,3 @@ const ReferralCodeGenerator: React.FC = () => {
 };
 
 export default ReferralCodeGenerator;
-
-const predefinedCodes: { [key: string]: string } = {
-    'anna svensson|anna@example.com': 'ANNA1234',
-    'erik karlsson|erik@example.com': 'ERIK5678',
-    'maria andersson|maria@example.com': 'MARIA9101',
-    'Emilie Kjellberg|e.kjellberg@hotmail.se': 'EK5',
-    'Monique Maarschalk|monique.maarschalk@gmail.com': 'MM54',
-    'Emil Reinholdsson|hannalarsson3@gmail.com': 'ER8',
-    'Märta Jakobsson|jakobsson.m@live.se': 'MJ7',
-    'Johannes Källgren|johannes.kallgren@gmail.com': 'JK34',
-    'Alexander Sävås|alexandersavas@gmail.com': 'AS34',
-    'Peter Sjöberg|psjobergprivat@gmail.com': 'PS34',
-    'Melisa Jiménez Segura|Schmutzli@gmail.com': 'MJ54',
-    'Daniel Wessborg|danielwessborg@gmail.com': 'DW54',
-    'Anna Pärsdotter|anna.parsdotter@gmail.com': 'AP4',
-    'Johanna Svensson|johanna793458@gmail.com': 'JS34',
-    'Josefin Olausson|josefin.olausson@gmail.com': 'JO34',
-    'Karin Holmberg|karin.holm@live.com': 'KH34',
-    'Caroline Pamp|caroline.pamp@gmail.com': 'CA54',
-    'Jasmine Pejov|minelini@hotmail.com': 'JP54',
-    'Kiki Broholm|kiki.broholm@gmail.com': 'KB34',
-    'Brandon Till|brandontill@gmail.com': 'BT34',
-    'Henrik Strand|mr.henrikstrand@gmail.com': 'HS34',
-    'Peter Németh|peter.nemeth68@gmail.com': 'PN68',
-    'Frida Bern|Fridand@hotmail.com': 'FB54',
-    'Nathalie Karlsson|nathalie.karlsson@live.se': 'NK34',
-    'Sandra Storberg Svahn|svahn.sandra@gmail.com': 'SS2',
-    'Dieter Bocklandt|dieterbocklandt@gmail.com': 'DB34',
-    'Frank Thijssen|frank_vgl@hotmail.com': 'FT34',
-    'Anna Kjellberg|hornborga@gmail.com': 'AK34',
-    'Bryn Farnsworth von Cederwald|bryn.mf@gmail.com': 'BF34',
-    'Maxime Cartier|maxim.cartier@gmail.com': 'MC40',
-    'Tobias Pålsson|tobiaspalsson@gmail.com': 'TP4',
-    'Oscar Palmqvist|palmqvist.oscar@gmail.com': 'OP34',
-    'Mathilda Forsby|mathildaforsby@gmail.com': 'MF34',
-    'Ulf Andersson Sundblom|ulf.andersson@bastadror.se': 'UA34',
-    'Mathias Ernst|mathias.ernst@gmail.com': 'ME54',
-    'Gisele De Abreu Freire Lander|giselefreire11@gmail.com': 'GA3',
-    'Marcus Wassén|wassen.marcus@gmail.com': 'MW34',
-    'Mia Shu|miawtshu@gmail.com': 'MS54',
-    'Cecilia Hellner|cecilia.hellner76@gmail.com': 'CH24',
-    'Björn Mattsson|mattsson@gmail.com': 'BM3',
-
-  };
