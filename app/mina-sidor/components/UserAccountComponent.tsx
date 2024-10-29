@@ -4,11 +4,14 @@ import { useLang } from "@/hooks/useLang";
 import useManageSubscriptionModal from "@/hooks/useManageSubscriptionModal";
 import useChangeIntervalModal from "@/hooks/useChangeIntervalModal";
 import useChangeDeliveryDayModal from "@/hooks/useChangeDeliveryDayModal";
-import useManageAddressModal from "@/hooks/useManageAddressModal"; // Hook för adressändring
-import ManageAddressModal from "@/components/modals/ManageAddressModal"; // Importera adressändringsmodalen
+import useManageAddressModal from "@/hooks/useManageAddressModal";
+import ManageAddressModal from "@/components/modals/ManageAddressModal";
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "@/providers/AuthProvider";
+import ManageSubscriptionModal from "@/components/modals/ManageSubscriptionModal";
+import { usePauseWeek } from "@/context/PauseWeekContext";
+import { addWeeks, format } from "date-fns";
 
 interface DeliveryInfo {
   city: string;
@@ -35,36 +38,62 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
   deliveryInfo,
 }) => {
   const [isPaused, setIsPaused] = useState<boolean>(false);
+  const [isIndefinitePause, setIsIndefinitePause] = useState<boolean>(false);
+  const { pauseWeek, setPauseWeek } = usePauseWeek();
+  const [manualPauseSet, setManualPauseSet] = useState<boolean>(false);
 
   const { isOpen, onClose, onOpen, forCustomer } = useManageSubscriptionModal();
-  const { isOpen: isOpenInterval, onOpen: onOpenInterval, forCustomer: forCustomerInterval } =
-    useChangeIntervalModal();
+  const { isOpen: isOpenInterval, onOpen: onOpenInterval, forCustomer: forCustomerInterval } = useChangeIntervalModal();
   const {
     isOpen: isOpenDeliveryDay,
     onOpen: onOpenDeliveryDay,
     forCustomer: forCustomerDeliveryDay,
   } = useChangeDeliveryDayModal();
-  const { onOpen: onOpenAddress, forCustomer: forCustomerAddress } = useManageAddressModal(); // Hook för adressmodal
+  const { onOpen: onOpenAddress, forCustomer: forCustomerAddress } = useManageAddressModal();
 
   const { text } = useLang();
   const authContext = useContext(AuthContext);
-
   const { referralCode } = authContext || {};
 
   useEffect(() => {
-    setIsPaused(activeSubscription?.pause_collection !== null);
-  }, [activeSubscription]);
+    if (loading || !activeSubscription) return;
+
+    const stripeResumesAt = activeSubscription?.pause_collection?.resumes_at;
+    const isPausedIndefinitely = stripeResumesAt === null || stripeResumesAt === 0;
+    const isStripePaused = stripeResumesAt > Date.now() / 1000 || isPausedIndefinitely;
+
+    setIsPaused(isStripePaused);
+    setIsIndefinitePause(isPausedIndefinitely);
+
+    if (isStripePaused && !manualPauseSet && stripeResumesAt && !isPausedIndefinitely) {
+      const stripeResumeDate = new Date(stripeResumesAt * 1000);
+      const nextWeekDate = addWeeks(stripeResumeDate, 1);
+      const formattedResumeWeek = format(nextWeekDate, "w");
+      setPauseWeek(formattedResumeWeek);
+    } else if (!isStripePaused) {
+      setPauseWeek("");
+    }
+  }, [activeSubscription, loading, manualPauseSet, setPauseWeek]);
+
+  const handleManualPauseToggle = () => {
+    const newPauseStatus = !isPaused;
+    setIsPaused(newPauseStatus);
+    handleManualPauseWeekSet(newPauseStatus ? pauseWeek : null);
+  };
+
+  const handleManualPauseWeekSet = (week: string | null) => {
+    setPauseWeek(week ? `${week}` : "");
+    setManualPauseSet(!!week);
+  };
 
   const handleModifyAccountClick = async () => {
     try {
       const response = await axios.post("/api/create-billing-portal-session", {
         customerId: stripeResponse.customer.id,
       });
-
       const data = response.data;
-
       if (data.url) {
-        window.location.href = data.url; // Redirect to Stripe Billing Portal
+        window.location.href = data.url;
       }
     } catch (error) {
       console.error("Error redirecting to billing portal:", error);
@@ -74,6 +103,7 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
   const handleSubscriptionClick = () => {
     forCustomer(stripeResponse.customer.id, stripeResponse.customer.email, isPaused);
     onOpen();
+    handleManualPauseToggle();
   };
 
   const handleChangeIntervalClick = () => {
@@ -101,14 +131,9 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
 
   const shareCode = () => {
     if (navigator.share) {
-      // Hämta meddelandet från `lang` och sätt in värvningskoden
       const message = text?.referral?.sms_message ?? 
       "Hej! Med min kod får du 100kr rabatt på www.saveabl.com. Ange den i checkouten när du gör din beställning :)";
-
-      // Ersätt en placeholder med värvningskoden, t.ex. {referralCode}
       const formattedMessage = message.replace("{referralCode}", referralCode);
-      
-      // Lägg till länken i slutet av meddelandet
       const fullMessage = `${formattedMessage}\n\nhttps://www.saveabl.com`;
 
       navigator.share({
@@ -117,9 +142,9 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
     } else {
       alert("Delning stöds inte på denna enhet");
     }
-};
+  };
 
-  if (loading) {
+  if (loading || !activeSubscription) {
     return (
       <div className="flex gap-2 items-center">
         <div className="w-3 h-3 rounded-full animate-pulse bg-accent"></div> Loading...
@@ -129,7 +154,6 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
 
   return (
     <div className="w-full">
-      {/* Ny sektion för Värva en Vän */}
       <h2 className="text-2xl text-secondary font-semibold mb-4">
         {text?.my_pages?.referral_title ?? "Värva en vän"}
       </h2>
@@ -176,6 +200,13 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
                   : text?.my_pages?.weekly}
               </span>
             </p>
+            {isPaused && (
+            <p className="mb-4">
+           {isIndefinitePause
+            ? text?.my_pages?.pause_indefinite ?? "Pausad tills vidare"
+            : text?.my_pages?.pause_until?.replace("{week}", pauseWeek ? pauseWeek.toString() : "")}
+            </p>
+            )}
             {stripeResponse?.customer?.metadata?.deliveryDay && (
               <p className="mb-4">
                 {text?.my_pages?.deliveryDay}:{" "}
@@ -191,28 +222,26 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
               >
                 {isPaused
                   ? text?.my_pages?.resume_mealbox_button ?? "Återuppta"
-                  : text?.my_pages?.pause_mealbox_button ?? "Pause"}
+                  : text?.my_pages?.pause_mealbox_button ?? "Pausa"}
               </button>
               {!isPaused && (
                 <button
                   className="bg-secondary hover:bg-secondary-800 text-white font-bold py-2 px-4 mr-2 mt-4"
                   onClick={handleChangeIntervalClick}
                 >
-                  {text?.my_pages?.change_mealbox_button ?? "Change interval"}
+                  {text?.my_pages?.change_mealbox_button ?? "Ändra interval"}
                 </button>
               )}
               <button
                 className="bg-secondary hover:bg-secondary-800 text-white font-bold py-2 px-4 mr-2 mt-4"
                 onClick={handleChangeDeliveryDayClick}
               >
-                {text?.my_pages?.change_delivery_day_button ??
-                  "Change delivery day"}
+                {text?.my_pages?.change_delivery_day_button ?? "Change delivery day"}
               </button>
             </div>
           </div>
         </>
       )}
-
       <h2 className="text-2xl text-secondary font-semibold mb-4">
         {text?.my_pages?.account_information ?? "Account Information"}
       </h2>
@@ -226,7 +255,7 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
             {text?.my_pages?.name}:{" "}
             <span className="font-medium">{stripeResponse.customer.name}</span>
           </p>
-          <p className="mb-4">
+          <p className="mb-2">
             {text?.my_pages?.phone}:{" "}
             <span className="font-medium">{stripeResponse.customer.phone}</span>
           </p>
@@ -236,7 +265,6 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
               {deliveryInfo.line1}, {deliveryInfo.city}, {deliveryInfo.postal_code}, {deliveryInfo.country}
             </span>
           </p>
-          {/* Knapp för att öppna adressändringsmodalen */}
           <button
             className="bg-secondary hover:bg-secondary-800 text-white font-bold py-2 px-4 mr-2 mt-4"
             onClick={() =>
@@ -250,9 +278,8 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
           >
             {text?.my_pages?.change_address_button ?? "Ändra adress och telefonnummer"}
           </button>
-
           <button
-            className="bg-secondary hover:bg-secondary-800 text-white font-bold py-2 px-4 mr-2 mt-4"
+            className="bg-secondary hover:bg-secondary-800 text-white font-bold py-2 px-4 mr-2 mt-8"
             onClick={handleModifyAccountClick}
           >
             {text?.my_pages?.manage_account}
@@ -264,12 +291,17 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
           <div className="font-light text-sm">{text?.my_pages?.no_connection_desc}</div>
         </div>
       )}
-
-      {/* Inkludera adressändringsmodalen */}
+      <ManageSubscriptionModal />
       <ManageAddressModal />
     </div>
   );
 };
 
 export default UserAccountComponent;
+
+
+
+
+
+
 

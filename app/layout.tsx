@@ -17,6 +17,7 @@ import CheckoutBasket from "@/components/section/CheckoutBasket";
 import MetaPixel from "@/components/MetaPixel";
 import { LangProvider } from "@/providers/LangProvider";
 import PopupManager from "@/app/popupManager"; // Importera PopupManager från app
+import { PauseWeekProvider } from "@/context/PauseWeekContext";
 
 const font = Figtree({ subsets: ["latin"] });
 export const revalidate = 1; // revalidate this page every 60 seconds
@@ -59,6 +60,7 @@ export default function RootLayout({
           }}
         />
         <GeoProvider>
+        <PauseWeekProvider>
           <LangProvider>
             <AuthProvider>
               <CheckoutProvider>
@@ -81,6 +83,7 @@ export default function RootLayout({
               </CheckoutProvider>
             </AuthProvider>
           </LangProvider>
+          </PauseWeekProvider>
         </GeoProvider>
       </body>
     </html>
