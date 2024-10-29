@@ -89,7 +89,7 @@ const ManageSubscriptionModal = () => {
     // Uppdatera pauseWeek med valt värde när användaren klickar på pausa
     if (typeof selectedWeek === "string") {
       handleOnPauseSubscription(selectedWeek);
-      setPauseWeek(parseInt(selectedWeek)); // Behåll veckan när pausen sätts på kontot
+      setPauseWeek(parseInt(selectedWeek).toString());
     } else {
       toast.error("Please select a valid value");
     }
