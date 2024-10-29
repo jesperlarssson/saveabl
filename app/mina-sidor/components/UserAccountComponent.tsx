@@ -202,11 +202,11 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
             </p>
             {isPaused && (
             <p className="mb-4">
-           {isIndefinitePause
+            {isIndefinitePause
             ? text?.my_pages?.pause_indefinite ?? "Pausad tills vidare"
             : text?.my_pages?.pause_until?.replace("{week}", pauseWeek ? pauseWeek.toString() : "")}
             </p>
-            )}
+             )}
             {stripeResponse?.customer?.metadata?.deliveryDay && (
               <p className="mb-4">
                 {text?.my_pages?.deliveryDay}:{" "}
@@ -266,7 +266,7 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
             </span>
           </p>
           <button
-            className="bg-secondary hover:bg-secondary-800 text-white font-bold py-2 px-4 mr-2 mt-4"
+            className="bg-secondary hover:bg-secondary-800 text-white font-bold py-2 px-4 mr-4 mt-4"
             onClick={() =>
               forCustomerAddress(
                 stripeResponse.customer.id,
@@ -298,7 +298,6 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
 };
 
 export default UserAccountComponent;
-
 
 
 
