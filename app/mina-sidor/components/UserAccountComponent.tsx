@@ -106,6 +106,21 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
     handleManualPauseToggle();
   };
 
+  const handleResumeSubscription = async () => {
+    try {
+      await axios.post("/api/add-todo", {
+        customer_email: stripeResponse.customer.email,
+        customer_id: stripeResponse.customer.id,
+        actions: "RESUME",
+        wish: "Vill återuppta prenumerationen",
+      });
+      setIsPaused(false); // Återställ pausstatusen
+      setPauseWeek(""); // Återställ pausveckan
+    } catch (error) {
+      console.error("Error adding resume action to backlog:", error);
+    }
+  };
+
   const handleChangeIntervalClick = () => {
     forCustomerInterval(stripeResponse.customer.id, stripeResponse.customer.email, isPaused);
     onOpenInterval();
@@ -216,14 +231,21 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
               </p>
             )}
             <div className="flex gap-2 flex-wrap">
-              <button
-                className="bg-secondary hover:bg-secondary-800 text-white font-bold py-2 px-4 mr-2 mt-4"
-                onClick={handleSubscriptionClick}
-              >
-                {isPaused
-                  ? text?.my_pages?.resume_mealbox_button ?? "Återuppta"
-                  : text?.my_pages?.pause_mealbox_button ?? "Pausa"}
-              </button>
+              {isPaused ? (
+                <button
+                  className="bg-secondary hover:bg-secondary-800 text-white font-bold py-2 px-4 mr-2 mt-4"
+                  onClick={handleResumeSubscription}
+                >
+                  {text?.my_pages?.resume_mealbox_button ?? "Återuppta"}
+                </button>
+              ) : (
+                <button
+                  className="bg-secondary hover:bg-secondary-800 text-white font-bold py-2 px-4 mr-2 mt-4"
+                  onClick={handleSubscriptionClick}
+                >
+                  {text?.my_pages?.pause_mealbox_button ?? "Pausa"}
+                </button>
+              )}
               {!isPaused && (
                 <button
                   className="bg-secondary hover:bg-secondary-800 text-white font-bold py-2 px-4 mr-2 mt-4"
@@ -298,9 +320,3 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
 };
 
 export default UserAccountComponent;
-
-
-
-
-
-
