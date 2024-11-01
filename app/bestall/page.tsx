@@ -100,7 +100,7 @@ const Order = () => {
 
       if (
         (day === 2 && (hours > 18 || (hours === 18 && minutes >= 7))) || // Tisdag efter 19:07
-        (day === 2 && hours < 24) // Hela onsdag
+        (day === 3 && hours < 24) // Hela onsdag
       ) {
         setShowUrgency(true);
       } else {
