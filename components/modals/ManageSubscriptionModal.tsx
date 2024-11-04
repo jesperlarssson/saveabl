@@ -8,46 +8,35 @@ import Button from "../ui/Button";
 import useMessageModal from "@/hooks/useMessageModal";
 import { useLang } from "@/hooks/useLang";
 import toast from "react-hot-toast";
-import { PauseWeekProvider } from "@/context/PauseWeekContext";
-import { usePauseWeek } from "@/context/PauseWeekContext"; // Importera contextet
+import { usePauseWeek } from "@/context/PauseWeekContext";
 
-// Funktion för att få veckonumret från ett datum
+// Typdefinition för props
+interface ManageSubscriptionModalProps {
+  updatePauseStatus: (status: boolean) => void;
+  updatePauseWeek: (week: string) => void;
+}
+
 function getWeekNumber(date: Date) {
   const startOfYear = new Date(date.getFullYear(), 0, 1);
   const firstThursday = new Date(startOfYear.getTime() +
-    ((4 - startOfYear.getDay() + 7) % 7) * 86400000); // Antal millisekunder på en dag
+    ((4 - startOfYear.getDay() + 7) % 7) * 86400000);
   const thisThursday = new Date(date.getTime() +
-    ((4 - date.getDay() + 7) % 7) * 86400000); // Antal millisekunder på en dag
+    ((4 - date.getDay() + 7) % 7) * 86400000);
 
   const weekNum = Math.ceil((thisThursday.getTime() - firstThursday.getTime()) / 604800000);
 
   return weekNum;
 }
 
-const ManageSubscriptionModal = () => {
+const ManageSubscriptionModal: React.FC<ManageSubscriptionModalProps> = ({ updatePauseStatus, updatePauseWeek }) => {
   const { onClose, isOpen, customerEmail, customerId, isPaused } = useManageSubscriptionModal();
   const { setPauseWeek } = usePauseWeek();  // Hämta funktionen för att sätta pausvecka
   const { onOpen, forMessage } = useMessageModal();
   const { text } = useLang();
   const [pauseOptions, setPauseOptions] = useState<React.ReactNode[]>([]);
-  const [selectedWeek, setSelectedWeek] = useState<number>(29); // Initialt veckonummer 29
-  const [weeks, setWeeks] = useState<number[]>([47, 48, 49]); // Initiala veckonummer för alternativen
-  
-  
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      const today = new Date();
-      const isMidnight = today.getHours() === 0 && today.getMinutes() === 0;
-  
-      if (isMidnight) {
-        setWeeks((prevWeeks) => prevWeeks.map(week => week + 1));
-      }
-    }, 60 * 1000); // Körs en gång per minut
-  
-    return () => clearInterval(intervalId);
-  }, []);
+  const [selectedWeek, setSelectedWeek] = useState<number>(29);
+  const [weeks, setWeeks] = useState<number[]>([47, 48, 49]);
 
-  // Skapa en lista över veckor baserat på weeks
   useEffect(() => {
     const options = weeks.map((week, index) => (
       <option key={index} value={week}>
@@ -73,12 +62,10 @@ const ManageSubscriptionModal = () => {
     }
   };
 
-  const handleOnPauseSubscription = async (numberOfMealkits: string) => {
-    addTodo("PAUSE", `Vill pausa nästa ${numberOfMealkits} matkassar`);
-  };
-
   const handleResumeSubscription = async () => {
     addTodo("RESUME", "Vill återuppta prenumerationen");
+    updatePauseStatus(false); // Uppdatera pausen till aktiv
+    updatePauseWeek(""); // Rensa återupptagningsveckan
   };
 
   const handleNumberSubmit = (e: any) => {
@@ -86,10 +73,11 @@ const ManageSubscriptionModal = () => {
     const data = new FormData(e.target);
     const selectedWeek = data.get("pause");
     
-    // Uppdatera pauseWeek med valt värde när användaren klickar på pausa
     if (typeof selectedWeek === "string") {
-      handleOnPauseSubscription(selectedWeek);
-      setPauseWeek(parseInt(selectedWeek).toString());
+      setPauseWeek(parseInt(selectedWeek).toString()); 
+      addTodo("PAUSE", `Vill pausa och återuppta vecka ${selectedWeek}`);
+      updatePauseStatus(true);
+      updatePauseWeek(selectedWeek);
     } else {
       toast.error("Please select a valid value");
     }

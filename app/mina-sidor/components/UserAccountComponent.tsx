@@ -75,15 +75,12 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
     }
   }, [activeSubscription, loading, manualPauseSet, setPauseWeek]);
 
-  const handleManualPauseToggle = () => {
-    const newPauseStatus = !isPaused;
-    setIsPaused(newPauseStatus);
-    handleManualPauseWeekSet(newPauseStatus ? pauseWeek : null);
+  const updatePauseStatus = (status: boolean) => {
+    setIsPaused(status);
   };
 
-  const handleManualPauseWeekSet = (week: string | null) => {
-    setPauseWeek(week ? `${week}` : "");
-    setManualPauseSet(!!week);
+  const updatePauseWeek = (week: string) => {
+    setPauseWeek(week);
   };
 
   const handleModifyAccountClick = async () => {
@@ -102,8 +99,7 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
 
   const handleSubscriptionClick = () => {
     forCustomer(stripeResponse.customer.id, stripeResponse.customer.email, isPaused);
-    onOpen();
-    handleManualPauseToggle();
+    onOpen(); // Endast öppna modal här utan att sätta pausen
   };
 
   const handleResumeSubscription = async () => {
@@ -313,7 +309,10 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
           <div className="font-light text-sm">{text?.my_pages?.no_connection_desc}</div>
         </div>
       )}
-      <ManageSubscriptionModal />
+      <ManageSubscriptionModal
+        updatePauseStatus={updatePauseStatus}
+        updatePauseWeek={updatePauseWeek}
+      />
       <ManageAddressModal />
     </div>
   );
