@@ -29,7 +29,11 @@ const ModalProvider = () => {
       <ChangeDeliveryDayModal />
       <MessageModal />
       <ChangeIntervalModal />
-      <ManageSubscriptionModal />
+      <ManageSubscriptionModal updatePauseStatus={function (status: boolean): void {
+        throw new Error("Function not implemented.");
+      } } updatePauseWeek={function (week: string): void {
+        throw new Error("Function not implemented.");
+      } } />
       <AuthModal />
       <LocationModal />
     </>
