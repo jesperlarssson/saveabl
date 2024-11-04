@@ -117,17 +117,23 @@ const ChangeDeliveryDayModal = () => {
         allowedDays = [1]; // Mån
       }
 
+        // Nytt datumintervall (11 dagar framåt)
+        const elevenDaysFromNow = new Date();
+        elevenDaysFromNow.setDate(elevenDaysFromNow.getDate() + 11);
+
         const filteredOptions = deliveryWindows.filter((option: any) => {
           const startTime = new Date(option.start * 1000);
           const dayOfWeek = startTime.getDay();
           const startHour = startTime.getHours();
           const endHour = new Date(option.end * 1000).getHours();
 
-          // Filtrera på tillåtna dagar
-          if (allowedDays.includes(dayOfWeek)) {
-            if (dayOfWeek === 6 && startHour === 9 && endHour === 18) return true; // Lördag 9-18
-            if (dayOfWeek === 0 && startHour === 10 && endHour <= 17) return true; // Söndag 10-17
-            if (dayOfWeek === 1 && startHour === 16 && endHour === 22) return true; // Måndag 16-22
+          // Kontrollera att leveransdatumet är inom 11 dagar
+          if (startTime > new Date() && startTime < elevenDaysFromNow) {
+            if (allowedDays.includes(dayOfWeek)) {
+              if (dayOfWeek === 6 && startHour === 9 && endHour === 18) return true; // Lördag 9-18
+              if (dayOfWeek === 0 && startHour === 10 && endHour <= 17) return true; // Söndag 10-17
+              if (dayOfWeek === 1 && startHour === 16 && endHour === 22) return true; // Måndag 16-22
+            }
           }
           return false;
         });
@@ -260,7 +266,6 @@ const ChangeDeliveryDayModal = () => {
 };
 
 export default ChangeDeliveryDayModal;
-
 
 const shippingDk = [
   "2620",
