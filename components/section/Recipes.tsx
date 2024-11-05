@@ -17,7 +17,7 @@ const Recipes = () => {
   const { text } = useLang();
   const { nextWeek, prior, fetchMorePrior, hasMore, loading } = useRecipes();
 
-  const loadMoreButtonRef = useRef<HTMLButtonElement | null>(null);
+  const lastRecipeRef = useRef<HTMLDivElement | null>(null); // Ref för att skrolla till sista receptgruppen
   const [clickedFetchMore, setClickedFetchMore] = useState(false);
   const [previousPriorLength, setPreviousPriorLength] = useState(prior.length);
 
@@ -26,13 +26,13 @@ const Recipes = () => {
     console.log("prior.length:", prior.length);
     console.log("previousPriorLength:", previousPriorLength);
 
-    if (clickedFetchMore && loadMoreButtonRef.current && prior.length > previousPriorLength) {
-      console.log("Skrollar till knappen...");
-      loadMoreButtonRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+    if (clickedFetchMore && lastRecipeRef.current && prior.length > previousPriorLength) {
+      console.log("Skrollar till de sista recepten...");
+      lastRecipeRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
       setClickedFetchMore(false);
     }
 
-    setPreviousPriorLength(prior.length); // Uppdatera endast efter skrollning
+    setPreviousPriorLength(prior.length);
   }, [prior.length, clickedFetchMore]);
 
   const handleFetchMoreClick = () => {
@@ -88,8 +88,12 @@ const Recipes = () => {
           ) : (
             <div className="col-span-3">
               <Grid className=" gap-8 pt-4">
-                {prior.map((recipe: Recipe) => (
-                  <div key={recipe.id} className="w-full">
+                {prior.map((recipe: Recipe, index: number) => (
+                  <div
+                    key={recipe.id}
+                    className="w-full"
+                    ref={index === prior.length - 3 ? lastRecipeRef : null} // Lägg ref på tredje sista receptet
+                  >
                     <RecipeTile recipe={recipe} />
                   </div>
                 ))}
@@ -100,7 +104,6 @@ const Recipes = () => {
 
         <div className="flex justify-center">
           <Button
-            ref={loadMoreButtonRef}
             className="mt-24 max-w-xl mx-auto w-full"
             disabled={!hasMore || loading}
             onClick={handleFetchMoreClick}
