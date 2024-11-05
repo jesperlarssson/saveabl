@@ -17,24 +17,31 @@ const Recipes = () => {
   const { text } = useLang();
   const { nextWeek, prior, fetchMorePrior, hasMore, loading } = useRecipes();
 
+  // Modifierad funktion för att förhindra skrollhopp
+  const handleFetchMore = (event: { preventDefault: () => void; }) => {
+    event.preventDefault(); // Förhindrar standardbeteende som kan påverka skrollpositionen
+    fetchMorePrior(); // Kallar på funktionen för att hämta fler recept
+    window.scrollTo(0, document.body.scrollHeight); // Skrolla direkt till botten för att förhindra hopp
+  };
+
   return (
     <>
       <Title>{text.recipes.title}</Title>
       <div className="my-10 min-h-screen">
         <Grid className="">
-          <div className="relative p-4 pt-0 mt-0 min-h-96 scale-103 col-span-3 border-0 border-primary border-opacity-50 rounded-2xl "> 
-          <h3 className=" font-poppins text-3xl text-primary">
-            {text.recipes.this_week}
-          </h3>
-          <ThisWeekRecipes />
-        </div>
+          <div className="relative p-4 pt-0 mt-0 min-h-96 scale-103 col-span-3 border-0 border-primary border-opacity-50 rounded-2xl"> 
+            <h3 className="font-poppins text-3xl text-primary">
+              {text.recipes.this_week}
+            </h3>
+            <ThisWeekRecipes />
+          </div>
 
           {nextWeek.length > 2 && (
             <div className="col-span-3">
               <h3 className="font-poppins text-3xl text-primary mt-4">
                 {text.recipes.next_week}
               </h3>
-              <Grid className=" gap-8 pt-4">
+              <Grid className="gap-8 pt-4">
                 {loading ? (
                   <>
                     <div className="h-80 overflow-hidden rounded-xl w-full animate-pulse bg-primary bg-opacity-25" />
@@ -49,10 +56,9 @@ const Recipes = () => {
               </Grid>
             </div>
           )}
-          {/* <h3 className="font-poppins text-3xl text-primary col-span-1 md:col-span-3 md:-mb-4 mt-8 md:mt-2">
-            {text.recipes.this_week}
-          </h3> */}
+
           <div className="w-full border-b col-span-1 md:col-span-3 border-primary-500 border-opacity-50"></div>
+
           {loading ? (
             <>
               <div className="h-80 overflow-hidden rounded-xl w-full animate-pulse bg-primary bg-opacity-25" />
@@ -64,31 +70,30 @@ const Recipes = () => {
             </>
           ) : (
             <div className="col-span-3">
-              <Grid className=" gap-8 pt-4">
-                {prior.map((recipe: Recipe) => {
-                  return (
-                    <div key={recipe.id} className="w-full">
-                      <RecipeTile recipe={recipe} />
-                    </div>
-                  );
-                })}
+              <Grid className="gap-8 pt-4">
+                {prior.map((recipe: Recipe) => (
+                  <div key={recipe.id} className="w-full">
+                    <RecipeTile recipe={recipe} />
+                  </div>
+                ))}
               </Grid>
             </div>
           )}
         </Grid>
+
         <div className="flex justify-center">
           <Button
             className="mt-24 max-w-xl mx-auto w-full"
             disabled={!hasMore || loading}
-            onClick={fetchMorePrior}
+            onClick={handleFetchMore} // Använder den modifierade funktionen här
           >
             {!loading ? (
               text.recipes.older_recipes
             ) : (
-              <div role="status" className=" w-full flex justify-center">
+              <div role="status" className="w-full flex justify-center">
                 <svg
                   aria-hidden="true"
-                  className="w-6 h-6 text-gray-200 animate-spin  fill-primary"
+                  className="w-6 h-6 text-gray-200 animate-spin fill-primary"
                   viewBox="0 0 100 101"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -113,3 +118,4 @@ const Recipes = () => {
 };
 
 export default Recipes;
+
