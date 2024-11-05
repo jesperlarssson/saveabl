@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, createContext, ReactNode } from "react";
+import React, { useEffect, useState, createContext, ReactNode, useRef } from "react";
 import { Recipe } from "@/types";
 import { getDateForPriorRecipes } from "@/helpers/format";
 import toast from "react-hot-toast";
@@ -38,8 +38,10 @@ export const RecipeProvider = ({ children }: RecipeProviderProps) => {
   const [deprecatedHasMore, setDeprecatedHasMore] = useState<boolean>(true);
   const [loadingMore, setLoadingMore] = useState<boolean>(false);
 
+  // Ref för att kontrollera skrollpositionen
+  const loadMoreRef = useRef<HTMLDivElement | null>(null);
+
   useEffect(() => {
-    // Din kod för hämtning av recept vid focus event
     const fetchOnFocus = async () => {
       try {
         const res = await fetch("/api/recipes/next-week", {
@@ -52,7 +54,6 @@ export const RecipeProvider = ({ children }: RecipeProviderProps) => {
     };
     window.addEventListener("focus", fetchOnFocus);
 
-    // Rensa event listener vid avmontering
     return () => window.removeEventListener("focus", fetchOnFocus);
   }, []);
 
@@ -124,15 +125,12 @@ export const RecipeProvider = ({ children }: RecipeProviderProps) => {
         toast.error("Kunde inte hämta recept");
       } finally {
         setLoadingMore(false);
-        // Skrolla till botten efter hämtning
-        setTimeout(() => {
-          window.scrollTo(0, document.body.scrollHeight);
-        }, 100); 
+        // Skrolla till knappen eller nya sektionen
+        loadMoreRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
       }
     }
 
     if (deprecatedHasMore && !hasMore) {
-      // Hämtar äldre (deprecated) recept om hasMore är false
       try {
         setLoadingMore(true);
         const res = await fetch("/api/recipes/deprecated", {
@@ -153,10 +151,7 @@ export const RecipeProvider = ({ children }: RecipeProviderProps) => {
         toast.error("Kunde inte hämta recept");
       } finally {
         setLoadingMore(false);
-        // Skrolla till botten efter hämtning
-        setTimeout(() => {
-          window.scrollTo(0, document.body.scrollHeight);
-        }, 100);
+        loadMoreRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
       }
     }
   };
@@ -171,6 +166,11 @@ export const RecipeProvider = ({ children }: RecipeProviderProps) => {
   };
 
   return (
-    <RecipeContext.Provider value={value}>{children}</RecipeContext.Provider>
+    <RecipeContext.Provider value={value}>
+      {children}
+      {/* Ref för att skrolla till sektionen */}
+      <div ref={loadMoreRef} />
+    </RecipeContext.Provider>
   );
 };
+
