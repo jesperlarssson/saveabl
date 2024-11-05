@@ -818,7 +818,7 @@ const enText = {
     type: "Make your selections - without commitment on any:",
     variant: "Choose how often you want to receive your meal kit:",
     urgency: "Few remaining", 
-    deliveryDay: "The meal kit with delivery on 2-4 November is sold out - next available delivery dates:",
+    deliveryDay: "Choose day of delivery:",
     delivery_saturday: "Saturday 9/11",
     delivery_sunday: "Sunday 10/11",
     delivery_monday: "Monday 11/11",
