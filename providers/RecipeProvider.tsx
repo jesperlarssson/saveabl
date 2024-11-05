@@ -5,7 +5,6 @@ import { Recipe } from "@/types";
 import { getDateForPriorRecipes } from "@/helpers/format";
 import toast from "react-hot-toast";
 
-
 interface RecipeContextInterface {
   thisWeek: Recipe[];
   nextWeek: Recipe[];
@@ -40,25 +39,22 @@ export const RecipeProvider = ({ children }: RecipeProviderProps) => {
   const [loadingMore, setLoadingMore] = useState<boolean>(false);
 
   useEffect(() => {
-    // Your fetching logic here...
-  
+    // Din kod för hämtning av recept vid focus event
     const fetchOnFocus = async () => {
       try {
         const res = await fetch("/api/recipes/next-week", {
           method: "GET",
-          
         });
         const data = await res.json();
         console.log(data);
         setNextWeek(data);
       } catch (error) {}
     };
-    window.addEventListener('focus', fetchOnFocus);
-  
-    // Make sure to clean up your event listeners!
-    return () => window.removeEventListener('focus', fetchOnFocus);
+    window.addEventListener("focus", fetchOnFocus);
+
+    // Rensa event listener vid avmontering
+    return () => window.removeEventListener("focus", fetchOnFocus);
   }, []);
-  
 
   useEffect(() => {
     const getNextWeeksRecipes = async () => {
@@ -128,11 +124,15 @@ export const RecipeProvider = ({ children }: RecipeProviderProps) => {
         toast.error("Kunde inte hämta recept");
       } finally {
         setLoadingMore(false);
-        return;
+        // Skrolla till botten efter hämtning
+        setTimeout(() => {
+          window.scrollTo(0, document.body.scrollHeight);
+        }, 100); 
       }
     }
+
     if (deprecatedHasMore && !hasMore) {
-      //Fetch deprecated version of recipes
+      // Hämtar äldre (deprecated) recept om hasMore är false
       try {
         setLoadingMore(true);
         const res = await fetch("/api/recipes/deprecated", {
@@ -153,7 +153,10 @@ export const RecipeProvider = ({ children }: RecipeProviderProps) => {
         toast.error("Kunde inte hämta recept");
       } finally {
         setLoadingMore(false);
-        return;
+        // Skrolla till botten efter hämtning
+        setTimeout(() => {
+          window.scrollTo(0, document.body.scrollHeight);
+        }, 100);
       }
     }
   };
