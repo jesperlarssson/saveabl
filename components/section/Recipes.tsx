@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 
 import { Recipe } from "@/types";
@@ -17,17 +17,41 @@ const Recipes = () => {
   const { text } = useLang();
   const { nextWeek, prior, fetchMorePrior, hasMore, loading } = useRecipes();
 
+  const loadMoreButtonRef = useRef<HTMLButtonElement | null>(null);
+  const [clickedFetchMore, setClickedFetchMore] = useState(false);
+  const [previousPriorLength, setPreviousPriorLength] = useState(prior.length);
+
+  useEffect(() => {
+    console.log("clickedFetchMore:", clickedFetchMore);
+    console.log("prior.length:", prior.length);
+    console.log("previousPriorLength:", previousPriorLength);
+
+    if (clickedFetchMore && loadMoreButtonRef.current && prior.length > previousPriorLength) {
+      console.log("Skrollar till knappen...");
+      loadMoreButtonRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+      setClickedFetchMore(false);
+    }
+
+    setPreviousPriorLength(prior.length); // Uppdatera endast efter skrollning
+  }, [prior.length, clickedFetchMore]);
+
+  const handleFetchMoreClick = () => {
+    console.log("Fetch More-knappen klickades");
+    setClickedFetchMore(true);
+    fetchMorePrior();
+  };
+
   return (
     <>
       <Title>{text.recipes.title}</Title>
       <div className="my-10 min-h-screen">
         <Grid className="">
           <div className="relative p-4 pt-0 mt-0 min-h-96 scale-103 col-span-3 border-0 border-primary border-opacity-50 rounded-2xl "> 
-          <h3 className=" font-poppins text-3xl text-primary">
-            {text.recipes.this_week}
-          </h3>
-          <ThisWeekRecipes />
-        </div>
+            <h3 className=" font-poppins text-3xl text-primary">
+              {text.recipes.this_week}
+            </h3>
+            <ThisWeekRecipes />
+          </div>
 
           {nextWeek.length > 2 && (
             <div className="col-span-3">
@@ -49,10 +73,9 @@ const Recipes = () => {
               </Grid>
             </div>
           )}
-          {/* <h3 className="font-poppins text-3xl text-primary col-span-1 md:col-span-3 md:-mb-4 mt-8 md:mt-2">
-            {text.recipes.this_week}
-          </h3> */}
+
           <div className="w-full border-b col-span-1 md:col-span-3 border-primary-500 border-opacity-50"></div>
+
           {loading ? (
             <>
               <div className="h-80 overflow-hidden rounded-xl w-full animate-pulse bg-primary bg-opacity-25" />
@@ -65,22 +88,22 @@ const Recipes = () => {
           ) : (
             <div className="col-span-3">
               <Grid className=" gap-8 pt-4">
-                {prior.map((recipe: Recipe) => {
-                  return (
-                    <div key={recipe.id} className="w-full">
-                      <RecipeTile recipe={recipe} />
-                    </div>
-                  );
-                })}
+                {prior.map((recipe: Recipe) => (
+                  <div key={recipe.id} className="w-full">
+                    <RecipeTile recipe={recipe} />
+                  </div>
+                ))}
               </Grid>
             </div>
           )}
         </Grid>
+
         <div className="flex justify-center">
           <Button
+            ref={loadMoreButtonRef}
             className="mt-24 max-w-xl mx-auto w-full"
             disabled={!hasMore || loading}
-            onClick={fetchMorePrior}
+            onClick={handleFetchMoreClick}
           >
             {!loading ? (
               text.recipes.older_recipes
@@ -88,7 +111,7 @@ const Recipes = () => {
               <div role="status" className=" w-full flex justify-center">
                 <svg
                   aria-hidden="true"
-                  className="w-6 h-6 text-gray-200 animate-spin  fill-primary"
+                  className="w-6 h-6 text-gray-200 animate-spin fill-primary"
                   viewBox="0 0 100 101"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -113,3 +136,4 @@ const Recipes = () => {
 };
 
 export default Recipes;
+

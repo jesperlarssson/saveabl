@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useEffect, useState, createContext, ReactNode, useRef } from "react";
+import React, { useEffect, useState, createContext, ReactNode } from "react";
 import { Recipe } from "@/types";
 import { getDateForPriorRecipes } from "@/helpers/format";
 import toast from "react-hot-toast";
+
 
 interface RecipeContextInterface {
   thisWeek: Recipe[];
@@ -38,24 +39,26 @@ export const RecipeProvider = ({ children }: RecipeProviderProps) => {
   const [deprecatedHasMore, setDeprecatedHasMore] = useState<boolean>(true);
   const [loadingMore, setLoadingMore] = useState<boolean>(false);
 
-  // Ref för att kontrollera skrollpositionen
-  const loadMoreRef = useRef<HTMLDivElement | null>(null);
-
   useEffect(() => {
+    // Your fetching logic here...
+  
     const fetchOnFocus = async () => {
       try {
         const res = await fetch("/api/recipes/next-week", {
           method: "GET",
+          
         });
         const data = await res.json();
         console.log(data);
         setNextWeek(data);
       } catch (error) {}
     };
-    window.addEventListener("focus", fetchOnFocus);
-
-    return () => window.removeEventListener("focus", fetchOnFocus);
+    window.addEventListener('focus', fetchOnFocus);
+  
+    // Make sure to clean up your event listeners!
+    return () => window.removeEventListener('focus', fetchOnFocus);
   }, []);
+  
 
   useEffect(() => {
     const getNextWeeksRecipes = async () => {
@@ -125,12 +128,11 @@ export const RecipeProvider = ({ children }: RecipeProviderProps) => {
         toast.error("Kunde inte hämta recept");
       } finally {
         setLoadingMore(false);
-        // Skrolla till knappen eller nya sektionen
-        loadMoreRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+        return;
       }
     }
-
     if (deprecatedHasMore && !hasMore) {
+      //Fetch deprecated version of recipes
       try {
         setLoadingMore(true);
         const res = await fetch("/api/recipes/deprecated", {
@@ -151,7 +153,7 @@ export const RecipeProvider = ({ children }: RecipeProviderProps) => {
         toast.error("Kunde inte hämta recept");
       } finally {
         setLoadingMore(false);
-        loadMoreRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+        return;
       }
     }
   };
@@ -166,11 +168,6 @@ export const RecipeProvider = ({ children }: RecipeProviderProps) => {
   };
 
   return (
-    <RecipeContext.Provider value={value}>
-      {children}
-      {/* Ref för att skrolla till sektionen */}
-      <div ref={loadMoreRef} />
-    </RecipeContext.Provider>
+    <RecipeContext.Provider value={value}>{children}</RecipeContext.Provider>
   );
 };
-
