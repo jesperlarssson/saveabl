@@ -27,10 +27,14 @@ const SuccessPage: React.FC = () => {
       return;
     }
 
+    const timestamp = Date.now();
+    const readableDate = new Date(timestamp).toLocaleString(); // Skapa ett läsbart datumformat
+
     const feedbackData = {
       email: email, // Inkludera e-post i feedbackData
       source: selectedOption === text?.success?.options?.other ? otherText : selectedOption,
-      timestamp: Date.now(), // Timestamp för sortering
+      timestamp: timestamp, // Timestamp för sortering
+      readableDate: readableDate // Lägg till läsbart datum för enklare visning
     };
     
     try {
@@ -319,3 +323,4 @@ const SuccessPage: React.FC = () => {
 };
 
 export default SuccessPage;
+
