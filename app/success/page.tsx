@@ -19,7 +19,7 @@ const SuccessPage: React.FC = () => {
 
   const handleFeedback = async () => {
     // Säkerställ att email inte är null
-    const email = state.email|| "test@example.com";
+    const email = state.email;
 
     // Om email är null, visa ett felmeddelande eller returnera för att förhindra vidare körning
     if (!email) {
