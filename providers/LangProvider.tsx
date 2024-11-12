@@ -226,7 +226,8 @@ const svText = {
     rate: "Betyg:",
     write_comment: "Kommentera",
     send_comment: "Kommentera",
-    sending_comment: "Skickar..."
+    sending_comment: "Skickar...", 
+    next_week_order_until: "Går att beställa t.o.m. onsdag v. {week}"
   },
 
   recipe_slug: {
@@ -782,7 +783,8 @@ const enText = {
     rate: "Rate:", 
     write_comment: "Comment", 
     send_comment: "Comment", 
-    sending_comment: "Sending..."
+    sending_comment: "Sending...",
+    next_week_order_until: "Available to order until Wed, w. {week}"
   },
   recipe_slug: {
     contains: "Contains",
@@ -1300,6 +1302,7 @@ const daText = {
     write_comment: "Kommentar",
     send_comment: "Kommentere",
     sending_comment: "Sender...", 
+    next_week_order_until: "Kan bestilles indtil torsdag kl. 16 uge {week}"
   
   },
   recipe_slug: {

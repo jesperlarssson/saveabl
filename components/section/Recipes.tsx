@@ -17,26 +17,39 @@ const Recipes = () => {
   const { text } = useLang();
   const { nextWeek, prior, fetchMorePrior, hasMore, loading } = useRecipes();
 
-  const lastRecipeRef = useRef<HTMLDivElement | null>(null); // Ref för att skrolla till sista receptgruppen
+  const lastRecipeRef = useRef<HTMLDivElement | null>(null);
   const [clickedFetchMore, setClickedFetchMore] = useState(false);
   const [previousPriorLength, setPreviousPriorLength] = useState(prior.length);
+  
+
+  // Läs sparat veckonummer från localStorage eller sätt startvärdet till vecka 46
+  const [veckaNummer, setVeckaNummer] = useState(() => {
+    const sparadVecka = localStorage.getItem("veckonummer");
+    return sparadVecka ? parseInt(sparadVecka) : 46;
+  });
 
   useEffect(() => {
-    console.log("clickedFetchMore:", clickedFetchMore);
-    console.log("prior.length:", prior.length);
-    console.log("previousPriorLength:", previousPriorLength);
+    const idag = new Date();
+    const dagIVeckan = idag.getDay();
+  
+    if (dagIVeckan === 1) { // Om det är måndag
+      setVeckaNummer(prevVecka => {
+        const nyVecka = prevVecka + 1;
+        localStorage.setItem("veckonummer", nyVecka.toString());
+        return nyVecka;
+      });
+    }
+  }, []);
 
+  useEffect(() => {
     if (clickedFetchMore && lastRecipeRef.current && prior.length > previousPriorLength) {
-      console.log("Skrollar till de sista recepten...");
       lastRecipeRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
       setClickedFetchMore(false);
     }
-
     setPreviousPriorLength(prior.length);
   }, [prior.length, clickedFetchMore]);
 
   const handleFetchMoreClick = () => {
-    console.log("Fetch More-knappen klickades");
     setClickedFetchMore(true);
     fetchMorePrior();
   };
@@ -55,9 +68,10 @@ const Recipes = () => {
 
           {nextWeek.length > 2 && (
             <div className="col-span-3">
-              <h3 className="font-poppins text-3xl text-primary mt-4">
+              <h3 className="font-poppins text-3xl text-primary mt-4 mb-2">
                 {text.recipes.next_week}
               </h3>
+              <p className="font-poppins text-xl text-primary opacity-90">{text.recipes.next_week_order_until.replace("{week}", veckaNummer)}</p> {/* Dynamisk underrubrik */}
               <Grid className=" gap-8 pt-4">
                 {loading ? (
                   <>
@@ -92,7 +106,7 @@ const Recipes = () => {
                   <div
                     key={recipe.id}
                     className="w-full"
-                    ref={index === prior.length - 3 ? lastRecipeRef : null} // Lägg ref på tredje sista receptet
+                    ref={index === prior.length - 3 ? lastRecipeRef : null}
                   >
                     <RecipeTile recipe={recipe} />
                   </div>
@@ -139,4 +153,3 @@ const Recipes = () => {
 };
 
 export default Recipes;
-
