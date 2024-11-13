@@ -75,6 +75,25 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
     }
   }, [activeSubscription, loading, manualPauseSet, setPauseWeek]);
 
+  // Om komponenten laddar, visa laddningsindikator
+  if (loading) {
+    return (
+      <div className="flex gap-2 items-center">
+        <div className="w-3 h-3 rounded-full animate-pulse bg-accent"></div> Loading...
+      </div>
+    );
+  }
+
+  // Om ingen aktiv prenumeration finns, visa fallback-meddelandet
+  if (!activeSubscription) {
+    return (
+      <div className="w-full h-36 rounded-lg text-secondary font-semibold text-xl bg-primary-500 bg-opacity-50 flex flex-col justify-center items-center mb-8">
+        <div>{text?.my_pages?.no_connection}</div>
+        <div className="font-light text-sm">{text?.my_pages?.no_connection_desc}</div>
+      </div>
+    );
+  }
+
   const updatePauseStatus = (status: boolean) => {
     setIsPaused(status);
   };
