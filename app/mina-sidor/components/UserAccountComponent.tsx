@@ -196,6 +196,10 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
             {text?.my_pages?.referral_your_code ?? "Din värvningskod"}:{" "}
             <span className="font-bold">{referralCode}</span>
           </p>
+          {/* Liten text med asterisk */}
+           <p className="text-sm text-black mb-4 italic">
+           * {text?.my_pages?.referral_code_note ?? "Koden är giltig för nya kunder"}
+          </p>
           <div className="flex gap-2 flex-wrap">
             <button
               className="bg-secondary hover:bg-secondary-800 text-white font-bold py-2 px-4 mr-2 mt-4"
