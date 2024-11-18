@@ -1,13 +1,10 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { toast } from "react-hot-toast";
-
 import { Recipe } from "@/types";
 import Grid from "../ui/Grid";
 import RecipeTile from "../RecipeTile";
 import Button from "../ui/Button";
-import { getDateForPriorRecipes } from "@/helpers/format";
 import ThisWeekRecipes from "../general/ThisWeekRecipes";
 import { useRecipes } from "@/hooks/useRecipes";
 import { useLang } from "@/hooks/useLang";
@@ -21,15 +18,28 @@ const Recipes = () => {
   const [clickedFetchMore, setClickedFetchMore] = useState(false);
   const [previousPriorLength, setPreviousPriorLength] = useState(prior.length);
 
-  // Läs sparat veckonummer från localStorage eller sätt startvärdet till vecka 47
+  // Starta alltid med vecka 47 om gamla värden finns
   const [veckaNummer, setVeckaNummer] = useState(() => {
+    const sparadVersion = localStorage.getItem("version");
+    const aktuellVersion = "1.0"; // Uppdatera vid behov för att rensa allt
     const sparadVecka = localStorage.getItem("veckonummer");
-    return sparadVecka ? parseInt(sparadVecka) : 46;
+    const idag = new Date().toDateString();
+
+    if (sparadVersion !== aktuellVersion) {
+      // Rensa gamla data och initiera ny version
+      localStorage.clear();
+      localStorage.setItem("version", aktuellVersion);
+      localStorage.setItem("veckonummer", "47");
+      localStorage.setItem("senasteUppdatering", idag);
+      return 47; // Starta på vecka 47
+    }
+
+    return sparadVecka ? parseInt(sparadVecka, 10) : 47;
   });
 
   useEffect(() => {
     const idag = new Date();
-    const dagIVeckan = idag.getDay();
+    const dagIVeckan = idag.getDay(); // 0 = Söndag, 1 = Måndag
     const dagensDatum = idag.toDateString(); // Formaterat datum
     const senasteUppdatering = localStorage.getItem("senasteUppdatering");
 
@@ -43,7 +53,7 @@ const Recipes = () => {
       });
     }
 
-    // Om det inte finns en senaste uppdatering, initiera med dagens datum
+    // Om inget uppdateringsdatum finns, sätt dagens datum
     if (!senasteUppdatering) {
       localStorage.setItem("senasteUppdatering", dagensDatum);
     }
@@ -66,7 +76,7 @@ const Recipes = () => {
     <>
       <Title>{text.recipes.title}</Title>
       <div className="my-10 min-h-screen">
-        <Grid className="">
+        <Grid>
           <div className="relative p-4 pt-0 mt-0 min-h-96 scale-103 col-span-3 border-0 border-primary border-opacity-50 rounded-2xl">
             <h3 className="font-poppins text-3xl text-primary">
               {text.recipes.this_week}
@@ -163,4 +173,5 @@ const Recipes = () => {
 };
 
 export default Recipes;
+
 
