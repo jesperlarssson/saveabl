@@ -20,9 +20,8 @@ const Recipes = () => {
   const lastRecipeRef = useRef<HTMLDivElement | null>(null);
   const [clickedFetchMore, setClickedFetchMore] = useState(false);
   const [previousPriorLength, setPreviousPriorLength] = useState(prior.length);
-  
 
-  // Läs sparat veckonummer från localStorage eller sätt startvärdet till vecka 46
+  // Läs sparat veckonummer från localStorage eller sätt startvärdet till vecka 47
   const [veckaNummer, setVeckaNummer] = useState(() => {
     const sparadVecka = localStorage.getItem("veckonummer");
     return sparadVecka ? parseInt(sparadVecka) : 46;
@@ -31,13 +30,22 @@ const Recipes = () => {
   useEffect(() => {
     const idag = new Date();
     const dagIVeckan = idag.getDay();
-  
-    if (dagIVeckan === 1) { // Om det är måndag
-      setVeckaNummer(prevVecka => {
+    const dagensDatum = idag.toDateString(); // Formaterat datum
+    const senasteUppdatering = localStorage.getItem("senasteUppdatering");
+
+    // Uppdatera veckonummer endast om det är måndag och inte redan uppdaterat idag
+    if (dagIVeckan === 1 && senasteUppdatering !== dagensDatum) {
+      setVeckaNummer((prevVecka) => {
         const nyVecka = prevVecka + 1;
         localStorage.setItem("veckonummer", nyVecka.toString());
+        localStorage.setItem("senasteUppdatering", dagensDatum);
         return nyVecka;
       });
+    }
+
+    // Om det inte finns en senaste uppdatering, initiera med dagens datum
+    if (!senasteUppdatering) {
+      localStorage.setItem("senasteUppdatering", dagensDatum);
     }
   }, []);
 
@@ -59,8 +67,8 @@ const Recipes = () => {
       <Title>{text.recipes.title}</Title>
       <div className="my-10 min-h-screen">
         <Grid className="">
-          <div className="relative p-4 pt-0 mt-0 min-h-96 scale-103 col-span-3 border-0 border-primary border-opacity-50 rounded-2xl "> 
-            <h3 className=" font-poppins text-3xl text-primary">
+          <div className="relative p-4 pt-0 mt-0 min-h-96 scale-103 col-span-3 border-0 border-primary border-opacity-50 rounded-2xl">
+            <h3 className="font-poppins text-3xl text-primary">
               {text.recipes.this_week}
             </h3>
             <ThisWeekRecipes />
@@ -71,8 +79,10 @@ const Recipes = () => {
               <h3 className="font-poppins text-3xl text-primary mt-4 mb-2">
                 {text.recipes.next_week}
               </h3>
-              <p className="font-poppins text-xl text-primary opacity-90">{text.recipes.next_week_order_until.replace("{week}", veckaNummer)}</p> {/* Dynamisk underrubrik */}
-              <Grid className=" gap-8 pt-4">
+              <p className="font-poppins text-xl text-primary opacity-90">
+                {text.recipes.next_week_order_until.replace("{week}", veckaNummer)}
+              </p>
+              <Grid className="gap-8 pt-4">
                 {loading ? (
                   <>
                     <div className="h-80 overflow-hidden rounded-xl w-full animate-pulse bg-primary bg-opacity-25" />
@@ -153,3 +163,4 @@ const Recipes = () => {
 };
 
 export default Recipes;
+
