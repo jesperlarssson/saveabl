@@ -85,7 +85,7 @@ const NewsletterForm = () => {
   .visste-du-att-image.sv {
     display: block;
     position: absolute;
-    top: 420px;
+    top: 480px;
     left: 300px;
     width: 300px;
     z-index: 1;
@@ -95,7 +95,7 @@ const NewsletterForm = () => {
   .visste-du-att-image.en {
     display: block;
     position: absolute;
-    top: 420px;
+    top: 480px;
     left: 250px;
     width: 350px;
     z-index: 1;
@@ -105,7 +105,7 @@ const NewsletterForm = () => {
   .visste-du-att-image.da {
     display: block;
     position: absolute;
-    top: 420px;
+    top: 480px;
     left: 280px;
     width: 300px;
     z-index: 1;
