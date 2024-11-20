@@ -86,7 +86,7 @@ const NewsletterForm = () => {
     display: block;
     position: absolute;
     top: 480px;
-    left: 300px;
+    left: 350px;
     width: 300px;
     z-index: 1;
   }
@@ -96,7 +96,7 @@ const NewsletterForm = () => {
     display: block;
     position: absolute;
     top: 480px;
-    left: 250px;
+    left: 320px;
     width: 350px;
     z-index: 1;
   }
@@ -106,7 +106,7 @@ const NewsletterForm = () => {
     display: block;
     position: absolute;
     top: 480px;
-    left: 280px;
+    left: 350px;
     width: 300px;
     z-index: 1;
   }
