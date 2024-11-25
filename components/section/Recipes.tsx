@@ -12,52 +12,25 @@ import Title from "../ui/Title";
 
 const Recipes = () => {
   const { text } = useLang();
-  const { nextWeek, prior, fetchMorePrior, hasMore, loading } = useRecipes();
+  const { thisWeek, nextWeek, prior, fetchMorePrior, hasMore, loading } = useRecipes();
 
   const lastRecipeRef = useRef<HTMLDivElement | null>(null);
   const [clickedFetchMore, setClickedFetchMore] = useState(false);
   const [previousPriorLength, setPreviousPriorLength] = useState(prior.length);
 
-  // Starta alltid med vecka 47 om gamla värden finns
-  const [veckaNummer, setVeckaNummer] = useState(() => {
-    const sparadVersion = localStorage.getItem("version");
-    const aktuellVersion = "1.0"; // Uppdatera vid behov för att rensa allt
-    const sparadVecka = localStorage.getItem("veckonummer");
-    const idag = new Date().toDateString();
-
-    if (sparadVersion !== aktuellVersion) {
-      // Rensa gamla data och initiera ny version
-      localStorage.clear();
-      localStorage.setItem("version", aktuellVersion);
-      localStorage.setItem("veckonummer", "47");
-      localStorage.setItem("senasteUppdatering", idag);
-      return 47; // Starta på vecka 47
-    }
-
-    return sparadVecka ? parseInt(sparadVecka, 10) : 47;
-  });
+  // Manuellt sätt veckonummer (ändra detta värde direkt i koden)
+  const veckaNummer = 48; // Ändra detta värde till korrekt veckonummer
 
   useEffect(() => {
     const idag = new Date();
     const dagIVeckan = idag.getDay(); // 0 = Söndag, 1 = Måndag
-    const dagensDatum = idag.toDateString(); // Formaterat datum
-    const senasteUppdatering = localStorage.getItem("senasteUppdatering");
 
-    // Uppdatera veckonummer endast om det är måndag och inte redan uppdaterat idag
-    if (dagIVeckan === 1 && senasteUppdatering !== dagensDatum) {
-      setVeckaNummer((prevVecka) => {
-        const nyVecka = prevVecka + 1;
-        localStorage.setItem("veckonummer", nyVecka.toString());
-        localStorage.setItem("senasteUppdatering", dagensDatum);
-        return nyVecka;
-      });
+    // På måndagar, flytta nästa veckas recept till denna vecka
+    if (dagIVeckan === 1 && nextWeek.length > 0) {
+      thisWeek.push(...nextWeek); // Flytta recepten
+      nextWeek.length = 0; // Töm nästa vecka
     }
-
-    // Om inget uppdateringsdatum finns, sätt dagens datum
-    if (!senasteUppdatering) {
-      localStorage.setItem("senasteUppdatering", dagensDatum);
-    }
-  }, []);
+  }, [nextWeek, thisWeek]);
 
   useEffect(() => {
     if (clickedFetchMore && lastRecipeRef.current && prior.length > previousPriorLength) {
@@ -84,7 +57,8 @@ const Recipes = () => {
             <ThisWeekRecipes />
           </div>
 
-          {nextWeek.length > 2 && (
+          {/* Nästa veckas recept - Dölj om inga recept */}
+          {nextWeek.length > 0 && (
             <div className="col-span-3">
               <h3 className="font-poppins text-3xl text-primary mt-4 mb-2">
                 {text.recipes.next_week}
@@ -110,6 +84,7 @@ const Recipes = () => {
 
           <div className="w-full border-b col-span-1 md:col-span-3 border-primary-500 border-opacity-50"></div>
 
+          {/* Tidigare recept */}
           {loading ? (
             <>
               <div className="h-80 overflow-hidden rounded-xl w-full animate-pulse bg-primary bg-opacity-25" />
@@ -173,5 +148,6 @@ const Recipes = () => {
 };
 
 export default Recipes;
+
 
 
