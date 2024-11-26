@@ -42,11 +42,6 @@ export default function RootLayout({
               })(window,document,'script','dataLayer','GTM-PBCCL8GC');`,
           }}
         />
-        {/* Lägg till Google Fonts för Reey */}
-  <link
-    href="https://fonts.googleapis.com/css2?family=Reey&display=swap"
-    rel="stylesheet"
-  />
 
         {/* Meta-taggar för SEO */}
         <title>{"Saveabl: Sveriges klimatsmartaste matkasse"}</title>
