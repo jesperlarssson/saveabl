@@ -101,6 +101,7 @@ const svText = {
     faq: "Vanliga frågor",
     recipe: "Menyer",
     news: "Nyheter",
+    giftcard: "Julklapp",
     log_in: "Logga in",
     log_out: "Logga ut",
     sign_up: "Registrera dig",
@@ -650,7 +651,18 @@ popup: {
   }, 
   promotionbanner: {
     promotiontext: "Bästa klimatvänliga matkassen - EU Business news"
-  }
+  },
+  julklapp: {
+    title: "Saveabl Julklapp", 
+    description: "Vad kan vara bättre att ge till nära och kära än en stressfri vardag? Inget tycker vi! Därför har vi tagit fram Saveabl Julklapp.",
+    buy: "Boka din julklapp",
+    subheading: "Julklappen innehåller:",
+      points: [
+        "Presentkort på en veckas matkasse + hemleverans",
+        "Du väljer om du vill ha det digitalt eller skickat på posten",
+        "Pris: 699 SEK",
+      ],
+  },
   
 };
 
@@ -661,6 +673,7 @@ const enText = {
     faq: "Common questions",
     recipe: "Our menus",
     news: "News",
+    giftcard: "Christmas gift",
     log_in: "Log in",
     log_out: "Log out",
     sign_up: "Sign up",
@@ -1174,7 +1187,19 @@ const enText = {
     },
     promotionbanner: {
       promotiontext: "Best Eco-Friendly meal kit - EU Business news"
-    }
+    }, 
+    julklapp: {
+      title: "Saveabl Christmas Gift", 
+      description: "What could be a better gift for your loved ones than a stress-free daily life? Nothing, we think! That’s why we’ve created the Saveabl Christmas Gift.",
+      buy_swedish: "Book now", 
+      buy_danish: "Book now", 
+      subheading: "The gift includes:",
+      points: [
+      "Gift card for one week of meal kits + home delivery",
+      "The gift card will be sent to you digitally after your purchase",
+      "Price: 699 SEK/629 DKK",
+        ],
+    },
 };
 
 const daText = {
@@ -1184,6 +1209,7 @@ const daText = {
     faq: "Almindelige spørgsmål",
     recipe: "Menuer",
     news: "Nyheder",
+    giftcard: "Julegave",
     log_in: "Log ind",
     log_out: "Log ud",
     sign_up: "Tilmeld dig",
@@ -1670,5 +1696,16 @@ integrity_policy: {
   }, 
   promotionbanner: {
     promotiontext: "Bedste miljøvenlige måltidskasse - EU Business news"
+  }, 
+  julklapp: {
+  title: "Saveabl Julegave",
+  description: "Hvad kan være en bedre gave til dine kære end en stressfri hverdag? Intet, synes vi! Derfor har vi skabt Saveabl Julegave.",
+  buy: "Book din julegave",
+  subheading: "Julegaven indeholder:",
+  points: [
+"Gavekort til en uges måltidskasse + hjemlevering",
+"Du vælger, om du vil modtage det digitalt eller med posten",
+"Pris: 629 DKK",
+]
   }
 };

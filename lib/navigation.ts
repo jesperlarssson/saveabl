@@ -24,10 +24,18 @@ export const navigation: NavigationItem[] = [
     path: "/om-oss",
     disabled: false,
   },
+  
+  // {
+  //   id: 4,
+  //   name: "Nyheter",
+  //   path: "/nyheter",
+  //   disabled: true,
+  // },
+  
   {
-    id: 4,
-    name: "Nyheter",
-    path: "/nyheter",
+    id: 5,
+    name: "Julklapp",
+    path: "/julklapp",
     disabled: false,
   },
   

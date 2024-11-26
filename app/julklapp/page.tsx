@@ -1,0 +1,109 @@
+"use client";
+import React from "react";
+import { useLang } from "@/hooks/useLang";
+
+const JulklappPage = () => {
+    const { text, lang } = useLang(); // Hämtar text och språk från språksystemet
+  
+    // Kontrollera att text.julklapp finns
+    if (!text?.julklapp) {
+      return <div>Laddar...</div>; // Visar en laddningsindikator om språket inte är laddat
+    }
+
+  return (
+    <div
+      className="min-h-screen bg-cover bg-center flex items-center justify-center text-[#6E2936] px-4"
+      style={{
+        backgroundImage: `url('/images/jul_bakgrund.png')`, // Bakgrundsbilden
+        backgroundColor: "#FCF7E8", // Fallback-färg
+      }}
+    >
+      {/* Innehåll med runda hörn */}
+      <div className="bg-[#FCF7E8] rounded-lg p-8 shadow-lg max-w-3xl w-full text-center">
+        {/* Huvudrubrik */}
+        <h1 className="text-4xl sm:text-5xl font-bold font-poppins mb-6">
+          {text.julklapp.title}
+        </h1>
+
+        {/* Beskrivning */}
+        <p className="text-base sm:text-xl font-poppins mb-8 max-w-lg mx-auto">
+          {text.julklapp.description}
+        </p>
+
+        {/* Underrubrik */}
+        <h2 className="text-2xl sm:text-3xl font-reey mb-4">
+          {text.julklapp.subheading}
+        </h2>
+
+        {/* Punktlista */}
+        <ul className="text-sm sm:text-lg font-poppins list-none space-y-4 mb-8">
+          {text.julklapp.points.map(
+            (
+              point:
+                | string
+                | number
+                | boolean
+                | React.ReactElement<any, string | React.JSXElementConstructor<any>>
+                | React.ReactFragment
+                | React.ReactPortal
+                | React.PromiseLikeOfReactNode
+                | null
+                | undefined,
+              index: React.Key | null | undefined
+            ) => (
+              <li key={index} className="flex items-start justify-center">
+                <span className="mr-2 text-[#6E2936]">•</span>
+                {point}
+              </li>
+            )
+          )}
+        </ul>
+
+        {/* Knappar */}
+        <div className="flex flex-wrap justify-center items-center gap-4">
+          {lang === "sv" && (
+            <a
+              href="https://book.stripe.com/6oE8yA86Y4bgfM414D" // Svensk länk
+              className="bg-[#F4664A] text-[#FCF7E8] font-poppins font-bold px-8 py-4 rounded-lg hover:bg-[#d95538] transition-colors shadow-md"
+            >
+              {text.julklapp.buy}
+            </a>
+          )}
+          {lang === "da" && (
+            <a
+              href="https://buy.stripe.com/fZeaGI3QI9vAczS5l2" // Dansk länk
+              className="bg-[#F4664A] text-[#FCF7E8] font-poppins font-bold px-8 py-4 rounded-lg hover:bg-[#d95538] transition-colors shadow-md"
+            >
+              {text.julklapp.buy}
+            </a>
+          )}
+         {lang === "en" && (
+  <div className="flex flex-wrap justify-center gap-4">
+    <a
+      href="https://book.stripe.com/6oE8yA86Y4bgfM414D" // Svensk länk
+      className="bg-[#F4664A] text-[#FCF7E8] font-poppins font-bold px-8 py-4 text-sm rounded-lg hover:bg-[#d95538] transition-colors shadow-md flex flex-col items-center w-[160px] sm:w-[250px]"
+    >
+      {text.julklapp.buy_swedish}
+      <span className="text-xs text-[#FCF7E8] mt-1">
+        (Swedish)
+      </span>
+    </a>
+    <a
+      href="https://buy.stripe.com/fZeaGI3QI9vAczS5l2" // Dansk länk
+      className="bg-[#F4664A] text-[#FCF7E8] font-poppins font-bold px-8 py-4 text-sm rounded-lg hover:bg-[#d95538] transition-colors shadow-md flex flex-col items-center w-[160px] sm:w-[250px]"
+    >
+      {text.julklapp.buy_danish}
+      <span className="text-xs text-[#FCF7E8] mt-1">
+        (Danish)
+      </span>
+    </a>
+  </div>
+)}
+
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default JulklappPage;

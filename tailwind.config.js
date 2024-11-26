@@ -57,6 +57,7 @@ module.exports = {
         poppins: ["Poppins", "sans-serif"],
         roboto: ["Roboto", "sans-serif"],
         "open-sans": ["Open Sans", "sans-serif"],
+        reey: ["Reey", "cursive"], 
       },
       keyframes: {
         float: {

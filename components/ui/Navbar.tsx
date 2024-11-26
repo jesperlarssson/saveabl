@@ -48,13 +48,13 @@ const Navbar = () => {
       disabled: false,
     },
     {
-      id: 4,
-      name: text.nav.news,
-      path: "/nyheter",
+      id: 5,
+      name: text.nav.giftcard, // Ny text för julklappspresentkort
+      path: "/julklapp", // Rätt sökväg
       disabled: false,
     },
     {
-      id: 5,
+      id: 6,
       name: text.nav.faq,
       path: "/om-oss#vanliga-fragor",
       disabled: false,
