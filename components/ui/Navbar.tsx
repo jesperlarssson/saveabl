@@ -5,7 +5,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { twMerge } from "tailwind-merge";
 
-import { navigation } from "@/lib/navigation";
 import NavItem from "./NavItem";
 import useAuthModal from "@/hooks/useAuthModal";
 import { useAuth } from "@/hooks/useAuth";
@@ -109,7 +108,26 @@ const Navbar = () => {
                 href={item.path}
                 disabled={item.disabled}
               >
-                {item.name}
+              
+{/* Lägg till en tomteluva som hänger på J:et */}
+{item.name === text.nav.giftcard ? (
+  <div className="relative flex items-center">
+    <span className="relative">
+      <Image
+        src="/images/tomteluva.png" // Ange rätt sökväg till bilden
+        alt="Tomteluva"
+        width={30} // Justera storleken på tomteluvan
+        height={30}
+        className="absolute -top-3 -left-4" // Positionera tomteluvan vid J:et
+      />
+      {item.name} {/* Texten "Julklapp" */}
+    </span>
+  </div>
+) : (
+  item.name
+)}
+
+
               </NavItem>
             </li>
           ))}
