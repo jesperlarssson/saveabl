@@ -21,7 +21,11 @@ const JulklappPage = () => {
       {/* Innehåll med runda hörn */}
       <div className="bg-[#FCF7E8] rounded-lg p-8 shadow-lg max-w-3xl w-full text-center">
         {/* Huvudrubrik */}
-        <h1 className="text-5xl sm:text-6xl font-bold font-poppins mb-6">
+        <h1
+          className={`font-bold font-poppins mb-6 ${
+            lang === "en" ? "text-4xl sm:text-5xl" : "text-5xl sm:text-6xl"
+          }`}
+        >
           {text.julklapp.title}
         </h1>
 
@@ -54,23 +58,27 @@ const JulklappPage = () => {
         )}
 
         {/* Punktlista */}
-<ul className="text-lg sm:text-xl font-poppins list-none leading-relaxed space-y-4 text-left sm:text-center mb-8">
-  {text.julklapp.points.map((point: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactFragment | React.ReactPortal | React.PromiseLikeOfReactNode | null | undefined, index: React.Key | null | undefined) => (
-    <li
-      key={index}
-      className="flex items-center justify-start sm:justify-center text-[#6E2936] gap-6"
-    >
-      {/* Justerad punkt */}
-      <span
-        className="w-2 h-2 bg-[#6E2936] rounded-full flex-shrink-0 self-center"
-        aria-hidden="true"
-      ></span>
-      {/* Text */}
-      <span className="leading-relaxed">{point}</span>
-    </li>
-  ))}
-</ul>
-
+        <ul className="text-lg sm:text-xl font-poppins list-none leading-relaxed space-y-4 text-left sm:text-center mb-8">
+          {text.julklapp.points.map(
+            (
+              point: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactFragment | React.ReactPortal | React.PromiseLikeOfReactNode | null | undefined,
+              index: React.Key | null | undefined
+            ) => (
+              <li
+                key={index}
+                className="flex items-center justify-start sm:justify-center text-[#6E2936] gap-6"
+              >
+                {/* Justerad punkt */}
+                <span
+                  className="w-2 h-2 bg-[#6E2936] rounded-full flex-shrink-0 self-center"
+                  aria-hidden="true"
+                ></span>
+                {/* Text */}
+                <span className="leading-relaxed">{point}</span>
+              </li>
+            )
+          )}
+        </ul>
 
         {/* Knappar */}
         <div className="flex flex-wrap justify-center items-center gap-4">
@@ -91,22 +99,22 @@ const JulklappPage = () => {
             </a>
           )}
           {lang === "en" && (
-             <div className="flex flex-wrap justify-between gap-4 w-full max-w-[100%] px-4">
-             <a
-               href="https://book.stripe.com/6oE8yA86Y4bgfM414D" // Svensk länk
-               className="bg-[#F4664A] text-[#FCF7E8] font-poppins font-bold px-4 py-4 text-sm rounded-lg hover:bg-[#d95538] transition-colors shadow-md flex flex-col items-center w-[130px] sm:w-[250px]"
-             >
-               {text.julklapp.buy_swedish}
-               <span className="text-xs text-[#FCF7E8] mt-1">(Swedish)</span>
-             </a>
-             <a
-               href="https://buy.stripe.com/fZeaGI3QI9vAczS5l2" // Dansk länk
-               className="bg-[#F4664A] text-[#FCF7E8] font-poppins font-bold px-4 py-4 text-sm rounded-lg hover:bg-[#d95538] transition-colors shadow-md flex flex-col items-center w-[130px] sm:w-[250px]"
-             >
-               {text.julklapp.buy_danish}
-               <span className="text-xs text-[#FCF7E8] mt-1">(Danish)</span>
-             </a>
-           </div>
+            <div className="flex flex-wrap justify-center gap-4">
+              <a
+                href="https://book.stripe.com/6oE8yA86Y4bgfM414D" // Svensk länk
+                className="bg-[#F4664A] text-[#FCF7E8] font-poppins font-bold px-8 py-4 text-sm rounded-lg hover:bg-[#d95538] transition-colors shadow-md flex flex-col items-center w-[150px] sm:w-[250px]"
+              >
+                {text.julklapp.buy_swedish}
+                <span className="text-xs text-[#FCF7E8] mt-1">(Swedish)</span>
+              </a>
+              <a
+                href="https://buy.stripe.com/fZeaGI3QI9vAczS5l2" // Dansk länk
+                className="bg-[#F4664A] text-[#FCF7E8] font-poppins font-bold px-6 py-4 text-sm rounded-lg hover:bg-[#d95538] transition-colors shadow-md flex flex-col items-center w-[150px] sm:w-[250px]"
+              >
+                {text.julklapp.buy_danish}
+                <span className="text-xs text-[#FCF7E8] mt-1">(Danish)</span>
+              </a>
+            </div>
           )}
         </div>
       </div>
@@ -115,3 +123,4 @@ const JulklappPage = () => {
 };
 
 export default JulklappPage;
+
