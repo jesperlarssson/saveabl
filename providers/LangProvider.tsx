@@ -1189,7 +1189,7 @@ const enText = {
       promotiontext: "Best Eco-Friendly meal kit - EU Business news"
     }, 
     julklapp: {
-      title: "Saveabl Christmas Gift", 
+      title: "Christmas Gift", 
       description: "What could be a better gift for your loved ones than a stress-free daily life? Nothing, we think! That’s why we’ve created the Saveabl Christmas Gift.",
       buy_swedish: "Book now", 
       buy_danish: "Book now", 

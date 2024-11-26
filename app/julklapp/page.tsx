@@ -94,14 +94,14 @@ const JulklappPage = () => {
             <div className="flex flex-wrap justify-center gap-4">
               <a
                 href="https://book.stripe.com/6oE8yA86Y4bgfM414D" // Svensk länk
-                className="bg-[#F4664A] text-[#FCF7E8] font-poppins font-bold px-8 py-4 text-sm rounded-lg hover:bg-[#d95538] transition-colors shadow-md flex flex-col items-center w-[160px] sm:w-[250px]"
+                className="bg-[#F4664A] text-[#FCF7E8] font-poppins font-bold px-8 py-4 text-sm rounded-lg hover:bg-[#d95538] transition-colors shadow-md flex flex-col items-center w-[150px] sm:w-[250px]"
               >
                 {text.julklapp.buy_swedish}
                 <span className="text-xs text-[#FCF7E8] mt-1">(Swedish)</span>
               </a>
               <a
                 href="https://buy.stripe.com/fZeaGI3QI9vAczS5l2" // Dansk länk
-                className="bg-[#F4664A] text-[#FCF7E8] font-poppins font-bold px-8 py-4 text-sm rounded-lg hover:bg-[#d95538] transition-colors shadow-md flex flex-col items-center w-[160px] sm:w-[250px]"
+                className="bg-[#F4664A] text-[#FCF7E8] font-poppins font-bold px-6 py-4 text-sm rounded-lg hover:bg-[#d95538] transition-colors shadow-md flex flex-col items-center w-[150px] sm:w-[250px]"
               >
                 {text.julklapp.buy_danish}
                 <span className="text-xs text-[#FCF7E8] mt-1">(Danish)</span>
