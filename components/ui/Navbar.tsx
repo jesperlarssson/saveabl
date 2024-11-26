@@ -217,8 +217,24 @@ const Navbar = () => {
                 href={item.path}
                 disabled={item.disabled}
               >
-                {item.name}
-              </NavItem>
+               {item.name === text.nav.giftcard ? (
+  <div className="relative flex items-center">
+    <span className="relative flex">
+      <Image
+        src="/images/tomteluva.png"
+        alt="Tomteluva"
+        width={35} // Justera storleken
+        height={35}
+        className="absolute sm:-top-4 sm:-left-4 -top-3 -left-4" // Justera positionering
+      />
+      {item.name}
+    </span>
+  </div>
+) : (
+  item.name
+)}
+
+      </NavItem>
             </li>
           ))}
           {!user ? (
