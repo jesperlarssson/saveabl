@@ -1,10 +1,13 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import { toast } from "react-hot-toast";
+
 import { Recipe } from "@/types";
 import Grid from "../ui/Grid";
 import RecipeTile from "../RecipeTile";
 import Button from "../ui/Button";
+import { getDateForPriorRecipes } from "@/helpers/format";
 import ThisWeekRecipes from "../general/ThisWeekRecipes";
 import { useRecipes } from "@/hooks/useRecipes";
 import { useLang } from "@/hooks/useLang";
@@ -12,35 +15,28 @@ import Title from "../ui/Title";
 
 const Recipes = () => {
   const { text } = useLang();
-  const { thisWeek, nextWeek, prior, fetchMorePrior, hasMore, loading } = useRecipes();
+  const { nextWeek, prior, fetchMorePrior, hasMore, loading } = useRecipes();
 
-  const lastRecipeRef = useRef<HTMLDivElement | null>(null);
+  const lastRecipeRef = useRef<HTMLDivElement | null>(null); // Ref för att skrolla till sista receptgruppen
   const [clickedFetchMore, setClickedFetchMore] = useState(false);
   const [previousPriorLength, setPreviousPriorLength] = useState(prior.length);
 
-  // Manuellt sätt veckonummer (ändra detta värde direkt i koden)
-  const veckaNummer = 48; // Ändra detta värde till korrekt veckonummer
-
   useEffect(() => {
-    const idag = new Date();
-    const dagIVeckan = idag.getDay(); // 0 = Söndag, 1 = Måndag
+    console.log("clickedFetchMore:", clickedFetchMore);
+    console.log("prior.length:", prior.length);
+    console.log("previousPriorLength:", previousPriorLength);
 
-    // På måndagar, flytta nästa veckas recept till denna vecka
-    if (dagIVeckan === 1 && nextWeek.length > 0) {
-      thisWeek.push(...nextWeek); // Flytta recepten
-      nextWeek.length = 0; // Töm nästa vecka
-    }
-  }, [nextWeek, thisWeek]);
-
-  useEffect(() => {
     if (clickedFetchMore && lastRecipeRef.current && prior.length > previousPriorLength) {
+      console.log("Skrollar till de sista recepten...");
       lastRecipeRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
       setClickedFetchMore(false);
     }
+
     setPreviousPriorLength(prior.length);
   }, [prior.length, clickedFetchMore]);
 
   const handleFetchMoreClick = () => {
+    console.log("Fetch More-knappen klickades");
     setClickedFetchMore(true);
     fetchMorePrior();
   };
@@ -49,24 +45,23 @@ const Recipes = () => {
     <>
       <Title>{text.recipes.title}</Title>
       <div className="my-10 min-h-screen">
-        <Grid>
-          <div className="relative p-4 pt-0 mt-0 min-h-96 scale-103 col-span-3 border-0 border-primary border-opacity-50 rounded-2xl">
-            <h3 className="font-poppins text-3xl text-primary">
+        <Grid className="">
+          <div className="relative p-4 pt-0 mt-0 min-h-96 scale-103 col-span-3 border-0 border-primary border-opacity-50 rounded-2xl "> 
+            <h3 className=" font-poppins text-3xl text-primary">
               {text.recipes.this_week}
             </h3>
             <ThisWeekRecipes />
           </div>
 
-          {/* Nästa veckas recept - Dölj om inga recept */}
-          {nextWeek.length > 0 && (
+          {nextWeek.length > 2 && (
             <div className="col-span-3">
-              <h3 className="font-poppins text-3xl text-primary mt-4 mb-2">
+              <h3 className="font-poppins text-3xl text-primary mt-4">
                 {text.recipes.next_week}
               </h3>
-              <p className="font-poppins text-xl text-primary opacity-90">
-                {text.recipes.next_week_order_until.replace("{week}", veckaNummer)}
+              <p className="text-primary text-lg mt-2">
+                {text.recipes.next_week_order_until.replace("{week}", "49")} {/* Ändra "46" till aktuell vecka */}
               </p>
-              <Grid className="gap-8 pt-4">
+              <Grid className=" gap-8 pt-4">
                 {loading ? (
                   <>
                     <div className="h-80 overflow-hidden rounded-xl w-full animate-pulse bg-primary bg-opacity-25" />
@@ -84,7 +79,6 @@ const Recipes = () => {
 
           <div className="w-full border-b col-span-1 md:col-span-3 border-primary-500 border-opacity-50"></div>
 
-          {/* Tidigare recept */}
           {loading ? (
             <>
               <div className="h-80 overflow-hidden rounded-xl w-full animate-pulse bg-primary bg-opacity-25" />
@@ -101,7 +95,7 @@ const Recipes = () => {
                   <div
                     key={recipe.id}
                     className="w-full"
-                    ref={index === prior.length - 3 ? lastRecipeRef : null}
+                    ref={index === prior.length - 3 ? lastRecipeRef : null} // Lägg ref på tredje sista receptet
                   >
                     <RecipeTile recipe={recipe} />
                   </div>
