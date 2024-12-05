@@ -282,6 +282,22 @@ const NewsletterForm = () => {
       margin: 10px auto;
       padding: 10px;
     }
+
+    .visste-du-att-wrapper {
+      position: relative;
+      margin-top: 0; /* Flyttar ned det beigea området */
+      margin-bottom: 10px; /* Lägg till lite luft mellan bild och text */
+    }
+  
+    .visste-du-att-image {
+      position: relative;
+      top: -30px; /* Ta bort tidigare höjdinställningar */
+      left: 0; /* Låt bilden flöda naturligt */
+      margin: 0 auto; /* Centrerar bilden */
+      width: 80%; /* Gör bilden mindre på mobil */
+      height: auto;
+    }
+  
   
     .page-title {
       font-size: 23px;
@@ -386,7 +402,7 @@ const NewsletterForm = () => {
     /* CSS för svenska */
     .visste-du-att-image.sv {
       position: absolute;
-      top: 105px;
+      top: 10px;
       left: -7px;
       width: 180px;
       z-index: 1;
@@ -395,7 +411,7 @@ const NewsletterForm = () => {
     /* CSS för engelska */
     .visste-du-att-image.en {
       position: absolute;
-      top: 110px;
+      top: -10px;
       left: 2px;
       width: 230px;
       z-index: 1;
@@ -404,7 +420,7 @@ const NewsletterForm = () => {
     /* CSS för danska */
     .visste-du-att-image.da {
       position: absolute;
-      top: 105px;
+      top: 10px;
       left: -10px;
       width: 180px;
       z-index: 1;
