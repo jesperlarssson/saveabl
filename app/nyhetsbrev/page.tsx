@@ -81,35 +81,31 @@ const NewsletterForm = () => {
     object-fit: cover;
   }
   
-  /* CSS för svenska */
+  .visste-du-att-wrapper {
+    text-align: center; /* Centrerar bilden horisontellt */
+    margin-bottom: -40px; /* Avstånd mellan bilden och rubriken */
+  }
+  
+  .visste-du-att-image {
+    display: inline-block; /* Gör bilden inline och skalbar */
+    width: 20%; /* Proportionell bredd */
+    height: auto; /* Behåller proportionerna */
+  }
+  
+  /* Språkspecifik placering (om små justeringar behövs) */
   .visste-du-att-image.sv {
-    display: block;
-    position: absolute;
-    top: 480px;
-    left: 410px;
-    width: 300px;
-    z-index: 1;
+    margin-top: -20px; /* Svenska inställningar */
   }
   
-  /* CSS för engelska */
   .visste-du-att-image.en {
-    display: block;
-    position: absolute;
-    top: 480px;
-    left: 450px;
-    width: 350px;
-    z-index: 1;
+    margin-top: 5px; /* Engelska inställningar */
+    margin-bottom: -20px;
   }
   
-  /* CSS för danska */
   .visste-du-att-image.da {
-    display: block;
-    position: absolute;
-    top: 480px;
-    left: 410px;
-    width: 300px;
-    z-index: 1;
+    margin-top: -15px; /* Danska inställningar */
   }
+  
   
   .container {
     width: 80%;
@@ -126,7 +122,7 @@ const NewsletterForm = () => {
     font-size: 40px;
     font-weight: bold;
     margin-bottom: 15px;
-    margin-top: 20px;
+    margin-top: -10px;
     text-align: center;
     line-height: 1.3;
   }
@@ -420,78 +416,136 @@ const NewsletterForm = () => {
   }  
 `;
 
-  return (
-    <div>
-      <style>{styles}</style>
-      <div className="header-image-container">
-        <Image src={HeaderImage} alt="Header" className="header-image" layout="responsive" />
-        <div className="morot-image-container">
-          <Image src={morotImage} alt="morot" layout="fixed" width={150} height={150} />
-        </div>
-        {/* Använd getVissteDuAttImage för att få rätt bild baserat på språk, visas endast om formuläret inte är inskickat */}
-        {!submitted && (
-          <Image
-            src={getVissteDuAttImage()}
-            alt={lang === 'sv' ? 'Visste du att' : lang === 'en' ? 'Did you know' : 'Vidste du at'}
-            className={`visste-du-att-image ${lang}`} // Dynamisk klass baserat på språk
-            width={200}
-            height={200}
-          />
-        )}
+return (
+  <div>
+    <style>{styles}</style>
+    <div className="header-image-container">
+      <Image
+        src={HeaderImage}
+        alt="Header"
+        className="header-image"
+        layout="responsive"
+      />
+      <div className="morot-image-container">
+        <Image
+          src={morotImage}
+          alt="morot"
+          layout="fixed"
+          width={150}
+          height={150}
+        />
       </div>
-      <div className="container">
-        {!submitted && (
-          <>
-            <h1 className="page-title">{text.newsletter.header_title}</h1>
-            <p className="page-subtitle">{text.newsletter.header_subtitle}</p>
-            <div className="button-section">
-            <a href="https://www.saveabl.com/bestall" target="_blank" rel="noopener noreferrer" className="form-button">
-            {text.newsletter.additional_button}
+
+      {/* Wrapper för "Visste du att"-bilden */}
+      {!submitted && (
+        <div className="visste-du-att-wrapper">
+          <Image
+            src={getVissteDuAttImage()} // Dynamiskt baserat på språk
+            alt={
+              lang === "sv"
+                ? "Visste du att"
+                : lang === "en"
+                ? "Did you know"
+                : "Vidste du at"
+            }
+            className={`visste-du-att-image ${lang}`} // Dynamisk klass för språk
+            width={300}
+            height={150}
+          />
+        </div>
+      )}
+    </div>
+
+    <div className="container">
+      {!submitted && (
+        <>
+          <h1 className="page-title">{text.newsletter.header_title}</h1>
+          <p className="page-subtitle">{text.newsletter.header_subtitle}</p>
+          <div className="button-section">
+            <a
+              href="https://www.saveabl.com/bestall"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="form-button"
+            >
+              {text.newsletter.additional_button}
             </a>
           </div>
-            <div className="additional-section">
-              <h2>{text.newsletter.new_section_title}</h2>
-              <p>{text.newsletter.new_section_subtitle}</p>
-            </div>
-            <form onSubmit={handleSubmit}>
-              <div className="input-group">
-                <label>{text.newsletter.email_label}</label>
-                <input type="email" placeholder={text.newsletter.email} value={email} onChange={(e) => setEmail(e.target.value)} required />
-              </div>
-  
-              <div className="input-group">
-                <label>{text.newsletter.name_label}</label>
-                <input type="text" placeholder={text.newsletter.name} value={name} onChange={(e) => setName(e.target.value)} required />
-              </div>
-  
-              <div className="input-group">
-                <label>{text.newsletter.country_label}</label>
-                <input type="text" placeholder={text.newsletter.country} value={country} onChange={(e) => setCountry(e.target.value)} required />
-              </div>
-  
-              <div className="consent-container">
-                <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} required />
-                <span className="consent-text">{text.newsletter.consent_text}</span>
-              </div>
-  
-              {error && <p style={{ color: 'red' }}>{error}</p>}
-              <button type="submit" className="form-button submit-button">{text.newsletter.submit}</button>
-              <div className="matkasse-image-container">
-                <Image src={MatkasseImage} alt="Matkasse" className="matkasse-image" layout="fixed" width={100} height={100} />
-              </div>
-            </form>
-          </>
-        )}
-  
-        {submitted && (
-          <div className="thank-you">
-            <h2>{text.newsletter.thank_you_title}</h2>
-            <p>{text.newsletter.thank_you_message}</p>
+          <div className="additional-section">
+            <h2>{text.newsletter.new_section_title}</h2>
+            <p>{text.newsletter.new_section_subtitle}</p>
           </div>
-        )}
-      </div>
+          <form onSubmit={handleSubmit}>
+            <div className="input-group">
+              <label>{text.newsletter.email_label}</label>
+              <input
+                type="email"
+                placeholder={text.newsletter.email}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+
+            <div className="input-group">
+              <label>{text.newsletter.name_label}</label>
+              <input
+                type="text"
+                placeholder={text.newsletter.name}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+            </div>
+
+            <div className="input-group">
+              <label>{text.newsletter.country_label}</label>
+              <input
+                type="text"
+                placeholder={text.newsletter.country}
+                value={country}
+                onChange={(e) => setCountry(e.target.value)}
+                required
+              />
+            </div>
+
+            <div className="consent-container">
+              <input
+                type="checkbox"
+                checked={consent}
+                onChange={(e) => setConsent(e.target.checked)}
+                required
+              />
+              <span className="consent-text">{text.newsletter.consent_text}</span>
+            </div>
+
+            {error && <p style={{ color: "red" }}>{error}</p>}
+            <button type="submit" className="form-button submit-button">
+              {text.newsletter.submit}
+            </button>
+            <div className="matkasse-image-container">
+              <Image
+                src={MatkasseImage}
+                alt="Matkasse"
+                className="matkasse-image"
+                layout="fixed"
+                width={100}
+                height={100}
+              />
+            </div>
+          </form>
+        </>
+      )}
+
+      {submitted && (
+        <div className="thank-you">
+          <h2>{text.newsletter.thank_you_title}</h2>
+          <p>{text.newsletter.thank_you_message}</p>
+        </div>
+      )}
     </div>
-  );
+  </div>
+);
 };
 
 export default NewsletterForm;
