@@ -35,7 +35,7 @@ const ManageSubscriptionModal: React.FC<ManageSubscriptionModalProps> = ({ updat
   const { text } = useLang();
   const [pauseOptions, setPauseOptions] = useState<React.ReactNode[]>([]);
   const [selectedWeek, setSelectedWeek] = useState<number>(29);
-  const [weeks, setWeeks] = useState<number[]>([2, 3, 4]);
+  const [weeks, setWeeks] = useState<number[]>([3, 4, 5]);
 
   useEffect(() => {
     const options = weeks.map((week, index) => (
