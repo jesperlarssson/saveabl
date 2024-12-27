@@ -84,6 +84,7 @@ const ChangeDeliveryDayModal = () => {
       try {
         // Hämta leveransdagar
         const response = await axios.get(`/api/gordon/get_delivery_dates/deliverywindow?postalCode=${sanitizedPostalCode}`);
+        console.log("API-respons för postnummer", sanitizedPostalCode, response.data);
         const deliveryWindows = response.data;
 
         let allowedDays: number[] = [];
@@ -131,8 +132,8 @@ const ChangeDeliveryDayModal = () => {
           if (startTime > new Date() && startTime < elevenDaysFromNow) {
             if (allowedDays.includes(dayOfWeek)) {
               if (dayOfWeek === 6 && startHour === 9 && endHour === 18) return true; // Lördag 9-18
-              if (dayOfWeek === 0 && startHour === 10 && endHour <= 17) return true; // Söndag 10-17
-              if (dayOfWeek === 1 && startHour === 16 && endHour === 22) return true; // Måndag 16-22
+              if (dayOfWeek === 0 && startHour === 10 && endHour <= 22) return true; // Söndag 10-17
+              if (dayOfWeek === 1 && startHour === 14 && endHour === 22) return true; // Måndag 16-22
             }
           }
           return false;
