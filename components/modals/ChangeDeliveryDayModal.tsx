@@ -84,7 +84,7 @@ const ChangeDeliveryDayModal = () => {
       try {
         // Hämta leveransdagar
         const response = await axios.get(`/api/gordon/get_delivery_dates/deliverywindow?postalCode=${sanitizedPostalCode}`);
-        console.log("API-respons för postnummer", sanitizedPostalCode, response.data);
+        
         const deliveryWindows = response.data;
 
         let allowedDays: number[] = [];
