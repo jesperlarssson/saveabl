@@ -45,37 +45,12 @@ export const getDateForPriorRecipes = (): string => {
   return dates[1].toISOString(); // Slutdatum för två veckor bakåt
 };
 
-// Testa veckonummer och veckodatum
-const today = new Date();
-console.log("Idag:", today);
-console.log("Veckonummer för idag:", getWeekNumber(today)); // Bör vara vecka 1
-console.log("Start- och slutdatum för vecka 1:", getDatesFromWeek(1, today.getFullYear()));
-console.log("Start- och slutdatum för vecka 2:", getDatesFromWeek(2, today.getFullYear()));
-
-// Filtrera recept baserat på veckonummer
-const allRecipes = [
-  { id: 1, title: "Recept för vecka 1", date: "2024-12-30" }, // Måndag vecka 1
-  { id: 2, title: "Recept för vecka 1", date: "2024-12-31" }, // Tisdag vecka 1
-  { id: 3, title: "Recept för vecka 2", date: "2025-01-06" }, // Måndag vecka 2
-];
-
-const currentWeek = getWeekNumber(today); // Vecka 1
-const nextWeek = currentWeek + 1; // Vecka 2
-
-// Hämta start- och slutdatum för nuvarande och nästa vecka
-const [startDateThisWeek, endDateThisWeek] = getDatesFromWeek(currentWeek, today.getFullYear());
-const [startDateNextWeek, endDateNextWeek] = getDatesFromWeek(nextWeek, today.getFullYear());
-
-// Filtrera recepten för denna vecka och nästa vecka
-const thisWeeksRecipes = allRecipes.filter(recipe => {
-  const recipeDate = new Date(recipe.date);
-  return recipeDate >= startDateThisWeek && recipeDate <= endDateThisWeek;
-});
-
-const nextWeeksRecipes = allRecipes.filter(recipe => {
-  const recipeDate = new Date(recipe.date);
-  return recipeDate >= startDateNextWeek && recipeDate <= endDateNextWeek;
-});
-
-console.log("Recept för denna vecka:", thisWeeksRecipes); // Ska visa vecka 1
-console.log("Recept för nästa vecka:", nextWeeksRecipes); // Ska visa vecka 2
+// Parsar leveransdagar baserat på start- och sluttider samt etikett
+export const deliveryDayParser = ({ start, end, label }: { start: any; end: any; label: any }) => {
+  const day = new Date(0);
+  day.setUTCSeconds(start);
+  if ([0, 1, 6].includes(day.getDay())) {
+    const labelSplit = label.split(" ");
+    return labelSplit.slice(0, 2).join(" ");
+  }
+};
