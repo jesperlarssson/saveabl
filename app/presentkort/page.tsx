@@ -19,7 +19,10 @@ const PresentkortPage = () => {
       : "/images/saveabl_presentkort.png";
 
   return (
-    <div className="min-h-screen flex items-center justify-center text-[#6E2936] px-6 sm:px-4 sm:pt-0 pt-6">
+    <div
+      style={{ fontFamily: "Poppins, sans-serif" }}
+      className="min-h-screen flex items-center justify-center text-[#6E2936] px-6 sm:px-4 sm:pt-0 pt-6"
+    >
       {/* Innehåll med bild och text */}
       <div className="flex flex-col md:flex-row items-center justify-center max-w-7xl w-full sm:mr-[5%]">
         {/* Bildsektion */}
