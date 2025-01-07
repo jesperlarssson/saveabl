@@ -48,8 +48,8 @@ const Navbar = () => {
     },
     {
       id: 5,
-      name: text.nav.giftcard, // Ny text för julklappspresentkort
-      path: "/julklapp", // Rätt sökväg
+      name: text.nav.giftcard, // Ny text för presentkort
+      path: "/presentkort", // Uppdaterad sökväg
       disabled: false,
     },
     {
@@ -108,26 +108,7 @@ const Navbar = () => {
                 href={item.path}
                 disabled={item.disabled}
               >
-              
-{/* Lägg till en tomteluva som hänger på J:et */}
-{item.name === text.nav.giftcard ? (
-  <div className="relative flex items-center">
-    <span className="relative">
-      <Image
-        src="/images/tomteluva.png" // Ange rätt sökväg till bilden
-        alt="Tomteluva"
-        width={30} // Justera storleken på tomteluvan
-        height={30}
-        className="absolute -top-3 -left-4" // Positionera tomteluvan vid J:et
-      />
-      {item.name} {/* Texten "Julklapp" */}
-    </span>
-  </div>
-) : (
-  item.name
-)}
-
-
+                {item.name}
               </NavItem>
             </li>
           ))}
@@ -192,7 +173,6 @@ const Navbar = () => {
           active && "translate-x-0 opacity-100"
         )}
       >
-        {/* Stäng knappen */}
         <button
           className="absolute top-[-4px] right-4 p-4 text-5xl text-[#EECFAA] hover:text-opacity-75"
           onClick={handleClick}
@@ -217,24 +197,8 @@ const Navbar = () => {
                 href={item.path}
                 disabled={item.disabled}
               >
-               {item.name === text.nav.giftcard ? (
-  <div className="relative flex items-center">
-    <span className="relative flex">
-      <Image
-        src="/images/tomteluva.png"
-        alt="Tomteluva"
-        width={35} // Justera storleken
-        height={35}
-        className="absolute sm:-top-4 sm:-left-4 -top-3 -left-4" // Justera positionering
-      />
-      {item.name}
-    </span>
-  </div>
-) : (
-  item.name
-)}
-
-      </NavItem>
+                {item.name}
+              </NavItem>
             </li>
           ))}
           {!user ? (

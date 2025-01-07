@@ -34,8 +34,8 @@ export const navigation: NavigationItem[] = [
   
   {
     id: 5,
-    name: "Julklapp",
-    path: "/julklapp",
+    name: "Presentkort",
+    path: "/presentkort",
     disabled: false,
   },
   
