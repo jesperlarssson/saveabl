@@ -23,7 +23,7 @@ const PresentkortPage = () => {
       {/* Innehåll med bild och text */}
       <div className="flex flex-col md:flex-row items-center justify-center max-w-7xl w-full sm:mr-[5%]">
         {/* Bildsektion */}
-        <div className="flex-shrink-0 md:w-1/2 mb-10 md:mb-0 sm:mt-0 mt-[-140px]">
+        <div className="flex-shrink-0 md:w-1/2 mb-10 md:mb-0 sm:mt-0 mt-[-100px]">
           <img
             src={imageSrc}
             alt="Presentkort"
