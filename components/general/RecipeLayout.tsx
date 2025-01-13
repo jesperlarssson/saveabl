@@ -121,6 +121,7 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
 
           {/* Innehåll till höger om receptbilden */}
           <div className="col-span-4 sm:col-span-3 flex flex-col justify-end gap-2 relative">
+             {/*
             <div className="flex items-center gap-2 mt-2">
               <Image
                 src="/images/emil_kock.png"
@@ -136,6 +137,7 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
             <div className="flex mt-2 text-star">
               {ratingSum > 1 && getStars(ratingSum)}
             </div>
+            */}
             <h2 className="font-poppins text-secondary text-2xl sm:text-4xl">
               {recept.title}
             </h2>
