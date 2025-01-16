@@ -110,33 +110,48 @@ const svText = {
   },
   page: {
     hero: {
-      title: "Kockförberedd matkasse som gör klimatet en tjänst",
-      subtitle: "",
-      order_now: "Beställ här",
-    },
+      title: {
+        part1: "Gör din vardagsmat",
+        part2: "enkel och hållbar",
+      },
+      subtitle: {
+        part1: "Servera vegetariska måltider på 15 minuter och ge samtidigt",
+        part2: "de där överblivna grönnsakerna en ny mening med livet.",
+      },
+      points: {
+        cooking_time: "tillagningstid",
+        delivery: "leverans till dörren",
+        chef_prepared: "kocklagat (sista 20 briljerar du med)",
+      },
+      order_now: "Beställ Saveabl smartkasse!",
+    },    
     usp: {
       title: "Såhär fungerar vår matkasse:",
       points: [
         {
-          title: "Vi lagar maten åt dig",
-          text: "Vi tar fram recept på råvaror som ser lite tokiga ut, sedan gör vår stjärnkock Emil de svåra och tidskrävande momenten i matlagningen åt dig. Och voila du har en kockpreppad matkasse!",
+          title: "1. Välj och beställ",
+          text: "Välj din Saveabl-plan och bestäm om du vill testa en gång eller prenumerera utan bindningstid och krångel.",
         },
         {
-          title: "Flexibla leveranser",
-          text: "Du väljer din leveransdag och bestämmer själv om du vill köpa en gång eller prenumerera på vår matkasse, såklart utan bindningstid!",
+          title: "2. Du räddar, vi levererar",
+          text: "Tack vare din beställning kan vi rädda krokiga morötter och sneda potatisar. Vår stjärnkock Emil preppar maten som sedan levereras direkt till din dörr.",
         },
         {
-          title: "Klimatsmart middag på 15 min",
-          text: "Du gör de sista stegen i receptet. På 15 minuter kan du servera en hälsosam middag som är snäll mot vårt klimat!",
+          title: "3. Tillaga och servera på 15 min",
+          text: "Ge maten en final touch och njut av en hälsosam, klimatsmart middag - snabbt, enkelt och löjligt gott.",
         },
       ],
     },
 
     call_to_action: {
-      title: "Hjälp oss att rädda bra mat från att slängas, en middag i taget!",
+      title: [
+        "Snabbt. Klimatsmart.",
+        "Och förbaskat gott.",
+        "Så varför välja?"
+      ],
       meals: "Middagar",
       vegetarian: "Vegetariskt",
-      price_per_portion: "Lägre klimatavtryck",
+      price_per_portion: "Lägre klimatavtryck än genomsnittsmiddagen",
       cooking_time: "Min tillagning",
       order_now: "Kom igång",
     },
@@ -175,10 +190,10 @@ const svText = {
         text: "Klimatfrågan är enormt viktig för oss och vi försöker bidra på alla sätt vi kan. Med hjälp av RISE har det räknats ut att våra middagar har 5 gånger lägre klimatpåverkan än en genomsnittlig svensk middag. Sättet som vi har uppnått det är genom att rädda bra matvaror från att slängas helt i onödan, vilket i sin tur gör att mindre mat behöver odlas, färre transporter behöver rulla och mindre vatten behövs till jordbruken. Genom att visa på hur otroligt gott det kan vara att äta vegetariskt vill vi inspirera till en kost som är mindre baserad på kött vilket även det leder till en lägre klimatpåverkan och vi jobbar just nu på att ta fram ett retursystem för våra plastburkar till såser tillsammans med Gordon Delivery för att ytterligare minska vår påverkan.",
       },
     ],
-    faq: "Vanliga frågor",
+    faq: "Vanligaste frågorna",
     faqItems: [
       {
-        question: "Prenumeration, vad gäller?",
+        question: "Prenumeration, hur funkar det?",
         answer: "Våra prenumerationer är helt utan bindningstid, vilket innebär att du kan pausa och avbryta när du vill. För att pausa eller avbryta din prenumeration loggar du enkelt in på ditt konto, alternativt kontaktar oss via mejl så ordnar vi det. Pausningar/uppsägningar behöver komma in till oss innan torsdagen inför leverans. Detta då vi bokar leveranserna denna dag, samt så vi ska kunna planera exakt antal matkassar med våra kockar.",
       },
       {
@@ -186,7 +201,7 @@ const svText = {
         answer: "Våra kockar gör de svåraste och mest tidskrävande stegen åt dig, så när matkassen levereras utanför din dörr är den klar till ungefär 70%. Vilket innebär att du endast behöver göra de sista, roliga stegen för att färdigställa middagen! Oftast handlar det om att rosta av något i ugnen, koka upp något eller värma en sås. Och på så vis har du dina kockpreppade middagar klara på endast 15 minuter!",
       },
       {
-        question: "Vad innebär räddad mat?",
+        question: "Räddad mat? Vad betyder det?",
         answer: "Vi samarbetar med gårdar, matproducenter och grossister och hjälper dem att rädda bra matvaror från att slängas. Ofta handlar det om frukt och grönt som inte uppfyller butikernas krav på storlek, form eller färg. Vi ser till att dessa utmärkta varor inte går till spillo. I många fall är maten i våra kassar till och med färskare än butikens, eftersom den ofta kommer direkt från bonden.",
       },
       {
@@ -194,27 +209,27 @@ const svText = {
         answer: "Nej, inget som vi skickar ut har passerat bäst före-datum. All mat som vi skickar ut i matkassen ska hålla i minst 7 dagar från att den når våra kunder, då vi räknar med att maten äts upp inom loppet av en vecka.",
       },
       {
-        question: "Behöver jag ha några ingredienser hemma?", 
+        question: "Behöver jag ha något extra hemma?", 
         answer: "Du behöver bara ha någon typ av matlagningsolja hemma, lite salt och peppar och sen har vi tillsatt ALLT annat! Njut av smidigheten.", 
       },
       {
-        question: "Hur stor andel är räddad mat och hur bidrar det till en hållbarare middag?", 
+        question: "Hur mycket av maten är egentligen räddad?", 
         answer: "Du hittar den exakta andelen räddad mat under varje enskilt recept. Vi strävar efter att ungefär 70% av ingredienserna ska vara räddade. Vår målsättning är att hitta den perfekta balansen mellan att skapa fantastiska och fullständiga rätter samtidigt som vi har en positiv inverkan på klimatet. En sammanställning gjord i samarbete med RISE visar att vårt klimatavtryck är hela 5 gånger lägre än en genomsnittlig svensk middag. Så ja, vi är definitivt på rätt väg mot en mer hållbar framtid!", 
       },
       {
-        question: "Täcker ni alla allergier?", 
+        question: "Allergier? Vad gäller?", 
         answer: "Tyvärr kan vi inte lösa alla allergier, skicka oss gärna ett mail så kan vi titta närmare på om vi kan ordna en matkasse som passar just din allergi.", 
       },
       {
-        question: "Kan jag välja rätterna själv i matkassen?", 
+        question: "Kan jag välja rätterna själv?", 
         answer: "Inte just nu, men vi hoppas på att kunna erbjuda det i framtiden. Att ge mer valfrihet gör våra inköp mindre förutsägbara och svinnet hamnar hos oss istället. Vi försöker hitta rätt balans mellan valfrihet och hållbarhet för att erbjuda så mycket som möjligt utan att äventyra vårt klimatarbete.", 
       },
       {
-        question: "Vad händer om jag inte är hemma tiden för leverans?", 
+        question: "Jag kan inte vara hemma vid leverans?", 
         answer: "Våra matkassar levereras av Gordon Delivery, du får ett sms med uppskattad leveranstid redan 3-4 dagar innan leverans. Skulle du inte vara hemma när kassen levereras kan Gordon lämna den utanför din dörr och då klarar sig maten bra i 1-2 timmar. Vi brukar alltid frysa ner en behållare och på så vis ha något som håller maten kall utan att behöva använda extra material.", 
       },
     ],
-    button: "Beställ nu"
+    button: "Jag fattar - beställ nu!"
   },
 
   recipes: {
@@ -267,17 +282,17 @@ const svText = {
     variant: "Välj hur ofta du vill få din matkasse:",
     urgency: "Fåtal kvar", 
     deliveryDay: "Välj leveransdag:",
-    delivery_saturday: "Lördag 18/1",
-    delivery_sunday: "Söndag 19/1",
-    delivery_monday: "Måndag 20/1",
+    delivery_saturday: "Lördag 25/1",
+    delivery_sunday: "Söndag 26/1",
+    delivery_monday: "Måndag 27/1",
     saturday_description: "kl. 09-18", 
     sunday_description: "kl. 10-17", 
     monday_description: "kl. 16-22",
-    stockholm_sunday: "Söndag 19/1",
-    stockholm_monday: "Måndag 20/1",
+    stockholm_sunday: "Söndag 26/1",
+    stockholm_monday: "Måndag 27/1",
     sunday_description_stockholm: "kl. 10-17",
     monday_description_stockholm: "kl. 16-22", 
-    copenhagen_monday: "Måndag 20/1", 
+    copenhagen_monday: "Måndag 27/1", 
     monday_description_copenhagen: "kl. 16-22", 
     address: "Leveransinfo:",
     extra: "Extra info",
@@ -311,19 +326,19 @@ const svText = {
     faq: "Frågor som kan uppstå:",
     faqItems: [ 
       {
-        question: "Prenumeration, vad gäller?",
+        question: "Prenumeration, hur funkar det?",
         answer: "Våra prenumerationer är helt utan bindningstid, vilket innebär att du kan pausa och avbryta när du vill. För att pausa eller avbryta din prenumeration loggar du enkelt in på ditt konto, alternativt kontaktar oss via mejl så ordnar vi det. Pausningar/uppsägningar behöver komma in till oss innan torsdagen inför leverans. Detta då vi bokar leveranserna denna dag, samt så vi ska kunna planera exakt antal matkassar med våra kockar.",
       },
       {
-        question: "Täcker ni alla allergier?", 
+        question: "Allergier? Vad gäller", 
         answer: "Tyvärr kan vi inte lösa alla allergier, skicka oss gärna ett mail så kan vi titta närmare på om vi kan ordna en matkasse som passar just din allergi.", 
       },
       {
-        question: "Vad händer om jag inte är hemma tiden för leverans?", 
+        question: "Jag kan inte vara hemma vid leverans?", 
         answer: "Våra matkassar levereras av Gordon Delivery, du får ett sms med uppskattad leveranstid redan 3-4 dagar innan leverans. Skulle du inte vara hemma när kassen levereras kan Gordon lämna den utanför din dörr och då klarar sig maten bra i 1-2 timmar. Vi brukar alltid frysa ner en behållare och på så vis ha något som håller maten kall utan att behöva använda extra material.", 
       },
       {
-        question: "Behöver jag ha några ingredienser hemma?", 
+        question: "Behöver jag ha något extra hemma?", 
         answer: "Du behöver bara ha någon typ av matlagningsolja hemma, lite salt och peppar och sen har vi tillsatt ALLT annat! Njut av smidigheten.", 
       },
     ],
@@ -683,33 +698,48 @@ const enText = {
   },
   page: {
     hero: {
-      title: "The meal kit that benefits the climate",
-      subtitle: "",
-      order_now: "Get started",
-    },
+      title: {
+        part1: "Make your everyday meals",
+        part2: "simple and sustainable",
+      },
+      subtitle: {
+        part1: "Serve vegetarian meals in 15 minutes and at the same time",
+        part2: "give those leftover veggies a new meaning in life.",
+      },
+      points: {
+        cooking_time: "cooking time",
+        delivery: "delivery to your door",
+        chef_prepared: "chef-prepared (you shine during the final 20%)",
+      },
+      order_now: "Order the Saveabl smart bag!",
+    },    
     usp: {
       title: "How it works",
       points: [
         {
-          title: "We do the cooking",
-          text: "Our michelin experienced chef creates delicious recipes from ingredients that look a bit odd and prepare about 70% of the cooking. And voila, you have a chef prepared meal kit!",
+          "title": "1. Choose and order",
+          "text": "Select your Saveabl plan and decide whether you want to try it once or subscribe with no commitments or hassle.",
         },
         {
-          title: "Flexible orders and deliveries",
-          text: "You choose delivery day and whether you want to try only once or start a subscription, of course you can cancel anytime you want.",
+          "title": "2. You save, we deliver",
+          "text": "Thanks to your order, we can save crooked carrots and wonky potatoes. Our star chef Emil preps the meals, which are then delivered straight to your door.",
         },
         {
-          title: "Climate-friendly meal in 15 min",
-          text: "You do the final steps of the recipe. Within 15 minutes, your delicious, climate-friendly dinner is ready to serve!",
+          "title": "3. Cook and serve in 15 min",
+          "text": "Give the food a final touch and enjoy a healthy, climate-smart dinner – quick, easy, and ridiculously tasty.",
         },
+        
       ],
     },
     call_to_action: {
-      title:
-        "Help us save delicious food from being wasted, one dinner at a time!",
+        title: [
+          "Quick. Climate-friendly.",
+          "And ridiculously tasty.",
+          "So why choose?"
+        ],
       meals: "Meals",
       vegetarian: "Vegetarian",
-      price_per_portion: "Lower footprint",
+      price_per_portion: "Lower climate footprint than the average meal",
       cooking_time: "Min cooking",
       order_now: "Get started",
     },
@@ -747,46 +777,46 @@ const enText = {
         text: "The climate issue is enormously important to us, and we are trying to contribute in every way we can. An independent research shows that our meals’ footprint is 5 times lower than the Swedish average. The ways we achieve this is by rescuing good food from being discarded entirely unnecessarily, which in turn reduces the need to cultivate less food, fewer transports are required, and less water is needed for agriculture. By demonstrating how incredibly delicious it can be to eat vegetarian, we aim to inspire a diet that is less dependent on meat which is also a way to achieve a lower climate footprint. Currently we are working on Saveabl Reuse, a return system for our plastic sauce containers in cooperation with Gordon Delivery to further lower our impact.",
       },
     ],
-    faq: "Common questions",
-    faqItems: [
-      {
-        question: "Subscription, what applies?", 
-        answer: "Our subscriptions are completely commitment-free, which means you can pause and cancel whenever you want. To pause or cancel your subscription, simply log in to your account, alternatively, contact us via email, and we'll take care of it. Pauses/cancellations need to be communicated to us before Thursday ahead of the delivery. This is because we schedule deliveries on this day, and so we can plan the exact number of meal kits with our chefs.", 
-      },
-      {
-        question: "15 minutes, how so?", 
-        answer: "Our chefs handle the most challenging and time-consuming steps for you, so when the meal kit arrives at your doorstep, it's already about 70% ready. That means you only need to take care of the final, enjoyable steps to complete your dinner! It usually involves roasting something in the oven, boiling something, or heating a sauce. And that's how you have your chef-prepped dinners ready in just 15 minutes!", 
-      },
-      {
-        question: "What does rescued food mean?", 
-        answer: "We collaborate with farms, food producers, and wholesalers to help rescue quality food items from being discarded. Often, this involves fruits and vegetables that don't meet the size, shape, or color standards set by stores. In many instances, the rescued products in our meal kits can even be fresher than those you find in stores since they often come directly from the farm.", 
-      },
-      {
-        question: "Has the food passed its expiration date?", 
-        answer: "No, nothing we send out has passed the expiration date. All the food we include in our meal kit is guaranteed to have at least 7 days of shelf life from the moment it reaches our customers, as we assume that the food will be consumed within a week.", 
-      },
-      {
-        question: "Do I need to have any ingredients at home?", 
-        answer: "You only need to have some type of cooking oil, a bit of salt, and pepper at home, as we've added EVERYTHING else! Enjoy the convenience.", 
-      },
-      {
-        question: "What is the proportion of rescued food, and how does it contribute to a more sustainable dinner?", 
-        answer: "You can find the exact proportion of rescued food in each individual recipe. We aim for approximately 70% of the ingredients to be rescued. Our goal is to strike the perfect balance between creating fantastic and complete dishes while making a positive impact on the environment. A survey conducted in collaboration with RISE (Research Institutes of Sweden) shows that our carbon footprint is a whopping 5 times lower than that of an average Swedish dinner. So, yes, we're definitely on the right track toward a more sustainable future!", 
-      },
-      {
-        question: "Do you cover all allergies?", 
-        answer: "Unfortunately, we can't accommodate all allergies. Please send us an email, and we will explore the possibility of arranging a meal kit that suits your specific allergy.", 
-      },
-      {
-        question: "Can I choose the dishes in the meal kit myself?", 
-        answer: "Not at the moment, but we hope to offer that in the future. Providing more choices can make our purchases less predictable and increase waste on our end. We are striving to strike the right balance between flexibility and sustainability to provide as much as we can without compromising our environmental efforts.", 
-      },
-      {
-        question: "What happens if I'm not home at the time of delivery?", 
-        answer: "Our meal kits are delivered by Gordon Delivery, and you'll receive an SMS with the estimated delivery time 3-4 days prior. If you're not home when the kit is delivered, Gordon can leave it outside your door, and the food will remain fresh for 1-2 hours. We typically include a frozen container to keep the food cool without the need for extra materials.", 
-      },
-    ],
-    button: "Order now", 
+    faq: "Frequently Asked Questions",
+faqItems: [
+  {
+    question: "Subscription, how does it work?",
+    answer: "Our subscriptions are completely without a binding period, meaning you can pause or cancel whenever you want. To pause or cancel your subscription, simply log in to your account or contact us via email, and we'll take care of it. Pauses/cancellations need to be submitted to us by Thursday before the delivery, as we book deliveries on this day and need to plan the exact number of meal kits with our chefs."
+  },
+  {
+    question: "15 minutes, how is that possible?",
+    answer: "Our chefs do the hardest and most time-consuming steps for you, so when the meal kit is delivered to your door, it’s about 70% done. This means you only need to do the final, fun steps to finish the meal! It usually involves roasting something in the oven, boiling something, or heating a sauce. This way, you can have your chef-prepared meals ready in just 15 minutes!"
+  },
+  {
+    question: "Resqued food? What does that mean?",
+    answer: "We collaborate with farms, food producers, and wholesalers to help them save good food items from being thrown away. It’s often fruits and vegetables that don’t meet store requirements for size, shape, or color. We make sure that these excellent items don’t go to waste. In many cases, the food in our kits is even fresher than what you find in stores because it often comes directly from the farmer."
+  },
+  {
+    question: "Has the food's best-before date passed?",
+    answer: "No, nothing we send out has passed its best-before date. All food in our meal kits should last at least 7 days from when it reaches our customers, as we expect the food to be eaten within a week."
+  },
+  {
+    question: "Do I need anything extra at home?",
+    answer: "You only need some kind of cooking oil, a little salt and pepper, and we’ve provided EVERYTHING else! Enjoy the convenience."
+  },
+  {
+    question: "How much of the food is actually saved?",
+    answer: "You can find the exact percentage of saved food under each individual recipe. We aim for about 70% of the ingredients to be saved. Our goal is to find the perfect balance between creating fantastic and complete dishes while also having a positive impact on the climate. A summary made in collaboration with RISE shows that our carbon footprint is five times lower than an average Swedish dinner. So yes, we are definitely on the right track toward a more sustainable future!"
+  },
+  {
+    question: "Allergies? What’s the deal?",
+    answer: "Unfortunately, we can't address all allergies, but feel free to email us, and we’ll take a closer look to see if we can create a meal kit that suits your specific allergy."
+  },
+  {
+    question: "Can I choose the dishes myself?",
+    answer: "Not right now, but we hope to offer this in the future. Allowing more choice makes our purchases less predictable, and the waste falls on us instead. We try to find the right balance between choice and sustainability to offer as much as possible without compromising our climate work."
+  },
+  {
+    question: "I can't be home at delivery?",
+    answer: "Our meal kits are delivered by Gordon Delivery, and you will receive an SMS with an estimated delivery time 3-4 days before the delivery. If you're not home when the kit is delivered, Gordon can leave it outside your door, and the food will stay good for 1-2 hours. We usually freeze a container, which helps keep the food cold without needing extra materials."
+  }
+],
+button: "Got it - order now!"
   },
 
   recipes: {
@@ -838,16 +868,16 @@ const enText = {
     urgency: "Few remaining", 
     deliveryDay: "Choose day of delivery:",
     delivery_saturday: "Saturday 4/1",
-    delivery_sunday: "Sunday 19/1",
-    delivery_monday: "Monday 20/1",
+    delivery_sunday: "Sunday 26/1",
+    delivery_monday: "Monday 27/1",
     saturday_description: "at 09-18", 
     sunday_description: "at 10-17", 
     monday_description: "at 16-22",
-    stockholm_sunday: "Sunday 19/1",
-    stockholm_monday: "Monday 20/1",
+    stockholm_sunday: "Sunday 16/1",
+    stockholm_monday: "Monday 27/1",
     sunday_description_stockholm: "at 10-17",
     monday_description_stockholm: "at 16-22", 
-    copenhagen_monday: "Monday 20/1", 
+    copenhagen_monday: "Monday 27/1", 
     monday_description_copenhagen: "at 16-22", 
     address: "Delivery info:",
     extra: "Extra information",
@@ -879,24 +909,24 @@ const enText = {
     totalPrice: "Total price",
     shipping: "+ shipping",
     faq: "Questions that may arise:",
-    faqItems: [ 
+    faqItems: [
       {
-        question: "Subscription, what applies?", 
-        answer: "Our subscriptions are completely commitment-free, which means you can pause and cancel whenever you want. To pause or cancel your subscription, simply log in to your account, alternatively, contact us via email, and we'll take care of it. Pauses/cancellations need to be communicated to us before Thursday ahead of the delivery. This is because we schedule deliveries on this day, and so we can plan the exact number of meal kits with our chefs.", 
+        question: "Subscription, how does it work?",
+        answer: "Our subscriptions have no binding period, meaning you can pause and cancel whenever you like. To pause or cancel your subscription, simply log in to your account or contact us via email, and we'll take care of it. Pauses/cancellations must be submitted to us before Thursday ahead of delivery. This is when we schedule deliveries and need to plan the exact number of meal kits with our chefs.",
       },
       {
-        question: "Do you cover all allergies?", 
-        answer: "Unfortunately, we can't accommodate all allergies. Please send us an email, and we will explore the possibility of arranging a meal kit that suits your specific allergy.", 
+        question: "Allergies? What applies?",
+        answer: "Unfortunately, we can’t solve all allergies, but please send us an email, and we’ll see if we can arrange a meal kit that suits your specific allergy.",
       },
       {
-        question: "What happens if I'm not home at the time of delivery?", 
-        answer: "Our meal kits are delivered by Gordon Delivery, and you'll receive an SMS with the estimated delivery time 3-4 days prior. If you're not home when the kit is delivered, Gordon can leave it outside your door, and the food will remain fresh for 1-2 hours. We typically include a frozen container to keep the food cool without the need for extra materials.", 
+        question: "I won’t be home at the time of delivery?",
+        answer: "Our meal kits are delivered by Gordon Delivery, and you’ll receive an SMS with the estimated delivery time 3-4 days before delivery. If you're not home when the kit is delivered, Gordon can leave it outside your door, and the food will stay fine for 1-2 hours. We always freeze a container to keep the food cold without needing extra materials.",
       },
       {
-        question: "Do I need to have any ingredients at home?", 
-        answer: "You only need to have some type of cooking oil, a bit of salt, and pepper at home, as we've added EVERYTHING else! Enjoy the convenience.", 
+        question: "Do I need anything extra at home?",
+        answer: "You only need some type of cooking oil, a little salt, and pepper, and we’ve added EVERYTHING else! Enjoy the convenience.",
       },
-    ],
+    ], 
   },
 
   success: {
@@ -1165,7 +1195,8 @@ const enText = {
       email_exists: "Du är redan en av våra mejlkompisar & med i tävlingen <3"
     },
     footer: {
-      faq: "Common questions",
+      questions: "Questions, concerns?", 
+      questions2: "Send us an email, and we'll sort it out!", 
       terms: "Terms and Conditions", 
       integrity: "Privacy Policy",
       newsletter: "Stay updated", 
@@ -1219,32 +1250,48 @@ const daText = {
   },
   page: {
     hero: {
-      title: "Færdiglavede måltidskasse der gør klimaet en tjeneste",
-      subtitle: "",
-      order_now: "Bestil nu",
-    },
+      title: {
+        part1: "Gør dine hverdagsmåltider",
+        part2: "enkle og bæredygtige",
+      },
+      subtitle: {
+        part1: "Server vegetariske måltider på 15 minutter og giv samtidig",
+        part2: "de overskydende grøntsager nyt liv.",
+      },
+      points: {
+        cooking_time: "tilberedningstid",
+        delivery: "levering til døren",
+        chef_prepared: "kokketilberedt (de sidste 20 % klarer du)",
+      },
+      order_now: "Bestil Saveabl smartkasse!",
+    },    
     usp: {
       title: "Hvad indebærer vores måltidskasse?",
       points: [
         {
-          title: "Vores kok skaber opskrifter",
-          text: "Vi samler lækre råvarer, der ser lidt skøre ud, og laver lækre opskrifter på det. Og voila, du har en kokkeforberedt måltidskasse!",
+          "title": "1. Vælg og bestil",
+          "text": "Vælg din Saveabl-plan, og beslut, om du vil prøve én gang eller abonnere uden binding og besvær.",
         },
         {
-          title: "Mad leveres til dig",
-          text: "Du får din reddede måltidskasse leveret med det meste forberedt for dig.",
+          "title": "2. Du redder, vi leverer",
+          "text": "Takket være din bestilling kan vi redde skæve gulerødder og ujævne kartofler. Vores stjernekok Emil forbereder maden, som derefter leveres direkte til din dør.",
         },
         {
-          title: "Klimavenligt måltid på 15 min",
-          text: "Du hakker og varmer det sidste på 15 minutter, nyd en lækker og klimavenlig middag!",
-        },
+          "title": "3. Tilbered og server på 15 min",
+          "text": "Giv maden det sidste touch og nyd en sund, klimavenlig middag – hurtigt, nemt og utroligt lækkert.",
+        },        
       ],
     },
     call_to_action: {
-      title: "Deltag også og red mad på en nem og klimavenlig måde!",
+      title: [
+        "Hurtigt. Klimavenligt.",
+        "Og forbandet lækkert.",
+        "Så hvorfor vælge?"
+      ],
+      
       meals: "Måltider",
       vegetarian: "Vegetarisk",
-      price_per_portion: "Lavere klimaaftryk",
+      price_per_portion: "Lavere klimaaftryk end gennemsnitsmiddagen",
       cooking_time: "Min tilberedning",
       order_now: "Bestil nu",
     },
@@ -1280,46 +1327,46 @@ const daText = {
         text: "Klimaspørgsmålet er enormt vigtigt for os og vi forsøger at bidrage på alle måder vi kan. Ved hjælp af RISE er det blevet beregnet at vores middage har en 5 gange lavere klimapåvirkning end en gennemsnitlig svensk middag. Den måde vi har opnået dette på er ved at redde gode madvarer fra at blive smidt ud helt unødvendigt, hvilket igen betyder, at mindre mad behøver dyrkes, færre transporter er nødvendige og mindre vand er nødvendigt til landbruget. Ved at vise hvor utroligt lækkert det kan være at spise vegetarisk ønsker vi at inspirere til en kost der er mindre baseret på kød, hvilket også fører til en lavere klimapåvirkning. Vi arbejder i øjeblikket på at udvikle et retursystem for vores plastikbøtter til saucer i samarbejde med Gordon Delivery for yderligere at mindske vores påvirkning.",
       },
     ],
-    faq: "Almindelige spørgsmål",
-    faqItems: [
-      {
-        question: "Abonnement, hvad gælder?", 
-        answer: "Vores abonnementer er helt uden forpligtelser, hvilket betyder, at du kan sætte på pause og annullere når som helst. For at sætte på pause eller annullere dit abonnement, skal du blot logge ind på din konto, eller alternativt kontakte os via e-mail, og vi tager os af det. Pauser/annulleringer skal kommunikeres til os inden torsdag inden leveringen. Dette skyldes, at vi planlægger leverancer på denne dag, og så vi kan planlægge det præcise antal måltidskasser med vores kokke.", 
-      },
-      {
-        question: "15 minutter, hvordan så?", 
-        answer: "Vores kokke tager sig af de mest udfordrende og tidskrævende trin for dig, så når måltidskassen ankommer til din dør, er den allerede omkring 70% klar. Det betyder, at du kun behøver at tage dig af de sidste, fornøjelige skridt for at færdiggøre din middag! Det involverer normalt at riste noget i ovnen, koge noget, eller opvarme en sauce. Og sådan har du dine kokkeforberedte middage klar på kun 15 minutter!", 
-      },
-      {
-        question: "Hvad betyder reddet mad?", 
-        answer: "Vi samarbejder med landbrug, fødevareproducenter og grossister for at hjælpe med at redde kvalitetsfødevarer fra at blive smidt ud. Ofte drejer det sig om frugt og grøntsager, der ikke opfylder butikkernes standarder for størrelse, form eller farve. I mange tilfælde kan de reddede produkter i vores måltidskasser endda være friskere end dem, du finder i butikkerne, da de ofte kommer direkte fra landbrugene.", 
-      },
-      {
-        question: "Er maden overskredet sin bedst-før-dato?", 
-        answer: "Nej, intet af det, vi sender ud, har overskredet sin bedst-før-dato. Alt den mad, vi inkluderer i vores måltidskasse, garanteres at have mindst 7 dages holdbarhed fra det øjeblik, det når vores kunder, da vi antager, at maden bliver spist inden for en uge.", 
-      },
-      {
-        question: "Skal jeg have nogle ingredienser derhjemme?", 
-        answer: "Du behøver kun at have en slags madolie, lidt salt og peber derhjemme, da vi har tilsat ALT andet! Nyd bekvemmeligheden.", 
-      },
-      {
-        question: "Hvor stor en del er reddet mad, og hvordan bidrager det til en mere bæredygtig middag?", 
-        answer: "Du finder den præcise andel af reddet mad under hvert enkelt opskrift. Vi stræber efter, at cirka 70% af ingredienserne er reddede. Vores mål er at finde den perfekte balance mellem at skabe fantastiske og fuldendte retter samtidig med at vi har en positiv indvirkning på klimaet. En sammenstilling lavet i samarbejde med RISE viser, at vores klimaaftryk er hele 5 gange lavere end en gennemsnitlig svensk middag. Så ja, vi er helt sikkert på vej mod en mere bæredygtig fremtid!", 
-      },
-      {
-        question: "Dækker I alle allergier?", 
-        answer: "Desværre kan vi ikke imødekomme alle allergier. Send os venligst en e-mail, og vi vil undersøge muligheden for at arrangere en måltidskasse, der passer til din specifikke allergi.", 
-      },
-      {
-        question: "Kan jeg selv vælge retterne i måltidskassen?", 
-        answer: "Ikke på nuværende tidspunkt, men vi håber at tilbyde det i fremtiden. At give flere valgmuligheder kan gøre vores indkøb mindre forudsigelige og resultere i madspild på vores side. Vi arbejder hårdt på at finde den rette balance mellem fleksibilitet og bæredygtighed for at kunne tilbyde så meget som muligt uden at gå på kompromis med vores miljøindsats.", 
-      },
-      {
-        question: "Hvad sker der, hvis jeg ikke er hjemme ved leveringstidspunktet?", 
-        answer: "Vores måltidskasser leveres af Gordon Delivery, og du vil modtage en SMS med det estimerede leveringstidspunkt 3-4 dage før. Hvis du ikke er hjemme, når kassen bliver leveret, kan Gordon efterlade den udenfor din dør, og maden vil blive frisk i 1-2 timer. Vi inkluderer normalt en frossen beholder for at holde maden kølig uden behov for ekstra materialer.", 
-      },
-    ],
-    button: "Bestil nu"
+    faq: "Ofte stillede spørgsmål",
+faqItems: [
+  {
+    question: "Abonnement, hvordan fungerer det?",
+    answer: "Vore abonnementer er helt uden bindingstid, hvilket betyder, at du kan pause eller afmelde når som helst. For at pause eller afmelde dit abonnement logger du nemt ind på din konto eller kontakter os via e-mail, så ordner vi det. Pauser/afmeldinger skal indsendes til os senest torsdag før levering, da vi booker leveringer den dag og skal planlægge det præcise antal måltidskasser med vores kokke."
+  },
+  {
+    question: "15 minutter, hvordan kan det lade sig gøre?",
+    answer: "Vore kokke laver de sværeste og mest tidskrævende trin for dig, så når måltidskassen leveres udenfor din dør, er den ca. 70% færdig. Det betyder, at du kun skal gøre de sidste, sjove trin for at færdiggøre retten! Det handler ofte om at riste noget i ovnen, koge noget op eller varme en sauce. På den måde har du dine kokkeforberedte måltider klar på kun 15 minutter!"
+  },
+  {
+    question: "Redet mad? Hvad betyder det?",
+    answer: "Vi samarbejder med gårde, fødevareproducenter og grossister og hjælper dem med at redde gode fødevarer fra at blive smidt ud. Ofte drejer det sig om frugt og grønt, der ikke opfylder butikkernes krav til størrelse, form eller farve. Vi sørger for, at disse fremragende varer ikke går til spilde. I mange tilfælde er maden i vores kasser faktisk friskere end butikkens, da den ofte kommer direkte fra landmanden."
+  },
+  {
+    question: "Er madens bedst før-dato overskredet?",
+    answer: "Nej, intet vi sender ud er overskredet bedst før-dato. Al mad i vores måltidskasser skal holde i mindst 7 dage fra den når vores kunder, da vi regner med, at maden spises indenfor en uge."
+  },
+  {
+    question: "Skal jeg have noget ekstra derhjemme?",
+    answer: "Du skal kun have en slags madlavningsolie, lidt salt og peber, og så har vi tilføjet ALT andet! Nyd bekvemmeligheden."
+  },
+  {
+    question: "Hvor meget af maden er egentlig reddet?",
+    answer: "Du kan finde den præcise andel reddet mad under hver opskrift. Vi sigter efter, at ca. 70% af ingredienserne skal være reddet. Vores mål er at finde den perfekte balance mellem at skabe fantastiske og komplette retter, samtidig med at vi har en positiv indvirkning på klimaet. Et sammendrag lavet i samarbejde med RISE viser, at vores klimaaftryk er fem gange lavere end et gennemsnitligt svensk måltid. Så ja, vi er bestemt på rette vej mod en mere bæredygtig fremtid!"
+  },
+  {
+    question: "Allergier? Hvad gælder?",
+    answer: "Desværre kan vi ikke løse alle allergier, men send os gerne en e-mail, så kigger vi nærmere på, om vi kan lave en måltidskasse, der passer til din specifikke allergi."
+  },
+  {
+    question: "Kan jeg vælge retterne selv?",
+    answer: "Ikke lige nu, men vi håber at kunne tilbyde det i fremtiden. At give mere valgfrihed gør vores indkøb mindre forudsigelige, og affaldet ender hos os i stedet. Vi prøver at finde den rette balance mellem valgfrihed og bæredygtighed for at tilbyde så meget som muligt uden at gå på kompromis med vores klimaarbejde."
+  },
+  {
+    question: "Jeg kan ikke være hjemme ved levering?",
+    answer: "Vore måltidskasser leveres af Gordon Delivery, og du vil modtage en SMS med estimeret leveringstid 3-4 dage før leveringen. Hvis du ikke er hjemme, når kassen leveres, kan Gordon efterlade den udenfor din dør, og maden holder sig god i 1-2 timer. Vi fryser som regel en beholder ned, hvilket hjælper med at holde maden kold uden at bruge ekstra materialer."
+  }
+],
+button: "Jeg forstår - bestil nu!"
   },
   recipes: {
     title: "Menuer",
@@ -1363,7 +1410,7 @@ const daText = {
     button1: "Hente",
     button2: "Få et tilbud",
     linkTitle: "Vi kan levere til dig!",
-    linkDescription: "om mandagen 20/1 mellem 16.00-22.00.",
+    linkDescription: "om mandagen 27/1 mellem 16.00-22.00.",
     bullet1: "👨‍🍳 Vegetarkassen med kokken inkluderet.",
     bullet2: "👨‍👩‍👧 Aftensmad till hele familien på blot 15 min.",
     bullet3: "✅  Ingen bindingsperiode, opsig når du vil.",
@@ -1371,7 +1418,7 @@ const daText = {
     variant: "Vælg hvor ofte du vil modtage din madkasse:",
     urgency: "Få tilbage", 
     deliveryDay: "Næste tilgængelige leveringsdato:",
-    copenhagen_monday: "Mandag 20/1", 
+    copenhagen_monday: "Mandag 27/1", 
     monday_description_copenhagen: "kl. 16-22", 
     address: "Leveringsinfo:",
     extra: "Ekstra info:",
@@ -1403,25 +1450,24 @@ const daText = {
     totalPrice: "Totalpris",
     shipping: "+ fragt",
     faq: "Spørgsmål der kan opstå:",
-    faqItems: [ 
+    faqItems: [
       {
-        question: "Abonnement, hvad gælder?", 
-        answer: "Vores abonnementer er helt uden forpligtelser, hvilket betyder, at du kan sætte på pause og annullere når som helst. For at sætte på pause eller annullere dit abonnement, skal du blot logge ind på din konto, eller alternativt kontakte os via e-mail, og vi tager os af det. Pauser/annulleringer skal kommunikeres til os inden torsdag inden leveringen. Dette skyldes, at vi planlægger leverancer på denne dag, og så vi kan planlægge det præcise antal måltidskasser med vores kokke.", 
+        question: "Abonnement, hvordan fungerer det?",
+        answer: "Vores abonnementer er helt uden bindingsperiode, hvilket betyder, at du kan sætte det på pause eller annullere, når du vil. For at sætte eller annullere dit abonnement, skal du blot logge ind på din konto eller kontakte os via e-mail, så ordner vi det. Pauser/afmeldinger skal sendes til os inden torsdag før leveringen. Det er på denne dag, vi planlægger leverancerne, og vi skal kunne planlægge det præcise antal måltidskasser med vores kokke.",
       },
       {
-        question: "Dækker I alle allergier?", 
-        answer: "Desværre kan vi ikke imødekomme alle allergier. Send os venligst en e-mail, og vi vil undersøge muligheden for at arrangere en måltidskasse, der passer til din specifikke allergi.", 
+        question: "Allergier? Hvad gælder?",
+        answer: "Desværre kan vi ikke løse alle allergier, men send os gerne en e-mail, så vi kan se, om vi kan arrangere en måltidskasse, der passer til din allergi.",
       },
       {
-        question: "Hvad sker der, hvis jeg ikke er hjemme ved leveringstidspunktet?", 
-        answer: "Vores måltidskasser leveres af Gordon Delivery, og du vil modtage en SMS med det estimerede leveringstidspunkt 3-4 dage før. Hvis du ikke er hjemme, når kassen bliver leveret, kan Gordon efterlade den udenfor din dør, og maden vil blive frisk i 1-2 timer. Vi inkluderer normalt en frossen beholder for at holde maden kølig uden behov for ekstra materialer.", 
+        question: "Jeg kan ikke være hjemme ved levering?",
+        answer: "Vores måltidskasser leveres af Gordon Delivery, og du får en sms med den estimerede leveringstid 3-4 dage før leveringen. Hvis du ikke er hjemme, når kassen leveres, kan Gordon efterlade den udenfor din dør, og maden vil holde sig fint i 1-2 timer. Vi fryser altid en beholder ned og bruger det til at holde maden kold uden at skulle bruge ekstra materialer.",
       },
       {
-        question: "Skal jeg have nogle ingredienser derhjemme?", 
-        answer: "Du behøver kun at have en slags madolie, lidt salt og peber derhjemme, da vi har tilsat ALT andet! Nyd bekvemmeligheden.", 
+        question: "Behøver jeg noget ekstra derhjemme?",
+        answer: "Du behøver kun at have en form for madlavningsolie, lidt salt og peber, og så har vi tilføjet ALT andet! Nyd bekvemmeligheden.",
       },
-    ],
-
+    ],    
   },
 
   success: {
@@ -1674,7 +1720,8 @@ integrity_policy: {
       email_exists: "Du är redan en av våra mejlkompisar & med i tävlingen <3"
     },
   footer: {
-    faq: "Almindelige spørgsmål",
+    questions: "Spørgsmål, overvejelser?", 
+    questions2: "Send os en e-mail, så finder vi en løsning!", 
     terms: "Generelle vilkår", 
     integrity: "Integritetspolitik",
     newsletter: "Hold dig opdateret", 
