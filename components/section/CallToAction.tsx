@@ -7,8 +7,9 @@ import { toast } from "react-hot-toast";
 import Title from "../ui/Title";
 import useLocationModal from "@/hooks/useLocationModal";
 import { useLang } from "@/hooks/useLang";
-import { use, useEffect, useState } from "react";
+import { JSXElementConstructor, Key, PromiseLikeOfReactNode, ReactElement, ReactFragment, ReactPortal, use, useEffect, useState } from "react";
 import { useRouter } from "next/navigation"
+import React from "react";
 
 const CallToAction = () => {
   const locationModal = useLocationModal();
@@ -105,14 +106,21 @@ const CallToAction = () => {
           src={sMatkassenImage}
         />
         )}
-        <Title className="text-center mt-8">{compText.title}</Title>
-        <div className="mt-10 mb-5 grid grid-cols-2 sm:grid-cols-4 gap-4 text-secondary ">
+        <Title className="text-center mt-8">
+        {compText.title.map((line: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | PromiseLikeOfReactNode | null | undefined, index: Key | null | undefined) => (
+         <React.Fragment key={index}>
+          {line}
+          <br />
+    </React.Fragment>
+  ))}
+</Title>
+        <div className="mt-10 mb-5 grid grid-cols-2 sm:grid-cols-4 gap-8 text-secondary ">
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
             whileInView={{ opacity: 1, scale: 1 }}
             className="flex flex-col items-center sm:w-40"
           >
-            <h3 className="font-poppins text-5xl ">3</h3>
+            <h3 className="font-poppins text-5xl mb-2 ">3</h3>
             <p className="text-xl -mt-2 font-light ">{compText.meals}</p>
           </motion.div>
 
@@ -122,7 +130,7 @@ const CallToAction = () => {
             transition={{ delay: 0.2 }}
             className="flex flex-col items-center sm:w-40"
           >
-            <h3 className="font-poppins text-5xl ">100%</h3>
+            <h3 className="font-poppins text-5xl mb-2 ">100%</h3>
             <p className="text-xl -mt-2 font-light ">{compText.vegetarian}</p>
           </motion.div>
 
@@ -132,8 +140,8 @@ const CallToAction = () => {
             transition={{ delay: 0.4 }}
             className="flex flex-col items-center sm:w-40"
           >
-            <h3 className="font-poppins text-5xl ">5x</h3>
-            <p className="text-xl -mt-2 font-light text-center">
+            <h3 className="font-poppins text-5xl mb-3">5x</h3>
+            <p className="text-xl -mt-2 font-light text-center leading-none">
               {compText.price_per_portion}
             </p>
           </motion.div>
@@ -144,7 +152,7 @@ const CallToAction = () => {
             transition={{ delay: 0.6 }}
             className="flex flex-col items-center sm:w-40"
           >
-            <h3 className="font-poppins text-5xl ">15</h3>
+            <h3 className="font-poppins text-5xl mb-2">15</h3>
             <p className="text-xl -mt-2 font-light ">{compText.cooking_time}</p>
           </motion.div>
         </div>
