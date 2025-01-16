@@ -24,7 +24,7 @@ const Hero = () => {
       : undefined;
 
   return (
-    <div className="w-full h-screen -mt-18 sm:mt-32 flex flex-col justify-center">
+    <div className="w-full h-screen -mt-28 flex flex-col justify-center">
       <Section>
         <Parallax speed={10}>
           <div className="flex flex-col justify-center items-center gap-y-6 text-secondary">
@@ -48,7 +48,7 @@ const Hero = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5, delay: 0.3 }}
-                className="text-gray-700 text-lg md:text-xl tracking-wide mb-6"
+                className="text-gray-700 text-md md:text-xl tracking-wide mb-6"
               >
                 <span className="hidden md:block">
                   {text.page.hero.subtitle.part1} <br />
@@ -62,7 +62,7 @@ const Hero = () => {
                 {Object.entries(text.page.hero.points).map(([key, point]) => (
                   <p
                     key={key}
-                    className="text-gray-700 text-lg md:text-xl tracking-wide"
+                    className="text-gray-700 text-md md:text-xl tracking-wide"
                   >
                     {key === "cooking_time" && <strong>15 min</strong>}
                     {key === "delivery" && <strong>100 %</strong>}
