@@ -110,10 +110,7 @@ const svText = {
   },
   page: {
     hero: {
-      title: {
-        part1: "Gör din vardagsmat",
-        part2: "enkel och hållbar",
-      },
+      title: "Gör din vardagsmat enkel och hållbar", 
       subtitle: {
         part1: "Servera vegetariska måltider på 15 minuter och ge samtidigt",
         part2: "de där överblivna grönnsakerna en ny mening med livet.",
@@ -698,10 +695,7 @@ const enText = {
   },
   page: {
     hero: {
-      title: {
-        part1: "Make your everyday meals",
-        part2: "simple and sustainable",
-      },
+      title: "Make your everyday meals simple and sustainablesimple and sustainable", 
       subtitle: {
         part1: "Serve vegetarian meals in 15 minutes and at the same time",
         part2: "give those leftover veggies a new meaning in life.",
@@ -1250,10 +1244,7 @@ const daText = {
   },
   page: {
     hero: {
-      title: {
-        part1: "Gør dine hverdagsmåltider",
-        part2: "enkle og bæredygtige",
-      },
+      title: "Gør dine hverdagsmåltider enkle og bæredygtige", 
       subtitle: {
         part1: "Server vegetariske måltider på 15 minutter og giv samtidig",
         part2: "de overskydende grøntsager nyt liv.",
