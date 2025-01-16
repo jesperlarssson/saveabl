@@ -110,8 +110,14 @@ const svText = {
   },
   page: {
     hero: {
-      title: "Gör din vardagsmat enkel och hållbar", 
-      subtitle: "", 
+      title: {
+        part1: "Gör din vardagsmat",
+        part2: "enkel och hållbar",
+      },
+      subtitle: {
+        part1: "Servera vegetariska måltider på 15 minuter och ge samtidigt",
+        part2: "de där överblivna grönsakerna en ny mening med livet.",
+      },
       points: {
         cooking_time: "tillagningstid",
         delivery: "leverans till dörren",
@@ -692,14 +698,20 @@ const enText = {
   },
   page: {
     hero: {
-      title: "Make your everyday meals simple and sustainable", 
-      subtitle: "", 
+      title: {
+        part1: "Make your everyday meals",
+        part2: "simple and sustainable",
+      },
+      subtitle: {
+        part1: "Serve vegetarian meals in 15 minutes and at the same time",
+        part2: "give those leftover veggies a new meaning in life.",
+      },
       points: {
         cooking_time: "cooking time",
         delivery: "delivery to your door",
         chef_prepared: "chef-prepared (you shine during the final 20%)",
       },
-      order_now: "Order the Saveabl smart bag!",
+      order_now: "Order Saveabl smart kit!",
     },    
     usp: {
       title: "How it works",
@@ -1238,8 +1250,14 @@ const daText = {
   },
   page: {
     hero: {
-      title: "Gør dine hverdagsmåltider enkle og bæredygtige", 
-      subtitle: "", 
+      title: {
+        part1: "Gør dine hverdagsmåltider",
+        part2: "enkle og bæredygtige",
+      },
+      subtitle: {
+        part1: "Server vegetariske måltider på 15 minutter og giv samtidig",
+        part2: "de overskydende grøntsager nyt liv.",
+      },
       points: {
         cooking_time: "tilberedningstid",
         delivery: "levering til døren",
