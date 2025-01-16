@@ -692,7 +692,7 @@ const enText = {
   },
   page: {
     hero: {
-      title: "Make your everyday meals simple and sustainablesimple and sustainable", 
+      title: "Make your everyday meals simple and sustainable", 
       subtitle: "", 
       points: {
         cooking_time: "cooking time",
