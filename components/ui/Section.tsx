@@ -22,7 +22,7 @@ const Section: React.FC<SectionProps> = ({
             {bgIllustrationComponent}
           </div>
         )}
-        <div className={twMerge("max-w-screen-2xl mx-auto px-2 sm:px-4 md:px-8", narrow && 'max-w-screen-lg')}>
+        <div className={twMerge("max-w-screen-2xl mx-auto px-6 sm:px-4 md:px-8", narrow && 'max-w-screen-lg')}>
           {children}
         </div>
       </section>
