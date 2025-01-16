@@ -10,6 +10,7 @@ import { Parallax } from "react-scroll-parallax";
 import RecipeDisplay from "../general/RecipeDisplay";
 import Link from "next/link";
 import { useLang } from "@/hooks/useLang";
+import router from "next/router";
 
 const Hero = () => {
   const { lang, text } = useLang();
@@ -24,7 +25,7 @@ const Hero = () => {
       : undefined;
 
   return (
-    <div className="w-full h-screen -mt-28 flex flex-col justify-center">
+    <div className="w-full h-screen -mt-20 sm:mt-12 flex flex-col justify-center">
       <Section>
         <Parallax speed={10}>
           <div className="flex flex-col justify-center items-center gap-y-6 text-secondary">
@@ -34,7 +35,7 @@ const Hero = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5, delay: 0.3 }}
-                className="font-poppins text-4xl md:text-5xl font-semibold mb-6"
+                className="font-poppins text-3xl md:text-5xl font-semibold mb-6"
               >
                 <span className="hidden md:block">
                   {text.page.hero.title.part1} <br />
@@ -71,11 +72,12 @@ const Hero = () => {
                   </p>
                 ))}
               </div>
-              <Link href={"/bestall"} className="flex justify-center">
-                <Button className="w-full md:w-96 mb-0 sm:mb-20">
-                  {text.page.hero.order_now}
-                </Button>
-              </Link>
+              <Button
+          onClick={() => router.push("/bestall?id=1")}
+          className="w-full md:w-96 mb-0 sm:mb-20"
+        >
+          {text.page.hero.order_now}
+        </Button>
             </div>
           </div>
         </Parallax>

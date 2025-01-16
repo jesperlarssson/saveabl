@@ -114,7 +114,7 @@ const CallToAction = () => {
     </React.Fragment>
   ))}
 </Title>
-        <div className="mt-10 mb-5 grid grid-cols-2 sm:grid-cols-4 gap-8 text-secondary ">
+        <div className="mt-10 mb-5 grid grid-cols-2 sm:grid-cols-4 gap-8 text-secondary sm:px-0 px-6">
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
             whileInView={{ opacity: 1, scale: 1 }}
