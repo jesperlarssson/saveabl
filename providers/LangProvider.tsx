@@ -709,7 +709,7 @@ const enText = {
       points: {
         cooking_time: "cooking time",
         delivery: "delivery to your door",
-        chef_prepared: "chef-prepared (you shine during the final 20%)",
+        chef_prepared: "chef-prepared (you shine during the final 20)",
       },
       order_now: "Order Saveabl smart kit!",
     },    
@@ -1261,7 +1261,7 @@ const daText = {
       points: {
         cooking_time: "tilberedningstid",
         delivery: "levering til døren",
-        chef_prepared: "kokketilberedt (de sidste 20 % klarer du)",
+        chef_prepared: "kokketilberedt (de sidste 20 klarer du)",
       },
       order_now: "Bestil Saveabl smartkasse!",
     },    

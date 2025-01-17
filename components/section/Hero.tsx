@@ -15,22 +15,28 @@ import router from "next/router";
 const Hero = () => {
   const { lang, text } = useLang();
 
-  const bylineImage =
+  const hero_picImage =
     lang === "sv"
-      ? "/images/byline.png"
+      ? "/images/hero_pic.png"
       : lang === "en"
-      ? "/images/byline_eng.png"
+      ? "/images/hero_pic_eng.png"
       : lang === "da"
-      ? "/images/byline_da.png"
+      ? "/images/hero_pic_da.png"
       : undefined;
 
   return (
-    <div className="w-full h-screen -mt-20 sm:mt-12 flex flex-col justify-center">
-      <Section>
+    <div className="w-full h-auto flex flex-col justify-center">
+      {/* Sektionen reduceras */}
+      <Section className="pb-0 sm:pb-2">
         <Parallax speed={10}>
-          <div className="flex flex-col justify-center items-center gap-y-6 text-secondary">
-            <RecipeDisplay />
-            <div className="flex flex-col justify-center items-center px-4 text-center">
+          <div className="flex flex-col justify-center items-center gap-y-4 text-secondary">
+            {/* Recepten */}
+            <div className="-mt-24 sm:-mt-24">
+              <RecipeDisplay />
+            </div>
+
+            {/* Huvudinnehållet */}
+            <div className="flex flex-col justify-center items-center text-center">
               <motion.h1
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -59,7 +65,7 @@ const Hero = () => {
                   {text.page.hero.subtitle.part1} {text.page.hero.subtitle.part2}
                 </span>
               </motion.p>
-              <div className="leading-normal mb-10">
+              <div className="leading-normal mb-6">
                 {Object.entries(text.page.hero.points).map(([key, point]) => (
                   <p
                     key={key}
@@ -72,13 +78,27 @@ const Hero = () => {
                   </p>
                 ))}
               </div>
+              {/* Knappen */}
               <Button
-          onClick={() => router.push("/bestall?id=1")}
-          className="w-full md:w-96 mb-0 sm:mb-20"
-        >
-          {text.page.hero.order_now}
-        </Button>
+                onClick={() => router.push("/bestall?id=1")}
+                className="w-full md:w-96 mt-6"
+              >
+                {text.page.hero.order_now}
+              </Button>
             </div>
+
+            {/* Hero Pic Bild */}
+            {hero_picImage && (
+              <div className="mt-4 -mb-16 sm:-mb-12">
+                <Image
+                  width={660 / 2}
+                  height={140 / 2}
+                  alt="Hand scribbles"
+                  src={hero_picImage}
+                  className="object-cover w-66 sm:w-78" // Mindre på mobil, större på större skärmar
+                />
+              </div>
+            )}
           </div>
         </Parallax>
       </Section>

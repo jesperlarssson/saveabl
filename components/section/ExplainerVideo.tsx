@@ -1,5 +1,6 @@
-"use client"
-import React, { useContext } from "react";
+"use client";
+
+import React, { useState, useEffect } from "react";
 import VideoPlayer from "../ui/VideoPlayer";
 import Section from "../ui/Section";
 import TextBanner from "../ui/TextBanner";
@@ -9,15 +10,18 @@ import { useLang } from "@/hooks/useLang";
 const ExplainerVideo = () => {
   const { lang, text } = useLang();
 
-  let videoSrc = "https://media.graphassets.com/aDRcOn9LTgK1aMDDISQL"; // Standardvideo
+  const getVideoSrc = (lang: string) => {
+    if (lang === "sv") {
+      return "https://media.graphassets.com/q6eRau6SQmFmpQB4ROND"; // Svenska videon
+    } else if (lang === "en") {
+      return "https://media.graphassets.com/PyutQtmQfaaxnfRjJphR"; // Engelska videon
+    } else if (lang === "da") {
+      return "https://media.graphassets.com/hVsVFpvZS3aWxseSyYBc"; // Danska videon
+    }
+    return "https://media.graphassets.com/aDRcOn9LTgK1aMDDISQL"; // Standardvideo
+  };
 
-  if (lang === "sv") {
-    videoSrc = "https://media.graphassets.com/q6eRau6SQmFmpQB4ROND"; // Svenska videon
-  } else if (lang === "en") {
-    videoSrc = "https://media.graphassets.com/PyutQtmQfaaxnfRjJphR"; // Engelska videon
-  } else if (lang === "da") {
-    videoSrc = "https://media.graphassets.com/hVsVFpvZS3aWxseSyYBc"; // Danska videon
-  }
+  const videoSrc = getVideoSrc(lang);
 
   return (
     <Section
@@ -31,7 +35,8 @@ const ExplainerVideo = () => {
       className="w-full p-8 max-h-fit"
     >
       <div className="rounded-xl overflow-hidden">
-        <VideoPlayer src={videoSrc} type="video/mp4" />
+        {/* Dynamisk key för att tvinga omrendering */}
+        <VideoPlayer key={lang} src={videoSrc} type="video/mp4" />
       </div>
     </Section>
   );
