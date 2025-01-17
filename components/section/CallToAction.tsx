@@ -114,14 +114,14 @@ const CallToAction = () => {
     </React.Fragment>
   ))}
 </Title>
-        <div className="mt-10 mb-5 grid grid-cols-2 sm:grid-cols-4 gap-8 text-secondary sm:px-0 px-6">
+        <div className="mt-10 mb-5 grid grid-cols-2 sm:grid-cols-4 gap-8 text-secondary sm:px-0">
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
             whileInView={{ opacity: 1, scale: 1 }}
             className="flex flex-col items-center sm:w-40"
           >
             <h3 className="font-poppins text-5xl mb-2 ">3</h3>
-            <p className="text-xl -mt-2 font-light ">{compText.meals}</p>
+            <p className="text-md sm:text-xl -mt-2 font-light ">{compText.meals}</p>
           </motion.div>
 
           <motion.div
@@ -131,7 +131,7 @@ const CallToAction = () => {
             className="flex flex-col items-center sm:w-40"
           >
             <h3 className="font-poppins text-5xl mb-2 ">100%</h3>
-            <p className="text-xl -mt-2 font-light ">{compText.vegetarian}</p>
+            <p className="text-md sm:text-xl -mt-2 font-light ">{compText.vegetarian}</p>
           </motion.div>
 
           <motion.div
@@ -141,7 +141,7 @@ const CallToAction = () => {
             className="flex flex-col items-center sm:w-40"
           >
             <h3 className="font-poppins text-5xl mb-3">5x</h3>
-            <p className="text-xl -mt-2 font-light text-center leading-none">
+            <p className="text-md sm:text-xl -mt-2 font-light text-center leading-none">
               {compText.price_per_portion}
             </p>
           </motion.div>
@@ -153,7 +153,7 @@ const CallToAction = () => {
             className="flex flex-col items-center sm:w-40"
           >
             <h3 className="font-poppins text-5xl mb-2">15</h3>
-            <p className="text-xl -mt-2 font-light ">{compText.cooking_time}</p>
+            <p className="text-md sm:text-xl -mt-2 font-light ">{compText.cooking_time}</p>
           </motion.div>
         </div>
         <Button
