@@ -1256,7 +1256,7 @@ const daText = {
       },
       subtitle: {
         part1: "Server vegetariske måltider på 15 minutter og giv samtidig",
-        part2: "de overskydende grøntsager nyt liv.",
+        part2: "de overskydende grøntsager en ny mening med livet.",
       },
       points: {
         cooking_time: "tilberedningstid",
