@@ -25,15 +25,13 @@ const Hero = () => {
       : undefined;
 
   return (
-    <div className="w-full h-auto flex flex-col justify-center">
+    <div className="w-full h-auto -mt-24 sm:-mt-24 flex flex-col justify-center">
       {/* Sektionen reduceras */}
       <Section className="pb-0 sm:pb-2">
         <Parallax speed={10}>
           <div className="flex flex-col justify-center items-center gap-y-4 text-secondary">
             {/* Recepten */}
-            <div className="-mt-24 sm:-mt-24">
               <RecipeDisplay />
-            </div>
 
             {/* Huvudinnehållet */}
             <div className="flex flex-col justify-center items-center text-center">
