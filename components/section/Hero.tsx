@@ -25,7 +25,7 @@ const Hero = () => {
       : undefined;
 
   return (
-    <div className="w-full h-auto -mt-32 sm:-mt-32 flex flex-col justify-center">
+    <div className="w-full h-auto -mt-42 sm:-mt-42 flex flex-col justify-center">
       {/* Sektionen reduceras */}
       <Section className="pb-0 sm:pb-2">
         <Parallax speed={10}>
