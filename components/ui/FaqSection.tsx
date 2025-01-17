@@ -1,0 +1,40 @@
+"use client"
+import { useLang } from "@/hooks/useLang"; // Hämta språket från LangProvider
+import Accordion from "@/components/ui/Accordion"; // Importera Accordion
+import React from "react";
+import Section from "@/components/ui/Section";
+import Button from "../ui/Button";
+import router from "next/router";
+import Title from "../ui/Title";
+
+const FaqSection = () => {
+    const { lang, text } = useLang();
+
+  // Mappa om FAQ-datan så att rätt fråga och svar visas baserat på språket
+  const translatedFaqs = text.about_us.faqItems.map((faq: { question: { [x: string]: any; }; answer: { [x: string]: any; }; }) => ({
+    question: faq.question[lang],
+    answer: faq.answer[lang]
+  }));
+
+  return (
+        <Section className="bg-primary-200 w-full relative pt-0">
+          <div id="vanliga-fragor">
+            <Accordion faqs={text.about_us.faqItems} title={text.about_us.faq} />
+            <div
+              style={{ backgroundColor: "#FCF7E8" }}
+              className="py-0 flex justify-center"
+            >
+              <Button
+                onClick={() => router.push("/bestall?id=1")}
+                className="mt-0 w-full md:w-96"
+              >
+                {text.about_us.button}
+              </Button>
+            </div>
+          </div>
+        </Section>
+      );
+      
+};
+
+export default FaqSection;

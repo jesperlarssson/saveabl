@@ -1,22 +1,14 @@
 "use client";
-
 import { useLang } from "@/hooks/useLang";
-import { navigation } from "@/lib/navigation";
-import NavItem from "./NavItem";
+import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import Section from "./Section";
-import {
-  FaFacebookF,
-  FaInstagram,
-  FaLinkedinIn,
-} from "react-icons/fa";
+import TextBanner from "../ui/TextBanner"; // Importera TextBanner
+import { textBannerText } from "@/lib/general"; // Importera texten
 
 const Footer = () => {
   const date = new Date();
-  const bannerText =
-    "save time • save food • save earth • save time • save food • save earth • save time • save food • save earth • save time • save food • save earth • save time • save food • save earth • save time • save food • save earth •  ";
   const { text, lang } = useLang();
 
-  // Bestäm Trustpilot-bilden baserat på språkkoden
   let trustpilotImage = "/images/trustpilot-en.png"; // Standardbild om inget språk matchar
 
   switch (lang) {
@@ -34,8 +26,13 @@ const Footer = () => {
 
   return (
     <>
-      <footer className="bg-secondary ">
-        <Section className="mx-auto  px-4 py-16 sm:px-6 lg:px-8">
+      <footer className="bg-secondary">
+        {/* Lägg till TextBanner högst upp i footern */}
+        <div className="mb-0">
+            <TextBanner>{textBannerText}</TextBanner>
+          </div>
+        <Section className="mx-auto px-4 py-10 sm:px-6 lg:px-8">
+
           <div className="flex justify-center text-teal-600 dark:text-teal-300">
             <svg
               className="h-10 fill-secondary-900"
@@ -49,14 +46,18 @@ const Footer = () => {
               </g>
             </svg>
           </div>
+
           <div>
-            <p className="mx-auto mt-6 mb-2 max-w-md text-center leading-relaxed text-primary-200 font-bold">
-              {text.my_pages.questions}
+            <p className="mx-auto mt-0 mb-2 max-w-lg text-center leading-relaxed text-primary-200 text-xl">
+              {text.footer.questions}
+            </p>
+            <p className="mx-auto mb-2 max-w-lg text-center leading-relaxed text-primary-200 text-xl">
+              {text.footer.questions2}
             </p>
           </div>
 
           <div>
-            <p className="mt-3 text-center font-bold hover:underline text-primary-200">
+            <p className="mt-3 text-center hover:underline text-primary-200 text-xl">
               <a href="mailto:hello@saveabl.se">hello@saveabl.se</a>
             </p>
           </div>

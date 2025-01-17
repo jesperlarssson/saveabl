@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { FaChevronDown } from "react-icons/fa";
 import Section from "./Section";
+import Title from "../ui/Title";
 
 type FAQ = {
   question: string;
@@ -17,13 +18,13 @@ const Accordion = ({ faqs, title }: AccordionProps) => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   return (
-    <Section narrow className="bg-secondary text-primary-200">
-      <h3 className="font-poppins text-2xl mb-8">{title}</h3>
+    <Section narrow className="accordion-background text-[#6E2936]">
+      <div className="mb-8 text-3xl font-bold text-center">{title}</div>
       <div className="w-full  mx-auto">
         {faqs.map((faq, index) => (
-          <div key={index} className="border-b border-gray-200 border-opacity-20 overflow-hidden">
+          <div key={index} className="border-b border-[#6E2936] border-opacity-20 overflow-hidden">
             <div
-              className="flex justify-between items-center py-4 px-5 cursor-pointer"
+              className="flex justify-between items-center py-4 cursor-pointer"
               onClick={() =>
                 setActiveIndex(index === activeIndex ? null : index)
               }

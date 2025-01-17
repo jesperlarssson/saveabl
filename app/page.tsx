@@ -3,7 +3,6 @@ import SellingPoints from "@/components/section/SellingPoints";
 import IllustrationsBg from "@/components/ui/IllustrationsBg";
 import CallToAction from "@/components/section/CallToAction";
 import Reviews from "@/components/section/Reviews";
-import News from "@/components/section/News";
 import TextBanner from "@/components/ui/TextBanner";
 import PromotionBanner from "@/components/ui/PromotionBanner";
 import Merch from "@/components/section/Merch";
@@ -12,6 +11,7 @@ import ExplainerVideo from "@/components/section/ExplainerVideo";
 import USP from "@/components/section/USP";
 import ProductGrid from "@/components/section/ProductGrid";
 import { getAllPostsForHome } from "@/lib/hygraph";
+import FaqSection from "@/components/ui/FaqSection";
 
 export default async function Home() {
 
@@ -21,7 +21,7 @@ export default async function Home() {
       <div className="absolute w-full min-h-screen flex justify-center items-center z-1">
         <IllustrationsBg />
       </div>
-      <div className="relative z-1 flex min-h-screen flex-col items-center justify-between pt-16">
+      <div className="relative z-1 flex min-h-screen flex-col items-center justify-between pt-0">
         <Hero />
         <ExplainerVideo />
         {/* <TextBanner>{textBannerText}</TextBanner> */}
@@ -33,9 +33,9 @@ export default async function Home() {
         {/* <TextBanner className="bg-primary">{textBannerText}</TextBanner> */}
         <Reviews />
         <TextBanner className="bg-primary">{textBannerText}</TextBanner>
-        <News news={news}/>
         {/* <TextBanner className="bg-accent">{textBannerText}</TextBanner> */}
         {/* <Merch /> */}
+        <FaqSection />
       </div>
     </>
   );
