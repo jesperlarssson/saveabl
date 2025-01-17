@@ -26,6 +26,8 @@ const USP = () => {
           text={text.page.usp.points[2].text}
         />
       </div>
+       {/* Liten extra sektion för mer lila */}
+  <div className="bg-secondary h-6 w-full"></div>
     </Section>
   );
 };
@@ -46,7 +48,7 @@ const Point: React.FC<PointProps> = ({ icon, title, text }) => {
         <div className="z-10">{icon}</div>
       </div>
       <h3 className="font-poppins text-primary-200 text-xl mb-2">{title}</h3>
-      <p className="text-primary-200 opacity-80 text-sm max-w-sm sm:max-w-[24rem]">
+      <p className="text-primary-200 opacity-80 text-md sm:max-w-[26rem]">
         {text}
       </p>
     </div>

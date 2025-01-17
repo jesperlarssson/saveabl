@@ -17,12 +17,12 @@ const FaqSection = () => {
   }));
 
   return (
-        <Section className="bg-primary-200 w-full relative pt-0">
+        <div className="bg-primary-200 w-full relative pt-0">
           <div id="vanliga-fragor">
             <Accordion faqs={text.about_us.faqItems} title={text.about_us.faq} />
             <div
               style={{ backgroundColor: "#FCF7E8" }}
-              className="py-0 flex justify-center"
+              className="-mt-4 sm:mt-0 flex justify-center px-4 sm:px-4 md:px-8 mb-20"
             >
               <Button
                 onClick={() => router.push("/bestall?id=1")}
@@ -32,7 +32,7 @@ const FaqSection = () => {
               </Button>
             </div>
           </div>
-        </Section>
+        </div>
       );
       
 };

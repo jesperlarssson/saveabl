@@ -19,7 +19,7 @@ const Accordion = ({ faqs, title }: AccordionProps) => {
 
   return (
     <Section narrow className="accordion-background text-[#6E2936]">
-      <div className="mb-8 text-3xl font-bold text-center">{title}</div>
+      <div className="mb-8 text-3xl sm:text-5xl font-bold text-center">{title}</div>
       <div className="w-full  mx-auto">
         {faqs.map((faq, index) => (
           <div key={index} className="border-b border-[#6E2936] border-opacity-20 overflow-hidden">
@@ -29,7 +29,7 @@ const Accordion = ({ faqs, title }: AccordionProps) => {
                 setActiveIndex(index === activeIndex ? null : index)
               }
             >
-              <h2 className="text-lg tracking-wide font-bold">{faq.question}</h2>
+              <h2 className="text-md sm:text-xl tracking-wide font-bold">{faq.question}</h2>
               <FaChevronDown
                 className={`w-5 h-5 transform transition-transform duration-200 ${
                   index === activeIndex ? "rotate-180" : ""
@@ -37,7 +37,7 @@ const Accordion = ({ faqs, title }: AccordionProps) => {
               />
             </div>
             <p
-              className={`px-5 transition-all duration-200 ${
+              className={`px-2 transition-all duration-200 ${
                 index === activeIndex ? "max-h-full py-3" : "max-h-0"
               }`}
             >

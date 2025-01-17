@@ -140,7 +140,7 @@ const CallToAction = () => {
             transition={{ delay: 0.4 }}
             className="flex flex-col items-center sm:w-40"
           >
-            <h3 className="font-poppins text-5xl mb-3">5x</h3>
+            <h3 className="font-poppins text-5xl mb-3 sm:mb-2">5x</h3>
             <p className="text-md sm:text-xl -mt-2 font-light text-center leading-none">
               {compText.price_per_portion}
             </p>
