@@ -11,9 +11,11 @@ import RecipeDisplay from "../general/RecipeDisplay";
 import Link from "next/link";
 import { useLang } from "@/hooks/useLang";
 import router from "next/router";
+import { useState } from "react";
 
 const Hero = () => {
   const { lang, text } = useLang();
+  const [activeIndex, setActiveIndex] = useState(0); // Håll koll på aktiv punkt
 
   const hero_picImage =
     lang === "sv"
@@ -24,6 +26,10 @@ const Hero = () => {
       ? "/images/hero_pic_da.png"
       : undefined;
 
+      const handleSwipe = (index: number) => {
+        setActiveIndex(index); // Uppdatera aktiv punkt
+      };
+
   return (
     <div className="w-full h-auto -mt-28 sm:-mt-24 flex flex-col justify-center">
       {/* Sektionen reduceras */}
@@ -32,6 +38,21 @@ const Hero = () => {
           <div className="flex flex-col justify-center items-center gap-y-4 text-secondary">
             {/* Recepten */}
               <RecipeDisplay />
+
+             {/* Swipe-indikatorer (bara för mobil) */}
+            <div className="flex justify-center items-center gap-2 mb-4 -mt-4 sm:hidden">
+              {[...Array(3)].map((_, index) => (
+                <div
+                  key={index}
+                  className={`w-2 h-2 rounded-full ${
+                    index === activeIndex
+                      ? "bg-[#6E2936]"
+                      : "bg-[#EECFAA]"
+                  }`}
+                ></div>
+              ))}
+            </div>
+
 
             {/* Huvudinnehållet */}
             <div className="flex flex-col justify-center items-center text-center">
@@ -93,7 +114,7 @@ const Hero = () => {
                   height={140 / 2}
                   alt="Hand scribbles"
                   src={hero_picImage}
-                  className="object-cover w-66 sm:w-78" // Mindre på mobil, större på större skärmar
+                  className="object-cover w-65 sm:w-78" // Mindre på mobil, större på större skärmar
                 />
               </div>
             )}

@@ -162,11 +162,40 @@ const svText = {
       description: "Vi utvecklas och vi testar nytt. Vi expanderar och hittar på nya grejer. Här uppdaterar vi vad som händer i vår värld.",
     },
     reviews: {
-      title: "Över 20 000 räddade middagar, tillsammans gör vi skillnad!",
+      title: "Våra kunder räddade precis 20 000 middagar. Det här säger de om oss:",
       text: "Såhär säger några av våra miljöhjältar till kunder:",
       read_all_reviews: "Läs alla omdömen",
-    },
+    content: [
+      {
+        id: 1,
+        name: "Alexander",
+        title: "Saveabl är en win-win-win",
+        review: "Saveabl är fantastiskt. Sättet det har underlättat vardagspusslet med två barn är otroligt, helt plötsligt har vi tid att hänga med barnen, träna eller bara få egentid på kvällarna. Maten är överlag väldigt god och uppskattad även av de små. Uppskattar att vissa rätter återkommer då och då. Men det kanske bästa är ändå att veta att den här matkassen bidrar till en bättre miljö. Helt enkelt en win-win-win!",
+        date: "2024-04-13",
+        url: "https://se.trustpilot.com/reviews/661afa5898613cce1ecc71a1",
+        rating: 5,
+      },
+      {
+        id: 2,
+        name: "Niklas",
+        title: "Väldigt god men samtidigt enkel mat",
+        review: "Väldigt god men samtidigt enkel mat! Istället för att få alla råvaror och behöva göra det från grunden så är det här ett perfekt substitut för att slänga ihop en snabb middag mitt i vardagen! Och smaker som inte tagit genvägar heller, enkelt och sjukt gott helt enkelt!",
+        date: "2024-01-31",
+        url: "https://se.trustpilot.com/reviews/65cd1846358cb4bb2f35c5a9",
+        rating: 5,
+      },
+      {
+        id: 3,
+        name: "Anneli",
+        title: "Absolut den bästa matkassen vi testat",
+        review: "Absolut den bästa matkassen vi testat. Vet inte hur vi överlevde innan! Jättegoda och varierande smaker, och maten blir klar på max en kvart varje kväll. Fantastiskt under småbarnsåren när maten snabbt ska fram. Generösa portioner också, för oss som är 2 vuxna och 1 barn räcker det ofta till 5-6 måltider.",
+        date: "2023-12-18",
+        url: "https://se.trustpilot.com/reviews/65804ae9054828d5f4bada17",
+        rating: 5,
+      },
+    ],
   },
+},
 
   about_us: {
     title: "Saveabl - “räddningsbar, något som går att rädda",
@@ -750,11 +779,40 @@ const enText = {
       description: "We're constantly evolving, exploring new horizons, and pushing the boundaries. Step into our world and discover the latest developments in our universe",
     },
     reviews: {
-      title: "Over 20,000 saved meals, together we make a difference!",
+      title: "Our customers just saved 20 000 dinners. Here's what they say about us:",
       text: "Here's what our climate-hero-customers think",
       read_all_reviews: "Read all reviews",
-    },
+    content: [
+      {
+        id: 1,
+        name: "Alexander",
+        title: "Saveabl is a win-win-win",
+        review: "Saveabl is amazing. The way it has simplified our daily life with two kids is incredible. Suddenly, we have time to spend with the children, work out, or just enjoy some alone time in the evenings. Overall, the food is very tasty and also appreciated by the little ones. I appreciate that some dishes return now and then. But perhaps the best thing is knowing that this meal kit contributes to a better environment. Simply a win-win-win!",
+        date: "2024-04-13",
+        url: "https://se.trustpilot.com/reviews/661afa5898613cce1ecc71a1",
+        rating: 5
+      },
+      {
+        id: 2,
+        name: "Niklas",
+        title: "Very tasty yet simple food",
+        review: "Very tasty yet simple food! Instead of getting all the ingredients and having to do everything from scratch, this is the perfect substitute for throwing together a quick dinner in the middle of a busy day! And the flavors haven’t taken any shortcuts either, simple and ridiculously delicious!",
+        date: "2024-01-31",
+        url: "https://se.trustpilot.com/reviews/65cd1846358cb4bb2f35c5a9",
+        rating: 5
+      },
+      {
+        id: 3,
+        name: "Anneli",
+        title: "Absolutely the best meal kit we've tried",
+        review: "Absolutely the best meal kit we've tried. I don’t know how we survived before! Very tasty and varied flavors, and the food is ready in just 15 minutes every evening. Fantastic during the toddler years when food needs to be ready quickly. Generous portions too – for us as two adults and one child, it often lasts for 5-6 meals.",
+        date: "2023-12-18",
+        url: "https://se.trustpilot.com/reviews/65804ae9054828d5f4bada17",
+        rating: 5
+      }
+    ]    
   },
+},
   about_us: {
     title: "Saveabl, capable of being saved or salvaged",
     description:
@@ -1300,11 +1358,40 @@ const daText = {
       text: "Vi udvikler og tester nyt. Vi ekspanderer og finder på nye ting. Her opdaterer vi, hvad der sker i vores verden.",
     },
     reviews: {
-      title: "Over 20.000 reddede middage, sammen gør vi en forskel!",
+      title: "Vores kunder har lige reddet 20 000 middage. Dette siger de om os:",
       text: "Sådan siger nogle af vores miljøhelte til kunder:",
       read_all_reviews: "Læs alle anmeldelser",
-    },
+    content: [
+      {
+        id: 1,
+        name: "Alexander",
+        title: "Saveabl er en win-win-win",
+        review: "Saveabl er fantastisk. Den måde, det har gjort hverdagen lettere med to børn, er utrolig. Pludselig har vi tid til at være sammen med børnene, træne eller bare få lidt alenetid om aftenen. Maden er generelt meget velsmagende og værdsat, også af de små. Jeg sætter pris på, at nogle retter kommer tilbage fra tid til anden. Men det bedste er nok at vide, at dette måltidskit bidrager til et bedre miljø. Simpelthen en win-win-win!",
+        date: "2024-04-13",
+        url: "https://se.trustpilot.com/reviews/661afa5898613cce1ecc71a1",
+        rating: 5
+      },
+      {
+        id: 2,
+        name: "Niklas",
+        title: "Meget velsmagende, men samtidig enkel mad",
+        review: "Meget velsmagende, men samtidig enkel mad! I stedet for at få alle ingredienser og skulle lave alt fra bunden er dette den perfekte erstatning for hurtigt at lave en middag midt i hverdagen! Og smagen er heller ikke gået på kompromis, enkel og utrolig lækker!",
+        date: "2024-01-31",
+        url: "https://se.trustpilot.com/reviews/65cd1846358cb4bb2f35c5a9",
+        rating: 5
+      },
+      {
+        id: 3,
+        name: "Anneli",
+        title: "Absolut det bedste måltidskit, vi har prøvet",
+        review: "Absolut det bedste måltidskit, vi har prøvet. Jeg ved ikke, hvordan vi klarede os før! Meget velsmagende og varierede smagsoplevelser, og maden er klar på blot 15 minutter hver aften. Fantastisk i småbørnsårene, hvor maden hurtigt skal serveres. Generøse portioner også – for os som to voksne og et barn holder det ofte til 5-6 måltider.",
+        date: "2023-12-18",
+        url: "https://se.trustpilot.com/reviews/65804ae9054828d5f4bada17",
+        rating: 5
+      }
+    ]    
   },
+},
   about_us: {
     title: "Redningsbar, noget der kan reddes",
     description:

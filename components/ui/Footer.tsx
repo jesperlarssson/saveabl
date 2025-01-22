@@ -33,31 +33,17 @@ const Footer = () => {
           </div>
         <Section className="mx-auto px-4 py-10 sm:px-6 lg:px-8">
 
-          <div className="flex justify-center text-teal-600 dark:text-teal-300">
-            <svg
-              className="h-10 fill-secondary-900"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 251.59 48.12"
-            >
-              <g id="Lager_2" data-name="Lager 2">
-                <g id="stdSaveable">
-                  {/* SVG-innehåll */}
-                </g>
-              </g>
-            </svg>
-          </div>
-
           <div>
-            <p className="mx-auto mt-0 mb-2 max-w-lg text-center leading-relaxed text-primary-200 text-xl">
+            <p className="mx-auto mt-0 mb-2 max-w-lg text-center leading-relaxed text-primary-200 text-lg sm:text-xl">
               {text.footer.questions}
             </p>
-            <p className="mx-auto mb-2 max-w-lg text-center leading-relaxed text-primary-200 text-xl">
+            <p className="mx-auto mb-2 max-w-lg text-center leading-relaxed text-primary-200 text-lg sm:text-xl">
               {text.footer.questions2}
             </p>
           </div>
 
           <div>
-            <p className="mt-3 text-center hover:underline text-primary-200 text-xl">
+            <p className="mt-3 text-center hover:underline text-primary-200 text-lg sm:text-xl">
               <a href="mailto:hello@saveabl.se">hello@saveabl.se</a>
             </p>
           </div>
