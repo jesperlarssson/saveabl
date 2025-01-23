@@ -1,84 +1,133 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Head from "next/head";
 import { AiOutlineArrowRight } from "react-icons/ai";
-import TrustPilotWidget from "./TrustPilotWidget";
-import Section from "../ui/Section";
 import InjectScriptComponent from "../general/InjectScript";
+import Section from "../ui/Section";
 import Grid from "../ui/Grid";
-import { reviews } from "@/lib/reviews";
 import ReviewTile from "../general/ReviewTile";
 import LottieAnimation from "../ui/LottieAnimation";
 import globAnimation from "../../public/anim/Jordklot.json";
-import clockAnimation from "../../public/anim/Klocka.json";
-
 import Title from "../ui/Title";
-import BodyText from "../ui/BodyText";
 import { useLang } from "@/hooks/useLang";
 
+interface Review {
+  id: number;
+  name: string;
+  title: string;
+  review: string;
+  date: string;
+  url: string;
+  rating: number;
+}
+
 const Reviews = () => {
-  const { text, lang } = useLang();  // Lägg till språkkoden
+  const { text, lang } = useLang(); // Hämta språk och text från LangProvider
   const [compText, setCompText] = useState(text.page.reviews);
-  
+  const [currentReviewIndex, setCurrentReviewIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Typ av recensioner
+  const reviews: Review[] = text.page.reviews.content;
+
   useEffect(() => {
     setCompText(text.page.reviews);
+
+    // Kontrollera om användaren är på mobil
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768); // Ändra gränsvärdet för mobil om det behövs
+    };
+
+    // Kör en gång vid render och lyssna på fönsterstorlek
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, [text]);
 
-  // Bestäm Trustpilot-bilden baserat på språkkoden
-  let trustpilotImage = "/images/trustpilot-en.png"; // Standardbild om inget språk matchar
+  const handleNext = () => {
+    setCurrentReviewIndex((prevIndex) =>
+      prevIndex === reviews.length - 1 ? 0 : prevIndex + 1
+    );
+  };
 
-  switch (lang) {
-    case 'sv':
-      trustpilotImage = "/images/trustpilot-sv.png";
-      break;
-    case 'da':
-      trustpilotImage = "/images/trustpilot-da.png";
-      break;
-    case 'en':
-    default:
-      trustpilotImage = "/images/trustpilot-en.png";
-      break;
-  }
+  const handlePrevious = () => {
+    setCurrentReviewIndex((prevIndex) =>
+      prevIndex === 0 ? reviews.length - 1 : prevIndex - 1
+    );
+  };
 
   return (
     <>
       <InjectScriptComponent />
-      <Section
-        className="bg-primary flex flex-col items-start"
-        bgIllustrationComponent={
-          <>
-            <div className="absolute left-20 bottom-2 opacity-50 w-0 h-0 lg:w-96 lg:h-96 z-0">
-              <LottieAnimation animationData={globAnimation} />
-            </div>
-            <div className="absolute right-5 top-10 opacity-50 w-0 h-0 md:w-64 md:h-48 lg:w-128 lg:h-96 z-0">
-              <LottieAnimation animationData={clockAnimation} />
-            </div>
-          </>
-        }
-      >
-        <div className="w-full sm:w-128 mb-4 -mt-4">
-          <a href="https://se.trustpilot.com/review/saveabl.se" target="_blank" rel="noopener noreferrer">
-            {/* Dynamisk Trustpilot-bild */}
-            <img src={trustpilotImage} alt="Trustpilot" className="h-12 w-auto" />
-          </a>
+      <Section className="py-16 sm:py-16 bg-primary flex flex-col items-center">
+        <div className="absolute left-[-50px] top-5 opacity-50 w-0 h-0 lg:w-96 lg:h-96 z-0">
+          <LottieAnimation animationData={globAnimation} />
         </div>
 
-        <Title>{compText.title}</Title>
-        <BodyText>{compText.text}</BodyText>
+        {/* Trustpilot och rubrik */}
+        <div className="flex flex-col items-center w-full">
+          <a
+            href="https://se.trustpilot.com/review/saveabl.se"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src={`/images/trustpilot-${lang}.png`}
+              alt="Trustpilot"
+              className="h-12 w-auto mb-4"
+            />
+          </a>
+          <Title className="text-center">{compText.title}</Title>
+        </div>
+
+        {/* Centrerad länk till alla omdömen */}
         <a
-          className="mt-4 font-bold text-neutral-700 flex items-center gap-2 cursor-pointer hover:gap-4 hover:text-neutral-600 transition-all group"
+          className="mt-4 font-bold text-neutral-700 flex justify-center items-center gap-2 cursor-pointer hover:gap-4 hover:text-neutral-600 transition-all group text-center"
           href="https://se.trustpilot.com/review/saveabl.se"
         >
           {compText.read_all_reviews}{" "}
           <AiOutlineArrowRight className="group-hover:text-accent" />
         </a>
 
-        <Grid>
-          {reviews.map((review) => (
-            <ReviewTile key={`review-${review.id}`} {...review} />
-          ))}
-        </Grid>
+        {/* Recensioner */}
+        {isMobile ? (
+          <div className="relative w-full max-w-md mt-8">
+            <ReviewTile key={`review-${currentReviewIndex}`} {...reviews[currentReviewIndex]} />
+
+            {/* Pilar för att byta recension */}
+            <div className="mt-8 flex justify-center gap-8">
+              {/* Vänster pil */}
+              <button
+                onClick={handlePrevious}
+                className="font-bold text-neutral-700 flex items-center gap-2 cursor-pointer group transition-all"
+                aria-label="Föregående recension"
+              >
+                <AiOutlineArrowRight
+                  className="text-2xl transition-transform group-hover:-translate-x-2 group-active:-translate-x-3 group-hover:text-accent group-active:text-accent rotate-180"
+                />
+              </button>
+              {/* Höger pil */}
+              <button
+                onClick={handleNext}
+                className="font-bold text-neutral-700 flex items-center gap-2 cursor-pointer group transition-all"
+                aria-label="Nästa recension"
+              >
+                <AiOutlineArrowRight
+                  className="text-2xl transition-transform group-hover:translate-x-2 group-active:translate-x-3 group-hover:text-accent group-active:text-accent"
+                />
+              </button>
+            </div>
+          </div>
+        ) : (
+          <Grid>
+            {reviews.map((review) => (
+              <ReviewTile key={`review-${review.id}`} {...review} />
+            ))}
+          </Grid>
+        )}
       </Section>
     </>
   );

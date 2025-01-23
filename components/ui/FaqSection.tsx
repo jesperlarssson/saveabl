@@ -6,6 +6,9 @@ import Section from "@/components/ui/Section";
 import Button from "../ui/Button";
 import router from "next/router";
 import Title from "../ui/Title";
+import LottieAnimation from "./LottieAnimation";
+import clockAnimation from "../../public/anim/Klocka.json";
+import globAnimation from "../../public/anim/Jordklot.json";
 
 const FaqSection = () => {
     const { lang, text } = useLang();
@@ -18,6 +21,9 @@ const FaqSection = () => {
 
   return (
         <div className="bg-primary-200 w-full relative pt-0">
+           <div className="absolute right-5 top-15 opacity-50 w-0 h-0 md:w-64 md:h-48 lg:w-128 lg:h-96 z-0">
+             <LottieAnimation animationData={clockAnimation} />
+           </div>
           <div id="vanliga-fragor">
             <Accordion faqs={text.about_us.faqItems} title={text.about_us.faq} />
             <div
