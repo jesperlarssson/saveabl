@@ -1,26 +1,25 @@
 "use client";
-import React from "react"
-// Import Swiper React components
+import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import 'swiper/css';
-import 'swiper/css/effect-coverflow';
+import "swiper/css";
+import "swiper/css/effect-coverflow";
 
-import { EffectCoverflow } from 'swiper';
-
-
+import { EffectCoverflow } from "swiper";
 
 interface SliderCardsProps {
   children: React.ReactNode;
+  onActiveIndexChange?: (index: number) => void; // Callback för aktivt index
 }
 
-const SliderCards: React.FC<SliderCardsProps> = ({ children }) => {
+const SliderCards: React.FC<SliderCardsProps> = ({ children, onActiveIndexChange }) => {
   const childrenArray = React.Children.toArray(children);
+
   return (
     <>
       <Swiper
         initialSlide={1}
-        effect={'coverflow'}
+        effect={"coverflow"}
         grabCursor={true}
         centeredSlides={true}
         loop={false}
@@ -49,16 +48,22 @@ const SliderCards: React.FC<SliderCardsProps> = ({ children }) => {
         }}
         width={340}
         coverflowEffect={{
-        //   rotate: 5,
-        //   stretch: 1,
-           depth: 100,
-        //   modifier: 1,
-        }}       
+          depth: 100,
+        }}
         modules={[EffectCoverflow]}
         className=""
+        onSlideChange={(swiper) => {
+          if (onActiveIndexChange) {
+            onActiveIndexChange(swiper.activeIndex); // Skicka aktiv index till callback
+          }
+        }}
       >
         {childrenArray.map((child, i) => {
-          return <SwiperSlide className="my-8" key={i}>{child}</SwiperSlide>;
+          return (
+            <SwiperSlide className="my-8" key={i}>
+              {child}
+            </SwiperSlide>
+          );
         })}
       </Swiper>
     </>

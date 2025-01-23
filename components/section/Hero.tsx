@@ -8,7 +8,6 @@ import Button from "../ui/Button";
 import Section from "../ui/Section";
 import { Parallax } from "react-scroll-parallax";
 import RecipeDisplay from "../general/RecipeDisplay";
-import Link from "next/link";
 import { useLang } from "@/hooks/useLang";
 import router from "next/router";
 import { useState } from "react";
@@ -16,6 +15,7 @@ import { useState } from "react";
 const Hero = () => {
   const { lang, text } = useLang();
   const [activeIndex, setActiveIndex] = useState(0); // Håll koll på aktiv punkt
+  const [recipesCount, setRecipesCount] = useState(0); // Håll koll på antal recept
 
   const hero_picImage =
     lang === "sv"
@@ -26,22 +26,28 @@ const Hero = () => {
       ? "/images/hero_pic_da.png"
       : undefined;
 
-      const handleSwipe = (index: number) => {
-        setActiveIndex(index); // Uppdatera aktiv punkt
-      };
+  const handleSwipe = (index: number) => {
+    setActiveIndex(index); // Uppdatera aktiv punkt
+  };
+
+  const updateRecipesCount = (count: number) => {
+    setRecipesCount(count); // Uppdatera antal recept
+  };
 
   return (
     <div className="w-full h-auto -mt-28 sm:-mt-24 flex flex-col justify-center">
-      {/* Sektionen reduceras */}
       <Section className="pb-0 sm:pb-2">
         <Parallax speed={10}>
           <div className="flex flex-col justify-center items-center gap-y-4 text-secondary">
             {/* Recepten */}
-              <RecipeDisplay />
+            <RecipeDisplay
+              onActiveIndexChange={handleSwipe} // Skicka callback för aktivt index
+              onRecipesCountChange={updateRecipesCount} // Skicka callback för antal recept
+            />
 
-             {/* Swipe-indikatorer (bara för mobil) */}
+            {/* Swipe-indikatorer (bara för mobil) */}
             <div className="flex justify-center items-center gap-2 mb-4 -mt-4 sm:hidden">
-              {[...Array(3)].map((_, index) => (
+              {[...Array(recipesCount)].map((_, index) => (
                 <div
                   key={index}
                   className={`w-2 h-2 rounded-full ${
@@ -52,7 +58,6 @@ const Hero = () => {
                 ></div>
               ))}
             </div>
-
 
             {/* Huvudinnehållet */}
             <div className="flex flex-col justify-center items-center text-center">
@@ -97,7 +102,6 @@ const Hero = () => {
                   </p>
                 ))}
               </div>
-              {/* Knappen */}
               <Button
                 onClick={() => router.push("/bestall?id=1")}
                 className="w-full md:w-96 mt-6"
@@ -114,7 +118,7 @@ const Hero = () => {
                   height={140 / 2}
                   alt="Hand scribbles"
                   src={hero_picImage}
-                  className="object-cover w-65 sm:w-78" // Mindre på mobil, större på större skärmar
+                  className="object-cover w-65 sm:w-78"
                 />
               </div>
             )}
