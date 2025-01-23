@@ -40,6 +40,7 @@
     "react-lite-youtube-embed": "^2.3.52",
     "react-responsive": "^10.0.0",
     "react-scroll-parallax": "^3.4.2",
+    "react-swipeable": "^7.0.2",
     "stripe": "^12.9.0",
     "styled-components": "^6.1.13",
     "swiper": "^9.4.1",

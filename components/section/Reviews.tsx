@@ -10,6 +10,7 @@ import LottieAnimation from "../ui/LottieAnimation";
 import globAnimation from "../../public/anim/Jordklot.json";
 import Title from "../ui/Title";
 import { useLang } from "@/hooks/useLang";
+import { useSwipeable } from "react-swipeable"; // Lägg till detta paket
 
 interface Review {
   id: number;
@@ -22,23 +23,20 @@ interface Review {
 }
 
 const Reviews = () => {
-  const { text, lang } = useLang(); // Hämta språk och text från LangProvider
+  const { text, lang } = useLang();
   const [compText, setCompText] = useState(text.page.reviews);
   const [currentReviewIndex, setCurrentReviewIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
 
-  // Typ av recensioner
   const reviews: Review[] = text.page.reviews.content;
 
   useEffect(() => {
     setCompText(text.page.reviews);
 
-    // Kontrollera om användaren är på mobil
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768); // Ändra gränsvärdet för mobil om det behövs
+      setIsMobile(window.innerWidth <= 768);
     };
 
-    // Kör en gång vid render och lyssna på fönsterstorlek
     handleResize();
     window.addEventListener("resize", handleResize);
 
@@ -58,6 +56,11 @@ const Reviews = () => {
       prevIndex === 0 ? reviews.length - 1 : prevIndex - 1
     );
   };
+
+  const swipeHandlers = useSwipeable({
+    onSwipedLeft: handleNext,
+    onSwipedRight: handlePrevious,
+  });
 
   return (
     <>
@@ -94,7 +97,10 @@ const Reviews = () => {
 
         {/* Recensioner */}
         {isMobile ? (
-          <div className="relative w-full max-w-md mt-8">
+          <div
+            className="relative w-full max-w-md mt-8"
+            {...swipeHandlers} // Lägg till swipe-hanterare
+          >
             <ReviewTile key={`review-${currentReviewIndex}`} {...reviews[currentReviewIndex]} />
 
             {/* Pilar för att byta recension */}
@@ -102,21 +108,21 @@ const Reviews = () => {
               {/* Vänster pil */}
               <button
                 onClick={handlePrevious}
-                className="font-bold text-neutral-700 flex items-center gap-2 cursor-pointer group transition-all"
+                className="font-bold text-neutral-700 flex items-center gap-2 cursor-pointer group"
                 aria-label="Föregående recension"
               >
                 <AiOutlineArrowRight
-                  className="text-2xl transition-transform group-hover:-translate-x-2 group-active:-translate-x-3 group-hover:text-accent group-active:text-accent rotate-180"
+                  className="text-2xl group-hover:text-accent rotate-180"
                 />
               </button>
               {/* Höger pil */}
               <button
                 onClick={handleNext}
-                className="font-bold text-neutral-700 flex items-center gap-2 cursor-pointer group transition-all"
+                className="font-bold text-neutral-700 flex items-center gap-2 cursor-pointer group"
                 aria-label="Nästa recension"
               >
                 <AiOutlineArrowRight
-                  className="text-2xl transition-transform group-hover:translate-x-2 group-active:translate-x-3 group-hover:text-accent group-active:text-accent"
+                  className="text-2xl group-hover:text-accent"
                 />
               </button>
             </div>
