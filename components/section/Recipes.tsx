@@ -59,7 +59,7 @@ const Recipes = () => {
                 {text.recipes.next_week}
               </h3>
               <p className="text-primary text-lg mt-2">
-                {text.recipes.next_week_order_until.replace("{week}", "4")} {/* Ändra "46" till aktuell vecka */}
+                {text.recipes.next_week_order_until.replace("{week}", "5")} {/* Ändra "46" till aktuell vecka */}
               </p>
               <Grid className=" gap-8 pt-4">
                 {loading ? (
