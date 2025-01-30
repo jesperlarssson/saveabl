@@ -40,7 +40,7 @@ const PresentkortPage = () => {
       className="min-h-screen flex items-center justify-center text-[#6E2936] px-6 sm:px-4"
     >
       {/* Innehåll med bild och text */}
-      <div className="flex flex-col md:flex-row items-start justify-center max-w-7xl w-full sm:mr-[5%] sm:mt-0 mt-[-100px]">
+      <div className="flex flex-col md:flex-row items-start justify-center max-w-7xl w-full sm:mr-[5%] sm:mt-0 mt-[-80px]">
         {/* Bildsektion */}
         <div className="flex-shrink-0 md:w-1/2 flex flex-col items-start">
           {/* Stor bild */}
