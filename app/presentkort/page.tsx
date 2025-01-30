@@ -5,10 +5,6 @@ import { useLang } from "@/hooks/useLang";
 const PresentkortPage = () => {
   const { text, lang } = useLang(); // Hämtar text och språk från språksystemet
 
-  if (!text?.presentkort) {
-    return <div>Laddar...</div>; // Visar en laddningsindikator om språket inte är laddat
-  }
-
   // Bilder för presentkort baserat på språk
   const images: Record<string, { main: string; alt: string }> = {
     sv: {
@@ -33,6 +29,11 @@ const PresentkortPage = () => {
     setSelectedImage(images[lang]?.main || images.sv.main);
   }, [lang]);
 
+  // **Fix för React Hook-fel - returnera först när texten finns**
+  if (!text?.presentkort) {
+    return <div>Laddar...</div>;
+  }
+
   return (
     <div
       style={{ fontFamily: "Poppins, sans-serif" }}
@@ -51,7 +52,6 @@ const PresentkortPage = () => {
 
           {/* Små bilder - placerade under den stora */}
           <div className="flex gap-4 mt-6 mb-6 md:ml-16 ml-0">
-            {/* Nuvarande stora bild som liten */}
             <img
               src={images[lang]?.main || images.sv.main}
               alt="Nuvarande presentkort"
@@ -60,8 +60,6 @@ const PresentkortPage = () => {
               }`}
               onClick={() => setSelectedImage(images[lang]?.main || images.sv.main)}
             />
-
-            {/* Alternativ bild */}
             <img
               src={images[lang]?.alt || images.sv.alt}
               alt="Alternativ presentkort"
