@@ -10,46 +10,60 @@ interface RecipeDisplayProps {
   showThisWeek?: boolean;
   showNextWeek?: boolean;
   summerBreak?: boolean;
-  onActiveIndexChange?: (index: number) => void; // Callback för aktivt index
-  onRecipesCountChange?: (count: number) => void; // Callback för antal recept
+  onActiveIndexChange?: (index: number) => void;
+  onRecipesCountChange?: (count: number) => void;
 }
 
 const RecipeDisplay: React.FC<RecipeDisplayProps> = ({
   showThisWeek = false,
   showNextWeek = true,
   summerBreak = false,
-  onActiveIndexChange, // Tar emot callback för aktivt index
-  onRecipesCountChange, // Tar emot callback för antal recept
+  onActiveIndexChange,
+  onRecipesCountChange,
 }) => {
   const { thisWeek, nextWeek } = useRecipes();
-  const [displayRecipes, setDisplayRecipes] = useState<Recipe[]>(
-    nextWeek.length > 2 ? nextWeek : thisWeek
-  );
+  const [displayRecipes, setDisplayRecipes] = useState<Recipe[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  // Uppdatera displayRecipes baserat på props
   useEffect(() => {
+    setIsLoading(true);
+
+    let selectedRecipes: Recipe[] = [];
     if (showThisWeek) {
-      setDisplayRecipes(thisWeek);
+      selectedRecipes = thisWeek;
     } else if (showNextWeek) {
-      setDisplayRecipes(nextWeek.length > 2 ? nextWeek : thisWeek);
+      selectedRecipes = nextWeek.length > 2 ? nextWeek : thisWeek;
     } else if (summerBreak) {
-      setDisplayRecipes([]);
+      selectedRecipes = [];
     }
+
+    setDisplayRecipes(selectedRecipes);
+    setTimeout(() => setIsLoading(false), 500); // Förhindrar layout shift
+
   }, [thisWeek, nextWeek, showThisWeek, showNextWeek, summerBreak]);
 
-  // Skicka antal recept till parent (Hero)
   useEffect(() => {
     if (onRecipesCountChange) {
-      onRecipesCountChange(displayRecipes.length); // Meddela antal recept
+      onRecipesCountChange(displayRecipes.length);
     }
   }, [displayRecipes, onRecipesCountChange]);
 
   return (
-    <SliderCards onActiveIndexChange={onActiveIndexChange}>
-      {displayRecipes.map((recipe) => (
-        <RecipeTile key={recipe.id} recipe={recipe} />
-      ))}
-    </SliderCards>
+    <div className="w-full min-h-[400px] flex justify-center items-center">
+      {isLoading ? (
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+          {[...Array(3)].map((_, i) => (
+            <div key={i} className="animate-pulse bg-gray-200 h-40 w-full rounded-lg"></div>
+          ))}
+        </div>
+      ) : (
+        <SliderCards onActiveIndexChange={onActiveIndexChange}>
+          {displayRecipes.map((recipe) => (
+            <RecipeTile key={recipe.id} recipe={recipe} className="min-h-[300px]" />
+          ))}
+        </SliderCards>
+      )}
+    </div>
   );
 };
 

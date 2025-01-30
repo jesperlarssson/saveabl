@@ -9,13 +9,14 @@ import Section from "../ui/Section";
 import { Parallax } from "react-scroll-parallax";
 import RecipeDisplay from "../general/RecipeDisplay";
 import { useLang } from "@/hooks/useLang";
-import router from "next/router";
+import { useRouter } from "next/navigation"; // Korrekt import av useRouter
 import { useState } from "react";
 
 const Hero = () => {
   const { lang, text } = useLang();
-  const [activeIndex, setActiveIndex] = useState(0); // Håll koll på aktiv punkt
-  const [recipesCount, setRecipesCount] = useState(0); // Håll koll på antal recept
+  const router = useRouter(); // Använd useRouter korrekt
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [recipesCount, setRecipesCount] = useState(0);
 
   const hero_picImage =
     lang === "sv"
@@ -27,11 +28,11 @@ const Hero = () => {
       : undefined;
 
   const handleSwipe = (index: number) => {
-    setActiveIndex(index); // Uppdatera aktiv punkt
+    setActiveIndex(index);
   };
 
   const updateRecipesCount = (count: number) => {
-    setRecipesCount(count); // Uppdatera antal recept
+    setRecipesCount(count);
   };
 
   return (
@@ -41,8 +42,8 @@ const Hero = () => {
           <div className="flex flex-col justify-center items-center gap-y-4 text-secondary">
             {/* Recepten */}
             <RecipeDisplay
-              onActiveIndexChange={handleSwipe} // Skicka callback för aktivt index
-              onRecipesCountChange={updateRecipesCount} // Skicka callback för antal recept
+              onActiveIndexChange={handleSwipe}
+              onRecipesCountChange={updateRecipesCount}
             />
 
             {/* Swipe-indikatorer (bara för mobil) */}
@@ -51,9 +52,7 @@ const Hero = () => {
                 <div
                   key={index}
                   className={`w-2 h-2 rounded-full ${
-                    index === activeIndex
-                      ? "bg-[#6E2936]"
-                      : "bg-[#EECFAA]"
+                    index === activeIndex ? "bg-[#6E2936]" : "bg-[#EECFAA]"
                   }`}
                 ></div>
               ))}
@@ -102,6 +101,7 @@ const Hero = () => {
                   </p>
                 ))}
               </div>
+
               <Button
                 onClick={() => router.push("/bestall?id=1")}
                 className="w-full md:w-96 mt-6"
@@ -114,11 +114,12 @@ const Hero = () => {
             {hero_picImage && (
               <div className="mt-4 -mb-16 sm:-mb-12">
                 <Image
-                  width={660 / 2}
-                  height={140 / 2}
+                  width={330}
+                  height={70}
                   alt="Hand scribbles"
                   src={hero_picImage}
                   className="object-cover w-65 sm:w-78"
+                  priority={true} // Ladda snabbt
                 />
               </div>
             )}

@@ -10,26 +10,27 @@ import { useLang } from "@/hooks/useLang";
 interface RecipeTileProps {
   recipe: Recipe;
   fullWidth?: boolean;
+  className?: string; // Stöd för extra klasser
 }
 
-const RecipeTile: React.FC<RecipeTileProps> = ({ recipe, fullWidth }) => {
+const RecipeTile: React.FC<RecipeTileProps> = ({ recipe, fullWidth, className }) => {
   const { lang } = useLang();
 
   // Helper function to get localization index based on language
   const getLocalizationIndex = (lang: string) => {
     switch (lang) {
-      case 'da':
+      case "da":
         return 1;
-      case 'en':
+      case "en":
         return 2;
-      case 'sv':
+      case "sv":
       default:
         return 0;
     }
   };
 
   const [recept, setRecept] = useState({
-    title: recipe.title, // Initial title as default
+    title: recipe.title,
   });
 
   useEffect(() => {
@@ -50,17 +51,15 @@ const RecipeTile: React.FC<RecipeTileProps> = ({ recipe, fullWidth }) => {
   };
 
   return (
-    <Link
-      onClick={handleLinkClick}
-      href={recipe.deprecated ? "#" : `recept/${recipe.slug}`}
-    >
+    <Link onClick={handleLinkClick} href={recipe.deprecated ? "#" : `recept/${recipe.slug}`}>
       <div
         className={twMerge(
           `relative cursor-pointer h-80 overflow-hidden rounded-xl bg-white group drop-shadow-lg hover:drop-shadow-xl hover:-translate-y-0 transition duration-300`,
-          fullWidth && "rounded-none shadow-none hover:-translate-y-0"
+          fullWidth && "rounded-none shadow-none hover:-translate-y-0",
+          className // Lägg till className här
         )}
       >
-        {/** TailwindCss gradient background to transparent */}
+        {/* TailwindCss gradient background to transparent */}
         <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent h-full"></div>
 
         <div className="relative bg-gray-300 bg-opacity-40 overflow-hidden h-full">
