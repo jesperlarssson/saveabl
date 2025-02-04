@@ -16,7 +16,7 @@ const IllustrationsBg = () => {
       <div className="w-screen max-w-screen-2xl h-screen p-24 opacity-60 relative flex justify-between overflow-hidden">
         <motion.div
           initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
+          animate={{ opacity: 1, scale: 1, y: 300 }} // Flyttar ner 100px
         >
           <Image
             width={150}
