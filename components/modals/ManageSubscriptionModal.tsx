@@ -112,17 +112,22 @@ const ManageSubscriptionModal: React.FC<ManageSubscriptionModalProps> = ({ updat
     </p>
 
     <select
-      className="w-full border col-span-2 border-primary bg-transparent p-2 rounded-md font-bold placeholder-secondary placeholder-opacity-10 text-secondary ring-1 ring-transparent focus:ring-primary focus:outline-none focus:border-secondary focus:ring-1 
-        disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
-        invalid:border-accent invalid:text-accent
-        focus:invalid:border-accent focus:invalid:ring-accent"
-      name="pause"
-      id="pause"
-      value={selectedWeek}
-      onChange={(e) => setSelectedWeek(parseInt(e.target.value))}
-    >
-      {pauseOptions}
-    </select>
+  className="w-full border col-span-2 border-primary bg-transparent p-2 pr-14 rounded-md font-bold 
+    text-secondary ring-1 ring-transparent focus:ring-primary focus:outline-none 
+    focus:border-secondary focus:ring-1 bg-no-repeat bg-right bg-[length:20px] appearance-none"
+  name="pause"
+  id="pause"
+  value={selectedWeek}
+  onChange={(e) => setSelectedWeek(parseInt(e.target.value))}
+  style={{
+    backgroundPosition: "calc(100% - 10px) center", // Flytta pilen mer åt höger
+    backgroundImage: "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"%236E2936\"><path fill-rule=\"evenodd\" d=\"M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z\" clip-rule=\"evenodd\"/></svg>')",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "20px",
+  }}
+>
+  {pauseOptions}
+</select>
   </div>
 
   {/* Knappen är utanför så den påverkas av formens gap-4 */}
