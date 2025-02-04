@@ -103,27 +103,34 @@ const ManageSubscriptionModal: React.FC<ManageSubscriptionModalProps> = ({ updat
       ) : (
         <div className="flex flex-col w-full gap-4">
           <div className="flex flex-col">
-            <form
-              onSubmit={handleNumberSubmit}
-              className="w-full flex flex-col gap-8 p-4"
-            >
-              <select
-                className="w-full border col-span-2 border-primary bg-transparent p-2 rounded-md font-bold placeholder-secondary placeholder-opacity-10 text-secondary ring-1 ring-transparent focus:ring-primary focus:outline-none focus:border-secondary focus:ring-1 
+          <form onSubmit={handleNumberSubmit} className="w-full flex flex-col gap-8 p-4">
+  
+  {/* Text och dropdown i en egen div med mindre mellanrum */}
+  <div className="flex flex-col space-y-3">
+    <p className="text-xs text-black mt-[-15px]">
+      {text?.my_pages.firstWeekAfterPause || "Första veckan efter paus"}
+    </p>
+
+    <select
+      className="w-full border col-span-2 border-primary bg-transparent p-2 rounded-md font-bold placeholder-secondary placeholder-opacity-10 text-secondary ring-1 ring-transparent focus:ring-primary focus:outline-none focus:border-secondary focus:ring-1 
         disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
         invalid:border-accent invalid:text-accent
         focus:invalid:border-accent focus:invalid:ring-accent"
-                name="pause"
-                id="pause"
-                value={selectedWeek}
-                onChange={(e) => setSelectedWeek(parseInt(e.target.value))}
-              >
-                {pauseOptions}
-              </select>
-              
-              <Button type="submit">
-                {text?.my_pages.pauseButton}
-              </Button>
-            </form>
+      name="pause"
+      id="pause"
+      value={selectedWeek}
+      onChange={(e) => setSelectedWeek(parseInt(e.target.value))}
+    >
+      {pauseOptions}
+    </select>
+  </div>
+
+  {/* Knappen är utanför så den påverkas av formens gap-4 */}
+  <Button type="submit">
+    {text?.my_pages.pauseButton}
+  </Button>
+</form>
+
           </div>
         </div>
       )}

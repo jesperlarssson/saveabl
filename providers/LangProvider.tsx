@@ -466,6 +466,7 @@ const svText = {
     manage_account: "Hantera konto",
     paused_until: "Pausad till",
     modalTitle: "Pausa din leverans till...",
+    firstWeekAfterPause: "Första veckan efter paus:", 
     modalDescription:
       "Du kan pausa din kommande matkasse till och med onsdagen före leverans. Därefter gäller pausningen för matkassen därpå. Välj vecka för återstart nedan, leverans lör/sön räknas som nästkommande vecka.",
     resumeSubscriptionButton: "Återuppta prenumeration",
@@ -1082,6 +1083,7 @@ button: "Got it - order now!"
     manage_account: "Manage account",
     paused_until: "Paused until",
     modalTitle: "Pause your delivery until...",
+    firstWeekAfterPause: "First week after pause:", 
     modalDescription:
       "You can pause your upcoming meal kit deliveries until the Wednesday before the delivery. After that, the pause will apply to the following meal kit. Select the week for restart below, delivery on Sat/Sun counts as the upcoming week.",
     resumeSubscriptionButton: "Resume subscription",
@@ -1631,6 +1633,7 @@ button: "Jeg forstår - bestil nu!"
     pause_until: "Abonnementet er sat på pause. Den næste måltidskasse leveres i uge {week} (leveringer lørdag/søndag tæller som følgende uge).", 
     pause_indefinite: "Abonnementet er sat på pause indtil videre.",
     modalTitle: "Pause din levering",
+    firstWeekAfterPause: "Første uge efter pause:", 
     modalDescription:
       "Du kan sætte din kommende måltidskasse på pause indtil onsdagen før levering. Derefter gælder pausen for den efterfølgende måltidskasse. Vælg ugen for genstart nedenfor:",
     resumeSubscriptionButton: "Genoptag abonnement",
