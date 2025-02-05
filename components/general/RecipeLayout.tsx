@@ -69,6 +69,10 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
     nutritionalValues: recipe?.nutritionalValues || "",
     contentAllergies: recipe?.contentAllergies || "",
     recipeComments: recipe?.recipeComments || [],
+    chef: {
+      name: recipe?.chef?.name || "Okänd kock",
+      image: recipe?.chef?.picture?.url || "/images/placeholder-chef.png"
+    }
   });
 
   const calculateRating = () => {
@@ -85,20 +89,30 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
   };
 
   useEffect(() => {
+    console.log("Full Recipe Object:", recipe);
+    console.log("Chef Data:", recipe?.chef);
+    console.log("Chef Picture URL:", recipe?.chef?.picture?.url);
+  
     const localizationIndex = getLocalizationIndex(lang);
     const temp = {
-      title: recipe?.localizations[localizationIndex]?.title || recipe?.title,
+      title: recipe?.title,
       image: recipe?.image?.url || "/images/placeholder.png",
-      ingredients: recipe?.localizations[localizationIndex]?.ingredients || recipe?.ingredients,
-      steg: recipe?.localizations[localizationIndex]?.steg || recipe?.steg,
-      savedIngredients: recipe?.localizations[localizationIndex]?.savedIngredients || recipe?.savedIngredients,
-      nutritionalValues: recipe?.localizations[localizationIndex]?.nutritionalValues || recipe?.nutritionalValues,
-      contentAllergies: recipe?.localizations[localizationIndex]?.contentAllergies || recipe?.contentAllergies,
+      ingredients: recipe?.ingredients || [],
+      steg: recipe?.steg || [],
+      savedIngredients: recipe?.savedIngredients || "",
+      nutritionalValues: recipe?.nutritionalValues || "",
+      contentAllergies: recipe?.contentAllergies || "",
       recipeComments: recipe?.recipeComments || [],
+      chef: {
+        name: recipe?.chef?.name || "Okänd kock",
+        image: recipe?.chef?.picture?.url || "/images/placeholder-chef.png"
+      }
     };
+    console.log("Updated Chef Object:", temp.chef); // Se om vi får en korrekt bild-URL
     setRecept(temp);
     calculateRating();
   }, [lang, recipe]);
+  
 
   if (recipe?.deprecated) {
     return <Section className="w-full">Detta är ett gammalt recept</Section>;
@@ -121,23 +135,21 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
 
           {/* Innehåll till höger om receptbilden */}
           <div className="col-span-4 sm:col-span-3 flex flex-col justify-end gap-2 relative">
-             {/*
-            <div className="flex items-center gap-2 mt-2">
-              <Image
-                src="/images/emil_kock.png"
-                alt="Chef Emil Petzén"
-                width={120}
-                height={120}
-                className="rounded-full"
-                sizes="(max-width: 120px) 100vw, 120px"
-                quality={100}
-              />
-              <h3 className="text-secondary font-poppins text-xl">Emil Petzén</h3>
-            </div>
-            <div className="flex mt-2 text-star">
-              {ratingSum > 1 && getStars(ratingSum)}
-            </div>
-            */}
+          <div className="flex items-center gap-2 mt-0">
+  {recept.chef.image && (
+    <Image
+      src={recept.chef.image}
+      alt={`Chef ${recept.chef.name}`}
+      width={120}
+      height={120}
+      className="rounded-full"
+      sizes="(max-width: 120px) 100vw, 120px"
+      quality={100}
+    />
+  )}
+  <h3 className="text-secondary font-poppins text-xl">{recept.chef.name}</h3>
+</div>
+
             <h2 className="font-poppins text-secondary text-2xl sm:text-4xl">
               {recept.title}
             </h2>

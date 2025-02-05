@@ -93,9 +93,11 @@ export interface Recipe {
 }
 
 export interface Chef {
+  picture: HyImage;
   name: string;
   title: string;
 }
+
 
 export interface HyImage {
   url: string;

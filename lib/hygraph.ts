@@ -499,6 +499,9 @@ export async function getRecipeWithSlug(slug: string) {
         chef {
           name
           title
+          picture {
+            url
+          }
         }
         image {
           url(transformation: {image: {resize: {height: 800, width: 1200}}})
