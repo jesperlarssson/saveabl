@@ -89,34 +89,30 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
   };
 
   useEffect(() => {
-    console.log("Full Recipe Object:", recipe);
-    console.log("Chef Data:", recipe?.chef);
-    console.log("Chef Picture URL:", recipe?.chef?.picture?.url);
-  
     const localizationIndex = getLocalizationIndex(lang);
     const temp = {
-      title: recipe?.title,
+      title: recipe?.localizations[localizationIndex]?.title || recipe?.title,
       image: recipe?.image?.url || "/images/placeholder.png",
-      ingredients: recipe?.ingredients || [],
-      steg: recipe?.steg || [],
-      savedIngredients: recipe?.savedIngredients || "",
-      nutritionalValues: recipe?.nutritionalValues || "",
-      contentAllergies: recipe?.contentAllergies || "",
+      ingredients: recipe?.localizations[localizationIndex]?.ingredients || recipe?.ingredients,
+      steg: recipe?.localizations[localizationIndex]?.steg || recipe?.steg,
+      savedIngredients: recipe?.localizations[localizationIndex]?.savedIngredients || recipe?.savedIngredients,
+      nutritionalValues: recipe?.localizations[localizationIndex]?.nutritionalValues || recipe?.nutritionalValues,
+      contentAllergies: recipe?.localizations[localizationIndex]?.contentAllergies || recipe?.contentAllergies,
       recipeComments: recipe?.recipeComments || [],
       chef: {
         name: recipe?.chef?.name || "Okänd kock",
         image: recipe?.chef?.picture?.url || "/images/placeholder-chef.png"
       }
     };
-    console.log("Updated Chef Object:", temp.chef); // Se om vi får en korrekt bild-URL
     setRecept(temp);
     calculateRating();
   }, [lang, recipe]);
-  
-
+ 
+ 
   if (recipe?.deprecated) {
     return <Section className="w-full">Detta är ett gammalt recept</Section>;
   }
+ 
 
   return (
     <Section className="w-full">
