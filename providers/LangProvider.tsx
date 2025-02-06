@@ -352,6 +352,10 @@ const svText = {
     deliveryDaysummary: "Leveransdag",
     totalPrice: "Totalpris",
     shipping: "+ frakt", 
+    title_familjekassen: "Familjekassen",
+    title_sambokassen: "Sambokassen",
+    subtitle_familjekassen: "3 recept • 3-4 personer",
+    subtitle_sambokassen: "3 recept • 2-3 personer",
     faq: "Frågor som kan uppstå:",
     faqItems: [ 
       {
@@ -967,6 +971,10 @@ button: "Got it - order now!"
     deliveryDaysummary: "Delivery day",
     totalPrice: "Total price",
     shipping: "+ shipping",
+    title_familjekassen: "Family kit",
+    title_sambokassen: "Couple kit",
+    subtitle_familjekassen: "3 recipes • 3-4 persons",
+    subtitle_sambokassen: "3 recipes • 2-3 persons",
     faq: "Questions that may arise:",
     faqItems: [
       {
@@ -1489,7 +1497,7 @@ button: "Jeg forstår - bestil nu!"
   order: {
     title: "Vi lancerer i nye byer!",
     title1:
-      "Find din levereringsdag",
+      "Indtast dit postnummer for at se om vi leverer til dig",
     title2: "Du har fået en særlig gave!",
     text: "Nu er det tid til at lancere i Malmö og København, og vi starter med et specielt tilbud til vores første kunder her! Indtast dit postnummer for at få et tilbud.",
     label: "Indtast dit postnummer for et tilbud",
@@ -1538,6 +1546,10 @@ button: "Jeg forstår - bestil nu!"
     deliveryDaysummary: "Leveringsdag",
     totalPrice: "Totalpris",
     shipping: "+ fragt",
+    title_familjekassen: "Familjekassen",
+    title_sambokassen: "Sambokassen",
+    subtitle_familjekassen: "3 opskrifter • 3-4 personer",
+    subtitle_sambokassen: "3 opskrifter • 2-3 personer",
     faq: "Spørgsmål der kan opstå:",
     faqItems: [
       {

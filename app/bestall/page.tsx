@@ -15,6 +15,8 @@ import getDeliveryWindowsForPostalCode from "@/actions/getDeliveryWindowsForPost
 import { UserInformation } from "@/providers/CheckoutProvider";
 import OrderWizard from './OrderWizard';
 import OrderSummary from './OrderSummary'; 
+import Lottie from "lottie-react";
+import gardAnimation from "@/public/anim/gard.json";
 import {
   getProductCostForPriceId,
   getShippingCostForProductId,
@@ -128,6 +130,21 @@ const Order = () => {
   const [selectedType, setSelectedType] = useState(productTypes[0]);
   const [deliveryWindows, setDeliveryWindows] = useState([]);
   const [showLinks, setShowLinks] = useState(false);
+  const [selectedMealKit, setSelectedMealKit] = useState<string>("Familjekassen");
+  const getMealKitTitle = () => {
+    if (!selectedMealKit) return text.order.linkTitle;
+    return selectedMealKit === "Familjekassen"
+      ? text.order.title_familjekassen
+      : text.order.title_sambokassen;
+  };
+
+  const getMealKitSubtitle = () => {
+    if (!selectedMealKit) return "";
+    return selectedMealKit === "Familjekassen"
+      ? text.order.subtitle_familjekassen
+      : text.order.subtitle_sambokassen;
+  };
+
 
   const [deliveryWindowsErrors, setDeliveryWindowsErrors] = useState<
     string | null
@@ -618,15 +635,14 @@ const Order = () => {
           <Title className="text-center">
             {id === "1" ? text.order.title1 : text.order.title2}
           </Title>
-          <BodyText className="text-center max-w-3xl mb-10">
+          <BodyText className="text-center max-w-3xl mb-4">
             {id === "1" ? "" : text.order.text}
           </BodyText>
-  
           <div className="my-8 max-w-4xl w-full h-1 border-b border-primary border-opacity-50"></div>
           <div className="flex flex-col items-center my-4">
             <label
               htmlFor="postalcode"
-              className="font-poppins text-lg mb-2 text-secondary w-full text-center sm:text-left"
+              className="font-poppins text-lg mb-2 text-secondary w-full text-center"
             >
               {id === "1" ? text.order.label1 : text.order.label2}
             </label>
@@ -643,6 +659,10 @@ const Order = () => {
               {id === "1" ? text.order.button1 : text.order.button2}
             </button>
           </div>
+          <div className="w-full max-w-md mt-2">
+      <Lottie animationData={gardAnimation} loop={true} />
+    </div>
+  
   
           <div className="my-8 max-w-4xl w-full h-1 border-b border-primary border-opacity-50"></div>
           {showLinks && (
@@ -673,19 +693,22 @@ const Order = () => {
              >
               {/* Steg 1: Välj matkasse */}
               <>
-              <h1 className="font-bold font-poppins text-secondary text-3xl sm:text-5xl max-w-4xl mb-4 col-span-2 px-2">
+              <h1 className="font-bold font-poppins text-center text-secondary text-3xl sm:text-4xl max-w-4xl mb-4 col-span-2 px-2">
                {text.order.linkTitle}
                </h1>
-                  <h3 className="font-poppins text-lg text-secondary px-2">
+                  <h3 className="font-poppins text-center mb-2 text-md sm:text-lg text-secondary px-2">
                     {text.order.type}
                   </h3> 
-                  <div className="flex gap-4 px-2">
+                  <div className="flex gap-4 px-2 justify-center">
                     {productTypes.map((productType) => {
                       return (
                         <CheckoutButton
                           key={productType.label}
                           selected={productType.id === selectedType.id}
-                          onClick={() => setSelectedType(productType)}
+                          onClick={() => {
+                            setSelectedMealKit(productType.label); // Sparar valet
+                            setSelectedType(productType);
+                          }}
                           className="w-full sm:w-auto"
                         >
                           {productType.label}
@@ -701,7 +724,7 @@ const Order = () => {
   
                 <h3
                   key="interval-title"
-                  className="font-poppins text-lg mt-6 text-secondary text-left px-2"
+                  className="font-poppins text-center mb-2 text-md sm:text-lg mt-8 text-secondary text-center px-2"
                 >
                   {text.order.variant}
                 </h3>
@@ -776,9 +799,12 @@ const Order = () => {
         variants={variants}
         className="mt-2 mb-4"
       >
+        <h1 className="font-bold font-poppins text-center text-secondary text-3xl sm:text-4xl max-w-4xl mb-0 col-span-2 px-2">{getMealKitTitle()}</h1>
+<h2 className="text-lg text-secondary text-center mb-6">{getMealKitSubtitle()}</h2>
+
         <h3
           key="title-delivery"
-          className="font-poppins mt-2 text-lg text-secondary text-left px-4"
+          className="font-poppins mt-2 mb-2 text-md sm:text-lg text-secondary text-center px-4"
         >
           {text.order.deliveryDay}
         </h3>
@@ -845,12 +871,13 @@ const Order = () => {
   
               {/* Steg 4: Adress- och kontaktinformation */}
               <>
-                <label
-                  htmlFor="address"
-                  className="font-poppins mt-8 text-lg mb-2 text-secondary"
-                >
-                  {text.order.address}
-                </label>
+              <h1 className="font-bold font-poppins text-center text-secondary text-3xl sm:text-4xl max-w-4xl mb-0 col-span-2 px-2">{getMealKitTitle()}</h1>
+<h2 className="text-lg text-secondary text-center mb-6">{getMealKitSubtitle()}</h2>
+
+<h3 className="font-poppins mt-8 mb-3 text-md sm:text-lg text-secondary">
+  {text.order.address}
+</h3>
+
                 <div className="grid grid-cols-2 gap-4 items-start my-2">
                   <Input
                     label={text.order.full_name}
@@ -896,7 +923,7 @@ const Order = () => {
                   </div>
                 </div>
           
-                <h3 className="font-poppins text-lg mt-3 text-secondary">
+                <h3 className="font-poppins mb-1 text-md sm:text-lg mt-6 text-secondary">
                   {text.order.contact}
                 </h3>
                 <div className="grid grid-cols-2 gap-4">
@@ -961,10 +988,6 @@ const Order = () => {
           )}
         </div>
       </Section>
-       {/* Behåller FAQ och andra avsnitt */}
-       <div id="vanliga-fragor">
-            <Accordion faqs={text.order.faqItems} title={text.order.faq} />
-          </div>
     </>
   )};
   
