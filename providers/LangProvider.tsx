@@ -780,7 +780,7 @@ const enText = {
       description: "We're constantly evolving, exploring new horizons, and pushing the boundaries. Step into our world and discover the latest developments in our universe",
     },
     reviews: {
-      title: "Our customers just saved 20 000 dinners. Here's what they say about us:",
+      title: "Our customers just saved 20 000 dinners. Here's what they say:",
       text: "Here's what our climate-hero-customers think",
       read_all_reviews: "Read all reviews",
     content: [
