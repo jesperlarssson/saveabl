@@ -1,48 +1,51 @@
 "use client";
 import React from "react";
 import { useRouter } from "next/navigation";
+import { AiFillStar } from "react-icons/ai"; // Importera stjärnikonen
 import Card from "../ui/Card";
-//import { Parallax } from "react-scroll-parallax";
-
 
 interface ReviewTileProps {
-  key: string;
   id: number;
   name: string;
   title: string;
   review: string;
   rating: number;
-  date: string;
   url: string;
 }
 
 const ReviewTile: React.FC<ReviewTileProps> = ({
-  key,
   id,
   name,
   title,
   review,
   rating,
-  date,
   url,
 }) => {
   const router = useRouter();
+
   return (
-    <div key={key} className="">
-      {/* <Parallax speed={id * 3}> */}
-        <Card
-          clickable
-          onClick={() => router.push(url)}
-          className="bg-primary-200 text-gray-900 bg-opacity-100 flex flex-col gap-2 relative z-10"
-        >
-          <p className="text-xs opacity-40">
-            <span className="font-bold ">{name}</span>
-            {`, ${date}`}
-          </p>
-          <h3 className="font-poppins text-xl text-secondary">{title}</h3>
-          <p className="opacity-80">{review}</p>
-        </Card>
-      {/* </Parallax> */}
+    <div className="relative">
+      <Card
+        clickable
+        onClick={() => router.push(url)}
+        className="bg-primary-200 text-gray-900 bg-opacity-100 flex flex-col gap-2 relative z-10 p-4"
+      >
+        {/* Stjärnor + Namn på samma rad */}
+<div className="flex items-center gap-2">
+  <p className="text-sm font-bold text-[#000000]">{name}</p>
+  <div className="flex gap-[1px]">
+    {[...Array(5)].map((_, i) => (
+      <AiFillStar key={i} className="text-[#00B67A] text-lg" />
+    ))}
+  </div>
+</div>
+
+        {/* Titel */}
+        <h3 className="font-poppins text-xl text-[#000000] font-semibold">{title}</h3>
+
+        {/* Recension */}
+        <p className="opacity-80">{review}</p>
+      </Card>
     </div>
   );
 };
