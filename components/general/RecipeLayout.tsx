@@ -145,12 +145,16 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
   )}
   <h3 className="text-secondary font-poppins text-xl">{recept.chef.name}</h3>
 </div>
+<div className="flex items-center mt-2">
+  {getStars(ratingSum)} {/* Endast stjärnorna baserat på det beräknade betyget */}
+</div>
 
             <h2 className="font-poppins text-secondary text-2xl sm:text-4xl">
               {recept.title}
             </h2>
           </div>
         </div>
+        
 
         {/* Ikoner och text direkt nedanför receptbilden */}
         <div className="mt-4 flex items-center gap-4">
