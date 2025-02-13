@@ -13,6 +13,47 @@ import ManageSubscriptionModal from "@/components/modals/ManageSubscriptionModal
 import { usePauseWeek } from "@/context/PauseWeekContext";
 import { addWeeks, format } from "date-fns";
 
+const translateDay = (day: string, language: "sv" | "en" | "da") => {
+  if (!day) return null;
+
+  // 🛠 Konvertera inkommande dag till "Title Case" (ex: "saturday" → "Saturday")
+  const formattedDay = day.charAt(0).toUpperCase() + day.slice(1).toLowerCase();
+
+  // Normalisera inkommande dagar till engelska först
+  const normalizedDays: Record<string, string> = {
+    // Svenska till engelska
+    "Lördag": "Saturday", "Söndag": "Sunday", "Måndag": "Monday",
+
+    // Danska till engelska
+    "Lørdag": "Saturday", "Søndag": "Sunday", "Mandag": "Monday",
+
+    // Engelska (om den redan är rätt formaterad)
+    "Saturday": "Saturday", "Sunday": "Sunday", "Monday": "Monday"
+  };
+
+  // Om dagen är på svenska eller danska, översätt till engelska först
+  const normalizedDay = normalizedDays[formattedDay] || formattedDay;
+
+  // Översätt till önskat språk (svenska, engelska eller danska)
+  const days: Record<"en" | "sv" | "da", Record<string, string>> = {
+    en: {
+      "Saturday": "Saturday", "Sunday": "Sunday", "Monday": "Monday",
+    },
+    sv: {
+      "Saturday": "Lördag", "Sunday": "Söndag", "Monday": "Måndag",
+    },
+    da: {
+      "Saturday": "Lørdag", "Sunday": "Søndag", "Monday": "Mandag",
+    }
+  };
+
+  return days[language]?.[normalizedDay] || normalizedDay; // Om inget matchar, returnera originalvärdet
+};
+
+
+
+
+
 interface DeliveryInfo {
   city: string;
   country: string;
@@ -51,9 +92,15 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
   } = useChangeDeliveryDayModal();
   const { onOpen: onOpenAddress, forCustomer: forCustomerAddress } = useManageAddressModal();
 
-  const { text } = useLang();
+  const { text, lang } = useLang();
   const authContext = useContext(AuthContext);
   const { referralCode } = authContext || {};
+
+  const deliveryDayMatch = stripeResponse?.customer?.description?.match(/Vald leverans:\s([\wåäöÅÄÖæøÆØ]+)/);
+const deliveryDay = deliveryDayMatch ? deliveryDayMatch[1] : null;
+
+// Översätt veckodagen till aktuellt språk
+const translatedDeliveryDay = deliveryDay ? translateDay(deliveryDay, lang as "sv" | "en" | "da") : null;
 
   useEffect(() => {
     if (loading || !activeSubscription) return;
@@ -175,6 +222,9 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
   };
 
   if (loading || !activeSubscription) {
+    console.log("Stripe Customer:", stripeResponse?.customer);
+
+
     return (
       <div className="flex gap-2 items-center">
         <div className="w-3 h-3 rounded-full animate-pulse bg-accent"></div> Loading...
@@ -226,7 +276,7 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
             {text?.my_pages?.subscription_details ?? "Subscription Details"}
           </h3>
           <div className="bg-primary bg-opacity-60 shadow-inner rounded px-8 pt-6 pb-8 mb-4">
-            <p className="mb-4">
+            <p className="mb-2">
               {text?.my_pages?.billing_frequency ?? "Billing Frequency"}:{" "}
               <span className="font-medium">
                 {billingFrequency === "bi-weekly"
@@ -234,6 +284,13 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
                   : text?.my_pages?.weekly}
               </span>
             </p>
+            {translatedDeliveryDay && (
+  <p className="mb-4">
+    {text?.my_pages?.delivery_day ?? "Leveransdag"}:{" "}
+    <span className="font-medium">{translatedDeliveryDay}</span>
+  </p>
+)}
+
             {isPaused && (
             <p className="mb-4">
             {isIndefinitePause

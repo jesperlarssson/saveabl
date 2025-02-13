@@ -189,6 +189,23 @@ const ChangeDeliveryDayModal = () => {
       onChange={onChange}
     >
       <div className="flex flex-col w-full gap-4">
+
+      <ul className="list-disc list-outside pl-6">
+  <li>
+    {textData?.beforeThursday ||
+      "Ändringar innan torsdag gäller för kommande matkasse."}
+  </li>
+  <li>
+    {textData?.afterThursday ||
+      "Ändringar efter torsdag gäller för matkassen därpå."}
+  </li>
+</ul>
+
+
+      <p>
+        {textData?.acceptanceNote ||
+          "För att vi ska kunna planera behöver vi acceptera ändringen, så det kan ta en liten stund innan den syns på ditt konto. Tack för ditt tålamod! 😊"}
+      </p>
         <div className="flex flex-col">
           <form
             onSubmit={handleSubmit}
