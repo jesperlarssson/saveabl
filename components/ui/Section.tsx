@@ -4,7 +4,7 @@ import { twMerge } from "tailwind-merge";
 interface SectionProps {
   className?: string;
   bgIllustrationComponent?: React.ReactNode;
-  children?: React.ReactNode; 
+  children: React.ReactNode;
   narrow?: boolean;
 }
 
