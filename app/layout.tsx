@@ -18,6 +18,7 @@ import MetaPixel from "@/components/MetaPixel";
 import { LangProvider } from "@/providers/LangProvider";
 import PopupManager from "@/app/popupManager"; // Importera PopupManager från app
 import { PauseWeekProvider } from "@/context/PauseWeekContext";
+import ImageDisplay from "@/components/general/ImageDisplay";
 
 const font = Figtree({ subsets: ["latin"] });
 export const revalidate = 1; // revalidate this page every 60 seconds
@@ -67,9 +68,9 @@ export default function RootLayout({
                 <ToasterProvider />
                 <ModalProvider />
                 <MyParallaxProvider>
-                  <RecipeProvider>
                     <PromotionBanner />
                     <Navbar />
+                    <ImageDisplay/>
 
                     <main className="min-h-screen overflow-x-hidden">
                       {children}
@@ -77,7 +78,6 @@ export default function RootLayout({
 
                     <Footer />
                     <PopupManager /> {/* Lägg till PopupManager här */}
-                  </RecipeProvider>
                 </MyParallaxProvider>
                 <CheckoutBasket />
               </CheckoutProvider>

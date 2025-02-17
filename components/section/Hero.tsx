@@ -36,27 +36,10 @@ const Hero = () => {
   };
 
   return (
-    <div className="w-full h-auto -mt-28 sm:-mt-24 flex flex-col justify-center">
+    <div className="w-full h-auto -mt-20 sm:-mt-24 flex flex-col justify-center">
       <Section className="pb-0 sm:pb-2">
         <Parallax speed={10}>
           <div className="flex flex-col justify-center items-center gap-y-4 text-secondary">
-            {/* Recepten */}
-            <RecipeDisplay
-              onActiveIndexChange={handleSwipe}
-              onRecipesCountChange={updateRecipesCount}
-            />
-
-            {/* Swipe-indikatorer (bara för mobil) */}
-            <div className="flex justify-center items-center gap-2 mb-4 -mt-4 sm:hidden">
-              {[...Array(recipesCount)].map((_, index) => (
-                <div
-                  key={index}
-                  className={`w-2 h-2 rounded-full ${
-                    index === activeIndex ? "bg-[#6E2936]" : "bg-[#EECFAA]"
-                  }`}
-                ></div>
-              ))}
-            </div>
 
             {/* Huvudinnehållet */}
             <div className="flex flex-col justify-center items-center text-center">

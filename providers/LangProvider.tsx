@@ -108,6 +108,11 @@ const svText = {
     my_account: "Mina sidor",
     newsletter: ""
   },
+  imageDisplay: {
+    klimatsmart: "Klimatsmart",
+    kockforberedd: "Kockförberedd",
+    enkeltgott: "Enkelt & Gott",
+  },
   page: {
     hero: {
       title: {
@@ -734,6 +739,11 @@ const enText = {
     sign_up: "Sign up",
     my_account: "My account",
   },
+  imageDisplay: {
+    klimatsmart: "Climate friendly",
+    kockforberedd: "Chef prepared",
+    enkeltgott: "Simple & Tasty",
+  },
   page: {
     hero: {
       title: {
@@ -1323,6 +1333,11 @@ const daText = {
     log_out: "Log ud",
     sign_up: "Tilmeld dig",
     my_account: "Min konto",
+  },
+  imageDisplay: {
+    klimatsmart: "Klimavenlig",
+    kockforberedd: "Kokforberedt",
+    enkeltgott: "Enkelt & Lækkert",
   },
   page: {
     hero: {
