@@ -100,7 +100,7 @@ const Hero = () => {
                   height={70}
                   alt="Hand scribbles"
                   src={hero_picImage}
-                  className="object-cover w-52 sm:w-72 md:w-80 lg:w-80" // 🔹 Mindre på mobil, större på desktop
+                  className="object-cover w-72 sm:w-72 md:w-80 lg:w-80" // 🔹 Mindre på mobil, större på desktop
                   priority={true}
                 />
               </div>
