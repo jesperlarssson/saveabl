@@ -11,6 +11,7 @@ import RecipeDisplay from "../general/RecipeDisplay";
 import { useLang } from "@/hooks/useLang";
 import { useRouter } from "next/navigation"; // Korrekt import av useRouter
 import { useState } from "react";
+import ImageDisplay from "../general/ImageDisplay";
 
 const Hero = () => {
   const { lang, text } = useLang();
@@ -36,12 +37,13 @@ const Hero = () => {
   };
 
   return (
-    <div className="w-full h-auto -mt-10 sm:-mt-10 flex flex-col justify-center">
+    <div className="w-full h-auto flex flex-col justify-center">
+      <ImageDisplay/>
       <Section className="pb-0 sm:pb-2">
           <div className="flex flex-col justify-center items-center gap-y-4 text-secondary">
 
             {/* Huvudinnehållet */}
-            <div className="flex flex-col justify-center items-center text-center">
+            <div className="flex flex-col justify-center items-center text-center -mt-10 sm:-mt-10">
               <motion.h1
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
