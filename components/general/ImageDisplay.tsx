@@ -1,6 +1,7 @@
 "use client"
 import React from "react";
 import { useLang } from "@/hooks/useLang"; // Importera språkhantering
+import Image from "next/image";
 
 const ImageDisplay: React.FC = () => {
   const { text } = useLang(); // Hämta text från LangProvider
@@ -11,7 +12,7 @@ const ImageDisplay: React.FC = () => {
       <div className="grid gap-1 md:gap-2 px-2 md:px-2 md:grid-cols-3 md:grid-rows-1 grid-cols-2 grid-auto-rows md:h-auto">
         {/* Första bilden - Mindre höjd på mobil */}
         <div className="relative w-full col-span-2 md:col-span-1">
-          <img 
+        <Image
             src="/images/klimatsmart.webp" 
             alt={text.imageDisplay.klimatsmart}
             className="w-full h-[150px] md:h-[415px] object-cover rounded-md object-[50%_60%] md:object-center"
@@ -24,7 +25,7 @@ const ImageDisplay: React.FC = () => {
 
         {/* Andra bilden - Kockförberedd (Högre på mobil) */}
         <div className="relative w-full">
-          <img 
+        <Image
             src="/images/kockforberedd.webp" 
             alt={text.imageDisplay.kockforberedd}
             className="w-full h-[190px] md:h-[415px] object-cover rounded-md object-[50%_38%]" 
@@ -37,7 +38,7 @@ const ImageDisplay: React.FC = () => {
 
         {/* Tredje bilden - Matbilden (Högre på mobil) */}
         <div className="relative w-full">
-          <img 
+        <Image
             src="/images/enkelt-gott.webp" 
             alt={text.imageDisplay.enkeltgott}
             className="w-full h-[190px] md:h-[415px] object-cover rounded-md object-[50%_40%]"
