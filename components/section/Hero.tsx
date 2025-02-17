@@ -43,7 +43,7 @@ const Hero = () => {
           <div className="flex flex-col justify-center items-center gap-y-4 text-secondary">
 
             {/* Huvudinnehållet */}
-            <div className="flex flex-col justify-center items-center text-center -mt-10 sm:-mt-10">
+            <div className="flex flex-col justify-center items-center text-center -mt-10 sm:-mt-8">
               <motion.h1
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
