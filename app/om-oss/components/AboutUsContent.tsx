@@ -104,6 +104,21 @@ const AboutUsContent = () => {
               {text.about_us.sections[3].title}
             </p>
           </a>
+          <a
+            href="#vanliga-fragor"
+            className="text-secondary font-semibold flex flex-col gap-4 justify-center items-center group cursor-pointer"
+          >
+            <div className="w-16 h-16  md:w-24 md:h-24 p-2 md:p-4 rounded-2xl bg-primary flex justify-center items-center transition group-hover:-translate-y-2 group-hover:drop-shadow-lg">
+              <Image
+                alt="Vanliga frågor"
+                src={"/images/illustrations/faq.png"}
+                width={60}
+                height={50}
+                className="object-contain w-full h-full"
+              />
+            </div>
+            <p className="text-sm md:text-base">{text.about_us.faq}</p>
+          </a>
         </div>
       </Section>
       <TextAndImage
@@ -134,6 +149,9 @@ const AboutUsContent = () => {
         text={text.about_us.sections[3].text}
         imageUrl="/images/green-landscape.png"
       />
+      <div id="vanliga-fragor">
+        <Accordion faqs={text.about_us.faqItems} title={text.about_us.faq} />
+      </div>
     </div>
   );
 };
