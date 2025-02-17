@@ -36,9 +36,8 @@ const Hero = () => {
   };
 
   return (
-    <div className="w-full h-auto -mt-20 sm:-mt-24 flex flex-col justify-center">
+    <div className="w-full h-auto -mt-10 sm:-mt-10 flex flex-col justify-center">
       <Section className="pb-0 sm:pb-2">
-        <Parallax speed={10}>
           <div className="flex flex-col justify-center items-center gap-y-4 text-secondary">
 
             {/* Huvudinnehållet */}
@@ -87,7 +86,7 @@ const Hero = () => {
 
               <Button
                 onClick={() => router.push("/bestall?id=1")}
-                className="w-full md:w-96 mt-6"
+                className="w-full md:w-96 mt-3"
               >
                 {text.page.hero.order_now}
               </Button>
@@ -95,19 +94,18 @@ const Hero = () => {
 
             {/* Hero Pic Bild */}
             {hero_picImage && (
-              <div className="mt-4 -mb-16 sm:-mb-12">
+                <div className="mt-4 -mb-6 sm:-mb-5">
                 <Image
                   width={330}
                   height={70}
                   alt="Hand scribbles"
                   src={hero_picImage}
-                  className="object-cover w-65 sm:w-78"
-                  priority={true} // Ladda snabbt
+                  className="object-cover w-52 sm:w-72 md:w-80 lg:w-80" // 🔹 Mindre på mobil, större på desktop
+                  priority={true}
                 />
               </div>
             )}
           </div>
-        </Parallax>
       </Section>
     </div>
   );
