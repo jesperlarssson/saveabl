@@ -10,14 +10,17 @@ import { Parallax } from "react-scroll-parallax";
 import RecipeDisplay from "../general/RecipeDisplay";
 import { useLang } from "@/hooks/useLang";
 import { useRouter } from "next/navigation"; // Korrekt import av useRouter
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ImageDisplay from "../general/ImageDisplay";
+import LoadingScreen from "./LoadingScreen";
 
 const Hero = () => {
   const { lang, text } = useLang();
   const router = useRouter(); // Använd useRouter korrekt
   const [activeIndex, setActiveIndex] = useState(0);
   const [recipesCount, setRecipesCount] = useState(0);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
+
 
   const hero_picImage =
     lang === "sv"
@@ -36,9 +39,31 @@ const Hero = () => {
     setRecipesCount(count);
   };
 
+  useEffect(() => {
+    const imagePaths = [
+      "/images/klimatsmart.webp",
+      "/images/kockforberedd.webp",
+      "/images/enkelt-gott.webp",
+    ];
+
+    let loadedImages = 0;
+
+    imagePaths.forEach((src) => {
+      const img = new window.Image();
+      img.src = src;
+      img.onload = () => {
+        loadedImages++;
+        if (loadedImages === imagePaths.length) {
+          setImagesLoaded(true);
+        }
+      };
+    });
+  }, []);
+  
+
   return (
     <div className="w-full h-auto flex flex-col justify-center">
-      <ImageDisplay/>
+      {!imagesLoaded ? <LoadingScreen /> : <ImageDisplay />}
       <Section className="pb-0 sm:pb-2">
           <div className="flex flex-col justify-center items-center gap-y-4 text-secondary">
 
@@ -114,3 +139,4 @@ const Hero = () => {
 };
 
 export default Hero;
+
