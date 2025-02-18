@@ -18,7 +18,8 @@ const ImageDisplay: React.FC = () => {
   width={500} // Sätt ett breddvärde
   height={500} // Sätt ett höjdvärde
   className="w-full h-[150px] md:h-[415px] object-cover rounded-md object-[50%_60%] md:object-center"
-  priority={true} // 🔹 Gör att bilderna laddas direkt
+  priority={true} 
+  loading="eager"
 />
           <div className="absolute bottom-2 right-2 md:bottom-4 md:right-4 bg-white px-1.5 md:px-3 py-1 md:py-2 rounded-md shadow-md flex items-center gap-1 md:gap-1">
           <span className="text-black font-medium text-[6px] md:text-xs">✔</span>
@@ -35,6 +36,7 @@ const ImageDisplay: React.FC = () => {
             height={500} // Sätt ett höjdvärde
             className="w-full h-[190px] md:h-[415px] object-cover rounded-md object-[50%_38%]" 
             priority={true}
+            loading="eager"
           />
           <div className="absolute bottom-2 right-2 md:bottom-4 md:right-4 bg-white px-1.5 md:px-3 py-1 md:py-2 rounded-md shadow-md flex items-center gap-1 md:gap-1">
           <span className="text-black font-medium text-[6px] md:text-xs">✔</span>
@@ -51,6 +53,7 @@ const ImageDisplay: React.FC = () => {
             height={500} // Sätt ett höjdvärde
             className="w-full h-[190px] md:h-[415px] object-cover rounded-md object-[50%_40%]"
             priority={true}
+            loading="eager"
           />
           <div className="absolute bottom-2 right-2 md:bottom-4 md:right-4 bg-white px-1.5 md:px-3 py-1 md:py-2 rounded-md shadow-md flex items-center gap-1 md:gap-1">
           <span className="text-black font-medium text-[6px] md:text-xs">✔</span>

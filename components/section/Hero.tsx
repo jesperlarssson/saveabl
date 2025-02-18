@@ -31,39 +31,9 @@ const Hero = () => {
       ? "/images/hero_pic_da.png"
       : undefined;
 
-  const handleSwipe = (index: number) => {
-    setActiveIndex(index);
-  };
-
-  const updateRecipesCount = (count: number) => {
-    setRecipesCount(count);
-  };
-
-  useEffect(() => {
-    const imagePaths = [
-      "/images/klimatsmart.webp",
-      "/images/kockforberedd.webp",
-      "/images/enkelt-gott.webp",
-    ];
-
-    let loadedImages = 0;
-
-    imagePaths.forEach((src) => {
-      const img = new window.Image();
-      img.src = src;
-      img.onload = () => {
-        loadedImages++;
-        if (loadedImages === imagePaths.length) {
-          setImagesLoaded(true);
-        }
-      };
-    });
-  }, []);
-  
-
   return (
     <div className="w-full h-auto flex flex-col justify-center">
-      {!imagesLoaded ? <LoadingScreen /> : <ImageDisplay />}
+       <ImageDisplay />
       <Section className="pb-0 sm:pb-2">
           <div className="flex flex-col justify-center items-center gap-y-4 text-secondary">
 
