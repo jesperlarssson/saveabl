@@ -34,10 +34,25 @@ export default function RootLayout({
      <head>
        <MetaPixel pixelId="995084671596511" />
 
-       <link rel="preload" as="image" href="/images/klimatsmart.webp" />
-       <link rel="preload" as="image" href="/images/kockforberedd.webp" />
-       <link rel="preload" as="image" href="/images/enkelt-gott.webp" />
-      
+       <link 
+  rel="preload" 
+  as="image" 
+  href="/images/klimatsmart.webp"
+  media="(max-width: 768px)" 
+/>
+<link 
+  rel="preload" 
+  as="image" 
+  href="/images/kockforberedd.webp"
+  media="(max-width: 768px)" 
+/>
+<link 
+  rel="preload" 
+  as="image" 
+  href="/images/enkelt-gott.webp"
+  media="(max-width: 768px)" 
+/>
+
        <Script
          id="google-tag-manager"
          dangerouslySetInnerHTML={{
