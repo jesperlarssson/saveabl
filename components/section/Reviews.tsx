@@ -84,6 +84,7 @@ const Reviews = () => {
   width={500} 
   height={100}
   quality={100} 
+  unoptimized={true} 
   loading="lazy" 
   className="h-12 w-auto mb-4"
 />
