@@ -66,11 +66,17 @@ const PromotionBanner = () => {
           className="flex items-center ml-1 md:ml-6"
         >
           <Image
-            src={trustpilotImage}  // Dynamisk bild baserat på språket
-            alt="Trustpilot"
-            width={250}
-            height={30}
-          />
+          src={trustpilotImage} 
+          alt="Trustpilot"
+          width={250}  
+          height={30}  
+          quality={100}
+          style={{ maxWidth: "100%", height: "auto", objectFit: "contain" }} 
+          priority={true}
+          loading="eager"
+          fetchPriority="high"
+         />
+
         </a>
 
         {/* Lodrätt streck */}
@@ -94,10 +100,15 @@ const PromotionBanner = () => {
           className="flex items-center mr-2 mt-0.5 md:hidden"
         >
           <Image
-            src={eubusinessImage}  // Dynamisk bild baserat på språket
+            src={eubusinessImage}  
             alt="Eubusiness News"
-            width={250}
-            height={30}
+            width={250}  
+            height={30}  
+            quality={100} 
+            style={{ maxWidth: "100%", height: "auto", objectFit: "contain" }} 
+            priority={true}
+            loading="eager"
+            fetchPriority="high"
           />
         </a>
 
