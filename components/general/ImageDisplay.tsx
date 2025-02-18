@@ -11,7 +11,7 @@ const ImageDisplay: React.FC = () => {
       {/* Bildlayouten */}
       <div className="grid gap-1 md:gap-2 px-2 md:px-2 md:grid-cols-3 md:grid-rows-1 grid-cols-2 grid-auto-rows md:h-auto">
         {/* Första bilden - Mindre höjd på mobil */}
-        <div className="relative w-full col-span-2 md:col-span-1">
+        <div className="relative w-full col-span-2 md:col-span-1 h-[150px] md:h-[415px]">
         <Image 
   src="/images/klimatsmart.webp" 
   alt={text.imageDisplay.klimatsmart} 
@@ -20,7 +20,6 @@ const ImageDisplay: React.FC = () => {
   className="w-full h-[150px] md:h-[415px] object-cover rounded-md object-[50%_60%] md:object-center"
   priority={true} 
   loading="eager"
-  style={{ aspectRatio: "1/1", minHeight: "150px" }}
 />
           <div className="absolute bottom-2 right-2 md:bottom-4 md:right-4 bg-white px-1.5 md:px-3 py-1 md:py-2 rounded-md shadow-md flex items-center gap-1 md:gap-1">
           <span className="text-black font-medium text-[6px] md:text-xs">✔</span>
@@ -29,7 +28,7 @@ const ImageDisplay: React.FC = () => {
         </div>
 
         {/* Andra bilden - Kockförberedd (Högre på mobil) */}
-        <div className="relative w-full">
+        <div className="relative w-full h-[190px] md:h-[415px]">
         <Image
             src="/images/kockforberedd.webp" 
             alt={text.imageDisplay.kockforberedd}
@@ -38,7 +37,6 @@ const ImageDisplay: React.FC = () => {
             className="w-full h-[190px] md:h-[415px] object-cover rounded-md object-[50%_38%]" 
             priority={true}
             loading="eager"
-            style={{ aspectRatio: "1/1", minHeight: "150px" }}
           />
           <div className="absolute bottom-2 right-2 md:bottom-4 md:right-4 bg-white px-1.5 md:px-3 py-1 md:py-2 rounded-md shadow-md flex items-center gap-1 md:gap-1">
           <span className="text-black font-medium text-[6px] md:text-xs">✔</span>
@@ -47,7 +45,7 @@ const ImageDisplay: React.FC = () => {
         </div>
 
         {/* Tredje bilden - Matbilden (Högre på mobil) */}
-        <div className="relative w-full">
+        <div className="relative w-full h-[190px] md:h-[415px]">
         <Image
             src="/images/enkelt-gott.webp" 
             alt={text.imageDisplay.enkeltgott}
@@ -56,7 +54,6 @@ const ImageDisplay: React.FC = () => {
             className="w-full h-[190px] md:h-[415px] object-cover rounded-md object-[50%_40%]"
             priority={true}
             loading="eager"
-            style={{ aspectRatio: "1/1", minHeight: "150px" }}
           />
           <div className="absolute bottom-2 right-2 md:bottom-4 md:right-4 bg-white px-1.5 md:px-3 py-1 md:py-2 rounded-md shadow-md flex items-center gap-1 md:gap-1">
           <span className="text-black font-medium text-[6px] md:text-xs">✔</span>
