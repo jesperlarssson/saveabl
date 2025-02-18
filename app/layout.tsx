@@ -33,6 +33,10 @@ export default function RootLayout({
    <html lang="sv">
      <head>
        <MetaPixel pixelId="995084671596511" />
+
+       <link rel="preload" as="image" href="/images/klimatsmart.webp" />
+       <link rel="preload" as="image" href="/images/kockforberedd.webp" />
+       <link rel="preload" as="image" href="/images/enkelt-gott.webp" />
       
        <Script
          id="google-tag-manager"
