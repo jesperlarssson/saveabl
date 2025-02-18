@@ -11,6 +11,7 @@ import globAnimation from "../../public/anim/Jordklot.json";
 import Title from "../ui/Title";
 import { useLang } from "@/hooks/useLang";
 import { useSwipeable } from "react-swipeable"; // Lägg till detta paket
+import Image from "next/image";
 
 interface Review {
   id: number;
@@ -77,11 +78,16 @@ const Reviews = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img
-              src={`/images/trustpilot-${lang}.webp`}
-              alt="Trustpilot"
-              className="h-12 w-auto mb-4"
-            />
+            <Image
+  src={`/images/trustpilot-${lang}.webp`}
+  alt="Trustpilot"
+  width={500} 
+  height={100}
+  quality={100} 
+  unoptimized={true} 
+  loading="lazy" 
+  className="h-12 w-auto mb-4"
+/>
           </a>
           <Title className="text-center">{compText.title}</Title>
         </div>
