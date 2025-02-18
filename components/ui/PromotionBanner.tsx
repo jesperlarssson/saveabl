@@ -31,22 +31,22 @@ const PromotionBanner = () => {
   }, [text]);
 
   // Bestäm bilder baserat på språkkoden
-  let trustpilotImage = "/images/trustpilot-en.png"; // Standardbild om inget språk matchar
-  let eubusinessImage = "/images/eubusinessnews-en.png"; // Standardbild för eubusiness om inget språk matchar
+  let trustpilotImage = "/images/trustpilot-en.webp"; // Standardbild om inget språk matchar
+  let eubusinessImage = "/images/eubusinessnews-en.webp"; // Standardbild för eubusiness om inget språk matchar
 
   switch (lang) {
     case 'sv':
-      trustpilotImage = "/images/trustpilot-sv.png";
-      eubusinessImage = "/images/eubusinessnews-se.png";
+      trustpilotImage = "/images/trustpilot-sv.webp";
+      eubusinessImage = "/images/eubusinessnews-se.webp";
       break;
     case 'da':
-      trustpilotImage = "/images/trustpilot-da.png";
-      eubusinessImage = "/images/eubusinessnews-da.png";
+      trustpilotImage = "/images/trustpilot-da.webp";
+      eubusinessImage = "/images/eubusinessnews-da.webp";
       break;
     case 'en':
     default:
-      trustpilotImage = "/images/trustpilot-en.png";
-      eubusinessImage = "/images/eubusinessnews-en.png";
+      trustpilotImage = "/images/trustpilot-en.webp";
+      eubusinessImage = "/images/eubusinessnews-en.webp";
       break;
   }
 
@@ -63,19 +63,21 @@ const PromotionBanner = () => {
           href="https://se.trustpilot.com/review/saveabl.se"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center ml-1 md:ml-6"
+          className="flex items-center ml-2 md:ml-6"
         >
           <Image
-          src={trustpilotImage} 
-          alt="Trustpilot"
-          width={250}  
-          height={30}  
-          quality={100}
-          style={{ maxWidth: "100%", height: "auto", objectFit: "contain" }} 
-          priority={true}
-          loading="eager"
-          fetchPriority="high"
-         />
+  src={trustpilotImage} 
+  alt="Trustpilot"
+  width={500}  
+  height={100}  
+  quality={100}
+  unoptimized={true}
+  priority={true}
+  loading="eager"
+  fetchPriority="high"
+  className="w-[200px] h-auto sm:w-[200px] md:w-[250px] lg:w-[250px]" // Anpassad storlek på olika skärmstorlekar
+/>
+
 
         </a>
 
@@ -102,14 +104,15 @@ const PromotionBanner = () => {
           <Image
             src={eubusinessImage}  
             alt="Eubusiness News"
-            width={250}  
-            height={30}  
-            quality={100} 
-            style={{ maxWidth: "100%", height: "auto", objectFit: "contain" }} 
-            priority={true}
-            loading="eager"
-            fetchPriority="high"
-          />
+            width={500}  
+  height={100}  
+  quality={100}
+  unoptimized={true}
+  priority={true}
+  loading="eager"
+  fetchPriority="high"
+  className="w-[200px] h-auto sm:w-[200px] md:w-[250px] lg:w-[250px]" // Anpassad storlek på olika skärmstorlekar
+/>
         </a>
 
       </div>

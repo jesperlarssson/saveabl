@@ -78,7 +78,7 @@ const Reviews = () => {
             rel="noopener noreferrer"
           >
             <img
-              src={`/images/trustpilot-${lang}.png`}
+              src={`/images/trustpilot-${lang}.webp`}
               alt="Trustpilot"
               className="h-12 w-auto mb-4"
             />
