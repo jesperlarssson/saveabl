@@ -220,25 +220,26 @@ const Navbar = () => {
 </li>
 
 
-<ul className="flex flex-col items-center">
+<ul className="flex flex-col w-full items-center text-center">
           {navigation.map((item) => (
-            <li onClick={() => setActive(false)} key={item.id}>
+            <li onClick={() => setActive(false)} key={item.id} className="w-full">
               <NavItem
-                className={twMerge(
-                  `-translate-x-full px-8 h-14 flex items-center text-xl font-bold hover:bg-primary hover:shadow-inner bg-opacity-60 transition duration-600`,
-                  [
-                    pathname === item.path && "bg-primary",
-                    item.disabled &&
-                      "cursor-not-allowed opacity-50 hover:bg-primary-200",
-                    active && "translate-x-0",
-                  ]
-                )}
-                active={pathname === item.path}
-                href={item.path || "#"}
-                disabled={item.disabled}
-              >
-                {item.name}
-              </NavItem>
+  className={twMerge(
+    `block w-full px-8 h-14 flex justify-center items-center text-xl font-bold text-center hover:bg-primary hover:shadow-inner bg-opacity-60 transition duration-600`,
+    [
+      pathname === item.path && "bg-primary",
+      item.disabled &&
+        "cursor-not-allowed opacity-50 hover:bg-primary-200",
+      active && "translate-x-0",
+    ]
+  )}
+  active={pathname === item.path}
+  href={item.path || "#"}
+  disabled={item.disabled}
+>
+  {item.name}
+</NavItem>
+
             </li>
           ))}
           {!user ? (
