@@ -213,14 +213,14 @@ const Navbar = () => {
           &times;
         </button>
 
-        <li className="mt-6 mb-6 flex justify-center md:hidden">
+        <li className="mt-12 mb-6 flex justify-center md:hidden">
   <div className="p-3 rounded-full">
     <LanguageSelector />
   </div>
 </li>
 
 
-        <ul className="mt-10">
+        <ul>
           {navigation.map((item) => (
             <li onClick={() => setActive(false)} key={item.id}>
               <NavItem
