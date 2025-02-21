@@ -169,7 +169,7 @@ const Navbar = () => {
           )}
         </div>
 
-        <div className="md:hidden mr-4">
+        <div className="md:hidden">
           <button
             className="p-2 bg-transparent bg-opacity-50 rounded-lg hover:drop-shadow-md "
             onClick={handleClick}
