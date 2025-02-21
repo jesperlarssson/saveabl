@@ -220,7 +220,7 @@ const Navbar = () => {
 </li>
 
 
-        <ul>
+<ul className="flex flex-col items-center">
           {navigation.map((item) => (
             <li onClick={() => setActive(false)} key={item.id}>
               <NavItem
