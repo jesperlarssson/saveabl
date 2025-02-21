@@ -9,18 +9,18 @@ const Footer = () => {
   const date = new Date();
   const { text, lang } = useLang();
 
-  let trustpilotImage = "/images/trustpilot-en.png"; // Standardbild om inget språk matchar
+  let trustpilotImage = "/images/trustpilot-en.webp"; // Standardbild om inget språk matchar
 
   switch (lang) {
     case 'sv':
-      trustpilotImage = "/images/trustpilot-sv.png";
+      trustpilotImage = "/images/trustpilot-sv.webp";
       break;
     case 'da':
-      trustpilotImage = "/images/trustpilot-da.png";
+      trustpilotImage = "/images/trustpilot-da.webp";
       break;
     case 'en':
     default:
-      trustpilotImage = "/images/trustpilot-en.png";
+      trustpilotImage = "/images/trustpilot-en.webp";
       break;
   }
 
