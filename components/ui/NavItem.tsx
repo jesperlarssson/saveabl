@@ -12,26 +12,24 @@ interface NavItemProps {
 
 const NavItem: React.FC<NavItemProps> = ({
   href,
-  onClick,
   active = false,
   disabled = false,
   children,
   className,
+  onClick, 
 }) => {
   return (
     <Link
       className={twMerge(
-        `
-    text-secondary tracking-wide  font-bold text-sm
- `,
+        `text-secondary tracking-wide font-bold text-sm`,
         [
           className,
           active && "underline font-semibold",
           disabled && "opacity-50 cursor-not-allowed hover:no-underline",
         ]
       )}
-      href={disabled ? "#" : href} // Förhindrar att disabled-länkar navigerar
-      onClick={onClick}
+      href={disabled ? "#" : href}
+      onClick={onClick} 
     >
       {children}
     </Link>

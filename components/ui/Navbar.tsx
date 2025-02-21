@@ -32,8 +32,8 @@ const Navbar = () => {
   interface NavigationItem {
     id: number;
     name: string;
-    path?: string; // Valfri, eftersom vi byter ut path i vissa fall
-    onClick?: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void; // Ny valfri egenskap
+    path?: string; 
+    onClick?: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void; 
     disabled?: boolean;
   }
   
@@ -59,31 +59,36 @@ const Navbar = () => {
     },
     {
       id: 5,
-      name: text.nav.giftcard, // Ny text för presentkort
-      path: "/presentkort", // Uppdaterad sökväg
+      name: text.nav.giftcard, 
+      path: "/presentkort", 
       disabled: false,
     },
     {
       id: 6,
       name: text.nav.faq,
-      path: "#",
+      path: "#vanliga-fragor",
       onClick: (e) => {
         e.preventDefault();
-        setActive(false); // Stäng menyn först
+        setActive(false); 
     
         setTimeout(() => {
           requestAnimationFrame(() => {
             const faqSection = document.getElementById("vanliga-fragor");
+    
             if (faqSection) {
+              window.location.hash = "vanliga-fragor"; 
               faqSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    
+              setTimeout(() => {
+                window.scrollTo({ top: faqSection.offsetTop - 50, behavior: "smooth" });
+              }, 100);
             }
           });
-        }, 300); // Vänta tills menyn är borta
+        }, 300); 
       },
       disabled: false,
     },
     
-       
   ];
 
   const auth = useAuth();
@@ -96,6 +101,7 @@ const Navbar = () => {
   const handleClick = () => {
     setActive(!active);
   };
+
 
   return (
     <div
@@ -129,9 +135,9 @@ const Navbar = () => {
           ]
         )}
         active={pathname === item.path}
-        href={item.path || "#"} // Se till att href ALLTID har ett värde
+        href={item.path || "#"} 
         disabled={item.disabled}
-        onClick={item.onClick} // Lägg till onClick om det finns
+        onClick={item.onClick} 
       >
         {item.name}
       </NavItem>
@@ -207,11 +213,14 @@ const Navbar = () => {
           &times;
         </button>
 
-        <li className="mt-6 flex justify-center md:hidden">
+        <li className="mt-6 mb-6 flex justify-center md:hidden">
+  <div className="p-3 rounded-full">
     <LanguageSelector />
-  </li>
+  </div>
+</li>
 
-        <ul className="mt-24">
+
+        <ul className="mt-10">
           {navigation.map((item) => (
             <li onClick={() => setActive(false)} key={item.id}>
               <NavItem
