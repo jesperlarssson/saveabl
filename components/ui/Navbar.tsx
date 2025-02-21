@@ -66,16 +66,24 @@ const Navbar = () => {
     {
       id: 6,
       name: text.nav.faq,
-      path: "#", // Behåller en giltig href
+      path: "#",
       onClick: (e) => {
         e.preventDefault();
-        const faqSection = document.getElementById("vanliga-fragor");
-        if (faqSection) {
-          faqSection.scrollIntoView({ behavior: "smooth" });
-        }
+        setActive(false); // Stäng menyn först
+    
+        setTimeout(() => {
+          requestAnimationFrame(() => {
+            const faqSection = document.getElementById("vanliga-fragor");
+            if (faqSection) {
+              faqSection.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+          });
+        }, 300); // Vänta tills menyn är borta
       },
       disabled: false,
-    },        
+    },
+    
+       
   ];
 
   const auth = useAuth();
