@@ -20,7 +20,7 @@ const FaqSection = () => {
   }));
 
   return (
-        <div className="bg-primary-200 w-full relative pt-0">
+        <div id="vanliga-fragor" className="bg-primary-200 w-full relative pt-0">
            <div className="absolute right-5 top-15 opacity-50 w-0 h-0 md:w-64 md:h-48 lg:w-128 lg:h-96 z-0">
              <LottieAnimation animationData={clockAnimation} />
            </div>

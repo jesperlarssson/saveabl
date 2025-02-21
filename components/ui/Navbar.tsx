@@ -20,12 +20,23 @@ const Navbar = () => {
 
   const navLinkFaqClass = "ml-[-10px]";
 
+  const handleScrollToFAQ = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    e.preventDefault();
+    const faqSection = document.getElementById("vanliga-fragor");
+    if (faqSection) {
+      faqSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+  
+
   interface NavigationItem {
     id: number;
     name: string;
-    path: string;
+    path?: string; // Valfri, eftersom vi byter ut path i vissa fall
+    onClick?: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void; // Ny valfri egenskap
     disabled?: boolean;
   }
+  
 
   const navigation: NavigationItem[] = [
     {
@@ -55,9 +66,16 @@ const Navbar = () => {
     {
       id: 6,
       name: text.nav.faq,
-      path: "/om-oss#vanliga-fragor",
+      path: "#", // Behåller en giltig href
+      onClick: (e) => {
+        e.preventDefault();
+        const faqSection = document.getElementById("vanliga-fragor");
+        if (faqSection) {
+          faqSection.scrollIntoView({ behavior: "smooth" });
+        }
+      },
       disabled: false,
-    },
+    },        
   ];
 
   const auth = useAuth();
@@ -92,28 +110,29 @@ const Navbar = () => {
           />
         </Link>
         <ul className="hidden md:flex">
-          {navigation.map((item) => (
-            <li key={item.id}>
-              <NavItem
-                className={twMerge(
-                  `px-8 h-14 flex items-center hover:bg-primary hover:shadow-inner bg-opacity-60 `,
-                  [
-                    pathname === item.path && "bg-primary",
-                    item.disabled &&
-                      "cursor-not-allowed opacity-50 hover:bg-primary-200",
-                    item.name === text.nav.faq && navLinkFaqClass,
-                  ]
-                )}
-                active={pathname === item.path}
-                href={item.path}
-                disabled={item.disabled}
-              >
-                {item.name}
-              </NavItem>
-            </li>
-          ))}
-        </ul>
-        <div className="flex gap-2">
+  {navigation.map((item) => (
+    <li key={item.id}>
+      <NavItem
+        className={twMerge(
+          `px-8 h-14 flex items-center hover:bg-primary hover:shadow-inner bg-opacity-60 `,
+          [
+            pathname === item.path && "bg-primary",
+            item.disabled && "cursor-not-allowed opacity-50 hover:bg-primary-200",
+          ]
+        )}
+        active={pathname === item.path}
+        href={item.path || "#"} // Se till att href ALLTID har ett värde
+        disabled={item.disabled}
+        onClick={item.onClick} // Lägg till onClick om det finns
+      >
+        {item.name}
+      </NavItem>
+    </li>
+  ))}
+</ul>
+
+
+        <div className="hidden md:flex gap-2">
           <LanguageSelector />
 
           {!user ? (
@@ -138,14 +157,14 @@ const Navbar = () => {
 
         <div className="md:hidden mr-4">
           <button
-            className="p-2 bg-primary bg-opacity-50 rounded-lg hover:drop-shadow-md "
+            className="p-2 bg-transparent bg-opacity-50 rounded-lg hover:drop-shadow-md "
             onClick={handleClick}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
-              stroke="currentColor"
-              className="h-6 w-6 fill-secondary"
+              stroke="#6E2936"  // Ändra färgen
+              className="h-7 w-7 fill-none"
             >
               {active ? (
                 <path
@@ -180,6 +199,10 @@ const Navbar = () => {
           &times;
         </button>
 
+        <li className="mt-6 flex justify-center md:hidden">
+    <LanguageSelector />
+  </li>
+
         <ul className="mt-24">
           {navigation.map((item) => (
             <li onClick={() => setActive(false)} key={item.id}>
@@ -194,7 +217,7 @@ const Navbar = () => {
                   ]
                 )}
                 active={pathname === item.path}
-                href={item.path}
+                href={item.path || "#"}
                 disabled={item.disabled}
               >
                 {item.name}
@@ -213,7 +236,7 @@ const Navbar = () => {
               <Link
                 href="/mina-sidor"
                 onClick={() => setActive(false)}
-                className=" px-8 py-3 mx-4 mt-8 justify-center w-40 rounded-full bg-primary text-primary-900 text-sm font-poppins tracking-wider border border-transparent disabled:cursor-not-allowed disabled:opacity-50 hover:bg-primary-500 hover:drop-shadow-md transition"
+                className="px-8 py-3 mx-4 mt-8 w-40 flex items-center justify-center rounded-full bg-primary text-primary-900 text-sm font-poppins tracking-wider border border-transparent disabled:cursor-not-allowed disabled:opacity-50 hover:bg-primary-500 hover:drop-shadow-md transition"
               >
                 {text.nav.my_account}
               </Link>

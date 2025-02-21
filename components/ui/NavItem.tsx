@@ -3,6 +3,7 @@ import { twMerge } from "tailwind-merge";
 
 interface NavItemProps {
   children: React.ReactNode;
+  onClick?: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
   active: boolean;
   disabled?: boolean;
   href: string;
@@ -11,6 +12,7 @@ interface NavItemProps {
 
 const NavItem: React.FC<NavItemProps> = ({
   href,
+  onClick,
   active = false,
   disabled = false,
   children,
@@ -28,7 +30,8 @@ const NavItem: React.FC<NavItemProps> = ({
           disabled && "opacity-50 cursor-not-allowed hover:no-underline",
         ]
       )}
-      href={disabled ? "#" : href}
+      href={disabled ? "#" : href} // Förhindrar att disabled-länkar navigerar
+      onClick={onClick}
     >
       {children}
     </Link>
