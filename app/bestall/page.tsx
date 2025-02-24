@@ -300,6 +300,12 @@ const Order = () => {
       setIsDk(false);
       setShowLinks(false);
       setShowAddressFields(true);
+      setTimeout(() => {
+        document.getElementById("deliverySection")?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }, 300);
     } 
     else if (
       address.postalCode.length === 4 &&
@@ -308,7 +314,14 @@ const Order = () => {
       setIsDk(true);
       setShowLinks(false);
       setShowAddressFields(true);
-    } 
+
+      setTimeout(() => {
+        document.getElementById("deliverySection")?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }, 300);
+    }
     else {
       setShowLinks(false);
       setShowAddressFields(false);
@@ -344,6 +357,7 @@ const Order = () => {
   const handleConfirm = async () => {
     const country = isDk ? "DK" : "SE";
     setCountry(country);
+    const countryCode = isDk ? "DK" : "SE";
     setStripeCheckoutIsLoading(true);
 
     const errors: FormError = {
@@ -445,6 +459,7 @@ const Order = () => {
       const sessionResponse = await axios.post("/api/checkout_sessions", {
         customerId: stripeUserId,
         mode: isSubscription(productId) ? "subscription" : "payment",
+        country: countryCode,  // Skicka med countryCode här
         items: [
           {
             price: productId,
@@ -659,7 +674,7 @@ const Order = () => {
               {id === "1" ? text.order.button1 : text.order.button2}
             </button>
           </div>
-          <div className="w-full max-w-md mt-2">
+          <div id="deliverySection" className="w-full max-w-md mt-2">
       <Lottie animationData={gardAnimation} loop={true} />
     </div>
   

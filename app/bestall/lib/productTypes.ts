@@ -58,6 +58,12 @@ export const priceIdSkaneEveryOtherWeekSambo =
  export const priceIdEveryOtherWeekSamboDk = "price_1PqDzsEhPZIzKmui73YrZ1Qk"; 
  export const priceIdStandardSamboDk = "price_1PqUyBEhPZIzKmuiPYwFaNl9"; 
 
+ // === SKATTESATSER (NYTT) ===
+export const taxRateSweden12 = "txr_1Qix0YEhPZIzKmuixfQmLrZg"; // 12% moms på produkter i Sverige
+export const taxRateSweden25 = "txr_1Qix0lEhPZIzKmuiCaVKnpLH"; // 25% moms på frakt i Sverige
+export const taxRateDenmark25 = "txr_1Qix0lEhPZIzKmuiCaVKnpLH"; // 25% moms på både produkter & frakt i Danmark
+
+
 const priceIdDeliveryEveryWeek = "price_1OY5DpEhPZIzKmuidVt8MLqm";
 const priceIdDeliveryEveryOtherWeek = "price_1OY5FsEhPZIzKmuiu5PVEK6o";
 const priceIdDeliveryStandard = "price_1Po3RKEhPZIzKmuiaAytTZTa";
@@ -99,6 +105,49 @@ const priceIdDeliveryEveryWeekSamboDk = "price_1PqV3UEhPZIzKmui1FiI9ISs";
 const priceIdDeliveryEveryOtherWeekSamboDk = "price_1PqV4eEhPZIzKmuiY9zhqVmT";
 const priceIdDeliveryStandardSamboDk = "price_1PqV5TEhPZIzKmuiFAPTHZt8";
 
+export const getTaxRateForPriceId = (priceId: string, country: string) => {
+  const isDanish = country.toLowerCase() === "dk";
+
+  // Lista över danska produkter
+  const danishProductPrices = [
+      priceIdEveryWeekDk,
+      priceIdEveryOtherWeekDk,
+      priceIdStandardDk,
+      priceIdEveryWeekSamboDk,
+      priceIdEveryOtherWeekSamboDk,
+      priceIdStandardSamboDk
+  ];
+
+  // Lista över alla frakt-ID
+  const shippingPrices = [
+      priceIdDeliveryEveryWeek,
+      priceIdDeliveryEveryOtherWeek,
+      priceIdDeliveryStandard,
+      priceIdDeliveryStockholmEveryWeek,
+      priceIdDeliveryStockholmEveryOtherWeek,
+      priceIdDeliveryStockholmStandard,
+      priceIdDeliverySkaneEveryWeek,
+      priceIdDeliverySkaneEveryOtherWeek,
+      priceIdDeliverySkaneStandard,
+      priceIdDeliveryEveryWeekDk,
+      priceIdDeliveryEveryOtherWeekDk,
+      priceIdDeliveryStandardDk,
+      priceIdDeliveryEveryWeekSamboDk,
+      priceIdDeliveryEveryOtherWeekSamboDk,
+      priceIdDeliveryStandardSamboDk
+  ];
+
+  const isShipping = shippingPrices.includes(priceId);
+  const isDanishProduct = danishProductPrices.includes(priceId);
+
+  // Om kunden är från Danmark, sätt 25% på både produkter & frakt
+  if (isDanish) {
+      return taxRateDenmark25;
+  }
+
+  // Svenska kunder får 12% på produkter, 25% på frakt
+  return isShipping ? taxRateSweden25 : taxRateSweden12;
+};
 
 
 export const getProductTypesFromLngCode = (lngCode: string): ProductType[] => {
@@ -633,7 +682,7 @@ export const getProductCostForPriceId = (id: string | null, lang: string) => {
      case priceIdSkaneEveryWeek:
        return eng ? "50kr/portion" : "50kr/portion";
      case priceIdSkaneEveryOtherWeek:
-       return eng ? "50kr/portionr" : "50kr/portion";
+       return eng ? "50kr/portion" : "50kr/portion";
      case priceIdSkaneStandard:
        return eng ? "55kr/portion" : "55kr/portion";
      case priceIdSkaneStandard8Portions:
