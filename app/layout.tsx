@@ -16,7 +16,6 @@ import { CheckoutProvider } from "@/providers/CheckoutProvider";
 import CheckoutBasket from "@/components/section/CheckoutBasket";
 import MetaPixel from "@/components/MetaPixel";
 import { LangProvider } from "@/providers/LangProvider";
-import PopupManager from "@/app/popupManager"; // Importera PopupManager från app
 import { PauseWeekProvider } from "@/context/PauseWeekContext";
 
 
@@ -85,7 +84,6 @@ export default function RootLayout({
 
 
                    <Footer />
-                   <PopupManager /> {/* Lägg till PopupManager här */}
                  </RecipeProvider>
                </MyParallaxProvider>
                <CheckoutBasket />

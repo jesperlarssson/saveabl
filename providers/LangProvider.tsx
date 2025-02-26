@@ -692,6 +692,19 @@ popup: {
     integrity: "Integritetspolicy",
     newsletter: "Håll dig uppdaterad",
   }, 
+  footer_newsletter: {
+    title: "Bli en del av förändringen",
+    placeholder: "Fyll i din mejladress",
+    description: "Genom att fylla i formuläret anmäler du dig till våra mejlutskick. Du när som helst avregistrera dig.",
+    subscribe_button: "Prenumerera",
+    error_message: "Vänligen fyll i en giltig e-postadress.",
+    thank_you_message: "Tack för att du prenumererar!",
+    country_label: "Vart bor du?",
+    select_country_error: "Vänligen välj Sverige eller Danmark innan du skickar in.",
+    sweden: "Sverige",
+    denmark: "Danmark"
+  }, 
+  
   referral: {
     header_title: "Bjud in dina vänner: tjäna 100kr!",
     subtitle: "",
@@ -1287,6 +1300,18 @@ button: "Got it - order now!"
       integrity: "Privacy Policy",
       newsletter: "Stay updated", 
     }, 
+    footer_newsletter: {
+      title: "Be part of the change",
+      placeholder: "Enter your email address",
+      description: "By filling out the form, you subscribe to our newsletter. You can unsubscribe at any time.",
+      subscribe_button: "Subscribe",
+      error_message: "Please enter a valid email address.",
+      thank_you_message: "Thank you for subscribing!",
+      country_label: "Where do you live?",
+      select_country_error: "Please select Sweden or Denmark before submitting.",
+      sweden: "Sweden",
+      denmark: "Denmark"
+    },
     referral: {
       header_title: "Invite your friends: earn 100kr!",
       subtitle: "",
@@ -1850,11 +1875,23 @@ integrity_policy: {
     },
   footer: {
     questions: "Spørgsmål, overvejelser?", 
-    questions2: "Send os en e-mail, så finder vi en løsning!", 
+    questions2: "Send os en mail så finder vi en løsning!", 
     terms: "Generelle vilkår", 
     integrity: "Integritetspolitik",
     newsletter: "Hold dig opdateret", 
   }, 
+  footer_newsletter: {
+    title: "Bliv en del af forandringen",
+    placeholder: "Indtast din mailadresse",
+    description: "Ved at udfylde formularen tilmelder du dig vores nyhedsbrev. Du kan til enhver tid afmelde dig.",
+    subscribe_button: "Tilmeld",
+    error_message: "Indtast venligst en gyldig mailadresse.",
+    thank_you_message: "Tak for din tilmelding!",
+    country_label: "Hvor bor du?",
+    select_country_error: "Vælg venligst Sverige eller Danmark, før du sender.",
+    sweden: "Sverige",
+    denmark: "Danmark"
+  },
   referral: {
     header_title: "Invitér dine venner: tjen 100 kr!",
     subtitle: "",
