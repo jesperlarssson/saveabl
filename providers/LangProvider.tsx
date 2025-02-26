@@ -1291,7 +1291,7 @@ button: "Got it - order now!"
       error: "You have missed something", 
       thank_you: "Welcome!",
       thank_you_subtitle: "You are now entered into the raffle for a meal kit and will be kept updated on what's happening in our world :)", 
-      email_exists: "Du är redan en av våra mejlkompisar & med i tävlingen <3"
+      email_exists: "You’re already one of our email friends & entered in the competition <3"
     },
     footer: {
       questions: "Questions, concerns?", 
@@ -1871,7 +1871,7 @@ integrity_policy: {
       error: "Du har glemt noget", 
       thank_you: "Velkommen!",
       thank_you_subtitle: "Du er nu med i lodtrækningen om en måltidskasse og vil blive opdateret om hvad der sker i vores verden :)", 
-      email_exists: "Du är redan en av våra mejlkompisar & med i tävlingen <3"
+      email_exists: "Du er allerede en af vores mailvenner & med i konkurrencen <3"
     },
   footer: {
     questions: "Spørgsmål, overvejelser?", 

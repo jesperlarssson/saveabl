@@ -131,7 +131,7 @@ const Footer = () => {
         </div>
 
         {/* Footer-text */}
-        <p className="mx-auto mt-7 max-w-md text-center leading-relaxed text-primary-200">
+        <p className="mx-auto mt-12 md:mt-16 max-w-md text-center leading-relaxed text-primary-200">
           Övre Kaserngården 12, 415 27 Göteborg, Sweden, Org. number: 559266-3149. VAT
           number: SE559266314901.
         </p>
