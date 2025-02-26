@@ -16,8 +16,6 @@ const NewsletterSubscription = () => {
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
 
-    console.log("E-post som skickas:", email);
-    console.log("Land som skickas:", selectedCountry);
     
     if (!email) {
       setError(text.footer_newsletter.error_message);
@@ -28,7 +26,6 @@ const NewsletterSubscription = () => {
       return;
     }
 
-    console.log("Sparar till Firestore...");
 
     try {
         await setDoc(doc(db, "newsletter", email), {
@@ -37,13 +34,11 @@ const NewsletterSubscription = () => {
           "Land": selectedCountry,
           timestamp: new Date().toISOString(),
         });
-        console.log("Lyckades spara i Firestore!");
         setSubmitted(true);
         setEmail("");
         setSelectedCountry(""); // Återställ val
         setError("");
       } catch (error) {
-        console.error("Fel vid sparning i Firestore:", error);
         setError(text.footer_newsletter.error_message);
       }
       
@@ -121,7 +116,8 @@ const NewsletterSubscription = () => {
 
       {/* Bekräftelsemeddelande */}
       {submitted && (
-        <p className="mt-4 text-sm text-[#6E2936] bg-[#FCF7E8] px-4 py-2 rounded-md w-fit">
+        <p className="mt-4 text-sm text-[#6E2936] bg-[#FCF7E8] px-4 py-2 rounded-md w-fit mx-auto sm:mx-0">
+
           {text.footer_newsletter.thank_you_message}
         </p>
       )}
