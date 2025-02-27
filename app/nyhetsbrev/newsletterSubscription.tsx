@@ -77,33 +77,42 @@ const NewsletterSubscription = () => {
           )}
         </div>
 
-        {/* Kryssrutor visas bara om användaren börjar skriva */}
-{isTyping && (
-  <div className="mt-4">
-    <p className="text-[#FCF7E8] text-left font-bold">{text.footer_newsletter.country_label}</p>
-    <div className="flex items-center gap-4 mt-2">
-      <label className="flex items-center space-x-2">
-        <input
-          type="checkbox"
-          checked={selectedCountry === "Sverige"}
-          onChange={() => setSelectedCountry("Sverige")}
-          className="w-4 h-4 accent-[#FCF7E8] cursor-pointer"
-        />
-        <span className="text-[#FCF7E8]">{text.footer_newsletter.sweden}</span>
-      </label>
-      <label className="flex items-center space-x-2">
-        <input
-          type="checkbox"
-          checked={selectedCountry === "Danmark"}
-          onChange={() => setSelectedCountry("Danmark")}
-          className="w-4 h-4 accent-[#FCF7E8] cursor-pointer"
-        />
-        <span className="text-[#FCF7E8]">{text.footer_newsletter.denmark}</span>
-      </label>
-    </div>
-  </div>
-)}
-
+        {/* Landval visas bara om användaren börjar skriva */}
+        {isTyping && (
+          <div className="mt-4">
+            <p className="text-[#FCF7E8] text-left font-bold">
+              {text.footer_newsletter.country_label}
+            </p>
+            <div className="flex items-center gap-4 mt-2">
+              <label className="flex items-center space-x-2">
+                <input
+                  type="radio"
+                  name="country"
+                  value="Sverige"
+                  checked={selectedCountry === "Sverige"}
+                  onChange={() => setSelectedCountry("Sverige")}
+                  className="w-4 h-4 accent-[#FCF7E8] cursor-pointer"
+                />
+                <span className="text-[#FCF7E8]">
+                  {text.footer_newsletter.sweden}
+                </span>
+              </label>
+              <label className="flex items-center space-x-2">
+                <input
+                  type="radio"
+                  name="country"
+                  value="Danmark"
+                  checked={selectedCountry === "Danmark"}
+                  onChange={() => setSelectedCountry("Danmark")}
+                  className="w-4 h-4 accent-[#FCF7E8] cursor-pointer"
+                />
+                <span className="text-[#FCF7E8]">
+                  {text.footer_newsletter.denmark}
+                </span>
+              </label>
+            </div>
+          </div>
+        )}
       </form>
 
       {/* Beskrivande text */}
