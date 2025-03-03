@@ -17,6 +17,8 @@ import CheckoutBasket from "@/components/section/CheckoutBasket";
 import MetaPixel from "@/components/MetaPixel";
 import { LangProvider } from "@/providers/LangProvider";
 import { PauseWeekProvider } from "@/context/PauseWeekContext";
+import PopupManager from "@/app/popupManager";
+
 
 
 const font = Figtree({ subsets: ["latin"] });
@@ -82,7 +84,7 @@ export default function RootLayout({
                      {children}
                    </main>
 
-
+                     <PopupManager />
                    <Footer />
                  </RecipeProvider>
                </MyParallaxProvider>

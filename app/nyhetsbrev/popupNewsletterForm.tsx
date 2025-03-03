@@ -1,359 +1,156 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
 import { useLang } from "@/hooks/useLang";
-import { db } from '@/firebase/firebaseNewsletterConfig';
-import { doc, setDoc } from 'firebase/firestore';
-import Image from 'next/image';
-import HeaderImage from '../../public/images/subscribe_newsletter.png';
+import { db } from "@/firebase/firebaseNewsletterConfig";
+import { doc, setDoc } from "firebase/firestore";
+import { FiMail } from "react-icons/fi";
+import Image from "next/image";
 
-const PopupNewsletterForm = ({ onClose }: { onClose: () => void }) => {
-    console.log('popupNewsletterForm component rendered');
-    const { lang, text = { popup: {} } } = useLang();
+// Importera bilder
+import image1 from "../../public/images/popup1.jpg";
+import image2 from "../../public/images/popup2.jpg";
+import image3 from "../../public/images/popup3.jpg";
+import image4 from "../../public/images/popup4.jpg";
+import image5 from "../../public/images/popup5.jpg";
+import image6 from "../../public/images/popup6.jpg";
+import image7 from "../../public/images/popup7.jpg";
 
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [country, setCountry] = useState('');
-    const [consent, setConsent] = useState(false);
-    const [submitted, setSubmitted] = useState(false);
-    const [error, setError] = useState('');
+const images = [image1, image2, image3, image4, image5, image6, image7];
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
+const PopupNewsletterForm = () => {
+  const { lang, text = { popup: {} } } = useLang();
+  const [email, setEmail] = useState("");
+  const [isTyping, setIsTyping] = useState(false);
+  const [selectedCountry, setSelectedCountry] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState("");
+  const [currentImage, setCurrentImage] = useState(0);
+  const [showPopup, setShowPopup] = useState(false); // 🔹 Styr popupens visning
 
-        if (!consent) {
-            setError(text.popup.error_example);
-            return;
-        }
+  // 🔹 Kolla om popupen ska visas (baserat på localStorage)
+  useEffect(() => {
+    const lastSeenTimestamp = localStorage.getItem("popupLastSeen");
+    const now = new Date().getTime();
+    const sixMonths = 6 * 30 * 24 * 60 * 60 * 1000; // 6 månader i millisekunder
 
-        try {
-            // Använd setDoc och sätt mejladressen som dokument-ID
-            await setDoc(doc(db, 'newslettersubscribers', email), {
-                'Namn': name,
-                'Mejl': email,
-                'Land': country,
-                timestamp: new Date().toISOString(),
-            });
-
-            console.log('Document written with email as ID: ', email);
-
-            setSubmitted(true);
-            setName('');
-            setEmail('');
-            setCountry('');
-            setConsent(false);
-            setError('');
-        } catch (error) {
-            console.error('Error adding document:', error);
-            setError(text.popup.error);
-        }
-    };
-
-    // Inline styles
-    const styles = `
-    .popup {
-        display: flex;
-        position: fixed;
-        bottom: 10px; /* Placera popupen närmare botten */
-        right: 10px; /* Placera i det högra hörnet */
-        width: 500px; /* Bredd på popupen */
-        max-height: 90vh; /* Maximal höjd för popupen, 80% av viewportens höjd */
-        background-color: rgba(0, 0, 0, 0.7); /* Mörkare bakgrund för popupen */
-        border-radius: 8px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-        justify-content: center;
-        align-items: center;
-        z-index: 1000;
-        overflow: hidden; /* Döljer överflödigt innehåll utanför popupen */
+    if (!lastSeenTimestamp || now - parseInt(lastSeenTimestamp) > sixMonths) {
+      const timer = setTimeout(() => {
+        setShowPopup(true);
+      }, 7000);
+      return () => clearTimeout(timer);
     }
+  }, []);
 
-    .popup-content {
-        background-color: #fcf7e8;
-        padding: 20px; /* Ökad padding för mer utrymme */
-        border-radius: 8px;
-        width: 100%;
-        height: 100%;
-        box-sizing: border-box;
-        overflow-y: auto; /* Lägg till scrollbar för överflödigt innehåll */
+  // 🔹 Spara att popupen har visats (i localStorage)
+  const handleClose = () => {
+    localStorage.setItem("popupLastSeen", new Date().getTime().toString());
+    setShowPopup(false);
+  };
+
+  // Byt bild var 4:e sekund
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImage((prev) => (prev + 1) % images.length);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!email) {
+      setError(text.popup.error_message);
+      return;
     }
-
-    .close {
-        position: absolute;
-        top: 10px; /* Justera så den är nära kanten */
-        right: 10px; /* Justera så den är nära kanten */
-        cursor: pointer;
-        font-size: 24px; /* Större storlek på tecknet */
-        color: #EECFAA; /* Färg på tecknet */
-        font-weight: bold;
-        border: 2px solid #EECFAA; /* Färg på ringens kant */
-        border-radius: 50%; /* Gör knappen rund */
-        width: 30px; /* Diameter på knappen */
-        height: 30px; /* Diameter på knappen */
-        text-align: center;
-        line-height: 30px; /* Vertikal centrering av tecknet */
-        background-color: #FCF7E8; /* Bakgrundsfärg på knappen */
-        z-index: 2; /* Se till att knappen är ovanpå bilden */
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    if (!selectedCountry) {
+      setError(text.popup.select_country_error);
+      return;
     }
+    try {
+      await setDoc(doc(db, "newslettersubscribers", email), {
+        "Namn": "",
+        "Mejl": email,
+        "Land": selectedCountry,
+        timestamp: new Date().toISOString(),
+      });
 
-    .header-image-container {
-        width: 100%;
-        height: 150px; /* Justera höjd på bildens container */
-        position: relative;
-        overflow: hidden; /* Döljer överflödigt innehåll utanför bildens container */
+      setSubmitted(true);
+      setEmail("");
+      setSelectedCountry("");
+      setError("");
+    } catch (error) {
+      console.error("❌ Firebase-fel:", error);
+      setError(text.popup.error_message);
     }
+  };
 
-    .header-image {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
+  return (
+    <>
+      {showPopup && ( // 🔹 Popup visas endast om showPopup är true
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="w-[95%] max-w-3xl bg-[#EECFAA] flex flex-row md:flex-row rounded-lg overflow-hidden shadow-lg relative">
+            
+            {/* Stängningsknapp */}
+            <button
+              onClick={handleClose}
+              className="absolute top-2 right-2 w-6 h-6 md:w-10 md:h-10 flex items-center justify-center rounded-full bg-[#6E2936] text-[#EECFAA] text-xl md:text-3xl hover:bg-[#57212C] transition duration-300 z-50"
+            >
+              <span className="relative top-[-1px]">&times;</span>
+            </button>
 
-    .container {
-        width: 100%;
-        padding: 5px; /* Ökad padding */
-        background-color: #fcf7e8;
-        text-align: left;
-    }
+            {/* Vänster sektion - Formulär */}
+            <div className={`w-3/5 md:w-1/2 p-2 md:p-6 flex flex-col justify-center transition-all duration-500 ${submitted || error ? "pb-2 md:pb-4" : ""}`}>
+              <h2 className="text-md md:text-2xl mb-2 md:mb-4 font-bold text-[#6E2936] text-center">
+                {text.popup.title}
+              </h2>
+              <p className="text-[#6E2936] text-center text-[11px] md:text-base mb-3 md:mb-4">
+                {text.popup.description}
+              </p>
 
-    .page-title {
-        color: #6e2936;
-        font-size: 25px; /* Större storlek på rubriken */
-        font-weight: bold;
-        margin-bottom: 5px;
-    }
+              <form onSubmit={handleSubmit} className="mt-2 md:mt-4 relative px-1">
+                <div className="flex items-center border-b border-[#6E2936] pb-2">
+                  <input
+                    type="email"
+                    placeholder={text.popup.placeholder}
+                    value={email}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                      setIsTyping(e.target.value.length > 0);
+                      setError("");
+                    }}
+                    className="w-full bg-transparent text-[#6E2936] outline-none text-[11px] md:text-[16px] placeholder-[#6E2936] px-1"
+                    required
+                  />
 
-    .page-subtitle {
-        color: black;
-        font-size: 15px; /* Större storlek på undertiteln */
-        margin-bottom: 20px;
-    }
-
-    form {
-        display: flex;
-        flex-direction: column;
-        text-align: left;
-        margin-bottom: 10px; /* Minska marginalen mellan formuläret och popup-innehållet */
-    }
-
-    .input-group {
-        position: relative;
-        margin-bottom: 15px; /* Större mellanrum mellan input-fält */
-    }
-
-    .input-group label {
-        position: absolute;
-        top: -10px;
-        left: 5px;
-        background-color: #fcf7e8;
-        padding: 0 5px;
-        color: #6e2936;
-        font-weight: bold;
-        font-size: 13px; /* Större storlek på etiketten */
-    }
-
-    input[type="text"],
-    input[type="email"] {
-        width: calc(100% - 10px);
-        padding: 12px; /* Större padding */
-        border: 2px solid #6e2936;
-        border-radius: 4px;
-        box-sizing: border-box;
-        font-size: 12px; /* Större textstorlek för input-fält */
-        background-color: #fcf7e8;
-        transition: border-color 0.3s ease;
-    }
-
-    input[type="text"]:focus,
-    input[type="email"]:focus {
-        border-color: #eecfaa;
-        outline: none;
-        box-shadow: 0 0 0 2px rgba(238, 207, 170, 0.5);
-    }
-
-    input::placeholder {
-        color: #d3a181;
-        font-size: 12px; /* Större textstorlek för placeholder */
-    }
-
-    .consent-container {
-        display: flex;
-        align-items: center;
-        margin-bottom: 15px;
-    }
-
-    .consent-container input[type="checkbox"] {
-        margin-right: 10px;
-        transform: scale(1.2); /* Större checkbox */
-    }
-
-    .consent-text {
-        font-size: 12px;
-    }
-
-    button[type="submit"] {
-        background-color: #f4664a;
-        color: #fcf7e8;
-        border: none;
-        padding: 12px; /* Större padding */
-        border-radius: 8px;
-        cursor: pointer;
-        font-size: 14px; /* Större textstorlek för knappen */
-        text-align: center;
-        width: 100%;
-        box-sizing: border-box;
-        margin-top: 5px; /* Minska avståndet ovanför knappen */
-        transition: background-color 0.3s ease;
-        font-weight: bold;
-    }
-
-    button[type="submit"]:hover {
-        background-color: rgba(244, 102, 74, 0.8);
-    }
-
-    .thank-you h2 {
-        color: #6e2936;
-        font-size: 30px; /* Större storlek på tack-rubrik */
-        font-weight: bold;
-        margin-bottom: 8px;
-    }
-
-    .thank-you p {
-        color: #6e2936;
-        font-size: 17px; /* Större storlek på tack-meddelande */
-        margin-bottom: 25px;
-    }
-
-    @media (max-width: 600px) {
-        .popup {
-            width: 100%;
-            height: 100vh;
-            bottom: 0;
-            right: 0;
-            border-radius: 0;
-            display: flex;
-            flex-direction: column;
-            overflow-y: auto; /* Tillåter vertikal rullning om innehållet är för stort */
-        }
-
-        .header-image-container {
-            height: 15vh; /* Justerad höjd för att minska utrymmet */
-            margin-bottom: 0; /* Ta bort eventuell marginal */
-        }
-
-        .page-title {
-            font-size: 30px;
-            margin-top: 5px; /* Minska övre marginalen */
-            margin-bottom: 5px; /* Justera nedre marginalen */
-        }
-
-        .page-subtitle {
-            font-size: 18px;
-            margin-top: 0; /* Minska övre marginalen */
-            margin-bottom: 20px; /* Justera nedre marginalen */
-        }
-
-        .input-group {
-            margin-bottom: 20px;
-        }
-
-        .input-group label {
-            font-size: 16px; /* Justerat för bättre läsbarhet */
-        }
-
-        input[type="text"],
-        input[type="email"] {
-            font-size: 16px; /* Justerat för bättre läsbarhet */
-            padding: 12px;
-            width: calc(100% - 24px); /* Justerar bredden för att ta hänsyn till padding */
-        }
-
-        .consent-container {
-            margin-bottom: 12px;
-        }
-
-        .consent-container input[type="checkbox"] {
-            margin-right: 7px;
-        }
-
-        .consent-text {
-            font-size: 12px; /* Justerat för bättre läsbarhet */
-        }
-
-        button[type="submit"] {
-            font-size: 16px; /* Större för bättre synlighet */
-            padding: 15px; /* Ökad padding för bättre klickyta */
-            font-weight: bold;
-            width: calc(100% - 30px); /* Justerar bredden för att ta hänsyn till padding */
-            margin: 10px; /* Lägger till marginal runt knappen */
-        }
-
-        .thank-you {
-            padding: 10px;
-            text-align: center;
-        }
-
-        .thank-you h2 {
-            font-size: 30px; /* Justerat för bättre synlighet */
-        }
-
-        .thank-you p {
-            font-size: 18px; /* Justerat för bättre läsbarhet */
-        }
-    }
-    `;
-
-    return (
-        <div className="popup">
-            <style>{styles}</style>
-            <div className="popup-content">
-                <span className="close" onClick={onClose}>&times;</span>
-                <div className="header-image-container">
-                    <Image src={HeaderImage} alt="Header" className="header-image" layout="responsive" />
+                  {isTyping ? (
+                    <button type="submit" className="ml-2 text-[#6E2936] font-bold text-[11px] md:text-base hover:text-[#F4664A] transition duration-300">
+                      {text.popup.submit_button}
+                    </button>
+                  ) : (
+                    <FiMail className="text-[#6E2936] text-lg md:text-2xl ml-2" />
+                  )}
                 </div>
-                <div className="container">
-                    {!submitted && (
-                        <>
-                            <h1 className="page-title">{text.popup.first_title}</h1>
-                            <p className="page-subtitle">{text.popup.first_subtitle}</p>
-                            <form onSubmit={handleSubmit}>
-                                <div className="input-group">
-                                    <label>{text.popup.email_explain}</label>
-                                    <input type="email" placeholder={text.popup.emailexample} value={email} onChange={(e) => setEmail(e.target.value)} required />
-                                </div>
+              </form>
 
-                                <div className="input-group">
-                                    <label>{text.popup.name_explain}</label>
-                                    <input type="text" placeholder={text.popup.nameexample} value={name} onChange={(e) => setName(e.target.value)} required />
-                                </div>
+              {/* Felmeddelande */}
+              {error && <p className="mt-2 text-[8px] md:text-sm text-center text-red-500">{error}</p>}
 
-                                <div className="input-group">
-                                    <label>{text.popup.country_explain}</label>
-                                    <input type="text" placeholder={text.popup.countryoption} value={country} onChange={(e) => setCountry(e.target.value)} required />
-                                </div>
-
-                                <div className="consent-container">
-                                    <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} required />
-                                    <span className="consent-text">{text.popup.consent_explain}</span>
-                                </div>
-
-                                {error && <p style={{ color: 'red' }}>{error}</p>}
-                                <button type="submit">{text.popup.submit_now}</button>
-                            </form>
-                        </>
-                    )}
-
-                    {submitted && (
-                        <div className="thank-you">
-                            <h2>{text.popup.thank_you}</h2>
-                            <p>{text.popup.thank_you_subtitle}</p>
-                        </div>
-                    )}
+              {/* Bekräftelsemeddelande */}
+              {submitted && (
+                <div className="mt-4 text-[11px] md:text-sm bg-[#6E2936] text-[#EECFAA] px-4 py-2 rounded-md w-fit mx-auto flex items-center justify-center min-h-[40px] transition-all duration-500">
+                  {text.popup.thank_you_message}
                 </div>
+              )}
             </div>
+
+            {/* Höger sektion - Bildkarusell */}
+            <div className={`flex-1 min-w-0 overflow-hidden relative transition-all duration-500 ${submitted || error ? "h-[350px] md:h-[500px]" : "h-[250px] md:h-[450px]"}`}>
+              <Image src={images[currentImage]} alt="Popup Image" width={500} height={450} className="absolute top-0 left-0 w-full h-full object-cover object-center" priority />
+            </div>
+          </div>
         </div>
-    );
+      )}
+    </>
+  );
 };
 
 export default PopupNewsletterForm;
