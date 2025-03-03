@@ -19,7 +19,7 @@ export default function PopupManager() {
 
   return (
     <>
-      {isPopupOpen && <PopupNewsletterForm onClose={closePopup} />}
+     {isPopupOpen && <PopupNewsletterForm />}
     </>
   );
 }
