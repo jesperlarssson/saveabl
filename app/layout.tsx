@@ -84,7 +84,6 @@ export default function RootLayout({
                      {children}
                    </main>
 
-                     <PopupManager />
                    <Footer />
                  </RecipeProvider>
                </MyParallaxProvider>
