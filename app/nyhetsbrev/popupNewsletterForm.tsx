@@ -87,6 +87,7 @@ const PopupNewsletterForm = () => {
     <>
 
 
+
       {showPopup && ( // 🔹 Popup visas endast om showPopup är true
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 px-2 z-50">
           <div className="max-w-full max-w-none bg-[#EECFAA] flex flex-row md:flex-row rounded-lg overflow-hidden shadow-lg relative">
@@ -104,7 +105,7 @@ const PopupNewsletterForm = () => {
               <h2 className="text-md md:text-2xl mb-2 md:mb-4 font-bold text-[#6E2936] text-center">
                 {text.popup.title}
               </h2>
-              <p className="text-[#6E2936] text-center text-xs md:text-base mb-3 md:mb-4">
+              <p className="text-[#6E2936] text-center text-[11px] md:text-base mb-3 md:mb-4">
                 {text.popup.description}
               </p>
 
@@ -119,12 +120,12 @@ const PopupNewsletterForm = () => {
                       setIsTyping(e.target.value.length > 0);
                       setError("");
                     }}
-                    className="w-full bg-transparent text-[#6E2936] outline-none text-xs md:text-[16px] placeholder-[#6E2936] px-1"
+                    className="w-full bg-transparent text-[#6E2936] outline-none text-[11px] md:text-[16px] placeholder-[#6E2936] px-1"
                     required
                   />
 
                   {isTyping ? (
-                    <button type="submit" className="ml-2 text-[#6E2936] font-bold text-xs md:text-base hover:text-[#F4664A] transition duration-300">
+                    <button type="submit" className="ml-2 text-[#6E2936] font-bold text-[11px] md:text-base hover:text-[#F4664A] transition duration-300">
                       {text.popup.submit_button}
                     </button>
                   ) : (
@@ -134,7 +135,7 @@ const PopupNewsletterForm = () => {
                 {/* Landval visas när man börjar skriva */}
                 {isTyping && (
                   <div className="mt-4 md:mt-4">
-                    <p className="text-[#6E2936] font-bold text-xs md:text-base">{text.popup.country_label}</p>
+                    <p className="text-[#6E2936] font-bold text-[11px] md:text-base">{text.popup.country_label}</p>
                     <div className="flex items-center gap-2 md:gap-4 mt-2">
                       <label className="flex items-center space-x-1 md:space-x-2">
                         <input
@@ -147,7 +148,7 @@ const PopupNewsletterForm = () => {
                           }}
                           className="w-3 h-3 md:w-4 md:h-4 accent-[#6E2936] cursor-pointer"
                         />
-                        <span className="text-[#6E2936] text-xs md:text-sm">{text.popup.sweden}</span>
+                        <span className="text-[#6E2936] text-[11px] md:text-sm">{text.popup.sweden}</span>
                       </label>
                       <label className="flex items-center space-x-1 md:space-x-2">
                         <input
@@ -158,7 +159,7 @@ const PopupNewsletterForm = () => {
                           className="w-3 h-3 md:w-4 md:h-4 accent-[#6E2936] cursor-pointer"
                           style={{ accentColor: "#6E2936" }}
                         />
-                        <span className="text-[#6E2936] text-xs md:text-sm">{text.popup.denmark}</span>
+                        <span className="text-[#6E2936] text-[11px] md:text-sm">{text.popup.denmark}</span>
                       </label>
                     </div>
                   </div>
