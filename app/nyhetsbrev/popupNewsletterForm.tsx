@@ -111,18 +111,24 @@ const PopupNewsletterForm = () => {
 
               <form onSubmit={handleSubmit} className="mt-2 md:mt-4 relative px-1">
                 <div className="flex items-center border-b border-[#6E2936] pb-2">
-                  <input
-                    type="email"
-                    placeholder={text.popup.placeholder}
-                    value={email}
-                    onChange={(e) => {
-                      setEmail(e.target.value);
-                      setIsTyping(e.target.value.length > 0);
-                      setError("");
-                    }}
-                    className="w-full bg-transparent text-[#6E2936] outline-none text-[11px] md:text-[16px] placeholder-[#6E2936] px-1"
-                    required
-                  />
+                <input
+  type="email"
+  placeholder={text.popup.placeholder}
+  value={email}
+  onChange={(e) => {
+    setEmail(e.target.value);
+    setIsTyping(e.target.value.length > 0);
+    setError("");
+  }}
+  className="w-full bg-transparent text-[#6E2936] outline-none text-[11px] md:text-[16px] placeholder-[#6E2936] px-1"
+  required
+  inputMode="email"
+  style={{
+    WebkitTextSizeAdjust: "100%", // 🛠️ Hindrar iOS från att auto-zooma
+    touchAction: "manipulation", // 🛠️ Minskar risken för zoom när man trycker på fältet
+  }}
+/>
+
 
                   {isTyping ? (
                     <button type="submit" className="ml-2 text-[#6E2936] font-bold text-[11px] md:text-base hover:text-[#F4664A] transition duration-300">
