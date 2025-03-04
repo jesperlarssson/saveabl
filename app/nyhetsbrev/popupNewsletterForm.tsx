@@ -85,9 +85,11 @@ const PopupNewsletterForm = () => {
 
   return (
     <>
+
+
       {showPopup && ( // 🔹 Popup visas endast om showPopup är true
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-          <div className="w-[95%] max-w-3xl bg-[#EECFAA] flex flex-row md:flex-row rounded-lg overflow-hidden shadow-lg relative">
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 px-2 z-50">
+          <div className="max-w-full max-w-none bg-[#EECFAA] flex flex-row md:flex-row rounded-lg overflow-hidden shadow-lg relative">
             
             {/* Stängningsknapp */}
             <button
