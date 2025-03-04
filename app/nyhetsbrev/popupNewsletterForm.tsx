@@ -110,24 +110,29 @@ const PopupNewsletterForm = () => {
               </p>
 
               <form onSubmit={handleSubmit} className="mt-2 md:mt-4 relative px-1">
-                <div className="flex items-center border-b border-[#6E2936] pb-2">
-                <input
-  type="email"
-  placeholder={text.popup.placeholder}
-  value={email}
-  onChange={(e) => {
-    setEmail(e.target.value);
-    setIsTyping(e.target.value.length > 0);
-    setError("");
-  }}
-  className="w-full bg-transparent text-[#6E2936] outline-none text-[11px] md:text-[16px] placeholder-[#6E2936] px-1"
-  required
-  inputMode="email"
-  style={{
-    WebkitTextSizeAdjust: "100%", // 🛠️ Hindrar iOS från att auto-zooma
-    touchAction: "manipulation", // 🛠️ Minskar risken för zoom när man trycker på fältet
-  }}
-/>
+  <div className="flex items-center border-b border-[#6E2936] pb-2 relative">
+    
+    {/* Osynlig input för att lura iOS */}
+    <input
+      type="text"
+      className="absolute opacity-0 pointer-events-none"
+      style={{ fontSize: "16px", position: "absolute", top: "-9999px" }}
+    />
+    
+    {/* Synlig input som användaren interagerar med */}
+    <input
+      type="email"
+      placeholder={text.popup.placeholder}
+      value={email}
+      onChange={(e) => {
+        setEmail(e.target.value);
+        setIsTyping(e.target.value.length > 0);
+        setError("");
+      }}
+      className="w-full bg-transparent text-[#6E2936] outline-none text-[11px] md:text-[16px] placeholder-[#6E2936] px-1"
+      required
+      inputMode="email"
+    />
 
 
                   {isTyping ? (
