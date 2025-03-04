@@ -85,7 +85,9 @@ const PopupNewsletterForm = () => {
 
   return (
     <>
-  {showPopup && ( // 🔹 Popup visas endast om showPopup är true
+
+
+      {showPopup && ( // 🔹 Popup visas endast om showPopup är true
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 px-2 z-50">
           <div className="max-w-full max-w-none bg-[#EECFAA] flex flex-row md:flex-row rounded-lg overflow-hidden shadow-lg relative">
             
@@ -108,23 +110,18 @@ const PopupNewsletterForm = () => {
 
               <form onSubmit={handleSubmit} className="mt-2 md:mt-4 relative px-1">
                 <div className="flex items-center border-b border-[#6E2936] pb-2">
-                <input
-  type="email"
-  placeholder={text.popup.placeholder}
-  value={email}
-  onChange={(e) => {
-    setEmail(e.target.value);
-    setIsTyping(e.target.value.length > 0);
-    setError("");
-  }}
-  className="w-full bg-transparent text-[#6E2936] outline-none text-[11px] md:text-[16px] placeholder-[#6E2936] px-1"
-  required
-  inputMode="email" // 🛠️ Ser till att rätt tangentbord visas och minskar risken för zoom
-  style={{
-    WebkitTextSizeAdjust: "100%" // 🛠️ Hindrar iOS från att auto-zooma utan att påverka storlek
-  }}
-/>
-
+                  <input
+                    type="email"
+                    placeholder={text.popup.placeholder}
+                    value={email}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                      setIsTyping(e.target.value.length > 0);
+                      setError("");
+                    }}
+                    className="w-full bg-transparent text-[#6E2936] outline-none text-[11px] md:text-[16px] placeholder-[#6E2936] px-1"
+                    required
+                  />
 
                   {isTyping ? (
                     <button type="submit" className="ml-2 text-[#6E2936] font-bold text-[11px] md:text-base hover:text-[#F4664A] transition duration-300">
