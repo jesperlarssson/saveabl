@@ -119,7 +119,7 @@ const PopupNewsletterForm = () => {
                       setIsTyping(e.target.value.length > 0);
                       setError("");
                     }}
-                    className="w-full bg-transparent text-[#6E2936] outline-none text-[11px] md:text-[16px] placeholder-[#6E2936] px-1"
+                    className="w-full bg-transparent text-[#6E2936] outline-none text-[14px] md:text-[16px] placeholder-[#6E2936] px-1"
                     required
                   />
 
