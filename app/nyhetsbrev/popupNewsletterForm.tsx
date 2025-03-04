@@ -129,7 +129,44 @@ const PopupNewsletterForm = () => {
                     <FiMail className="text-[#6E2936] text-lg md:text-2xl ml-2" />
                   )}
                 </div>
+                {/* Landval visas när man börjar skriva */}
+                {isTyping && (
+                  <div className="mt-4 md:mt-4">
+                    <p className="text-[#6E2936] font-bold text-[11px] md:text-base">{text.popup.country_label}</p>
+                    <div className="flex items-center gap-2 md:gap-4 mt-2">
+                      <label className="flex items-center space-x-1 md:space-x-2">
+                        <input
+                          type="radio"
+                          name="country"
+                          checked={selectedCountry === "Sverige"}
+                          onChange={() => {
+                            setSelectedCountry("Sverige");
+                            setError("");
+                          }}
+                          className="w-3 h-3 md:w-4 md:h-4 accent-[#6E2936] cursor-pointer"
+                        />
+                        <span className="text-[#6E2936] text-[11px] md:text-sm">{text.popup.sweden}</span>
+                      </label>
+                      <label className="flex items-center space-x-1 md:space-x-2">
+                        <input
+                          type="radio"
+                          name="country"
+                          checked={selectedCountry === "Danmark"}
+                          onChange={() => setSelectedCountry("Danmark")}
+                          className="w-3 h-3 md:w-4 md:h-4 accent-[#6E2936] cursor-pointer"
+                          style={{ accentColor: "#6E2936" }}
+                        />
+                        <span className="text-[#6E2936] text-[11px] md:text-sm">{text.popup.denmark}</span>
+                      </label>
+                    </div>
+                  </div>
+                )}
               </form>
+
+              {/* Beskrivande text */}
+              <p className="text-center text-[8px] md:text-sm text-[#6E2936] mt-3 md:mt-4">
+                {text.popup.consent_text}
+              </p>
 
               {/* Felmeddelande */}
               {error && <p className="mt-2 text-[8px] md:text-sm text-center text-red-500">{error}</p>}
