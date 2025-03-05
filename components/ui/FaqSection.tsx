@@ -4,7 +4,7 @@ import Accordion from "@/components/ui/Accordion"; // Importera Accordion
 import React from "react";
 import Section from "@/components/ui/Section";
 import Button from "../ui/Button";
-import router from "next/router";
+import { useRouter } from "next/navigation";
 import Title from "../ui/Title";
 import LottieAnimation from "./LottieAnimation";
 import clockAnimation from "../../public/anim/Klocka.json";
@@ -12,6 +12,8 @@ import globAnimation from "../../public/anim/Jordklot.json";
 
 const FaqSection = () => {
     const { lang, text } = useLang();
+    const router = useRouter();
+    
 
   // Mappa om FAQ-datan så att rätt fråga och svar visas baserat på språket
   const translatedFaqs = text.about_us.faqItems.map((faq: { question: { [x: string]: any; }; answer: { [x: string]: any; }; }) => ({
