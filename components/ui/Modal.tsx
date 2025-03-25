@@ -5,7 +5,7 @@ interface ModalProps {
   isOpen: boolean;
   onChange: (open: boolean) => void;
   title: string;
-  description: string;
+  description: React.ReactNode;
   children: React.ReactNode;
 }
 
@@ -57,7 +57,8 @@ const Modal: React.FC<ModalProps> = ({
             className="
               text-2xl 
               font-poppins 
-              mb-2
+              mb-4
+              mt-4
               text-secondary
             "
           >

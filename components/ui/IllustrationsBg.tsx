@@ -36,13 +36,13 @@ const IllustrationsBg = () => {
             <Image
               width={0}
               height={0}
-              className="md:block object-contain animate-wiggle"
+              className="hidden md:block object-contain animate-wiggle"
               alt={illustration[2].alt}
               src={illustration[2].path}
             />
           </motion.div>
           <div className="translate-x-36 z-1 relative ">
-            <div className="animate-wiggle">
+            <div className="hidden md:block animate-wiggle">
               <LottieAnimation
                 animationData={matkasseAnimation}
                 style={{ height: 220 }}

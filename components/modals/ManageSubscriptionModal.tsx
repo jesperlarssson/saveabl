@@ -86,7 +86,13 @@ const ManageSubscriptionModal: React.FC<ManageSubscriptionModalProps> = ({ updat
   return (
     <Modal
       title={text?.my_pages.modalTitle}
-      description={text?.my_pages.modalDescription}
+      description={
+        <ul className="list-disc pl-4 space-y-1 marker:text-[#6E2936]">
+          {text?.my_pages.modalDescription?.map((item: string, index: number) => (
+            <li key={index}>{item}</li>
+          ))}
+        </ul>
+      }      
       isOpen={isOpen}
       onChange={(open: boolean) => {
         if (!open) {
@@ -134,6 +140,10 @@ const ManageSubscriptionModal: React.FC<ManageSubscriptionModalProps> = ({ updat
   <Button type="submit">
     {text?.my_pages.pauseButton}
   </Button>
+  <p
+  className="text-xs text-black mb-2 mt-[-10px]"
+  dangerouslySetInnerHTML={{ __html: text?.my_pages.pauseInfoWithEmail || "" }}
+/>
 </form>
 
           </div>
