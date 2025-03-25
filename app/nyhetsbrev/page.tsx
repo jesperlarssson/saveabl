@@ -69,371 +69,364 @@ const NewsletterForm = () => {
   };
 
   const styles = `
-  .header-image-container {
-    width: 100%;
-    height: auto;
-    position: relative;
-  }
-  
-  .header-image {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-  }
-  
-  .visste-du-att-wrapper {
-    text-align: center; /* Centrerar bilden horisontellt */
-    margin-bottom: -40px; /* Avstånd mellan bilden och rubriken */
-  }
-  
-  .visste-du-att-image {
-    display: inline-block; /* Gör bilden inline och skalbar */
-    width: 20%; /* Proportionell bredd */
-    height: auto; /* Behåller proportionerna */
-  }
-  
-  /* Språkspecifik placering (om små justeringar behövs) */
-  .visste-du-att-image.sv {
-    margin-top: -20px; /* Svenska inställningar */
-  }
-  
-  .visste-du-att-image.en {
-    margin-top: 5px; /* Engelska inställningar */
-    margin-bottom: -20px;
-  }
-  
-  .visste-du-att-image.da {
-    margin-top: -15px; /* Danska inställningar */
-  }
-  
-  
-  .container {
-    width: 80%;
-    max-width: 750px;
-    margin: 40px auto;
-    padding: 20px;
-    background-color: #fcf7e8;
-    text-align: left;
-    position: relative;
-  }
-  
-  .page-title {
-    color: #6e2936;
-    font-size: 40px;
-    font-weight: bold;
-    margin-bottom: 15px;
-    margin-top: -10px;
-    text-align: center;
-    line-height: 1.3;
-  }
-  
-  .page-subtitle {
-    color: black;
-    font-size: 19px;
-    margin-top: 15px;
-    margin-bottom: 30px;
-    text-align: left;
-  }
-  
-  .button-section {
-    margin-bottom: 30px;
-    display: flex;
-    justify-content: left;
-  }
-  
-  .form-button {
-    background-color: #f4664a;
-    color: #fcf7e8;
-    border: none;
-    padding: 15px 25px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 20px;
-    text-align: center;
-    max-width: 300px;
-    width: 100%;
-    box-sizing: border-box;
-    display: block;
-    margin: 0 auto;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-  }
-  
-  .form-button:hover {
-    background-color: rgba(244, 102, 74, 0.8);
-  }
-  
-  .additional-section {
-    margin-top: 20px;
-    margin-bottom: 30px;
+.newsletter-page .header-image-container {
+  width: 100%;
+  height: auto;
+  position: relative;
+}
+
+.newsletter-page .header-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.newsletter-page .visste-du-att-wrapper {
+  text-align: center;
+  margin-bottom: -40px;
+}
+
+.newsletter-page .visste-du-att-image {
+  display: inline-block;
+  width: 20%;
+  height: auto;
+}
+
+.newsletter-page .visste-du-att-image.sv {
+  margin-top: -20px;
+}
+
+.newsletter-page .visste-du-att-image.en {
+  margin-top: 5px;
+  margin-bottom: -20px;
+}
+
+.newsletter-page .visste-du-att-image.da {
+  margin-top: -15px;
+}
+
+.newsletter-page .container {
+  width: 80%;
+  max-width: 750px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #fcf7e8;
+  text-align: left;
+  position: relative;
+}
+
+.newsletter-page .page-title {
+  color: #6e2936;
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  margin-top: -10px;
+  text-align: center;
+  line-height: 1.3;
+}
+
+.newsletter-page .page-subtitle {
+  color: black;
+  font-size: 19px;
+  margin-top: 15px;
+  margin-bottom: 30px;
+  text-align: left;
+}
+
+.newsletter-page .button-section {
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: left;
+}
+
+.newsletter-page .form-button {
+  background-color: #f4664a;
+  color: #fcf7e8;
+  border: none;
+  padding: 15px 25px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 20px;
+  text-align: center;
+  max-width: 300px;
+  width: 100%;
+  box-sizing: border-box;
+  display: block;
+  margin: 0 auto;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.newsletter-page .form-button:hover {
+  background-color: rgba(244, 102, 74, 0.8);
+}
+
+.newsletter-page .additional-section {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.newsletter-page .additional-section h2 {
+  color: #6e2936;
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 50px;
+  margin-bottom: 10px;
+}
+
+.newsletter-page .additional-section p {
+  font-size: 19px;
+  margin-bottom: 20px;
+}
+
+.newsletter-page .input-group {
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.newsletter-page .input-group label {
+  position: absolute;
+  top: -12px;
+  left: 10px;
+  background-color: #fcf7e8;
+  padding: 0 5px;
+  color: #6e2936;
+  font-weight: bold;
+  font-size: 19px;
+}
+
+.newsletter-page input[type="text"],
+.newsletter-page input[type="email"] {
+  width: calc(100% - 20px);
+  max-width: 100%;
+  padding: 15px;
+  border: 2px solid #6e2936;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 16px;
+  text-align: left;
+  background-color: #fcf7e8;
+  transition: border-color 0.3s ease;
+}
+
+.newsletter-page input[type="text"]:focus,
+.newsletter-page input[type="email"]:focus {
+  border-color: #eecfaa;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(238, 207, 170, 0.5);
+}
+
+.newsletter-page input::placeholder {
+  text-align: left;
+  color: #d3a181;
+  font-size: 16px;
+  opacity: 0.5;
+}
+
+.newsletter-page .consent-container {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 40px;
+}
+
+.newsletter-page .consent-container input[type="checkbox"] {
+  margin-right: 10px;
+  margin-top: 5px;
+  transform: scale(1.2);
+}
+
+.newsletter-page .consent-text {
+  font-size: 16px;
+  margin-bottom: -10px;
+}
+
+.newsletter-page .matkasse-image {
+  position: absolute;
+  bottom: 10px;
+  right: -250px;
+  width: 230px;
+  height: 230px;
+}
+
+.newsletter-page .morot-image-container {
+  position: absolute;
+  top: 650px;
+  left: 120px;
+  width: 300px;
+  height: 300px;
+}
+
+.newsletter-page .thank-you h2 {
+  color: #6e2936;
+  font-size: 45px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  margin-top: 5px;
+  text-align: left;
+}
+
+.newsletter-page .thank-you p {
+  color: black;
+  font-size: 20px;
+  margin-top: 15px;
+  margin-bottom: 40px;
+  text-align: left;
+}
+
+/* Mobil */
+@media (max-width: 600px) {
+  .newsletter-page .container {
+    width: 95%;
+    margin: 10px auto;
+    padding: 10px;
   }
 
-  .additional-section h2 {
-    color: #6e2936;
-    font-size: 24px;
-    font-weight: bold;
-    margin-top: 50px;
+  .newsletter-page .visste-du-att-wrapper {
+    position: relative;
+    margin-top: 0;
     margin-bottom: 10px;
   }
 
-  .additional-section p {
-    font-size: 19px;
+  .newsletter-page .visste-du-att-image {
+    position: relative;
+    top: -30px;
+    left: 0;
+    margin: 0 auto;
+    width: 80%;
+    height: auto;
+  }
+
+  .newsletter-page .page-title {
+    font-size: 23px;
+    margin-top: 25px;
+    margin-bottom: 10px;
+    text-align: left;
+    line-height: 1.3;
+  }
+
+  .newsletter-page .page-subtitle {
+    font-size: 18px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    text-align: left;
+  }
+
+  .newsletter-page .form-button {
+    font-size: 18px;
+    padding: 10px 20px;
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .newsletter-page .additional-section {
+    margin-top: 10px;
+    margin-bottom: 30px;
+  }
+
+  .newsletter-page .additional-section h2 {
+    color: #6e2936;
+    font-size: 23px;
+    font-weight: bold;
+    margin-bottom: 7px;
+    margin-top: 10px;
+  }
+
+  .newsletter-page .additional-section p {
+    font-size: 18px;
     margin-bottom: 20px;
   }
-  
-  .input-group {
-    position: relative;
-    margin-bottom: 40px;
+
+  .newsletter-page .input-group {
+    margin-bottom: 20px;
   }
-  
-  .input-group label {
-    position: absolute;
-    top: -12px;
-    left: 10px;
-    background-color: #fcf7e8;
-    padding: 0 5px;
-    color: #6e2936;
-    font-weight: bold;
-    font-size: 19px;
+
+  .newsletter-page .input-group label {
+    font-size: 16px;
+    display: block;
+    padding-left: 10px;
+    margin-bottom: 5px;
   }
-  
-  input[type="text"],
-  input[type="email"] {
+
+  .newsletter-page input[type="text"],
+  .newsletter-page input[type="email"] {
+    font-size: 16px;
+    padding: 10px;
     width: calc(100% - 20px);
-    max-width: 100%;
-    padding: 15px;
-    border: 2px solid #6e2936;
-    border-radius: 5px;
-    box-sizing: border-box;
-    font-size: 16px;
-    text-align: left;
-    background-color: #fcf7e8;
-    transition: border-color 0.3s ease;
+    margin-bottom: 15px;
   }
-  
-  input[type="text"]:focus,
-  input[type="email"]:focus {
-    border-color: #eecfaa;
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(238, 207, 170, 0.5);
+
+  .newsletter-page .consent-container {
+    margin-bottom: 10px;
   }
-  
-  input::placeholder {
-    text-align: left;
-    color: #d3a181;
-    font-size: 16px;
-    opacity: 0.5;
-  }
-  
-  .consent-container {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 40px;
-  }
-  
-  .consent-container input[type="checkbox"] {
+
+  .newsletter-page .consent-container input[type="checkbox"] {
     margin-right: 10px;
     margin-top: 5px;
-    transform: scale(1.2);
+    transform: scale(1);
   }
-  
-  .consent-text {
-    font-size: 16px;
-    margin-bottom: -10px;
-  }
-  
-  .matkasse-image {
-    position: absolute;
-    bottom: 10px;
-    right: -250px;
-    width: 230px;
-    height: 230px;
-  }
-  
-  .morot-image-container {
-    position: absolute;
-    top: 650px;
-    left: 120px;
-    width: 300px;
-    height: 300px;
-  }
-  
-  .thank-you h2 {
-    color: #6e2936;
-    font-size: 45px;
-    font-weight: bold;
-    margin-bottom: 15px;
-    margin-top: 5px;
-    text-align: left;
-  }
-  
-  .thank-you p {
-    color: black;
-    font-size: 20px;
-    margin-top: 15px;
-    margin-bottom: 40px;
-    text-align: left;
-  }
-  
-  /* Endast justeringar för mobilversionen */
-  @media (max-width: 600px) {
-    .container {
-      width: 95%;
-      margin: 10px auto;
-      padding: 10px;
-    }
 
-    .visste-du-att-wrapper {
-      position: relative;
-      margin-top: 0; /* Flyttar ned det beigea området */
-      margin-bottom: 10px; /* Lägg till lite luft mellan bild och text */
-    }
-  
-    .visste-du-att-image {
-      position: relative;
-      top: -30px; /* Ta bort tidigare höjdinställningar */
-      left: 0; /* Låt bilden flöda naturligt */
-      margin: 0 auto; /* Centrerar bilden */
-      width: 80%; /* Gör bilden mindre på mobil */
-      height: auto;
-    }
-  
-  
-    .page-title {
-      font-size: 23px;
-      margin-top: 25px;
-      margin-bottom: 10px;
-      text-align: left;
-      line-height: 1.3;
-    }
-  
-    .page-subtitle {
-      font-size: 18px;
-      margin-top: 10px;
-      margin-bottom: 20px;
-      text-align: left;
-    }
-  
-    .form-button {
-      font-size: 18px;
-      padding: 10px 20px;
-      width: 100%;
-      text-align: center;
-      margin-top: 10px;
-    }
-  
-    .additional-section {
-      margin-top: 10px;
-      margin-bottom: 30px;
-    }
-  
-    .additional-section h2 {
-      color: #6e2936;
-      font-size: 23px;
-      font-weight: bold;
-      margin-bottom: 7px;
-      margin-top: 10px;
-    }
-  
-    .additional-section p {
-      font-size: 18px;
-      margin-bottom: 20px;
-    }
-  
-    .input-group {
-      margin-bottom: 20px;
-    }
-  
-    .input-group label {
-      font-size: 16px;
-      display: block;
-      padding-left: 10px;
-      margin-bottom: 5px;
-    }
-  
-    input[type="text"],
-    input[type="email"] {
-      font-size: 16px;
-      padding: 10px;
-      width: calc(100% - 20px);
-      margin-bottom: 15px;
-    }
-  
-    .consent-container {
-      display: flex;
-      align-items: flex-start;
-      margin-bottom: 10px;
-    }
-  
-    .consent-container input[type="checkbox"] {
-      margin-right: 10px;
-      margin-top: 5px;
-      transform: scale(1);
-    }
-  
-    .consent-text {
-      font-size: 14px;
-    }
-  
-    .matkasse-image {
-      display: none;
-    }
-  
-    .morot-image-container {
+  .newsletter-page .consent-text {
+    font-size: 14px;
+  }
+
+  .newsletter-page .matkasse-image {
+    display: none;
+  }
+
+  .newsletter-page .morot-image-container {
     position: absolute;
     top: 80px;
     left: 330px;
     width: 60px;
     height: 60px;
-    z-index: 10; 
-    }
-  
-    .thank-you h2 {
-      font-size: 30px;
-      text-align: left;
-    }
-  
-    .thank-you p {
-      font-size: 18px;
-      text-align: left;
-    }
+    z-index: 10;
+  }
 
-    
-    /* CSS för svenska */
-    .visste-du-att-image.sv {
-      position: absolute;
-      top: 10px;
-      left: -7px;
-      width: 180px;
-      z-index: 1;
-    }
-    
-    /* CSS för engelska */
-    .visste-du-att-image.en {
-      position: absolute;
-      top: -10px;
-      left: 2px;
-      width: 230px;
-      z-index: 1;
-    }
-    
-    /* CSS för danska */
-    .visste-du-att-image.da {
-      position: absolute;
-      top: 10px;
-      left: -10px;
-      width: 180px;
-      z-index: 1;
-    }
-  
-    .submit-button {
-      margin-top: 35px;
-      margin-bottom: 30px;
-  }  
+  .newsletter-page .thank-you h2 {
+    font-size: 30px;
+    text-align: left;
+  }
+
+  .newsletter-page .thank-you p {
+    font-size: 18px;
+    text-align: left;
+  }
+
+  .newsletter-page .visste-du-att-image.sv {
+    position: absolute;
+    top: 10px;
+    left: -7px;
+    width: 180px;
+    z-index: 1;
+  }
+
+  .newsletter-page .visste-du-att-image.en {
+    position: absolute;
+    top: -10px;
+    left: 2px;
+    width: 230px;
+    z-index: 1;
+  }
+
+  .newsletter-page .visste-du-att-image.da {
+    position: absolute;
+    top: 10px;
+    left: -10px;
+    width: 180px;
+    z-index: 1;
+  }
+
+  .newsletter-page .submit-button {
+    margin-top: 35px;
+    margin-bottom: 30px;
+  }
+}
 `;
 
+
 return (
-  <div>
+  <div className="newsletter-page">
     <style>{styles}</style>
     <div className="header-image-container">
       <Image
