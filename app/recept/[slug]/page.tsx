@@ -34,7 +34,6 @@ const RecipePage: React.FC<RecipePageProps> = async ({ params }) => {
 
       <TextBanner>{textBannerText}</TextBanner>
       <ThisWeekRecipes fullWidth />
-      <TextBanner>{textBannerText}</TextBanner>
     </>
   );
 };

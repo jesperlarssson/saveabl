@@ -176,6 +176,9 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({ selectedType, selectedVaria
           <p className="text-[#6E2936]"><strong>{text.order.frequency}:</strong> {getVariantName(typeof selectedVariant === 'string' ? selectedVariant : selectedVariant.label, lang)}</p>
           <p className="text-[#6E2936]"><strong>{text.order.deliveryDaysummary}:</strong> {selectedDay.label}</p>
           <p className="text-[#6E2936]"><strong>{text.order.totalPrice}:</strong> {totalPrice} kr {text.order.shipping}</p>
+          <p className="text-[#6E2936] text-md mt-2">
+  {text.order.discountNote}
+</p>
       </div><style jsx>{`
 @media (max-width: 640px) {
   .order-summary {

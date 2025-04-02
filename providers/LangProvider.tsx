@@ -200,6 +200,9 @@ const svText = {
       },
     ],
   },
+  hero_sthlm: {
+    launch_offer: "Ange <strong>STHLM</strong> på saveabl varje eller\nvarannan vecka för lanseringsrabatt.",
+  }  
 },
 
   about_us: {
@@ -356,6 +359,7 @@ const svText = {
     frequency: "Leveransfrekvens",
     deliveryDaysummary: "Leveransdag",
     totalPrice: "Totalpris",
+    discountNote: "Eventuella rabattkoder anges i sista steget",
     shipping: "+ frakt", 
     title_familjekassen: "Familjekassen",
     title_sambokassen: "Sambokassen",
@@ -737,6 +741,21 @@ popup: {
         "Pris: 699 SEK",
       ],
   },
+  stockholmPopup: {
+    title: "Lanseringserbjudande",
+    description:
+      "För att fira vår lansering i Stockholm får du som startar en prenumeration 100 kr rabatt på dina fyra första matkassar.",
+    code_note: "Ange kod STHLM i kassan.",
+    save_later: "Spara till senare?",
+    save_description: "Fyll i din mejladress så skickar vi koden.",
+    placeholder: "Din e-postadress",
+    send_button: "Skicka",
+    consent_text:
+      "Genom att fylla i formuläret anmäler du dig till våra mejlutskick. Du kan när som helst avregistrera dig.",
+    error_empty: "Fyll i din e-postadress.",
+    error_generic: "Något gick fel. Försök igen.",
+    success_message: "Tack! Vi har skickat koden till dig 💌",
+  }, 
   
 };
 
@@ -845,6 +864,10 @@ const enText = {
       }
     ]    
   },
+  hero_sthlm: {
+    launch_offer: "Enter <strong>STHLM</strong> on saveabl weekly or\nevery other week for launch discount",
+  },
+  
 },
   about_us: {
     title: "Saveabl, capable of being saved or salvaged",
@@ -998,6 +1021,7 @@ button: "Got it - order now!"
     frequency: "Delivery frequency",
     deliveryDaysummary: "Delivery day",
     totalPrice: "Total price",
+    discountNote: "Any discount codes are entered in the final step",
     shipping: "+ shipping",
     title_familjekassen: "Family kit",
     title_sambokassen: "Couple kit",
@@ -1344,6 +1368,22 @@ button: "Got it - order now!"
       "Price: 699 SEK/629 DKK",
         ],
     },
+    stockholmPopup: {
+      title: "Launch Offer",
+      description:
+        "To celebrate our launch in Stockholm, you get 100 SEK off your first four meal kits when you start a subscription.",
+      code_note: "Use code STHLM at checkout.",
+      save_later: "Save for later?",
+      save_description: "Enter your email and we'll send you the code.",
+      placeholder: "Your email address",
+      send_button: "Send",
+      consent_text:
+        "By filling out the form, you agree to receive our emails. You can unsubscribe at any time.",
+      error_empty: "Please enter your email address.",
+      error_generic: "Something went wrong. Please try again.",
+      success_message: "Thanks! We've sent you the code 💌",
+    },
+    
 };
 
 const daText = {
@@ -1449,6 +1489,10 @@ const daText = {
       }
     ]    
   },
+  hero_sthlm: {
+    launch_offer: "Angiv <strong>STHLM</strong> på saveabl hver eller\nhver anden uge for lanceringsrabat",
+  },
+  
 },
   about_us: {
     title: "Redningsbar, noget der kan reddes",
@@ -1593,6 +1637,7 @@ button: "Jeg forstår - bestil nu!"
     frequency: "Leveringsfrekvens",
     deliveryDaysummary: "Leveringsdag",
     totalPrice: "Totalpris",
+    discountNote: "Eventuelle rabatkoder angives i sidste trin", 
     shipping: "+ fragt",
     title_familjekassen: "Familjekassen",
     title_sambokassen: "Sambokassen",
@@ -1921,5 +1966,21 @@ integrity_policy: {
 "Vi sender gavekortet digitalt efter dit køb",
 "Pris: 629 DKK",
 ]
-  }
+  }, 
+  stockholmPopup: {
+    title: "Lanceringstilbud",
+    description:
+      "For at fejre vores lancering i Stockholm får du 100 SEK rabat på dine første fire måltidskasser, når du starter et abonnement.",
+    code_note: "Brug koden STHLM i kassen.",
+    save_later: "Gem til senere?",
+    save_description: "Indtast din e-mail, så sender vi dig koden.",
+    placeholder: "Din e-mailadresse",
+    send_button: "Send",
+    consent_text:
+      "Ved at udfylde formularen tilmelder du dig vores nyhedsbrev. Du kan til enhver tid afmelde dig.",
+    error_empty: "Udfyld din e-mailadresse.",
+    error_generic: "Noget gik galt. Prøv igen.",
+    success_message: "Tak! Vi har sendt koden til dig 💌",
+  },
+  
 };

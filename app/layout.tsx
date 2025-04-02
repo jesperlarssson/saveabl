@@ -1,3 +1,4 @@
+"use client"
 import "./globals.css";
 import { Figtree } from "next/font/google";
 import ToasterProvider from "@/providers/ToasterProvider";
@@ -18,6 +19,7 @@ import MetaPixel from "@/components/MetaPixel";
 import { LangProvider } from "@/providers/LangProvider";
 import { PauseWeekProvider } from "@/context/PauseWeekContext";
 import PopupManager from "@/app/popupManager";
+import { usePathname } from "next/navigation";
 
 
 
@@ -25,11 +27,10 @@ const font = Figtree({ subsets: ["latin"] });
 export const revalidate = 1; // revalidate this page every 60 seconds
 
 
-export default function RootLayout({
- children,
-}: {
- children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
+  const isSthlmPage = pathname?.startsWith("/sthlm");
+
  return (
    <html lang="sv">
      <head>
@@ -84,7 +85,7 @@ export default function RootLayout({
                      {children}
                    </main>
 
-                    <PopupManager />
+                   {!isSthlmPage && <PopupManager />}
                    <Footer />
                  </RecipeProvider>
                </MyParallaxProvider>
