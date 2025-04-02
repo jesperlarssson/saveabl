@@ -79,7 +79,7 @@ const StockholmPopup = () => {
 
         {!submitted ? (
           <>
-            <p className="text-md sm:text-sm text-center mb-2">
+            <p className="text-sm sm:text-sm text-center mb-2">
               <span className="font-semibold">{t.save_later}</span> {t.save_description}
             </p>
 
@@ -107,13 +107,13 @@ const StockholmPopup = () => {
                   {t.send_button}
                 </button>
               ) : (
-                <FiMail className="ml-2 text-3xl text-[#6E2936]" />
+                <FiMail className="ml-2 text-2xl text-[#6E2936]" />
               )}
             </form>
 
             {isTyping && (
               <div className="mx-auto max-w-[350px]">
-                <p className="text-md text-[#6E2936] mt-2 text-center">{t.consent_text}</p>
+                <p className="text-sm text-[#6E2936] mt-2 text-center">{t.consent_text}</p>
               </div>
             )}
 
