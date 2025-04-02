@@ -72,14 +72,14 @@ const StockholmPopup = () => {
           &times;
         </button>
 
-        <h2 className="text-xl sm:text-2xl font-bold text-center mb-4">{t.title}</h2>
-        <p className="text-center text-sm sm:text-base mb-4">
+        <h2 className="text-2xl sm:text-2xl font-bold text-center mb-4">{t.title}</h2>
+        <p className="text-center text-md sm:text-base mb-4">
           {t.description} <span className="font-semibold">{t.code_note}</span>
         </p>
 
         {!submitted ? (
           <>
-            <p className="text-xs sm:text-sm text-center mb-2">
+            <p className="text-md sm:text-sm text-center mb-2">
               <span className="font-semibold">{t.save_later}</span> {t.save_description}
             </p>
 
@@ -96,35 +96,35 @@ const StockholmPopup = () => {
                   setIsTyping(e.target.value.length > 0);
                   setError("");
                 }}
-                className="w-full bg-transparent text-sm placeholder-[#6E2936] outline-none px-1"
+                className="w-full bg-transparent text-md placeholder-[#6E2936] outline-none px-1"
                 required
               />
               {isTyping ? (
                 <button
                   type="submit"
-                  className="ml-2 text-sm font-bold text-[#6E2936] hover:text-[#F4664A]"
+                  className="ml-2 text-md font-bold text-[#6E2936] hover:text-[#F4664A]"
                 >
                   {t.send_button}
                 </button>
               ) : (
-                <FiMail className="ml-2 text-2xl text-[#6E2936]" />
+                <FiMail className="ml-2 text-3xl text-[#6E2936]" />
               )}
             </form>
 
             {isTyping && (
               <div className="mx-auto max-w-[350px]">
-                <p className="text-xs text-[#6E2936] mt-2 text-center">{t.consent_text}</p>
+                <p className="text-md text-[#6E2936] mt-2 text-center">{t.consent_text}</p>
               </div>
             )}
 
             {error && (
               <div className="mx-auto max-w-[350px]">
-                <p className="text-red-600 text-xs text-center mt-2">{error}</p>
+                <p className="text-red-600 text-md text-center mt-2">{error}</p>
               </div>
             )}
           </>
         ) : (
-          <div className="mt-4 bg-[#6E2936] text-[#EECFAA] px-4 py-2 rounded-md text-sm text-center">
+          <div className="mt-4 bg-[#6E2936] text-[#EECFAA] px-4 py-2 rounded-md text-md text-center">
             {t.success_message}
           </div>
         )}
