@@ -96,17 +96,7 @@ const CallToAction = () => {
             </motion.div>
           </div>
         </div>
-        {/* Rendera bara Image-komponenten om sMatkassenImage är definierad */}
-        {sMatkassenImage && (
-        <Image
-          width={170}
-          height={100}
-          className="w-40 -mb-16 z-20"
-          alt="scribble matkassen"
-          src={sMatkassenImage}
-        />
-        )}
-        <Title className="text-center mt-8">
+        <Title className="text-center mt-0">
         {compText.title.map((line: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | PromiseLikeOfReactNode | null | undefined, index: Key | null | undefined) => (
          <React.Fragment key={index}>
           {line}
