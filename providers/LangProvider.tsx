@@ -170,6 +170,8 @@ const svText = {
       title: "Våra kunder räddade precis 20 000 middagar. Det här säger de om oss:",
       text: "Såhär säger några av våra miljöhjältar till kunder:",
       read_all_reviews: "Läs alla omdömen",
+      read_more: "Läs mer",
+      read_less: "Visa mindre",
     content: [
       {
         id: 1,
@@ -834,6 +836,8 @@ const enText = {
       title: "Our customers just saved 20 000 dinners. Here's what they say:",
       text: "Here's what our climate-hero-customers think",
       read_all_reviews: "Read all reviews",
+      read_more: "Read more",
+      read_less: "Read less",
     content: [
       {
         id: 1,
@@ -1459,6 +1463,8 @@ const daText = {
       title: "Vores kunder har lige reddet 20 000 middage. Dette siger de om os:",
       text: "Sådan siger nogle af vores miljøhelte til kunder:",
       read_all_reviews: "Læs alle anmeldelser",
+      read_more: "Læs mere",
+      read_less: "Vis mindre",
     content: [
       {
         id: 1,
