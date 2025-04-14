@@ -13,6 +13,8 @@ import { useRouter } from "next/navigation"; // Korrekt import av useRouter
 import { useEffect, useState } from "react";
 import ImageDisplay from "../general/ImageDisplay";
 import LoadingScreen from "./LoadingScreen";
+import Head from "next/head";
+
 
 const Hero = () => {
   const { lang, text } = useLang();
@@ -32,9 +34,13 @@ const Hero = () => {
       : undefined;
 
   return (
-    <div className="w-full h-auto flex flex-col justify-center">
-       <ImageDisplay />
-      <Section className="pb-0 sm:pb-2">
+    <><Head>
+      <link rel="preload" as="image" href="/images/kockforberedd.webp" />
+      <link rel="preload" as="image" href="/images/klimatsmart.webp" />
+      <link rel="preload" as="image" href="/images/enkelt-gott.webp" />
+    </Head><div className="w-full h-auto flex flex-col justify-center">
+        <ImageDisplay />
+        <Section className="pb-0 sm:pb-2">
           <div className="flex flex-col justify-center items-center gap-y-4 text-secondary">
 
             {/* Huvudinnehållet */}
@@ -91,20 +97,19 @@ const Hero = () => {
 
             {/* Hero Pic Bild */}
             {hero_picImage && (
-                <div className="mt-4 -mb-6 sm:-mb-5">
+              <div className="mt-4 -mb-6 sm:-mb-5">
                 <Image
                   width={330}
                   height={70}
                   alt="Hand scribbles"
                   src={hero_picImage}
                   className="object-cover w-72 sm:w-72 md:w-80 lg:w-80" // 🔹 Mindre på mobil, större på desktop
-                  priority={true}
-                />
+                  priority={true} />
               </div>
             )}
           </div>
-      </Section>
-    </div>
+        </Section>
+      </div></>
   );
 };
 

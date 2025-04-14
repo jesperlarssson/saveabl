@@ -21,8 +21,9 @@ const ImageDisplay: React.FC = () => {
           alt={text.imageDisplay.kockforberedd}
           fill
           className="object-cover"
+          priority={true}
+          decoding="async"
           style={{ objectPosition: "center 38%" }}
-          unoptimized
         />
         <div className="absolute bottom-2 left-2 md:bottom-4 md:left-4 bg-white px-1.5 md:px-3 py-0.5 md:py-2 rounded-sm shadow-md flex items-center gap-1 md:gap-1">
   <span className="text-black font-medium text-[6px] md:text-xs">✔</span>
@@ -44,7 +45,8 @@ const ImageDisplay: React.FC = () => {
           alt={text.imageDisplay.klimatsmart}
           fill
           className="object-cover"
-          unoptimized
+          priority={true}
+          decoding="async"
         />
         <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 md:bottom-4 bg-white px-1.5 md:px-3 py-0.5 md:py-2 rounded-sm shadow-md flex items-center gap-1 md:gap-1">
   <span className="text-black font-medium text-[6px] md:text-xs">✔</span>
@@ -67,8 +69,9 @@ const ImageDisplay: React.FC = () => {
           alt={text.imageDisplay.enkeltgott}
           fill
           className="object-cover"
+          priority={true}
+          decoding="async"
           style={{ objectPosition: "center 20%" }}
-          unoptimized
         />
          <div className="absolute bottom-2 right-2 md:bottom-4 md:right-4 bg-white px-1.5 md:px-3 py-0.5 md:py-2 rounded-sm shadow-md flex items-center gap-1 md:gap-1">
          <span className="text-black font-medium text-[6px] md:text-xs">✔</span>
