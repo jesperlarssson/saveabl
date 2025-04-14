@@ -1,5 +1,3 @@
-export const dynamic = "force-dynamic";
-
 import { getWeekNumber } from "@/helpers/format";
 import { getRecipesForWeek } from "@/lib/hygraph";
 
