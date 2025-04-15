@@ -375,10 +375,17 @@ export async function getPaginatedOldRecipes(limit: number, offset: number) {
 }
 
 export async function getRecipesForWeek(week: number) {
+  const NEXT_WEEK = 17; // ← Byt detta om du vill visa andra veckor från tempRecipes
 
-  // const recipes = tempRecipes.data.recepts.filter((recipe) => recipe.weekNr === week);
-  // return recipes;
+  // Fallback: Hämta från tempRecipes om det gäller nästa vecka
+  if (week === NEXT_WEEK) {
+    const recipes = tempRecipes.data.recepts.filter(
+      (recipe) => recipe.weekNr === NEXT_WEEK
+    );
+    return recipes;
+  }
 
+  // Standard: Hämta från Hygraph
   const data = await fetchAPI(
     `
     query GetRecipes($week: Int!) {
@@ -480,8 +487,15 @@ export async function getAllRecipesWithSlug() {
 }
 
 export async function getRecipeWithSlug(slug: string) {
-  // const recipe = tempRecipes.data.recepts.find((recipe) => recipe.slug === slug);
-  // return recipe;
+  // Fallback: kolla i tempRecipes om receptet finns där
+  const tempMatch = tempRecipes.data.recepts.find(
+    (recipe) => recipe.slug === slug
+  );
+  if (tempMatch) {
+    return tempMatch;
+  }
+
+  // Annars: hämta från Hygraph
   const data = await fetchAPI(
     `
     query GetRecipe($slug: String!) {
@@ -527,5 +541,6 @@ export async function getRecipeWithSlug(slug: string) {
   `,
     { variables: { slug } }
   );
+
   return data.recept;
 }

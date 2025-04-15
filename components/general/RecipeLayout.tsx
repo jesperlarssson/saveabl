@@ -35,6 +35,14 @@ export const getStars = (rating: number) => {
   ));
 };
 
+// 👇 Här är fallback-funktionen för kockbilder
+const getChefImage = (name: string, image?: string) => {
+  if (image && !image.includes("placeholder-chef")) return image;
+  if (name.toLowerCase().includes("emil")) return "/images/emil_kock.png";
+  if (name.toLowerCase().includes("anton")) return "/images/anton_kock.webp";
+  return "/images/placeholder-chef.png";
+};
+
 interface RecipeLayoutProps {
   recipe: Recipe;
 }
@@ -107,18 +115,15 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
     setRecept(temp);
     calculateRating();
   }, [lang, recipe]);
- 
- 
+
   if (recipe?.deprecated) {
     return <Section className="w-full">Detta är ett gammalt recept</Section>;
   }
- 
 
   return (
     <Section className="w-full">
       <Card className="my-0 text-secondary relative">
         <div className="grid grid-cols-4 gap-8 relative">
-          {/* Receptbild */}
           <div className="col-span-4 sm:col-span-1 drop-shadow-md overflow-hidden rounded-lg relative mb-2">
             <Image
               src={recept.image}
@@ -129,34 +134,32 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
             />
           </div>
 
-          {/* Innehåll till höger om receptbilden */}
           <div className="col-span-4 sm:col-span-3 flex flex-col justify-end gap-2 relative">
-          <div className="flex items-center gap-2 mt-0">
-  {recept.chef.image && (
-    <Image
-      src={recept.chef.image}
-      alt={`Chef ${recept.chef.name}`}
-      width={120}
-      height={120}
-      className="rounded-full"
-      sizes="(max-width: 120px) 100vw, 120px"
-      quality={100}
-    />
-  )}
-  <h3 className="text-secondary font-poppins text-xl">{recept.chef.name}</h3>
-</div>
-<div className="flex items-center mt-2">
-  {getStars(ratingSum)} {/* Endast stjärnorna baserat på det beräknade betyget */}
-</div>
+            <div className="flex items-center gap-2 mt-0">
+              <Image
+                src={getChefImage(recept.chef.name, recept.chef.image)}
+                alt={`Chef ${recept.chef.name}`}
+                width={120}
+                height={120}
+                className="rounded-full"
+                sizes="(max-width: 120px) 100vw, 120px"
+                quality={100}
+              />
+              <h3 className="text-secondary font-poppins text-xl">
+                {recept.chef.name}
+              </h3>
+            </div>
+
+            <div className="flex items-center mt-2">
+              {getStars(ratingSum)}
+            </div>
 
             <h2 className="font-poppins text-secondary text-2xl sm:text-4xl">
               {recept.title}
             </h2>
           </div>
         </div>
-        
 
-        {/* Ikoner och text direkt nedanför receptbilden */}
         <div className="mt-4 flex items-center gap-4">
           <div
             className="flex items-center cursor-pointer"
@@ -175,15 +178,15 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
             </span>
           </div>
           <div
-  className="flex items-center cursor-pointer"
-  onClick={() => {
-    if (navigator.share) {
-      navigator.share({
-        text: `${text.recipe_slug.share_message}\n\n${recept.title}\n\n${window.location.href}`, // Share_message först, sen mellanrum, sen titel
-      });
-    }
-  }}
->
+            className="flex items-center cursor-pointer"
+            onClick={() => {
+              if (navigator.share) {
+                navigator.share({
+                  text: `${text.recipe_slug.share_message}\n\n${recept.title}\n\n${window.location.href}`,
+                });
+              }
+            }}
+          >
             <Image
               src="/images/share_recipe.png"
               alt="Share Recipe"
@@ -196,7 +199,6 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
           </div>
         </div>
 
-        {/* Innehåll (ingredienser) och Gör så här nedanför ikonerna */}
         <div className="grid grid-cols-4 gap-8 mt-4">
           <div className="col-span-4 sm:col-span-1">
             <h3 className="font-poppins text-xl">{text.recipe_slug.contains}</h3>
@@ -230,7 +232,6 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
         </div>
       </Card>
 
-      {/* Grid layout for Räddade varor, Näringsvärden, and Innehåll & allergener */}
       <Grid>
         <Card>
           <h3 className="text-secondary font-poppins">
@@ -256,7 +257,6 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
         {comments.length > 0 && <CommentSection comments={comments} />}
       </div>
 
-      {/* Kommentarsformulär med id för att länka till */}
       <div id="comment-form">
         <CommentForm recipeId={recipe.id || ''} onNewComment={handleNewComment} />
       </div>
@@ -265,16 +265,3 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
 };
 
 export default RecipeLayout;
-
-
-
-
-
-
-
-
-
-
-
-
-

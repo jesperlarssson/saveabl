@@ -2,6 +2,212 @@ export const tempRecipes = {
   data: {
     recepts: [
       {
+        id: "week17-recipe1",
+        weekNr: 17,
+        recipeNumber: 1,
+        startDate: "2025-04-22", // måndagen i vecka 17
+        chef: {
+          name: "Emil Petzén",
+          image: "/images/emil_kock.png" 
+        },
+        title:
+          "Creamy tikka masala with lentils. Served with naan bread, basmati rice & herb yoghurt with coriander & mint.",
+        slug: "kramig-tikka-masala-med-linser-naan-ris-och-ortyoghurt",
+        image: {
+          url: "/images/week17-recipe1.jpg", // ← byt till rätt lokal bildsökväg
+        },
+        ingredients: ["Coming soon!"],
+        steg: ["Coming soon!"],
+        contentAllergies: [
+          "Tikka dahl *Red lentils, cream, sour cream, galangal, chili, ginger, tomato paste, yellow ONION, cinnamon, cardamom, thyme, GARLIC, rapeseed oil, coriander, vegetable stock parsley, ONION, celery, cornstarch.",
+          "Naan: WHEAT FLOUR, water, 3% wheat sourdough (water, WHEAT FLOUR, brandy vinegar, WHEAT MALT FLOUR, salt), yeast, rapeseed oil, salt, YOGURT, CORN MALT, vinegar."
+        ],
+        savedIngredients: "Coming soon!",
+        nutritionalValues: "Calculated per portion. Calories 743. Protein 33g. Carbohydrates 83g. Fat 23g.",
+        freezabl: null,
+        createdAt: "2025-04-15T12:00:00Z",
+        localizations: [
+          {
+            title: "Krämig tikka masala med linser. Serveras med naanbröd, basmatiris & örtig yoghurt med koriander och mynta.",
+            ingredients: ["Kommer snart!"],
+            steg: ["Kommer snart!"],
+            contentAllergies: [
+              "Tikka dahl *Röda linser, grädde, creme fraiche, galangal, chili, ingefära, tomatpuré, gul LÖK, kanel, kardemumma, timjan, VITLÖK, rapsolja, koriander, grönsaksfond *persilja, LÖK, selleri, maizena*.",
+              "Naan: VETEMJÖL, vatten, 3 % vetesurdeg (vatten, VETEMJÖL, brandyättika, VETEMALTMJÖL, salt), jäst, rapsolja, salt, YOGHURT, KORNMALT, ättika.",
+            ],
+            savedIngredients: "Kommer snart!",
+            nutritionalValues: "Räknat per portion. Kcal 743. Protein 33g. Kolhydrater 83g. Fett 23g.",
+            image: {
+              url: "/images/week17-recipe1.jpg", // ← byt till rätt lokal bildsökväg
+            },
+            id: "week17-recipe1-sv",
+            createdAt: "2025-04-15T12:00:00Z",
+            freezabl: null,
+            recipeNumber: 1,
+            slug: "kramig-tikka-masala-med-linser-naan-ris-och-ortyoghurt"
+          },
+          {
+            title: "Kremet tikka masala med linser. Serveres med naanbrød, basmatiris og urtet yoghurt med koriander og mynte.",
+            ingredients: ["Kommer snart!"],
+            steg: ["Kommer snart!"],
+            contentAllergies: [
+              "Tikka dahl *Røde linser, fløde, creme fraiche, galangal, chili, ingefær, tomatpuré, løg, kanel, kardemomme, timian, hvidløg, rapsolie, koriander, grøntsagsfond *persille, løg, selleri, maizena*.",
+              "Naan: HVEMJØL, vand, surdej (vand, HVEMJØL, brandyeddike, HVEDEMALTMEL, salt), gær, rapsolie, salt, YOGHURT, BYGMALT, eddike.",
+            ],
+            savedIngredients: "Kommer snart!",
+            nutritionalValues: "Beregnede per portion. Kalorier 743. Protein 33g. Kulhydrater 83g. Fedt 23g.",
+            image: {
+              url: "/images/week17-recipe1.jpg", // ← byt till rätt lokal bildsökväg
+            },
+            id: "week17-recipe1-da",
+            createdAt: "2025-04-15T12:00:00Z",
+            freezabl: null,
+            recipeNumber: 1,
+            slug: "kramig-tikka-masala-med-linser-naan-ris-och-ortyoghurt"
+          }
+        ]
+      }, 
+      {
+        id: "week17-recipe2",
+        weekNr: 17,
+        recipeNumber: 2,
+        startDate: "2025-04-22",
+        chef: {
+          name: "Emil Petzén",
+          image: "/images/emil_kock.png" 
+        },
+        title:
+          "French country-style salad with bulgur, grilled vegetables, coriander-pickled carrots, green olives, feta, croutons, sautéed haricots verts & lime crème fraîche.",
+        slug: "fransk-bondsallad-pa-bulgur-grillade-gronsaker-feta-haricot-verts",
+        image: {
+          url: "/images/week17-recipe2.jpg", // ← byt till rätt lokal bildsökväg
+        },
+        ingredients: ["Coming soon!"],
+        steg: ["Coming soon!"],
+        contentAllergies: ["Bulgur. Marinated olives olives, garlic, rosemary. Feta cheese. Haricot verts. Grilled vegetables onion, eggplant, bell pepper, zucchini. Sourdough croutons rye flour, wheat flour, water, salt, sourdough. Sour cream, lime. Carrot, vinegar, sugar, salt, coriander seeds."
+          ],
+        savedIngredients: "Coming soon!",
+        nutritionalValues:
+          "Calculated per portion. Calories 732. Protein 32g. Carbohydrates 79g. Fat 21g.",
+        freezabl: null,
+        createdAt: "2025-04-15T12:00:00Z",
+        localizations: [
+          {
+            title:
+              "Fransk bondsallad på bulgur med grillade grönsaker, korianderfrö-picklad morot, marinerade gröna oliver, smulad fetaost, surdegskrutonger, frästa haricot verts & creme fraiche med lime.",
+            ingredients: ["Kommer snart!"],
+            steg: ["Kommer snart!"],
+            contentAllergies: ["Bulgur. Marinerade oliver *oliver, vitlök, rosmarin*. Fetaost. Haricot verts. Grillade grönsaker *lök, aubergine, paprika, zucchini*. Surdegskrutonger *rågmjöl, vetemjöl, vatten, salt, surdeg*. Creme fraiche, lime. Morot, ättika, socker, salt, korianderfrö"
+              ],
+            savedIngredients: "Kommer snart!",
+            nutritionalValues:
+          "Räknat per portion. Kcal 732. Protein 32g. Kolhydrater 79g. Fett 21g.",
+            image: {
+              url: "/images/week17-recipe2.jpg",
+            },
+            id: "week17-recipe2-sv",
+            createdAt: "2025-04-15T12:00:00Z",
+            freezabl: null,
+            recipeNumber: 2,
+            slug: "fransk-bondsallad-pa-bulgur-grillade-gronsaker-feta-haricot-verts",
+          },
+          {
+            title:
+              "Fransk bondesalat med bulgur, grillede grøntsager, koriander-syltede gulerødder, marinerede grønne oliven, smuldret fetaost, surdejscroutoner, sauterede haricots verts & creme fraiche med lime.",
+            ingredients: ["Kommer snart!"],
+            steg: ["Kommer snart!"],
+            contentAllergies: ["Bulgur. Marinerede oliven oliven, hvidløg, rosmarin. Fetaost. Haricot verts. Grillede grøntsager løg, aubergine, peberfrugt, zucchini. Surdejscroutoner rugmel, hvedemel, vand, salt, surdej. Creme fraiche, lime. Gulerod, eddike, sukker, salt, korianderfrø."
+              
+            ],
+            savedIngredients: "Kommer snart!",
+            nutritionalValues:
+          "Beregnet per portion. Kalorier 732. Protein 32g. Kulhydrater 79g. Fedt 21g.",
+            image: {
+              url: "/images/week17-recipe2.jpg",
+            },
+            id: "week17-recipe2-da",
+            createdAt: "2025-04-15T12:00:00Z",
+            freezabl: null,
+            recipeNumber: 2,
+            slug: "fransk-bondsallad-pa-bulgur-grillade-gronsaker-feta-haricot-verts",
+          },
+        ],
+      },
+{
+  id: "week17-recipe3",
+  weekNr: 17,
+  recipeNumber: 3,
+  startDate: "2025-04-22",
+  chef: {
+    name: "Anton Mällroth",
+    image: "/images/anton_kock.webp"
+  },
+  title:
+    "Creamy spinach soup with poached egg, roasted sunflower seeds & chili oil.",
+  slug: "kramig-spenatsoppa-med-pocherat-agg-solroskarnor-chiliolja",
+  image: {
+    url: "/images/week17-recipe3.jpg",
+  },
+  ingredients: ["Coming soon!"],
+  steg: ["Coming soon!"],
+  contentAllergies: [
+    "Spinach, yellow ONION, GARLIC, MILK, CREAM, eggs, sunflower seeds, rapeseed oil, chili pepper, salt, pepper, parsley.",
+    "Broth: Vegetable stock 49% (infusion of water, vegetables (onion, carrot, leek, CELERY, fennel), thyme, lovage, black pepper, bay leaves, salt), rehydrated vegetable powder 18.5% (onion, parsnip, parsley root, leek, mushroom, carrot, tomato, garlic), salt, sugar, aromas, modified starch, vinegar, parsley extract, stabilizer (xanthan gum).",
+],
+  savedIngredients: "Coming soon!",
+  nutritionalValues:
+  "Calculated per portion. Calories 769. Protein 33g. Carbohydrates 25g. Fat 57g.", 
+  freezabl: null,
+  createdAt: "2025-04-15T12:00:00Z",
+  localizations: [
+    {
+      title:
+        "Krämig spenatsoppa med pocherat ägg, rostade solroskärnor & chiliolja.",
+      ingredients: ["Kommer snart!"],
+      steg: ["Kommer snart!"],
+      contentAllergies: [
+        "Spenat, gul LÖK, VITLÖK, MJÖLK, GRÄDDE, ägg, solroskärnor, rapsolja, chilipeppar, salt, peppar, persilja.",
+        "Fond: Grönsaksbuljong 49% (avkok av vatten, grönsaker (lök, morot, purjolök, SELLERI, fänkål), timjan, libbsticka, svartpeppar, lagerblad, salt), rehydrerat grönsakspulver 18,5% (lök, palsternacka, persiljerot, purjolök, champinjon, morot, tomat, vitlök), salt, socker, aromer, modifierad stärkelse, vinäger, persiljeextrakt, stabiliseringsmedel (xantangummi).",
+      ],
+      savedIngredients: "Kommer snart!",
+      nutritionalValues:
+    "Räknat per portion. Kcal 769. Protein 33g. Kolhydrater 25g. Fett 57g.",
+      image: {
+        url: "/images/week17-recipe3.jpg",
+      },
+      id: "week17-recipe3-sv",
+      createdAt: "2025-04-15T12:00:00Z",
+      freezabl: null,
+      recipeNumber: 3,
+      slug: "kramig-spenatsoppa-med-pocherat-agg-solroskarnor-chiliolja",
+    },
+    {
+      title:
+        "Cremet spinatsuppe med pocheret æg, ristede solsikkekerner og chiliolie.",
+      ingredients: ["Kommer snart!"],
+      steg: ["Kommer snart!"],
+      contentAllergies: [
+        "Spinat, løg, hvidløg, mælk, fløde, æg, solsikkekerner, rapsolie, chilipeber, salt, peber, persille.",
+        "Fond: Grøntsagsbouillon (vand, grøntsager – løg, gulerod, porre, SELLERI, fennikel – timian, løvstikke, peber, laurbærblad, salt), grøntsagspulver, eddike, sukker, persilleekstrakt, xanthangummi.",
+      ],
+      savedIngredients: "Kommer snart!",
+      nutritionalValues:
+    "Räknat per portion. Kcal 769. Protein 33g. Kolhydrater 25g. Fett 57g.",
+      image: {
+        url: "/images/week17-recipe3.jpg",
+      },
+      id: "week17-recipe3-da",
+      createdAt: "2025-04-15T12:00:00Z",
+      freezabl: null,
+      recipeNumber: 3,
+      slug: "kramig-spenatsoppa-med-pocherat-agg-solroskarnor-chiliolja",
+    },
+  ],
+},
+      
+
+      
+      {
         chef: {
           name: "Emil Petzén",
           title: "Kökschef / COO",
