@@ -1,3 +1,5 @@
+export const dynamicParams = true;
+
 import RecipeLayout from "@/components/general/RecipeLayout";
 import ThisWeekRecipes from "@/components/general/ThisWeekRecipes";
 import CommentSection from "@/components/section/CommentSection";
@@ -9,7 +11,7 @@ import React from "react";
 
 export async function generateStaticParams() {
   const slugs = await getAllRecipesWithSlug();
-  return slugs;
+  return slugs.slice(0, 10); // ✅ Endast senaste 10 laddas statiskt
 }
 
 async function getRecipe(params: any) {
@@ -25,13 +27,14 @@ interface RecipePageProps {
 
 const RecipePage: React.FC<RecipePageProps> = async ({ params }) => {
   const recipe = await getRecipe(params);
+
   return (
     <>
       <Head>
         <title>{recipe?.title}</title>
       </Head>
-      <RecipeLayout recipe={recipe} />
 
+      <RecipeLayout recipe={recipe} />
       <TextBanner>{textBannerText}</TextBanner>
       <ThisWeekRecipes fullWidth />
     </>
