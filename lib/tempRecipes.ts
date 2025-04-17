@@ -16,26 +16,45 @@ export const tempRecipes = {
         image: {
           url: "/images/week17-recipe1.jpg", // ← byt till rätt lokal bildsökväg
         },
-        ingredients: ["Coming soon!"],
-        steg: ["Coming soon!"],
+        ingredients: [
+          "1 pack of naan bread",
+          "1 pack of tikka dahl",
+          "1 pack of coriander/lime yogurt", 
+          "1 pack of rice",
+      ],
+        steg: [
+          "Take out a saucepan and a frying pan. Fry the rice in the frying pan and heat the tikka dahl in the saucepan over medium heat, stirring occasionally. Feel free to add some cream, crème fraîche, or butter to the dahl.", 
+          "When the rice is fried and hot, slice the naan bread into thin pieces and fry them in a little fat until crispy.", 
+          "Stir the yogurt and serve."
+        ],
         contentAllergies: [
           "Tikka dahl *Red lentils, cream, sour cream, galangal, chili, ginger, tomato paste, yellow ONION, cinnamon, cardamom, thyme, GARLIC, rapeseed oil, coriander, vegetable stock parsley, ONION, celery, cornstarch.",
           "Naan: WHEAT FLOUR, water, 3% wheat sourdough (water, WHEAT FLOUR, brandy vinegar, WHEAT MALT FLOUR, salt), yeast, rapeseed oil, salt, YOGURT, CORN MALT, vinegar."
         ],
-        savedIngredients: "Coming soon!",
+        savedIngredients: "Oat cream, onion, and sourdough bread.",
         nutritionalValues: "Calculated per portion. Calories 743. Protein 33g. Carbohydrates 83g. Fat 23g.",
         freezabl: null,
         createdAt: "2025-04-15T12:00:00Z",
         localizations: [
           {
             title: "Krämig tikka masala med linser. Serveras med naanbröd, basmatiris & örtig yoghurt med koriander och mynta.",
-            ingredients: ["Kommer snart!"],
-            steg: ["Kommer snart!"],
+            ingredients: [
+              "1 förpackning naanbröd",
+              "1 förpackning tikka dahl", 
+              "1 förpackning koriander/limeyoghurt", 
+              "1 förpackning ris"
+          ],
+            steg: [
+              "Ta fram en kastrull och en stekpanna. Stek riset i stekpannan och värm tikka dahlen i kastrullen på medelvärme, rör om då och då och tillsätt gärna lite grädde, creme fraiche eller smör i den.", 
+              "När riset är stekt och varmt, skiva naanbrödet i tunna skivor och stek det i lite matfett så det blir krispigt.", 
+              "Rör runt i yoghurten och servera."
+          
+          ],
             contentAllergies: [
               "Tikka dahl *Röda linser, grädde, creme fraiche, galangal, chili, ingefära, tomatpuré, gul LÖK, kanel, kardemumma, timjan, VITLÖK, rapsolja, koriander, grönsaksfond *persilja, LÖK, selleri, maizena*.",
               "Naan: VETEMJÖL, vatten, 3 % vetesurdeg (vatten, VETEMJÖL, brandyättika, VETEMALTMJÖL, salt), jäst, rapsolja, salt, YOGHURT, KORNMALT, ättika.",
             ],
-            savedIngredients: "Kommer snart!",
+            savedIngredients: "Havregrädde, lök, surdegsbröd.",
             nutritionalValues: "Räknat per portion. Kcal 743. Protein 33g. Kolhydrater 83g. Fett 23g.",
             image: {
               url: "/images/week17-recipe1.jpg", // ← byt till rätt lokal bildsökväg
@@ -48,13 +67,23 @@ export const tempRecipes = {
           },
           {
             title: "Kremet tikka masala med linser. Serveres med naanbrød, basmatiris og urtet yoghurt med koriander og mynte.",
-            ingredients: ["Kommer snart!"],
-            steg: ["Kommer snart!"],
+            ingredients: [
+              "1 pakke naanbrød", 
+              "1 pakke tikka dahl", 
+              "1 pakke koriander/limeyoghurt", 
+              "1 pakke ris"
+          
+          ],
+            steg: [
+              "Tag en gryde og en stegepande frem. Steg riset i stegepanden, og varm tikka dahlen op i gryden ved middel varme. Rør jævnligt rundt, og tilsæt gerne lidt fløde, creme fraiche eller smør.", 
+              "Når riset er stegt og varmt, skær naanbrødet i tynde skiver og steg det i lidt fedtstof, indtil det bliver sprødt.", 
+              "Rør rundt i yoghurten og server."
+          ],
             contentAllergies: [
               "Tikka dahl *Røde linser, fløde, creme fraiche, galangal, chili, ingefær, tomatpuré, løg, kanel, kardemomme, timian, hvidløg, rapsolie, koriander, grøntsagsfond *persille, løg, selleri, maizena*.",
               "Naan: HVEMJØL, vand, surdej (vand, HVEMJØL, brandyeddike, HVEDEMALTMEL, salt), gær, rapsolie, salt, YOGHURT, BYGMALT, eddike.",
             ],
-            savedIngredients: "Kommer snart!",
+            savedIngredients: "Havrefløde, løg og surdejsbrød.",
             nutritionalValues: "Beregnede per portion. Kalorier 743. Protein 33g. Kulhydrater 83g. Fedt 23g.",
             image: {
               url: "/images/week17-recipe1.jpg", // ← byt till rätt lokal bildsökväg
@@ -82,11 +111,24 @@ export const tempRecipes = {
         image: {
           url: "/images/week17-recipe2.jpg", // ← byt till rätt lokal bildsökväg
         },
-        ingredients: ["Coming soon!"],
-        steg: ["Coming soon!"],
+        ingredients: [
+          "1 pack of bulgur", 
+          "1 pack of grilled vegetables", 
+          "1 pack of marinated olives", 
+          "1 pack of sourdough croutons", 
+          "1 pack of feta cheese", 
+          "1 pack of lime crème fraîche", 
+          "1 pack of coriander seed-pickled carrots",
+          "1 pack of haricot verts"
+        ],
+        steg: [
+          "Take out 2 frying pans. Fry the bulgur in one frying pan so it gets hot and has some frying surface. Fry the haricot verts and the grilled vegetables in the other with a little cooking fat so they have some frying surface.", 
+          "Pour off the feta cheese, carrot and olives. Open the crème fraîche jar and serve by layering the bulgur, then the vegetables, drizzle over the crème fraîche, crumble the feta cheese, olives, carrot and then the sourdough croutons."
+      
+      ],
         contentAllergies: ["Bulgur. Marinated olives olives, garlic, rosemary. Feta cheese. Haricot verts. Grilled vegetables onion, eggplant, bell pepper, zucchini. Sourdough croutons rye flour, wheat flour, water, salt, sourdough. Sour cream, lime. Carrot, vinegar, sugar, salt, coriander seeds."
           ],
-        savedIngredients: "Coming soon!",
+        savedIngredients: "Garlic, sourdough bread, vinegar, coriander seeds, and sugar.",
         nutritionalValues:
           "Calculated per portion. Calories 732. Protein 32g. Carbohydrates 79g. Fat 21g.",
         freezabl: null,
@@ -95,11 +137,26 @@ export const tempRecipes = {
           {
             title:
               "Fransk bondsallad på bulgur med grillade grönsaker, korianderfrö-picklad morot, marinerade gröna oliver, smulad fetaost, surdegskrutonger, frästa haricot verts & creme fraiche med lime.",
-            ingredients: ["Kommer snart!"],
-            steg: ["Kommer snart!"],
+            ingredients: [
+              "1 förpackning bulgur", 
+              "1 förpackning grillade grönsaker", 
+              "1 förpackning marinerade oliver", 
+              "1 förpackning surdegskrutonger", 
+              "1 förpackning fetaost", 
+              "1 förpackning creme fraiche med lime",
+              "1 förpackning korianderfrö-picklad morot", 
+              "1 förpackning haricot verts"
+
+          
+          ],
+            steg: [
+              "Ta fram 2 stekpannor. Stek bulguren i ena stekpannan så det blir varmt och får lite stekyta. Stek haricot vertsen och de grillade grönsakerna i den andra med lite matfett så de får stekyta.", 
+              "Häll av fetaostspadet, morotsspadet och häll även av spadet från oliverna. Öppna crème fraîche burken och servera sedan med att grunda med bulguren, sedan grönsakerna, ringla över crème fraichen, smula fetaosten, oliverna, moroten och sedan surdegskrutongerna."
+            
+          ],
             contentAllergies: ["Bulgur. Marinerade oliver *oliver, vitlök, rosmarin*. Fetaost. Haricot verts. Grillade grönsaker *lök, aubergine, paprika, zucchini*. Surdegskrutonger *rågmjöl, vetemjöl, vatten, salt, surdeg*. Creme fraiche, lime. Morot, ättika, socker, salt, korianderfrö"
               ],
-            savedIngredients: "Kommer snart!",
+            savedIngredients: "Vitlök, surdegsbröd, ättika, korianderfrö, socker.",
             nutritionalValues:
           "Räknat per portion. Kcal 732. Protein 32g. Kolhydrater 79g. Fett 21g.",
             image: {
@@ -114,12 +171,24 @@ export const tempRecipes = {
           {
             title:
               "Fransk bondesalat med bulgur, grillede grøntsager, koriander-syltede gulerødder, marinerede grønne oliven, smuldret fetaost, surdejscroutoner, sauterede haricots verts & creme fraiche med lime.",
-            ingredients: ["Kommer snart!"],
-            steg: ["Kommer snart!"],
+            ingredients: [
+              "1 pakke bulgur", 
+              "1 pakke grillede grøntsager", 
+              "1 pakke marinerede oliven", 
+              "1 pakke surdejskrutoner", 
+              "1 pakke fetaost", 
+              "1 pakke creme fraiche med lime", 
+              "1 pakke gulerødder syltet med korianderfrø", 
+              "1 pakke haricot verts"
+          ],
+            steg: [
+              "Tag 2 stegepander ud. Steg bulguren i den ene pande, så den bliver varm og får lidt stegeflade. Steg haricot verts og de grillede grøntsager i den anden med lidt madfedt, så de får en stegeflade.", 
+              "Hæld fetaostskelen, gulerodsskelen fra og hæld også skevlen fra oliven. Åbn glasset med creme fraiche og server med en bund af bulguren, derefter grøntsagerne, dryp over creme fraichen, smuldr fetaost, oliven, gulerod og derefter surdejscroutoner."
+          ],
             contentAllergies: ["Bulgur. Marinerede oliven oliven, hvidløg, rosmarin. Fetaost. Haricot verts. Grillede grøntsager løg, aubergine, peberfrugt, zucchini. Surdejscroutoner rugmel, hvedemel, vand, salt, surdej. Creme fraiche, lime. Gulerod, eddike, sukker, salt, korianderfrø."
               
             ],
-            savedIngredients: "Kommer snart!",
+            savedIngredients: "Hvidløg, surdejsbrød, eddike, korianderfrø og sukker.",
             nutritionalValues:
           "Beregnet per portion. Kalorier 732. Protein 32g. Kulhydrater 79g. Fedt 21g.",
             image: {
@@ -148,13 +217,23 @@ export const tempRecipes = {
   image: {
     url: "/images/week17-recipe3.jpg",
   },
-  ingredients: ["Coming soon!"],
-  steg: ["Coming soon!"],
+  ingredients: [
+    "1 pack spinach soup", 
+    "1 pack roasted sunflower seeds", 
+    "1 pack chili oil", 
+    "Eggs"
+],
+  steg: [
+    "Take out two saucepans. Pour all the soup into one of them and dilute with 200–300 ml of milk, cream, or water. Bring to a boil and season with salt and pepper.", 
+    "While the soup is heating, bring salted water to a boil in the second saucepan. Add two tablespoons of vinegar to the water – this helps the egg coagulate more easily.", 
+    "Crack the eggs into separate bowls. When the water reaches a boil, reduce to medium heat so it stops bubbling, and stir the water to create a whirlpool. Gently pour in the eggs while the water is still swirling. Let the egg simmer for 3–4 minutes before removing it from the pot. For best results, we recommend poaching no more than two eggs at a time. If you prefer not to poach the eggs, you can also boil them – we recommend soft-boiled (6–7 minutes).", 
+    "Top the soup with the eggs, sunflower seeds, and chili oil before serving."
+],
   contentAllergies: [
     "Spinach, yellow ONION, GARLIC, MILK, CREAM, eggs, sunflower seeds, rapeseed oil, chili pepper, salt, pepper, parsley.",
     "Broth: Vegetable stock 49% (infusion of water, vegetables (onion, carrot, leek, CELERY, fennel), thyme, lovage, black pepper, bay leaves, salt), rehydrated vegetable powder 18.5% (onion, parsnip, parsley root, leek, mushroom, carrot, tomato, garlic), salt, sugar, aromas, modified starch, vinegar, parsley extract, stabilizer (xanthan gum).",
 ],
-  savedIngredients: "Coming soon!",
+  savedIngredients: "Garlic, yellow onion, sunflower seeds, and rapeseed oil.",
   nutritionalValues:
   "Calculated per portion. Calories 769. Protein 33g. Carbohydrates 25g. Fat 57g.", 
   freezabl: null,
@@ -163,13 +242,23 @@ export const tempRecipes = {
     {
       title:
         "Krämig spenatsoppa med pocherat ägg, rostade solroskärnor & chiliolja.",
-      ingredients: ["Kommer snart!"],
-      steg: ["Kommer snart!"],
+      ingredients: [
+        "1 förpackning spenatsoppa",        
+        "1 förpackning rostade solroskärnor", 
+        "1 förpackning chiliolja", 
+        "Ägg"
+    ],
+      steg: [
+        "Tag fram två kastruller. Häll all soppa i den ena kastrullen och späd med 2-3 dl mjölk, grädde eller vatten. Koka upp och smaka av med salt och peppar.", 
+        "Under tiden du värmer soppan, koka upp saltat vatten i den andra kastrullen. Tillsätt gärna två matskedar ättika i vattnet, detta underlättar koaguleringen av ägget.", 
+        "Knäck äggen och lägg dem i separata skålar. När vattnet kokat upp, sänk till medelvärme så att vattnet slutar koka och rör runt i vattnet för att skapa en virvel. Häll försiktigt ned äggen medan vattnet fortfarande virvlar runt. Låt sedan ägget sjuda i 3-4 minuter innan du plockar upp det ur kastrullen. För bäst resultat rekommenderar vi att ni pocherar maximalt två ägg åt gången. Om ni inte vill ge er på att pochera ägg går det även fint att koka det som vanligt, då rekommenderar vi löskokt (6-7 min).", 
+        "Toppa soppan med äggen, solroskärnorna och chilioljan och servera."
+    ],
       contentAllergies: [
         "Spenat, gul LÖK, VITLÖK, MJÖLK, GRÄDDE, ägg, solroskärnor, rapsolja, chilipeppar, salt, peppar, persilja.",
         "Fond: Grönsaksbuljong 49% (avkok av vatten, grönsaker (lök, morot, purjolök, SELLERI, fänkål), timjan, libbsticka, svartpeppar, lagerblad, salt), rehydrerat grönsakspulver 18,5% (lök, palsternacka, persiljerot, purjolök, champinjon, morot, tomat, vitlök), salt, socker, aromer, modifierad stärkelse, vinäger, persiljeextrakt, stabiliseringsmedel (xantangummi).",
       ],
-      savedIngredients: "Kommer snart!",
+      savedIngredients: "Vitlök, gul lök, solroskärnor, rapsolja.",
       nutritionalValues:
     "Räknat per portion. Kcal 769. Protein 33g. Kolhydrater 25g. Fett 57g.",
       image: {
@@ -184,13 +273,24 @@ export const tempRecipes = {
     {
       title:
         "Cremet spinatsuppe med pocheret æg, ristede solsikkekerner og chiliolie.",
-      ingredients: ["Kommer snart!"],
-      steg: ["Kommer snart!"],
+      ingredients: [
+        "1 pakke spinatsuppe", 
+        "1 pakke ristede solsikkekerner", 
+        "1 pakke chilieolie", 
+        "Æg"
+
+    ],
+      steg: [
+        "Tag to gryder frem. Hæld al suppen i den ene gryde og spæd med 2-3 dl mælk, fløde eller vand. Kog op og smag til med salt og peber.",
+        "Mens suppen varmes op, koges vand med salt i den anden gryde. Tilsæt gerne to spiseskefulde eddike i vandet – det gør det nemmere for ægget at koagulere.", 
+        "Slå æggene ud i separate skåle. Når vandet koger, sænk varmen til middel, så det holder op med at boble, og rør rundt i vandet for at skabe en hvirvel. Hæld forsigtigt æggene i, mens vandet stadig hvirvler. Lad ægget simre i 3-4 minutter, før du tager det op med en hulske. For det bedste resultat anbefaler vi, at du pocherer maks to æg ad gangen. Hvis du ikke har lyst til at pochere æg, kan du også blot koge dem – vi anbefaler blødkogte (6-7 minutter).", 
+        "Top suppen med æggene, solsikkekernerne og chiliolien og server."
+      ],
       contentAllergies: [
         "Spinat, løg, hvidløg, mælk, fløde, æg, solsikkekerner, rapsolie, chilipeber, salt, peber, persille.",
         "Fond: Grøntsagsbouillon (vand, grøntsager – løg, gulerod, porre, SELLERI, fennikel – timian, løvstikke, peber, laurbærblad, salt), grøntsagspulver, eddike, sukker, persilleekstrakt, xanthangummi.",
       ],
-      savedIngredients: "Kommer snart!",
+      savedIngredients: "Vitlök, gul lök, solroskärnor, rapsolja.",
       nutritionalValues:
     "Räknat per portion. Kcal 769. Protein 33g. Kolhydrater 25g. Fett 57g.",
       image: {
