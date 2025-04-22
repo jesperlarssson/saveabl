@@ -2,6 +2,244 @@ export const tempRecipes = {
   data: {
     recepts: [
       {
+        id: "week18-recipe1",
+        weekNr: 18,
+        recipeNumber: 1,
+        startDate: "2025-04-28", // måndagen i vecka 17
+        chef: {
+          name: "Emil Petzén",
+          image: "/images/emil_kock.png" 
+        },
+        title:
+          "Vegetarian meatballs with mashed potatoes, cream sauce, stirred lingonberries & pressed cucumber.",
+        slug: "vegetarian-meatballs-mashed-potatoes-lingonberries-cucumber",
+        image: {
+          url: "/images/week18-recipe1.jpeg", // ← byt till rätt lokal bildsökväg
+        },
+        ingredients: [
+         "Coming soon!"
+      ],
+        steg: [
+         "Coming soon!"
+        ],
+        contentAllergies: [
+          "Meatballs (rehydrated pea protein, water, rapeseed oil, potato, onion, caramelized sugar, citrus fiber, salt, spices, nutmeg, preservative, cayenne pepper) potatoes, MILK, BUTTER, CREAM, SOY, lingonberries, sugar, cucumber, vinegar, dill, carrot, ONION, leek, salt, natural flavor, sugar, parsnip, modified corn starch, garlic powder, sunflower oil.          "
+        ],
+        savedIngredients: "Coming soon!", 
+        nutritionalValues: "Calculated per portion. Kcal 613. Protein 32g. Carbohydrates 71g. Fat 21g.",
+        freezabl: null,
+        createdAt: "2025-04-22T12:00:00Z",
+        localizations: [
+          {
+            title: "Vegetariska köttbullar med potatispuré, gräddsås, rårörda lingon & pressgurka.",
+            ingredients: [
+              "Kommer snart!"
+          ],
+            steg: [
+              "Kommer snart!"
+          
+          ],
+            contentAllergies: [
+              "Köttbullar (Rehydrerat ärtprotein, vatten, rapsolja, potatis, lök, karamelliserat socker, citrusfiber, salt, kryddor, muskot, konserveringsmedel, cayennepeppar) Potatis, MJÖLK, SMÖR, VISPGRÄDDE, SOJA, lingon, socker, gurka, ättika, dill, morot, LÖK, purjoLÖK, salt, naturlig arom, socker, palsternacka, modifierad majsstärkelse, vitlökspulver, solrosolja."
+            ],
+            savedIngredients: "Kommer snart!",
+            nutritionalValues: "Räknat per portion. Kcal 613. Protein 32g. Kolhydrater 71g. Fett 21g.",
+            image: {
+              url: "/images/week18-recipe1.jpeg", // ← byt till rätt lokal bildsökväg
+            },
+            id: "week18-recipe1-sv",
+            createdAt: "2025-04-22T12:00:00Z",
+            freezabl: null,
+            recipeNumber: 1,
+            slug: "vegetariska-kottbullar-potatispure-lingon-pressgurka"
+          },
+          {
+            title: "Vegetariske kødboller med kartoffelmos, flødesovs, rørte tyttebær & presset agurk.",
+            ingredients: [
+              "Kommer snart!"
+          
+          ],
+            steg: [
+              "Kommer snart!"
+          ],
+            contentAllergies: [
+              "Kødboller (rehydreret ærteprotein, vand, rapsolie, kartoffel, løg, karamelliseret sukker, citrusfibre, salt, krydderier, muskatnød, konserveringsmiddel, cayennepeber) kartofler, MÆLK, SMØR, FLØDE, SOJA, tyttebær, sukker, agurk, eddike, dild, gulerod, LØG, porre, salt, naturlig aroma, sukker, pastinak, modificeret majsstivelse, hvidløgspulver, solsikkeolie."
+            ],
+            savedIngredients: "Kommer snart!",
+            nutritionalValues: "Beregnede per portion. Kcal 613. Protein 32g. Kulhydrater 71g. Fedt 21g.",
+            image: {
+              url: "/images/week18-recipe1.jpeg", // ← byt till rätt lokal bildsökväg
+            },
+            id: "week18-recipe1-da",
+            createdAt: "2025-04-22T12:00:00Z",
+            freezabl: null,
+            recipeNumber: 1,
+            slug: "vegetariske-kodeboller-kartoffelmos-tyttebaer-agurk"
+          }
+        ]
+      }, 
+      {
+        id: "week18-recipe2",
+        weekNr: 18,
+        recipeNumber: 2,
+        startDate: "2025-04-28",
+        chef: {
+          name: "Anton Mällroth",
+          image: "/images/anton_kock.webp" 
+        },
+        title:
+          "Roasted root vegetables with tangy bean crème, spring focaccia and shaved parmesan.",
+        slug: "roasted-root-vegetables-bean-creme-focaccia-parmesan",
+        image: {
+          url: "/images/week18-recipe2.jpg", // ← byt till rätt lokal bildsökväg
+        },
+        ingredients: [
+          "Coming soon!"
+        ],
+        steg: [
+          "Coming soon!"
+      ],
+        contentAllergies: ["Carrots, potatoes, sweet potatoes, parsnip, pearl onions, parmesan cheese, white beans, yogurt, WHEAT flour, yeast, thyme, rosemary, rapeseed oil, salt, pepper, lime juice."
+          ],
+        savedIngredients: "Coming soon!",
+        nutritionalValues:
+          "Calculated per portion. Kcal 777. Protein 33g. Carbohydrates 108g. Fat 23g.",
+        freezabl: null,
+        createdAt: "2025-04-22T12:00:00Z",
+        localizations: [
+          {
+            title:
+              "Rostade rotfrukter med syrlig böncrème, vår focaccia och hyvlad parmesan.",
+            ingredients: [
+              "Kommer snart!"
+          
+          ],
+            steg: [
+              "Kommer snart!"
+            
+          ],
+            contentAllergies: ["Morötter, potatis, sötpotatis, palsternacka, steklök, parmesanost, vita bönor, yoghurt, VETEmjöl, jäst, timjan, rosmarin, rapsolja, salt, peppar, limejuice.            "
+              ],
+            savedIngredients: "Kommer snart!",
+            nutritionalValues:
+          "Räknat per portion. Kcal 777. Protein 33g. Kolhydrater 108g. Fett 23g.",
+            image: {
+              url: "/images/week18-recipe2.jpg",
+            },
+            id: "week18-recipe2-sv",
+            createdAt: "2025-04-22T12:00:00Z",
+            freezabl: null,
+            recipeNumber: 2,
+            slug: "rostade-rotfrukter-boncreme-focaccia-parmesan",
+          },
+          {
+            title:
+              "Ovnbagte rodfrugter med syrlig bønnecreme, vores focaccia og høvlet parmesan.",
+            ingredients: [
+             "Kommer snart!"
+          ],
+            steg: [
+              "Kommer snart!"
+          ],
+            contentAllergies: ["Gulerødder, kartofler, søde kartofler, pastinak, perleløg, parmesanost, hvide bønner, yoghurt, HVEDEMEL, gær, timian, rosmarin, rapsolie, salt, peber, limesaft."
+              
+            ],
+            savedIngredients: "Kommer snart!",
+            nutritionalValues:
+          "Beregnet per portion. Kcal 777. Protein 33g. Kulhydrater 108g. Fedt 23g.",
+            image: {
+              url: "/images/week18-recipe2.jpg",
+            },
+            id: "week18-recipe2-da",
+            createdAt: "2025-04-15T12:00:00Z",
+            freezabl: null,
+            recipeNumber: 2,
+            slug: "ovnbagte-rodfrugter-bonnecreme-focaccia-parmesan",
+          },
+        ],
+      },
+{
+  id: "week18-recipe3",
+  weekNr: 18,
+  recipeNumber: 3,
+  startDate: "2025-04-28",
+  chef: {
+    name: "Anton Mällroth",
+    image: "/images/anton_kock.webp"
+  },
+  title:
+    "Ramen with umami broth, glass noodles, soy-marinated egg, edamame, and spring onion.",
+  slug: "ramen-umami-broth-glass-noodles-soy-egg-edamame",
+  image: {
+    url: "/images/week18-recipe3.jpg",
+  },
+  ingredients: [
+    "Coming soon!"
+],
+  steg: [
+   "Coming soon!"
+],
+  contentAllergies: [
+    "Egg, soy, chili flakes, green chili, syrup, sesame oil, garlic, sesame seeds, glass noodles (starch from peas, mung beans), miso paste, spring onion, edamame beans. Broth base: Water, maltodextrin, salt, flavorings, sugar, natural lemongrass flavor, modified starch, garlic powder, spices (kaffir lime, turmeric), spice extracts (ginger, white pepper), stabilizer (xanthan gum)."
+],
+  savedIngredients: "Coming soon!",
+  nutritionalValues:
+  "Calculated per portion. Kcal 698. Protein 59g. Carbohydrates 66g. Fat 24g.", 
+  freezabl: null,
+  createdAt: "2025-04-22T12:00:00Z",
+  localizations: [
+    {
+      title:
+        "Ramen på umamibuljong med glasnudlar, sojamarinerat ägg, edamame och salladslök.",
+      ingredients: [
+        "Kommer snart!"
+    ],
+      steg: [
+        "Kommer snart!"
+    ],
+      contentAllergies: [
+        "Ägg, soja, chiliflakes, grön chili, sirap, sesamolja, vitlök, sesamfrön, glasnudlar (stärkelse från ärtor, mungbönor), misopasta, salladslök, edamamebönor. Fond: Vatten, maltodextrin, salt, aromer, socker, naturlig citrongräsarom, modifierad stärkelse, vitløkspulver, kryddor (kaffirlime, gurkmeja), kryddextrakt (ingefära, vitpeppar), stabilisator (xantangummi)."
+      ],
+      savedIngredients: "Kommer snart!",
+      nutritionalValues:
+    "Räknat per portion. Kcal 698. Protein 59g. Kolhydrater 66g. Fett 24g.",
+      image: {
+        url: "/images/week18-recipe3.jpg",
+      },
+      id: "week18-recipe3-sv",
+      createdAt: "2025-04-22T12:00:00Z",
+      freezabl: null,
+      recipeNumber: 3,
+      slug: "ramen-umamibuljong-glasnudlar-sojaagg-edamame",
+    },
+    {
+      title:
+        "Ramen med umamibouillon, glasnudler, sojamarineret æg, edamame og forårsløg.",
+      ingredients: [
+        "Kommer snart!"
+
+    ],
+      steg: [
+        "Kommer snart!"
+      ],
+      contentAllergies: [
+        "Æg, soja, chiliflager, grøn chili, sirup, sesamolie, hvidløg, sesamfrø, glasnudler (stivelse fra ærter og mungbønner), misopasta, forårsløg, edamamebønner. Fond: Vand, maltodextrin, salt, aromaer, sukker, naturlig citrongræsaroma, modificeret stivelse, hvidløgspulver, krydderier (kaffir lime, gurkemeje), krydderekstrakter (ingefær, hvid peber), stabilisator (xanthangummi)."
+      ],
+      savedIngredients: "Kommer snart!",
+      nutritionalValues:
+    "Räknat per portion. Kcal 698. Protein 59g. Kulhydrater 66g. Fedt 24g.",
+      image: {
+        url: "/images/week18-recipe3.jpg",
+      },
+      id: "week18-recipe3-da",
+      createdAt: "2025-04-22T12:00:00Z",
+      freezabl: null,
+      recipeNumber: 3,
+      slug: "ramen-umamibouillon-glasnudler-sojaaeg-edamame",
+    },
+  ],
+},
+      {
         id: "week17-recipe1",
         weekNr: 17,
         recipeNumber: 1,
