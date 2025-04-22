@@ -88,7 +88,7 @@ export const tempRecipes = {
           image: "/images/anton_kock.webp" 
         },
         title:
-          "Roasted root vegetables with tangy bean crème, spring focaccia and shaved parmesan.",
+          "Roasted root vegetables with tangy bean crème, our focaccia and shaved parmesan.",
         slug: "roasted-root-vegetables-bean-creme-focaccia-parmesan",
         image: {
           url: "/images/week18-recipe2.jpg", // ← byt till rätt lokal bildsökväg
