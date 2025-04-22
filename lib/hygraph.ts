@@ -1,4 +1,4 @@
-import { getDatesFromWeek } from "@/helpers/format";
+import { getDatesFromWeek, getWeekNumber } from "@/helpers/format";
 import { Post, PostsData } from "@/types";
 import { tempRecipes } from "./tempRecipes";
 import { tempHomePosts, tempPostSlugs, tempPosts } from "./tempPosts";
@@ -375,17 +375,14 @@ export async function getPaginatedOldRecipes(limit: number, offset: number) {
 }
 
 export async function getRecipesForWeek(week: number) {
-  const NEXT_WEEK = 17; // ← Byt detta om du vill visa andra veckor från tempRecipes
+  const currentWeek = getWeekNumber(new Date());
+  const tempWeeks = [currentWeek, currentWeek + 1];
 
-  // Fallback: Hämta från tempRecipes om det gäller nästa vecka
-  if (week === NEXT_WEEK) {
-    const recipes = tempRecipes.data.recepts.filter(
-      (recipe) => recipe.weekNr === NEXT_WEEK
-    );
-    return recipes;
+  if (tempWeeks.includes(week)) {
+    return tempRecipes.data.recepts.filter((recipe) => recipe.weekNr === week);
   }
 
-  // Standard: Hämta från Hygraph
+  // fallback till Hygraph
   const data = await fetchAPI(
     `
     query GetRecipes($week: Int!) {
