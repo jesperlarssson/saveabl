@@ -17,15 +17,21 @@ export const tempRecipes = {
           url: "/images/week18-recipe1.jpeg", // ← byt till rätt lokal bildsökväg
         },
         ingredients: [
-         "Coming soon!"
+         "1 package vegetarian meatballs",
+         "1 package mashed potatoes",
+         "1 package cream sauce", 
+         "1 package sweetened lingonberries", 
+         "1 package pressed cucumber"
       ],
         steg: [
-         "Coming soon!"
+         "Take out a frying pan and a larger saucepan. Place the mashed potatoes in the larger saucepan with 1 dl of water, milk or cream. Put it on medium heat and stir occasionally so it doesn't burn at the bottom, make sure the mash gets hot. At the same time, fry the meatballs in a little cooking fat, preferably butter, so they get a nice frying surface.", 
+         "When the meatballs have a nice surface and have been fried for a few minutes, pour the cream sauce into the frying pan together with 0.5dl of water, milk or cream. Let the meatballs simmer in the sauce for a few minutes.", 
+         "Serving: Put the warm mash on a plate with meatballs, sauce, lingonberry and cucumber.", 
         ],
         contentAllergies: [
           "Meatballs (rehydrated pea protein, water, rapeseed oil, potato, onion, caramelized sugar, citrus fiber, salt, spices, nutmeg, preservative, cayenne pepper) potatoes, MILK, BUTTER, CREAM, SOY, lingonberries, sugar, cucumber, vinegar, dill, carrot, ONION, leek, salt, natural flavor, sugar, parsnip, modified corn starch, garlic powder, sunflower oil.          "
         ],
-        savedIngredients: "Coming soon!", 
+        savedIngredients: "Potatoes, milk, cream, sugar, dill seeds.", 
         nutritionalValues: "Calculated per portion. Kcal 613. Protein 32g. Carbohydrates 71g. Fat 21g.",
         freezabl: null,
         createdAt: "2025-04-22T12:00:00Z",
@@ -33,16 +39,22 @@ export const tempRecipes = {
           {
             title: "Vegetariska köttbullar med potatispuré, gräddsås, rårörda lingon & pressgurka.",
             ingredients: [
-              "Kommer snart!"
+              "1 förpackning vegetariska köttbullar", 
+              "1 förpackning potatismos", 
+              "1 förpackning gräddsås", 
+              "1 förpackning rårörda lingon", 
+              "1 förpackning pressgurka"
           ],
             steg: [
-              "Kommer snart!"
+              "Ta fram en stekpanna och en större kastrull. Lägg potatismoset i den större kastrullen med 1 dl vatten, mjölk eller grädde. Sätt den på medelhög värme och rör om då och då så den inte bränner i botten, se till att moset blir varmt. Samtidigt, stek köttbullarna i lite matfett, gärna smör så de får fin stekyta.", 
+              "När köttbullarna har fått fin yta och stekts i några minuter, häll på gräddsåsen i stekpannan tillsammans med 0.5dl vatten, mjölk eller grädde. Låt köttbullarna sjuda i såsen i några minuter.", 
+              "Servering: Lägg det varma moset på en tallrik med köttbullar, sås, lingon och gurka.", 
           
           ],
             contentAllergies: [
               "Köttbullar (Rehydrerat ärtprotein, vatten, rapsolja, potatis, lök, karamelliserat socker, citrusfiber, salt, kryddor, muskot, konserveringsmedel, cayennepeppar) Potatis, MJÖLK, SMÖR, VISPGRÄDDE, SOJA, lingon, socker, gurka, ättika, dill, morot, LÖK, purjoLÖK, salt, naturlig arom, socker, palsternacka, modifierad majsstärkelse, vitlökspulver, solrosolja."
             ],
-            savedIngredients: "Kommer snart!",
+            savedIngredients: "Potatis, mjölk, grädde, socker, dillfrö.",
             nutritionalValues: "Räknat per portion. Kcal 613. Protein 32g. Kolhydrater 71g. Fett 21g.",
             image: {
               url: "/images/week18-recipe1.jpeg", // ← byt till rätt lokal bildsökväg
@@ -56,16 +68,22 @@ export const tempRecipes = {
           {
             title: "Vegetariske kødboller med kartoffelmos, flødesovs, rørte tyttebær & presset agurk.",
             ingredients: [
-              "Kommer snart!"
+              "1 pakke vegetariske kødboller", 
+              "1 pakke kartoffelmos",
+              "1 pakke flødesovs",  
+              "1 pakke rørte tyttebær", 
+              "1 pakke presset agurk", 
           
           ],
             steg: [
-              "Kommer snart!"
+              "Tag en stegepande og en større gryde ud. Læg kartoffelmosen i den større gryde med 1 dl vand, mælk eller fløde. Sæt det på middel varme og rør rundt af og til så det ikke brænder på i bunden, sørg for at mosen bliver varm. Steg samtidig frikadellerne i lidt madlavningsfedt, gerne smør, så de får en flot stegeflade.", 
+              "Når frikadellerne har fået en flot overflade og har stegt et par minutter, hældes flødesovsen i bradepanden sammen med 0,5 dl vand, mælk eller fløde. Lad frikadellerne simre i saucen et par minutter.", 
+              "Servering: Kom den lune mos på en fad med frikadeller, sauce, tyttebær og agurk."
           ],
             contentAllergies: [
               "Kødboller (rehydreret ærteprotein, vand, rapsolie, kartoffel, løg, karamelliseret sukker, citrusfibre, salt, krydderier, muskatnød, konserveringsmiddel, cayennepeber) kartofler, MÆLK, SMØR, FLØDE, SOJA, tyttebær, sukker, agurk, eddike, dild, gulerod, LØG, porre, salt, naturlig aroma, sukker, pastinak, modificeret majsstivelse, hvidløgspulver, solsikkeolie."
             ],
-            savedIngredients: "Kommer snart!",
+            savedIngredients: "Kartofler, mælk, fløde, sukker, dildfrø.",
             nutritionalValues: "Beregnede per portion. Kcal 613. Protein 32g. Kulhydrater 71g. Fedt 21g.",
             image: {
               url: "/images/week18-recipe1.jpeg", // ← byt till rätt lokal bildsökväg
@@ -94,14 +112,20 @@ export const tempRecipes = {
           url: "/images/week18-recipe2.jpg", // ← byt till rätt lokal bildsökväg
         },
         ingredients: [
-          "Coming soon!"
+          "1 pack roasted potatoes/carrots", 
+          "1 pack roasted sweet potatoes/pearl onions/parsnip", 
+          "1 pack focaccia", 
+          "1 pack bean purée", 
+          "1 pack parmesan"
         ],
         steg: [
-          "Coming soon!"
+          "Take out a large frying pan, or two smaller ones. Sauté the root vegetables in a bit of fat until they are heated through and have a nice golden-brown surface.", 
+          "To warm the bread, you can either heat it in the oven at 100°C (210°F) for five minutes or in the microwave with a glass of water on full power for 30–60 seconds.", 
+          "Serve the root vegetables with the bean purée, focaccia, and parmesan."
       ],
         contentAllergies: ["Carrots, potatoes, sweet potatoes, parsnip, pearl onions, parmesan cheese, white beans, yogurt, WHEAT flour, yeast, thyme, rosemary, rapeseed oil, salt, pepper, lime juice."
           ],
-        savedIngredients: "Coming soon!",
+        savedIngredients: "Flour, yeast, carrots, potatoes, yogurt, crème fraîche, lime juice.",
         nutritionalValues:
           "Calculated per portion. Kcal 777. Protein 33g. Carbohydrates 108g. Fat 23g.",
         freezabl: null,
@@ -111,16 +135,22 @@ export const tempRecipes = {
             title:
               "Rostade rotfrukter med syrlig böncrème, vår focaccia och hyvlad parmesan.",
             ingredients: [
-              "Kommer snart!"
+              "1 förpackning rostad potatis/morot", 
+              "1 förpackning rostad sötpotatis/steklök/palsternacka", 
+              "1 förpackning focaccia", 
+              "1 förpackning bönkräm", 
+              "1 förpackning parmesan"
           
           ],
             steg: [
-              "Kommer snart!"
+              "Ta fram en stor stekpanna, eller två små. Stek rotfrukterna i lite matfett så att de blir genomvarma och får lite fin gyllenbrun yta.", 
+              "För att värma brödet kan du antingen köra det i ugnen på 100 grader i fem minuter eller i micron tillsammans med ett vattenglas på full effekt i 30-60 sekunder.", 
+              "Servera rotfrukterna med bönkrämen, foccacian och parmesanen."
             
           ],
             contentAllergies: ["Morötter, potatis, sötpotatis, palsternacka, steklök, parmesanost, vita bönor, yoghurt, VETEmjöl, jäst, timjan, rosmarin, rapsolja, salt, peppar, limejuice.            "
               ],
-            savedIngredients: "Kommer snart!",
+            savedIngredients: "Mjöl, jäst, morötter, potatis, yoghurt, creme fraiche, limejuice.",
             nutritionalValues:
           "Räknat per portion. Kcal 777. Protein 33g. Kolhydrater 108g. Fett 23g.",
             image: {
@@ -136,15 +166,21 @@ export const tempRecipes = {
             title:
               "Ovnbagte rodfrugter med syrlig bønnecreme, vores focaccia og høvlet parmesan.",
             ingredients: [
-             "Kommer snart!"
+             "1 pakke ristede kartofler/gulerødder", 
+             "1 pakke ristede søde kartofler/perleløg/pastinak", 
+             "1 pakke focaccia", 
+             "1 pakke bønnecreme", 
+             "1 pakke parmesan"
           ],
             steg: [
-              "Kommer snart!"
+              "Find en stor stegepande frem, eller to små. Steg rodfrugterne i lidt fedtstof, indtil de er gennemvarme og får en let gyldenbrun overflade.", 
+              "For at varme brødet kan du enten sætte det i ovnen ved 100 grader i fem minutter eller i mikroovnen sammen med et glas vand på fuld effekt i 30–60 sekunder.", 
+              "Server rodfrugterne med bønnecremen, focacciaen og parmesanen."
           ],
             contentAllergies: ["Gulerødder, kartofler, søde kartofler, pastinak, perleløg, parmesanost, hvide bønner, yoghurt, HVEDEMEL, gær, timian, rosmarin, rapsolie, salt, peber, limesaft."
               
             ],
-            savedIngredients: "Kommer snart!",
+            savedIngredients: "Mel, gær, gulerødder, kartofler, yoghurt, creme fraiche, limesaft.",
             nutritionalValues:
           "Beregnet per portion. Kcal 777. Protein 33g. Kulhydrater 108g. Fedt 23g.",
             image: {
@@ -174,15 +210,23 @@ export const tempRecipes = {
     url: "/images/week18-recipe3.jpg",
   },
   ingredients: [
-    "Coming soon!"
+    "1 pack ramen broth", 
+    "1 pack glass noodles", 
+    "1 pack soy-marinated egg", 
+    "1 pack edamame", 
+    "Spring onion"
 ],
   steg: [
-   "Coming soon!"
+   "Take out two pots and one saucepan. Fill one of the pots and the saucepan with salted water and bring to a boil. Pour the ramen broth into the other pot and heat over medium.", 
+   "Cook the noodles in the pot of water, but do not cook them all the way through — they will finish cooking in the broth. Half the cooking time is about 3–4 minutes. Boil the edamame beans in the salted water in the saucepan for the same amount of time, about 3–4 minutes.", 
+   "Split the spring onion in half and rinse under running water, then finely chop. Remove the eggs from the marinade and set aside.", 
+   "When the noodles have cooked for 3–4 minutes, drain them and add them to the broth. Then simmer for roughly the same time, 3–4 minutes. The noodles should be cooked but still slightly firm to the bite.", 
+   "Serve the noodles in the broth with the edamame beans, spring onion, and the soy-marinated egg."
 ],
   contentAllergies: [
     "Egg, soy, chili flakes, green chili, syrup, sesame oil, garlic, sesame seeds, glass noodles (starch from peas, mung beans), miso paste, spring onion, edamame beans. Broth base: Water, maltodextrin, salt, flavorings, sugar, natural lemongrass flavor, modified starch, garlic powder, spices (kaffir lime, turmeric), spice extracts (ginger, white pepper), stabilizer (xanthan gum)."
 ],
-  savedIngredients: "Coming soon!",
+  savedIngredients: "Egg, sesame seeds, spring onion.",
   nutritionalValues:
   "Calculated per portion. Kcal 698. Protein 59g. Carbohydrates 66g. Fat 24g.", 
   freezabl: null,
@@ -192,15 +236,23 @@ export const tempRecipes = {
       title:
         "Ramen på umamibuljong med glasnudlar, sojamarinerat ägg, edamame och salladslök.",
       ingredients: [
-        "Kommer snart!"
+        "1 förpackning ramenbuljong", 
+        "1 förpackning glasnudlar", 
+        "1 förpackning sojamarinerat ägg", 
+        "1 förpackning edamame", 
+        "Salladslök"
     ],
       steg: [
-        "Kommer snart!"
+        "Ta fram två grytor och en kastrull, fyll den ena grytan och kastrullen med saltat vatten och koka upp. Häll ramenbuljongen i den andra grytan och värm till medelvärme.", 
+        "Koka nudlarna i den vattenfyllda grytan, koka inte färdig då de ska gå klart i buljongen. Halva koktiden är ca 3-4 minuter. Koka edamamebönorna i kastrullen med saltat vatten lika länge, ca 3-4 minuter.", 
+        "Dela salladslöken på mitten och rengör under rinnande vatten, sedan hacka fint. Ta ut äggen ur marinaden och lägg åt sidan.", 
+        "När nudlarna har kokat i 3-4 minuter silar du av och lägger ned dem i buljongen. Sjud därefter i ungefär lika lång tid, 3-4 minuter. Nudlarna ska vara klara med ha lite bett kvar.", 
+        "Servera nudlarna i buljong med edamamebönorna, salladslöken och det sojamarinerade ägget."
     ],
       contentAllergies: [
         "Ägg, soja, chiliflakes, grön chili, sirap, sesamolja, vitlök, sesamfrön, glasnudlar (stärkelse från ärtor, mungbönor), misopasta, salladslök, edamamebönor. Fond: Vatten, maltodextrin, salt, aromer, socker, naturlig citrongräsarom, modifierad stärkelse, vitløkspulver, kryddor (kaffirlime, gurkmeja), kryddextrakt (ingefära, vitpeppar), stabilisator (xantangummi)."
       ],
-      savedIngredients: "Kommer snart!",
+      savedIngredients: "Ägg, sesamfrön, salladslök.",
       nutritionalValues:
     "Räknat per portion. Kcal 698. Protein 59g. Kolhydrater 66g. Fett 24g.",
       image: {
@@ -216,16 +268,25 @@ export const tempRecipes = {
       title:
         "Ramen med umamibouillon, glasnudler, sojamarineret æg, edamame og forårsløg.",
       ingredients: [
-        "Kommer snart!"
+        "1 pakke ramenbouillon", 
+        "1 pakke glasnudler", 
+        "1 pakke sojamarineret æg", 
+        "1 pakke edamame", 
+        "Forårsløg"
+
 
     ],
       steg: [
-        "Kommer snart!"
+        "Tag to gryder og en kasserolle frem. Fyld den ene gryde og kasserollen med saltet vand og bring i kog. Hæld ramenbouillonen i den anden gryde og varm op til medium varme.", 
+        "Kog nudlerne i gryden med vand, men ikke helt færdige – de skal koge færdigt i bouillonen. Halv kogetid er cirka 3-4 minutter. Kog edamamebønnerne i kasserollen med saltet vand i samme tid, cirka 3-4 minutter.", 
+        "Del forårsløget på midten og skyl under rindende vand, hak derefter fint. Tag æggene ud af marinaden og læg dem til side.", 
+        "Når nudlerne har kogt i 3-4 minutter, sigtes de og lægges ned i bouillonen. Lad derefter simre i cirka samme tid, 3-4 minutter. Nudlerne skal være færdige, men stadig have lidt bid.", 
+        "Server nudlerne i bouillonen med edamamebønner, forårsløg og det sojamarinerede æg."
       ],
       contentAllergies: [
         "Æg, soja, chiliflager, grøn chili, sirup, sesamolie, hvidløg, sesamfrø, glasnudler (stivelse fra ærter og mungbønner), misopasta, forårsløg, edamamebønner. Fond: Vand, maltodextrin, salt, aromaer, sukker, naturlig citrongræsaroma, modificeret stivelse, hvidløgspulver, krydderier (kaffir lime, gurkemeje), krydderekstrakter (ingefær, hvid peber), stabilisator (xanthangummi)."
       ],
-      savedIngredients: "Kommer snart!",
+      savedIngredients: "Æg, sesamfrø, forårsløg.",
       nutritionalValues:
     "Räknat per portion. Kcal 698. Protein 59g. Kulhydrater 66g. Fedt 24g.",
       image: {
