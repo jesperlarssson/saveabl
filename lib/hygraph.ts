@@ -376,11 +376,11 @@ export async function getPaginatedOldRecipes(limit: number, offset: number) {
 
 export async function getRecipesForWeek(week: number) {
   const currentWeek = getWeekNumber(new Date());
-  const tempWeeks = [currentWeek, currentWeek + 1];
 
-  if (tempWeeks.includes(week)) {
-    return tempRecipes.data.recepts.filter((recipe) => recipe.weekNr === week);
-  }
+  const tempWeeks = [17, 18, 19];
+if (tempWeeks.includes(week)) {
+  return tempRecipes.data.recepts.filter((recipe) => recipe.weekNr === week);
+}
 
   // fallback till Hygraph
   const data = await fetchAPI(

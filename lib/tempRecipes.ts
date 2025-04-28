@@ -1,6 +1,245 @@
 export const tempRecipes = {
   data: {
     recepts: [
+
+      {
+        id: "week19-recipe1",
+        weekNr: 19,
+        recipeNumber: 1,
+        startDate: "2025-05-05", // måndagen i vecka 17
+        chef: {
+          name: "Anton Mällroth",
+          image: "/images/anton_kock.webp"
+        },
+        title:
+          "Oregano-scented mushroom pasta with crispy zucchini.",
+        slug: "oregano-scented-mushroom-pasta-crispy-zucchini",
+        image: {
+          url: "/images/week19-recipe1.jpg", // ← byt till rätt lokal bildsökväg
+        },
+        ingredients: [
+         "Coming soon!"
+      ],
+        steg: [
+         "Coming soon!"
+        ],
+        contentAllergies: [
+          "Crème fraîche, cream, mushroom, garlic, onion, spring onion, zucchini, rapeseed oil, durum wheat flour, carrot, leek, celery, fennel, thyme, lovage, black pepper, bay leaf, salt, parsnip, parsley root, tomato, salt, sugar, flavorings, modified starch, vinegar, parsley extract."
+        ],
+        savedIngredients: "Coming soon!", 
+        nutritionalValues: "Calculated per portion. 694 kcal, 20g protein, 73g carbohydrates, 34g fat.",
+        freezabl: null,
+        createdAt: "2025-04-28T12:00:00Z",
+        localizations: [
+          {
+            title: "Oreganodoftande svamppasta med krispig zucchini.",
+            ingredients: [
+              "Kommer snart!"
+          ],
+            steg: [
+              "Kommer snart!"
+          
+          ],
+            contentAllergies: [
+              "Créme fraiche, grädde, champinjon, VITLÖK, LÖK, salladslök, zucchini, rapsolja, durumvetemjöl, morot, purjolök, SELLERI, fänkål, timjan, libbsticka, svartpeppar, lagerblad, salt, palsternacka, persiljerot, tomat, salt, socker, aromer, modifierad stärkelse, vinäger, persiljeextrakt.              "
+            ],
+            savedIngredients: "Kommer snart!",
+            nutritionalValues: "Räknat per portion. Kcal 694. Protein 20g. Kolhydrater 73g. Fett 34g.",
+            image: {
+              url: "/images/week19-recipe1.jpeg", // ← byt till rätt lokal bildsökväg
+            },
+            id: "week19-recipe1-sv",
+            createdAt: "2025-04-28T12:00:00Z",
+            freezabl: null,
+            recipeNumber: 1,
+            slug: "oreganodoftande-svamppasta-krispig-zucchini"
+          },
+          {
+            title: "Oreganoduftende svampepasta med sprød zucchini.",
+            ingredients: [
+              "Kommer snart!"
+          
+          ],
+            steg: [
+             "Kommer snart!"
+          ],
+            contentAllergies: [
+              "Crème fraiche, fløde, champignon, hvidløg, løg, forårsløg, zucchini, rapsolie, durumhvedemel, gulerod, porre, selleri, fennikel, timian, løvstikke, sort peber, laurbærblad, salt, pastinak, persillerod, tomat, salt, sukker, aromaer, modificeret stivelse, eddike, persilleekstrakt."
+            ],
+            savedIngredients: "Kommer snart!",
+            nutritionalValues: "Beregnede per portion. 694 kcal, 20g protein, 73g kulhydrater, 34g fedt.",
+            image: {
+              url: "/images/week19-recipe1.jpeg", // ← byt till rätt lokal bildsökväg
+            },
+            id: "week19-recipe1-da",
+            createdAt: "2025-04-28T12:00:00Z",
+            freezabl: null,
+            recipeNumber: 1,
+            slug: "oreganoduftende-svampepasta-sproed-zucchini"
+          }
+        ]
+      }, 
+      {
+        id: "week19-recipe2",
+        weekNr: 19,
+        recipeNumber: 2,
+        startDate: "2025-05-05",
+        chef: {
+          name: "Anton Mällroth",
+          image: "/images/anton_kock.webp" 
+        },
+        title:
+          "Spicy chili sin carne served with rice, tortilla chips, and cooling sour cream.",
+        slug: "spicy-chili-sin-carne-rice-tortilla-chips-sour-cream",
+        image: {
+          url: "/images/week19-recipe2.jpg", // ← byt till rätt lokal bildsökväg
+        },
+        ingredients: [
+         "Coming soon!"
+        ],
+        steg: [
+          "Coming soon!"
+      ],
+        contentAllergies: ["Soy mince, tomato, ONION, GARLIC, kidney beans, white beans, parsley, SOY, sour cream. Vegetable broth: (onion, carrot, leek, CELERY, fennel), thyme, lovage, black pepper, bay leaf, salt), rehydrated vegetable powder 18.5% (onion, parsnip, parsley root, leek, mushroom, carrot, tomato, garlic), salt, sugar, flavorings, modified starch, vinegar, parsley extract, stabilizer (xanthan gum). Chips: Corn 74%, sunflower oil, cheese seasoning 4.8% (salt, grape sugar, LACTOSE [MILK], CHEESE POWDER [MILK], natural flavoring [MILK], BUTTER OIL [MILK], seasoning, MALTODEXTRIN, MILK PROTEIN)."
+          ],
+        savedIngredients: "Coming soon!",
+        nutritionalValues:
+          "Calculated per portion. 636 kcal, 38g protein, 82g carbohydrates, 14g fat.",
+        freezabl: null,
+        createdAt: "2025-04-28T12:00:00Z",
+        localizations: [
+          {
+            title:
+              "Kryddig chili sin carne serverad med ris, tortillachips & svalkande gräddfil.",
+            ingredients: [
+            "Kommer snart!"
+          
+          ],
+            steg: [
+             "Kommer snart!"
+            
+          ],
+            contentAllergies: ["SOJAfärs, tomat, LÖK, VITLÖK, kidneybönor, vita bönor, persilja, SOJA, gräddfil. Grönsaksbuljong: (lök, morot, purjolök, SELLERI, fänkål), timjan, libbsticka, svartpeppar, lagerblad, salt), rehydrerat grönsakspulver 18,5% (lök, palsternacka, persiljerot, purjolök, champinjon, morot, tomat, vitlök), salt, socker, aromer, modifierad stärkelse, vinäger, persiljeextrakt, stabiliseringsmedel (xantangummi). Chips: Majs 74%, solrosolja, ostkrydda 4,8% (salt, druvsocker, LAKTOS [MJÖLK], OSTPULVER [MJÖLK], naturlig arom [MJÖLK], SMÖROLJA [MJÖLK], krydda, MALTODEXTRIN, MJÖLKPROTEIN).          "
+              ],
+            savedIngredients: "Kommer snart!",
+            nutritionalValues:
+          "Räknat per portion. Kcal 636. Protein 38g. Kolhydrater 82g. Fett 14g.",
+            image: {
+              url: "/images/week19-recipe2.jpg",
+            },
+            id: "week19-recipe2-sv",
+            createdAt: "2025-04-28T12:00:00Z",
+            freezabl: null,
+            recipeNumber: 2,
+            slug: "kryddig-chili-sin-carne-ris-tortillachips-gradfil",
+          },
+          {
+            title:
+              "Krydret chili sin carne serveret med ris, tortillachips og kølende creme fraiche.",
+            ingredients: [
+            "Kommer snart!"
+          ],
+            steg: [
+              "Kommer snart!"
+          ],
+            contentAllergies: ["SOJAfars, tomat, LØG, HVIDLØG, kidneybønner, hvide bønner, persille, SOJA, creme fraiche. Grøntsagsbouillon: (løg, gulerod, porre, SELLERI, fennikel), timian, løvstikke, sort peber, laurbærblad, salt), rehydreret grøntsagspulver 18,5% (løg, pastinak, persillerod, porre, champignon, gulerod, tomat, hvidløg), salt, sukker, aromaer, modificeret stivelse, eddike, persilleekstrakt, stabilisator (xanthangummi). Chips: Majs 74%, solsikkeolie, ostekrydderi 4,8% (salt, druesukker, LAKTOSE [MÆLK], OSTEPULVER [MÆLK], naturlig aroma [MÆLK], SMØROLIE [MÆLK], krydderi, MALTODEXTRIN, MÆLKPROTEIN)."
+              
+            ],
+            savedIngredients: "Kommer snart!",
+            nutritionalValues:
+          "Beregnet per portion. 636 kcal, 38g protein, 82g kulhydrater, 14g fedt.",
+            image: {
+              url: "/images/week19-recipe2.jpg",
+            },
+            id: "week19-recipe2-da",
+            createdAt: "2025-04-28T12:00:00Z",
+            freezabl: null,
+            recipeNumber: 2,
+            slug: "krydret-chili-sin-carne-ris-tortillachips-creme-fraiche",
+          },
+        ],
+      },
+{
+  id: "week19-recipe3",
+  weekNr: 19,
+  recipeNumber: 3,
+  startDate: "2025-05-05",
+  chef: {
+    name: "Emil Petzén",
+    image: "/images/emil_kock.png" 
+  },
+  title:
+    "Potato gnocchi with a roasted sun-dried tomato pesto sauce, Västerbotten cheese, crushed roasted almonds, haricots verts, and basil.",
+  slug: "potato-gnocchi-roasted-sun-dried-tomato-pesto-vasterbotten-cheese-almonds-haricots-verts-basil",
+  image: {
+    url: "/images/week19-recipe3.jpg",
+  },
+  ingredients: [
+    "Coming soon!"
+],
+  steg: [
+   "Coming soon!"
+],
+  contentAllergies: [
+    "Sun-dried tomatoes, crème fraîche, vegetable broth, garlic, pecorino, basil, black pepper, salt, almonds, haricots verts. Potato gnocchi: Potato purée 35% (water, dried potato flakes 7%), WHEAT flour, potato starch, rice flour, salt."
+],
+  savedIngredients: "Coming soon!",
+  nutritionalValues:
+  "Calculated per portion. 791 kcal, 16g protein, 84g carbohydrates, 29g fat.", 
+  freezabl: null,
+  createdAt: "2025-04-28T12:00:00Z",
+  localizations: [
+    {
+      title:
+        "Potatisgnocchi med en rostad soltorkad tomatpestosås med västerbottenost, krossade rostade mandlar, haricot verts & basilika.",
+      ingredients: [
+        "Kommer snart!"
+    ],
+      steg: [
+        "Kommer snart!"
+    ],
+      contentAllergies: [
+        "Soltorkade tomater, creme fraiche, grönsaksbuljong, vitlök, pecorino, basilika, svartpeppar, salt, mandlar, haricot verts. Potatisgnocchi: Potatispuré 35% (vatten, torkade potatisflingor 7%), VETEmjöl, potatisstärkelse, rismjöl, salt."
+      ],
+      savedIngredients: "Kommer snart!",
+      nutritionalValues:
+    "Räknat per portion. Kcal 791. Protein 16g. Kolhydrater 84g. Fett 29g.",
+      image: {
+        url: "/images/week19-recipe3.jpg",
+      },
+      id: "week19-recipe3-sv",
+      createdAt: "2025-04-28T12:00:00Z",
+      freezabl: null,
+      recipeNumber: 3,
+      slug: "potatisgnocchi-rostad-soltorkad-tomatpestosas-vasterbottenost-mandlar-haricot-verts-basilika",
+    },
+    {
+      title:
+        "Kartoffelgnocchi med en ristet soltørret tomatpestosauce med Västerbottenost, knuste ristede mandler, haricots verts og basilikum.",
+      ingredients: [
+        "Kommer snart!"
+    ],
+      steg: [
+        "Kommer snart!"
+      ],
+      contentAllergies: [
+        "Soltørrede tomater, creme fraiche, grøntsagsbouillon, hvidløg, pecorino, basilikum, sort peber, salt, mandler, haricots verts. Kartoffelgnocchi: Kartoffelpuré 35% (vand, tørrede kartoffelflager 7%), HVEDEMEL, kartoffelstivelse, rismel, salt."
+      ],
+      savedIngredients: "Kommer snart!",
+      nutritionalValues:
+    "Räknat per portion. 791 kcal, 16g protein, 84g kulhydrater, 29g fedt.",
+      image: {
+        url: "/images/week19-recipe3.jpg",
+      },
+      id: "week19-recipe3-da",
+      createdAt: "2025-04-28T12:00:00Z",
+      freezabl: null,
+      recipeNumber: 3,
+      slug: "kartoffelgnocchi-ristet-soltorret-tomatpestosauce-vasterbottenost-mandler-haricots-verts-basilikum      ",
+    },
+  ],
+},
+      
       {
         id: "week18-recipe1",
         weekNr: 18,
