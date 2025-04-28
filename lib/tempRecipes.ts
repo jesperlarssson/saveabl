@@ -18,15 +18,19 @@ export const tempRecipes = {
           url: "/images/week19-recipe1.jpg", // ← byt till rätt lokal bildsökväg
         },
         ingredients: [
-         "Coming soon!"
+         "1 pack of mushroom sauce",
+         "1 pack of spaghetti", 
+         "1 zucchini"
       ],
         steg: [
-         "Coming soon!"
+         "Take out a frying pan for the zucchini, a saucepan for the sauce, and a pot for the pasta.",
+         "Dice or slice the zucchini and fry it in cooking fat until golden brown. Season with salt and pepper.", 
+         "Heat the sauce and dilute to the desired consistency, then taste and adjust. Cook the pasta in salted water until done (about 7-8 minutes)."
         ],
         contentAllergies: [
           "Crème fraîche, cream, mushroom, garlic, onion, spring onion, zucchini, rapeseed oil, durum wheat flour, carrot, leek, celery, fennel, thyme, lovage, black pepper, bay leaf, salt, parsnip, parsley root, tomato, salt, sugar, flavorings, modified starch, vinegar, parsley extract."
         ],
-        savedIngredients: "Coming soon!", 
+        savedIngredients: "Mushrooms, onion, garlic.", 
         nutritionalValues: "Calculated per portion. 694 kcal, 20g protein, 73g carbohydrates, 34g fat.",
         freezabl: null,
         createdAt: "2025-04-28T12:00:00Z",
@@ -34,16 +38,20 @@ export const tempRecipes = {
           {
             title: "Oreganodoftande svamppasta med krispig zucchini.",
             ingredients: [
-              "Kommer snart!"
+              "1 förpackning svampsås",
+              "1 förpackning spaghetti", 
+              "1 zucchini"
           ],
             steg: [
-              "Kommer snart!"
+              "Ta fram en stekpanna till zucchinin, en kastrull till såsen och en gryta till pastan.", 
+              "Tärna eller skiva zucchinin och stek i matfett till gyllenbrun. Krydda med salt och peppar. ", 
+              "Värm såsen och späd till önskad konsistens, smaka av. Koka pastan i saltat vatten till klar (ca 7-8 minuter)"
           
           ],
             contentAllergies: [
               "Créme fraiche, grädde, champinjon, VITLÖK, LÖK, salladslök, zucchini, rapsolja, durumvetemjöl, morot, purjolök, SELLERI, fänkål, timjan, libbsticka, svartpeppar, lagerblad, salt, palsternacka, persiljerot, tomat, salt, socker, aromer, modifierad stärkelse, vinäger, persiljeextrakt.              "
             ],
-            savedIngredients: "Kommer snart!",
+            savedIngredients: "Champinjoner, lök, vitlök.",
             nutritionalValues: "Räknat per portion. Kcal 694. Protein 20g. Kolhydrater 73g. Fett 34g.",
             image: {
               url: "/images/week19-recipe1.jpeg", // ← byt till rätt lokal bildsökväg
@@ -57,16 +65,20 @@ export const tempRecipes = {
           {
             title: "Oreganoduftende svampepasta med sprød zucchini.",
             ingredients: [
-              "Kommer snart!"
+              "1 pakke svampesauce", 
+              "1 pakke spaghetti", 
+              "zucchini"
           
           ],
             steg: [
-             "Kommer snart!"
+             "Tag en stegepande til zucchini, en kasserolle til saucen og en gryde til pastaen.", 
+             "Tern eller skær zucchini i skiver, og steg den i fedtstof, indtil den er gyldenbrun. Krydr med salt og peber.", 
+             "Varm saucen op og spæd til ønsket konsistens, smag til. Kog pastaen i saltet vand, indtil den er klar (ca. 7-8 minutter)."
           ],
             contentAllergies: [
               "Crème fraiche, fløde, champignon, hvidløg, løg, forårsløg, zucchini, rapsolie, durumhvedemel, gulerod, porre, selleri, fennikel, timian, løvstikke, sort peber, laurbærblad, salt, pastinak, persillerod, tomat, salt, sukker, aromaer, modificeret stivelse, eddike, persilleekstrakt."
             ],
-            savedIngredients: "Kommer snart!",
+            savedIngredients: "Champignoner, løg, hvidløg.",
             nutritionalValues: "Beregnede per portion. 694 kcal, 20g protein, 73g kulhydrater, 34g fedt.",
             image: {
               url: "/images/week19-recipe1.jpeg", // ← byt till rätt lokal bildsökväg
@@ -95,14 +107,18 @@ export const tempRecipes = {
           url: "/images/week19-recipe2.jpg", // ← byt till rätt lokal bildsökväg
         },
         ingredients: [
-         "Coming soon!"
+         "1 package of chili sin carne", 
+         "1 package of rice", 
+         "1 package of sour cream", 
+         "1 package of tortilla chips"
         ],
         steg: [
-          "Coming soon!"
+          "Take out a pot and a frying pan. Pour the chili sin carne into the pot and the rice into the frying pan. Dilute the chili with a bit of water to reach the desired consistency. Add half a deciliter of water and a tablespoon of fat to the frying pan. Heat both on medium heat while stirring until everything is warmed through.", 
+          "Serve the chili sin carne with rice, a dollop of sour cream, and crispy tortilla chips.", 
       ],
         contentAllergies: ["Soy mince, tomato, ONION, GARLIC, kidney beans, white beans, parsley, SOY, sour cream. Vegetable broth: (onion, carrot, leek, CELERY, fennel), thyme, lovage, black pepper, bay leaf, salt), rehydrated vegetable powder 18.5% (onion, parsnip, parsley root, leek, mushroom, carrot, tomato, garlic), salt, sugar, flavorings, modified starch, vinegar, parsley extract, stabilizer (xanthan gum). Chips: Corn 74%, sunflower oil, cheese seasoning 4.8% (salt, grape sugar, LACTOSE [MILK], CHEESE POWDER [MILK], natural flavoring [MILK], BUTTER OIL [MILK], seasoning, MALTODEXTRIN, MILK PROTEIN)."
           ],
-        savedIngredients: "Coming soon!",
+        savedIngredients: "Chili, bell pepper & onion.",
         nutritionalValues:
           "Calculated per portion. 636 kcal, 38g protein, 82g carbohydrates, 14g fat.",
         freezabl: null,
@@ -112,16 +128,20 @@ export const tempRecipes = {
             title:
               "Kryddig chili sin carne serverad med ris, tortillachips & svalkande gräddfil.",
             ingredients: [
-            "Kommer snart!"
+            "1 förpackning chili sin carne", 
+            "1 förpackning ris", 
+            "1 förpackning gräddfil", 
+            "1 förpackning tortillachips"
           
           ],
             steg: [
-             "Kommer snart!"
+             "Ta fram en gryta och en stekpanna. Häll chilin sin carne i grytan och riset i stekpannan. Späd chilin med lite vatten till önskad konsistens. Tillsätt en halv deciliter vatten och en matsked matfett i stekpannan. Värm båda på medelvärme under omrörning tills allt är genomvarmt.",
+             "Servera chili sin carne tillsammans med ris, en klick gräddfil och krispiga tortillachips.", 
             
           ],
             contentAllergies: ["SOJAfärs, tomat, LÖK, VITLÖK, kidneybönor, vita bönor, persilja, SOJA, gräddfil. Grönsaksbuljong: (lök, morot, purjolök, SELLERI, fänkål), timjan, libbsticka, svartpeppar, lagerblad, salt), rehydrerat grönsakspulver 18,5% (lök, palsternacka, persiljerot, purjolök, champinjon, morot, tomat, vitlök), salt, socker, aromer, modifierad stärkelse, vinäger, persiljeextrakt, stabiliseringsmedel (xantangummi). Chips: Majs 74%, solrosolja, ostkrydda 4,8% (salt, druvsocker, LAKTOS [MJÖLK], OSTPULVER [MJÖLK], naturlig arom [MJÖLK], SMÖROLJA [MJÖLK], krydda, MALTODEXTRIN, MJÖLKPROTEIN).          "
               ],
-            savedIngredients: "Kommer snart!",
+            savedIngredients: "Chili, paprika & lök.",
             nutritionalValues:
           "Räknat per portion. Kcal 636. Protein 38g. Kolhydrater 82g. Fett 14g.",
             image: {
@@ -137,15 +157,19 @@ export const tempRecipes = {
             title:
               "Krydret chili sin carne serveret med ris, tortillachips og kølende creme fraiche.",
             ingredients: [
-            "Kommer snart!"
+            "1 pakke chili sin carne", 
+            "1 pakke ris", 
+            "1 pakke creme fraiche", 
+            "1 pakke tortillachips"
           ],
             steg: [
-              "Kommer snart!"
+              "Find en gryde og en stegepande frem. Hæld chili sin carne i gryden og risene i stegepanden. Spæd chilien med lidt vand, indtil den ønskede konsistens opnås. Tilsæt en halv deciliter vand og en spiseskefuld fedtstof i stegepanden. Opvarm begge dele ved middel varme under omrøring, indtil alt er gennemvarmt.", 
+              "Server chili sin carne med ris, en skefuld rømme og sprøde tortillachips."
           ],
             contentAllergies: ["SOJAfars, tomat, LØG, HVIDLØG, kidneybønner, hvide bønner, persille, SOJA, creme fraiche. Grøntsagsbouillon: (løg, gulerod, porre, SELLERI, fennikel), timian, løvstikke, sort peber, laurbærblad, salt), rehydreret grøntsagspulver 18,5% (løg, pastinak, persillerod, porre, champignon, gulerod, tomat, hvidløg), salt, sukker, aromaer, modificeret stivelse, eddike, persilleekstrakt, stabilisator (xanthangummi). Chips: Majs 74%, solsikkeolie, ostekrydderi 4,8% (salt, druesukker, LAKTOSE [MÆLK], OSTEPULVER [MÆLK], naturlig aroma [MÆLK], SMØROLIE [MÆLK], krydderi, MALTODEXTRIN, MÆLKPROTEIN)."
               
             ],
-            savedIngredients: "Kommer snart!",
+            savedIngredients: "Chili, paprika og løg.",
             nutritionalValues:
           "Beregnet per portion. 636 kcal, 38g protein, 82g kulhydrater, 14g fedt.",
             image: {
@@ -175,15 +199,19 @@ export const tempRecipes = {
     url: "/images/week19-recipe3.jpg",
   },
   ingredients: [
-    "Coming soon!"
+    "Potato gnocchi", 
+    "1 jar sun dried tomato pestosauce", 
+    "1 jar roasted salted almonds", 
+    "1 box haricot verts"
 ],
   steg: [
-   "Coming soon!"
+   "Take out a frying pan and a large saucepan and boil water for the gnocchi. Fry the haricot verts on a high heat until they have a frying surface and put them aside. Cook the gnocchi in the water for about 2 minutes. Save 1 dl of the water before draining the gnocchi. Drain the gnocchi, but be careful not to break it!", 
+   "Fry the gnocchi with a little cooking fat in the frying pan you fried the haricot verts in so that they become a little crispy, then pour the sauce along with the water you saved and let it simmer and get hot. If the sauce is too thick, add more liquid Then serve by sprinkling the toasted crushed almonds and the haricot verts."
 ],
   contentAllergies: [
     "Sun-dried tomatoes, crème fraîche, vegetable broth, garlic, pecorino, basil, black pepper, salt, almonds, haricots verts. Potato gnocchi: Potato purée 35% (water, dried potato flakes 7%), WHEAT flour, potato starch, rice flour, salt."
 ],
-  savedIngredients: "Coming soon!",
+  savedIngredients: "Haricot greens. Almonds. Cream. Sun-dried tomatoes.",
   nutritionalValues:
   "Calculated per portion. 791 kcal, 16g protein, 84g carbohydrates, 29g fat.", 
   freezabl: null,
@@ -193,15 +221,19 @@ export const tempRecipes = {
       title:
         "Potatisgnocchi med en rostad soltorkad tomatpestosås med västerbottenost, krossade rostade mandlar, haricot verts & basilika.",
       ingredients: [
-        "Kommer snart!"
+        "Potatis gnocchi", 
+        "1 burk soltorkad tomatpestosås", 
+        "1 burk rostade saltade mandlar", 
+        "1 låda haricot verts"
     ],
       steg: [
-        "Kommer snart!"
+        "Ta fram en stekpanna och en stor kastrull och koka upp vatten till gnocchin. Stek haricot vertsen på hög värme tills den får stekyta och lägg de åt sidan. Koka gnocchin i vattnet i cirka 2 minuter. Spara 1 dl av vattnet innan du häller av gnocchin. Häll av gnocchin, men var försiktig så den inte går sönder!", 
+        "Stek gnocchin med lite matfett i stekpannan ni stekte haricot vertsen i så att de blir lite krispiga, häll sedan på såsen tillsammans med vattnet ni sparade och låt det sjuda och bli varmt. Om det blir för tjock sås, tillsätt mer vätska Servera sedan genom att strö över de rostade krossade mandlarna och haricot vertsen."
     ],
       contentAllergies: [
         "Soltorkade tomater, creme fraiche, grönsaksbuljong, vitlök, pecorino, basilika, svartpeppar, salt, mandlar, haricot verts. Potatisgnocchi: Potatispuré 35% (vatten, torkade potatisflingor 7%), VETEmjöl, potatisstärkelse, rismjöl, salt."
       ],
-      savedIngredients: "Kommer snart!",
+      savedIngredients: "Haricot verts. Mandlar. Grädde. Soltorkade tomater.",
       nutritionalValues:
     "Räknat per portion. Kcal 791. Protein 16g. Kolhydrater 84g. Fett 29g.",
       image: {
@@ -217,15 +249,19 @@ export const tempRecipes = {
       title:
         "Kartoffelgnocchi med en ristet soltørret tomatpestosauce med Västerbottenost, knuste ristede mandler, haricots verts og basilikum.",
       ingredients: [
-        "Kommer snart!"
+        "Kartoffelgnocchi", 
+        "1 dåse soltørret tomatpestosauce", 
+        "1 dåse ristede saltede mandler", 
+        "1 æske grønne bønner"
     ],
       steg: [
-        "Kommer snart!"
+        "Tag en bradepande og en stor gryde ud og kog vand op til gnocchierne. Steg haricot verts ved høj varme til de har en stegeflade og læg dem til side. Kog gnocchierne i vandet i cirka 2 minutter. Gem 1 dl af vandet inden du dræner gnocchierne. Dræn gnocchierne, men pas på ikke at knække den!", 
+        "Steg gnocchierne med lidt madfedt i den stegepande du stegte haricot verts i, så de bliver lidt sprøde, hæld derefter saucen sammen med det gemte vand og lad det simre og blive varmt. Hvis saucen er for tyk, tilsæt mere væske. Server derefter ved at drysse de ristede knuste mandler og haricot verts."
       ],
       contentAllergies: [
         "Soltørrede tomater, creme fraiche, grøntsagsbouillon, hvidløg, pecorino, basilikum, sort peber, salt, mandler, haricots verts. Kartoffelgnocchi: Kartoffelpuré 35% (vand, tørrede kartoffelflager 7%), HVEDEMEL, kartoffelstivelse, rismel, salt."
       ],
-      savedIngredients: "Kommer snart!",
+      savedIngredients: "Haricot greens. Mandler. Fløde. Soltørrede tomater.",
       nutritionalValues:
     "Räknat per portion. 791 kcal, 16g protein, 84g kulhydrater, 29g fedt.",
       image: {
