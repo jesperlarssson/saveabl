@@ -7,7 +7,7 @@ const ImageDisplay: React.FC = () => {
   const { text } = useLang(); 
 
   return (
-    <div className="relative w-full h-[150px] md:h-[400px] overflow-hidden">
+    <div className="relative w-full h-[150px] md:h-[400px] 2xl:h-[510px] overflow-hidden">
       {/* Bild 1 – vänster, bredare nertill, lutning på höger sida */}
       <div
         className="absolute top-0 left-0 h-full"

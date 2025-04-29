@@ -110,7 +110,7 @@ const Navbar = () => {
         active && ""
       )}
     >
-      <nav className="w-full flex items-center justify-between max-w-screen-2xl mx-auto px-2 sm:px-4 md:px-8">
+      <nav className="w-full flex items-center justify-between px-2 sm:px-4 md:px-8 2xl:px-10">
         <Link
           href={"/"}
           className=" px-4 h-14 flex items-center rounded-md hover:shadow-inner hover:scale-95 transition-all"
