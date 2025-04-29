@@ -169,13 +169,17 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({ selectedType, selectedVaria
   
   const totalPrice = calculateTotalPrice(postalCode);
 
+  // --- NYTT: Lägg till fraktkostnad beroende på land ---
+  const shippingCost = isDk ? 49 : 79;
+
+
   return (
     <><div className="order-summary border-2 border-[#6E2936] p-4 rounded-lg mt-6 mx-auto max-w-full sm:max-w-[500px]">
           <h3 className="text-lg font-bold mb-2 text-[#6E2936]">{text.order.summaryTitle}</h3>
           <p className="text-[#6E2936]"><strong>{text.order.mealKit}:</strong> {getProductName(selectedType.label, lang)}</p>
           <p className="text-[#6E2936]"><strong>{text.order.frequency}:</strong> {getVariantName(typeof selectedVariant === 'string' ? selectedVariant : selectedVariant.label, lang)}</p>
           <p className="text-[#6E2936]"><strong>{text.order.deliveryDaysummary}:</strong> {selectedDay.label}</p>
-          <p className="text-[#6E2936]"><strong>{text.order.totalPrice}:</strong> {totalPrice} kr {text.order.shipping}</p>
+          <p className="text-[#6E2936]"><strong>{text.order.totalPrice}:</strong> {totalPrice} kr + {shippingCost} kr {text.order.shipping}</p>
           <p className="text-[#6E2936] text-md mt-2">
   {text.order.discountNote}
 </p>

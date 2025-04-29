@@ -1,34 +1,35 @@
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
-import { getTaxRateForPriceId } from "@/app/bestall/lib/productTypes";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? "", {
   apiVersion: "2022-11-15",
 });
+
+// Här anger du dina riktiga tax rate-IDs från Stripe
+const taxRate12Sweden = "txr_1Qix0YEhPZIzKmuixfQmLrZg"; // <-- Ersätt med ditt riktiga 12% tax rate ID
+const taxRate25Denmark = "txr_1Qix0lEhPZIzKmuiCaVKnpLH"; // <-- Ersätt med ditt riktiga 25% tax rate ID
 
 export async function POST(request: Request) {
   const body = await request.json();
   const { customerId, mode, items, country } = body;
 
   try {
-    // Ensure customerId is provided
     if (!customerId) {
       throw new Error("customerId is required");
     }
 
-    // Lägg till moms på varje produkt
-    const lineItems = items.map((item: { price: string }) => ({
-      ...item,
-      tax_rates: [getTaxRateForPriceId(item.price, country)],
+    const lineItems = items.map((item: {
+      [x: string]: any; price: string 
+}) => ({
+      price: item.price,
+      quantity: item.quantity,
+      tax_rates: [country === "DK" ? taxRate25Denmark : taxRate12Sweden],
     }));
 
-
-    // Create a billing portal session
     const session = await stripe.checkout.sessions.create({
       customer: customerId,
       allow_promotion_codes: true,
       mode: mode ?? "payment",
-      // payment_method_types: ['card', 'klarna'],
       line_items: lineItems,
       success_url: `https://www.saveabl.com/success?session_id={CHECKOUT_SESSION_ID}${
         mode === "subscription" ? "&recurring=true" : ""
@@ -38,6 +39,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ url: session.url });
   } catch (error) {
-    throw error;
+    console.error(error);
+    return new NextResponse("Something went wrong", { status: 500 });
   }
 }

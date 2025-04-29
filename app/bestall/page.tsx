@@ -19,7 +19,6 @@ import Lottie from "lottie-react";
 import gardAnimation from "@/public/anim/gard.json";
 import {
   getProductCostForPriceId,
-  getShippingCostForProductId,
   isSubscription,
   priceIdEveryWeek,
   getProductTypesFromLngCode,
@@ -455,7 +454,6 @@ const Order = () => {
         extraInfo: userInformation.extraInfo,
       });
       const stripeUserId = response.data.stripeUser.id;
-      const shippingPriceId = getShippingCostForProductId(productId);
       const sessionResponse = await axios.post("/api/checkout_sessions", {
         customerId: stripeUserId,
         mode: isSubscription(productId) ? "subscription" : "payment",
@@ -463,10 +461,6 @@ const Order = () => {
         items: [
           {
             price: productId,
-            quantity: 1,
-          },
-          {
-            price: shippingPriceId,
             quantity: 1,
           },
         ],

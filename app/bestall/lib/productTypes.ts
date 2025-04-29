@@ -18,95 +18,46 @@ export const productIdStandard8Portions =
  export const productIdStandardSamboDk = "prod_OjDo5pqjEixNw4"; 
  
 
-export const priceIdEveryWeek = "price_1Nxu8QEhPZIzKmuikn7uAHzK";
-export const priceIdEveryOtherWeek = "price_1NxtncEhPZIzKmuiNZl0xIxC";
-export const priceIdStandard = "price_1NvlKkEhPZIzKmuiEozTJBYf";
+export const priceIdEveryWeek = "price_1RDmlwEhPZIzKmuicMsj4306";
+export const priceIdEveryOtherWeek = "price_1RDmnyEhPZIzKmuifW5Ni3Uu";
+export const priceIdStandard = "price_1RDmjdEhPZIzKmuip7XRuquc";
 export const priceIdStandard8Portions = "price_1NvlKfEhPZIzKmuiDximMRN3";
 
-export const priceIdEveryWeekSambo = "price_1PpRu2EhPZIzKmuinWGZBdiX";
-export const priceIdEveryOtherWeekSambo = "price_1PpRweEhPZIzKmuinrNVWFZ6";
-export const priceIdStandardSambo = "price_1PpRz2EhPZIzKmuia3MD9OxT";
+export const priceIdEveryWeekSambo = "price_1RDmYLEhPZIzKmuiaL3NS3jq";
+export const priceIdEveryOtherWeekSambo = "price_1RDmVMEhPZIzKmuijgpFLRYX";
+export const priceIdStandardSambo = "price_1RDmTBEhPZIzKmuitSymxMBd";
 
 
-export const priceIdStockholmEveryWeek = "price_1OY5CQEhPZIzKmuiYkWX6DrL";
+export const priceIdStockholmEveryWeek = "price_1RDmmsEhPZIzKmuif7eMFzHa";
 export const priceIdStockholmEveryOtherWeek =
- "price_1OY5F0EhPZIzKmuinFbez8qr";
-export const priceIdStockholmStandard = "price_1OY5GmEhPZIzKmuip8JKjcVY";
+ "price_1RDmnHEhPZIzKmuifLYRAAQW";
+export const priceIdStockholmStandard = "price_1RDmkOEhPZIzKmuiz06oUhwM";
 export const priceIdStockholmStandard8Portions = "price_1OY5JkEhPZIzKmuiY9xTWk0K";
-export const priceIdStockholmEveryWeekSambo = "price_1P4PBIEhPZIzKmuiUDGuWIaL";
+export const priceIdStockholmEveryWeekSambo = "price_1RDmY0EhPZIzKmui66vzvn96";
 export const priceIdStockholmEveryOtherWeekSambo =
- "price_1P4PRqEhPZIzKmuibBlRI0HG";
- export const priceIdStockholmStandardSambo = "price_1PpS0MEhPZIzKmuia0jpXicc";
+ "price_1RDmWREhPZIzKmuinRpHJ0Zj";
+ export const priceIdStockholmStandardSambo = "price_1RDmU0EhPZIzKmuiYTromffP";
 
 
-export const priceIdSkaneEveryWeek = "price_1PDOpXEhPZIzKmuiIXimOxOH";
+export const priceIdSkaneEveryWeek = "price_1RDmlwEhPZIzKmuicMsj4306";
 export const priceIdSkaneEveryOtherWeek =
- "price_1PDOr7EhPZIzKmui4MUY0nvi";
-export const priceIdSkaneStandard = "price_1PDOthEhPZIzKmuiqiW23r7x";
+ "price_1RDmnyEhPZIzKmuifW5Ni3Uu";
+export const priceIdSkaneStandard = "price_1RDmjdEhPZIzKmuip7XRuquc";
 export const priceIdSkaneStandard8Portions = "price_1PDOv0EhPZIzKmuiDcrV96Sz";
-export const priceIdSkaneEveryWeekSambo = "price_1PxUJQEhPZIzKmuimedluh0N";
+export const priceIdSkaneEveryWeekSambo = "price_1RDmYLEhPZIzKmuiaL3NS3jq";
 export const priceIdSkaneEveryOtherWeekSambo =
- "price_1PpRweEhPZIzKmuinrNVWFZ6";
- export const priceIdSkaneStandardSambo = "price_1PpRz2EhPZIzKmuia3MD9OxT";
+ "price_1RDmVMEhPZIzKmuijgpFLRYX";
+ export const priceIdSkaneStandardSambo = "price_1RDmTBEhPZIzKmuitSymxMBd";
 
 
- export const priceIdEveryWeekDk = "price_1PqUqrEhPZIzKmuiAy9PVxzP"; 
- export const priceIdEveryOtherWeekDk = "price_1PqUsUEhPZIzKmuitr57359j"; 
- export const priceIdStandardDk = "price_1PqUv2EhPZIzKmuil2ZtEFj8"; 
+ export const priceIdEveryWeekDk = "price_1RDn0cEhPZIzKmui06gMlEwL"; 
+ export const priceIdEveryOtherWeekDk = "price_1RDn1NEhPZIzKmui507yAf4y"; 
+ export const priceIdStandardDk = "price_1RDmzTEhPZIzKmuiakp6c9gb"; 
  
- export const priceIdEveryWeekSamboDk = "price_1PqV1aEhPZIzKmuitBsfWuJi"; 
- export const priceIdEveryOtherWeekSamboDk = "price_1PqDzsEhPZIzKmui73YrZ1Qk"; 
- export const priceIdStandardSamboDk = "price_1PqUyBEhPZIzKmuiPYwFaNl9"; 
+ export const priceIdEveryWeekSamboDk = "price_1RDmwzEhPZIzKmui9TIMOaJA"; 
+ export const priceIdEveryOtherWeekSamboDk = "price_1RDmsWEhPZIzKmuiFXeGCXhL"; 
+ export const priceIdStandardSamboDk = "price_1RDmyTEhPZIzKmuiS7nppB1a"; 
 
- // === SKATTESATSER (NYTT) ===
-export const taxRateSweden12 = "txr_1Qix0YEhPZIzKmuixfQmLrZg"; // 12% moms på produkter i Sverige
-export const taxRateSweden25 = "txr_1Qix0lEhPZIzKmuiCaVKnpLH"; // 25% moms på frakt i Sverige
-export const taxRateDenmark25 = "txr_1Qix0lEhPZIzKmuiCaVKnpLH"; // 25% moms på både produkter & frakt i Danmark
-
-
-const priceIdDeliveryEveryWeek = "price_1OY5DpEhPZIzKmuidVt8MLqm";
-const priceIdDeliveryEveryOtherWeek = "price_1OY5FsEhPZIzKmuiu5PVEK6o";
-const priceIdDeliveryStandard = "price_1Po3RKEhPZIzKmuiaAytTZTa";
-
-
-const priceIdDeliveryStockholmEveryWeek = "price_1OY5DpEhPZIzKmuidVt8MLqm";
-const priceIdDeliveryStockholmEveryOtherWeek =
- "price_1OY5FsEhPZIzKmuiu5PVEK6o";
-const priceIdDeliveryStockholmStandard = "price_1Po3RKEhPZIzKmuiaAytTZTa";
-
-
-const priceIdDeliverySkaneEveryWeek = "price_1OY5DpEhPZIzKmuidVt8MLqm";
-const priceIdDeliverySkaneEveryOtherWeek =
- "price_1OY5FsEhPZIzKmuiu5PVEK6o";
-const priceIdDeliverySkaneStandard = "price_1Po3RKEhPZIzKmuiaAytTZTa";
-
-const priceIdDeliveryEveryWeekSambo = "price_1OY5DpEhPZIzKmuidVt8MLqm";
-const priceIdDeliveryEveryOtherWeekSambo = "price_1OY5FsEhPZIzKmuiu5PVEK6o";
-const priceIdDeliveryStandardSambo = "price_1Po3RKEhPZIzKmuiaAytTZTa";
-
-
-const priceIdDeliveryStockholmEveryWeekSambo = "price_1OY5DpEhPZIzKmuidVt8MLqm";
-const priceIdDeliveryStockholmEveryOtherWeekSambo =
- "price_1OY5FsEhPZIzKmuiu5PVEK6o";
-const priceIdDeliveryStockholmStandardSambo = "price_1Po3RKEhPZIzKmuiaAytTZTa";
-
-
-const priceIdDeliverySkaneEveryWeekSambo = "price_1OY5DpEhPZIzKmuidVt8MLqm";
-const priceIdDeliverySkaneEveryOtherWeekSambo =
- "price_1OY5FsEhPZIzKmuiu5PVEK6o";
-const priceIdDeliverySkaneStandardSambo = "price_1Po3RKEhPZIzKmuiaAytTZTa";
-
-
-const priceIdDeliveryEveryWeekDk = "price_1PqV3UEhPZIzKmui1FiI9ISs";
-const priceIdDeliveryEveryOtherWeekDk = "price_1PqV4eEhPZIzKmuiY9zhqVmT";
-const priceIdDeliveryStandardDk = "price_1PqV5TEhPZIzKmuiFAPTHZt8";
-
-const priceIdDeliveryEveryWeekSamboDk = "price_1PqV3UEhPZIzKmui1FiI9ISs";
-const priceIdDeliveryEveryOtherWeekSamboDk = "price_1PqV4eEhPZIzKmuiY9zhqVmT";
-const priceIdDeliveryStandardSamboDk = "price_1PqV5TEhPZIzKmuiFAPTHZt8";
-
-export const getTaxRateForPriceId = (priceId: string, country: string) => {
-  const isDanish = country.toLowerCase() === "dk";
 
   // Lista över danska produkter
   const danishProductPrices = [
@@ -117,37 +68,7 @@ export const getTaxRateForPriceId = (priceId: string, country: string) => {
       priceIdEveryOtherWeekSamboDk,
       priceIdStandardSamboDk
   ];
-
-  // Lista över alla frakt-ID
-  const shippingPrices = [
-      priceIdDeliveryEveryWeek,
-      priceIdDeliveryEveryOtherWeek,
-      priceIdDeliveryStandard,
-      priceIdDeliveryStockholmEveryWeek,
-      priceIdDeliveryStockholmEveryOtherWeek,
-      priceIdDeliveryStockholmStandard,
-      priceIdDeliverySkaneEveryWeek,
-      priceIdDeliverySkaneEveryOtherWeek,
-      priceIdDeliverySkaneStandard,
-      priceIdDeliveryEveryWeekDk,
-      priceIdDeliveryEveryOtherWeekDk,
-      priceIdDeliveryStandardDk,
-      priceIdDeliveryEveryWeekSamboDk,
-      priceIdDeliveryEveryOtherWeekSamboDk,
-      priceIdDeliveryStandardSamboDk
-  ];
-
-  const isShipping = shippingPrices.includes(priceId);
-  const isDanishProduct = danishProductPrices.includes(priceId);
-
-  // Om kunden är från Danmark, sätt 25% på både produkter & frakt
-  if (isDanish) {
-      return taxRateDenmark25;
-  }
-
-  // Svenska kunder får 12% på produkter, 25% på frakt
-  return isShipping ? taxRateSweden25 : taxRateSweden12;
-};
+  
 
 
 export const getProductTypesFromLngCode = (lngCode: string): ProductType[] => {
@@ -573,75 +494,6 @@ export const isSubscription = (priceId: string | null): boolean => {
   }
   return false;
 };
-
-
-export const getShippingCostForProductId = (id: string | null) => {
- switch (id) {
-   case priceIdEveryWeek:
-     return priceIdDeliveryEveryWeek;
-   case priceIdEveryOtherWeek:
-     return priceIdDeliveryEveryOtherWeek;
-   case priceIdStandard:
-     return priceIdDeliveryStandard;
-   case priceIdStandard8Portions:
-     return priceIdDeliveryStandard;
-   case priceIdStockholmEveryWeek:
-     return priceIdDeliveryStockholmEveryWeek;
-   case priceIdStockholmEveryOtherWeek:
-     return priceIdDeliveryStockholmEveryOtherWeek;
-   case priceIdStockholmStandard:
-     return priceIdDeliveryStockholmStandard;
-   case priceIdStockholmStandard8Portions:
-     return priceIdDeliveryStockholmStandard;
-   case priceIdSkaneEveryWeek:
-       return priceIdDeliverySkaneEveryWeek;
-   case priceIdSkaneEveryOtherWeek:
-       return priceIdDeliverySkaneEveryOtherWeek;
-   case priceIdSkaneStandard:
-       return priceIdDeliverySkaneStandard;
-   case priceIdSkaneStandard8Portions:
-       return priceIdDeliverySkaneStandard;
- 
-   case priceIdEveryWeekSambo:
-        return priceIdDeliveryEveryWeekSambo;
-    case priceIdEveryOtherWeekSambo:
-        return priceIdDeliveryEveryOtherWeekSambo;
-    case priceIdStandardSambo:
-        return priceIdDeliveryStandardSambo;
-
-    case priceIdStockholmEveryWeekSambo:
-          return priceIdDeliveryStockholmEveryWeekSambo;
-    case priceIdStockholmEveryOtherWeekSambo:
-          return priceIdDeliveryStockholmEveryOtherWeekSambo;
-    case priceIdStockholmStandardSambo:
-          return priceIdDeliveryStockholmStandardSambo;
-
-    case priceIdSkaneEveryWeekSambo:
-          return priceIdDeliverySkaneEveryWeekSambo;
-    case priceIdSkaneEveryOtherWeekSambo:
-          return priceIdDeliverySkaneEveryOtherWeekSambo;
-    case priceIdSkaneStandardSambo:
-          return priceIdDeliverySkaneStandardSambo;
-
-    case priceIdEveryWeekDk:
-            return priceIdDeliveryEveryWeekDk;
-    case priceIdEveryOtherWeekDk:
-            return priceIdDeliveryEveryOtherWeekDk;
-    case priceIdStandardDk:
-            return priceIdDeliveryStandardDk;
-    case priceIdEveryWeekSamboDk:
-        return priceIdDeliveryEveryWeekSamboDk;
-    case priceIdEveryOtherWeekSamboDk:
-        return priceIdDeliveryEveryOtherWeekSamboDk;
-    case priceIdStandardSamboDk:
-        return priceIdDeliveryStandardSamboDk;
-  
-
-   default:
-     throw new Error("No shipping cost found for product id: " + id);
- }
-};
-
 
 
 export const getProductCostForPriceId = (id: string | null, lang: string) => {
