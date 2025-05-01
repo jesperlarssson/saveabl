@@ -1615,7 +1615,7 @@ button: "Jeg forstår - bestil nu!"
     deliveryDay: "Næste tilgængelige leveringsdato:",
     copenhagen_monday: "Mandag 12/5", 
     monday_description_copenhagen: "kl. 16-22", 
-    address: "Leveringsinfo:",
+    address: "Leveringsinfo",
     extra: "Ekstra info:",
     contact: "Kontaktoplysninger:",
     terms: "Jeg godkender vilkårene, og at min konto vil blive oprettet.",
