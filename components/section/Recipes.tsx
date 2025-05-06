@@ -17,17 +17,12 @@ const Recipes = () => {
   const { text } = useLang();
   const { nextWeek, prior, fetchMorePrior, hasMore, loading } = useRecipes();
 
-  const lastRecipeRef = useRef<HTMLDivElement | null>(null); // Ref för att skrolla till sista receptgruppen
+  const lastRecipeRef = useRef<HTMLDivElement | null>(null);
   const [clickedFetchMore, setClickedFetchMore] = useState(false);
   const [previousPriorLength, setPreviousPriorLength] = useState(prior.length);
 
   useEffect(() => {
-    console.log("clickedFetchMore:", clickedFetchMore);
-    console.log("prior.length:", prior.length);
-    console.log("previousPriorLength:", previousPriorLength);
-
     if (clickedFetchMore && lastRecipeRef.current && prior.length > previousPriorLength) {
-      console.log("Skrollar till de sista recepten...");
       lastRecipeRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
       setClickedFetchMore(false);
     }
@@ -36,10 +31,19 @@ const Recipes = () => {
   }, [prior.length, clickedFetchMore]);
 
   const handleFetchMoreClick = () => {
-    console.log("Fetch More-knappen klickades");
     setClickedFetchMore(true);
     fetchMorePrior();
   };
+
+  // Sortera recepten så att dag 1 → 3 och nyare veckor först
+  const sortedNextWeek = [...nextWeek].sort(
+    (a, b) => (a.recipeNumber || 0) - (b.recipeNumber || 0)
+  );
+
+  const sortedPrior = [...prior].sort((a, b) => {
+    if (a.weekNr !== b.weekNr) return b.weekNr - a.weekNr;
+    return (a.recipeNumber || 0) - (b.recipeNumber || 0);
+  });
 
   return (
     <>
@@ -59,7 +63,7 @@ const Recipes = () => {
                 {text.recipes.next_week}
               </h3>
               <p className="text-primary text-lg mt-2">
-                {text.recipes.next_week_order_until.replace("{week}", "19")} {/* Ändra "46" till aktuell vecka */}
+                {text.recipes.next_week_order_until.replace("{week}", "19")}
               </p>
               <Grid className=" gap-8 pt-4">
                 {loading ? (
@@ -69,7 +73,7 @@ const Recipes = () => {
                     <div className="h-80 overflow-hidden rounded-xl w-full animate-pulse bg-primary bg-opacity-25" />
                   </>
                 ) : (
-                  nextWeek.map((recipe: Recipe, index: number) => (
+                  sortedNextWeek.map((recipe: Recipe, index: number) => (
                     <RecipeTile key={index} recipe={recipe} />
                   ))
                 )}
@@ -91,11 +95,11 @@ const Recipes = () => {
           ) : (
             <div className="col-span-3">
               <Grid className=" gap-8 pt-4">
-                {prior.map((recipe: Recipe, index: number) => (
+                {sortedPrior.map((recipe: Recipe, index: number) => (
                   <div
                     key={recipe.id}
                     className="w-full"
-                    ref={index === prior.length - 3 ? lastRecipeRef : null} // Lägg ref på tredje sista receptet
+                    ref={index === sortedPrior.length - 3 ? lastRecipeRef : null}
                   >
                     <RecipeTile recipe={recipe} />
                   </div>
@@ -142,6 +146,3 @@ const Recipes = () => {
 };
 
 export default Recipes;
-
-
-
