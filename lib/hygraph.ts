@@ -9,6 +9,7 @@ async function fetchAPI(
 ): Promise<any> {
   const res: Response = await fetch(process.env.HYGRAPH_PROJECT_API!, {
     method: "POST",
+    cache: "no-store",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${
