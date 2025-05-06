@@ -1,6 +1,5 @@
-import { getDatesFromWeek, getWeekNumber } from "@/helpers/format";
+import { getWeekNumber } from "@/helpers/format";
 import { Post, PostsData } from "@/types";
-import { tempRecipes } from "./tempRecipes";
 import { tempHomePosts, tempPostSlugs, tempPosts } from "./tempPosts";
 import { tempFaq } from "./tempFaq";
 
@@ -27,7 +26,6 @@ async function fetchAPI(
   const json: { data?: any; errors?: any } = await res.json();
 
   if (json.errors) {
-    console.log(process.env.NEXT_EXAMPLE_CMS_GCMS_PROJECT_ID);
     console.error(json.errors);
     throw new Error(json.errors[0].message);
   }
@@ -39,18 +37,10 @@ export async function sendMutation(
   mutation: string,
   variables: any
 ): Promise<any> {
-  try {
-    const response = await fetchAPI(mutation, { variables, mutation: true });
-    return response;
-  } catch (error) {
-    console.error("Error executing mutation:", error);
-    throw error;
-  }
+  return await fetchAPI(mutation, { variables, mutation: true });
 }
 
 export async function getAllPostsForHome(mutation: boolean): Promise<Post[]> {
-  // const posts: Post[] = tempHomePosts;
-  // return posts;
   const data: PostsData = await fetchAPI(
     `
       {
@@ -63,11 +53,7 @@ export async function getAllPostsForHome(mutation: boolean): Promise<Post[]> {
           coverImage {
             url(transformation: {
               image: {
-                resize: {
-                  fit:crop,
-                  width:2000,
-                  height:1000
-                }
+                resize: { fit: crop, width: 2000, height: 1000 }
               }
             })
           }
@@ -77,11 +63,7 @@ export async function getAllPostsForHome(mutation: boolean): Promise<Post[]> {
             picture {
               url(transformation: {
                 image: {
-                  resize: {
-                    width:200,
-                    height:200,
-                    fit:crop
-                  }
+                  resize: { width: 200, height: 200, fit: crop }
                 }
               })
             }
@@ -95,23 +77,17 @@ export async function getAllPostsForHome(mutation: boolean): Promise<Post[]> {
 }
 
 export async function getAllPostsWithSlug() {
-  const slugs = tempPostSlugs;
-  return slugs;
-  const data = await fetchAPI(
-    `
+  const data = await fetchAPI(`
     query GetSlugs {
       posts {
         slug
       }
     }
-  `
-  );
+  `);
   return data.posts;
 }
 
 export async function getPostWithSlug(slug: string) {
-  // const post = tempPosts.find((post) => post.slug === slug);
-  // return post;
   const data = await fetchAPI(
     `
     query GetPost($slug: String!) {
@@ -122,9 +98,7 @@ export async function getPostWithSlug(slug: string) {
         slug
         tags
         seoKeywords
-        content {
-          html
-        }
+        content { html }
         date
         postComment(orderBy: publishedAt_DESC) {
           name
@@ -132,19 +106,18 @@ export async function getPostWithSlug(slug: string) {
           comment
         }
         ogImage: coverImage {
-          url(transformation: {image: {resize: {fit: crop, width: 2000, height: 1000}}})
+          url(transformation: { image: { resize: { fit: crop, width: 2000, height: 1000 }}})
         }
         coverImage {
-          url(transformation: {image: {resize: {fit: crop, width: 2000, height: 1000}}})
+          url(transformation: { image: { resize: { fit: crop, width: 2000, height: 1000 }}})
         }
         author {
           name
           title
           picture {
-            url(transformation: {image: {resize: {fit: crop, width: 100, height: 100}}})
+            url(transformation: { image: { resize: { fit: crop, width: 100, height: 100 }}})
           }
         }
-
       }
     }
   `,
@@ -154,44 +127,34 @@ export async function getPostWithSlug(slug: string) {
 }
 
 export async function getPaginatedPosts(limit: number, offset: number) {
-  // const posts = tempPosts.slice(offset, offset + limit);
-  // return posts;
   const variables = { limit, offset };
   const data = await fetchAPI(
     `
     query GetPosts($limit: Int!, $offset: Int!) {
       posts(orderBy: createdAt_DESC, first: $limit, skip: $offset) {
         title
-          slug
-          excerpt
-          date
-          tags
-          coverImage {
+        slug
+        excerpt
+        date
+        tags
+        coverImage {
+          url(transformation: {
+            image: {
+              resize: { fit: crop, width: 2000, height: 1000 }
+            }
+          })
+        }
+        author {
+          name
+          title
+          picture {
             url(transformation: {
               image: {
-                resize: {
-                  fit:crop,
-                  width:2000,
-                  height:1000
-                }
+                resize: { width: 200, height: 200, fit: crop }
               }
             })
           }
-          author {
-            name
-            title
-            picture {
-              url(transformation: {
-                image: {
-                  resize: {
-                    width:200,
-                    height:200,
-                    fit:crop
-                  }
-                }
-              })
-            }
-          }
+        }
       }
     }
   `,
@@ -201,33 +164,18 @@ export async function getPaginatedPosts(limit: number, offset: number) {
 }
 
 export async function getLatestPromotionBanner() {
-//  const banner = [
-//     {
-//       "id": "clippe5kmy1t50bt2s6pkbz7y",
-//       "content": {
-//         "html": "<p>Thank you for choosing 5 x lower carbon footprint &lt;3</p>"
-//       },}
-//   ];
-//   return banner;
-  const data = await fetchAPI(
-    `
-      query GetLatestPromotionBanner {
-        promotionBanners(first: 1, orderBy: publishedAt_DESC) {
-          content {
-            html
-          }
-        }
+  const data = await fetchAPI(`
+    query GetLatestPromotionBanner {
+      promotionBanners(first: 1, orderBy: publishedAt_DESC) {
+        content { html }
       }
-    `
-  );
+    }
+  `);
   return data.promotionBanners;
 }
 
 export async function getAllRecipes() {
-  // const recipes = tempRecipes.data.recepts;
-  // return recipes;
-  const data = await fetchAPI(
-    `
+  const data = await fetchAPI(`
     query GetRecipes {
       recepts(orderBy: startDate_DESC) {
         id
@@ -246,7 +194,7 @@ export async function getAllRecipes() {
           title
         }
         image {
-          url(transformation: {image: {resize: {height: 500, width: 700}}})
+          url(transformation: { image: { resize: { height: 500, width: 700 }}})
         }
         localizations {
           contentAllergies
@@ -257,28 +205,20 @@ export async function getAllRecipes() {
         }
       }
     }
-  `
-  );
+  `);
   return data.recepts;
 }
 
-export async function getPaginatedRecipes(
-  limit: number,
-  offset: number,
-  endDate: Date
-) {
+export async function getPaginatedRecipes(limit: number, offset: number, endDate: Date) {
   const variables = { limit, offset, endDate };
-
-  // const recipes = tempRecipes.data.recepts.slice(offset, offset + limit);
-  // return recipes;
   const data = await fetchAPI(
     `
     query GetRecipes($limit: Int!, $offset: Int!, $endDate: Date!) {
       recepts(
-        orderBy: startDate_DESC, 
-        first: $limit, 
+        orderBy: startDate_DESC,
+        first: $limit,
         skip: $offset,
-        where: {startDate_lte: $endDate}
+        where: { startDate_lte: $endDate }
       ) {
         id
         title
@@ -289,9 +229,12 @@ export async function getPaginatedRecipes(
         chef {
           name
           title
+          picture {
+            url
+          }
         }
         image {
-          url(transformation: {image: {resize: {height: 500, width: 700}}})
+          url(transformation: { image: { resize: { height: 500, width: 700 }}})
         }
         localizations {
           contentAllergies
@@ -309,7 +252,6 @@ export async function getPaginatedRecipes(
 }
 
 export async function getPaginatedOldRecipes(limit: number, offset: number) {
-  // return [];
   const variables = { limit, offset };
   const data = await fetchAPI(
     `
@@ -327,13 +269,11 @@ export async function getPaginatedOldRecipes(limit: number, offset: number) {
           comment
           authorFirebaseId
         }
-        includedIn {
-          title
-        }
+        includedIn { title }
         estimatedDuration
         excerpt
         image {
-          url(transformation: {image: {resize: {height: 500, width: 700}}})
+          url(transformation: { image: { resize: { height: 500, width: 700 }}})
         }
         title
         recipeSteps(orderBy: stepNumber_ASC) {
@@ -363,7 +303,7 @@ export async function getPaginatedOldRecipes(limit: number, offset: number) {
         author {
           name
           picture {
-            url(transformation: {image: {resize: {height: 40, width: 40}}})
+            url(transformation: { image: { resize: { height: 40, width: 40 }}})
           }
         }
       }
@@ -375,21 +315,10 @@ export async function getPaginatedOldRecipes(limit: number, offset: number) {
 }
 
 export async function getRecipesForWeek(week: number) {
-  const currentWeek = getWeekNumber(new Date());
-
-  const tempWeeks = [17, 18, 19];
-if (tempWeeks.includes(week)) {
-  return tempRecipes.data.recepts.filter((recipe) => recipe.weekNr === week);
-}
-
-  // fallback till Hygraph
   const data = await fetchAPI(
     `
     query GetRecipes($week: Int!) {
-      recepts(
-        orderBy: recipeNumber_ASC, 
-        where: {weekNr: $week}
-      ) {
+      recepts(orderBy: recipeNumber_ASC, where: { weekNr: $week }) {
         id
         title
         slug
@@ -399,9 +328,12 @@ if (tempWeeks.includes(week)) {
         chef {
           name
           title
+          picture {
+            url
+          }
         }
         image {
-          url(transformation: {image: {resize: {height: 500, width: 700}}})
+          url(transformation: { image: { resize: { height: 500, width: 700 }}})
         }
         localizations {
           contentAllergies
@@ -419,10 +351,7 @@ if (tempWeeks.includes(week)) {
   return data.recepts;
 }
 
-
 export async function getAllFAQ() {
-  // const faqs = tempFaq;
-  // return faqs;
   const data = await fetchAPI(`
     {
       faqs {
@@ -434,69 +363,22 @@ export async function getAllFAQ() {
   return data.faqs;
 }
 
-// export async function getRecipesForWeek(week: number) {
-//   const dates = getDatesFromWeek(week);
-//   console.log(dates);
-
-//   const data = await fetchAPI(
-//     `
-//     query GetRecipes($dates: [Date!]) {
-//       recepts(
-//         orderBy: recipeNumber_ASC,
-//         where: {startDate_in: $dates}
-//       ) {
-//         id
-//         title
-//         slug
-//         startDate
-//         weekNr
-//         recipeNumber
-//         chef {
-//           name
-//           title
-//         }
-//         image {
-//           url(transformation: {image: {resize: {height: 500, width: 700}}})
-//         }
-//       }
-//     }
-//   `,
-//     { variables: { dates } }
-//   );
-
-//   return data.recepts;
-// }
-
 export async function getAllRecipesWithSlug() {
-  // const slugs = tempRecipes.data.recepts.map((recipe) => recipe.slug);
-  // return slugs;
-
-  const data = await fetchAPI(
-    `
+  const data = await fetchAPI(`
     query GetSlugs {
       recepts {
         slug
       }
     }
-  `
-  );
+  `);
   return data.recepts;
 }
 
 export async function getRecipeWithSlug(slug: string) {
-  // Fallback: kolla i tempRecipes om receptet finns där
-  const tempMatch = tempRecipes.data.recepts.find(
-    (recipe) => recipe.slug === slug
-  );
-  if (tempMatch) {
-    return tempMatch;
-  }
-
-  // Annars: hämta från Hygraph
   const data = await fetchAPI(
     `
     query GetRecipe($slug: String!) {
-      recept(where: {slug: $slug}) {
+      recept(where: { slug: $slug }) {
         id
         title
         slug
@@ -515,14 +397,13 @@ export async function getRecipeWithSlug(slug: string) {
           }
         }
         image {
-          url(transformation: {image: {resize: {height: 800, width: 1200}}})
+          url(transformation: { image: { resize: { height: 800, width: 1200 }}})
         }
         localizations {
           contentAllergies
           ingredients
           nutritionalValues
           savedIngredients
-          ingredients
           steg
           title
         }
