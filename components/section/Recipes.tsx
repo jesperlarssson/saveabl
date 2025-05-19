@@ -15,7 +15,7 @@ import Title from "../ui/Title";
 
 const Recipes = () => {
   const { text } = useLang();
-  const { nextWeek, prior, fetchMorePrior, hasMore, loading } = useRecipes();
+  const { thisWeek, nextWeek, prior, fetchMorePrior, hasMore, loading } = useRecipes();
 
   const lastRecipeRef = useRef<HTMLDivElement | null>(null);
   const [clickedFetchMore, setClickedFetchMore] = useState(false);
@@ -95,15 +95,22 @@ const Recipes = () => {
           ) : (
             <div className="col-span-3">
               <Grid className=" gap-8 pt-4">
-                {sortedPrior.map((recipe: Recipe, index: number) => (
-                  <div
-                    key={recipe.id}
-                    className="w-full"
-                    ref={index === sortedPrior.length - 3 ? lastRecipeRef : null}
-                  >
-                    <RecipeTile recipe={recipe} />
-                  </div>
-                ))}
+              {sortedPrior
+  .filter(
+    (r) =>
+      !thisWeek.find((tw) => tw.id === r.id) &&
+      !nextWeek.find((nw) => nw.id === r.id)
+  )
+  .map((recipe: Recipe, index: number) => (
+    <div
+      key={recipe.id}
+      className="w-full"
+      ref={index === sortedPrior.length - 3 ? lastRecipeRef : null}
+    >
+      <RecipeTile recipe={recipe} />
+    </div>
+  ))}
+
               </Grid>
             </div>
           )}

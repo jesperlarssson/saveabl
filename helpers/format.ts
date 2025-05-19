@@ -1,8 +1,11 @@
-export const getWeekNumber = (date: Date) => {
-  const firstDayOfYear: any = new Date(date.getFullYear(), 0, 1);
-  const pastDaysOfYear = (((date as any) - firstDayOfYear) as any) / 86400000;
-  return Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7);
+export const getWeekNumber = (date: Date): number => {
+  const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+  const dayNum = d.getUTCDay() || 7; // söndag blir 7
+  d.setUTCDate(d.getUTCDate() + 4 - dayNum); // flyttar till torsdag i veckan
+  const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+  return Math.ceil(((d.getTime() - yearStart.getTime()) / 86400000 + 1) / 7);
 };
+
 
 export const getDatesFromWeek = (
   week: number,
