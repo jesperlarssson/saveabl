@@ -59,6 +59,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
          content="Saveabl är din klimatsmarta lösning för att få ihop livspusslet. Våra proffskockar lagar dina middagar som du färdigställer på endast 15 minuter."
        />
        <link rel="icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+<meta property="og:title" content="Saveabl: Sveriges klimatsmartaste matkasse" />
+<meta property="og:description" content="Kockförberedda middagar klara på 15 minuter – rädda mat med oss!" />
+<meta property="og:image" content="https://saveabl.com/images/og-image.png" />
+<meta property="og:url" content="https://saveabl.com" />
+
      </head>
      <body className={font.className}>
        {/* Google Tag Manager (noscript) */}
