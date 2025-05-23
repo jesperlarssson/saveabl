@@ -1457,7 +1457,7 @@ const daText = {
       vegetarian: "Vegetarisk",
       price_per_portion: "Lavere klimaaftryk end gennemsnitsmiddagen",
       cooking_time: "Min tilberedning",
-      order_now: "Bestil nu",
+      order_now: "Kom i gang",
     },
     news: {
       title: "Følg med på rejsen - kig ind på vores seneste nyhedsindlæg!",
