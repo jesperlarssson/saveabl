@@ -94,6 +94,9 @@ const Recipes = () => {
             </>
           ) : (
             <div className="col-span-3">
+              <h3 className="font-poppins text-3xl text-primary mt-4 mb-4">
+              {text.recipes.older_recipes_heading}
+  </h3>
               <Grid className=" gap-8 pt-4">
               {sortedPrior
   .filter(
