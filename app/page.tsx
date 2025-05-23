@@ -12,12 +12,15 @@ import USP from "@/components/section/USP";
 import ProductGrid from "@/components/section/ProductGrid";
 import { getAllPostsForHome } from "@/lib/hygraph";
 import FaqSection from "@/components/ui/FaqSection";
+import ScrollToHash from "@/components/general/ScrollToHash";
+
 
 export default async function Home() {
 
   const news = (await getAllPostsForHome(false)) || [];
   return (
     <>
+    <ScrollToHash />
       <div className="absolute w-full min-h-screen flex justify-center items-center z-1">
         <IllustrationsBg />
       </div>

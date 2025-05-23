@@ -66,28 +66,36 @@ const Navbar = () => {
     {
       id: 6,
       name: text.nav.faq,
-      path: "#vanliga-fragor",
+      path: "/#vanliga-fragor",
       onClick: (e) => {
         e.preventDefault();
-        setActive(false); 
+        setActive(false);
     
-        setTimeout(() => {
-          requestAnimationFrame(() => {
-            const faqSection = document.getElementById("vanliga-fragor");
+        if (pathname !== "/") {
+          // Navigera till startsidan + ankarlänk
+          window.location.href = "/#vanliga-fragor";
+        } else {
+          // Scrolla till sektionen på samma sida
+          setTimeout(() => {
+            requestAnimationFrame(() => {
+              const faqSection = document.getElementById("vanliga-fragor");
     
-            if (faqSection) {
-              window.location.hash = "vanliga-fragor"; 
-              faqSection.scrollIntoView({ behavior: "smooth", block: "start" });
+              if (faqSection) {
+                faqSection.scrollIntoView({ behavior: "smooth", block: "start" });
     
-              setTimeout(() => {
-                window.scrollTo({ top: faqSection.offsetTop - 50, behavior: "smooth" });
-              }, 100);
-            }
-          });
-        }, 300); 
+                setTimeout(() => {
+                  window.scrollTo({
+                    top: faqSection.offsetTop - 50,
+                    behavior: "smooth",
+                  });
+                }, 100);
+              }
+            });
+          }, 300);
+        }
       },
       disabled: false,
-    },
+    }    
     
   ];
 
