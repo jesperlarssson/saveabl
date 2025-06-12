@@ -9,7 +9,7 @@ async function fetchAPI(
 ): Promise<any> {
   const res: Response = await fetch(process.env.HYGRAPH_PROJECT_API!, {
     method: "POST",
-    cache: "no-store",
+    next: { revalidate: 0 },
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${
@@ -387,6 +387,7 @@ export async function getRecipeWithSlug(slug: string) {
         recipeNumber
         steg
         ingredients
+        spicyIngredients
         nutritionalValues
         savedIngredients
         contentAllergies
@@ -407,6 +408,7 @@ export async function getRecipeWithSlug(slug: string) {
           savedIngredients
           steg
           title
+          spicyIngredients
         }
         recipeComments {
           comment

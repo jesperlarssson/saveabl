@@ -84,6 +84,7 @@ export interface Recipe {
   recipeNumber: number;
   steg: string[];
   ingredients: string[];
+  spicyIngredients?: string[];
   nutritionalValues: string;
   savedIngredients: string;
   contentAllergies: string;

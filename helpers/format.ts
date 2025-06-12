@@ -21,7 +21,7 @@ export const getDatesFromWeek = (
 export const getDateForPriorRecipes = () => {
   const today = new Date();
   const week = getWeekNumber(today);
-  const dates = getDatesFromWeek(week - 2);
+  const dates = getDatesFromWeek(week - 3);
   const dateString = dates[1].toISOString();
   return dateString;
 };
