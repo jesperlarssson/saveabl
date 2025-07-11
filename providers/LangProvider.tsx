@@ -120,7 +120,7 @@ const svText = {
         part2: "enkel och hållbar",
       },
       subtitle: {
-        part1: "Servera vegetariska måltider på 15 minuter och ge samtidigt",
+        part1: "Servera kocklagade måltider på 15 minuter och ge samtidigt",
         part2: "de där överblivna grönsakerna en ny mening med livet.",
       },
       points: {
@@ -143,19 +143,18 @@ const svText = {
         },
         {
           title: "3. Tillaga och servera på 15 min",
-          text: "Ge maten en final touch och njut av en hälsosam, klimatsmart middag - snabbt, enkelt och löjligt gott.",
+          text: "Ge maten en final touch och njut av en hälsosam middag. Snabbt, enkelt och löjligt gott.",
         },
       ],
     },
 
     call_to_action: {
       title: [
-        "Snabbt. Klimatsmart.",
-        "Och förbaskat gott.",
+        "Snabbt och förbaskat gott.",
         "Så varför välja?"
       ],
       meals: "Middagar",
-      vegetarian: "Vegetariskt",
+      vegetarian: "Kocklagat",
       price_per_portion: "Lägre klimatavtryck än genomsnittsmiddagen",
       cooking_time: "Min tillagning",
       order_now: "Kom igång",
@@ -253,7 +252,7 @@ const svText = {
       },
       {
         question: "Hur mycket av maten är egentligen räddad?", 
-        answer: "Du hittar den exakta andelen räddad mat under varje enskilt recept. Vi strävar efter att ungefär 70% av ingredienserna ska vara räddade. Vår målsättning är att hitta den perfekta balansen mellan att skapa fantastiska och fullständiga rätter samtidigt som vi har en positiv inverkan på klimatet. En sammanställning gjord i samarbete med RISE visar att vårt klimatavtryck är hela 5 gånger lägre än en genomsnittlig svensk middag. Så ja, vi är definitivt på rätt väg mot en mer hållbar framtid!", 
+        answer: "Du hittar den exakta andelen räddad mat under varje enskilt recept. Vi strävar efter att ungefär 80% av ingredienserna ska vara räddade. Vår målsättning är att hitta den perfekta balansen mellan att skapa fantastiska och fullständiga rätter samtidigt som vi har en positiv inverkan på klimatet. En sammanställning gjord i samarbete med RISE visar att vårt klimatavtryck är hela 5 gånger lägre än en genomsnittlig svensk middag. Så ja, vi är definitivt på rätt väg mot en mer hållbar framtid!", 
       },
       {
         question: "Allergier? Vad gäller?", 
@@ -789,13 +788,13 @@ const enText = {
         part2: "simple and sustainable",
       },
       subtitle: {
-        part1: "Serve vegetarian meals in 15 minutes and at the same time",
+        part1: "Serve chef prepared meals in 15 minutes and at the same time",
         part2: "give those leftover veggies a new meaning in life.",
       },
       points: {
         cooking_time: "cooking time",
         delivery: "delivery to your door",
-        chef_prepared: "chef-prepared (you shine during the final 20)",
+        chef_prepared: "chef prepared (you shine during the final 20)",
       },
       order_now: "Do you deliver to me?",
     },    
@@ -812,19 +811,18 @@ const enText = {
         },
         {
           "title": "3. Cook and serve in 15 min",
-          "text": "Give the food a final touch and enjoy a healthy, climate-smart dinner – quick, easy, and ridiculously tasty.",
+          "text": "Give the food a final touch and enjoy a healthy dinner. Quick, easy, and ridiculously tasty.",
         },
         
       ],
     },
     call_to_action: {
         title: [
-          "Quick. Climate-friendly.",
-          "And ridiculously tasty.",
+          "Quick and ridiculously tasty.",
           "So why choose?"
         ],
       meals: "Meals",
-      vegetarian: "Vegetarian",
+      vegetarian: "Chef Prepared",
       price_per_portion: "Lower climate footprint than the average meal",
       cooking_time: "Min cooking",
       order_now: "Get started",
@@ -879,7 +877,7 @@ const enText = {
   about_us: {
     title: "Saveabl, capable of being saved or salvaged",
     description:
-      "At Saveabl, we identify avoidable and reoccurring food waste within farms, producers and wholesalers. We then create chef-prepared meal kits using this surplus. Our meal kit seamlessly blends the essence of a classic meal kit with the convenience of take-away. We’re firm believers that climate-conscious choices can also be convenient. This conviction led us to create a meal kit that's ready in 15 minutes - incredibly smooth and incredibly tasty!",
+      "At Saveabl, we identify avoidable and reoccurring food waste within farms, producers and wholesalers. We then create chef prepared meal kits using this surplus. Our meal kit seamlessly blends the essence of a classic meal kit with the convenience of take-away. We’re firm believers that climate-conscious choices can also be convenient. This conviction led us to create a meal kit that's ready in 15 minutes - incredibly smooth and incredibly tasty!",
     sections: [
       {
         title: "Who we are",
@@ -906,7 +904,7 @@ faqItems: [
   },
   {
     question: "15 minutes, how is that possible?",
-    answer: "Our chefs do the hardest and most time-consuming steps for you, so when the meal kit is delivered to your door, it’s about 70% done. This means you only need to do the final, fun steps to finish the meal! It usually involves roasting something in the oven, boiling something, or heating a sauce. This way, you can have your chef-prepared meals ready in just 15 minutes!"
+    answer: "Our chefs do the hardest and most time-consuming steps for you, so when the meal kit is delivered to your door, it’s about 70% done. This means you only need to do the final, fun steps to finish the meal! It usually involves roasting something in the oven, boiling something, or heating a sauce. This way, you can have your chef prepared meals ready in just 15 minutes!"
   },
   {
     question: "Resqued food? What does that mean?",
@@ -922,7 +920,7 @@ faqItems: [
   },
   {
     question: "How much of the food is actually saved?",
-    answer: "You can find the exact percentage of saved food under each individual recipe. We aim for about 70% of the ingredients to be saved. Our goal is to find the perfect balance between creating fantastic and complete dishes while also having a positive impact on the climate. A summary made in collaboration with RISE shows that our carbon footprint is five times lower than an average Swedish dinner. So yes, we are definitely on the right track toward a more sustainable future!"
+    answer: "You can find the exact percentage of saved food under each individual recipe. We aim for about 80% of the ingredients to be saved. Our goal is to find the perfect balance between creating fantastic and complete dishes while also having a positive impact on the climate. A summary made in collaboration with RISE shows that our carbon footprint is five times lower than an average Swedish dinner. So yes, we are definitely on the right track toward a more sustainable future!"
   },
   {
     question: "Allergies? What’s the deal?",
@@ -1295,7 +1293,7 @@ button: "Got it - order now!"
     },
     newsletter: {
       header_title: "300 000 000 carrots are sorted out after harvest every year?", 
-      header_subtitle: "And that’s just in Sweden. At Saveabl, we save food that our master chef prepares almost to completion and offer you fantastic dinners in just 15 minutes. Save time, help the climate, and enjoy chef-prepped meals – it doesn’t have to be harder than that!", 
+      header_subtitle: "And that’s just in Sweden. At Saveabl, we save food that our master chef prepares almost to completion and offer you fantastic dinners in just 15 minutes. Save time, help the climate, and enjoy chef prepared meals – it doesn’t have to be harder than that!", 
       additional_button: "To the meal kit",
       new_section_title: "Join the journey!", 
       new_section_subtitle: "We're evolving and trying new things. We're expanding and coming up with exciting ideas. Join the journey and be the first to get news, offers, and recipes!", 
@@ -1421,7 +1419,7 @@ const daText = {
         part2: "enkle og bæredygtige",
       },
       subtitle: {
-        part1: "Server vegetariske måltider på 15 minutter og giv samtidig",
+        part1: "Server kokketilberedte måltider på 15 minutter og giv samtidig",
         part2: "de overskydende grøntsager en ny mening med livet.",
       },
       points: {
@@ -1444,19 +1442,18 @@ const daText = {
         },
         {
           "title": "3. Tilbered og server på 15 min",
-          "text": "Giv maden det sidste touch og nyd en sund, klimavenlig middag – hurtigt, nemt og utroligt lækkert.",
+          "text": "Giv maden det sidste touch og nyd en sund middag. Hurtigt, nemt og utroligt lækkert.",
         },        
       ],
     },
     call_to_action: {
       title: [
-        "Hurtigt. Klimavenligt.",
-        "Og forbandet lækkert.",
+        "Hurtigt Og forbandet lækkert.",
         "Så hvorfor vælge?"
       ],
       
       meals: "Måltider",
-      vegetarian: "Vegetarisk",
+      vegetarian: "kokketilberedt",
       price_per_portion: "Lavere klimaaftryk end gennemsnitsmiddagen",
       cooking_time: "Min tilberedning",
       order_now: "Kom i gang",
@@ -1552,7 +1549,7 @@ faqItems: [
   },
   {
     question: "Hvor meget af maden er egentlig reddet?",
-    answer: "Du kan finde den præcise andel reddet mad under hver opskrift. Vi sigter efter, at ca. 70% af ingredienserne skal være reddet. Vores mål er at finde den perfekte balance mellem at skabe fantastiske og komplette retter, samtidig med at vi har en positiv indvirkning på klimaet. Et sammendrag lavet i samarbejde med RISE viser, at vores klimaaftryk er fem gange lavere end et gennemsnitligt svensk måltid. Så ja, vi er bestemt på rette vej mod en mere bæredygtig fremtid!"
+    answer: "Du kan finde den præcise andel reddet mad under hver opskrift. Vi sigter efter, at ca. 80% af ingredienserne skal være reddet. Vores mål er at finde den perfekte balance mellem at skabe fantastiske og komplette retter, samtidig med at vi har en positiv indvirkning på klimaet. Et sammendrag lavet i samarbejde med RISE viser, at vores klimaaftryk er fem gange lavere end et gennemsnitligt svensk måltid. Så ja, vi er bestemt på rette vej mod en mere bæredygtig fremtid!"
   },
   {
     question: "Allergier? Hvad gælder?",
