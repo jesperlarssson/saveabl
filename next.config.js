@@ -28,6 +28,20 @@ const nextConfig = {
       },
     ],
   },
+  webpack: (config, { isServer }) => {
+    config.externals.push({
+      bufferutil: 'commonjs bufferutil',
+      'utf-8-validate': 'commonjs utf-8-validate',
+    });
+
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...(config.resolve.fallback || {}),
+        ws: false,
+      };
+    }
+    return config;
+  },
 };
 
 module.exports = nextConfig;
