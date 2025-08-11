@@ -15,7 +15,8 @@ import getDeliveryWindowsForPostalCode from "@/actions/getDeliveryWindowsForPost
 import { UserInformation } from "@/providers/CheckoutProvider";
 import OrderWizard from './OrderWizard';
 import OrderSummary from './OrderSummary'; 
-import Lottie from "lottie-react";
+import dynamic from "next/dynamic";
+const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 import gardAnimation from "@/public/anim/gard.json";
 import {
   getProductCostForPriceId,
