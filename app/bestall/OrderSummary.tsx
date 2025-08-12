@@ -107,9 +107,9 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({ selectedType, selectedVaria
     const productName = getProductName(selectedType.label, lang);
     
     if (productName === 'Familjekassen' || productName === 'Family kit' || productName === 'Familiekassen') {
-      return isSubscription(selectedVariant) ? 649 : 719;
+      return isSubscription(selectedVariant) ? 708 : 828;
     } else if (productName === 'Sambokassen' || productName === 'Couple kit' || productName === 'Sambokassen') {
-      return isSubscription(selectedVariant) ? 579 : 649;
+      return isSubscription(selectedVariant) ? 621 : 711;
     }
     return 0;
   };
@@ -131,9 +131,9 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({ selectedType, selectedVaria
     const productName = getProductName(selectedType.label, lang);
     
     if (productName === 'Familjekassen' || productName === 'Family kit' || productName === 'Familiekassen') {
-      return isSubscription(selectedVariant) ? 599 : 659;
+      return isSubscription(selectedVariant) ? 708 : 828;
     } else if (productName === 'Sambokassen' || productName === 'Couple kit' || productName === 'Sambokassen') {
-      return isSubscription(selectedVariant) ? 529 : 589;
+      return isSubscription(selectedVariant) ? 621 : 711;
     }
     return 0;
   };

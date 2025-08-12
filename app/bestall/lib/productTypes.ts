@@ -18,36 +18,38 @@ export const productIdStandard8Portions =
  export const productIdStandardSamboDk = "prod_OjDo5pqjEixNw4"; 
  
 
-export const priceIdEveryWeek = "price_1RDmlwEhPZIzKmuicMsj4306";
-export const priceIdEveryOtherWeek = "price_1RDmnyEhPZIzKmuifW5Ni3Uu";
-export const priceIdStandard = "price_1RDmjdEhPZIzKmuip7XRuquc";
+export const priceIdEveryWeek = "price_1RuwGlEhPZIzKmuiB92KnJvr";
+export const priceIdEveryOtherWeek = "price_1RuwHgEhPZIzKmui1imzbXUx";
+export const priceIdStandard = "price_1RuwJsEhPZIzKmuiNIHg6hcT";
 export const priceIdStandard8Portions = "price_1NvlKfEhPZIzKmuiDximMRN3";
 
-export const priceIdEveryWeekSambo = "price_1RDmYLEhPZIzKmuiaL3NS3jq";
-export const priceIdEveryOtherWeekSambo = "price_1RDmVMEhPZIzKmuijgpFLRYX";
-export const priceIdStandardSambo = "price_1RDmTBEhPZIzKmuitSymxMBd";
+export const priceIdEveryWeekSambo = "price_1RuwS4EhPZIzKmuig3lcLU9y";
+export const priceIdEveryOtherWeekSambo = "price_1RuwSuEhPZIzKmuiCKHpfOA2";
+export const priceIdStandardSambo = "price_1RuwQtEhPZIzKmui285lxnoS";
 
 
-export const priceIdStockholmEveryWeek = "price_1RDmmsEhPZIzKmuif7eMFzHa";
+export const priceIdStockholmEveryWeek = "price_1RuwGlEhPZIzKmuiB92KnJvr";
 export const priceIdStockholmEveryOtherWeek =
- "price_1RDmnHEhPZIzKmuifLYRAAQW";
-export const priceIdStockholmStandard = "price_1RDmkOEhPZIzKmuiz06oUhwM";
+ "price_1RuwHgEhPZIzKmui1imzbXUx";
+export const priceIdStockholmStandard = "price_1RuwJsEhPZIzKmuiNIHg6hcT";
 export const priceIdStockholmStandard8Portions = "price_1OY5JkEhPZIzKmuiY9xTWk0K";
-export const priceIdStockholmEveryWeekSambo = "price_1RDmY0EhPZIzKmui66vzvn96";
+
+export const priceIdStockholmEveryWeekSambo = "price_1RuwS4EhPZIzKmuig3lcLU9y";
 export const priceIdStockholmEveryOtherWeekSambo =
- "price_1RDmWREhPZIzKmuinRpHJ0Zj";
- export const priceIdStockholmStandardSambo = "price_1RDmU0EhPZIzKmuiYTromffP";
+ "price_1RuwSuEhPZIzKmuiCKHpfOA2";
+ export const priceIdStockholmStandardSambo = "price_1RuwQtEhPZIzKmui285lxnoS";
 
 
-export const priceIdSkaneEveryWeek = "price_1RDmlwEhPZIzKmuicMsj4306";
+export const priceIdSkaneEveryWeek = "price_1RuwGlEhPZIzKmuiB92KnJvr";
 export const priceIdSkaneEveryOtherWeek =
- "price_1RDmnyEhPZIzKmuifW5Ni3Uu";
-export const priceIdSkaneStandard = "price_1RDmjdEhPZIzKmuip7XRuquc";
+ "price_1RuwHgEhPZIzKmui1imzbXUx";
+export const priceIdSkaneStandard = "price_1RuwJsEhPZIzKmuiNIHg6hcT";
 export const priceIdSkaneStandard8Portions = "price_1PDOv0EhPZIzKmuiDcrV96Sz";
-export const priceIdSkaneEveryWeekSambo = "price_1RDmYLEhPZIzKmuiaL3NS3jq";
+
+export const priceIdSkaneEveryWeekSambo = "price_1RuwS4EhPZIzKmuig3lcLU9y";
 export const priceIdSkaneEveryOtherWeekSambo =
- "price_1RDmVMEhPZIzKmuijgpFLRYX";
- export const priceIdSkaneStandardSambo = "price_1RDmTBEhPZIzKmuitSymxMBd";
+ "price_1RuwSuEhPZIzKmuiCKHpfOA2";
+ export const priceIdSkaneStandardSambo = "price_1RuwQtEhPZIzKmui285lxnoS";
 
 
  export const priceIdEveryWeekDk = "price_1RDn0cEhPZIzKmui06gMlEwL"; 
@@ -501,50 +503,50 @@ export const getProductCostForPriceId = (id: string | null, lang: string) => {
  const dk = lang === "da";
  switch (id) {
    case priceIdEveryWeek:
-     return eng ? "50kr/portion" : "50kr/portion";
+     return eng ? "59kr/portion" : "59kr/portion";
    case priceIdEveryOtherWeek:
-     return eng ? "50kr/portion" : "50kr/portion";
+     return eng ? "59kr/portion" : "59kr/portion";
    case priceIdStandard:
-     return eng ? "55kr/portion" : "55kr/portion";
+     return eng ? "69kr/portion" : "69kr/portion";
    case priceIdStandard8Portions:
      return eng ? "50kr/portion" : "50kr/portion";
    case priceIdEveryWeekSambo:
-      return eng ? "60kr/portion" : "60kr/portion";
+      return eng ? "69kr/portion" : "69kr/portion";
    case priceIdEveryOtherWeekSambo:
-        return eng ? "60kr/portion" : "60kr/portion";
+        return eng ? "69kr/portion" : "69kr/portion";
    case priceIdStandardSambo:
-        return eng ? "65kr/portion" : "65kr/portion";
+        return eng ? "79kr/portion" : "79kr/portion";
 
    case priceIdStockholmEveryWeek:
-     return eng ? "55kr/portion" : "55kr/portion";
+     return eng ? "59kr/portion" : "59kr/portion";
    case priceIdStockholmEveryOtherWeek:
-     return eng ? "55kr/portion" : "55kr/portion";
+     return eng ? "59kr/portion" : "59kr/portion";
    case priceIdStockholmStandard:
-     return eng ? "60kr/portion" : "60kr/portion";
+     return eng ? "69kr/portion" : "69kr/portion";
    case priceIdStockholmStandard8Portions:
      return eng ? "50kr/portion" : "50kr/portion";
    case priceIdStockholmEveryWeekSambo:
-      return eng ? "65kr/portion" : "65kr/portion";
+      return eng ? "69kr/portion" : "69kr/portion";
    case priceIdStockholmEveryOtherWeekSambo:
-      return eng ? "65kr/portion" : "65kr/portion";
+      return eng ? "69kr/portion" : "69kr/portion";
    case priceIdStockholmStandardSambo:
-      return eng ? "72kr/portion" : "72kr/portion";
+      return eng ? "79kr/portion" : "79kr/portion";
 
 
      case priceIdSkaneEveryWeek:
-       return eng ? "50kr/portion" : "50kr/portion";
+       return eng ? "59kr/portion" : "59kr/portion";
      case priceIdSkaneEveryOtherWeek:
-       return eng ? "50kr/portion" : "50kr/portion";
+       return eng ? "59kr/portion" : "59kr/portion";
      case priceIdSkaneStandard:
-       return eng ? "55kr/portion" : "55kr/portion";
+       return eng ? "69kr/portion" : "69kr/portion";
      case priceIdSkaneStandard8Portions:
        return eng ? "50kr/portion" : "50kr/portion";
      case priceIdSkaneEveryWeekSambo:
-        return eng ? "60kr/portion" : "60kr/portion";
+        return eng ? "69kr/portion" : "69kr/portion";
      case priceIdSkaneEveryOtherWeekSambo:
-        return eng ? "60kr/portionr" : "60kr/portion";
+        return eng ? "69kr/portionr" : "69kr/portion";
      case priceIdSkaneStandardSambo:
-        return eng ? "65kr/portion" : "65kr/portion";
+        return eng ? "79kr/portion" : "79kr/portion";
 
      case priceIdEveryWeekDk:
         return dk ? "Kuvertpris 45kr" : "45kr/portion";
