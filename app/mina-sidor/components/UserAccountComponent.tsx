@@ -290,6 +290,12 @@ const translatedDeliveryDay = deliveryDay ? translateDay(deliveryDay, lang as "s
     <span className="font-medium">{translatedDeliveryDay}</span>
   </p>
 )}
+<div className="mb-4">
+  <p
+    className="font-bold"
+    dangerouslySetInnerHTML={{ __html: text?.my_pages?.pause_issue }}
+  />
+</div>
 
             {isPaused && (
             <p className="mb-4">
