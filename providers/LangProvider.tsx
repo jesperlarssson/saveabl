@@ -1675,7 +1675,7 @@ button: "Jeg forstår - bestil nu!"
     email_example: "E-mail",
     password: "Adgangskode",
     password_example: "Adgangskode",
-    step1_button: "Vælg leveringsdag",
+    step1_button: "Vælg leveringsdag ",
     step2_button: "Opskrifter", 
     step3_button: "Leveringsinfo", 
     step4_button: "Leveringsdag", 
