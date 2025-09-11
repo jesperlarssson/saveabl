@@ -282,7 +282,11 @@ const svText = {
     write_comment: "Kommentera",
     send_comment: "Kommentera",
     sending_comment: "Skickar...", 
-    next_week_order_until: "Går att beställa t.o.m. onsdag v. {week}"
+    next_week_order_until: "Går att beställa t.o.m. onsdag v. {week}", 
+    filters: {
+      veg: "Veg",
+      meat: "Kött",
+    },
   },
 
   recipe_slug: {
@@ -322,32 +326,36 @@ const svText = {
     bullet1: "",
     bullet2: "",
     bullet3: "",
-    type: "Gör dina val - utan bindningstid på samtliga:",
+    type: "Hur många sitter runt middagsbordet?",
     smartkasse: {
-      title: "Välj din smartkasse – Räddad veg eller räddad gård",
+      title: "Vad vill du servera? ",
       options: {
-        veg: "Räddad veg",
-        gard: "Räddad gård",
+        veg: "Saveabl Grön",
+        gard: "Saveabl Gård",
       },
+      notes: {
+        veg: "Vegetariska middagar gjorda på utvalda råvaror",
+        gard: "Middagar med svenskt kött & fisk + utvalda råvaror"
+      }
     },
-    variant: "Välj hur ofta du vill få din matkasse:",
+    variant: "Hur ofta vill du få hem middagarna?",
     urgency: "Fåtal kvar", 
-    deliveryDay: "Välj leveransdag:",
-    delivery_saturday: "Lördag 13/9",
-    delivery_sunday: "Söndag 14/9",
-    delivery_monday: "Måndag 15/9",
+    deliveryDay: "Vilken dag ska middagarna dyka upp?",
+    delivery_saturday: "Lördag 20/9",
+    delivery_sunday: "Söndag 21/9",
+    delivery_monday: "Måndag 22/9",
     saturday_description: "kl. 09-18", 
     sunday_description: "kl. 10-17", 
     monday_description: "kl. 16-22",
-    stockholm_sunday: "Söndag 14/9",
-    stockholm_monday: "Måndag 15/9",
+    stockholm_sunday: "Söndag 21/9",
+    stockholm_monday: "Måndag 22/9",
     sunday_description_stockholm: "kl. 10-17",
     monday_description_stockholm: "kl. 16-22", 
-    copenhagen_monday: "Måndag 15/9", 
+    copenhagen_monday: "Måndag 22/9", 
     monday_description_copenhagen: "kl. 16-22", 
-    address: "Leveransinfo:",
+    address: "Vart ska middagarna levereras?",
     extra: "Extra info",
-    contact: "Kontaktuppgifter:",
+    contact: "Kontakt & Konto",
     terms: "Jag godkänner villkoren och att mitt konto kommer att skapas.",
     payButton: "Gå vidare",
     full_name: "Fullständigt namn",
@@ -364,14 +372,14 @@ const svText = {
     password: "Lösenord",
     password_example: "Lösenord",
     step1_button: "Välj leveransdag",
-    step2_button: "Leveransinfo", 
-    step3_button: "Frekvens", 
-    step4_button: "Leveransdag", 
-    step5_button: "Leveransinfo",
+    step2_button: "Fortsätt", 
+    step3_button: "Fortsätt", 
+    step4_button: "Fortsätt", 
+    step5_button: "Fortsätt",
     back_button: "Tillbaka", 
     loading: "Laddar...", 
     pay: "Till betalning", 
-    summaryTitle: "Dina val:",
+    summaryTitle: "Din matkasse:",
     mealKit: "Matkasse",
     frequency: "Leveransfrekvens",
     deliveryDaysummary: "Leveransdag",
@@ -380,8 +388,8 @@ const svText = {
     shipping: "frakt", 
     title_familjekassen: "Familjekassen",
     title_sambokassen: "Sambokassen",
-    subtitle_familjekassen: "3 recept • 3-4 personer",
-    subtitle_sambokassen: "3 recept • 2-3 personer",
+    subtitle_familjekassen: "Familjekassen • 3 recept • 3-4 personer",
+    subtitle_sambokassen: "Sambokassen • 3 recept • 2-3 personer",
     faq: "Frågor som kan uppstå:",
     faqItems: [ 
       {
@@ -401,6 +409,15 @@ const svText = {
         answer: "Du behöver bara ha någon typ av matlagningsolja hemma, lite salt och peppar och sen har vi tillsatt ALLT annat! Njut av smidigheten.", 
       },
     ],
+    
+        help_smartkasse: "Alltid kocklagat. Alltid enkelt. Alltid nära.",
+        help_type: "Välj hur många som ska äta av middagarna. Skapar du en prenumeration kan du ändra dina val när du vill och självklart noll bindningstid.",
+        help_variant: "Välj mellan varje vecka, varannan vecka eller engångsköp. Du ser en sammanfattning av dina val i nästa steg.",
+        help_deliveryDay: "Välj den leveransdag som passar. Startar du en prenumeration kan du byta när du vill. Ingen bindningstid.",
+        help_address: "Fyll i din adress så att vi kan leverera direkt till dörren.",
+        help_contact: "Här skapar du ditt konto. Du kan se och ändra din prenumeration när som helst."
+      
+    
   },
 
   success: {
@@ -963,7 +980,11 @@ button: "Got it - order now!"
     write_comment: "Comment", 
     send_comment: "Comment", 
     sending_comment: "Sending...",
-    next_week_order_until: "Available to order until Wed, w. {week}"
+    next_week_order_until: "Available to order until Wed, w. {week}",
+    filters: {
+      veg: "Veg",
+      meat: "Meat",
+    },
   },
   recipe_slug: {
     contains: "Contains",
@@ -1001,32 +1022,36 @@ button: "Got it - order now!"
     bullet1: "👨‍🍳 Vegetarian meal kit with the chef included.",
     bullet2: "👨‍👩‍👧‍👦 Dinner for the whole family in just 15 minutes.",
     bullet3: "✅ No binding period, cancel whenever you want.",
-    type: "Make your selections - without commitment on any:",
-    variant: "Choose how often you want to receive your meal kit:",
+    type: "How many people are around the dinner table?",
+    variant: "How often would you like the dinners delivered?",
     smartkasse: {
-      title: "Choose your Smart Kit – Saved Veg or Saved Farm",
+      title: "What do you want to serve?",
       options: {
         veg: "Saved Veg",
         gard: "Saved Farm",
       },
+      notes: {
+        veg: "Vegetariska middagar gjorda på utvalda råvaror.",
+        gard: "Mixade middagar med svenskt kött & fisk + utvalda råvaror."
+      }
     },    
     urgency: "Few remaining", 
-    deliveryDay: "Choose delivery day:",
-    delivery_saturday: "Saturday 13/9",
-    delivery_sunday: "Sunday 14/9",
-    delivery_monday: "Monday 15/9",
+    deliveryDay: "Which day should the dinners arrive?",
+    delivery_saturday: "Saturday 20/9",
+    delivery_sunday: "Sunday 21/9",
+    delivery_monday: "Monday 22/9",
     saturday_description: "at 09-18", 
     sunday_description: "at 10-17", 
     monday_description: "at 16-22",
-    stockholm_sunday: "Sunday 14/9",
-    stockholm_monday: "Monday 15/9",
+    stockholm_sunday: "Sunday 21/9",
+    stockholm_monday: "Monday 22/9",
     sunday_description_stockholm: "at 10-17",
     monday_description_stockholm: "at 16-22", 
-    copenhagen_monday: "Monday 15/9", 
+    copenhagen_monday: "Monday 22/9", 
     monday_description_copenhagen: "at 16-22", 
-    address: "Delivery info:",
+    address: "Where should the dinners be delivered?",
     extra: "Extra information",
-    contact: "Contact details",
+    contact: "Contact & Account",
     terms: "I accept the terms and understand that an account will be created.",
     payButton: "Register and pay",
     full_name: "Full name",
@@ -1043,10 +1068,10 @@ button: "Got it - order now!"
     password: "Password",
     password_example: "Password",
     step1_button: "Choose delivery day",
-    step2_button: "Delivery info", 
-    step3_button: "Frequency", 
-    step4_button: "Delivery day", 
-    step5_button: "Delivery info",
+    step2_button: "Continue", 
+    step3_button: "Continue", 
+    step4_button: "Continue", 
+    step5_button: "Continue",
     back_button: "Back", 
     loading: "Loading...", 
     pay: "Payment", 
@@ -1059,8 +1084,8 @@ button: "Got it - order now!"
     shipping: "shipping",
     title_familjekassen: "Family kit",
     title_sambokassen: "Couple kit",
-    subtitle_familjekassen: "3 recipes • 3-4 persons",
-    subtitle_sambokassen: "3 recipes • 2-3 persons",
+    subtitle_familjekassen: "Family kit • 3 recipes • 3-4 persons",
+    subtitle_sambokassen: "Couple kit • 3 recipes • 2-3 persons",
     faq: "Questions that may arise:",
     faqItems: [
       {
@@ -1080,6 +1105,13 @@ button: "Got it - order now!"
         answer: "You only need some type of cooking oil, a little salt, and pepper, and we’ve added EVERYTHING else! Enjoy the convenience.",
       },
     ], 
+        help_type: "Choose between vegetarian dinners with selected ingredients or mixed dinners with Swedish meat & fish. Always chef-prepared. Always easy. Always close.",
+        help_smartkasse: "Choose vegetarian dinners with selected ingredients or mixed dinners with Swedish meat and fish. If you start a subscription you can switch anytime.",
+        help_variant: "Choose weekly, every other week, or a one-time purchase. You’ll see a summary of your choices in the next step.",
+        help_deliveryDay: "Pick the delivery day that suits you. With a subscription you can switch anytime. No commitment.",
+        help_address: "Enter your address so we can deliver straight to your door.",
+        help_contact: "Create your account here. You can view and change your subscription at any time."
+    
   },
 
   success: {
@@ -1604,7 +1636,11 @@ button: "Jeg forstår - bestil nu!"
     write_comment: "Kommentar",
     send_comment: "Kommentere",
     sending_comment: "Sender...", 
-    next_week_order_until: "Kan bestilles indtil torsdag kl. 16 uge {week}"
+    next_week_order_until: "Kan bestilles indtil torsdag kl. 16 uge {week}", 
+    filters: {
+      veg: "Veg",
+      meat: "Kød",
+    },
   
   },
   recipe_slug: {
@@ -1640,26 +1676,30 @@ button: "Jeg forstår - bestil nu!"
     button1: "Leverer I til mig?",
     button2: "Få et tilbud",
     linkTitle: "Vi kan levere til dig!",
-    linkDescription: "om mandagen 15/9 mellem 16.00-22.00.",
+    linkDescription: "om mandagen 22/9 mellem 16.00-22.00.",
     bullet1: "👨‍🍳 Vegetarkassen med kokken inkluderet.",
     bullet2: "👨‍👩‍👧 Aftensmad till hele familien på blot 15 min.",
     bullet3: "✅  Ingen bindingsperiode, opsig når du vil.",
-    type: "Gør dine valg - uden bindingstid på alle:",
+    type: "Hvor mange sidder rundt om aftensbordet?",
     smartkasse: {
-      title: "Vælg din smartkasse – Reddet veg eller reddet gård",
+      title: "Hvad vil du servere?",
       options: {
         veg: "Reddet veg",
         gard: "Reddet gård",
       },
+      notes: {
+        veg: "Vegetariska middagar gjorda på utvalda råvaror.",
+        gard: "Mixade middagar med svenskt kött & fisk + utvalda råvaror."
+      }
     },    
-    variant: "Vælg hvor ofte du vil modtage din madkasse:",
+    variant: "Hvor ofte vil du have middage leveret?",
     urgency: "Få tilbage", 
-    deliveryDay: "Vælg leveringsdag:",
-    copenhagen_monday: "Mandag 15/9", 
+    deliveryDay: "Hvilken dag skal måltiderne ankomme?",
+    copenhagen_monday: "Mandag 22/9 ", 
     monday_description_copenhagen: "kl. 16-22", 
-    address: "Leveringsinfo:",
+    address: "Hvor skal måltiderne leveres?",
     extra: "Ekstra info:",
-    contact: "Kontaktoplysninger:",
+    contact: "Kontakt & Konto",
     terms: "Jeg godkender vilkårene, og at min konto vil blive oprettet.",
     payButton: "Fortsæt",
     full_name: "Fuldt navn",
@@ -1676,10 +1716,10 @@ button: "Jeg forstår - bestil nu!"
     password: "Adgangskode",
     password_example: "Adgangskode",
     step1_button: "Vælg leveringsdag ",
-    step2_button: "Opskrifter", 
-    step3_button: "Leveringsinfo", 
-    step4_button: "Leveringsdag", 
-    step5_button: "Leveringsinfo",
+    step2_button: "Fortsæt", 
+    step3_button: "Fortsæt", 
+    step4_button: "Fortsæt", 
+    step5_button: "Fortsæt",
     back_button: "Tilbage", 
     loading: "Indlæser...", 
     pay: "Til betaling", 
@@ -1713,6 +1753,13 @@ button: "Jeg forstår - bestil nu!"
         answer: "Du behøver kun at have en form for madlavningsolie, lidt salt og peber, og så har vi tilføjet ALT andet! Nyd bekvemmeligheden.",
       },
     ],    
+        help_type: "Vælg mellem vegetariske middage med udvalgte råvarer eller mixede middage med svensk kød & fisk. Altid kokkeforberedt. Altid nemt. Altid tæt på.",
+        help_smartkasse: "Vælg vegetariske middage med udvalgte råvarer eller blandede middage med svensk kød og fisk. Starter du et abonnement kan du skifte når som helst.",
+        help_variant: "Vælg hver uge, hver anden uge eller et engangskøb. Du ser et overblik over dine valg i næste trin.",
+        help_deliveryDay: "Vælg den leveringsdag der passer. Med et abonnement kan du skifte når som helst. Ingen binding.",
+        help_address: "Udfyld din adresse, så vi kan levere direkte til døren.",
+        help_contact: "Her opretter du din konto. Du kan se og ændre dit abonnement når som helst."
+    
   },
 
   success: {
