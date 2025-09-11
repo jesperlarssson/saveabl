@@ -388,8 +388,8 @@ const svText = {
     shipping: "frakt", 
     title_familjekassen: "Familjekassen",
     title_sambokassen: "Sambokassen",
-    subtitle_familjekassen: "Familjekassen • 3 recept • 3-4 personer",
-    subtitle_sambokassen: "Sambokassen • 3 recept • 2-3 personer",
+    subtitle_familjekassen: "3 recept • 3-4 personer",
+    subtitle_sambokassen: "3 recept • 2-3 personer",
     faq: "Frågor som kan uppstå:",
     faqItems: [ 
       {
@@ -1084,8 +1084,8 @@ button: "Got it - order now!"
     shipping: "shipping",
     title_familjekassen: "Family kit",
     title_sambokassen: "Couple kit",
-    subtitle_familjekassen: "Family kit • 3 recipes • 3-4 persons",
-    subtitle_sambokassen: "Couple kit • 3 recipes • 2-3 persons",
+    subtitle_familjekassen: "3 recipes • 3-4 persons",
+    subtitle_sambokassen: "3 recipes • 2-3 persons",
     faq: "Questions that may arise:",
     faqItems: [
       {
