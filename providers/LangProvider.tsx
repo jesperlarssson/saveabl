@@ -1695,7 +1695,7 @@ button: "Jeg forstår - bestil nu!"
     variant: "Hvor ofte vil du have middage leveret?",
     urgency: "Få tilbage", 
     deliveryDay: "Hvilken dag skal måltiderne ankomme?",
-    copenhagen_monday: "Mandag 22/9 ", 
+    copenhagen_monday: "Mandag 22/9", 
     monday_description_copenhagen: "kl. 16-22", 
     address: "Hvor skal måltiderne leveres?",
     extra: "Ekstra info:",
