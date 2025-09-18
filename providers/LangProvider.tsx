@@ -109,24 +109,25 @@ const svText = {
     newsletter: ""
   },
   imageDisplay: {
-    klimatsmart: "Klimatsmart",
+    klimatsmart: "Nära",
     kockforberedd: "Kockförberedd",
     enkeltgott: "Enkelt & Gott",
   },
   page: {
     hero: {
       title: {
-        part1: "Gör din vardagsmat",
-        part2: "enkel och hållbar",
+        part1: "Alltid kocklagat.",
+        part2: "Alltid enkelt. Alltid nära.",
       },
       subtitle: {
-        part1: "Servera kocklagade måltider på 15 minuter och ge samtidigt",
-        part2: "de där överblivna grönsakerna en ny mening med livet.",
+        part1: "Servera kocklagade middagar på 15 minuter och ge samtidigt",
+        part2: "de där överblivna råvarorna en ny mening med livet.",
       },
       points: {
         cooking_time: "tillagningstid",
-        delivery: "leverans till dörren",
         chef_prepared: "kocklagat (sista 20 briljerar du med)",
+        binding_days: "dagars",
+        binding: "bindningstid",
       },
       order_now: "Levererar ni till mig?",
     },    
@@ -138,7 +139,7 @@ const svText = {
           text: "Välj din Saveabl-plan och bestäm om du vill testa en gång eller prenumerera utan bindningstid och krångel.",
         },
         {
-          title: "2. Du räddar, vi levererar",
+          title: "2. Du väljer, vi levererar",
           text: "Tack vare din beställning kan vi rädda krokiga morötter och sneda potatisar. Vår stjärnkock Emil preppar maten som sedan levereras direkt till din dörr.",
         },
         {
@@ -284,8 +285,8 @@ const svText = {
     sending_comment: "Skickar...", 
     next_week_order_until: "Går att beställa t.o.m. onsdag v. {week}", 
     filters: {
-      veg: "Veg",
-      meat: "Kött",
+      veg: "Saveabl Grön",
+      meat: "Saveabl Gård",
     },
   },
 
@@ -311,15 +312,15 @@ const svText = {
     title: "Vi lanserar på nya orter!",
     title1: "Fyll i ditt postnummer för att se om vi levererar till dig",
     title2: "Specialerbjudande för att fira vår lansering!",
-    step_val: "Skapa din matkasse",
-    step_details: "Berätta om dig", 
-    step_payment: "Säker betalning", 
+    step_val: "Dina val",
+    step_details: "Om dig", 
+    step_payment: "Betalning", 
     text: "Nu är det dags att köra vår första lansering i Malmö och Köpenhamn och börjar med ett special-erbjudande till våra första kunder här! Fyll i ditt postnummer för att få en erbjudandelänk.",
     label: "Fyll i ditt postnummer för ett erbjudande",
     label1: "Fyll i ditt postnummer",
     label2: "Fyll i ditt postnummer för ett erbjudande",
     button: "Hämta erbjudanden",
-    button1: "Levererar ni till mig?",
+    button1: "Fortsätt",
     button2: "Hämta erbjudanden",
     linkTitle: "Vi levererar till dig!",
     linkDescription: "Välj en av länkarna nedan för att gå vidare.",
@@ -341,17 +342,17 @@ const svText = {
     variant: "Hur ofta vill du få hem middagarna?",
     urgency: "Fåtal kvar", 
     deliveryDay: "Vilken dag ska middagarna dyka upp?",
-    delivery_saturday: "Lördag 20/9",
-    delivery_sunday: "Söndag 21/9",
-    delivery_monday: "Måndag 22/9",
+    delivery_saturday: "Lördag 27/9",
+    delivery_sunday: "Söndag 28/9",
+    delivery_monday: "Måndag 29/9",
     saturday_description: "kl. 09-18", 
     sunday_description: "kl. 10-17", 
     monday_description: "kl. 16-22",
-    stockholm_sunday: "Söndag 21/9",
-    stockholm_monday: "Måndag 22/9",
+    stockholm_sunday: "Söndag 28/9",
+    stockholm_monday: "Måndag 29/9",
     sunday_description_stockholm: "kl. 10-17",
     monday_description_stockholm: "kl. 16-22", 
-    copenhagen_monday: "Måndag 22/9", 
+    copenhagen_monday: "Måndag 29/9", 
     monday_description_copenhagen: "kl. 16-22", 
     address: "Vart ska middagarna levereras?",
     extra: "Extra info",
@@ -381,6 +382,13 @@ const svText = {
     pay: "Till betalning", 
     summaryTitle: "Din matkasse:",
     mealKit: "Matkasse",
+    smartTitle: {
+      base: "Saveabl",
+      veg: "Saveabl Grön",
+      gard: "Saveabl Gård",
+    },
+    your_choices: "Dina val", 
+    personsLabel: "Antal personer", 
     frequency: "Leveransfrekvens",
     deliveryDaysummary: "Leveransdag",
     totalPrice: "Totalpris",
@@ -411,11 +419,22 @@ const svText = {
     ],
     
         help_smartkasse: "Alltid kocklagat. Alltid enkelt. Alltid nära.",
-        help_type: "Välj hur många som ska äta av middagarna. Skapar du en prenumeration kan du ändra dina val när du vill och självklart noll bindningstid.",
-        help_variant: "Välj mellan varje vecka, varannan vecka eller engångsköp. Du ser en sammanfattning av dina val i nästa steg.",
-        help_deliveryDay: "Välj den leveransdag som passar. Startar du en prenumeration kan du byta när du vill. Ingen bindningstid.",
+        help_type: "Självklart noll bindningstid.",
+        help_variant: "Du ser en sammanfattning av dina val i nästa steg.",
+        help_deliveryDay: "Du kan byta när du vill för framtida leveranser.",
         help_address: "Fyll i din adress så att vi kan leverera direkt till dörren.",
-        help_contact: "Här skapar du ditt konto. Du kan se och ändra din prenumeration när som helst."
+        help_contact: "På ditt konto kan du se och ändra din prenumeration när som helst.", 
+        we_deliver_to_you: "Vi levererar till dig",
+        no_delivery_to_you: "Vi levererar tyvärr inte till ditt område just nu",
+        outside_area_badge: "Utanför leveransområde",
+        continue: "Fortsätt",
+        zip_ok_sr: "Vi levererar till dig",
+        zip_no_sr: "Vi levererar tyvärr inte till ditt område just nu", 
+        reassurance: {
+          noBind: "Ingen bindningstid",
+          fast: "Alltid 15 minuter",
+          trust: "4.8 av 5 ⭐️ på Trustpilot"
+        },
       
     
   },
@@ -807,24 +826,25 @@ const enText = {
     my_account: "My account",
   },
   imageDisplay: {
-    klimatsmart: "Climate friendly",
+    klimatsmart: "Close",
     kockforberedd: "Chef prepared",
     enkeltgott: "Simple & Tasty",
   },
   page: {
     hero: {
       title: {
-        part1: "Make your everyday meals",
-        part2: "simple and sustainable",
+        part1: "Always chef-prepared.",
+        part2: "Always simple. Always close.",
       },
       subtitle: {
-        part1: "Serve chef prepared meals in 15 minutes and at the same time",
-        part2: "give those leftover veggies a new meaning in life.",
+        part1: "Serve chef-prepared dinners in 15 minutes while",
+        part2: "giving leftover ingredients a new purpose in life.",
       },
       points: {
         cooking_time: "cooking time",
-        delivery: "delivery to your door",
         chef_prepared: "chef prepared (you shine during the final 20)",
+        binding_days: "days",
+        binding: "binding period",
       },
       order_now: "Do you deliver to me?",
     },    
@@ -836,7 +856,7 @@ const enText = {
           "text": "Select your Saveabl plan and decide whether you want to try it once or subscribe with no commitments or hassle.",
         },
         {
-          "title": "2. You save, we deliver",
+          "title": "2. You choose, we deliver.",
           "text": "Thanks to your order, we can save crooked carrots and wonky potatoes. Our star chef Emil preps the meals, which are then delivered straight to your door.",
         },
         {
@@ -851,7 +871,7 @@ const enText = {
           "Quick and ridiculously tasty.",
           "So why choose?"
         ],
-      meals: "Meals",
+      meals: "Dinners",
       vegetarian: "Chef Prepared",
       price_per_portion: "Lower climate footprint than the average meal",
       cooking_time: "Min cooking",
@@ -982,8 +1002,8 @@ button: "Got it - order now!"
     sending_comment: "Sending...",
     next_week_order_until: "Available to order until Wed, w. {week}",
     filters: {
-      veg: "Veg",
-      meat: "Meat",
+      veg: "Saveabl Green",
+      meat: "Saveabl Farm",
     },
   },
   recipe_slug: {
@@ -1007,15 +1027,15 @@ button: "Got it - order now!"
     title: "We're launching in new cities!",
     title1: "Enter your post code to see if you are within our delivery area",
     title2: "You have been awarded a special gift!",
-    step_val: "Create your meal kit",
-    step_details: "Tell us about you", 
-    step_payment: "Secure payment", 
+    step_val: "Your choices",
+    step_details: "About you", 
+    step_payment: "Payment", 
     text: "Now it's time to launch in Malmö and Copenhagen and we're starting with a special offer to our first customers here! Enter your zip code to get an offer link.",
     label: "Enter your zip code for an offer",
     label1: "Enter your zip code",
     label2: "Enter your zip code for an offer",
     button: "Get offer",
-    button1: "Do you deliver to me?",
+    button1: "Continue",
     button2: "Get offer",
     linkTitle: "We deliver to you!",
     linkDescription: "Choose day of delivery:",
@@ -1027,27 +1047,27 @@ button: "Got it - order now!"
     smartkasse: {
       title: "What do you want to serve?",
       options: {
-        veg: "Saved Veg",
-        gard: "Saved Farm",
+        veg: "Saveabl Green",
+        gard: "Saveabl Farm",
       },
       notes: {
-        veg: "Vegetariska middagar gjorda på utvalda råvaror.",
-        gard: "Mixade middagar med svenskt kött & fisk + utvalda råvaror."
+        veg: "Vegetarian dinners made with selected ingredients",
+        gard: "Dinners with Swedish meat & fish + selected ingridients"
       }
     },    
     urgency: "Few remaining", 
     deliveryDay: "Which day should the dinners arrive?",
-    delivery_saturday: "Saturday 20/9",
-    delivery_sunday: "Sunday 21/9",
-    delivery_monday: "Monday 22/9",
+    delivery_saturday: "Saturday 27/9",
+    delivery_sunday: "Sunday 28/9",
+    delivery_monday: "Monday 29/9",
     saturday_description: "at 09-18", 
     sunday_description: "at 10-17", 
     monday_description: "at 16-22",
-    stockholm_sunday: "Sunday 21/9",
-    stockholm_monday: "Monday 22/9",
+    stockholm_sunday: "Sunday 28/9",
+    stockholm_monday: "Monday 29/9",
     sunday_description_stockholm: "at 10-17",
     monday_description_stockholm: "at 16-22", 
-    copenhagen_monday: "Monday 22/9", 
+    copenhagen_monday: "Monday 29/9", 
     monday_description_copenhagen: "at 16-22", 
     address: "Where should the dinners be delivered?",
     extra: "Extra information",
@@ -1077,6 +1097,13 @@ button: "Got it - order now!"
     pay: "Payment", 
     summaryTitle: "Your choices:",
     mealKit: "Meal kit",
+    your_choices: "Your chioces", 
+    smartTitle: {
+      base: "Saveabl",
+      veg: "Saveabl Green",
+      gard: "Saveabl Farm",
+    },
+    personsLabel: "Number of people", 
     frequency: "Delivery frequency",
     deliveryDaysummary: "Delivery day",
     totalPrice: "Total price",
@@ -1105,13 +1132,23 @@ button: "Got it - order now!"
         answer: "You only need some type of cooking oil, a little salt, and pepper, and we’ve added EVERYTHING else! Enjoy the convenience.",
       },
     ], 
-        help_type: "Choose between vegetarian dinners with selected ingredients or mixed dinners with Swedish meat & fish. Always chef-prepared. Always easy. Always close.",
-        help_smartkasse: "Choose vegetarian dinners with selected ingredients or mixed dinners with Swedish meat and fish. If you start a subscription you can switch anytime.",
-        help_variant: "Choose weekly, every other week, or a one-time purchase. You’ll see a summary of your choices in the next step.",
-        help_deliveryDay: "Pick the delivery day that suits you. With a subscription you can switch anytime. No commitment.",
+        help_smartkasse: "Always chef-prepared. Always simple. Always close.",
+        help_type: "Of course, zero commitment.",
+        help_variant: "You’ll see a summary of your choices in the next step.",
+        help_deliveryDay: "You can switch anytime for future deliveries.",
         help_address: "Enter your address so we can deliver straight to your door.",
-        help_contact: "Create your account here. You can view and change your subscription at any time."
-    
+        help_contact: "In your account, you can view and edit your subscription anytime.", 
+        we_deliver_to_you: "We deliver to you",
+        no_delivery_to_you: "We don’t deliver to your area yet",
+        _badge: "Outside delivery area",
+        continue: "Continue",
+        zip_ok_sr: "We deliver to you",
+        zip_no_sr: "We don’t deliver to you yet", 
+        reassurance: {
+          noBind: "No binding period",
+          fast: "Always 15 minutes",
+          trust: "4.8 out of 5 ⭐️ on Trustpilot"
+        },
   },
 
   success: {
@@ -1466,24 +1503,25 @@ const daText = {
     my_account: "Min konto",
   },
   imageDisplay: {
-    klimatsmart: "Klimavenlig",
+    klimatsmart: "Tæt på",
     kockforberedd: "Kokforberedt",
     enkeltgott: "Enkelt & Lækkert",
   },
   page: {
     hero: {
       title: {
-        part1: "Gør dine hverdagsmåltider",
-        part2: "enkle og bæredygtige",
+        part1: "Altid kokkeforberedt.",
+        part2: "Altid nemt. Altid tæt på.",
       },
       subtitle: {
-        part1: "Server kokketilberedte måltider på 15 minutter og giv samtidig",
-        part2: "de overskydende grøntsager en ny mening med livet.",
+        part1: "Server kokkeklar middage på 15 minutter og giv",
+        part2: "samtidig de overskydende råvarer nyt liv.",
       },
       points: {
         cooking_time: "tilberedningstid",
-        delivery: "levering til døren",
         chef_prepared: "kokketilberedt (de sidste 20 klarer du)",
+        binding_days: "dages",
+        binding: "bindingstid",
       },
       order_now: "Leverer I til mig?",
     },    
@@ -1495,7 +1533,7 @@ const daText = {
           "text": "Vælg din Saveabl-plan, og beslut, om du vil prøve én gang eller abonnere uden binding og besvær.",
         },
         {
-          "title": "2. Du redder, vi leverer",
+          "title": "2. Du vælger, vi leverer",
           "text": "Takket være din bestilling kan vi redde skæve gulerødder og ujævne kartofler. Vores stjernekok Emil forbereder maden, som derefter leveres direkte til din dør.",
         },
         {
@@ -1510,7 +1548,7 @@ const daText = {
         "Så hvorfor vælge?"
       ],
       
-      meals: "Måltider",
+      meals: "Middage",
       vegetarian: "kokketilberedt",
       price_per_portion: "Lavere klimaaftryk end gennemsnitsmiddagen",
       cooking_time: "Min tilberedning",
@@ -1638,8 +1676,8 @@ button: "Jeg forstår - bestil nu!"
     sending_comment: "Sender...", 
     next_week_order_until: "Kan bestilles indtil torsdag kl. 16 uge {week}", 
     filters: {
-      veg: "Veg",
-      meat: "Kød",
+      veg: "Saveabl Grøn",
+      meat: "Saveabl Gård",
     },
   
   },
@@ -1665,18 +1703,18 @@ button: "Jeg forstår - bestil nu!"
     title1:
       "Indtast dit postnummer for at se om vi leverer til dig",
     title2: "Du har fået en særlig gave!",
-    step_val: "Skab din måltidskasse",
-    step_details: "Fortæl om dig", 
-    step_payment: "Sikker betaling", 
+    step_val: "Dine valg",
+    step_details: "Om dig", 
+    step_payment: "Betaling", 
     text: "Nu er det tid til at lancere i Malmö og København, og vi starter med et specielt tilbud til vores første kunder her! Indtast dit postnummer for at få et tilbud.",
     label: "Indtast dit postnummer for et tilbud",
     label1: "Indtast dit postnummer",
     label2: "Indtast dit postnummer for et tilbud",
     button: "Få et tilbud",
-    button1: "Leverer I til mig?",
+    button1: "Fortsæt",
     button2: "Få et tilbud",
     linkTitle: "Vi kan levere til dig!",
-    linkDescription: "om mandagen 22/9 mellem 16.00-22.00.",
+    linkDescription: "om mandagen 29/9 mellem 16.00-22.00.",
     bullet1: "👨‍🍳 Vegetarkassen med kokken inkluderet.",
     bullet2: "👨‍👩‍👧 Aftensmad till hele familien på blot 15 min.",
     bullet3: "✅  Ingen bindingsperiode, opsig når du vil.",
@@ -1684,18 +1722,18 @@ button: "Jeg forstår - bestil nu!"
     smartkasse: {
       title: "Hvad vil du servere?",
       options: {
-        veg: "Reddet veg",
-        gard: "Reddet gård",
+        veg: "Saveabl Grøn",
+        gard: "Saveabl Gård",
       },
       notes: {
-        veg: "Vegetariska middagar gjorda på utvalda råvaror.",
-        gard: "Mixade middagar med svenskt kött & fisk + utvalda råvaror."
+        veg: "Vegetariske middage lavet af udvalgte råvarer",
+        gard: "Middage med svensk kød & fisk + udvalgte råvarer"
       }
     },    
     variant: "Hvor ofte vil du have middage leveret?",
     urgency: "Få tilbage", 
     deliveryDay: "Hvilken dag skal måltiderne ankomme?",
-    copenhagen_monday: "Mandag 22/9", 
+    copenhagen_monday: "Mandag 29/9", 
     monday_description_copenhagen: "kl. 16-22", 
     address: "Hvor skal måltiderne leveres?",
     extra: "Ekstra info:",
@@ -1722,10 +1760,17 @@ button: "Jeg forstår - bestil nu!"
     step5_button: "Fortsæt",
     back_button: "Tilbage", 
     loading: "Indlæser...", 
-    pay: "Til betaling", 
+    pay: "Betaling", 
     summaryTitle: "Dine valg:",
+    smartTitle: {
+      base: "Saveabl",
+      veg: "Saveabl Grøn",
+      gard: "Saveabl Gård", 
+    },
+    personsLabel: "Antal personer", 
     mealKit: "Måltidskasse",
     frequency: "Leveringsfrekvens",
+    your_choices: "Dine valg", 
     deliveryDaysummary: "Leveringsdag",
     totalPrice: "Totalpris",
     discountNote: "Eventuelle rabatkoder angives i sidste trin", 
@@ -1753,14 +1798,25 @@ button: "Jeg forstår - bestil nu!"
         answer: "Du behøver kun at have en form for madlavningsolie, lidt salt og peber, og så har vi tilføjet ALT andet! Nyd bekvemmeligheden.",
       },
     ],    
-        help_type: "Vælg mellem vegetariske middage med udvalgte råvarer eller mixede middage med svensk kød & fisk. Altid kokkeforberedt. Altid nemt. Altid tæt på.",
-        help_smartkasse: "Vælg vegetariske middage med udvalgte råvarer eller blandede middage med svensk kød og fisk. Starter du et abonnement kan du skifte når som helst.",
-        help_variant: "Vælg hver uge, hver anden uge eller et engangskøb. Du ser et overblik over dine valg i næste trin.",
-        help_deliveryDay: "Vælg den leveringsdag der passer. Med et abonnement kan du skifte når som helst. Ingen binding.",
+        help_smartkasse: "Altid kokkeforberedt. Altid nemt. Altid tæt på.",
+        help_type: "Selvfølgelig nul bindingstid.",
+        help_variant: "Du ser en oversigt over dine valg i næste trin.",
+        help_deliveryDay: "Du kan skifte når du vil for fremtidige leveringer.",
         help_address: "Udfyld din adresse, så vi kan levere direkte til døren.",
-        help_contact: "Her opretter du din konto. Du kan se og ændre dit abonnement når som helst."
-    
-  },
+        help_contact: "På din konto kan du se og ændre dit abonnement når som helst.", 
+        we_deliver_to_you: "Vi leverer til dig",
+        no_delivery_to_you: "Vi leverer desværre ikke til dit område endnu",
+        outside_area_badge: "Uden for leveringsområde",
+        continue: "Fortsæt",
+        zip_ok_sr: "Vi leverer til dig",
+        zip_no_sr: "Vi leverer desværre ikke til dig endnu", 
+        reassurance: {
+          noBind: "Ingen bindingsperiode",
+          fast: "Altid 15 minutter",
+          trust: "4.8 ud af 5 ⭐️ på Trustpilot"
+        },
+  
+}, 
 
   success: {
     title: "Tak for din bestilling!",
