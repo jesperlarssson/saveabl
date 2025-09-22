@@ -74,7 +74,7 @@ const Recipes = () => {
                {text.recipes.next_week}
              </h3>
              <p className="text-primary text-lg mt-2">
-               {text.recipes.next_week_order_until.replace("{week}", "38")}
+               {text.recipes.next_week_order_until.replace("{week}", "39")}
              </p>
              <Grid className=" gap-8 pt-4">
                {loading ? (
@@ -172,7 +172,3 @@ const Recipes = () => {
 
 
 export default Recipes;
-
-
-
-
