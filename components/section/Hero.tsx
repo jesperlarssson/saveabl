@@ -90,7 +90,7 @@ const Hero = () => {
                         key={key}
                         className="text-gray-700 text-md md:text-xl tracking-wide"
                       >
-                        {key === "chef_prepared" && <strong>80 %</strong>}
+                        {key === "chef_prepared" && <strong>100 %</strong>}
                         {key === "cooking_time" && <strong>15 min</strong>}{" "}
                         {point}
                       </p>

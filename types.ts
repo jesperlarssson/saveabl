@@ -82,6 +82,8 @@ export interface Recipe {
   startDate: string;
   weekNr: number;
   recipeNumber: number;
+   // ✅ stöd för multi-select + bakåtkompatibelt single/null
+   diet?: Array<"VEG" | "KOTT"> | "VEG" | "KOTT" | null;
   steg: string[];
   ingredients: string[];
   spicyIngredients?: string[];

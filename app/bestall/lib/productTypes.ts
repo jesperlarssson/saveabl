@@ -1,567 +1,246 @@
-export const productIdEveryWeek = "934dc035-0cea-449a-8977-7b6778146c99";
-export const productIdEveryOtherWeek = "4914f47a-e297-404b-b336-b505b9deedb9";
-export const productIdStandard = "bfce226b-994c-42b3-945e-ae1fde089818";
-export const productIdStandard8Portions =
- "570897f5-82f5-482e-a2c6-fd94f001486a";
+/* =========================================================
+   Saveabl — Produkt/Pris-konfiguration för checkout
+   Två produktlinjer: Grön (veg) och Gård (gard).
+   Steg 1 (selectedSmartType) avgör vilket priceId som väljs.
+   ========================================================= */
 
- export const productIdEveryWeekSambo = "prod_PuDcXtmqgiYTAz";
- export const productIdEveryOtherWeekSambo = "prod_PuDtIpxzTIo0Zu";
- export const productIdStandardSambo =
- "prod_PuEPfAjQdxFwRI";
+   export type DualPrice = { veg: string; gard: string };
 
- export const productIdEveryWeekDk = "prod_OjDodUaLk1sKL7";
- export const productIdEveryOtherWeekDk = "prod_OjDo2XfLRppIPa"; 
- export const productIdStandardDk = "prod_OjDoIv8e5Zzek2"; 
- 
- export const productIdEveryWeekSamboDk = "prod_PdHycyUnOkL6TL"; 
- export const productIdEveryOtherWeekSamboDk = "prod_QhdGye2ZZDVipp"; 
- export const productIdStandardSamboDk = "prod_OjDo5pqjEixNw4"; 
- 
-
-export const priceIdEveryWeek = "price_1RuwGlEhPZIzKmuiB92KnJvr";
-export const priceIdEveryOtherWeek = "price_1RuwHgEhPZIzKmui1imzbXUx";
-export const priceIdStandard = "price_1RuwJsEhPZIzKmuiNIHg6hcT";
-export const priceIdStandard8Portions = "price_1NvlKfEhPZIzKmuiDximMRN3";
-
-export const priceIdEveryWeekSambo = "price_1RuwS4EhPZIzKmuig3lcLU9y";
-export const priceIdEveryOtherWeekSambo = "price_1RuwSuEhPZIzKmuiCKHpfOA2";
-export const priceIdStandardSambo = "price_1RuwQtEhPZIzKmui285lxnoS";
-
-
-export const priceIdStockholmEveryWeek = "price_1RuwGlEhPZIzKmuiB92KnJvr";
-export const priceIdStockholmEveryOtherWeek =
- "price_1RuwHgEhPZIzKmui1imzbXUx";
-export const priceIdStockholmStandard = "price_1RuwJsEhPZIzKmuiNIHg6hcT";
-export const priceIdStockholmStandard8Portions = "price_1OY5JkEhPZIzKmuiY9xTWk0K";
-
-export const priceIdStockholmEveryWeekSambo = "price_1RuwS4EhPZIzKmuig3lcLU9y";
-export const priceIdStockholmEveryOtherWeekSambo =
- "price_1RuwSuEhPZIzKmuiCKHpfOA2";
- export const priceIdStockholmStandardSambo = "price_1RuwQtEhPZIzKmui285lxnoS";
-
-
-export const priceIdSkaneEveryWeek = "price_1RuwGlEhPZIzKmuiB92KnJvr";
-export const priceIdSkaneEveryOtherWeek =
- "price_1RuwHgEhPZIzKmui1imzbXUx";
-export const priceIdSkaneStandard = "price_1RuwJsEhPZIzKmuiNIHg6hcT";
-export const priceIdSkaneStandard8Portions = "price_1PDOv0EhPZIzKmuiDcrV96Sz";
-
-export const priceIdSkaneEveryWeekSambo = "price_1RuwS4EhPZIzKmuig3lcLU9y";
-export const priceIdSkaneEveryOtherWeekSambo =
- "price_1RuwSuEhPZIzKmuiCKHpfOA2";
- export const priceIdSkaneStandardSambo = "price_1RuwQtEhPZIzKmui285lxnoS";
-
-
- export const priceIdEveryWeekDk = "price_1RDn0cEhPZIzKmui06gMlEwL"; 
- export const priceIdEveryOtherWeekDk = "price_1RDn1NEhPZIzKmui507yAf4y"; 
- export const priceIdStandardDk = "price_1RDmzTEhPZIzKmuiakp6c9gb"; 
- 
- export const priceIdEveryWeekSamboDk = "price_1RDmwzEhPZIzKmui9TIMOaJA"; 
- export const priceIdEveryOtherWeekSamboDk = "price_1RDmsWEhPZIzKmuiFXeGCXhL"; 
- export const priceIdStandardSamboDk = "price_1RDmyTEhPZIzKmuiS7nppB1a"; 
-
-
-  // Lista över danska produkter
-  const danishProductPrices = [
-      priceIdEveryWeekDk,
-      priceIdEveryOtherWeekDk,
-      priceIdStandardDk,
-      priceIdEveryWeekSamboDk,
-      priceIdEveryOtherWeekSamboDk,
-      priceIdStandardSamboDk
-  ];
-  
-
-
-export const getProductTypesFromLngCode = (lngCode: string): ProductType[] => {
- console.log("lngCode", lngCode);
- switch (lngCode) {
-   case "se":
-     return productTypesSe;
-   case "en":
-     console.log("en");
-     return productTypesEn;
-   case "da":
-     return productTypesDk;
-   default:
-     return productTypes;
- }
-}
-
-
-export const productTypes = [
- {
-   id: "Familybox",
-   label: "Familjekassen",
-   recipes: "3 recept", 
-   persons: "3-4 pers",
-   variants: [
+   export type Variant = {
+     label: string;
+     productId?: string;         // legacy (ej använd i själva Stripe-kallet)
+     disabled: boolean;
+     price: string;
+     portionPrice: string;
+     id?: "subscription";
+     priceId: DualPrice;             // default SE
+     stockholmPriceId: DualPrice;    // SE Stockholm (pekar nu på samma som SE)
+     skanePriceId: DualPrice;        // SE Skåne (pekar nu på samma som SE)
+     danishPriceId: DualPrice;       // DK
+   };
+   
+   export type ProductType = {
+     id: string;
+     label: string;
+     recipes: string;
+     persons: string;
+     variants: Variant[];
+   };
+   
+   /* =========================================================
+      NYA STRIPE-ID (från dig)
+      ========================================================= */
+   /* SE — GRÖN (Saveabl Grön) */
+   export const SE_GRON_EVERY_WEEK_FAMILY   = "price_1SDjZWEhPZIzKmuirNOh8EGR"; // 3–4
+   export const SE_GRON_EVERY_WEEK_COUPLE   = "price_1S8z9jEhPZIzKmuiD7oWkhbc"; // 2–3
+   export const SE_GRON_EVERY_OTHER_FAMILY  = "price_1SDjdVEhPZIzKmuimTqjfzku"; // 3–4
+   export const SE_GRON_EVERY_OTHER_COUPLE  = "price_1S8zD8EhPZIzKmuildqCBNHC"; // 2–3
+   export const SE_GRON_ONE_TIME_FAMILY     = "price_1SDjf8EhPZIzKmui3ba2W83t"; // 3–4
+   export const SE_GRON_ONE_TIME_COUPLE     = "price_1S8zG8EhPZIzKmuiQDdQLLq1"; // 2–3
+   
+   /* SE — GÅRD (Saveabl Gård) */
+   export const SE_GARD_EVERY_WEEK_FAMILY   = "price_1SDjhVEhPZIzKmui9xYGfdmQ"; // 3–4
+   export const SE_GARD_EVERY_WEEK_COUPLE   = "price_1S92BKEhPZIzKmuiVVzivpkn"; // 2–3
+   export const SE_GARD_EVERY_OTHER_FAMILY  = "price_1SDjn3EhPZIzKmuiwGh8EQPN"; // 3–4
+   export const SE_GARD_EVERY_OTHER_COUPLE  = "price_1S92EvEhPZIzKmuiVb47nEEf"; // 2–3
+   export const SE_GARD_ONE_TIME_FAMILY     = "price_1SDjpzEhPZIzKmuiC4gDuKkI"; // 3–4
+   export const SE_GARD_ONE_TIME_COUPLE     = "price_1S92GvEhPZIzKmui13XdBjv5"; // 2–3
+   
+   /* DK — GRØN */
+   export const DK_GRON_EVERY_WEEK_FAMILY   = "price_1SDkgJEhPZIzKmuiAD6Mbjqa"; // 3–4
+   export const DK_GRON_EVERY_WEEK_COUPLE   = "price_1SDMdKEhPZIzKmuiScDmFR4R"; // 2–3
+   export const DK_GRON_EVERY_OTHER_FAMILY  = "price_1SDkkMEhPZIzKmuijgMxqiYZ"; // 3–4
+   export const DK_GRON_EVERY_OTHER_COUPLE  = "price_1SDN4MEhPZIzKmui9ngVspE2"; // 2–3
+   export const DK_GRON_ONE_TIME_FAMILY     = "price_1SDks9EhPZIzKmuiiz97pQwo"; // 3–4
+   export const DK_GRON_ONE_TIME_COUPLE     = "price_1SDN6uEhPZIzKmuilAWXix5w"; // 2–3
+   
+   /* DK — GÅRD */
+   export const DK_GARD_EVERY_WEEK_FAMILY   = "price_1SDkvUEhPZIzKmui7a5u4spP"; // 3–4
+   export const DK_GARD_EVERY_WEEK_COUPLE   = "price_1SDNGhEhPZIzKmui5uiW9ter"; // 2–3
+   export const DK_GARD_EVERY_OTHER_FAMILY  = "price_1SDkyjEhPZIzKmui0uhEGefW"; // 3–4
+   export const DK_GARD_EVERY_OTHER_COUPLE  = "price_1SDNILEhPZIzKmuisGGc30du"; // 2–3
+   export const DK_GARD_ONE_TIME_FAMILY     = "price_1SDl2eEhPZIzKmuigD4BBJmV"; // 3–4
+   export const DK_GARD_ONE_TIME_COUPLE     = "price_1SDNpjEhPZIzKmuiEQ3mri8L"; // 2–3
+   
+   /* =========================================================
+      Hjälpfunktion: välj rätt textsamling
+      ========================================================= */
+   export const getProductTypesFromLngCode = (lngCode: string): ProductType[] => {
+     switch (lngCode) {
+       case "se": return productTypesSe;
+       case "en": return productTypesEn;
+       case "da": return productTypesDk;
+       default:   return productTypesSe;
+     }
+   };
+   
+   /* =========================================================
+      Produktmatriser (SE/EN/DA)
+      ========================================================= */
+   
+   export const productTypesSe: ProductType[] = [
      {
-       label: "Varje vecka",
-       productId: productIdEveryWeek,
-       productIdDk: productIdEveryWeekDk,
-       disabled: false,
-       price: "599kr/vecka",
-       portionPrice: "50kr/portion",
-       id: "subscription", 
-       priceId: priceIdEveryWeek,
-       stockholmPriceId: priceIdStockholmEveryWeek,
-       skanePriceId: priceIdSkaneEveryWeek,
-       danishPriceId: priceIdEveryWeekDk,
+       id: "Familybox",
+       label: "3-4 pers",
+       recipes: "3 recept",
+       persons: "3-4 pers",
+       variants: [
+         {
+           label: "Varje vecka",
+           disabled: false,
+           price: "",
+           portionPrice: "",
+           id: "subscription",
+           priceId:          { veg: SE_GRON_EVERY_WEEK_FAMILY,  gard: SE_GARD_EVERY_WEEK_FAMILY },
+           stockholmPriceId: { veg: SE_GRON_EVERY_WEEK_FAMILY,  gard: SE_GARD_EVERY_WEEK_FAMILY },
+           skanePriceId:     { veg: SE_GRON_EVERY_WEEK_FAMILY,  gard: SE_GARD_EVERY_WEEK_FAMILY },
+           danishPriceId:    { veg: DK_GRON_EVERY_WEEK_FAMILY,  gard: DK_GARD_EVERY_WEEK_FAMILY },
+         },
+         {
+           label: "Varannan vecka",
+           disabled: false,
+           price: "",
+           portionPrice: "",
+           id: "subscription",
+           priceId:          { veg: SE_GRON_EVERY_OTHER_FAMILY, gard: SE_GARD_EVERY_OTHER_FAMILY },
+           stockholmPriceId: { veg: SE_GRON_EVERY_OTHER_FAMILY, gard: SE_GARD_EVERY_OTHER_FAMILY },
+           skanePriceId:     { veg: SE_GRON_EVERY_OTHER_FAMILY, gard: SE_GARD_EVERY_OTHER_FAMILY },
+           danishPriceId:    { veg: DK_GRON_EVERY_OTHER_FAMILY, gard: DK_GARD_EVERY_OTHER_FAMILY },
+         },
+         {
+           label: "Engångsköp",
+           disabled: false,
+           price: "",
+           portionPrice: "",
+           priceId:          { veg: SE_GRON_ONE_TIME_FAMILY,    gard: SE_GARD_ONE_TIME_FAMILY },
+           stockholmPriceId: { veg: SE_GRON_ONE_TIME_FAMILY,    gard: SE_GARD_ONE_TIME_FAMILY },
+           skanePriceId:     { veg: SE_GRON_ONE_TIME_FAMILY,    gard: SE_GARD_ONE_TIME_FAMILY },
+           danishPriceId:    { veg: DK_GRON_ONE_TIME_FAMILY,    gard: DK_GARD_ONE_TIME_FAMILY },
+         },
+       ],
      },
      {
-       label: "Varannan vecka",
-       productId: productIdEveryOtherWeek,
-       productIdDk: productIdEveryOtherWeekDk, 
-       disabled: false,
-       price: "599kr/varannan vecka",
-       portionPrice: "50kr/portion",
-       id: "subscription",
-       priceId: priceIdEveryOtherWeek,
-       stockholmPriceId: priceIdStockholmEveryOtherWeek,
-       skanePriceId: priceIdSkaneEveryOtherWeek,
-       danishPriceId: priceIdEveryOtherWeekDk,
+       id: "Couplebox",
+       label: "2-3 pers",
+       recipes: "3 recept",
+       persons: "2-3 pers",
+       variants: [
+         {
+           label: "Varje vecka",
+           disabled: false,
+           price: "",
+           portionPrice: "",
+           id: "subscription",
+           priceId:          { veg: SE_GRON_EVERY_WEEK_COUPLE,  gard: SE_GARD_EVERY_WEEK_COUPLE },
+           stockholmPriceId: { veg: SE_GRON_EVERY_WEEK_COUPLE,  gard: SE_GARD_EVERY_WEEK_COUPLE },
+           skanePriceId:     { veg: SE_GRON_EVERY_WEEK_COUPLE,  gard: SE_GARD_EVERY_WEEK_COUPLE },
+           danishPriceId:    { veg: DK_GRON_EVERY_WEEK_COUPLE,  gard: DK_GARD_EVERY_WEEK_COUPLE },
+         },
+         {
+           label: "Varannan vecka",
+           disabled: false,
+           price: "",
+           portionPrice: "",
+           id: "subscription",
+           priceId:          { veg: SE_GRON_EVERY_OTHER_COUPLE, gard: SE_GARD_EVERY_OTHER_COUPLE },
+           stockholmPriceId: { veg: SE_GRON_EVERY_OTHER_COUPLE, gard: SE_GARD_EVERY_OTHER_COUPLE },
+           skanePriceId:     { veg: SE_GRON_EVERY_OTHER_COUPLE, gard: SE_GARD_EVERY_OTHER_COUPLE },
+           danishPriceId:    { veg: DK_GRON_EVERY_OTHER_COUPLE, gard: DK_GARD_EVERY_OTHER_COUPLE },
+         },
+         {
+           label: "Engångsköp",
+           disabled: false,
+           price: "",
+           portionPrice: "",
+           priceId:          { veg: SE_GRON_ONE_TIME_COUPLE,    gard: SE_GARD_ONE_TIME_COUPLE },
+           stockholmPriceId: { veg: SE_GRON_ONE_TIME_COUPLE,    gard: SE_GARD_ONE_TIME_COUPLE },
+           skanePriceId:     { veg: SE_GRON_ONE_TIME_COUPLE,    gard: SE_GARD_ONE_TIME_COUPLE },
+           danishPriceId:    { veg: DK_GRON_ONE_TIME_COUPLE,    gard: DK_GARD_ONE_TIME_COUPLE },
+         },
+       ],
      },
-     {
-      label: "Engångsköp",
-      productId: productIdStandard,
-      productIdDk: productIdStandardDk,
-      disabled: false,
-      price: "659kr",
-      portionPrice: "55kr/portion",
-      priceId: priceIdStandard,
-      stockholmPriceId: priceIdStockholmStandard,
-      skanePriceId: priceIdSkaneStandard,
-      danishPriceId: priceIdStandardDk,
-    },
-   ],
- },
- {
-  id: "Couplebox",
-  label: "Sambokassen",
-  recipes: "3 recept", 
-  persons: "2-3 pers",
-  variants: [
-    {
-      label: "Varje vecka",
-      productId: productIdEveryWeekSambo,
-      productIdDk: productIdEveryWeekSamboDk,
-      disabled: false,
-      price: "599kr/vecka",
-      portionPrice: "50kr/portion",
-      id: "subscription",
-      priceId: priceIdEveryWeekSambo,
-      stockholmPriceId: priceIdStockholmEveryWeekSambo,
-      skanePriceId: priceIdSkaneEveryWeekSambo,
-      danishPriceId: priceIdEveryWeekSamboDk,
-    },
-    {
-      label: "Varannan vecka",
-      productId: productIdEveryOtherWeekSambo,
-      productIdDk: productIdEveryOtherWeekSamboDk,
-      disabled: false,
-      price: "599kr/varannan vecka",
-      portionPrice: "50kr/portion",
-      id: "subscription",
-      priceId: priceIdEveryOtherWeekSambo,
-      stockholmPriceId: priceIdStockholmEveryOtherWeekSambo,
-      skanePriceId: priceIdSkaneEveryOtherWeekSambo,
-      danishPriceId: priceIdEveryOtherWeekSamboDk,
-    },
-    {
-     label: "Engångsköp",
-     productId: productIdStandardSambo,
-     productIdDk: productIdStandardSamboDk,
-     disabled: false,
-     price: "659kr",
-     portionPrice: "55kr/portion",
-     priceId: priceIdStandardSambo,
-     stockholmPriceId: priceIdStockholmStandardSambo,
-     skanePriceId: priceIdSkaneStandardSambo,
-     danishPriceId: priceIdStandardSamboDk,
-
-   },
-  ],
-},
-];
-export const productTypesSe = [
-  {
-    id: "Familybox",
-    label: "Familjekasse",
-    recipes: "3 recept", 
-    persons: "3-4 pers",
-    variants: [
-      {
-        label: "Varje vecka",
-        productId: productIdEveryWeek,
-        productIdDk: productIdEveryWeekDk,
-        disabled: false,
-        price: "599kr/vecka",
-        portionPrice: "50kr/portion",
-        id: "subscription", 
-        priceId: priceIdEveryWeek,
-        stockholmPriceId: priceIdStockholmEveryWeek,
-        skanePriceId: priceIdSkaneEveryWeek,
-        danishPriceId: priceIdEveryWeekDk,
-      },
-      {
-        label: "Varannan vecka",
-        productId: productIdEveryOtherWeek,
-        productIdDk: productIdEveryOtherWeekDk,
-        disabled: false,
-        price: "599kr/varannan vecka",
-        portionPrice: "50kr/portion",
-        id: "subscription",
-        priceId: priceIdEveryOtherWeek,
-        stockholmPriceId: priceIdStockholmEveryOtherWeek,
-        skanePriceId: priceIdSkaneEveryOtherWeek,
-        danishPriceId: priceIdEveryOtherWeekDk,
-      },
-      {
-       label: "Engångsköp",
-       productId: productIdStandard,
-       productIdDk: productIdStandardDk,
-       disabled: false,
-       price: "659kr",
-       portionPrice: "55kr/portion",
-       priceId: priceIdStandard,
-       stockholmPriceId: priceIdStockholmStandard,
-       skanePriceId: priceIdSkaneStandard,
-       danishPriceId: priceIdStandardDk,
-     },
-    ],
-  },
-  {
-   id: "Couplebox",
-   label: "Sambokasse",
-   recipes: "3 recept", 
-   persons: "2-3 pers",
-   variants: [
-     {
-       label: "Varje vecka",
-       productId: productIdEveryWeekSambo,
-       productIdDk: productIdEveryWeekSamboDk,
-       disabled: false,
-       price: "599kr/vecka",
-       portionPrice: "50kr/portion",
-       id: "subscription",
-       priceId: priceIdEveryWeekSambo,
-       stockholmPriceId: priceIdStockholmEveryWeekSambo,
-       skanePriceId: priceIdSkaneEveryWeekSambo,
-       danishPriceId: priceIdEveryWeekSamboDk,
-     },
-     {
-       label: "Varannan vecka",
-       productId: productIdEveryOtherWeekSambo,
-       productIdDk: productIdEveryOtherWeekSamboDk,
-       disabled: false,
-       price: "599kr/varannan vecka",
-       portionPrice: "50kr/portion",
-       id: "subscription",
-       priceId: priceIdEveryOtherWeek,
-       stockholmPriceId: priceIdStockholmEveryOtherWeekSambo,
-       skanePriceId: priceIdSkaneEveryOtherWeekSambo,
-       danishPriceId: priceIdEveryOtherWeekDk, 
-     },
-     {
-      label: "Engångsköp",
-      productId: productIdStandardSambo,
-      productIdDk: productIdStandardSamboDk,
-      disabled: false,
-      price: "659kr",
-      portionPrice: "55kr/portion",
-      priceId: priceIdStandardSambo,
-      stockholmPriceId: priceIdStockholmStandardSambo,
-      skanePriceId: priceIdSkaneStandardSambo,
-      danishPriceId: priceIdStandardSamboDk,
-    },
-   ],
- },
- ];
- 
-export const productTypesEn = [
-  {
-    id: "Familybox",
-    label: "Family kit",
-    recipes: "3 recipes", 
-    persons: "3-4 pers",
-    variants: [
-      {
-        label: "Every week",
-        productId: productIdEveryWeek,
-        productIdDk: productIdEveryWeekDk,
-        disabled: false,
-        price: "599kr/vecka",
-        portionPrice: "50kr/portion",
-        id: "subscription", 
-        priceId: priceIdEveryWeek,
-        stockholmPriceId: priceIdStockholmEveryWeek,
-        skanePriceId: priceIdSkaneEveryWeek,
-        danishPriceId: priceIdEveryWeekDk,
-      },
-      {
-        label: "Every other week",
-        productId: productIdEveryOtherWeek,
-        productIdDk: productIdEveryOtherWeekDk,
-        disabled: false,
-        price: "599kr/varannan vecka",
-        portionPrice: "50kr/portion",
-        id: "subscription",
-        priceId: priceIdEveryOtherWeek,
-        stockholmPriceId: priceIdStockholmEveryOtherWeek,
-        skanePriceId: priceIdSkaneEveryOtherWeek,
-        danishPriceId: priceIdEveryOtherWeekDk,
-      },
-      {
-       label: "One time order",
-       productId: productIdStandard,
-       productIdDk: productIdStandardDk,
-       disabled: false,
-       price: "659kr",
-       portionPrice: "55kr/portion",
-       priceId: priceIdStandard,
-       stockholmPriceId: priceIdStockholmStandard,
-       skanePriceId: priceIdSkaneStandard,
-       danishPriceId: priceIdStandardDk,
-     },
-    ],
-  },
-  {
-   id: "Couplebox",
-   label: "Couple kit",
-   recipes: "3 recipes",
-   persons: "2-3 pers",
-   variants: [
-     {
-       label: "Every week",
-       productId: productIdEveryWeekSambo,
-       productIdDk: productIdEveryWeekSamboDk,
-       disabled: false,
-       price: "599kr/vecka",
-       portionPrice: "50kr/portion",
-       id: "subscription",
-       priceId: priceIdEveryWeekSambo,
-       stockholmPriceId: priceIdStockholmEveryWeekSambo,
-       skanePriceId: priceIdSkaneEveryWeekSambo,
-       danishPriceId: priceIdEveryWeekSamboDk, 
-     },
-     {
-       label: "Every other week",
-       productId: productIdEveryOtherWeekSambo,
-       productIdDk: productIdEveryOtherWeekSamboDk,
-       disabled: false,
-       price: "599kr/varannan vecka",
-       portionPrice: "50kr/portion",
-       id: "subscription",
-       priceId: priceIdEveryOtherWeekSambo,
-       stockholmPriceId: priceIdStockholmEveryOtherWeekSambo,
-       skanePriceId: priceIdSkaneEveryOtherWeekSambo,
-       danishPriceId: priceIdEveryOtherWeekSamboDk,
-     },
-     {
-      label: "One time order",
-      productId: productIdStandardSambo,
-      productIdDk: productIdStandardSamboDk,
-      disabled: false,
-      price: "659kr",
-      portionPrice: "55kr/portion",
-      priceId: priceIdStandardSambo,
-      stockholmPriceId: priceIdStockholmStandardSambo,
-      skanePriceId: priceIdSkaneStandardSambo,
-      danishPriceId: priceIdStandardSamboDk,
-    },
-   ],
- },
- ];
-export const productTypesDk = [
-  {
-    id: "Familybox",
-    label: "Familiekassen",
-    recipes: "3 opskrifter",
-    persons: "3-4 pers",
-    variants: [
-      {
-        label: "Hver uge",
-        productId: productIdEveryWeekDk,
-        disabled: false,
-        price: "599kr/vecka",
-        portionPrice: "50kr/portion",
-        id: "subscription", 
-        priceId: priceIdEveryWeek,
-        stockholmPriceId: priceIdStockholmEveryWeek,
-        skanePriceId: priceIdSkaneEveryWeek,
-        danishPriceId: priceIdEveryWeekDk, 
-      },
-      {
-        label: "Hver anden uge",
-        productId: productIdEveryOtherWeekDk,
-        disabled: false,
-        price: "599kr/varannan vecka",
-        portionPrice: "50kr/portion",
-        id: "subscription",
-        priceId: priceIdEveryOtherWeek,
-        stockholmPriceId: priceIdStockholmEveryOtherWeek,
-        skanePriceId: priceIdSkaneEveryOtherWeek,
-        danishPriceId: priceIdEveryOtherWeekDk, 
-      },
-      {
-       label: "Engangskøb",
-       productId: productIdStandardDk,
-       disabled: false,
-       price: "659kr",
-       portionPrice: "55kr/portion",
-       priceId: priceIdStandard,
-       stockholmPriceId: priceIdStockholmStandard,
-       skanePriceId: priceIdSkaneStandard,
-       danishPriceId: priceIdStandardDk,
-     },
-    ],
-  },
-  {
-   id: "Couplebox",
-   label: "Sambokassen",
-   recipes: "3 opskrifter",
-   persons: "2-3 pers",
-   variants: [
-     {
-       label: "Hver uge",
-       productId: productIdEveryWeekSamboDk,
-       disabled: false,
-       price: "599kr/vecka",
-       portionPrice: "50kr/portion",
-       id: "subscription",
-       priceId: priceIdEveryWeekSambo,
-       stockholmPriceId: priceIdStockholmEveryWeekSambo,
-       skanePriceId: priceIdSkaneEveryWeekSambo,
-       danishPriceId: priceIdEveryWeekSamboDk,
-     },
-     {
-       label: "Hver anden uge",
-       productId: productIdEveryOtherWeekSamboDk,
-       disabled: false,
-       price: "599kr/varannan vecka",
-       portionPrice: "50kr/portion",
-       id: "subscription",
-       priceId: priceIdEveryOtherWeekSambo,
-       stockholmPriceId: priceIdStockholmEveryOtherWeekSambo,
-       skanePriceId: priceIdSkaneEveryOtherWeekSambo,
-       danishPriceId: priceIdEveryOtherWeekSamboDk, 
-     },
-     {
-      label: "Engangskøb",
-      productId: productIdStandardSamboDk,
-      disabled: false,
-      price: "659kr",
-      portionPrice: "55kr/portion",
-      priceId: priceIdStandardSambo,
-      stockholmPriceId: priceIdStockholmStandardSambo,
-      skanePriceId: priceIdSkaneStandardSambo,
-      danishPriceId: priceIdStandardSamboDk, 
-    },
-   ],
- },
- ];
-
-type ProductType = {
- id: string;
- label: string;
- recipes: string;
- persons: string;
- variants: Variant[];
-};
-
-
-type Variant = {
- label: string;
- productId: string;
- disabled: boolean;
- price: string;
- portionPrice: string;
- priceId: string;
-};
-
-
-export const isSubscription = (priceId: string | null): boolean => {
-  for (const productType of productTypes) {
-    for (const variant of productType.variants) {
-      if (
-        variant.priceId === priceId ||
-        variant.stockholmPriceId === priceId ||
-        variant.skanePriceId === priceId ||
-        variant.danishPriceId === priceId
-      ) {
-        return variant.id === "subscription"; // Kolla om varianten är en prenumeration
-      }
-    }
-  }
-  return false;
-};
-
-
-export const getProductCostForPriceId = (id: string | null, lang: string) => {
- const eng = lang !== "sv"
- const dk = lang === "da";
- switch (id) {
-   case priceIdEveryWeek:
-     return eng ? "59kr/portion" : "59kr/portion";
-   case priceIdEveryOtherWeek:
-     return eng ? "59kr/portion" : "59kr/portion";
-   case priceIdStandard:
-     return eng ? "69kr/portion" : "69kr/portion";
-   case priceIdStandard8Portions:
-     return eng ? "50kr/portion" : "50kr/portion";
-   case priceIdEveryWeekSambo:
-      return eng ? "69kr/portion" : "69kr/portion";
-   case priceIdEveryOtherWeekSambo:
-        return eng ? "69kr/portion" : "69kr/portion";
-   case priceIdStandardSambo:
-        return eng ? "79kr/portion" : "79kr/portion";
-
-   case priceIdStockholmEveryWeek:
-     return eng ? "59kr/portion" : "59kr/portion";
-   case priceIdStockholmEveryOtherWeek:
-     return eng ? "59kr/portion" : "59kr/portion";
-   case priceIdStockholmStandard:
-     return eng ? "69kr/portion" : "69kr/portion";
-   case priceIdStockholmStandard8Portions:
-     return eng ? "50kr/portion" : "50kr/portion";
-   case priceIdStockholmEveryWeekSambo:
-      return eng ? "69kr/portion" : "69kr/portion";
-   case priceIdStockholmEveryOtherWeekSambo:
-      return eng ? "69kr/portion" : "69kr/portion";
-   case priceIdStockholmStandardSambo:
-      return eng ? "79kr/portion" : "79kr/portion";
-
-
-     case priceIdSkaneEveryWeek:
-       return eng ? "59kr/portion" : "59kr/portion";
-     case priceIdSkaneEveryOtherWeek:
-       return eng ? "59kr/portion" : "59kr/portion";
-     case priceIdSkaneStandard:
-       return eng ? "69kr/portion" : "69kr/portion";
-     case priceIdSkaneStandard8Portions:
-       return eng ? "50kr/portion" : "50kr/portion";
-     case priceIdSkaneEveryWeekSambo:
-        return eng ? "69kr/portion" : "69kr/portion";
-     case priceIdSkaneEveryOtherWeekSambo:
-        return eng ? "69kr/portionr" : "69kr/portion";
-     case priceIdSkaneStandardSambo:
-        return eng ? "79kr/portion" : "79kr/portion";
-
-     case priceIdEveryWeekDk:
-        return dk ? "Kuvertpris 45kr" : "45kr/portion";
-     case priceIdEveryOtherWeekDk:
-        return dk ? "Kuvertpris 45kr" : "45kr/portion";
-     case priceIdStandardDk:
-        return dk ? "Kuvertpris 50kr" : "50kr/portion";
-     case priceIdEveryWeekSamboDk:
-        return dk ? "Kuvertpris 50kr" : "50kr/portion";
-     case priceIdEveryOtherWeekSamboDk:
-        return dk ? "Kuvertpris 50kr" : "50kr/portion";
-     case priceIdStandardSamboDk:
-        return dk ? "Kuvertpris 58kr" : "58kr/portion";
-
-   default:
-     throw new Error("No product id found for price id: " + id);
- }
-}
+   ];
+   
+   // Engelska etiketter (återanvänder pris-matriserna)
+   export const productTypesEn: ProductType[] = [
+     { ...productTypesSe[0], recipes: "3 recipes" },
+     { ...productTypesSe[1], recipes: "3 recipes" },
+   ];
+   
+   // Danska etiketter (återanvänder pris-matriserna)
+   export const productTypesDk: ProductType[] = [
+     { ...productTypesSe[0], recipes: "3 opskrifter" },
+     { ...productTypesSe[1], recipes: "3 opskrifter" },
+   ];
+   
+   /* =========================================================
+      Prenumeration? (allt utom Engångsköp)
+      ========================================================= */
+   export const isSubscription = (priceId: string | null): boolean => {
+     if (!priceId) return false;
+     const variants = productTypesSe.flatMap((pt) => pt.variants);
+     for (const v of variants) {
+       const ids = [
+         v.priceId?.veg, v.priceId?.gard,
+         v.stockholmPriceId?.veg, v.stockholmPriceId?.gard,
+         v.skanePriceId?.veg, v.skanePriceId?.gard,
+         v.danishPriceId?.veg, v.danishPriceId?.gard,
+       ].filter(Boolean) as string[];
+       if (ids.includes(priceId)) return v.id === "subscription";
+     }
+     return false;
+   };
+   
+   /* =========================================================
+      Pristext per priceId (LINEUP-SPECIFIKT: Grön vs Gård)
+      ========================================================= */
+   
+   const PRICE_TEXT_SE = {
+     // GRÖN — SE
+     [SE_GRON_EVERY_WEEK_FAMILY]:  "59kr/portion",
+     [SE_GRON_EVERY_OTHER_FAMILY]: "59kr/portion",
+     [SE_GRON_ONE_TIME_FAMILY]:    "69kr/portion",
+   
+     [SE_GRON_EVERY_WEEK_COUPLE]:  "69kr/portion",
+     [SE_GRON_EVERY_OTHER_COUPLE]: "69kr/portion",
+     [SE_GRON_ONE_TIME_COUPLE]:    "79kr/portion",
+   
+     // GÅRD — SE (exempel – justera till era riktiga Gård-priser)
+     [SE_GARD_EVERY_WEEK_FAMILY]:  "69kr/portion",
+     [SE_GARD_EVERY_OTHER_FAMILY]: "69kr/portion",
+     [SE_GARD_ONE_TIME_FAMILY]:    "79kr/portion",
+   
+     [SE_GARD_EVERY_WEEK_COUPLE]:  "79kr/portion",
+     [SE_GARD_EVERY_OTHER_COUPLE]: "79kr/portion",
+     [SE_GARD_ONE_TIME_COUPLE]:    "89kr/portion",
+   } as const;
+   
+   const PRICE_TEXT_DK = {
+     // GRØN — DK (dina kuvertpris)
+     [DK_GRON_EVERY_WEEK_FAMILY]:  "Kuvertpris 45kr",
+     [DK_GRON_EVERY_OTHER_FAMILY]: "Kuvertpris 45kr",
+     [DK_GRON_ONE_TIME_FAMILY]:    "Kuvertpris 50kr",
+   
+     [DK_GRON_EVERY_WEEK_COUPLE]:  "Kuvertpris 50kr",
+     [DK_GRON_EVERY_OTHER_COUPLE]: "Kuvertpris 50kr",
+     [DK_GRON_ONE_TIME_COUPLE]:    "Kuvertpris 58kr",
+   
+     // GÅRD — DK (justera om Gård skiljer sig i DK)
+     [DK_GARD_EVERY_WEEK_FAMILY]:  "Kuvertpris 55kr",
+     [DK_GARD_EVERY_OTHER_FAMILY]: "Kuvertpris 55kr",
+     [DK_GARD_ONE_TIME_FAMILY]:    "Kuvertpris 60kr",
+   
+     [DK_GARD_EVERY_WEEK_COUPLE]:  "Kuvertpris 60kr",
+     [DK_GARD_EVERY_OTHER_COUPLE]: "Kuvertpris 60kr",
+     [DK_GARD_ONE_TIME_COUPLE]:    "Kuvertpris 68kr",
+   } as const;
+   
+   export const getProductCostForPriceId = (id: string | null, lang: string) => {
+     if (!id) return "";
+     const dk = lang === "da";
+     if (dk && id in PRICE_TEXT_DK) return (PRICE_TEXT_DK as any)[id];
+     if (id in PRICE_TEXT_SE) return (PRICE_TEXT_SE as any)[id];
+     // fallback
+     return dk ? "Kuvertpris" : "Pris per portion";
+   };
+   

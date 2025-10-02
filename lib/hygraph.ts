@@ -185,6 +185,7 @@ export async function getAllRecipes() {
         startDate
         weekNr
         recipeNumber
+        diet           # 👈 diet
         steg
         ingredients
         nutritionalValues
@@ -227,6 +228,7 @@ export async function getPaginatedRecipes(limit: number, offset: number, endDate
         startDate
         weekNr
         recipeNumber
+        diet           # 👈 diet
         chef {
           name
           title
@@ -263,6 +265,7 @@ export async function getPaginatedOldRecipes(limit: number, offset: number) {
         ingredients
         nutritionalValues
         savedIngredients
+        # diet        # 👈 lägg bara till detta om fältet finns på publicRecipes
         comments(orderBy: publishedAt_DESC) {
           name
           rating
@@ -326,6 +329,7 @@ export async function getRecipesForWeek(week: number) {
         startDate
         weekNr
         recipeNumber
+        diet           # 👈 diet
         chef {
           name
           title
@@ -385,6 +389,7 @@ export async function getRecipeWithSlug(slug: string) {
         slug
         startDate
         recipeNumber
+        diet           # 👈 diet
         steg
         ingredients
         spicyIngredients

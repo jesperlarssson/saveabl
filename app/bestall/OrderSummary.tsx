@@ -1,198 +1,187 @@
-import React from 'react';
+"use client";
+import React from "react";
 import { 
-  stockholmPostalCodes1,
-  stockholmPostalCodes2,
-  stockholmPostalCodes3,
-  skanePostalCodes1,
-  skanePostalCodes2,
-  vastPostalCodes1,
-  vastPostalCodes2,
-  vastPostalCodes3,
-  vastPostalCodes4,
-  vastPostalCodes5,
-  vastPostalCodes6,
-  vastPostalCodes7,
- } from '@/lib/zipCodes';
-import { useLang } from '@/hooks/useLang'; 
+  stockholmPostalCodes1, stockholmPostalCodes2, stockholmPostalCodes3,
+  skanePostalCodes1, skanePostalCodes2,
+} from "@/lib/zipCodes";
+import { useLang } from "@/hooks/useLang";
 
-interface SelectedType {
-  label: string;
-}
+type SmartType = "veg" | "gard" | null;
 
-interface SelectedVariant {
-  label: string;
-  productId: string;
-}
-
-interface SelectedDay {
-  label: string;
-}
+interface SelectedType { id?: string; label: string; }
+interface SelectedVariant { label: string; productId?: string; }
+interface SelectedDay { label: string; }
 
 interface OrderSummaryProps {
   selectedType: SelectedType;
-  selectedVariant: SelectedVariant | string; 
+  selectedSmartType: SmartType;
+  selectedVariant: SelectedVariant | string;
   selectedDay: SelectedDay;
   postalCode: string | null;
   isDk: boolean;
   productTypes: any;
-  lang: string; 
+  lang: string;
 }
 
-// Funktion för att kontrollera om varianten är en prenumeration
-const isSubscription = (selectedVariant: SelectedVariant | string) => {
-  if (typeof selectedVariant === 'object' && 'productId' in selectedVariant) {
-    const subscriptionProductIds = [
-      '934dc035-0cea-449a-8977-7b6778146c99', 
-      '4914f47a-e297-404b-b336-b505b9deedb9', 
-      'prod_PuDcXtmqgiYTAz', 
-      'prod_PuDtIpxzTIo0Zu', 
-      'prod_OjDodUaLk1sKL7', 
-      'prod_OjDo2XfLRppIPa', 
-      'prod_PdHycyUnOkL6TL', 
-      'prod_QhdGye2ZZDVipp'
-    ];
-    return subscriptionProductIds.includes(selectedVariant.productId);
-  }
-  return false;
+/* --- helpers --- */
+const isFamilyType = (t: SelectedType) =>
+  !!t && (t.id === "Familybox" || /(^|\s)3\s*[–-]?\s*4(\s|$)|3–4|3-4/i.test(t.label));
+
+const isCoupleType = (t: SelectedType) =>
+  !!t && (t.id === "Couplebox" || /(^|\s)2\s*[–-]?\s*3(\s|$)|2–3|2-3/i.test(t.label));
+
+const mapVariant = (label: string, lang: string) => {
+  const m: Record<string, Record<string, string>> = {
+    sv: { "Varje vecka": "Varje vecka", "Varannan vecka": "Varannan vecka", "Engångsköp": "Engångsköp" },
+    en: { "Every week": "Every week", "Every other week": "Every other week", "One time order": "One time order" },
+    da: { "Hver uge": "Hver uge", "Hver anden uge": "Hver anden uge", "Engangskøb": "Engangskøb" },
+  };
+  return m[lang]?.[label] ?? label;
 };
 
-// Funktion för att hantera produktnamn och språk
-const getProductName = (label: string, lang: string) => {
-  if (lang === 'sv') {
-    if (label === 'Family kit' || label === 'Familiekassen') return 'Familjekassen';
-    if (label === 'Couple kit' || label === 'Sambokassen') return 'Sambokassen';
-  } else if (lang === 'en') {
-    if (label === 'Familjekassen' || label === 'Familiekassen') return 'Family kit';
-    if (label === 'Sambokassen') return 'Couple kit';
-  } else if (lang === 'da') {
-    if (label === 'Familjekassen' || label === 'Family kit') return 'Familiekassen';
-    if (label === 'Sambokassen' || label === 'Couple kit') return 'Sambokassen';
-  }
-  return label;
+const normalizeVariantLabel = (label: string) => {
+  const l = label.toLowerCase();
+  if (/(engångsköp|one\s*time|engangskøb)/i.test(l)) return "one";
+  if (/(varje vecka|every week|hver uge)/i.test(l)) return "weekly";
+  if (/(varannan vecka|every other week|hver anden uge)/i.test(l)) return "biweekly";
+  return "unknown";
 };
 
-const getVariantName = (label: string, lang: string) => {
-    const subscriptionTerms: { [key: string]: { [key: string]: string } } = {
-        sv: {
-            'Varje vecka': 'Varje vecka',
-            'Varannan vecka': 'Varannan vecka',
-            'Engångsköp': 'Engångsköp'
-          },
-          en: {
-            'Every week': 'Every week',
-            'Every other week': 'Every other week',
-            'One time order': 'One time order'
-          },
-          da: {
-            'Hver uge': 'Hver uge',
-            'Hver anden uge': 'Hver anden uge',
-            'Engangskøb': 'Engangskøb'
-      }
-    };
-  
-    if (subscriptionTerms[lang]) {
-      return subscriptionTerms[lang][label] || label;
-    }
+const getSmartTitle = (t: SmartType, text: any) => {
+  if (t === "veg") return text?.order?.smartTitle?.veg ?? "Saveabl Grön";
+  if (t === "gard") return text?.order?.smartTitle?.gard ?? "Saveabl Gård";
+  return text?.order?.smartTitle?.base ?? "Saveabl";
+};
 
+/* =========================================================
+   HÅRDKODADE TOTALPRISER (per kasse, exkl. frakt)
+   - SE Grön = dina tidigare nivåer
+   - SE Gård = lite högre (exempel) – ändra fritt till era faktiska
+   - DK = samma för Gård som Grön (ändra om ni vill)
+   ========================================================= */
 
-  
-    return label;
-  };
-  
+type Bucket = { family: { sub: number; one: number }; couple: { sub: number; one: number } };
 
-const OrderSummary: React.FC<OrderSummaryProps> = ({ selectedType, selectedVariant, selectedDay, postalCode, isDk, productTypes }) => {
-    const { lang, text } = useLang();
-  // Funktionen för att hämta priset för Stockholm
-  const getPriceForStockholm = () => {
-    const productName = getProductName(selectedType.label, lang);
-    
-    if (productName === 'Familjekassen' || productName === 'Family kit' || productName === 'Familiekassen') {
-      return isSubscription(selectedVariant) ? 708 : 828;
-    } else if (productName === 'Sambokassen' || productName === 'Couple kit' || productName === 'Sambokassen') {
-      return isSubscription(selectedVariant) ? 621 : 711;
-    }
-    return 0;
-  };
-  
-  // Funktionen för att hämta priset för Danmark
-  const getPriceForDenmark = () => {
-    const productName = getProductName(selectedType.label, lang);
-    
-    if (productName === 'Familjekassen' || productName === 'Family kit' || productName === 'Familiekassen') {
-      return isSubscription(selectedVariant) ? 529 : 599;
-    } else if (productName === 'Sambokassen' || productName === 'Couple kit' || productName === 'Sambokassen') {
-      return isSubscription(selectedVariant) ? 449 : 519;
-    }
-    return 0;
-  };
-  
-  // Funktionen för att hämta priset för övriga regioner
-  const getPriceForStages = () => {
-    const productName = getProductName(selectedType.label, lang);
-    
-    if (productName === 'Familjekassen' || productName === 'Family kit' || productName === 'Familiekassen') {
-      return isSubscription(selectedVariant) ? 708 : 828;
-    } else if (productName === 'Sambokassen' || productName === 'Couple kit' || productName === 'Sambokassen') {
-      return isSubscription(selectedVariant) ? 621 : 711;
-    }
-    return 0;
-  };
-  
-  // Funktionen för att beräkna totalpriset
-  const calculateTotalPrice = (postalCode: string | null) => {
-    if (!postalCode) return getPriceForStages();
+const PRICES = {
+  seStockholm: {
+    veg: { family: { sub: 708, one: 828 }, couple: { sub: 621, one: 711 } },
+    gard: { family: { sub: 828, one: 948 }, couple: { sub: 711, one: 801 } },
+  },
+  seOther: {
+    veg: { family: { sub: 708, one: 828 }, couple: { sub: 621, one: 711 } },
+    gard: { family: { sub: 828, one: 948 }, couple: { sub: 711, one: 801 } },
+  },
+  dk: {
+    veg: { family: { sub: 539, one: 599 }, couple: { sub: 449, one: 519 } },
+    gard: { family: { sub: 660, one: 720 }, couple: { sub: 540, one: 612 } }, // justera om Gård skiljer sig i DK
+  },
+} as const;
 
-    if (
-      stockholmPostalCodes1.includes(postalCode) ||
+const pickPrice = ({
+  lineup,
+  region,
+  typeKey,
+  isSub,
+}: {
+  lineup: "veg" | "gard";
+  region: "seStockholm" | "seOther" | "dk";
+  typeKey: "family" | "couple";
+  isSub: boolean;
+}) => {
+  const bucket: Bucket = (PRICES as any)[region][lineup];
+  return isSub ? bucket[typeKey].sub : bucket[typeKey].one;
+};
+
+const OrderSummary: React.FC<OrderSummaryProps> = ({
+  selectedType,
+  selectedSmartType,
+  selectedVariant,
+  selectedDay,
+  postalCode,
+  isDk,
+}) => {
+  const { lang, text } = useLang();
+
+  const typeKey: "family" | "couple" | null =
+    isFamilyType(selectedType) ? "family" : isCoupleType(selectedType) ? "couple" : null;
+
+  // prenumeration vs engångsköp baserat på variantens label (robust för alla språk)
+  const variantLabel =
+    typeof selectedVariant === "string" ? selectedVariant : selectedVariant?.label ?? "";
+  const norm = normalizeVariantLabel(variantLabel);
+  const isSub = norm === "weekly" || norm === "biweekly";
+
+  // region
+  const inSTH =
+    !!postalCode &&
+    (stockholmPostalCodes1.includes(postalCode) ||
       stockholmPostalCodes2.includes(postalCode) ||
-      stockholmPostalCodes3.includes(postalCode)
-    ) {
-      return getPriceForStockholm();
-    } else if (isDk) {
-      return getPriceForDenmark();
-    } else if (
-      skanePostalCodes1.includes(postalCode) ||
-      skanePostalCodes2.includes(postalCode) ||
-      vastPostalCodes1.includes(postalCode) ||
-      vastPostalCodes2.includes(postalCode) ||
-      vastPostalCodes3.includes(postalCode) ||
-      vastPostalCodes4.includes(postalCode) ||
-      vastPostalCodes5.includes(postalCode)||
-      vastPostalCodes6.includes(postalCode)||
-      vastPostalCodes7.includes(postalCode)
-    ) {
-      return getPriceForStages();
-    } else {
-      return getPriceForStages();
-    }
-  };
-  
-  const totalPrice = calculateTotalPrice(postalCode);
+      stockholmPostalCodes3.includes(postalCode));
 
-  // --- NYTT: Lägg till fraktkostnad beroende på land ---
+  const inSkane =
+    !!postalCode &&
+    (skanePostalCodes1.includes(postalCode) || skanePostalCodes2.includes(postalCode));
+  // (Skåne använder seOther-bucket tills ni vill särskilja)
+
+  const region: "seStockholm" | "seOther" | "dk" = isDk ? "dk" : inSTH ? "seStockholm" : "seOther";
+
+  // lineup (Grön/Gård)
+  const lineup: "veg" | "gard" = selectedSmartType === "gard" ? "gard" : "veg";
+
+  // totalpris (exkl. frakt)
+  const totalPrice =
+    typeKey ? pickPrice({ lineup, region, typeKey, isSub }) : 0;
+
+  // frakt
   const shippingCost = isDk ? 49 : 79;
 
+  const frequency = mapVariant(variantLabel, lang);
 
   return (
-    <><div className="order-summary border-2 border-[#6E2936] p-4 rounded-lg mt-6 mx-auto max-w-full sm:max-w-[500px]">
-          <h3 className="text-lg font-bold mb-2 text-[#6E2936]">{text.order.summaryTitle}</h3>
-          <p className="text-[#6E2936]"><strong>{text.order.mealKit}:</strong> {getProductName(selectedType.label, lang)}</p>
-          <p className="text-[#6E2936]"><strong>{text.order.frequency}:</strong> {getVariantName(typeof selectedVariant === 'string' ? selectedVariant : selectedVariant.label, lang)}</p>
-          <p className="text-[#6E2936]"><strong>{text.order.deliveryDaysummary}:</strong> {selectedDay.label}</p>
-          <p className="text-[#6E2936]"><strong>{text.order.totalPrice}:</strong> {totalPrice} kr + {shippingCost} kr {text.order.shipping}</p>
-          <p className="text-[#6E2936] text-md mt-2">
-  {text.order.discountNote}
-</p>
-      </div><style jsx>{`
-@media (max-width: 640px) {
-  .order-summary {
-    max-width: 92%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-`}</style></>
+    <div className="mx-auto max-w-full sm:max-w-[500px] pt-8 sm:pt-12">
+      <div className="order-summary relative border-2 border-[#6E2936] p-4 rounded-lg mx-auto">
+        {/* Pillret följer boxen */}
+        <div className="absolute -top-3 left-7 sm:left-3 px-2 py-0.5 rounded-md text-sm font-semibold text-[#6E2936] bg-[#FCF7E8]">
+          {text?.order?.your_choices ?? "Dina val"}
+        </div>
 
+        {/* Rubrik */}
+        <h3 className="text-lg font-bold mb-2 text-[#6E2936]">
+          {getSmartTitle(selectedSmartType, text)}
+        </h3>
+
+        <p className="text-[#6E2936]">
+          <strong>{text?.order?.personsLabel ?? "Antal personer"}:</strong> {selectedType?.label}
+        </p>
+
+        <p className="text-[#6E2936]">
+          <strong>{text?.order?.frequency ?? "Frekvens"}:</strong> {frequency}
+        </p>
+
+        {selectedDay?.label && (
+          <p className="text-[#6E2936]">
+            <strong>{text?.order?.deliveryDaysummary ?? "Leveransdag"}:</strong> {selectedDay?.label}
+          </p>
+        )}
+
+        <p className="text-[#6E2936]">
+          <strong>{text?.order?.totalPrice ?? "Totalt"}:</strong> {totalPrice} kr + {shippingCost} kr{" "}
+          {text?.order?.shipping ?? "frakt"}
+        </p>
+
+        <p className="text-[#6E2936] text-md mt-2">{text?.order?.discountNote}</p>
+      </div>
+
+      <style jsx>{`
+        @media (max-width: 640px) {
+          .order-summary {
+            max-width: 92%;
+            margin-left: auto;
+            margin-right: auto;
+          }
+        }
+      `}</style>
+    </div>
   );
 };
 

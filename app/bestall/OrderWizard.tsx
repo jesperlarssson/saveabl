@@ -1,124 +1,187 @@
-import React, { useState, useEffect, ReactNode } from "react";
+"use client";
+import React, {
+  useState,
+  useEffect,
+  ReactNode,
+  forwardRef,
+  useImperativeHandle,
+} from "react";
 import Button from "@/components/ui/Button";
 import { useLang } from "@/hooks/useLang";
 
-interface OrderWizardProps {
-  children: ReactNode[]; // Behandla children som en array
-  handleConfirm: () => void; // Funktion för hantering av betalning
-  stripeCheckoutIsLoading: boolean; // Laddningsindikator för betalning
-  selectedType: any; // Valt matkasse
-  selectedVariant: any; // Vald frekvens eller variant
-  selectedDay: any; // Vald leveransdag
+export interface OrderWizardHandle {
+  prev: () => void;
+  next: () => void;
+  getStep: () => number;
+  // Valfritt – om du senare vill kunna hoppa till ett steg men med “guard”
+  goTo?: (to: number) => void;
 }
 
-const OrderWizard = ({
-  children,
-  handleConfirm,
-  stripeCheckoutIsLoading,
-  selectedType,
-  selectedVariant,
-  selectedDay,
-}: OrderWizardProps) => {
-  const { text, lang } = useLang(); // Flytta denna rad inuti komponenten
-  const [currentStep, setCurrentStep] = useState(1);
-  const [step1ChoicesMade, setStep1ChoicesMade] = useState(false); // Kontroll för steg 1 val
-  const [step2ChoicesMade, setStep2ChoicesMade] = useState(false); // Kontroll för steg 2 val
+interface OrderWizardProps {
+  /** Steginnehåll: 5 block (smartkasse, antal, variant, leveransdag, adress) */
+  children: ReactNode[];
 
-  const nextStep = () => setCurrentStep((prevStep) => Math.min(prevStep + 1, children.length));
-  const prevStep = () => setCurrentStep((prevStep) => Math.max(prevStep - 1, 1));
+  /** Actions */
+  handleConfirm: () => void;
+  stripeCheckoutIsLoading: boolean;
 
-  // Aktivera "Gå vidare" för steg 1 när både selectedType och selectedVariant är valda
-  useEffect(() => {
-    if (selectedType && selectedVariant) {
-      setStep1ChoicesMade(true);
-    } else {
-      setStep1ChoicesMade(false);
-    }
-  }, [selectedType, selectedVariant]);
+  /** Tillstånd för låsning per steg (fallback-logik) */
+  selectedType: any; // Steg 2
+  selectedSmartType: "veg" | "gard" | null; // Steg 1
+  selectedVariant: any; // Steg 3
+  selectedDay: any; // Steg 4
 
-  // Aktivera "Gå vidare" för steg 2 när en dag är vald
-  useEffect(() => {
-    if (selectedDay) {
-      setStep2ChoicesMade(true);
-    } else {
-      setStep2ChoicesMade(false);
-    }
-  }, [selectedDay]);
+  /** Exponera steg utåt – för t.ex. CheckoutStepBar */
+  onStepChange?: (step: number, total: number) => void;
 
-  // Unika stilar och egenskaper för varje steg
-  const buttonStyles = {
-    common: {
-      padding: "10px 20px",
-      width: "100%", // Full bredd på mobilen
-      maxWidth: "600px", // Mindre bredd på större skärmar
-      margin: "10px auto", // Centrera på större skärmar
-      display: "flex", // Flexbox för layout
-      justifyContent: "center", // Centrerar horisontellt
-      alignItems: "center", // Centrerar vertikalt
-      textAlign: "center", // Centrerar texten horisontellt
-      flexGrow: 1, // Låter knappen växa
-      minWidth: "150px", // Minsta bredd
-      height: "auto", // Se till att höjden inte begränsar texten
-      lineHeight: "normal", // Se till att texten visas korrekt
-      borderRadius: "4px", // Ger en liten rundning på hörnen
-      cursor: "pointer", // Visar att det är en klickbar knapp
-    } as React.CSSProperties,
+  /** Valfritt: extern guard som styr om "Fortsätt" är aktiv i varje steg */
+  canProceedGuard?: (step: number) => boolean;
 
-    confirm: {
-      backgroundColor: "#F4664A", // Orange bakgrund
-      color: "#FCF7E8", // Vit text
+  /** Valfria setters (orörda här, men kvar för kompatibilitet) */
+  setSelectedVariant?: (v: any | null) => void;
+  setSelectedSmartType?: (v: "veg" | "gard" | null) => void;
+  setSelectedDay?: (v: any | null) => void;
+  setDeliveryWindow?: (v: any | null) => void;
+  setSelectedWeekday?: (v: number | null) => void;
+  postalCode?: string | null;
+}
+
+const OrderWizard = forwardRef<OrderWizardHandle, OrderWizardProps>(
+  (
+    {
+      children,
+      handleConfirm,
+      stripeCheckoutIsLoading,
+      selectedType,
+      selectedSmartType,
+      selectedVariant,
+      selectedDay,
+      onStepChange,
+      canProceedGuard,
     },
+    ref
+  ) => {
+    const { text } = useLang();
 
-    back: {
-        backgroundColor: "#EECFAA", // Bakgrundsfärg till orange
-        border: "2px solid #EECFAA", // Samma orange färg för ramen
-        color: "#6E2936", // Textfärg till ljus krämfärg
+    const maxStep = Array.isArray(children) ? children.length : 1;
+    const [currentStep, setCurrentStep] = useState(1);
+
+    // ✅ Korrekt fallback-låsning per steg
+    // Steg 1: smartkasse, Steg 2: antal, Steg 3: variant, Steg 4: leveransdag
+    const fallbackCanProceed = (step: number) => {
+      if (step === 1) return Boolean(selectedSmartType);
+      if (step === 2) return Boolean(selectedType);
+      if (step === 3) return Boolean(selectedVariant);
+      if (step === 4) return Boolean(selectedDay);
+      return true; // sista steget (adress/betalning) hanteras i handleConfirm
+    };
+
+    const canProceed = (step: number) =>
+      typeof canProceedGuard === "function"
+        ? canProceedGuard(step)
+        : fallbackCanProceed(step);
+
+    // Hjälp för att blockera hopp framåt
+    const allPrevSatisfied = (toStep: number) => {
+      for (let s = 1; s < toStep; s++) {
+        if (!canProceed(s)) return false;
+      }
+      return true;
+    };
+
+    const guardedGoTo = (to: number) => {
+      if (to === currentStep) return;
+      // Blockera hopp framåt om tidigare steg inte är uppfyllda
+      if (to > currentStep && !allPrevSatisfied(to)) return;
+      setCurrentStep(Math.min(Math.max(1, to), maxStep));
+    };
+
+    // Ping till stegbaren när steg ändras
+    useEffect(() => {
+      onStepChange?.(currentStep, maxStep);
+    }, [currentStep, maxStep, onStepChange]);
+
+    const nextStep = () => setCurrentStep((s) => Math.min(s + 1, maxStep));
+    const prevStep = () => setCurrentStep((s) => Math.max(s - 1, 1));
+
+    // Exponera API (för bakåtpil etc.)
+    useImperativeHandle(ref, () => ({
+      prev: prevStep,
+      next: () => {
+        if (canProceed(currentStep)) nextStep();
       },
-  };
+      getStep: () => currentStep,
+      goTo: guardedGoTo,
+    }));
 
-  return (
-    <div>
-      <div>{children[currentStep - 1]} {/* Rendera aktuellt steg */}</div>
-      
-      {/* Flexcontainer för knappar */}
-      <div className="flex justify-center gap-4 mt-4 px-4">
-        {/* Hantering av knappar för första steget */}
-        {currentStep === 1 && (
-          <Button onClick={nextStep} style={{ ...buttonStyles.common, ...buttonStyles.confirm }} disabled={!step1ChoicesMade}>
-            {text.order.step1_button}
-          </Button>
-        )}
+    // Enhetlig CTA-storlek
+    const ctaStyle: React.CSSProperties = {
+      width: "100%",
+      maxWidth: 360,
+      height: 52,
+      margin: "10px auto",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      borderRadius: 8,
+      backgroundColor: "#F4664A",
+      color: "#FCF7E8",
+      cursor: "pointer",
+    };
 
-        {/* Hantering av knappar för andra steget */}
-        {currentStep === 2 && (
-          <>
-            <Button onClick={prevStep} style={{ ...buttonStyles.common, ...buttonStyles.back }}>
-              {text.order.back_button}
-            </Button>
-            <Button onClick={nextStep} style={{ ...buttonStyles.common, ...buttonStyles.confirm }} disabled={!step2ChoicesMade}>
-              {text.order.step2_button}
-            </Button>
-          </>
-        )}
+    // Språkstyrda CTA-etiketter
+    const nextCtas = [
+      String(text?.order?.step2_button ?? ""),
+      String(text?.order?.step3_button ?? ""),
+      String(text?.order?.step4_button ?? ""),
+      String(text?.order?.step5_button ?? ""),
+    ];
+    const nextLabel = nextCtas[currentStep - 1] || "Fortsätt";
 
-        {/* Hantering av knappar för sista steget */}
-        {currentStep === 3 && (
-          <>
-            <Button onClick={prevStep} style={{ ...buttonStyles.common, ...buttonStyles.back }}>
-              {text.order.back_button}
+    // NEW: blockera Enter från att hoppa vidare när steget inte får fortsätta
+    const onKeyDown: React.KeyboardEventHandler<HTMLDivElement> = (e) => {
+      if (e.key === "Enter" && !canProceed(currentStep)) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    };
+
+    return (
+      <div onKeyDown={onKeyDown}>
+        {/* Innehåll för aktuellt steg */}
+        <div className="space-y-6 sm:space-y-8">
+          {Array.isArray(children) ? children[currentStep - 1] : children}
+        </div>
+
+        {/* CTA-rad */}
+        <div className="flex justify-center mt-8 sm:mt-10 px-4 pt-6 border-t border-primary/20">
+          {currentStep < maxStep ? (
+            <Button
+              onClick={() => {
+                if (canProceed(currentStep)) nextStep();
+              }}
+              style={ctaStyle}
+              disabled={!canProceed(currentStep)}
+            >
+              {nextLabel}
             </Button>
+          ) : (
             <Button
               onClick={handleConfirm}
-              style={{ ...buttonStyles.common, ...buttonStyles.confirm }}
-              disabled={stripeCheckoutIsLoading} // Deaktivera knappen om betalning pågår
+              style={ctaStyle}
+              // NEW: även sista knappen är disabled tills alla krav för steg 5 är uppfyllda
+              disabled={stripeCheckoutIsLoading || !canProceed(currentStep)}
             >
-              {stripeCheckoutIsLoading ? text.order.loading : text.order.pay}
+              {stripeCheckoutIsLoading
+                ? (text?.order?.loading ?? "Laddar...")
+                : (text?.order?.pay ?? "Betala")}
             </Button>
-          </>
-        )}
+          )}
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+);
 
+OrderWizard.displayName = "OrderWizard";
 export default OrderWizard;

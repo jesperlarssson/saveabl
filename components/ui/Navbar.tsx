@@ -113,8 +113,9 @@ const Navbar = () => {
 
   return (
     <div
+    id="site-header"
       className={twMerge(
-        `sticky top-0 w-full bg-primary-200 border-b border-primary border-opacity-25 drop-shadow-sm  z-30 transition`,
+        `sticky top-0 w-full bg-primary-200 border-b border-primary border-opacity-25 drop-shadow-sm  z-50 transition`,
         active && ""
       )}
     >

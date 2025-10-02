@@ -1,1 +1,1 @@
-export const textBannerText = "save time • save food • save earth • save time • save food • save earth • save time • save food • save earth • save time • save food • save earth • save time • save food • save earth • save time • save food • save earth • ";
+export const textBannerText = "save time • save food • save dinner • save time • save food • save dinner • save time • save food • save dinner • save time • save food • save dinner • save time • save food • save dinner • save time • save food • save dinner • ";

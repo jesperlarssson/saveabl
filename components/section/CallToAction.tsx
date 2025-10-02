@@ -129,7 +129,7 @@ const CallToAction = () => {
             transition={{ delay: 0.2 }}
             className="flex flex-col items-center"
           >
-            <h3 className="font-poppins text-4xl sm:text-5xl mb-1 sm:mb-2">80%</h3>
+            <h3 className="font-poppins text-4xl sm:text-5xl mb-1 sm:mb-2">100%</h3>
             <p className="text-sm sm:text-xl -mt-1 font-light text-center">
               {compText.vegetarian}
             </p>
