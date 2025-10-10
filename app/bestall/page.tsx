@@ -381,11 +381,6 @@ const Order = () => {
       measureBar();
       recomputeStickyTop();
     });
-    setTimeout(() => {
-      document
-        .getElementById("deliverySection")
-        ?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 300);
   };
 
   const handleConfirm = async () => {
