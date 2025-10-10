@@ -244,17 +244,22 @@ const svText = {
         answer: "Vi samarbetar med gårdar, matproducenter och grossister och hjälper dem att rädda bra matvaror från att slängas. Ofta handlar det om frukt och grönt som inte uppfyller butikernas krav på storlek, form eller färg. Vi ser till att dessa utmärkta varor inte går till spillo. I många fall är maten i våra kassar till och med färskare än butikens, eftersom den ofta kommer direkt från bonden.",
       },
       {
+        question: "Hur mycket av maten är räddad?", 
+        answer: "Du hittar den exakta andelen räddad mat under varje enskilt recept. I “Saveabl Grön” består omkring 80 % av ingredienserna av räddade råvaror. Du får goda, genomtänkta måltider och samtidigt möjlighet att ta vara på bra mat som redan finns. En sammanställning i samarbete med RISE år 2024 visar att det ger upp till fem gånger lägre klimatavtryck än en genomsnittlig svensk middag.", 
+      },
+      {
         question: "Har matens bäst-före datum passerat?",
         answer: "Nej, inget som vi skickar ut har passerat bäst före-datum. All mat som vi skickar ut i matkassen ska hålla i minst 7 dagar från att den når våra kunder, då vi räknar med att maten äts upp inom loppet av en vecka.",
+      },
+      {
+        question: "Varifrån kommer köttet i Saveabl Gård?", 
+        answer: "Allt kött i alternativet “Saveabl Gård” kommer från Sverige. Vi väljer noga ut gårdar och producenter med goda djurförhållanden. Du ska naturligtvis kunna känna dig trygg med att servera kockpreppade middagar där omtanken finns i hela kedjan – från gård till färdig måltid.", 
       },
       {
         question: "Behöver jag ha något extra hemma?", 
         answer: "Du behöver bara ha någon typ av matlagningsolja hemma, lite salt och peppar och sen har vi tillsatt ALLT annat! Njut av smidigheten.", 
       },
-      {
-        question: "Hur mycket av maten är egentligen räddad?", 
-        answer: "Du hittar den exakta andelen räddad mat under varje enskilt recept. Vi strävar efter att ungefär 80% av ingredienserna ska vara räddade. Vår målsättning är att hitta den perfekta balansen mellan att skapa fantastiska och fullständiga rätter samtidigt som vi har en positiv inverkan på klimatet. En sammanställning gjord i samarbete med RISE visar att vårt klimatavtryck är hela 5 gånger lägre än en genomsnittlig svensk middag. Så ja, vi är definitivt på rätt väg mot en mer hållbar framtid!", 
-      },
+    
       {
         question: "Allergier? Vad gäller?", 
         answer: "Tyvärr kan vi inte lösa alla allergier, skicka oss gärna ett mail så kan vi titta närmare på om vi kan ordna en matkasse som passar just din allergi.", 
@@ -965,16 +970,20 @@ faqItems: [
     answer: "We collaborate with farms, food producers, and wholesalers to help them save good food items from being thrown away. It’s often fruits and vegetables that don’t meet store requirements for size, shape, or color. We make sure that these excellent items don’t go to waste. In many cases, the food in our kits is even fresher than what you find in stores because it often comes directly from the farmer."
   },
   {
-    question: "Has the food's best-before date passed?",
-    answer: "No, nothing we send out has passed its best-before date. All food in our meal kits should last at least 7 days from when it reaches our customers, as we expect the food to be eaten within a week."
+    question: "How much of the food is saved?",
+    answer: "You can find the exact share of rescued food under each individual recipe. In “Saveabl Grön,” around 80% of the ingredients come from rescued produce. You get delicious, well-balanced meals while helping to make use of great food that already exists. A review conducted in collaboration with RISE in 2024 shows that this results in up to five times lower climate impact compared to an average Swedish dinner."
+  },
+  {
+    question: "Where does the meat in Saveabl Farm come from?",
+    answer: "All the meat in “Saveabl Farm” come from Sweden. We carefully select farms and producers with good animal welfare standards. You can feel confident serving chef-prepped meals made with care at every step – from farm to finished dish."
   },
   {
     question: "Do I need anything extra at home?",
     answer: "You only need some kind of cooking oil, a little salt and pepper, and we’ve provided EVERYTHING else! Enjoy the convenience."
   },
   {
-    question: "How much of the food is actually saved?",
-    answer: "You can find the exact percentage of saved food under each individual recipe. We aim for about 80% of the ingredients to be saved. Our goal is to find the perfect balance between creating fantastic and complete dishes while also having a positive impact on the climate. A summary made in collaboration with RISE shows that our carbon footprint is five times lower than an average Swedish dinner. So yes, we are definitely on the right track toward a more sustainable future!"
+    question: "Do I need anything extra at home?",
+    answer: "You only need some kind of cooking oil, a little salt and pepper, and we’ve provided EVERYTHING else! Enjoy the convenience."
   },
   {
     question: "Allergies? What’s the deal?",
@@ -1644,16 +1653,20 @@ faqItems: [
     answer: "Vi samarbejder med gårde, fødevareproducenter og grossister og hjælper dem med at redde gode fødevarer fra at blive smidt ud. Ofte drejer det sig om frugt og grønt, der ikke opfylder butikkernes krav til størrelse, form eller farve. Vi sørger for, at disse fremragende varer ikke går til spilde. I mange tilfælde er maden i vores kasser faktisk friskere end butikkens, da den ofte kommer direkte fra landmanden."
   },
   {
+    question: "Hvor stor en del af maden er reddet?",
+    answer: "Du kan se den præcise andel af reddet mad under hver enkelt opskrift. I “Saveabl Grön” består omkring 80 % af ingredienserne af reddede råvarer. Du får velsmagende, gennemtænkte måltider og samtidig mulighed for at tage vare på god mad, der allerede findes. En opgørelse lavet i samarbejde med RISE i 2024 viser, at det giver op til fem gange lavere klimaaftryk end et gennemsnitligt svensk måltid."
+  },
+  {
     question: "Er madens bedst før-dato overskredet?",
     answer: "Nej, intet vi sender ud er overskredet bedst før-dato. Al mad i vores måltidskasser skal holde i mindst 7 dage fra den når vores kunder, da vi regner med, at maden spises indenfor en uge."
   },
   {
-    question: "Skal jeg have noget ekstra derhjemme?",
-    answer: "Du skal kun have en slags madlavningsolie, lidt salt og peber, og så har vi tilføjet ALT andet! Nyd bekvemmeligheden."
+    question: "Hvor kommer kødet i Saveabl Gård fra?",
+    answer: "Alt kød i “Saveabl Gård” kommer fra Sverige. Vi udvælger gårde og producenter med gode dyrevelfærdsforhold med stor omhu. Du kan trygt servere kokkeklare måltider, hvor omtanken følger hele vejen – fra gård til færdigt måltid."
   },
   {
-    question: "Hvor meget af maden er egentlig reddet?",
-    answer: "Du kan finde den præcise andel reddet mad under hver opskrift. Vi sigter efter, at ca. 80% af ingredienserne skal være reddet. Vores mål er at finde den perfekte balance mellem at skabe fantastiske og komplette retter, samtidig med at vi har en positiv indvirkning på klimaet. Et sammendrag lavet i samarbejde med RISE viser, at vores klimaaftryk er fem gange lavere end et gennemsnitligt svensk måltid. Så ja, vi er bestemt på rette vej mod en mere bæredygtig fremtid!"
+    question: "Skal jeg have noget ekstra derhjemme?",
+    answer: "Du skal kun have en slags madlavningsolie, lidt salt og peber, og så har vi tilføjet ALT andet! Nyd bekvemmeligheden."
   },
   {
     question: "Allergier? Hvad gælder?",
