@@ -835,7 +835,7 @@ const enText = {
     my_account: "My account",
   },
   imageDisplay: {
-    klimatsmart: "Close",
+    klimatsmart: "Carefully selected",
     kockforberedd: "Chef prepared",
     enkeltgott: "Simple & Tasty",
   },
@@ -974,8 +974,8 @@ faqItems: [
     answer: "You can find the exact share of rescued food under each individual recipe. In “Saveabl Grön,” around 80% of the ingredients come from rescued produce. You get delicious, well-balanced meals while helping to make use of great food that already exists. A review conducted in collaboration with RISE in 2024 shows that this results in up to five times lower climate impact compared to an average Swedish dinner."
   },
   {
-    question: "Where does the meat in Saveabl Farm come from?",
-    answer: "All the meat in “Saveabl Farm” come from Sweden. We carefully select farms and producers with good animal welfare standards. You can feel confident serving chef-prepped meals made with care at every step – from farm to finished dish."
+    question: "Where does the meat in Saveabl Gård come from?",
+    answer: "All the meat in “Saveabl Gård” come from Sweden. We carefully select farms and producers with good animal welfare standards. You can feel confident serving chef-prepped meals made with care at every step – from farm to finished dish."
   },
   {
     question: "Do I need anything extra at home?",
@@ -1015,8 +1015,8 @@ button: "Got it - order now!"
     sending_comment: "Sending...",
     next_week_order_until: "Available to order until Wed, w. {week}",
     filters: {
-      veg: "Saveabl Green",
-      meat: "Saveabl Farm",
+      veg: "Saveabl Grön",
+      meat: "Saveabl Gård",
     },
     filtersDescriptions: {
       veg: "Vegetarian dinners made with carefully selected ingredients",
@@ -1064,8 +1064,8 @@ button: "Got it - order now!"
     smartkasse: {
       title: "What do you want to serve?",
       options: {
-        veg: "Saveabl Green",
-        gard: "Saveabl Farm",
+        veg: "Saveabl Grön",
+        gard: "Saveabl Gård",
       },
       notes: {
         veg: "Vegetarian dinners made with selected ingredients",
@@ -1117,8 +1117,8 @@ button: "Got it - order now!"
     your_choices: "Your chioces", 
     smartTitle: {
       base: "Saveabl",
-      veg: "Saveabl Green",
-      gard: "Saveabl Farm",
+      veg: "Saveabl Grön",
+      gard: "Saveabl Gård",
     },
     personsLabel: "Number of people", 
     frequency: "Delivery frequency",
@@ -1697,7 +1697,7 @@ button: "Jeg forstår - bestil nu!"
     sending_comment: "Sender...", 
     next_week_order_until: "Kan bestilles indtil torsdag kl. 16 uge {week}", 
     filters: {
-      veg: "Saveabl Grøn",
+      veg: "Saveabl Grön",
       meat: "Saveabl Gård",
     },
     filtersDescriptions: {
@@ -1747,7 +1747,7 @@ button: "Jeg forstår - bestil nu!"
     smartkasse: {
       title: "Hvad vil du servere?",
       options: {
-        veg: "Saveabl Grøn",
+        veg: "Saveabl Grön",
         gard: "Saveabl Gård",
       },
       notes: {
@@ -1789,7 +1789,7 @@ button: "Jeg forstår - bestil nu!"
     summaryTitle: "Dine valg:",
     smartTitle: {
       base: "Saveabl",
-      veg: "Saveabl Grøn",
+      veg: "Saveabl Grön",
       gard: "Saveabl Gård", 
     },
     personsLabel: "Antal personer", 
