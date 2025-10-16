@@ -449,9 +449,11 @@ const Order = () => {
       const deliveryDayLabel = getDayLabelFromId(selectedWeekday) ?? "Okänt";
       const people = (selectedType?.label ?? "").replace(/\s*[-–]\s*/g, "-");
       const descriptionForStripe =
-        `Vald leverans: ${deliveryDayLabel}\n` +
-        `Antal personer: ${people}\n` +
-        `Extra info: ${userInformation.extraInfo || ""}`;
+  `Vald leverans: ${deliveryDayLabel}\n` +
+  `Antal personer: ${people}\n` +
+  `Matkasse: ${selectedSmartType === "gard" ? "Saveabl Gård" : "Saveabl Grön"}\n` +
+  `Extra info: ${userInformation.extraInfo || ""}`;
+
 
       const response = await axios.post("/api/create_stripe_customer", {
         email: userInformation.email,

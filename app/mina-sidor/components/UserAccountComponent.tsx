@@ -16,43 +16,23 @@ import { addWeeks, format } from "date-fns";
 const translateDay = (day: string, language: "sv" | "en" | "da") => {
   if (!day) return null;
 
-  // 🛠 Konvertera inkommande dag till "Title Case" (ex: "saturday" → "Saturday")
   const formattedDay = day.charAt(0).toUpperCase() + day.slice(1).toLowerCase();
-
-  // Normalisera inkommande dagar till engelska först
   const normalizedDays: Record<string, string> = {
-    // Svenska till engelska
     "Lördag": "Saturday", "Söndag": "Sunday", "Måndag": "Monday",
-
-    // Danska till engelska
     "Lørdag": "Saturday", "Søndag": "Sunday", "Mandag": "Monday",
-
-    // Engelska (om den redan är rätt formaterad)
     "Saturday": "Saturday", "Sunday": "Sunday", "Monday": "Monday"
   };
 
-  // Om dagen är på svenska eller danska, översätt till engelska först
   const normalizedDay = normalizedDays[formattedDay] || formattedDay;
 
-  // Översätt till önskat språk (svenska, engelska eller danska)
   const days: Record<"en" | "sv" | "da", Record<string, string>> = {
-    en: {
-      "Saturday": "Saturday", "Sunday": "Sunday", "Monday": "Monday",
-    },
-    sv: {
-      "Saturday": "Lördag", "Sunday": "Söndag", "Monday": "Måndag",
-    },
-    da: {
-      "Saturday": "Lørdag", "Sunday": "Søndag", "Monday": "Mandag",
-    }
+    en: { "Saturday": "Saturday", "Sunday": "Sunday", "Monday": "Monday" },
+    sv: { "Saturday": "Lördag", "Sunday": "Söndag", "Monday": "Måndag" },
+    da: { "Saturday": "Lørdag", "Sunday": "Søndag", "Monday": "Mandag" }
   };
 
-  return days[language]?.[normalizedDay] || normalizedDay; // Om inget matchar, returnera originalvärdet
+  return days[language]?.[normalizedDay] || normalizedDay;
 };
-
-
-
-
 
 interface DeliveryInfo {
   city: string;
@@ -83,24 +63,43 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
   const { pauseWeek, setPauseWeek } = usePauseWeek();
   const [manualPauseSet, setManualPauseSet] = useState<boolean>(false);
 
-  const { isOpen, onClose, onOpen, forCustomer } = useManageSubscriptionModal();
-  const { isOpen: isOpenInterval, onOpen: onOpenInterval, forCustomer: forCustomerInterval } = useChangeIntervalModal();
-  const {
-    isOpen: isOpenDeliveryDay,
-    onOpen: onOpenDeliveryDay,
-    forCustomer: forCustomerDeliveryDay,
-  } = useChangeDeliveryDayModal();
-  const { onOpen: onOpenAddress, forCustomer: forCustomerAddress } = useManageAddressModal();
+  const { onOpen, forCustomer } = useManageSubscriptionModal();
+  const { onOpen: onOpenInterval, forCustomer: forCustomerInterval } = useChangeIntervalModal();
+  const { onOpen: onOpenDeliveryDay, forCustomer: forCustomerDeliveryDay } = useChangeDeliveryDayModal();
+  const { forCustomer: forCustomerAddress } = useManageAddressModal();
 
   const { text, lang } = useLang();
   const authContext = useContext(AuthContext);
   const { referralCode } = authContext || {};
 
-  const deliveryDayMatch = stripeResponse?.customer?.description?.match(/Vald leverans:\s([\wåäöÅÄÖæøÆØ]+)/);
-const deliveryDay = deliveryDayMatch ? deliveryDayMatch[1] : null;
+  // --- 🧩 Extrahera leveransdag, antal personer & matkasse ---
+  const description = stripeResponse?.customer?.description ?? "";
 
-// Översätt veckodagen till aktuellt språk
-const translatedDeliveryDay = deliveryDay ? translateDay(deliveryDay, lang as "sv" | "en" | "da") : null;
+  // Leveransdag (endast veckodag)
+  const deliveryDayMatch = description.match(/Vald leverans:\s([^\n]+)/);
+  let deliveryDay = deliveryDayMatch ? deliveryDayMatch[1] : null;
+  if (deliveryDay) deliveryDay = deliveryDay.split(" ")[0];
+
+  // Antal personer (stannar innan Matkasse eller Extra info)
+  const peopleMatch = description.match(/Antal personer:\s(.*?)(?=\s?Matkasse:|\s?Extra info:|$)/);
+
+  const people = peopleMatch ? peopleMatch[1].trim() : null;
+
+  // Matkasse (stannar innan Extra info eller nästa fält)
+  const mealBoxMatch = description.match(/Matkasse:\s(.*?)(?=\sVald leverans:|\sAntal personer:|\sExtra info:|$)/);
+  let mealBoxType = mealBoxMatch ? mealBoxMatch[1].trim() : null;
+
+  // Fallback via productId om det inte hittas
+  const productId = activeSubscription?.items?.data?.[0]?.price?.id || "";
+  if (!mealBoxType) {
+    if (productId.toLowerCase().includes("gard")) mealBoxType = "Saveabl Gård";
+    else if (productId.toLowerCase().includes("gron")) mealBoxType = "Saveabl Grön";
+  }
+
+  const translatedDeliveryDay = deliveryDay
+    ? translateDay(deliveryDay, lang as "sv" | "en" | "da")
+    : null;
+  // --- ✅ Slut på regexfix ---
 
   useEffect(() => {
     if (loading || !activeSubscription) return;
@@ -122,7 +121,6 @@ const translatedDeliveryDay = deliveryDay ? translateDay(deliveryDay, lang as "s
     }
   }, [activeSubscription, loading, manualPauseSet, setPauseWeek]);
 
-  // Om komponenten laddar, visa laddningsindikator
   if (loading) {
     return (
       <div className="flex gap-2 items-center">
@@ -131,7 +129,6 @@ const translatedDeliveryDay = deliveryDay ? translateDay(deliveryDay, lang as "s
     );
   }
 
-  // Om ingen aktiv prenumeration finns, visa fallback-meddelandet
   if (!activeSubscription) {
     return (
       <div className="w-full h-36 rounded-lg text-secondary font-semibold text-xl bg-primary-500 bg-opacity-50 flex flex-col justify-center items-center mb-8">
@@ -141,23 +138,12 @@ const translatedDeliveryDay = deliveryDay ? translateDay(deliveryDay, lang as "s
     );
   }
 
-  const updatePauseStatus = (status: boolean) => {
-    setIsPaused(status);
-  };
-
-  const updatePauseWeek = (week: string) => {
-    setPauseWeek(week);
-  };
-
   const handleModifyAccountClick = async () => {
     try {
       const response = await axios.post("/api/create-billing-portal-session", {
         customerId: stripeResponse.customer.id,
       });
-      const data = response.data;
-      if (data.url) {
-        window.location.href = data.url;
-      }
+      if (response.data.url) window.location.href = response.data.url;
     } catch (error) {
       console.error("Error redirecting to billing portal:", error);
     }
@@ -165,7 +151,7 @@ const translatedDeliveryDay = deliveryDay ? translateDay(deliveryDay, lang as "s
 
   const handleSubscriptionClick = () => {
     forCustomer(stripeResponse.customer.id, stripeResponse.customer.email, isPaused);
-    onOpen(); // Endast öppna modal här utan att sätta pausen
+    onOpen();
   };
 
   const handleResumeSubscription = async () => {
@@ -176,8 +162,8 @@ const translatedDeliveryDay = deliveryDay ? translateDay(deliveryDay, lang as "s
         actions: "RESUME",
         wish: "Vill återuppta prenumerationen",
       });
-      setIsPaused(false); // Återställ pausstatusen
-      setPauseWeek(""); // Återställ pausveckan
+      setIsPaused(false);
+      setPauseWeek("");
     } catch (error) {
       console.error("Error adding resume action to backlog:", error);
     }
@@ -199,44 +185,31 @@ const translatedDeliveryDay = deliveryDay ? translateDay(deliveryDay, lang as "s
   };
 
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(referralCode || "").then(() => {
-      alert(text.referral.copy_success);
-    }).catch(err => {
-      alert(text.referral.copy_fail + ': ' + err);
-    });
+    navigator.clipboard.writeText(referralCode || "")
+      .then(() => alert(text.referral.copy_success))
+      .catch(err => alert(text.referral.copy_fail + ': ' + err));
   };
 
   const shareCode = () => {
     if (navigator.share) {
-      const message = text?.referral?.sms_message ?? 
-      "Hej! Med min kod får du 100kr rabatt på www.saveabl.com. Ange den i checkouten när du gör din beställning :)";
+      const message = text?.referral?.sms_message ??
+        "Hej! Med min kod får du 100kr rabatt på www.saveabl.com. Ange den i checkouten när du gör din beställning :)";
       const formattedMessage = message.replace("{referralCode}", referralCode);
       const fullMessage = `${formattedMessage}\n\nhttps://www.saveabl.com`;
 
-      navigator.share({
-        text: fullMessage,
-      }).catch((error) => console.error("Delning misslyckades:", error));
+      navigator.share({ text: fullMessage }).catch(console.error);
     } else {
       alert("Delning stöds inte på denna enhet");
     }
   };
 
-  if (loading || !activeSubscription) {
-    console.log("Stripe Customer:", stripeResponse?.customer);
-
-
-    return (
-      <div className="flex gap-2 items-center">
-        <div className="w-3 h-3 rounded-full animate-pulse bg-accent"></div> Loading...
-      </div>
-    );
-  }
-
   return (
     <div className="w-full">
+      {/* --- Referral Section --- */}
       <h2 className="text-2xl text-secondary font-semibold mb-4">
         {text?.my_pages?.referral_title ?? "Värva en vän"}
       </h2>
+
       {referralCode ? (
         <div className="bg-primary bg-opacity-60 shadow-inner rounded px-8 pt-6 pb-8 mb-4">
           <p className="mb-4 font-medium">
@@ -246,19 +219,18 @@ const translatedDeliveryDay = deliveryDay ? translateDay(deliveryDay, lang as "s
             {text?.my_pages?.referral_your_code ?? "Din värvningskod"}:{" "}
             <span className="font-bold">{referralCode}</span>
           </p>
-          {/* Liten text med asterisk */}
-           <p className="text-sm text-black mb-4 italic">
-           * {text?.my_pages?.referral_code_note ?? "Koden är giltig för nya kunder"}
+          <p className="text-sm text-black mb-4 italic">
+            * {text?.my_pages?.referral_code_note ?? "Koden är giltig för nya kunder"}
           </p>
           <div className="flex gap-2 flex-wrap">
             <button
-              className="bg-secondary hover:bg-secondary-800 text-white font-bold py-2 px-4 mr-2 mt-4"
+              className="bg-secondary hover:bg-secondary-800 text-white font-bold py-2 px-4 mt-4"
               onClick={copyToClipboard}
             >
               {text?.my_pages?.referral_copy_button ?? "Kopiera kod"}
             </button>
             <button
-              className="bg-secondary hover:bg-secondary-800 text-white font-bold py-2 px-4 mr-2 mt-4"
+              className="bg-secondary hover:bg-secondary-800 text-white font-bold py-2 px-4 mt-4"
               onClick={shareCode}
             >
               {text?.my_pages?.referral_share_button ?? "Dela kod"}
@@ -270,42 +242,52 @@ const translatedDeliveryDay = deliveryDay ? translateDay(deliveryDay, lang as "s
           <div>{text?.my_pages?.referral_no_code ?? "Ingen värvningskod tillgänglig"}</div>
         </div>
       )}
+
+      {/* --- Subscription Details --- */}
       {activeSubscription && (
         <>
           <h3 className="text-2xl text-secondary font-semibold mb-3">
-            {text?.my_pages?.subscription_details ?? "Subscription Details"}
+            {text?.my_pages?.subscription_details ?? "Prenumerationsdetaljer"}
           </h3>
           <div className="bg-primary bg-opacity-60 shadow-inner rounded px-8 pt-6 pb-8 mb-4">
             <p className="mb-2">
-              {text?.my_pages?.billing_frequency ?? "Billing Frequency"}:{" "}
+              {text?.my_pages?.billing_frequency ?? "Frekvens"}:{" "}
               <span className="font-medium">
                 {billingFrequency === "bi-weekly"
                   ? text?.my_pages?.biweekly
                   : text?.my_pages?.weekly}
               </span>
             </p>
-            {translatedDeliveryDay && (
-  <p className="mb-4">
-    {text?.my_pages?.delivery_day ?? "Leveransdag"}:{" "}
-    <span className="font-medium">{translatedDeliveryDay}</span>
-  </p>
-)}
 
-            {isPaused && (
-            <p className="mb-4">
-            {isIndefinitePause
-            ? text?.my_pages?.pause_indefinite ?? "Pausad tills vidare"
-            : text?.my_pages?.pause_until?.replace("{week}", pauseWeek ? pauseWeek.toString() : "")}
-            </p>
-             )}
-            {stripeResponse?.customer?.metadata?.deliveryDay && (
-              <p className="mb-4">
-                {text?.my_pages?.deliveryDay}:{" "}
-                <span className="font-medium">
-                  {stripeResponse.customer.metadata.deliveryDay}
-                </span>
+            {translatedDeliveryDay && (
+              <p className="mb-2">
+                {text?.my_pages?.delivery_day ?? "Leveransdag"}:{" "}
+                <span className="font-medium">{translatedDeliveryDay}</span>
               </p>
             )}
+
+            {people && (
+              <p className="mb-2">
+                {text?.my_pages?.people ?? "Antal personer"}:{" "}
+                <span className="font-medium">{people}</span>
+              </p>
+            )}
+
+            {mealBoxType && (
+              <p className="mb-4">
+                {text?.my_pages?.mealbox_type ?? "Matkasse"}:{" "}
+                <span className="font-medium">{mealBoxType}</span>
+              </p>
+            )}
+
+            {isPaused && (
+              <p className="mb-4">
+                {isIndefinitePause
+                  ? text?.my_pages?.pause_indefinite ?? "Pausad tills vidare"
+                  : text?.my_pages?.pause_until?.replace("{week}", pauseWeek ? pauseWeek.toString() : "")}
+              </p>
+            )}
+
             <div className="flex gap-2 flex-wrap">
               {isPaused ? (
                 <button
@@ -322,27 +304,32 @@ const translatedDeliveryDay = deliveryDay ? translateDay(deliveryDay, lang as "s
                   {text?.my_pages?.pause_mealbox_button ?? "Pausa"}
                 </button>
               )}
+
               {!isPaused && (
                 <button
                   className="bg-secondary hover:bg-secondary-800 text-white font-bold py-2 px-4 mr-2 mt-4"
                   onClick={handleChangeIntervalClick}
                 >
-                  {text?.my_pages?.change_mealbox_button ?? "Ändra interval"}
+                  {text?.my_pages?.change_mealbox_button ?? "Ändra intervall"}
                 </button>
               )}
+
               <button
                 className="bg-secondary hover:bg-secondary-800 text-white font-bold py-2 px-4 mr-2 mt-4"
                 onClick={handleChangeDeliveryDayClick}
               >
-                {text?.my_pages?.change_delivery_day_button ?? "Change delivery day"}
+                {text?.my_pages?.change_delivery_day_button ?? "Ändra leveransdag"}
               </button>
             </div>
           </div>
         </>
       )}
+
+      {/* --- Kundinformation --- */}
       <h2 className="text-2xl text-secondary font-semibold mb-4">
-        {text?.my_pages?.account_information ?? "Account Information"}
+        {text?.my_pages?.account_information ?? "Kundinformation"}
       </h2>
+
       {stripeResponse ? (
         <div className="bg-primary bg-opacity-60 shadow-inner rounded px-8 pt-6 pb-8 mb-4">
           <p className="mb-2">
@@ -363,6 +350,7 @@ const translatedDeliveryDay = deliveryDay ? translateDay(deliveryDay, lang as "s
               {deliveryInfo.line1}, {deliveryInfo.city}, {deliveryInfo.postal_code}, {deliveryInfo.country}
             </span>
           </p>
+
           <button
             className="bg-secondary hover:bg-secondary-800 text-white font-bold py-2 px-4 mr-4 mt-4"
             onClick={() =>
@@ -376,6 +364,7 @@ const translatedDeliveryDay = deliveryDay ? translateDay(deliveryDay, lang as "s
           >
             {text?.my_pages?.change_address_button ?? "Ändra adress och telefonnummer"}
           </button>
+
           <button
             className="bg-secondary hover:bg-secondary-800 text-white font-bold py-2 px-4 mr-2 mt-8"
             onClick={handleModifyAccountClick}
@@ -383,15 +372,11 @@ const translatedDeliveryDay = deliveryDay ? translateDay(deliveryDay, lang as "s
             {text?.my_pages?.manage_account}
           </button>
         </div>
-      ) : (
-        <div className="w-full h-36 rounded-lg text-secondary font-semibold text-xl bg-primary-500 bg-opacity-50 flex flex-col justify-center items-center">
-          <div>{text?.my_pages?.no_connection}</div>
-          <div className="font-light text-sm">{text?.my_pages?.no_connection_desc}</div>
-        </div>
-      )}
+      ) : null}
+
       <ManageSubscriptionModal
-        updatePauseStatus={updatePauseStatus}
-        updatePauseWeek={updatePauseWeek}
+        updatePauseStatus={setIsPaused}
+        updatePauseWeek={setPauseWeek}
       />
       <ManageAddressModal />
     </div>
