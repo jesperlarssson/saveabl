@@ -83,7 +83,7 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
   // Antal personer (stannar innan Matkasse eller Extra info)
   const peopleMatch = description.match(/Antal personer:\s(.*?)(?=\s?Matkasse:|\s?Extra info:|$)/);
 
-  const people = peopleMatch ? peopleMatch[1].trim() : null;
+  const people = peopleMatch ? peopleMatch[1].trim() : null; 
 
   // Matkasse (stannar innan Extra info eller nästa fält)
   const mealBoxMatch = description.match(/Matkasse:\s(.*?)(?=\sVald leverans:|\sAntal personer:|\sExtra info:|$)/);
