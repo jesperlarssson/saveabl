@@ -70,10 +70,10 @@ const ChangeDeliveryDayModal = () => {
     const data = new FormData(e.target);
     const intervalValue = data.get("toDate");
 
-    if (intervalValue && typeof intervalValue === 'string') {
+    if (intervalValue && typeof intervalValue === "string") {
       handleOnUpdateDeliveryDay(intervalValue);
     } else {
-      toast.error('Vänligen välj ett giltigt värde');
+      toast.error("Vänligen välj ett giltigt värde");
     }
   };
 
@@ -83,40 +83,42 @@ const ChangeDeliveryDayModal = () => {
 
       try {
         // Hämta leveransdagar
-        const response = await axios.get(`/api/gordon/get_delivery_dates/deliverywindow?postalCode=${sanitizedPostalCode}`);
-        
+        const response = await axios.get(
+          `/api/gordon/get_delivery_dates/deliverywindow?postalCode=${sanitizedPostalCode}`
+        );
+
         const deliveryWindows = response.data;
 
         let allowedDays: number[] = [];
 
-       // Postnummer-logik
-       if (stockholmPostalCodes1.includes(sanitizedPostalCode)) {
-        allowedDays = [0, 1]; // Sön och Mån
-      } else if (stockholmPostalCodes2.includes(sanitizedPostalCode)) {
-        allowedDays = [0]; // Sön
-      } else if (stockholmPostalCodes3.includes(sanitizedPostalCode)) {
-        allowedDays = [1]; // Mån
-      } else if (skanePostalCodes1.includes(sanitizedPostalCode)) {
-        allowedDays = [0, 1]; // Sön och Mån
-      } else if (skanePostalCodes2.includes(sanitizedPostalCode)) {
-        allowedDays = [1]; // Mån
-      } else if (vastPostalCodes1.includes(sanitizedPostalCode)) {
-        allowedDays = [6, 0, 1]; // Lör, Sön, Mån
-      } else if (vastPostalCodes2.includes(sanitizedPostalCode)) {
-        allowedDays = [6, 1]; // Lör och Mån
-      } else if (vastPostalCodes3.includes(sanitizedPostalCode)) {
-        allowedDays = [1]; // Mån
-      } else if (vastPostalCodes4.includes(sanitizedPostalCode)) {
-        allowedDays = [6]; // Lör
-      } else if (vastPostalCodes5.includes(sanitizedPostalCode)) {
-        allowedDays = [0]; // Sön
-      } else if (vastPostalCodes6.includes(sanitizedPostalCode)) {
-        allowedDays = [6, 0]; // Lör och Sön
-      } else if (vastPostalCodes7.includes(sanitizedPostalCode)) {
-        allowedDays = [0, 1]; // Sön och Mån
-      } else if (shippingDk.includes(sanitizedPostalCode)) {
-        allowedDays = [1]; // Mån
-      }
+        // Postnummer-logik
+        if (stockholmPostalCodes1.includes(sanitizedPostalCode)) {
+          allowedDays = [0, 1]; // Sön och Mån
+        } else if (stockholmPostalCodes2.includes(sanitizedPostalCode)) {
+          allowedDays = [0]; // Sön
+        } else if (stockholmPostalCodes3.includes(sanitizedPostalCode)) {
+          allowedDays = [1]; // Mån
+        } else if (skanePostalCodes1.includes(sanitizedPostalCode)) {
+          allowedDays = [0, 1]; // Sön och Mån
+        } else if (skanePostalCodes2.includes(sanitizedPostalCode)) {
+          allowedDays = [1]; // Mån
+        } else if (vastPostalCodes1.includes(sanitizedPostalCode)) {
+          allowedDays = [6, 0, 1]; // Lör, Sön, Mån
+        } else if (vastPostalCodes2.includes(sanitizedPostalCode)) {
+          allowedDays = [6, 1]; // Lör och Mån
+        } else if (vastPostalCodes3.includes(sanitizedPostalCode)) {
+          allowedDays = [1]; // Mån
+        } else if (vastPostalCodes4.includes(sanitizedPostalCode)) {
+          allowedDays = [6]; // Lör
+        } else if (vastPostalCodes5.includes(sanitizedPostalCode)) {
+          allowedDays = [0]; // Sön
+        } else if (vastPostalCodes6.includes(sanitizedPostalCode)) {
+          allowedDays = [6, 0]; // Lör och Sön
+        } else if (vastPostalCodes7.includes(sanitizedPostalCode)) {
+          allowedDays = [0, 1]; // Sön och Mån
+        } else if (shippingDk.includes(sanitizedPostalCode)) {
+          allowedDays = [1]; // Mån
+        }
 
         // Nytt datumintervall (11 dagar framåt)
         const elevenDaysFromNow = new Date();
@@ -146,7 +148,15 @@ const ChangeDeliveryDayModal = () => {
 
           return {
             ...option,
-            label: `${dayLabel}, ${startTime.getDate()}/${startTime.getMonth() + 1} ${startTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - ${new Date(option.end * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`,
+            label: `${dayLabel}, ${startTime.getDate()}/${
+              startTime.getMonth() + 1
+            } ${startTime.toLocaleTimeString([], {
+              hour: "2-digit",
+              minute: "2-digit",
+            })} - ${new Date(option.end * 1000).toLocaleTimeString([], {
+              hour: "2-digit",
+              minute: "2-digit",
+            })}`,
           };
         });
 
@@ -189,47 +199,58 @@ const ChangeDeliveryDayModal = () => {
       onChange={onChange}
     >
       <div className="flex flex-col w-full gap-4">
+        <ul className="list-disc list-outside pl-6">
+          <li>
+            {textData?.beforeThursday ||
+              "Ändringar innan torsdag gäller för kommande matkasse."}
+          </li>
+          <li>
+            {textData?.afterThursday ||
+              "Ändringar efter torsdag gäller för matkassen därpå."}
+          </li>
+        </ul>
 
-      <ul className="list-disc list-outside pl-6">
-  <li>
-    {textData?.beforeThursday ||
-      "Ändringar innan torsdag gäller för kommande matkasse."}
-  </li>
-  <li>
-    {textData?.afterThursday ||
-      "Ändringar efter torsdag gäller för matkassen därpå."}
-  </li>
-</ul>
+        <p>
+          {textData?.acceptanceNote ||
+            "För att vi ska kunna planera behöver vi acceptera ändringen, så det kan ta en liten stund innan den syns på ditt konto. Tack för ditt tålamod! 😊"}
+        </p>
 
-
-      <p>
-        {textData?.acceptanceNote ||
-          "För att vi ska kunna planera behöver vi acceptera ändringen, så det kan ta en liten stund innan den syns på ditt konto. Tack för ditt tålamod! 😊"}
-      </p>
         <div className="flex flex-col">
-          <form
-            onSubmit={handleSubmit}
-            className="w-full flex flex-col gap-8 p-4"
-          >
-            <select
-              className={twMerge(
-                `w-full border col-span-2 border-primary bg-transparent p-2 rounded-md font-bold placeholder-secondary placeholder-opacity-10 text-secondary ring-1 ring-transparent focus:ring-primary focus:outline-none focus:border-secondary focus:ring-1 
-                disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
-                invalid:border-accent invalid:text-accent
-                focus:invalid:border-accent focus:invalid:ring-accent`
-              )}
-              name="toDate"
-              id="toDate"
-            >
-              <option value="" disabled selected>
-                {textData?.deliveryDayModalPlaceholder || "Välj leveransdag"}
-              </option>
-              {options.map((option) => (
-                <option key={option.start} value={option.label}>
-                  {option.label}
+          <form onSubmit={handleSubmit} className="w-full flex flex-col gap-8 p-4">
+            {/* Wrapper för egen pil */}
+            <div className="relative">
+              <select
+                defaultValue=""
+                className={twMerge(
+                  `w-full border col-span-2 border-primary bg-transparent p-2 pr-10 rounded-md font-bold
+                   placeholder-secondary placeholder-opacity-10 text-secondary
+                   ring-1 ring-transparent focus:ring-primary focus:outline-none focus:border-secondary focus:ring-1
+                   disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
+                   invalid:border-accent invalid:text-accent
+                   focus:invalid:border-accent focus:invalid:ring-accent
+                   appearance-none`
+                )}
+                name="toDate"
+                id="toDate"
+              >
+                <option value="" disabled>
+                  {textData?.deliveryDayModalPlaceholder || "Välj leveransdag"}
                 </option>
-              ))}
-            </select>
+                {options.map((option) => (
+                  <option key={option.start} value={option.label}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+
+              {/* Egen oifylld pil, konsekvent positionering */}
+              <span
+                aria-hidden
+                className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-secondary"
+              >
+                ▾
+              </span>
+            </div>
 
             <div>
               <label className="flex items-center space-x-3">
@@ -238,7 +259,10 @@ const ChangeDeliveryDayModal = () => {
                   onChange={(e) => setAlwaysUseThisDay(e.target.checked)}
                   className="custom-checkbox"
                 />
-                <span>{textData?.always_use_this_day || "Använd alltid denna leveransdag"}</span>
+                <span>
+                  {textData?.always_use_this_day ||
+                    "Använd alltid denna leveransdag"}
+                </span>
               </label>
             </div>
 
@@ -976,4 +1000,4 @@ const shippingDk = [
   "4760",
   "4873",
   "4894",
-]; 
+];

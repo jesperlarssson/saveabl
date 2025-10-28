@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-
 import { useRouter } from "next/navigation";
 
 import useChangeIntervalModal from "@/hooks/useChangeIntervalModal";
@@ -14,8 +13,6 @@ import { useLang } from "@/hooks/useLang";
 import toast from "react-hot-toast";
 
 const ChangeIntervalModal = () => {
-
-
   const { onClose, isOpen, customerEmail, customerId, isPaused } =
     useChangeIntervalModal();
   const { onOpen, forMessage } = useMessageModal();
@@ -31,7 +28,7 @@ const ChangeIntervalModal = () => {
 
   const addTodo = async (action: string, wish: string) => {
     try {
-      const res = await axios.post("/api/add-todo", {
+      await axios.post("/api/add-todo", {
         customer_email: customerEmail,
         customer_id: customerId,
         actions: action,
@@ -58,7 +55,6 @@ const ChangeIntervalModal = () => {
     } else {
       toast.error("Please select a valid value");
     }
-   
   };
 
   return (
@@ -74,24 +70,35 @@ const ChangeIntervalModal = () => {
             onSubmit={handleIntervalSubmit}
             className="w-full flex flex-col gap-8 p-4"
           >
-            <select
-              className={twMerge(
-                `w-full border col-span-2 border-primary bg-transparent p-2 rounded-md font-bold placeholder-secondary placeholder-opacity-10 text-secondary ring-1 ring-transparent focus:ring-primary focus:outline-none focus:border-secondary focus:ring-1 
-          disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
-          invalid:border-accent invalid:text-accent
-          focus:invalid:border-accent focus:invalid:ring-accent`
-              )}
-              name="interval"
-              id="interval"
-            >
-              <option value="varje vecka">{textData?.intervalOption1}</option>
-              <option value="varannan vecka">
-                {textData?.intervalOption2}
-              </option>
-            </select>
-            <Button type="submit" className="">
-              {textData?.intervalButton}
-            </Button>
+            {/* Wrapper för egen pil */}
+            <div className="relative">
+              <select
+                className={twMerge(
+                  `w-full border col-span-2 border-primary bg-transparent p-2 pr-10 rounded-md font-bold
+                   placeholder-secondary placeholder-opacity-10 text-secondary
+                   ring-1 ring-transparent focus:ring-primary focus:outline-none focus:border-secondary focus:ring-1
+                   disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
+                   invalid:border-accent invalid:text-accent
+                   focus:invalid:border-accent focus:invalid:ring-accent
+                   appearance-none`
+                )}
+                name="interval"
+                id="interval"
+              >
+                <option value="varje vecka">{textData?.intervalOption1}</option>
+                <option value="varannan vecka">{textData?.intervalOption2}</option>
+              </select>
+
+              {/* Egen oifylld pil, konsekvent positionering */}
+              <span
+                aria-hidden
+                className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-secondary"
+              >
+                ▾
+              </span>
+            </div>
+
+            <Button type="submit">{textData?.intervalButton}</Button>
           </form>
         </div>
       </div>
