@@ -16,7 +16,7 @@ import {
   vastPostalCodes7,
 } from "@/lib/zipCodes";
 
-/** 🔧 Viktigt i prod: inga statiska svar/caching + Node runtime */
+/** ✅ Viktigt i produktion: alltid Node-runtime och ingen caching */
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 export const runtime = "nodejs";
@@ -48,9 +48,8 @@ function allowedWeekdaysForZip(zip: string): number[] {
   return [];
 }
 
-// ---- Helpers för att bygga windows av exakta datum (ingen omloggik) ----
+/** ---- Helpers för att bygga windows av exakta datum ---- */
 const toEpoch = (dateStr: string, hh: number, mm: number) => {
-  // Anta svensk tid; justera vid behov för DST i framtiden
   const d = new Date(
     `${dateStr}T${String(hh).padStart(2, "0")}:${String(mm).padStart(
       2,
@@ -65,57 +64,56 @@ function buildWindowsFromProductDates(rec: {
   sunday?: string | null;
   monday?: string | null;
 }) {
-  // Skapa endast maskinella fält – ingen text/label här
   const out: { start: number; end: number; weekday: number }[] = [];
-  if (rec.saturday) out.push({ start: toEpoch(rec.saturday, 9, 0), end: toEpoch(rec.saturday, 18, 0), weekday: 6 });
-  if (rec.sunday)   out.push({ start: toEpoch(rec.sunday, 10, 0), end: toEpoch(rec.sunday, 17, 0), weekday: 0 });
-  if (rec.monday)   out.push({ start: toEpoch(rec.monday, 16, 0), end: toEpoch(rec.monday, 22, 0), weekday: 1 });
+  if (rec.saturday)
+    out.push({
+      start: toEpoch(rec.saturday, 9, 0),
+      end: toEpoch(rec.saturday, 18, 0),
+      weekday: 6,
+    });
+  if (rec.sunday)
+    out.push({
+      start: toEpoch(rec.sunday, 10, 0),
+      end: toEpoch(rec.sunday, 17, 0),
+      weekday: 0,
+    });
+  if (rec.monday)
+    out.push({
+      start: toEpoch(rec.monday, 16, 0),
+      end: toEpoch(rec.monday, 22, 0),
+      weekday: 1,
+    });
   return out;
 }
 
-// ----------------------------------------------------------------------
+/** ---------------------------------------------------------------------- */
 
 export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
     const zip = (searchParams.get("zip") || "").trim();
+    const product = (searchParams.get("product") || "Saveabl Gård").trim();
 
-    // Skicka med ?product=Saveabl%20Gård eller ?product=Saveabl%20Grön
-    const product = (searchParams.get("product") || "Saveabl Gård").trim(); // default till Gård
-
-    // 🔍 Debug: finns env:en i prod?
-    console.log("HYGRAPH env check (server):", {
-      api: !!process.env.HYGRAPH_PROJECT_API,
-      token: !!process.env.HYGRAPH_PROD_AUTH_TOKEN,
-    });
-
-    // 1) Hämta EXAKT de datum du lagt in i Hygraph för vald produkt
+    // 1️⃣ Hämta exakta datum från Hygraph
     const rec = await getDeliveryDatesForProduct(product);
 
-    // 🔍 Debug: vad kommer tillbaka från Hygraph?
-    console.log("Hygraph response for product:", product, "=>", rec);
-
     if (!rec) {
-      // Ingen publicerad post i Hygraph för den här produkten -> tomt svar
-      // Vanligast när det funkar lokalt men inte live: posten är inte "Published" i Hygraph.
       return NextResponse.json(
-        { windows: [], weekdaysWithDays: [], soldOut: false, product, note: "no-record" },
+        { windows: [], weekdaysWithDays: [], soldOut: false, product },
         { status: 200 }
       );
     }
 
-    // 2) Bygg windows av de exakta datumen (utan omloggik)
+    // 2️⃣ Bygg windows av datumen
     const allWindows = buildWindowsFromProductDates(rec);
 
-    // 3) Filtrera endast på tillåtna veckodagar beroende på postnummer
+    // 3️⃣ Filtrera på tillåtna veckodagar beroende på postnummer
     const allowed = allowedWeekdaysForZip(zip);
     const windows = allWindows.filter(
       (w) => !allowed.length || allowed.includes(w.weekday)
     );
 
-    // 🔍 Debug: vad filtrerades fram för detta postnummer?
-    console.log("zip:", zip, "allowed:", allowed, "windows:", windows);
-
+    // 4️⃣ Returnera resultatet
     return NextResponse.json(
       { windows, weekdaysWithDays: [], soldOut: !!(rec as any).soldOut, product },
       { status: 200 }
