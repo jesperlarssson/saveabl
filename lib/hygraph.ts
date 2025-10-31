@@ -9,7 +9,6 @@ async function fetchAPI(
 ): Promise<any> {
   const res: Response = await fetch(process.env.HYGRAPH_PROJECT_API!, {
     method: "POST",
-    cache: "no-store", // ⬅️ Tvingar runtime-fetch i Vercel
     next: { revalidate: 0 },
     headers: {
       "Content-Type": "application/json",
@@ -21,7 +20,6 @@ async function fetchAPI(
     },
     body: JSON.stringify({ query, variables }),
   });
-  
 
   const json: { data?: any; errors?: any } = await res.json();
 
