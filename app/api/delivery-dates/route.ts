@@ -16,6 +16,11 @@ import {
   vastPostalCodes7,
 } from "@/lib/zipCodes";
 
+/** 🔧 Viktigt i prod: inga statiska svar/caching + Node runtime */
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+export const runtime = "nodejs";
+
 // DK pausad (behåll tom)
 const shippingDk: string[] = [];
 
@@ -78,13 +83,23 @@ export async function GET(req: Request) {
     // Skicka med ?product=Saveabl%20Gård eller ?product=Saveabl%20Grön
     const product = (searchParams.get("product") || "Saveabl Gård").trim(); // default till Gård
 
+    // 🔍 Debug: finns env:en i prod?
+    console.log("HYGRAPH env check (server):", {
+      api: !!process.env.HYGRAPH_PROJECT_API,
+      token: !!process.env.HYGRAPH_PROD_AUTH_TOKEN,
+    });
+
     // 1) Hämta EXAKT de datum du lagt in i Hygraph för vald produkt
     const rec = await getDeliveryDatesForProduct(product);
 
+    // 🔍 Debug: vad kommer tillbaka från Hygraph?
+    console.log("Hygraph response for product:", product, "=>", rec);
+
     if (!rec) {
-      // Ingen post i Hygraph för den produkten -> tomt svar
+      // Ingen publicerad post i Hygraph för den här produkten -> tomt svar
+      // Vanligast när det funkar lokalt men inte live: posten är inte "Published" i Hygraph.
       return NextResponse.json(
-        { windows: [], weekdaysWithDays: [], soldOut: false, product },
+        { windows: [], weekdaysWithDays: [], soldOut: false, product, note: "no-record" },
         { status: 200 }
       );
     }
@@ -97,6 +112,9 @@ export async function GET(req: Request) {
     const windows = allWindows.filter(
       (w) => !allowed.length || allowed.includes(w.weekday)
     );
+
+    // 🔍 Debug: vad filtrerades fram för detta postnummer?
+    console.log("zip:", zip, "allowed:", allowed, "windows:", windows);
 
     return NextResponse.json(
       { windows, weekdaysWithDays: [], soldOut: !!(rec as any).soldOut, product },
