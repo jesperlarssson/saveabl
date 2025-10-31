@@ -75,7 +75,7 @@
    };
    
    /* =========================================================
-      Produktmatriser (SE/EN/DA)
+      Produktmatriser (SE)
       ========================================================= */
    
    export const productTypesSe: ProductType[] = [
@@ -161,17 +161,55 @@
      },
    ];
    
-   // Engelska etiketter (återanvänder pris-matriserna)
-   export const productTypesEn: ProductType[] = [
-     { ...productTypesSe[0], recipes: "3 recipes" },
-     { ...productTypesSe[1], recipes: "3 recipes" },
-   ];
+   /* =========================================================
+      Språkade etiketter för variant-knapparna
+      ========================================================= */
+   const VARIANT_LABELS = {
+     se: {
+       weekly:   "Varje vecka",
+       biweekly: "Varannan vecka",
+       onetime:  "Engångsköp",
+     },
+     en: {
+       weekly:   "Every week",
+       biweekly: "Every other week",
+       onetime:  "One-time purchase",
+     },
+     da: {
+       weekly:   "Hver uge",
+       biweekly: "Hver anden uge",
+       onetime:  "Engangskøb",
+     },
+   } as const;
    
-   // Danska etiketter (återanvänder pris-matriserna)
-   export const productTypesDk: ProductType[] = [
-     { ...productTypesSe[0], recipes: "3 opskrifter" },
-     { ...productTypesSe[1], recipes: "3 opskrifter" },
-   ];
+   const swedishLabelToKey = (label: string) => {
+     if (label === VARIANT_LABELS.se.weekly)   return "weekly" as const;
+     if (label === VARIANT_LABELS.se.biweekly) return "biweekly" as const;
+     if (label === VARIANT_LABELS.se.onetime)  return "onetime" as const;
+     return null;
+   };
+   
+   const relabelVariants = (variants: Variant[], lang: "se" | "en" | "da"): Variant[] =>
+     variants.map((v) => {
+       const key = swedishLabelToKey(v.label);
+       if (!key) return v;
+       return { ...v, label: VARIANT_LABELS[lang][key] };
+     });
+   
+   /* =========================================================
+      Engelska & Danska produktmatriser
+      ========================================================= */
+   export const productTypesEn: ProductType[] = productTypesSe.map((pt) => ({
+     ...pt,
+     recipes: "3 recipes",
+     variants: relabelVariants(pt.variants, "en"),
+   }));
+   
+   export const productTypesDk: ProductType[] = productTypesSe.map((pt) => ({
+     ...pt,
+     recipes: "3 opskrifter",
+     variants: relabelVariants(pt.variants, "da"),
+   }));
    
    /* =========================================================
       Prenumeration? (allt utom Engångsköp)
@@ -194,9 +232,7 @@
    /* =========================================================
       Pristext per priceId (LINEUP-SPECIFIKT: Grön vs Gård)
       ========================================================= */
-   
    const PRICE_TEXT_SE = {
-     // GRÖN — SE
      [SE_GRON_EVERY_WEEK_FAMILY]:  "59kr/portion",
      [SE_GRON_EVERY_OTHER_FAMILY]: "59kr/portion",
      [SE_GRON_ONE_TIME_FAMILY]:    "69kr/portion",
@@ -205,7 +241,6 @@
      [SE_GRON_EVERY_OTHER_COUPLE]: "69kr/portion",
      [SE_GRON_ONE_TIME_COUPLE]:    "79kr/portion",
    
-     // GÅRD — SE (exempel – justera till era riktiga Gård-priser)
      [SE_GARD_EVERY_WEEK_FAMILY]:  "69kr/portion",
      [SE_GARD_EVERY_OTHER_FAMILY]: "69kr/portion",
      [SE_GARD_ONE_TIME_FAMILY]:    "79kr/portion",
@@ -216,7 +251,6 @@
    } as const;
    
    const PRICE_TEXT_DK = {
-     // GRØN — DK (dina kuvertpris)
      [DK_GRON_EVERY_WEEK_FAMILY]:  "Kuvertpris 45kr",
      [DK_GRON_EVERY_OTHER_FAMILY]: "Kuvertpris 45kr",
      [DK_GRON_ONE_TIME_FAMILY]:    "Kuvertpris 50kr",
@@ -225,7 +259,6 @@
      [DK_GRON_EVERY_OTHER_COUPLE]: "Kuvertpris 50kr",
      [DK_GRON_ONE_TIME_COUPLE]:    "Kuvertpris 58kr",
    
-     // GÅRD — DK (justera om Gård skiljer sig i DK)
      [DK_GARD_EVERY_WEEK_FAMILY]:  "Kuvertpris 55kr",
      [DK_GARD_EVERY_OTHER_FAMILY]: "Kuvertpris 55kr",
      [DK_GARD_ONE_TIME_FAMILY]:    "Kuvertpris 60kr",
@@ -240,7 +273,6 @@
      const dk = lang === "da";
      if (dk && id in PRICE_TEXT_DK) return (PRICE_TEXT_DK as any)[id];
      if (id in PRICE_TEXT_SE) return (PRICE_TEXT_SE as any)[id];
-     // fallback
      return dk ? "Kuvertpris" : "Pris per portion";
    };
    

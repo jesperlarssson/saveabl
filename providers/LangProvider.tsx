@@ -444,6 +444,8 @@ const svText = {
           fast: "Alltid 15 minuter",
           trust: "4.8 av 5 ⭐️ på Trustpilot"
         },
+        sold_out_title: "Nästa veckas middagar blev snabbt fullbokade", 
+        sold_out_subtitle: "Men du kan redan nu välja bland kommande datum nedan."
       
     
   },
@@ -1184,6 +1186,9 @@ button: "Got it - order now!"
           fast: "Always 15 minutes",
           trust: "4.8 out of 5 ⭐️ on Trustpilot"
         },
+        sold_out_title: "Next week’s dinners sold out quickly", 
+        sold_out_subtitle: "But you can already choose from the upcoming delivery dates below."
+      
   },
 
   success: {
@@ -1876,6 +1881,9 @@ button: "Jeg forstår - bestil nu!"
           fast: "Altid 15 minutter",
           trust: "4.8 ud af 5 ⭐️ på Trustpilot"
         },
+        sold_out_title: "Næste uges måltider blev hurtigt udsolgt", 
+        sold_out_subtitle: "Men du kan allerede nu vælge blandt de kommende leveringsdatoer herunder."
+      
   
 }, 
 

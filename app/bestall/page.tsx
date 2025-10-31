@@ -1,4 +1,5 @@
 "use client";
+
 import { useRouter, useSearchParams } from "next/navigation";
 import NextImage from "next/image";
 import { twMerge } from "tailwind-merge";
@@ -9,7 +10,6 @@ import { toast } from "react-hot-toast";
 import Section from "@/components/ui/Section";
 import { AnimatePresence, motion } from "framer-motion";
 import Title from "@/components/ui/Title";
-import getDeliveryWindowsForPostalCode from "@/actions/getDeliveryWindowsForPostalCode";
 import { UserInformation } from "@/providers/CheckoutProvider";
 import OrderWizard, { OrderWizardHandle } from "./OrderWizard";
 import OrderSummary from "./OrderSummary";
@@ -103,6 +103,87 @@ type FormError = {
   extraInfo: RowError | null;
 };
 
+// Paus: vi levererar inte till DK just nu
+const shippingDk: string[] = [];
+
+/** API-hämtare – läser Hygraph 1:1 via din API-route och filtrerar veckodagar per postnummer + produkt */
+async function fetchDeliveryWindows(zip: string, product: string) {
+  const url = `/api/delivery-dates?zip=${zip}&product=${encodeURIComponent(product)}`;
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok) throw new Error("Failed to fetch delivery dates");
+  return (await res.json()) as {
+    windows: { start: number; end: number; label: string; weekday: number }[];
+    weekdaysWithDays: { weekday: string; days: number[] }[];
+    soldOut?: boolean;
+    product?: string;
+  };
+}
+
+const productNameFor = (t: "veg" | "gard" | null) =>
+  t === "gard" ? "Saveabl Gård" : t === "veg" ? "Saveabl Grön" : "Saveabl Gård";
+
+const weekdayName = (w: number) =>
+  ["söndag", "måndag", "tisdag", "onsdag", "torsdag", "fredag", "lördag"][w];
+
+/** Bygg dag-knappar från windows – etiketter (dag + datum) och tider hämtas från lang */
+function daysFromWindows(
+  windows: { start: number; end: number; label: string; weekday: number }[],
+  text: any
+) {
+  const now = Math.floor(Date.now() / 1000);
+  const bestByWeekday = new Map<number, { start: number; end: number; label: string; weekday: number }>();
+
+  windows
+    .filter((w) => w.start >= now)
+    .sort((a, b) => a.start - b.start)
+    .forEach((w) => {
+      if (!bestByWeekday.has(w.weekday)) bestByWeekday.set(w.weekday, w);
+    });
+
+  const pad2 = (n: number) => (n < 10 ? `0${n}` : String(n));
+
+  return Array.from(bestByWeekday.values()).map((w) => {
+    const start = new Date(w.start * 1000);
+    const end = new Date(w.end * 1000);
+
+    const day = start.getDate();
+    const month = start.getMonth() + 1;
+    const labelDate = `${day}/${month}`;
+
+    // weekday: 0=Sun,1=Mon,...,6=Sat
+    let weekdayText = "";
+    let description = "";
+
+    switch (w.weekday) {
+      case 6: // Saturday
+        weekdayText = (text?.order?.delivery_saturday ?? "Lördag").split(" ")[0];
+        description = text?.order?.saturday_description ?? "kl. 09-18";
+        break;
+      case 0: // Sunday
+        weekdayText = (text?.order?.delivery_sunday ?? "Söndag").split(" ")[0];
+        description = text?.order?.sunday_description ?? "kl. 10-17";
+        break;
+      case 1: // Monday
+        weekdayText = (text?.order?.delivery_monday ?? "Måndag").split(" ")[0];
+        description = text?.order?.monday_description ?? "kl. 16-22";
+        break;
+      default:
+        // om Hygraph någon gång skickar andra veckodagar, visa bara datum
+        weekdayText = "";
+        description = "";
+        break;
+    }
+
+    const label = weekdayText ? `${weekdayText} ${labelDate}` : labelDate;
+
+    return {
+      id: w.weekday,
+      label,
+      description,
+    };
+  });
+}
+
 const Order = () => {
   const { text, lang } = useLang();
   const router = useRouter();
@@ -141,9 +222,8 @@ const Order = () => {
   useEffect(() => {
     const header = document.getElementById("site-header");
     if (!header || typeof ResizeObserver === "undefined") return;
-
     const ro = new ResizeObserver(() => {
-      recomputeStickyTop(); // uppdatera när headern (mobilmenyn) ändrar höjd
+      recomputeStickyTop();
     });
     ro.observe(header);
     return () => ro.disconnect();
@@ -175,14 +255,13 @@ const Order = () => {
   const [showAddressFields, setShowAddressFields] = useState(false);
   const [canDeliver, setCanDeliver] = useState(false);
 
-  // status för auto-validering av postnummer
   const [serviceStatus, setServiceStatus] = useState<"unknown" | "ok" | "no">(
     "unknown"
   );
 
   const [stripeCheckoutIsLoading, setStripeCheckoutIsLoading] = useState(false);
 
-  // "Fåtal kvar..."-flagga
+  // "Fåtal kvar..."-flagga (oförändrat)
   const [showUrgency, setShowUrgency] = useState(false);
   useEffect(() => {
     const checkTime = () => {
@@ -204,7 +283,6 @@ const Order = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // uppdatera top/height när baren blir synlig
   useEffect(() => {
     if (canDeliver) {
       requestAnimationFrame(() => {
@@ -218,38 +296,19 @@ const Order = () => {
   const id = searchParams?.get("id") || "1";
   const offerId = parseInt(id, 10);
 
-  const [deliveryWindows, setDeliveryWindows] = useState<any[]>([]);
+  const [deliveryWindows, setDeliveryWindows] = useState<
+    { start: number; end: number; label: string; weekday: number }[]
+  >([]);
   const [showLinks, setShowLinks] = useState(false);
+  const [, setDeliveryWindowsErrors] = useState<string | null>(null);
 
-  const [deliveryWindowsErrors, setDeliveryWindowsErrors] =
-    useState<string | null>(null);
-
-  const [deliveryDaysToChoose, setDeliveryDaysToChoose] = useState<any[]>([
-    {
-      label: text.order.delivery_saturday,
-      id: 6,
-      description: text.order.saturday_description,
-    },
-    {
-      label: text.order.delivery_sunday,
-      id: 0,
-      description: text.order.sunday_description,
-    },
-    {
-      label: text.order.delivery_monday,
-      id: 1,
-      description: text.order.monday_description,
-    },
-  ]);
-
+  const [deliveryDaysToChoose, setDeliveryDaysToChoose] = useState<any[]>([]);
   const getDayLabelFromId = (id: number | null | undefined) =>
     id === null || id === undefined
-      ? deliveryDaysToChoose.find(
-          (d) => d.id === deliveryDaysToChoose[0].id
-        )?.label
+      ? deliveryDaysToChoose.find((d) => d.id === deliveryDaysToChoose[0]?.id)
+          ?.label
       : deliveryDaysToChoose.find((d) => d.id === id)?.label;
 
-  // Endast set-delen behövs; vi vill inte läsa värdet → undvik noUnusedLocals
   const [, setWeekdaysWithDays] = useState<{ weekday: string; days: number[] }[]>(
     []
   );
@@ -267,6 +326,9 @@ const Order = () => {
   });
   const [isDk, setIsDk] = useState(false);
 
+  // Ny: soldOut från API-route/Hygraph
+  const [soldOut, setSoldOut] = useState(false);
+
   // --- Gård-regeln: ta bort måndag i Sverige ---
   const applyGardMondayRule = React.useCallback(
     (days: Array<{ id: number; label: string; description?: string }>) => {
@@ -278,20 +340,16 @@ const Order = () => {
     [selectedSmartType, isDk]
   );
 
-  // Tålig mot både { windows } och ren array
-  const updateWeekdaysList = (payload: any) => {
-    const wins: any[] = Array.isArray(payload) ? payload : payload?.windows ?? [];
-    const temp: { weekday: string; days: number[] }[] = [];
-    wins.forEach((window: any) => {
-      const date = new Date(window.start * 1000);
-      const weekday = date.toLocaleDateString("sv-SE", { weekday: "long" });
-      const day = date.getDay();
-      if (day === 2) return;
-      const existing = temp.find((i) => i.weekday === weekday);
-      if (existing) existing.days.push(day);
-      else temp.push({ weekday, days: [day] });
+  // Bygg en visuell översikt av veckodagar från API:ts weekday (inte new Date)
+  const updateWeekdaysList = (wins: any[]) => {
+    const groups: { weekday: string; days: number[] }[] = [];
+    wins.forEach((w) => {
+      const name = weekdayName(w.weekday);
+      const existing = groups.find((g) => g.weekday === name);
+      if (existing) existing.days.push(w.weekday);
+      else groups.push({ weekday: name, days: [w.weekday] });
     });
-    setWeekdaysWithDays(temp);
+    setWeekdaysWithDays(groups);
   };
 
   const {
@@ -320,63 +378,93 @@ const Order = () => {
   } = useCheckout();
 
   /** ------------ AUTO: validera postnummer medan man skriver ------------- */
-  // Kontroll av leveransområde — DK pausad
-const serviceable = (pcRaw: string) => {
-  const pc = pcRaw.trim();
-  // Endast svenska postnummer (5 siffror)
-  const isSE = pc.length === 5;
+  const serviceable = (pcRaw: string) => {
+    const pc = pcRaw.trim();
+    const isSE = pc.length === 5;
+    const okSE =
+      isSE &&
+      (stockholmPostalCodes1.includes(pc) ||
+        stockholmPostalCodes2.includes(pc) ||
+        stockholmPostalCodes3.includes(pc) ||
+        skanePostalCodes1.includes(pc) ||
+        skanePostalCodes2.includes(pc) ||
+        vastPostalCodes1.includes(pc) ||
+        vastPostalCodes2.includes(pc) ||
+        vastPostalCodes3.includes(pc) ||
+        vastPostalCodes4.includes(pc) ||
+        vastPostalCodes5.includes(pc) ||
+        vastPostalCodes6.includes(pc) ||
+        vastPostalCodes7.includes(pc));
 
-  const okSE =
-    isSE &&
-    (stockholmPostalCodes1.includes(pc) ||
-      stockholmPostalCodes2.includes(pc) ||
-      stockholmPostalCodes3.includes(pc) ||
-      skanePostalCodes1.includes(pc) ||
-      skanePostalCodes2.includes(pc) ||
-      vastPostalCodes1.includes(pc) ||
-      vastPostalCodes2.includes(pc) ||
-      vastPostalCodes3.includes(pc) ||
-      vastPostalCodes4.includes(pc) ||
-      vastPostalCodes5.includes(pc) ||
-      vastPostalCodes6.includes(pc) ||
-      vastPostalCodes7.includes(pc));
+    return { ok: okSE, isDK: false };
+  };
 
-  // DK pausad: inga 4-siffriga postnummer behandlas
-  return { ok: okSE, isDK: false };
-};
+  const handleZipCodeChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const zip = e.target.value;
+    const clean = zip.replace(/\D/g, "");
+    setPostalCode(clean);
 
+    // Rensa val när man ändrar postnummer
+    setSelectedWeekday(null);
+    setDeliveryWindow?.(null);
+    setSelectedDay(null);
 
-const handleZipCodeChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-  const zip = e.target.value;
-  const clean = zip.replace(/\D/g, "");
-  setPostalCode(clean);
+    if (clean.length === 5) {
+      const { ok, isDK } = serviceable(clean);
+      setIsDk(isDK);
+      setServiceStatus(ok ? "ok" : "no");
+      setShowDeliveryOptions(ok);
 
-  // Endast svenska postnummer: agera först NÄR vi har 5 siffror
-  if (clean.length === 5) {
-    const { ok, isDK } = serviceable(clean); // isDK kommer alltid vara false i din nuvarande serviceable
-    setIsDk(isDK);
-    setServiceStatus(ok ? "ok" : "no");
-    setShowDeliveryOptions(true);
+      if (!ok) {
+        setDeliveryWindows([]);
+        setDeliveryDaysToChoose([]);
+        setSoldOut(false);
+        return;
+      }
 
-    try {
-      const dw = await getDeliveryWindowsForPostalCode(clean, "se");
-      updateWeekdaysList(dw.windows ?? dw);
-      setDeliveryWindows(dw.windows ?? []);
-      setDeliveryPeriodId(dw.deliveryPeriodId);
-    } catch {
-      setDeliveryWindowsErrors("Något gick fel. Kontrollera postkoden!");
+      try {
+        const dw = await fetchDeliveryWindows(clean, productNameFor(selectedSmartType));
+        setDeliveryWindows(dw.windows);
+        updateWeekdaysList(dw.windows);
+        setSoldOut(!!dw.soldOut);
+
+        const nextDays = applyGardMondayRule(daysFromWindows(dw.windows, text));
+        setDeliveryDaysToChoose(nextDays);
+
+        setDeliveryPeriodId?.(undefined as any);
+      } catch {
+        setDeliveryWindowsErrors("Något gick fel. Kontrollera postkoden!");
+      }
+    } else {
+      setIsDk(false);
+      setServiceStatus("unknown");
+      setShowDeliveryOptions(false);
+      setDeliveryWindows([]);
+      setDeliveryDaysToChoose([]);
+      setSoldOut(false);
     }
-  } else {
-    // Under 5 tecken: visa neutralt läge utan hopp
-    setIsDk(false);
-    setServiceStatus("unknown");
-    setShowDeliveryOptions(false);
-    setDeliveryWindows([]); // rensa ev. gamla slots så inget blinkar
-  }
-};
+  };
 
+  /** 🔁 Hämta om man byter mellan Gård/Grön */
+  useEffect(() => {
+    const zip = (address.postalCode || "").trim();
+    if (zip.length === 5 && serviceStatus === "ok") {
+      (async () => {
+        try {
+          const dw = await fetchDeliveryWindows(zip, productNameFor(selectedSmartType));
+          setDeliveryWindows(dw.windows);
+          setSoldOut(!!dw.soldOut);
 
-  /** Knappen: om vi levererar → gå vidare, annars visa fel */
+          const nextDays = applyGardMondayRule(daysFromWindows(dw.windows, text));
+          setDeliveryDaysToChoose(nextDays);
+        } catch {
+          setDeliveryWindowsErrors("Något gick fel vid hämtning av leveransdatum.");
+        }
+      })();
+    }
+  }, [selectedSmartType, address.postalCode, serviceStatus, applyGardMondayRule, text]);
+
+  /** Knapp: fortsätt */
   const handleContinue = () => {
     if (serviceStatus !== "ok") {
       toast.error("Skriv ett giltigt postnummer först");
@@ -391,6 +479,7 @@ const handleZipCodeChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     });
   };
 
+  /** ENDA versionen av handleConfirm */
   const handleConfirm = async () => {
     const country = isDk ? "DK" : "SE";
     setCountry(country);
@@ -457,11 +546,10 @@ const handleZipCodeChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
       const deliveryDayLabel = getDayLabelFromId(selectedWeekday) ?? "Okänt";
       const people = (selectedType?.label ?? "").replace(/\s*[-–]\s*/g, "-");
       const descriptionForStripe =
-  `Vald leverans: ${deliveryDayLabel}\n` +
-  `Antal personer: ${people}\n` +
-  `Matkasse: ${selectedSmartType === "gard" ? "Saveabl Gård" : "Saveabl Grön"}\n` +
-  `Extra info: ${userInformation.extraInfo || ""}`;
-
+        `Vald leverans: ${deliveryDayLabel}\n` +
+        `Antal personer: ${people}\n` +
+        `Matkasse: ${selectedSmartType === "gard" ? "Saveabl Gård" : "Saveabl Grön"}\n` +
+        `Extra info: ${userInformation.extraInfo || ""}`;
 
       const response = await axios.post("/api/create_stripe_customer", {
         email: userInformation.email,
@@ -469,8 +557,8 @@ const handleZipCodeChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         name: userInformation.name,
         metadata: {
           deliveryDay: formatEpochToTimeString({
-            start: deliveryWindow?.start || undefined,
-            end: deliveryWindow?.end || undefined,
+            start: userInformation.deliveryWindow?.start || undefined,
+            end: userInformation.deliveryWindow?.end || undefined,
           }),
         },
         address: {
@@ -480,10 +568,10 @@ const handleZipCodeChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
           postal_code: userInformation.address.postalCode,
         },
         description: descriptionForStripe,
-
         phone: userInformation.phone,
         extraInfo: userInformation.extraInfo,
       });
+
       const stripeUserId = response.data.stripeUser.id;
       const sessionResponse = await axios.post("/api/checkout_sessions", {
         customerId: stripeUserId,
@@ -501,87 +589,42 @@ const handleZipCodeChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     }
   };
 
-  // Bygg leveransdagar per postnummer
+  /** --- Låsning av "Fortsätt" i alla steg (används av OrderWizard) --- */
+  const canProceedGuard = (step: number) => {
+    switch (step) {
+      case 1:
+        return !!selectedSmartType; // valt Smartkasse (veg/gard)
+      case 2:
+        return !!selectedType; // valt antal personer
+      case 3:
+        return !!selectedVariant; // valt frekvens/variant
+      case 4:
+        return !!selectedDay; // valt leveransdag
+      case 5:
+        return (
+          (name?.length ?? 0) > 1 &&
+          (address?.street?.length ?? 0) > 1 &&
+          (address?.city?.length ?? 0) > 1 &&
+          (phone?.length ?? 0) > 1 &&
+          (email?.length ?? 0) > 3 &&
+          (password?.length ?? 0) >= 6 &&
+          agreeToTerms
+        );
+      default:
+        return true;
+    }
+  };
+
+  // --- DRIV ENBART AV HYGRAPH + API ---
+  // När windows ändras (nytt postnummer eller ny fetch), bygg knappar och applicera Gård-regeln
   useEffect(() => {
-    if (address.postalCode && address.postalCode.length < 4) setShowLinks(false);
+    setDeliveryDaysToChoose(applyGardMondayRule(daysFromWindows(deliveryWindows, text)));
+  }, [deliveryWindows, applyGardMondayRule, text]);
 
-    if (typeof address.postalCode === "string") {
-      // Stockholm
-      if (stockholmPostalCodes1.includes(address.postalCode)) {
-        setDeliveryDaysToChoose([
-          { label: text.order.stockholm_sunday, id: 0, description: text.order.sunday_description_stockholm },
-          { label: text.order.stockholm_monday, id: 1, description: text.order.monday_description_stockholm },
-        ]);
-      } else if (stockholmPostalCodes2.includes(address.postalCode)) {
-        setDeliveryDaysToChoose([
-          { label: text.order.stockholm_sunday, id: 0, description: text.order.sunday_description_stockholm },
-        ]);
-      } else if (stockholmPostalCodes3.includes(address.postalCode)) {
-        setDeliveryDaysToChoose([
-          { label: text.order.stockholm_monday, id: 1, description: text.order.monday_description_stockholm },
-        ]);
-      }
-
-      // Skåne
-      else if (skanePostalCodes1.includes(address.postalCode)) {
-        setDeliveryDaysToChoose([
-          { label: text.order.delivery_sunday, id: 0, description: text.order.sunday_description },
-          { label: text.order.delivery_monday, id: 1, description: text.order.monday_description },
-        ]);
-      } else if (skanePostalCodes2.includes(address.postalCode)) {
-        setDeliveryDaysToChoose([
-          { label: text.order.delivery_monday, id: 1, description: text.order.monday_description },
-        ]);
-      }
-
-      // Västra Götaland
-      else if (vastPostalCodes1.includes(address.postalCode)) {
-        setDeliveryDaysToChoose([
-          { label: text.order.delivery_saturday, id: 6, description: text.order.saturday_description },
-          { label: text.order.delivery_sunday, id: 0, description: text.order.sunday_description },
-          { label: text.order.delivery_monday, id: 1, description: text.order.monday_description },
-        ]);
-      } else if (vastPostalCodes2.includes(address.postalCode)) {
-        setDeliveryDaysToChoose([
-          { label: text.order.delivery_saturday, id: 6, description: text.order.saturday_description },
-          { label: text.order.delivery_monday, id: 1, description: text.order.monday_description },
-        ]);
-      } else if (vastPostalCodes3.includes(address.postalCode)) {
-        setDeliveryDaysToChoose([{ label: text.order.delivery_monday, id: 1, description: text.order.monday_description }]);
-      } else if (vastPostalCodes4.includes(address.postalCode)) {
-        setDeliveryDaysToChoose([{ label: text.order.delivery_saturday, id: 6, description: text.order.saturday_description }]);
-      } else if (vastPostalCodes5.includes(address.postalCode)) {
-        setDeliveryDaysToChoose([{ label: text.order.delivery_sunday, id: 0, description: text.order.sunday_description }]);
-      } else if (vastPostalCodes6.includes(address.postalCode)) {
-        setDeliveryDaysToChoose([
-          { label: text.order.delivery_saturday, id: 6, description: text.order.saturday_description },
-          { label: text.order.delivery_sunday, id: 0, description: text.order.sunday_description },
-        ]);
-      } else if (vastPostalCodes7.includes(address.postalCode)) {
-        setDeliveryDaysToChoose([
-          { label: text.order.delivery_sunday, id: 0, description: text.order.sunday_description },
-          { label: text.order.delivery_monday, id: 1, description: text.order.monday_description },
-        ]);
-      }
-    }
-
-    // Danmark
-    if (typeof address.postalCode === "string" && shippingDk.includes(address.postalCode)) {
-      setDeliveryDaysToChoose([
-        { label: text.order.copenhagen_monday, id: 0, description: text.order.monday_description_copenhagen },
-      ]);
-    }
-
-    // → Applicera Gård-regeln efter att listan satts
-    setDeliveryDaysToChoose((prev) => applyGardMondayRule(prev));
-  }, [address.postalCode, text.order, applyGardMondayRule]);
-
-  // Reagera om man växlar mellan Grön/Gård eller DK-flaggan ändras
+  // Om man växlar mellan Grön/Gård: applicera regeln och nolla måndagsvalet om det blivit ogiltigt
   useEffect(() => {
     setDeliveryDaysToChoose((prev) => {
       const next = applyGardMondayRule(prev);
-
-      // Om måndag var vald och nu ej tillåten → rensa
       if (
         selectedSmartType === "gard" &&
         !isDk &&
@@ -591,7 +634,6 @@ const handleZipCodeChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         setSelectedWeekday(null);
         setDeliveryWindow(null);
       }
-
       return next;
     });
   }, [selectedSmartType, isDk, applyGardMondayRule]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -637,28 +679,6 @@ const handleZipCodeChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     } else {
       setShowAddressFields(false);
       setCanDeliver(false);
-    }
-  };
-
-  // --- LÅSNING AV "Fortsätt" I ALLA STEG ---
-  const canProceedGuard = (step: number) => {
-    switch (step) {
-      case 1: return !!selectedSmartType;   // valt Smartkasse (veg/gard)
-      case 2: return !!selectedType;        // valt antal personer
-      case 3: return !!selectedVariant;     // valt frekvens/variant
-      case 4: return !!selectedDay;         // valt leveransdag
-      case 5:
-        return (
-          (name?.length ?? 0) > 1 &&
-          (address?.street?.length ?? 0) > 1 &&
-          (address?.city?.length ?? 0) > 1 &&
-          (phone?.length ?? 0) > 1 &&
-          (email?.length ?? 0) > 3 &&
-          (password?.length ?? 0) >= 6 &&
-          agreeToTerms
-        );
-      default:
-        return true;
     }
   };
 
@@ -708,7 +728,6 @@ const handleZipCodeChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
           {/* Pre-checkout */}
           {!canDeliver && (
             <>
-              {/* Titel + ikon beroende på status */}
               <div className="text-center">
                 {serviceStatus === "ok" && (
                   <div className="mx-auto mb-2 flex items-center justify-center">
@@ -751,7 +770,8 @@ const handleZipCodeChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
                   {serviceStatus === "ok"
                     ? (text.order.we_deliver_to_you ?? "Vi levererar till ditt område 🎉")
                     : serviceStatus === "no"
-                    ? (text.order.no_delivery_to_you ?? "Vi levererar tyvärr inte till ditt område just nu")
+                    ? (text.order.no_delivery_to_you ??
+                      "Vi levererar tyvärr inte till ditt område just nu")
                     : id === "1"
                     ? text.order.title1
                     : text.order.title2}
@@ -912,7 +932,10 @@ const handleZipCodeChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
               >
                 {/* --- Steg 1: Smartkasse --- */}
                 <>
-                  <QBlock title={text.order.smartkasse?.title} help={text.order.help_smartkasse} />
+                  <QBlock
+                    title={text.order.smartkasse?.title}
+                    help={text.order.help_smartkasse}
+                  />
                   <div className={STEP_GROUP}>
                     <CheckoutButton
                       selected={selectedSmartType === "veg"}
@@ -920,12 +943,25 @@ const handleZipCodeChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
                       className="w-full sm:w-auto"
                     >
                       <div className="flex flex-col items-center">
-                        <span className="text-center">{text.order.smartkasse?.options?.veg}</span>
-                        <span className="text-xs leading-snug opacity-80 mt-1 text-center">
-                          {text.order.smartkasse?.notes?.veg ?? text.order.smartkasse?.noteVeg ?? ""}
+                        <span className="text-center">
+                          {text.order.smartkasse?.options?.veg}
                         </span>
-                        <div className="relative mt-3 rounded-xl overflow-hidden w-[9.75rem] sm:w-[10.75rem] md:w-[11.75rem]" style={{ aspectRatio: "4 / 3" }}>
-                          <NextImage src="/images/saveabl-gron.jpg" alt="Vegetariska middagar gjorda på utvalda råvaror" fill sizes="(min-width:1024px) 188px, (min-width:640px) 172px, 156px" className="object-cover" />
+                        <span className="text-xs leading-snug opacity-80 mt-1 text-center">
+                          {text.order.smartkasse?.notes?.veg ??
+                            text.order.smartkasse?.noteVeg ??
+                            ""}
+                        </span>
+                        <div
+                          className="relative mt-3 rounded-xl overflow-hidden w-[9.75rem] sm:w-[10.75rem] md:w-[11.75rem]"
+                          style={{ aspectRatio: "4 / 3" }}
+                        >
+                          <NextImage
+                            src="/images/saveabl-gron.jpg"
+                            alt="Vegetariska middagar gjorda på utvalda råvaror"
+                            fill
+                            sizes="(min-width:1024px) 188px, (min-width:640px) 172px, 156px"
+                            className="object-cover"
+                          />
                         </div>
                       </div>
                     </CheckoutButton>
@@ -936,12 +972,25 @@ const handleZipCodeChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
                       className="w-full sm:w-auto"
                     >
                       <div className="flex flex-col items-center">
-                        <span className="text-center">{text.order.smartkasse?.options?.gard}</span>
-                        <span className="text-xs leading-snug opacity-80 mt-1 text-center">
-                          {text.order.smartkasse?.notes?.gard ?? text.order.smartkasse?.noteGard ?? ""}
+                        <span className="text-center">
+                          {text.order.smartkasse?.options?.gard}
                         </span>
-                        <div className="relative mt-3 rounded-xl overflow-hidden w-[9.75rem] sm:w-[10.75rem] md:w-[11.75rem]" style={{ aspectRatio: "4 / 3" }}>
-                          <NextImage src="/images/saveabl-gard.jpg" alt="Mixade middagar med svenskt kött & fisk + utvalda råvaror" fill sizes="(min-width:1024px) 188px, (min-width:640px) 172px, 156px" className="object-cover" />
+                        <span className="text-xs leading-snug opacity-80 mt-1 text-center">
+                          {text.order.smartkasse?.notes?.gard ??
+                            text.order.smartkasse?.noteGard ??
+                            ""}
+                        </span>
+                        <div
+                          className="relative mt-3 rounded-xl overflow-hidden w-[9.75rem] sm:w-[10.75rem] md:w-[11.75rem]"
+                          style={{ aspectRatio: "4 / 3" }}
+                        >
+                          <NextImage
+                            src="/images/saveabl-gard.jpg"
+                            alt="Mixade middagar med svenskt kött & fisk + utvalda råvaror"
+                            fill
+                            sizes="(min-width:1024px) 188px, (min-width:640px) 172px, 156px"
+                            className="object-cover"
+                          />
                         </div>
                       </div>
                     </CheckoutButton>
@@ -958,12 +1007,8 @@ const handleZipCodeChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
                         selected={productType.id === selectedType?.id}
                         onClick={() => {
                           setSelectedType(productType);
-
-                          // lås steg 3 tills variant valts manuellt
                           setSelectedVariant(null);
                           setProductId("");
-
-                          // nollställ leveransval
                           setSelectedDay(null);
                           setDeliveryWindow(null);
                           setSelectedWeekday(null);
@@ -980,7 +1025,10 @@ const handleZipCodeChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
 
                 {/* Steg 3: Hur ofta */}
                 <>
-                  <QBlock title={text.order.variant} help={text.order.help_variant} />
+                  <QBlock
+                    title={text.order.variant}
+                    help={text.order.help_variant}
+                  />
                   <div className={`${STEP_GROUP} max-w-2xl mx-auto`}>
                     {selectedType?.variants?.map((variant: any) => {
                       const postalCode = address.postalCode || "";
@@ -993,26 +1041,25 @@ const handleZipCodeChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
                         skanePostalCodes2.includes(postalCode);
                       const dkCustomer = shippingDk.includes(postalCode);
 
-                      // Välj rätt regions-objekt (har .veg och .gard)
-                      const regional =
-                        sthlmCustomer
-                          ? variant.stockholmPriceId
-                          : skaneCustomer
-                          ? variant.skanePriceId
-                          : dkCustomer
-                          ? variant.danishPriceId
-                          : variant.priceId;
+                      const regional = sthlmCustomer
+                        ? variant.stockholmPriceId
+                        : skaneCustomer
+                        ? variant.skanePriceId
+                        : dkCustomer
+                        ? variant.danishPriceId
+                        : variant.priceId;
 
-                      // Välj veg/gard från steg 1
                       const currentPriceId =
-                        (selectedSmartType === "gard" ? regional?.gard : regional?.veg) || "";
+                        (selectedSmartType === "gard"
+                          ? regional?.gard
+                          : regional?.veg) || "";
 
                       return (
                         <CheckoutButton
                           key={variant.label}
                           selected={currentPriceId === productId}
                           onClick={() => {
-                            setProductId(currentPriceId); // Stripe PRICE id
+                            setProductId(currentPriceId);
                             setSelectedVariant(variant);
                             setSelectedDay(null);
                             setDeliveryWindow(null);
@@ -1045,12 +1092,38 @@ const handleZipCodeChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
                         className="mt-2 mb-4"
                       >
                         <StepHeader />
-                        <QBlock title={text.order.deliveryDay} help={text.order.help_deliveryDay} />
+
+                        {/* Slutsålt-banderoll baserad på Hygraph-flaggan */}
+                        {soldOut && (
+                          <div
+                            className="
+                              max-w-3xl mx-auto -mt-9
+                              mb-6 sm:mb-8
+                              rounded-lg border border-[#6E2936]/20
+                              bg-[#6E2936]/5 px-4 sm:px-6 py-3 sm:py-4
+                              text-[#6E2936]
+                              text-left sm:text-center
+                              shadow-sm
+                            "
+                          >
+                            <p className="font-semibold">
+                              {text?.order?.sold_out_title ?? "Den kommande veckans matkasse är tyvärr slutsåld."}
+                            </p>
+                            <p className="text-sm mt-1">
+                              {text?.order?.sold_out_subtitle ?? "Välj närmaste tillgängliga leveransdag nedan."}
+                            </p>
+                          </div>
+                        )}
+
+                        <QBlock
+                          title={text.order.deliveryDay}
+                          help={text.order.help_deliveryDay}
+                        />
                         <div className={`${STEP_GROUP} max-w-3xl mx-auto`}>
                           <AnimatePresence mode="wait">
                             {deliveryDaysToChoose.map((day: any, index: number) => (
                               <motion.div
-                                key={day.label}
+                                key={day.label + day.id}
                                 initial={{ opacity: 0, y: -10 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 exit={{ opacity: 0, y: -10 }}
@@ -1059,7 +1132,9 @@ const handleZipCodeChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
                               >
                                 <CheckoutButton
                                   className={`w-full sm:w-auto px-8 py-4 border bg-transparent text-neutral-700 font-medium border-primary rounded-md transition-all hover:bg-primary ${
-                                    selectedDay?.id === day.id ? "bg-primary text-[#6E2936] font-bold" : ""
+                                    selectedDay?.id === day.id
+                                      ? "bg-primary text-[#6E2936] font-bold"
+                                      : ""
                                   }`}
                                   selected={selectedWeekday == day.id}
                                   onClick={() => {
@@ -1070,13 +1145,24 @@ const handleZipCodeChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
                                       return;
                                     }
                                     setSelectedWeekday(day.id);
-                                    setDeliveryWindow(day);
+
+                                    // Välj första kommande fönster som matchar API:ts weekday
+                                    const win =
+                                      deliveryWindows
+                                        .filter((w) => w.weekday === day.id)
+                                        .sort((a: any, b: any) => a.start - b.start)[0] ?? null;
+
+                                    setDeliveryWindow(win);
                                     setSelectedDay(day);
                                   }}
                                 >
                                   {day.label}
-                                  <p className="text-xs mt-1">{day.description}</p>
-                                  {showUrgency && <h4 className="text-xs mt-2">{text.order.urgency}</h4>}
+                                  {day.description ? (
+                                    <p className="text-xs mt-1">{day.description}</p>
+                                  ) : null}
+                                  {showUrgency && (
+                                    <h4 className="text-xs mt-2">{text.order.urgency}</h4>
+                                  )}
                                 </CheckoutButton>
                               </motion.div>
                             ))}
@@ -1102,7 +1188,10 @@ const handleZipCodeChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
 
                 {/* Adress- och kontaktinformation */}
                 <>
-                  <QBlock title={text.order.address} help={text.order.help_address} />
+                  <QBlock
+                    title={text.order.address}
+                    help={text.order.help_address}
+                  />
                   <div className="grid grid-cols-2 gap-4 items-start my-2">
                     <Input
                       label={text.order.full_name}
@@ -1148,7 +1237,10 @@ const handleZipCodeChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
                     </div>
                   </div>
 
-                  <QBlock title={text.order.contact} help={text.order.help_contact} />
+                  <QBlock
+                    title={text.order.contact}
+                    help={text.order.help_contact}
+                  />
                   <div className="grid grid-cols-2 gap-4">
                     <Input
                       onChange={(e) => setPhone(e.target.value)}
@@ -1211,7 +1303,7 @@ const handleZipCodeChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
                     text-[#6E2936]
                     whitespace-nowrap
                     text-[13px] leading-tight
-                    sm:text-[15px] sm:leading-normal
+                    sm:text[15px] sm:leading-normal
                   "
                 >
                   <span className="whitespace-nowrap align-middle">
@@ -1221,10 +1313,12 @@ const handleZipCodeChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
                   <span
                     aria-hidden="true"
                     className="
-                      mx-2 text-[11px] align-middle text-[#6E2936]
+                      mx-2 text:[11px] align-middle text-[#6E2936]
                       sm:mx-3 sm:text-sm
                     "
-                  >●</span>
+                  >
+                    ●
+                  </span>
 
                   <span className="whitespace-nowrap align-middle">
                     {text.order.reassurance.fast}
@@ -1233,10 +1327,12 @@ const handleZipCodeChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
                   <span
                     aria-hidden="true"
                     className="
-                      mx-2 text-[11px] align-middle text-[#6E2936]
+                      mx-2 text:[11px] align-middle text-[#6E2936]
                       sm:mx-3 sm:text-sm
                     "
-                  >●</span>
+                  >
+                    ●
+                  </span>
 
                   <a
                     href="https://www.trustpilot.com/review/saveabl.se"
@@ -1268,7 +1364,3 @@ const handleZipCodeChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
 };
 
 export default Order;
-
-// Paus: vi levererar inte till DK just nu
-const shippingDk: string[] = [];
-

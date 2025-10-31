@@ -18,10 +18,7 @@ async function fetchAPI(
           : process.env.HYGRAPH_PROD_AUTH_TOKEN
       }`,
     },
-    body: JSON.stringify({
-      query,
-      variables,
-    }),
+    body: JSON.stringify({ query, variables }),
   });
 
   const json: { data?: any; errors?: any } = await res.json();
@@ -34,10 +31,7 @@ async function fetchAPI(
   return json.data;
 }
 
-export async function sendMutation(
-  mutation: string,
-  variables: any
-): Promise<any> {
+export async function sendMutation(mutation: string, variables: any): Promise<any> {
   return await fetchAPI(mutation, { variables, mutation: true });
 }
 
@@ -53,9 +47,7 @@ export async function getAllPostsForHome(mutation: boolean): Promise<Post[]> {
           tags
           coverImage {
             url(transformation: {
-              image: {
-                resize: { fit: crop, width: 2000, height: 1000 }
-              }
+              image: { resize: { fit: crop, width: 2000, height: 1000 } }
             })
           }
           author {
@@ -63,9 +55,7 @@ export async function getAllPostsForHome(mutation: boolean): Promise<Post[]> {
             title
             picture {
               url(transformation: {
-                image: {
-                  resize: { width: 200, height: 200, fit: crop }
-                }
+                image: { resize: { width: 200, height: 200, fit: crop } }
               })
             }
           }
@@ -80,9 +70,7 @@ export async function getAllPostsForHome(mutation: boolean): Promise<Post[]> {
 export async function getAllPostsWithSlug() {
   const data = await fetchAPI(`
     query GetSlugs {
-      posts {
-        slug
-      }
+      posts { slug }
     }
   `);
   return data.posts;
@@ -140,9 +128,7 @@ export async function getPaginatedPosts(limit: number, offset: number) {
         tags
         coverImage {
           url(transformation: {
-            image: {
-              resize: { fit: crop, width: 2000, height: 1000 }
-            }
+            image: { resize: { fit: crop, width: 2000, height: 1000 } }
           })
         }
         author {
@@ -150,9 +136,7 @@ export async function getPaginatedPosts(limit: number, offset: number) {
           title
           picture {
             url(transformation: {
-              image: {
-                resize: { width: 200, height: 200, fit: crop }
-              }
+              image: { resize: { width: 200, height: 200, fit: crop } }
             })
           }
         }
@@ -185,16 +169,13 @@ export async function getAllRecipes() {
         startDate
         weekNr
         recipeNumber
-        diet           # 👈 diet
+        diet
         steg
         ingredients
         nutritionalValues
         savedIngredients
         contentAllergies
-        chef {
-          name
-          title
-        }
+        chef { name title }
         image {
           url(transformation: { image: { resize: { height: 500, width: 700 }}})
         }
@@ -228,14 +209,8 @@ export async function getPaginatedRecipes(limit: number, offset: number, endDate
         startDate
         weekNr
         recipeNumber
-        diet           # 👈 diet
-        chef {
-          name
-          title
-          picture {
-            url
-          }
-        }
+        diet
+        chef { name title picture { url } }
         image {
           url(transformation: { image: { resize: { height: 500, width: 700 }}})
         }
@@ -265,7 +240,6 @@ export async function getPaginatedOldRecipes(limit: number, offset: number) {
         ingredients
         nutritionalValues
         savedIngredients
-        # diet        # 👈 lägg bara till detta om fältet finns på publicRecipes
         comments(orderBy: publishedAt_DESC) {
           name
           rating
@@ -297,12 +271,7 @@ export async function getPaginatedOldRecipes(limit: number, offset: number) {
           }
           stepNumber
           timerMinutes
-          videoClip {
-            title
-            video {
-              url
-            }
-          }
+          videoClip { title video { url } }
         }
         author {
           name
@@ -329,14 +298,8 @@ export async function getRecipesForWeek(week: number) {
         startDate
         weekNr
         recipeNumber
-        diet           # 👈 diet
-        chef {
-          name
-          title
-          picture {
-            url
-          }
-        }
+        diet
+        chef { name title picture { url } }
         image {
           url(transformation: { image: { resize: { height: 500, width: 700 }}})
         }
@@ -358,12 +321,7 @@ export async function getRecipesForWeek(week: number) {
 
 export async function getAllFAQ() {
   const data = await fetchAPI(`
-    {
-      faqs {
-        answer
-        question
-      }
-    }
+    { faqs { answer question } }
   `);
   return data.faqs;
 }
@@ -371,9 +329,7 @@ export async function getAllFAQ() {
 export async function getAllRecipesWithSlug() {
   const data = await fetchAPI(`
     query GetSlugs {
-      recepts {
-        slug
-      }
+      recepts { slug }
     }
   `);
   return data.recepts;
@@ -389,20 +345,14 @@ export async function getRecipeWithSlug(slug: string) {
         slug
         startDate
         recipeNumber
-        diet           # 👈 diet
+        diet
         steg
         ingredients
         spicyIngredients
         nutritionalValues
         savedIngredients
         contentAllergies
-        chef {
-          name
-          title
-          picture {
-            url
-          }
-        }
+        chef { name title picture { url } }
         image {
           url(transformation: { image: { resize: { height: 800, width: 1200 }}})
         }
@@ -415,12 +365,7 @@ export async function getRecipeWithSlug(slug: string) {
           title
           spicyIngredients
         }
-        recipeComments {
-          comment
-          createdAt
-          name
-          rating
-        }
+        recipeComments { comment createdAt name rating }
         freezabl
       }
     }
@@ -429,4 +374,41 @@ export async function getRecipeWithSlug(slug: string) {
   );
 
   return data.recept;
+}
+
+export type ProductDates = {
+  product: string;
+  saturday?: string | null; // yyyy-mm-dd
+  sunday?: string | null;
+  monday?: string | null;
+  soldOut?: boolean | null;
+};
+
+const DELIVERY_DATE_BY_PRODUCT = /* GraphQL */ `
+  query DeliveryDateByProduct($product: String!) {
+    deliveryDates(
+      first: 1
+      orderBy: updatedAt_DESC
+      where: { product: $product }
+    ) {
+      product
+      saturday
+      sunday
+      monday
+      soldOut
+    }
+  }
+`;
+
+/**
+ * Hämtar datum-posten för en given produkt (t.ex. "Saveabl Gård" eller "Saveabl Grön").
+ * Returnerar null om det inte finns någon post.
+ */
+export async function getDeliveryDatesForProduct(
+  product: string
+): Promise<ProductDates | null> {
+  const data = await fetchAPI(DELIVERY_DATE_BY_PRODUCT, {
+    variables: { product },
+  });
+  return (data?.deliveryDates && data.deliveryDates[0]) || null;
 }
