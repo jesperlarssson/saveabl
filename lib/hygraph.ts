@@ -330,13 +330,6 @@ export async function getRecipesForWeek(week: number) {
   return data.recepts;
 }
 
-export async function getAllFAQ() {
-  const data = await fetchAPI(`
-    { faqs { answer question } }
-  `);
-  return data.faqs;
-}
-
 export async function getAllRecipesWithSlug() {
   const data = await fetchAPI(`
     query GetSlugs {
@@ -400,6 +393,41 @@ export async function getRecipeWeekConfig(): Promise<RecipeWeekConfig | null> {
     }
   `);
   return data?.recipeWeekConfigs?.[0] ?? null;
+}
+
+/* --------------------- Rolling mode (publishedAt) ------------------------ */
+
+/** Hämta senaste N publicerade recept (nyast först, via publishedAt). */
+export async function getLatestRecipes(limit: number) {
+  const data = await fetchAPI(
+    `
+    query GetLatestRecipes($limit: Int!) {
+      recepts(orderBy: publishedAt_DESC, first: $limit) {
+        id
+        title
+        slug
+        startDate
+        weekNr
+        recipeNumber
+        diet
+        chef { name title picture { url } }
+        image {
+          url(transformation: { image: { resize: { height: 500, width: 700 }}})
+        }
+        localizations {
+          contentAllergies
+          ingredients
+          nutritionalValues
+          steg
+          title
+        }
+        publishedAt
+      }
+    }
+    `,
+    { variables: { limit } }
+  );
+  return data.recepts;
 }
 
 /* ------------------------ Delivery dates by product ----------------------- */

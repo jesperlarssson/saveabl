@@ -1,136 +1,183 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 
 import { Recipe } from "@/types";
 import Grid from "../ui/Grid";
 import RecipeTile from "../RecipeTile";
 import Button from "../ui/Button";
 import ThisWeekRecipes from "../general/ThisWeekRecipes";
-import { useRecipes } from "@/hooks/useRecipes";
 import { useLang } from "@/hooks/useLang";
 import Title from "../ui/Title";
 import DietToggle from "@/components/recipes/DietToggle";
-
 import { useSearchParams } from "next/navigation";
 import { recipeMatchesDiet, DietFilter } from "@/lib/recipeDiet";
-import { getWeekNumber } from "@/helpers/format";
 
-type RecipesProps = {
-  /** Startläge utan att kräva ?diet= i URL (t.ex. på /recept/kott) */
-  initialDiet?: Extract<DietFilter, "veg" | "meat">;
-  /** Dölj reglaget vid låst vy (t.ex. på /recept/kott) */
-  hideToggle?: boolean;
-};
+const INITIAL_VISIBLE_WEEK_GROUPS = 1; // ⬅️ visa endast 1 tidigare vecka
+const LOAD_MORE_WEEK_GROUPS = 1;       // ⬅️ ladda 1 vecka per klick
 
-const Recipes: React.FC<RecipesProps> = ({ initialDiet, hideToggle }) => {
+// Fallback: ISO-veckonummer från datum om weekNr saknas
+function isoWeekFromDateStr(d?: string | null): number | null {
+  if (!d) return null;
+  const date = new Date(d);
+  if (isNaN(date.getTime())) return null;
+
+  // ISO: torsdag definierar veckan
+  const target = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+  const day = target.getUTCDay() || 7; // 1=Mon..7=Sun
+  target.setUTCDate(target.getUTCDate() + 4 - day);
+
+  const yearStart = new Date(Date.UTC(target.getUTCFullYear(), 0, 1));
+  const week = Math.floor(
+    ( (target.getTime() - yearStart.getTime()) / 86400000 + 1 + (yearStart.getUTCDay() || 7) ) / 7
+  );
+  return Math.max(1, Math.min(53, week));
+}
+
+const effectiveWeek = (r: Partial<Recipe>): number | null =>
+  (typeof (r as any).weekNr === "number" ? (r as any).weekNr : null) ??
+  isoWeekFromDateStr((r as any).startDate);
+
+// Gruppera recept per vecka i redan korrekt ordning (kommer från /api/recipes/rolling)
+function groupRecipesByWeek(recipes: Recipe[]) {
+  const order: Array<{ week: number | "unknown"; items: Recipe[] }> = [];
+  const indexByKey = new Map<number | "unknown", number>();
+
+  for (const r of recipes) {
+    const wk = effectiveWeek(r) ?? "unknown";
+    if (!indexByKey.has(wk)) {
+      indexByKey.set(wk, order.length);
+      order.push({ week: wk, items: [] });
+    }
+    order[indexByKey.get(wk)!].items.push(r);
+  }
+
+  // Sortera inom varje vecka dag 1→3
+  for (const g of order) {
+    g.items.sort(
+      (a, b) => ((a as any).recipeNumber ?? 0) - ((b as any).recipeNumber ?? 0)
+    );
+  }
+  return order; // första gruppen = senaste "äldre" veckan
+}
+
+const Recipes: React.FC = () => {
   const { text } = useLang();
-  const { thisWeek, nextWeek, prior, fetchMorePrior, hasMore, loading } = useRecipes();
 
-  // Diet från prop i första hand, annars URL (?diet=), annars "veg"
   const sp = useSearchParams();
   const queryDiet = (sp?.get("diet") ?? undefined) as DietFilter | undefined;
-  const diet: DietFilter = (initialDiet ?? queryDiet ?? "veg") as DietFilter;
+  const diet: DietFilter = (queryDiet ?? "veg") as DietFilter;
 
+  const [nextWeek, setNextWeek] = useState<Recipe[]>([]);
+  const [thisWeek, setThisWeek] = useState<Recipe[]>([]);
+  const [prior, setPrior] = useState<Recipe[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  const [visibleWeekGroups, setVisibleWeekGroups] = useState(INITIAL_VISIBLE_WEEK_GROUPS);
   const lastRecipeRef = useRef<HTMLDivElement | null>(null);
-  const [clickedFetchMore, setClickedFetchMore] = useState(false);
-  const [previousPriorLength, setPreviousPriorLength] = useState(prior.length);
 
-  // --- Hämta vecka från singleton i Hygraph via API-route ---
-  const [cmsWeek, setCmsWeek] = useState<number | null>(null);
+  const [weekText, setWeekText] = useState<string | null>(null); // veckotext från Hygraph
+
+  // Hämta rullande listor (nästa/denna/äldre)
   useEffect(() => {
-    let ok = true;
+    let alive = true;
     (async () => {
       try {
-        const res = await fetch("/api/recipe-week", { cache: "no-store" });
+        setLoading(true);
+        const res = await fetch("/api/recipes/rolling", { cache: "no-store" });
         const json = await res.json();
-        if (ok) setCmsWeek(typeof json?.week === "number" ? json.week : null);
+
+        if (!alive) return;
+
+        const filterDiet = (arr: Recipe[]) =>
+          (arr || []).filter((r) => recipeMatchesDiet(r, diet));
+
+        setNextWeek(filterDiet(json.nextWeek));
+        setThisWeek(filterDiet(json.thisWeek));
+        setPrior(filterDiet(json.prior));
+
+        // resetta veckopagineringen vid dietbyte
+        setVisibleWeekGroups(INITIAL_VISIBLE_WEEK_GROUPS);
+      } catch (e) {
+        console.error("rolling fetch error", e);
+        setNextWeek([]);
+        setThisWeek([]);
+        setPrior([]);
+      } finally {
+        if (alive) setLoading(false);
+      }
+    })();
+
+    return () => {
+      alive = false;
+    };
+  }, [diet]);
+
+  // Hämta veckotext (“…onsdag v. X”) från Hygraph
+  useEffect(() => {
+    let alive = true;
+    (async () => {
+      try {
+        const r = await fetch("/api/recipe-week", { cache: "no-store" });
+        const j = await r.json();
+        if (!alive) return;
+        setWeekText(j?.week ?? null);
       } catch {
-        if (ok) setCmsWeek(null);
+        setWeekText(null);
       }
     })();
     return () => {
-      ok = false;
+      alive = false;
     };
   }, []);
 
-  useEffect(() => {
-    if (clickedFetchMore && lastRecipeRef.current && prior.length > previousPriorLength) {
-      lastRecipeRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
-      setClickedFetchMore(false);
-    }
-    setPreviousPriorLength(prior.length);
-  }, [prior.length, clickedFetchMore]);
+  // Gruppera “prior” per vecka och välj hur många grupper som ska visas
+  const priorGroups = useMemo(() => groupRecipesByWeek(prior), [prior]);
+  const visiblePriorGroups = priorGroups.slice(0, visibleWeekGroups);
+  const hasMorePriorGroups = visibleWeekGroups < priorGroups.length;
 
   const handleFetchMoreClick = () => {
-    setClickedFetchMore(true);
-    fetchMorePrior();
+    const newCount = visibleWeekGroups + LOAD_MORE_WEEK_GROUPS;
+    setVisibleWeekGroups(newCount);
+    // scrolla till sista renderade kort efter att DOM uppdaterats
+    setTimeout(() => {
+      lastRecipeRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 0);
   };
-
-  // --- FILTRERING ---
-  const filteredThisWeek = [...thisWeek].filter((r) => recipeMatchesDiet(r, diet));
-
-  const sortedNextWeek = [...nextWeek]
-    .filter((r) => recipeMatchesDiet(r, diet))
-    .sort((a, b) => (a.recipeNumber || 0) - (b.recipeNumber || 0));
-
-  const sortedPrior = [...prior]
-    .filter((r) => recipeMatchesDiet(r, diet))
-    .sort((a, b) => {
-      if (a.weekNr !== b.weekNr) return b.weekNr - a.weekNr;
-      return (a.recipeNumber || 0) - (b.recipeNumber || 0);
-    });
-
-  // --- VECKA FÖR TEXTEN "Går att beställa t.o.m. onsdag v. X" ---
-  // 1) Först: Single source of truth från Hygraph (RecipeWeekConfig)
-  const weekFromSingleton = cmsWeek; // kan vara null
-
-  // 2) Sista fallback: en vecka före nästa veckas start
-  const msInDay = 24 * 60 * 60 * 1000;
-  const nextStartISO = sortedNextWeek[0]?.startDate ?? null;
-  const weekAutoFallback = nextStartISO
-    ? getWeekNumber(new Date(new Date(nextStartISO).getTime() - 7 * msInDay))
-    : getWeekNumber(new Date());
-
-  // Slutligt värde: Singleton > Auto
-  const weekToShow = weekFromSingleton ?? weekAutoFallback;
 
   return (
     <>
       <Title>{text.recipes.title}</Title>
 
-      {!hideToggle && (
-        <div className="mt-8 mb-6">
-          <DietToggle />
-        </div>
-      )}
+      <div className="mt-8 mb-6">
+        <DietToggle />
+      </div>
 
       <div className="my-10 min-h-screen">
         <Grid className="">
-          {/* Denna veckan – visas bara om det finns recept */}
-          {filteredThisWeek.length > 0 && (
-            <div className="relative p-2 sm:p-4 pt-0 mt-0 min-h-96 scale-103 col-span-3 border-0 border-primary border-opacity-50 rounded-2xl">
+          {/* Denna veckan */}
+          {thisWeek.length > 0 && (
+            <div className="relative p-2 sm:p-4 pt-0 mt-0 min-h-96 scale-103 col-span-3 rounded-2xl">
               <h3 className="font-poppins text-3xl text-primary">
                 {text.recipes.this_week}
               </h3>
-              <ThisWeekRecipes recipes={filteredThisWeek} />
+              <ThisWeekRecipes recipes={thisWeek} />
             </div>
           )}
 
           {/* Nästa veckan */}
-          {nextWeek.length > 2 && (
+          {nextWeek.length > 0 && (
             <div className="col-span-3">
               <h3 className="font-poppins text-3xl text-primary mt-4">
                 {text.recipes.next_week}
               </h3>
 
-              {/* Veckotexten styrs av: Singleton > Auto */}
-              <p className="text-primary text-lg mt-2">
-                {text.recipes.next_week_order_until.replace(
-                  "{week}",
-                  String(weekToShow)
-                )}
-              </p>
+              {/* Veckotext från Hygraph */}
+              {typeof weekText === "string" || typeof weekText === "number" ? (
+                <p className="text-primary text-lg mt-2">
+                  {text.recipes.next_week_order_until.replace("{week}", String(weekText))}
+                </p>
+              ) : null}
 
               <Grid className="gap-8 pt-4">
                 {loading ? (
@@ -140,8 +187,8 @@ const Recipes: React.FC<RecipesProps> = ({ initialDiet, hideToggle }) => {
                     <div className="h-80 overflow-hidden rounded-xl w-full animate-pulse bg-primary bg-opacity-25" />
                   </>
                 ) : (
-                  sortedNextWeek.map((recipe: Recipe, index: number) => (
-                    <RecipeTile key={index} recipe={recipe} />
+                  nextWeek.map((recipe: Recipe, index: number) => (
+                    <RecipeTile key={recipe.id ?? index} recipe={recipe} />
                   ))
                 )}
               </Grid>
@@ -150,12 +197,9 @@ const Recipes: React.FC<RecipesProps> = ({ initialDiet, hideToggle }) => {
 
           <div className="w-full border-b col-span-1 md:col-span-3 border-primary-500 border-opacity-50"></div>
 
-          {/* Äldre recept */}
+          {/* Äldre recept – visar 1 vecka först, sedan 1 vecka per klick */}
           {loading ? (
             <>
-              <div className="h-80 overflow-hidden rounded-xl w-full animate-pulse bg-primary bg-opacity-25" />
-              <div className="h-80 overflow-hidden rounded-xl w-full animate-pulse bg-primary bg-opacity-25" />
-              <div className="h-80 overflow-hidden rounded-xl w-full animate-pulse bg-primary bg-opacity-25" />
               <div className="h-80 overflow-hidden rounded-xl w-full animate-pulse bg-primary bg-opacity-25" />
               <div className="h-80 overflow-hidden rounded-xl w-full animate-pulse bg-primary bg-opacity-25" />
               <div className="h-80 overflow-hidden rounded-xl w-full animate-pulse bg-primary bg-opacity-25" />
@@ -165,57 +209,42 @@ const Recipes: React.FC<RecipesProps> = ({ initialDiet, hideToggle }) => {
               <h3 className="font-poppins text-3xl text-primary mt-4 mb-4">
                 {text.recipes.older_recipes_heading}
               </h3>
-              <Grid className="gap-8 pt-4">
-                {sortedPrior
-                  .filter(
-                    (r) =>
-                      !thisWeek.find((tw) => tw.id === r.id) &&
-                      !nextWeek.find((nw) => nw.id === r.id)
-                  )
-                  .map((recipe: Recipe, index: number) => (
-                    <div
-                      key={recipe.id}
-                      className="w-full"
-                      ref={index === sortedPrior.length - 3 ? lastRecipeRef : null}
-                    >
-                      <RecipeTile recipe={recipe} />
-                    </div>
-                  ))}
-              </Grid>
+
+              {/* Rendera veckovis */}
+              {visiblePriorGroups.map((group, gi) => (
+                <Grid className="gap-8 pt-4" key={`prior-group-${group.week}-${gi}`}>
+                  {group.items.map((recipe: Recipe, index: number) => {
+                    // ref på sista kortet i sista synliga gruppen
+                    const isLastGroup = gi === visiblePriorGroups.length - 1;
+                    const isLastCard =
+                      isLastGroup && index === group.items.length - 1;
+                    return (
+                      <div
+                        key={recipe.id ?? `prior-${gi}-${index}`}
+                        className="w-full"
+                        ref={isLastCard ? lastRecipeRef : null}
+                      >
+                        <RecipeTile recipe={recipe} />
+                      </div>
+                    );
+                  })}
+                </Grid>
+              ))}
+
+              {/* Hämta fler */}
+              {hasMorePriorGroups && (
+                <div className="flex justify-center">
+                  <Button
+                    className="mt-12 max-w-xl mx-auto w-full"
+                    onClick={handleFetchMoreClick}
+                  >
+                    {text.recipes.older_recipes}
+                  </Button>
+                </div>
+              )}
             </div>
           )}
         </Grid>
-
-        {/* Hämta fler */}
-        <div className="flex justify-center">
-          <Button
-            className="mt-24 max-w-xl mx-auto w-full"
-            disabled={!hasMore || loading}
-            onClick={handleFetchMoreClick}
-          >
-            {!loading ? (
-              text.recipes.older_recipes
-            ) : (
-              <div role="status" className=" w-full flex justify-center">
-                <svg
-                  aria-hidden="true"
-                  className="w-6 h-6 text-gray-200 animate-spin fill-primary"
-                  viewBox="0 0 100 101"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-                  />
-                  <path
-                    d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-                  />
-                </svg>
-                <span className="sr-only">Loading...</span>
-              </div>
-            )}
-          </Button>
-        </div>
       </div>
     </>
   );

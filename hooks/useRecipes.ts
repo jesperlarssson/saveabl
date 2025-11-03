@@ -1,9 +1,12 @@
-
-import { useContext } from 'react';
-
-import { RecipeContext } from '@/providers/RecipeProvider';
-
-
+// hooks/useRecipes.ts
 export function useRecipes() {
-  return useContext(RecipeContext);
+  // Neutral "no-op"-hook så ingenting kraschar om något fortfarande importerar den.
+  return {
+    thisWeek: [] as any[],
+    nextWeek: [] as any[],
+    prior: [] as any[],
+    fetchMorePrior: () => {},
+    hasMore: false,
+    loading: false,
+  };
 }
