@@ -72,6 +72,7 @@ export interface Subscription {
 }
 
 export interface Recipe {
+  orderUntilWeek?: number | null;
   locale: any;
   localizations: Recipe[];
   createdAt: string | number | Date;

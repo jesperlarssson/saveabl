@@ -14,6 +14,7 @@ import DietToggle from "@/components/recipes/DietToggle";
 
 import { useSearchParams } from "next/navigation";
 import { recipeMatchesDiet, DietFilter } from "@/lib/recipeDiet";
+import { getWeekNumber } from "@/helpers/format";
 
 type RecipesProps = {
   /** Startläge utan att kräva ?diet= i URL (t.ex. på /recept/kott) */
@@ -26,9 +27,6 @@ const Recipes: React.FC<RecipesProps> = ({ initialDiet, hideToggle }) => {
   const { text } = useLang();
   const { thisWeek, nextWeek, prior, fetchMorePrior, hasMore, loading } = useRecipes();
 
-  // 🔢 MANUELLT VECKONUMMER FÖR TEXTEN – ändra här när du vill
-  const MANUAL_NEXT_WEEK = "45";
-
   // Diet från prop i första hand, annars URL (?diet=), annars "veg"
   const sp = useSearchParams();
   const queryDiet = (sp?.get("diet") ?? undefined) as DietFilter | undefined;
@@ -37,6 +35,24 @@ const Recipes: React.FC<RecipesProps> = ({ initialDiet, hideToggle }) => {
   const lastRecipeRef = useRef<HTMLDivElement | null>(null);
   const [clickedFetchMore, setClickedFetchMore] = useState(false);
   const [previousPriorLength, setPreviousPriorLength] = useState(prior.length);
+
+  // --- Hämta vecka från singleton i Hygraph via API-route ---
+  const [cmsWeek, setCmsWeek] = useState<number | null>(null);
+  useEffect(() => {
+    let ok = true;
+    (async () => {
+      try {
+        const res = await fetch("/api/recipe-week", { cache: "no-store" });
+        const json = await res.json();
+        if (ok) setCmsWeek(typeof json?.week === "number" ? json.week : null);
+      } catch {
+        if (ok) setCmsWeek(null);
+      }
+    })();
+    return () => {
+      ok = false;
+    };
+  }, []);
 
   useEffect(() => {
     if (clickedFetchMore && lastRecipeRef.current && prior.length > previousPriorLength) {
@@ -64,6 +80,20 @@ const Recipes: React.FC<RecipesProps> = ({ initialDiet, hideToggle }) => {
       if (a.weekNr !== b.weekNr) return b.weekNr - a.weekNr;
       return (a.recipeNumber || 0) - (b.recipeNumber || 0);
     });
+
+  // --- VECKA FÖR TEXTEN "Går att beställa t.o.m. onsdag v. X" ---
+  // 1) Först: Single source of truth från Hygraph (RecipeWeekConfig)
+  const weekFromSingleton = cmsWeek; // kan vara null
+
+  // 2) Sista fallback: en vecka före nästa veckas start
+  const msInDay = 24 * 60 * 60 * 1000;
+  const nextStartISO = sortedNextWeek[0]?.startDate ?? null;
+  const weekAutoFallback = nextStartISO
+    ? getWeekNumber(new Date(new Date(nextStartISO).getTime() - 7 * msInDay))
+    : getWeekNumber(new Date());
+
+  // Slutligt värde: Singleton > Auto
+  const weekToShow = weekFromSingleton ?? weekAutoFallback;
 
   return (
     <>
@@ -94,9 +124,12 @@ const Recipes: React.FC<RecipesProps> = ({ initialDiet, hideToggle }) => {
                 {text.recipes.next_week}
               </h3>
 
-              {/* 👇 manuellt veckonummer */}
+              {/* Veckotexten styrs av: Singleton > Auto */}
               <p className="text-primary text-lg mt-2">
-                {text.recipes.next_week_order_until.replace("{week}", MANUAL_NEXT_WEEK)}
+                {text.recipes.next_week_order_until.replace(
+                  "{week}",
+                  String(weekToShow)
+                )}
               </p>
 
               <Grid className="gap-8 pt-4">
@@ -176,16 +209,16 @@ const Recipes: React.FC<RecipesProps> = ({ initialDiet, hideToggle }) => {
                   />
                   <path
                     d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-                />
-              </svg>
-              <span className="sr-only">Loading...</span>
-            </div>
-          )}
-        </Button>
+                  />
+                </svg>
+                <span className="sr-only">Loading...</span>
+              </div>
+            )}
+          </Button>
+        </div>
       </div>
-    </div>
-  </>
-);
+    </>
+  );
 };
 
 export default Recipes;

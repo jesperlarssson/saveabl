@@ -35,6 +35,8 @@ export async function sendMutation(mutation: string, variables: any): Promise<an
   return await fetchAPI(mutation, { variables, mutation: true });
 }
 
+/* -------------------------------- Posts ---------------------------------- */
+
 export async function getAllPostsForHome(mutation: boolean): Promise<Post[]> {
   const data: PostsData = await fetchAPI(
     `
@@ -148,6 +150,8 @@ export async function getPaginatedPosts(limit: number, offset: number) {
   return data.posts;
 }
 
+/* -------------------------- Promotion banners ---------------------------- */
+
 export async function getLatestPromotionBanner() {
   const data = await fetchAPI(`
     query GetLatestPromotionBanner {
@@ -158,6 +162,8 @@ export async function getLatestPromotionBanner() {
   `);
   return data.promotionBanners;
 }
+
+/* -------------------------------- Recipes -------------------------------- */
 
 export async function getAllRecipes() {
   const data = await fetchAPI(`
@@ -375,6 +381,23 @@ export async function getRecipeWithSlug(slug: string) {
 
   return data.recept;
 }
+
+/* ----------------------- Singleton: RecipeWeekConfig ---------------------- */
+
+export type RecipeWeekConfig = { nextWeekOrderUntil: number };
+
+export async function getRecipeWeekConfig(): Promise<RecipeWeekConfig | null> {
+  const data = await fetchAPI(`
+    query GetRecipeWeekConfig {
+      recipeWeekConfigs(first: 1, orderBy: updatedAt_DESC) {
+        nextWeekOrderUntil
+      }
+    }
+  `);
+  return data?.recipeWeekConfigs?.[0] ?? null;
+}
+
+/* ------------------------ Delivery dates by product ----------------------- */
 
 export type ProductDates = {
   product: string;
