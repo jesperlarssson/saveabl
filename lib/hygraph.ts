@@ -490,3 +490,41 @@ export async function getDeliveryDatesForProduct(
   });
   return (data?.deliveryDates && data.deliveryDates[0]) || null;
 }
+
+/* --------------------------- Pause week options --------------------------- */
+
+export type PauseWeekOptions = {
+  weeks: number[];
+  enabled?: boolean | null;
+};
+
+const PAUSE_WEEKS_QUERY = /* GraphQL */ `
+  query GetPauseWeeks {
+    pauseWeekOptions(stage: PUBLISHED, first: 1, orderBy: updatedAt_DESC) {
+      weeks
+      enabled
+      updatedAt
+    }
+  }
+`;
+
+/**
+ * Hämtar hela objektet (weeks + enabled).
+ */
+export async function getPauseWeekSettings(): Promise<PauseWeekOptions | null> {
+  const data = await fetchAPI(PAUSE_WEEKS_QUERY, {});
+  const item = data?.pauseWeekOptions?.[0];
+  if (!item) return null;
+  return {
+    weeks: Array.isArray(item.weeks) ? item.weeks : [],
+    enabled: item.enabled ?? true,
+  };
+}
+
+/**
+ * Smidig hjälpare om du bara vill ha veckorna.
+ */
+export async function getPauseWeeks(): Promise<number[]> {
+  const settings = await getPauseWeekSettings();
+  return settings?.weeks ?? [];
+}

@@ -18,33 +18,72 @@ interface ManageSubscriptionModalProps {
 
 function getWeekNumber(date: Date) {
   const startOfYear = new Date(date.getFullYear(), 0, 1);
-  const firstThursday = new Date(startOfYear.getTime() +
-    ((4 - startOfYear.getDay() + 7) % 7) * 86400000);
-  const thisThursday = new Date(date.getTime() +
-    ((4 - date.getDay() + 7) % 7) * 86400000);
-
-  const weekNum = Math.ceil((thisThursday.getTime() - firstThursday.getTime()) / 604800000);
-
+  const firstThursday = new Date(
+    startOfYear.getTime() + (((4 - startOfYear.getDay() + 7) % 7) * 86400000)
+  );
+  const thisThursday = new Date(
+    date.getTime() + (((4 - date.getDay() + 7) % 7) * 86400000)
+  );
+  const weekNum = Math.ceil(
+    (thisThursday.getTime() - firstThursday.getTime()) / 604800000
+  );
   return weekNum;
 }
 
-const ManageSubscriptionModal: React.FC<ManageSubscriptionModalProps> = ({ updatePauseStatus, updatePauseWeek }) => {
-  const { onClose, isOpen, customerEmail, customerId, isPaused } = useManageSubscriptionModal();
-  const { setPauseWeek } = usePauseWeek();  // Hämta funktionen för att sätta pausvecka
+const ManageSubscriptionModal: React.FC<ManageSubscriptionModalProps> = ({
+  updatePauseStatus,
+  updatePauseWeek,
+}) => {
+  const { onClose, isOpen, customerEmail, customerId, isPaused } =
+    useManageSubscriptionModal();
+  const { setPauseWeek } = usePauseWeek();
   const { onOpen, forMessage } = useMessageModal();
   const { text } = useLang();
-  const [pauseOptions, setPauseOptions] = useState<React.ReactNode[]>([]);
-  const [selectedWeek, setSelectedWeek] = useState<number>(29);
-  const [weeks, setWeeks] = useState<number[]>([47, 48, 49]);
+
+  // === NYTT: hämta veckor från API/Hygraph ===
+  const [weeks, setWeeks] = useState<number[]>([]);
+  const [loadingWeeks, setLoadingWeeks] = useState<boolean>(false);
+  const [selectedWeek, setSelectedWeek] = useState<number | undefined>(undefined);
 
   useEffect(() => {
-    const options = weeks.map((week, index) => (
-      <option key={index} value={week}>
-        {text?.my_pages.weekOption} {week}
-      </option>
-    ));
-    setPauseOptions(options);
-  }, [weeks, text]);
+    const loadWeeks = async () => {
+      setLoadingWeeks(true);
+      try {
+        const res = await fetch("/api/pause-weeks", { cache: "no-store" });
+        const json = (await res.json()) as { weeks: number[] };
+
+        let loaded = Array.isArray(json.weeks) ? json.weeks : [];
+
+        // Fallback om inget finns i Hygraph
+        if (loaded.length === 0) {
+          const cw = getWeekNumber(new Date());
+          loaded = [cw + 1, cw + 2, cw + 3];
+          console.warn("Hygraph saknar pausveckor – använder fallback:", loaded);
+        }
+
+        // sortera + unika
+        const uniqueSorted = Array.from(new Set(loaded)).sort((a, b) => a - b);
+        setWeeks(uniqueSorted);
+
+        // välj rimlig default (nästa vecka eller första)
+        const currentWeek = getWeekNumber(new Date());
+        const next = uniqueSorted.find((w) => w >= currentWeek + 1) ?? uniqueSorted[0];
+        setSelectedWeek(next);
+      } catch (e) {
+        console.error(e);
+        const cw = getWeekNumber(new Date());
+        const fallback = [cw + 1, cw + 2, cw + 3];
+        setWeeks(fallback);
+        setSelectedWeek(fallback[0]);
+        toast.error(text?.common?.errorGeneric || "Kunde inte hämta pausveckor.");
+      } finally {
+        setLoadingWeeks(false);
+      }
+    };
+
+    loadWeeks();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const addTodo = async (action: string, wish: string) => {
     try {
@@ -52,7 +91,7 @@ const ManageSubscriptionModal: React.FC<ManageSubscriptionModalProps> = ({ updat
         customer_email: customerEmail,
         customer_id: customerId,
         actions: action,
-        wish: wish,
+        wish,
       });
       forMessage(true, "");
       onOpen();
@@ -64,25 +103,25 @@ const ManageSubscriptionModal: React.FC<ManageSubscriptionModalProps> = ({ updat
 
   const handleResumeSubscription = async () => {
     addTodo("RESUME", "Vill återuppta prenumerationen");
-    updatePauseStatus(false); // Uppdatera pausen till aktiv
-    updatePauseWeek(""); // Rensa återupptagningsveckan
+    updatePauseStatus(false);
+    updatePauseWeek("");
   };
 
-  const handleNumberSubmit = (e: any) => {
+  const handleNumberSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const data = new FormData(e.target);
-    const selectedWeek = data.get("pause");
-    
-    if (typeof selectedWeek === "string") {
-      setPauseWeek(parseInt(selectedWeek).toString()); 
-      addTodo("PAUSE", `Vill pausa och återuppta vecka ${selectedWeek}`);
+    const data = new FormData(e.currentTarget);
+    const selected = data.get("pause");
+
+    if (typeof selected === "string" && selected.length > 0) {
+      setPauseWeek(parseInt(selected, 10).toString());
+      addTodo("PAUSE", `Vill pausa och återuppta vecka ${selected}`);
       updatePauseStatus(true);
-      updatePauseWeek(selectedWeek);
+      updatePauseWeek(selected);
     } else {
       toast.error("Please select a valid value");
     }
   };
-  
+
   return (
     <Modal
       title={text?.my_pages.modalTitle}
@@ -92,12 +131,10 @@ const ManageSubscriptionModal: React.FC<ManageSubscriptionModalProps> = ({ updat
             <li key={index}>{item}</li>
           ))}
         </ul>
-      }      
+      }
       isOpen={isOpen}
       onChange={(open: boolean) => {
-        if (!open) {
-          onClose();
-        }
+        if (!open) onClose();
       }}
     >
       {isPaused ? (
@@ -109,43 +146,47 @@ const ManageSubscriptionModal: React.FC<ManageSubscriptionModalProps> = ({ updat
       ) : (
         <div className="flex flex-col w-full gap-4">
           <div className="flex flex-col">
-          <form onSubmit={handleNumberSubmit} className="w-full flex flex-col gap-8 p-4">
-  
-  {/* Text och dropdown i en egen div med mindre mellanrum */}
-  <div className="flex flex-col space-y-3">
-    <p className="text-xs text-black mt-[-15px]">
-      {text?.my_pages.firstWeekAfterPause || "Första veckan efter paus"}
-    </p>
+            <form onSubmit={handleNumberSubmit} className="w-full flex flex-col gap-8 p-4">
+              {/* Text och dropdown */}
+              <div className="flex flex-col space-y-3">
+                <p className="text-xs text-black mt-[-15px]">
+                  {text?.my_pages.firstWeekAfterPause || "Första veckan efter paus"}
+                </p>
 
-    <select
-  className="w-full border col-span-2 border-primary bg-transparent p-2 pr-14 rounded-md font-bold 
-    text-secondary ring-1 ring-transparent focus:ring-primary focus:outline-none 
-    focus:border-secondary focus:ring-1 bg-no-repeat bg-right bg-[length:20px] appearance-none"
-  name="pause"
-  id="pause"
-  value={selectedWeek}
-  onChange={(e) => setSelectedWeek(parseInt(e.target.value))}
-  style={{
-    backgroundPosition: "calc(100% - 5px) center", // Flytta pilen mer åt höger
-    backgroundImage: "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"%236E2936\"><path fill-rule=\"evenodd\" d=\"M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z\" clip-rule=\"evenodd\"/></svg>')",
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "20px",
-  }}
->
-  {pauseOptions}
-</select>
-  </div>
+                <select
+                  className="w-full border col-span-2 border-primary bg-transparent p-2 pr-14 rounded-md font-bold 
+                    text-secondary ring-1 ring-transparent focus:ring-primary focus:outline-none 
+                    focus:border-secondary focus:ring-1 bg-no-repeat bg-right bg-[length:20px] appearance-none disabled:opacity-50"
+                  name="pause"
+                  id="pause"
+                  disabled={loadingWeeks || weeks.length === 0 || selectedWeek === undefined}
+                  value={selectedWeek ?? ""}
+                  onChange={(e) => setSelectedWeek(parseInt(e.target.value, 10))}
+                  style={{
+                    backgroundPosition: "calc(100% - 5px) center",
+                    backgroundImage:
+                      "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"%236E2936\"><path fill-rule=\"evenodd\" d=\"M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z\" clip-rule=\"evenodd\"/></svg>')",
+                    backgroundRepeat: "no-repeat",
+                    backgroundSize: "20px",
+                  }}
+                >
+                  {weeks.map((week) => (
+                    <option key={week} value={week}>
+                      {text?.my_pages.weekOption} {week}
+                    </option>
+                  ))}
+                </select>
+              </div>
 
-  {/* Knappen är utanför så den påverkas av formens gap-4 */}
-  <Button type="submit">
-    {text?.my_pages.pauseButton}
-  </Button>
-  <p
-  className="text-xs text-black mb-2 mt-[-10px]"
-  dangerouslySetInnerHTML={{ __html: text?.my_pages.pauseInfoWithEmail || "" }}
-/>
-</form>
+              <Button type="submit" disabled={loadingWeeks || !selectedWeek}>
+                {text?.my_pages.pauseButton}
+              </Button>
 
+              <p
+                className="text-xs text-black mb-2 mt-[-10px]"
+                dangerouslySetInnerHTML={{ __html: text?.my_pages.pauseInfoWithEmail || "" }}
+              />
+            </form>
           </div>
         </div>
       )}
@@ -154,4 +195,3 @@ const ManageSubscriptionModal: React.FC<ManageSubscriptionModalProps> = ({ updat
 };
 
 export default ManageSubscriptionModal;
-
