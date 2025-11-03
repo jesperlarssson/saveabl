@@ -8,13 +8,12 @@ import RecipeTile from "../RecipeTile";
 
 interface ThisWeekRecipesProps {
   fullWidth?: boolean;
-  recipes: Recipe[];
+  recipes?: Recipe[]; // ← valfri
 }
 
-const ThisWeekRecipes: React.FC<ThisWeekRecipesProps> = ({ fullWidth, recipes }) => {
+const ThisWeekRecipes: React.FC<ThisWeekRecipesProps> = ({ fullWidth, recipes = [] }) => {
   if (!recipes || recipes.length === 0) return null;
 
-  // Sortera recepten i rätt ordning: dag 1 → dag 3
   const sortedThisWeek = [...recipes].sort(
     (a, b) => (a.recipeNumber || 0) - (b.recipeNumber || 0)
   );
@@ -22,7 +21,7 @@ const ThisWeekRecipes: React.FC<ThisWeekRecipesProps> = ({ fullWidth, recipes })
   return (
     <Grid className={twMerge(`gap-8 pt-4`, fullWidth && "gap-0 pt-0")}>
       {sortedThisWeek.map((recipe: Recipe, index: number) => (
-        <RecipeTile fullWidth={fullWidth} key={index} recipe={recipe} />
+        <RecipeTile fullWidth={fullWidth} key={recipe.id ?? index} recipe={recipe} />
       ))}
     </Grid>
   );
