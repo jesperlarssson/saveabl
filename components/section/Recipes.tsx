@@ -27,7 +27,7 @@ const Recipes: React.FC<RecipesProps> = ({ initialDiet, hideToggle }) => {
   const { thisWeek, nextWeek, prior, fetchMorePrior, hasMore, loading } = useRecipes();
 
   // 🔢 MANUELLT VECKONUMMER FÖR TEXTEN – ändra här när du vill
-  const MANUAL_NEXT_WEEK = "44";
+  const MANUAL_NEXT_WEEK = "45";
 
   // Diet från prop i första hand, annars URL (?diet=), annars "veg"
   const sp = useSearchParams();
