@@ -3,13 +3,18 @@ import { Post, PostsData } from "@/types";
 import { tempHomePosts, tempPostSlugs, tempPosts } from "./tempPosts";
 import { tempFaq } from "./tempFaq";
 
+/**
+ * Single source of truth for all Hygraph requests.
+ * - No caching: always fetch fresh content (no redeploy needed after CMS publish)
+ */
 async function fetchAPI(
   query: string,
   { variables, mutation }: { variables?: any; mutation?: boolean } = {}
 ): Promise<any> {
   const res: Response = await fetch(process.env.HYGRAPH_PROJECT_API!, {
     method: "POST",
-    next: { revalidate: 0 },
+    cache: "no-store",            // ⬅️ IMPORTANT: disable Next.js cache
+    next: { revalidate: 0 },      // ⬅️ and any ISR revalidation
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${
