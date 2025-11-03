@@ -1,7 +1,4 @@
-import { getWeekNumber } from "@/helpers/format";
 import { Post, PostsData } from "@/types";
-import { tempHomePosts, tempPostSlugs, tempPosts } from "./tempPosts";
-import { tempFaq } from "./tempFaq";
 
 /**
  * Single source of truth for all Hygraph requests.
@@ -13,8 +10,8 @@ async function fetchAPI(
 ): Promise<any> {
   const res: Response = await fetch(process.env.HYGRAPH_PROJECT_API!, {
     method: "POST",
-    cache: "no-store",            // ⬅️ IMPORTANT: disable Next.js cache
-    next: { revalidate: 0 },      // ⬅️ and any ISR revalidation
+    cache: "no-store",            // ⬅️ disable Next.js cache
+    next: { revalidate: 0 },      // ⬅️ disable ISR revalidation
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${
@@ -170,6 +167,9 @@ export async function getLatestPromotionBanner() {
 
 /* -------------------------------- Recipes -------------------------------- */
 
+/**
+ * Legacy: alla recept (behövs av vissa vyer)
+ */
 export async function getAllRecipes() {
   const data = await fetchAPI(`
     query GetRecipes {
@@ -203,6 +203,9 @@ export async function getAllRecipes() {
   return data.recepts;
 }
 
+/**
+ * Används av "Äldre recept" (serverpaginering – legacy)
+ */
 export async function getPaginatedRecipes(limit: number, offset: number, endDate: Date) {
   const variables = { limit, offset, endDate };
   const data = await fetchAPI(
@@ -240,6 +243,9 @@ export async function getPaginatedRecipes(limit: number, offset: number, endDate
   return data.recepts;
 }
 
+/**
+ * Legacy: äldre publika recept (annan modell)
+ */
 export async function getPaginatedOldRecipes(limit: number, offset: number) {
   const variables = { limit, offset };
   const data = await fetchAPI(
@@ -298,6 +304,9 @@ export async function getPaginatedOldRecipes(limit: number, offset: number) {
   return data.publicRecipes;
 }
 
+/**
+ * Legacy: hämta recept för en given vecka (används ev. av gamla endpoints)
+ */
 export async function getRecipesForWeek(week: number) {
   const data = await fetchAPI(
     `
@@ -328,6 +337,53 @@ export async function getRecipesForWeek(week: number) {
   );
 
   return data.recepts;
+}
+
+/**
+ * Ny: hämta senaste recepten i publiceringsordning (för rullande flödet)
+ * returnerar fält som behövs för listor/tiles och gruppering
+ */
+export async function getLatestRecipes(limit: number = 120) {
+  const data = await fetchAPI(
+    `
+    query GetLatestRecipes($limit: Int!) {
+      recepts(orderBy: publishedAt_DESC, first: $limit) {
+        id
+        title
+        slug
+        startDate
+        weekNr
+        recipeNumber
+        diet
+        image {
+          url(transformation: { image: { resize: { height: 500, width: 700 }}})
+        }
+        chef { name title picture { url } }
+        # localizations med locale valfri – om du vill slå upp språk i klient
+        localizations {
+          locale
+          title
+          ingredients
+          nutritionalValues
+          steg
+          savedIngredients
+          contentAllergies
+          spicyIngredients
+        }
+        publishedAt
+      }
+    }
+  `,
+    { variables: { limit } }
+  );
+  return data.recepts;
+}
+
+export async function getAllFAQ() {
+  const data = await fetchAPI(`
+    { faqs { answer question } }
+  `);
+  return data.faqs;
 }
 
 export async function getAllRecipesWithSlug() {
@@ -361,6 +417,7 @@ export async function getRecipeWithSlug(slug: string) {
           url(transformation: { image: { resize: { height: 800, width: 1200 }}})
         }
         localizations {
+          locale
           contentAllergies
           ingredients
           nutritionalValues
@@ -393,41 +450,6 @@ export async function getRecipeWeekConfig(): Promise<RecipeWeekConfig | null> {
     }
   `);
   return data?.recipeWeekConfigs?.[0] ?? null;
-}
-
-/* --------------------- Rolling mode (publishedAt) ------------------------ */
-
-/** Hämta senaste N publicerade recept (nyast först, via publishedAt). */
-export async function getLatestRecipes(limit: number) {
-  const data = await fetchAPI(
-    `
-    query GetLatestRecipes($limit: Int!) {
-      recepts(orderBy: publishedAt_DESC, first: $limit) {
-        id
-        title
-        slug
-        startDate
-        weekNr
-        recipeNumber
-        diet
-        chef { name title picture { url } }
-        image {
-          url(transformation: { image: { resize: { height: 500, width: 700 }}})
-        }
-        localizations {
-          contentAllergies
-          ingredients
-          nutritionalValues
-          steg
-          title
-        }
-        publishedAt
-      }
-    }
-    `,
-    { variables: { limit } }
-  );
-  return data.recepts;
 }
 
 /* ------------------------ Delivery dates by product ----------------------- */
