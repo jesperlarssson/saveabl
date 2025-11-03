@@ -1,11 +1,32 @@
+import { NextResponse } from "next/server";
 import { getWeekNumber } from "@/helpers/format";
 import { getRecipesForWeek } from "@/lib/hygraph";
 
+// 🔒 Ingen cache – hämta alltid färsk data
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+export const fetchCache = "force-no-store";
 
 export async function GET() {
- const week = getWeekNumber(new Date());
- const result = await getRecipesForWeek(week);
+  try {
+    const week = getWeekNumber(new Date());
+    const result = await getRecipesForWeek(week);
 
-
- return new Response(JSON.stringify(result));
+    return NextResponse.json(result, {
+      headers: {
+        "Cache-Control": "no-store, no-cache, max-age=0, must-revalidate",
+      },
+    });
+  } catch (error) {
+    console.error("Error in this-week route:", error);
+    return NextResponse.json(
+      { error: "Failed to fetch this week recipes" },
+      {
+        status: 500,
+        headers: {
+          "Cache-Control": "no-store, no-cache, max-age=0, must-revalidate",
+        },
+      }
+    );
+  }
 }
