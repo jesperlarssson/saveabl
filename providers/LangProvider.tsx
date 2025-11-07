@@ -3,7 +3,7 @@
 import Footer from "@/components/ui/Footer";
 import React, { useEffect, useState, createContext, ReactNode } from "react";
 
-type Language = "sv" | "en" | "da";
+type Language = "sv" | "en"; // ⬅️ DK borttagen
 
 interface LangContextInterface {
   lang: any;
@@ -11,88 +11,67 @@ interface LangContextInterface {
   handleChangeLang: (lang: Language) => void;
 }
 
-
 export const LangContext = createContext<LangContextInterface>({
   lang: null,
   text: null,
-  handleChangeLang: () => { },
+  handleChangeLang: () => {},
 });
 
 interface TextProviderProps {
   children: ReactNode;
 }
 
+// Hjälpare: mappa browserns språk till våra aktiva språk
+function mapBrowserLangToSupported(browserLang: string | null | undefined): Language {
+  if (!browserLang) return "en";
+  if (browserLang === "sv-SE") return "sv";
+  if (browserLang === "da-DK") return "en"; // ⬅️ nu → engelska
+  if (browserLang.startsWith("en")) return "en";
+  return "en";
+}
+
 export const LangProvider = ({ children }: TextProviderProps) => {
-  const [lang, setLang] = useState<string>("sv");
+  const [lang, setLang] = useState<Language>("sv");
   const [text, setText] = useState<any>(null);
 
-  useEffect(() => {
-    const lang = navigator.language;
-    if (lang === "sv-SE") {
+  const applyTexts = (l: Language) => {
+    if (l === "sv") {
       setLang("sv");
       setText(svText);
-    } else if (lang === "en-GB" || lang === "en-US" || lang === "en") {
-      setLang("en");
-      setText(enText);
-    } else if (lang === "da-DK") {
-      setLang("da");
-      setText(daText);
     } else {
       setLang("en");
       setText(enText);
     }
-  }, []);
+  };
 
-  const handleChangeLang = (lang: Language) => {
-    if (lang === "sv") {
-      setLang("sv");
-      setText(svText);
-    } else if (lang === "en") {
-      setLang("en");
-      setText(enText);
-    } else if (lang === "da") {
-      setLang("da");
-      setText(daText);
-    } else {
-      setLang("sv");
-      setText(svText);
-    }
-    // Store the selected language in localStorage
-    localStorage.setItem("selectedLang", lang);
+  const handleChangeLang = (l: Language) => {
+    applyTexts(l);
+    localStorage.setItem("selectedLang", l);
   };
 
   useEffect(() => {
-    // Check if there's a language stored in localStorage
-    const storedLang = localStorage.getItem("selectedLang");
+    const storedLang = typeof window !== "undefined" ? localStorage.getItem("selectedLang") : null;
 
-    if (storedLang) {
+    if (storedLang === "da") {
+      // ⬅️ tidigare danska blir engelska
+      handleChangeLang("en");
+      return;
+    }
+
+    if (storedLang === "sv" || storedLang === "en") {
       handleChangeLang(storedLang as Language);
-    } else {
-      const browserLang = navigator.language;
-      if (browserLang === "sv-SE") {
-        handleChangeLang("sv");
-      } else if (
-        browserLang === "en-GB" ||
-        browserLang === "en-US" ||
-        browserLang === "en"
-      ) {
-        handleChangeLang("en");
-      } else if (browserLang === "da-DK") {
-        handleChangeLang("da");
-      } else {
-        handleChangeLang("en");
-      }
+      return;
     }
+
+    const browserLang = typeof navigator !== "undefined" ? navigator.language : null;
+    handleChangeLang(mapBrowserLangToSupported(browserLang));
   }, []);
 
-  const value = {
-    lang,
-    text,
-    handleChangeLang,
-  };
+  const value = { lang, text, handleChangeLang };
 
   return <LangContext.Provider value={value}>{children}</LangContext.Provider>;
 };
+
 
 const svText = {
   nav: {

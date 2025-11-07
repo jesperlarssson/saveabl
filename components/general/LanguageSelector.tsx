@@ -12,7 +12,6 @@ const LanguageSelector: React.FC = () => {
     >
       <option value="sv">🇸🇪</option>
       <option value="en">🇬🇧</option>
-      <option value="da">🇩🇰</option>
     </select>
   );
 };
