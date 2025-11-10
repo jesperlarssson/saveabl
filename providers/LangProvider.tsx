@@ -276,6 +276,7 @@ const svText = {
       veg: "Vegetariska middagar gjorda på utvalda råvaror",
       meat: "Middagar med svenskt kött & fisk + utvalda råvaror",
     },
+    back_to_all: "Alla recept"
   },
 
   recipe_slug: {
@@ -527,7 +528,7 @@ const svText = {
     modalTitle: "Pausa matkassen - tänk på:",
     firstWeekAfterPause: "Välj när du vill få första matkassen efter paus:", 
     modalDescription: [
-      "Du kan pausa matkassen t.o.m. onsdag före leverans.",
+      "Du kan pausa matkassen t.o.m. tisdag före leverans.",
       "Helgleveranser räknas till veckan därpå."
     ],
     resumeSubscriptionButton: "Återuppta prenumeration",
@@ -1021,6 +1022,7 @@ button: "Got it - order now!"
       veg: "Vegetarian dinners made with carefully selected ingredients",
       meat: "Dinners with Swedish meat & fish + selected ingredients",
     },
+    back_to_all: "All recipes"
   },
   recipe_slug: {
     contains: "Contains",
@@ -1270,7 +1272,7 @@ button: "Got it - order now!"
     modalTitle: "Pause your meal kit – note:",
     firstWeekAfterPause: "Select your first delivery week after the pause:",
     modalDescription: [
-      "You can pause your meal kit up until the Wednesday before delivery.",
+      "You can pause your meal kit up until the Tuesday before delivery.",
       "Weekend deliveries count toward the following week."
     ],
     resumeSubscriptionButton: "Resume subscription",
