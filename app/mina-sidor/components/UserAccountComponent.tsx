@@ -252,7 +252,7 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
     forCustomerInterval(
       stripeResponse.customer.id,
       stripeResponse.customer.email,
-      isPaused
+      isPaused // du kan låta den vara; modalen bör inte blockera på paus
     );
     onOpenInterval();
   };
@@ -434,19 +434,18 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
             <div className="relative rounded-xl shadow-lg border border-[#eecfaa]/40 bg-[#fcf7e8] overflow-visible">
               {/* Meny-alternativ */}
               <div className="flex flex-col p-2">
-                {!isPaused && (
-                  <button
-                    role="menuitem"
-                    onClick={() => {
-                      setEditMenuOpen(false);
-                      handleChangeIntervalClick();
-                    }}
-                    className="w-full text-left px-4 py-3 text-[#6e2936] font-bold hover:bg-[#eecfaa] transition-colors flex items-center justify-between rounded-lg"
-                  >
-                    <span>{text?.my_pages?.interval_label ?? "Intervall"}</span>
-                    <span aria-hidden>›</span>
-                  </button>
-                )}
+                {/* ✅ ändrad: Intervall visas alltid */}
+                <button
+                  role="menuitem"
+                  onClick={() => {
+                    setEditMenuOpen(false);
+                    handleChangeIntervalClick();
+                  }}
+                  className="w-full text-left px-4 py-3 text-[#6e2936] font-bold hover:bg-[#eecfaa] transition-colors flex items-center justify-between rounded-lg"
+                >
+                  <span>{text?.my_pages?.interval_label ?? "Intervall"}</span>
+                  <span aria-hidden>›</span>
+                </button>
 
                 <button
                   role="menuitem"
@@ -528,8 +527,7 @@ const UserAccountComponent: React.FC<UserAccountProps> = ({
                 )
               }
             >
-              {text?.my_pages?.change_address_button ??
-                "Ändra adress och telefonnummer"}
+              {text?.my_pages?.change_address_button ?? "Ändra adress och telefonnummer"}
             </button>
 
             <button
