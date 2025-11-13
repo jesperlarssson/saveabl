@@ -1,44 +1,55 @@
-export const dynamicParams = true;
+export const dynamic = "force-dynamic";
+
+import type { Metadata } from "next";
+import Link from "next/link";
 
 import RecipeLayout from "@/components/general/RecipeLayout";
 import ThisWeekRecipes from "@/components/general/ThisWeekRecipes";
-import CommentSection from "@/components/section/CommentSection";
-import TextBanner from "@/components/ui/TextBanner";
-import { textBannerText } from "@/lib/general";
-import { getAllRecipesWithSlug, getRecipeWithSlug } from "@/lib/hygraph";
-import Head from "next/head";
-import React from "react";
+import { getRecipeWithSlug, getSiblingRecipeForToggle } from "@/lib/hygraph";
+import RecipeDietToggleInline from "./RecipeDietToggleInline";
+import BackToAllLink from "./BackToAllLink"; // ⬅️ ny, client-komponent
 
-export async function generateStaticParams() {
-  const slugs = await getAllRecipesWithSlug();
-  return slugs.slice(0, 10); // ✅ Endast senaste 10 laddas statiskt
-}
-
-async function getRecipe(params: any) {
+export async function generateMetadata(
+  { params }: { params: { slug: string } }
+): Promise<Metadata> {
   const recipe = await getRecipeWithSlug(params.slug);
-  return recipe;
+  return { title: recipe?.title ?? "Recept" };
 }
 
 interface RecipePageProps {
-  params: {
-    slug: string;
-  };
+  params: { slug: string };
 }
 
-const RecipePage: React.FC<RecipePageProps> = async ({ params }) => {
-  const recipe = await getRecipe(params);
+export default async function RecipePage({ params }: RecipePageProps) {
+  const recipe = await getRecipeWithSlug(params.slug);
+  if (!recipe) {
+    return <div className="px-6 py-10">Receptet kunde inte hittas.</div>;
+  }
+
+  // Normalisera diet (Hygraph enum: VEG/KOTT)
+  const arr: string[] = Array.isArray(recipe.diet) ? recipe.diet : [recipe.diet].filter(Boolean);
+  const currentDiet: "veg" | "meat" =
+    arr.some(v => String(v).toLowerCase().startsWith("veg")) ? "veg" : "meat";
+
+  const sibling = await getSiblingRecipeForToggle(params.slug);
 
   return (
     <>
-      <Head>
-        <title>{recipe?.title}</title>
-      </Head>
+      <div className="mx-auto max-w-screen-2xl px-4 md:px-8 pt-6">
+        <BackToAllLink />  {/* ⬅️ sköter språk + länk */}
+        <div className="mt-4 flex flex-col items-start gap-2">
+          <RecipeDietToggleInline
+            currentDiet={currentDiet}
+            siblingSlug={sibling?.slug ?? null}
+          />
+        </div>
+      </div>
 
-      <RecipeLayout recipe={recipe} />
-      <TextBanner>{textBannerText}</TextBanner>
+      <div className="-mt-10 md:-mt-12">
+        <RecipeLayout recipe={recipe} />
+      </div>
+
       <ThisWeekRecipes fullWidth />
     </>
   );
-};
-
-export default RecipePage;
+}

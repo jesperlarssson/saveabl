@@ -10,8 +10,8 @@ async function fetchAPI(
 ): Promise<any> {
   const res: Response = await fetch(process.env.HYGRAPH_PROJECT_API!, {
     method: "POST",
-    cache: "no-store",            // ⬅️ disable Next.js cache
-    next: { revalidate: 0 },      // ⬅️ disable ISR revalidation
+    cache: "no-store",            // ⬅️ behåll endast denna
+    // next: { revalidate: 0 },   // ⬅️ TA BORT denna rad (orsakade konflikt)
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${
@@ -404,6 +404,7 @@ export async function getRecipeWithSlug(slug: string) {
         title
         slug
         startDate
+        weekNr
         recipeNumber
         diet
         steg
@@ -436,6 +437,7 @@ export async function getRecipeWithSlug(slug: string) {
 
   return data.recept;
 }
+
 
 /* ----------------------- Singleton: RecipeWeekConfig ---------------------- */
 
@@ -527,4 +529,108 @@ export async function getPauseWeekSettings(): Promise<PauseWeekOptions | null> {
 export async function getPauseWeeks(): Promise<number[]> {
   const settings = await getPauseWeekSettings();
   return settings?.weeks ?? [];
+}
+/* ========= ADD-ONLY: Helpers för diet-växling (veg ↔ meat) ========= */
+/*  Enum-värden i Hygraph: VEG / KOTT  */
+
+const HYGRAPH_DIET_ENUM_MAP: Record<"veg" | "meat", string> = {
+  veg: "VEG",
+  meat: "KOTT",
+};
+
+/** Lättvikt: meta för togglern (normaliserar till "veg" | "meat") */
+export async function getRecipeMetaForToggle(slug: string): Promise<{
+  id: string;
+  slug: string;
+  title: string;
+  weekNr: number;
+  recipeNumber: number;
+  diet: "veg" | "meat";
+} | null> {
+  const data = await fetchAPI(
+    `
+    query GetRecipeMetaForToggle($slug: String!) {
+      recept(where: { slug: $slug }) {
+        id
+        slug
+        title
+        weekNr
+        recipeNumber
+        diet
+      }
+    }
+  `,
+    { variables: { slug } }
+  );
+
+  const r = data?.recept;
+  if (!r) return null;
+
+  // diet kan vara enum eller lista – normalisera till "veg" | "meat"
+  const arr: string[] = Array.isArray(r.diet) ? r.diet : [r.diet].filter(Boolean);
+  const norm = arr.some((v) => String(v).toLowerCase().startsWith("veg")) ? "veg" : "meat";
+
+  return {
+    id: r.id,
+    slug: r.slug,
+    title: r.title,
+    weekNr: r.weekNr,
+    recipeNumber: r.recipeNumber,
+    diet: norm,
+  };
+}
+
+/** Hitta syskonrecept (samma vecka + nummer, motsatt diet) via enum-filter */
+export async function getSiblingRecipeForToggle(slug: string): Promise<{
+  id: string;
+  slug: string;
+  title: string;
+  weekNr: number;
+  recipeNumber: number;
+  diet: "veg" | "meat";
+} | null> {
+  const current = await getRecipeMetaForToggle(slug);
+  if (!current) return null;
+
+  const targetKey: "veg" | "meat" = current.diet === "veg" ? "meat" : "veg";
+  const targetEnum = HYGRAPH_DIET_ENUM_MAP[targetKey];
+
+  const data = await fetchAPI(
+    `
+    query GetSiblingForToggle($week: Int!, $num: Int!, $diet: Diet!) {
+      recepts(
+        first: 1
+        orderBy: publishedAt_DESC
+        where: {
+          weekNr: $week
+          recipeNumber: $num
+          diet_contains_some: [$diet]
+        }
+      ) {
+        id
+        slug
+        title
+        weekNr
+        recipeNumber
+        diet
+      }
+    }
+  `,
+    { variables: { week: current.weekNr, num: current.recipeNumber, diet: targetEnum } }
+  );
+
+  const s = data?.recepts?.[0];
+  if (!s) return null;
+
+  const arr: string[] = Array.isArray(s.diet) ? s.diet : [s.diet].filter(Boolean);
+  const norm = arr.some((v) => String(v).toLowerCase().startsWith("veg")) ? "veg" : "meat";
+
+  return {
+    id: s.id,
+    slug: s.slug,
+    title: s.title,
+    weekNr: s.weekNr,
+    recipeNumber: s.recipeNumber,
+    diet: norm,
+  };
 }
