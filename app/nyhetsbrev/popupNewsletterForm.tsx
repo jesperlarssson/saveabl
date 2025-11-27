@@ -18,10 +18,9 @@ import image7 from "../../public/images/popup7.jpg";
 const images = [image1, image2, image3, image4, image5, image6, image7];
 
 const PopupNewsletterForm = () => {
-  const { lang, text = { popup: {} } } = useLang();
+  const { lang, text = { popup: {} as any } } = useLang();
   const [email, setEmail] = useState("");
   const [isTyping, setIsTyping] = useState(false);
-  const [selectedCountry, setSelectedCountry] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
   const [currentImage, setCurrentImage] = useState(0);
@@ -47,7 +46,7 @@ const PopupNewsletterForm = () => {
     setShowPopup(false);
   };
 
-  // Byt bild var 4:e sekund
+  // Byt bild var 4:e sekund (just nu 1 sek i din kod – jag har inte ändrat)
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImage((prev) => (prev + 1) % images.length);
@@ -61,21 +60,18 @@ const PopupNewsletterForm = () => {
       setError(text.popup.error_message);
       return;
     }
-    if (!selectedCountry) {
-      setError(text.popup.select_country_error);
-      return;
-    }
+
     try {
       await setDoc(doc(db, "newslettersubscribers", email), {
         "Namn": "",
         "Mejl": email,
-        "Land": selectedCountry,
+        "Land": "Sverige", // 🔹 Hårdkodat land
         timestamp: new Date().toISOString(),
       });
 
       setSubmitted(true);
       setEmail("");
-      setSelectedCountry("");
+      setIsTyping(false);
       setError("");
     } catch (error) {
       console.error("❌ Firebase-fel:", error);
@@ -85,13 +81,9 @@ const PopupNewsletterForm = () => {
 
   return (
     <>
-
-
-
-      {showPopup && ( // 🔹 Popup visas endast om showPopup är true
+      {showPopup && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 px-2 z-50">
           <div className="max-w-full max-w-none bg-[#EECFAA] flex flex-row md:flex-row rounded-lg overflow-hidden shadow-lg relative">
-            
             {/* Stängningsknapp */}
             <button
               onClick={handleClose}
@@ -101,7 +93,11 @@ const PopupNewsletterForm = () => {
             </button>
 
             {/* Vänster sektion - Formulär */}
-            <div className={`w-3/5 md:w-1/2 p-2 md:p-6 flex flex-col justify-center transition-all duration-500 ${submitted || error ? "pb-2 md:pb-4" : ""}`}>
+            <div
+              className={`w-3/5 md:w-1/2 p-2 md:p-6 flex flex-col justify-center transition-all duration-500 ${
+                submitted || error ? "pb-2 md:pb-4" : ""
+              }`}
+            >
               <h2 className="text-md md:text-2xl mb-2 md:mb-4 font-bold text-[#6E2936] text-center">
                 {text.popup.title}
               </h2>
@@ -125,45 +121,16 @@ const PopupNewsletterForm = () => {
                   />
 
                   {isTyping ? (
-                    <button type="submit" className="ml-2 text-[#6E2936] font-bold text-[11px] md:text-base hover:text-[#F4664A] transition duration-300">
+                    <button
+                      type="submit"
+                      className="ml-2 text-[#6E2936] font-bold text-[11px] md:text-base hover:text-[#F4664A] transition duration-300"
+                    >
                       {text.popup.submit_button}
                     </button>
                   ) : (
                     <FiMail className="text-[#6E2936] text-lg md:text-2xl ml-2" />
                   )}
                 </div>
-                {/* Landval visas när man börjar skriva */}
-                {isTyping && (
-                  <div className="mt-4 md:mt-4">
-                    <p className="text-[#6E2936] font-bold text-[11px] md:text-base">{text.popup.country_label}</p>
-                    <div className="flex items-center gap-2 md:gap-4 mt-2">
-                      <label className="flex items-center space-x-1 md:space-x-2">
-                        <input
-                          type="radio"
-                          name="country"
-                          checked={selectedCountry === "Sverige"}
-                          onChange={() => {
-                            setSelectedCountry("Sverige");
-                            setError("");
-                          }}
-                          className="w-3 h-3 md:w-4 md:h-4 accent-[#6E2936] cursor-pointer"
-                        />
-                        <span className="text-[#6E2936] text-[11px] md:text-sm">{text.popup.sweden}</span>
-                      </label>
-                      <label className="flex items-center space-x-1 md:space-x-2">
-                        <input
-                          type="radio"
-                          name="country"
-                          checked={selectedCountry === "Danmark"}
-                          onChange={() => setSelectedCountry("Danmark")}
-                          className="w-3 h-3 md:w-4 md:h-4 accent-[#6E2936] cursor-pointer"
-                          style={{ accentColor: "#6E2936" }}
-                        />
-                        <span className="text-[#6E2936] text-[11px] md:text-sm">{text.popup.denmark}</span>
-                      </label>
-                    </div>
-                  </div>
-                )}
               </form>
 
               {/* Beskrivande text */}
@@ -172,7 +139,11 @@ const PopupNewsletterForm = () => {
               </p>
 
               {/* Felmeddelande */}
-              {error && <p className="mt-2 text-[8px] md:text-sm text-center text-red-500">{error}</p>}
+              {error && (
+                <p className="mt-2 text-[8px] md:text-sm text-center text-red-500">
+                  {error}
+                </p>
+              )}
 
               {/* Bekräftelsemeddelande */}
               {submitted && (
@@ -183,8 +154,21 @@ const PopupNewsletterForm = () => {
             </div>
 
             {/* Höger sektion - Bildkarusell */}
-            <div className={`flex-1 min-w-0 overflow-hidden relative transition-all duration-500 ${submitted || error ? "h-[350px] md:h-[500px]" : "h-[250px] md:h-[450px]"}`}>
-              <Image src={images[currentImage]} alt="Popup Image" width={500} height={450} className="absolute top-0 left-0 w-full h-full object-cover object-center" priority />
+            <div
+              className={`flex-1 min-w-0 overflow-hidden relative transition-all duration-500 ${
+                submitted || error
+                  ? "h-[350px] md:h-[500px]"
+                  : "h-[250px] md:h-[450px]"
+              }`}
+            >
+              <Image
+                src={images[currentImage]}
+                alt="Popup Image"
+                width={500}
+                height={450}
+                className="absolute top-0 left-0 w-full h-full object-cover object-center"
+                priority
+              />
             </div>
           </div>
         </div>
