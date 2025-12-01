@@ -12,7 +12,7 @@ import {
 import { auth } from "@/firebase/init";
 import LoadingScreen from "@/components/section/LoadingScreen";
 
-interface AuthContextInterface {
+export interface AuthContextInterface {
   user: User | null;
   error: string | null;
   signUp: (email: string, password: string) => Promise<User | null>;
@@ -22,23 +22,8 @@ interface AuthContextInterface {
   referralCode: string | null;
 }
 
-export const AuthContext = createContext<AuthContextInterface | null>({
-  user: null,
-  error: null,
-  signUp: async () => {
-    throw new Error("AuthProvider not ready");
-  },
-  signIn: async () => {
-    throw new Error("AuthProvider not ready");
-  },
-  signOut: async () => {
-    throw new Error("AuthProvider not ready");
-  },
-  forgotPassword: async () => {
-    throw new Error("AuthProvider not ready");
-  },
-  referralCode: null, 
-});
+// 👇 Viktigt: default är null (annars får du TS7022-felet)
+export const AuthContext = createContext<AuthContextInterface | null>(null);
 
 interface AuthProviderProps {
   children: ReactNode;
@@ -115,6 +100,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         } catch (error) {
           console.error("Error fetching referral code:", error);
         }
+      } else {
+        setReferralCode(null);
       }
     });
 
@@ -125,10 +112,18 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     return <LoadingScreen />;
   }
 
+  const contextValue: AuthContextInterface = {
+    user,
+    error,
+    signUp,
+    signIn,
+    signOut,
+    forgotPassword,
+    referralCode,
+  };
+
   return (
-    <AuthContext.Provider
-      value={{ user, error, signUp, signIn, signOut, forgotPassword, referralCode }}
-    >
+    <AuthContext.Provider value={contextValue}>
       {children}
     </AuthContext.Provider>
   );
