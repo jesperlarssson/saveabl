@@ -11,7 +11,6 @@ import CommentForm from "./CommentForm";
 import { BsInfoCircle, BsStar, BsStarFill, BsStarHalf, BsX } from 'react-icons/bs';
 import { GiChiliPepper } from "react-icons/gi";
 
-
 export const getStars = (rating: number) => {
  const stars = [
    <BsStar key={0} />,
@@ -20,7 +19,6 @@ export const getStars = (rating: number) => {
    <BsStar key={3} />,
    <BsStar key={4} />
  ];
-
 
  for (let index = 0; index < stars.length; index++) {
    if (index <= rating - 1) {
@@ -33,14 +31,12 @@ export const getStars = (rating: number) => {
    }
  }
 
-
  return stars.map((star, index) => (
    <div key={`star-${index}`}>{star}</div>
  ));
 };
 
-
-// 👇 Här är fallback-funktionen för kockbilder
+// fallback för kockbilder
 const getChefImage = (name: string, image?: string) => {
  if (image && !image.includes("placeholder-chef")) return image;
  if (name.toLowerCase().includes("emil")) return "/images/emil_kock.png";
@@ -48,22 +44,18 @@ const getChefImage = (name: string, image?: string) => {
  return "/images/placeholder-chef.png";
 };
 
-
 interface RecipeLayoutProps {
  recipe: Recipe;
 }
 
-
 const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
  const { lang, text } = useLang();
-
 
  const [comments, setComments] = useState(recipe?.recipeComments || []);
  const handleNewComment = (comment: any) => {
    setComments((allComments) => [...allComments, comment]);
  };
  const [ratingSum, setRatingSum] = useState<number>(0);
-
 
  const getLocalizationIndex = (lang: string) => {
    switch (lang) {
@@ -76,7 +68,6 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
        return 0;
    }
  };
-
 
  const [recept, setRecept] = useState({
    title: recipe?.title,
@@ -93,7 +84,6 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
      image: recipe?.chef?.picture?.url || "/images/placeholder-chef.png"
    }
  });
-
 
  const calculateRating = () => {
    let sum = 0;
@@ -131,11 +121,9 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
    calculateRating();
  }, [lang, recipe]);
 
-
  if (recipe?.deprecated) {
    return <Section className="w-full">Detta är ett gammalt recept</Section>;
  }
-
 
  return (
    <Section className="w-full">
@@ -150,7 +138,6 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
              className="object-cover w-full h-full"
            />
          </div>
-
 
          <div className="col-span-4 sm:col-span-3 flex flex-col justify-end gap-2 relative">
            <div className="flex items-center gap-2 mt-0">
@@ -168,18 +155,15 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
              </h3>
            </div>
 
-
            <div className="flex items-center mt-2">
              {getStars(ratingSum)}
            </div>
-
 
            <h2 className="font-poppins text-secondary text-2xl sm:text-4xl">
              {recept.title}
            </h2>
          </div>
        </div>
-
 
        <div className="mt-4 flex items-center gap-4">
          <div
@@ -198,6 +182,7 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
              {text.recipe_slug.comment}
            </span>
          </div>
+
          <div
            className="flex items-center cursor-pointer"
            onClick={() => {
@@ -220,36 +205,35 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
          </div>
        </div>
 
-
        <div className="grid grid-cols-4 gap-8 mt-4">
          <div className="col-span-4 sm:col-span-1">
            <h3 className="font-poppins text-xl">{text.recipe_slug.contains}</h3>
            <ul className="text-gray-700">
-  {recept.ingredients.length > 0 ? (
-    recept.ingredients.map((ingredient, index) => {
-      const isSpicy = recept.spicyIngredients.includes(ingredient);
-      return (
-        <li key={index} className="flex items-center gap-2">
-          <p>{ingredient}</p>
-          {isSpicy && (
-            <button
-              onClick={() => setShowChiliInfo(true)}
-              aria-label="Mer information om stark ingrediens"
-              className="flex items-center text-[#6E2936] hover:opacity-70"
-            >
-              <GiChiliPepper size={26} className="-ml-2"/>
-              <BsInfoCircle size={11} className="-ml-0.5 mt-[6px]" />
-            </button>
-          )}
-        </li>
-      );
-    })
-  ) : (
-    <li>{text.recipe_slug.no_steps}</li>
-  )}
-</ul>
-
+             {recept.ingredients.length > 0 ? (
+               recept.ingredients.map((ingredient, index) => {
+                 const isSpicy = recept.spicyIngredients.includes(ingredient);
+                 return (
+                   <li key={index} className="flex items-center gap-2">
+                     <p>{ingredient}</p>
+                     {isSpicy && (
+                       <button
+                         onClick={() => setShowChiliInfo(true)}
+                         aria-label="Mer information om stark ingrediens"
+                         className="flex items-center text-[#6E2936] hover:opacity-70"
+                       >
+                         <GiChiliPepper size={26} className="-ml-2"/>
+                         <BsInfoCircle size={11} className="-ml-0.5 mt-[6px]" />
+                       </button>
+                     )}
+                   </li>
+                 );
+               })
+             ) : (
+               <li>{text.recipe_slug.no_steps}</li>
+             )}
+           </ul>
          </div>
+
          <div className="col-span-4 sm:col-span-3 relative">
            <h3 className="font-poppins text-xl">{text.recipe_slug.how_to}</h3>
            <ul className="text-gray-700">
@@ -268,61 +252,65 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
        </div>
      </Card>
 
-
      <Grid>
        <Card>
          <h3 className="text-secondary font-poppins">
            {text.recipe_slug.saved_ingredients}
          </h3>
-         <p className="text-gray-700">{recept.savedIngredients}</p>
+         <p className="text-gray-700 whitespace-pre-line">
+           {recept.savedIngredients}
+         </p>
        </Card>
+
        <Card>
          <h3 className="text-secondary font-poppins">
            {text.recipe_slug.nutrients}
          </h3>
-         <p className="text-gray-700">{recept.nutritionalValues}</p>
+         <p className="text-gray-700 whitespace-pre-line">
+           {recept.nutritionalValues}
+         </p>
        </Card>
+
        <Card>
          <h3 className="text-secondary font-poppins">
            {text.recipe_slug.ingredients}
          </h3>
-         <p className="text-gray-700">{recept.contentAllergies}</p>
+         <p className="text-gray-700 whitespace-pre-line">
+           {recept.contentAllergies}
+         </p>
        </Card>
      </Grid>
-
 
      <div id="comment-section">
        {comments.length > 0 && <CommentSection comments={comments} />}
      </div>
 
-
      <div id="comment-form">
        <CommentForm recipeId={recipe.id || ''} onNewComment={handleNewComment} />
      </div>
+
      {showChiliInfo && (
-  <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4">
-    <div className="bg-[#FCF7E8] rounded-xl shadow-lg p-6 max-w-sm w-full text-center relative">
-      <div
-        className="absolute top-2 right-2 cursor-pointer text-[#6E2936] hover:text-[#5a2230]"
-        onClick={() => setShowChiliInfo(false)}
-        aria-label="Stäng"
-      >
-        <BsX size={24} />
-      </div>
+       <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4">
+         <div className="bg-[#FCF7E8] rounded-xl shadow-lg p-6 max-w-sm w-full text-center relative">
+           <div
+             className="absolute top-2 right-2 cursor-pointer text-[#6E2936] hover:text-[#5a2230]"
+             onClick={() => setShowChiliInfo(false)}
+             aria-label="Stäng"
+           >
+             <BsX size={24} />
+           </div>
 
-      <h2 className="text-lg font-semibold text-[#6E2936] mb-2">
-  {text.recipe_slug.chili_info_title}
-</h2>
-<p className="text-sm text-gray-700">
-  {text.recipe_slug.chili_info_text}
-</p>
-    </div>
-  </div>
-)}
-
+           <h2 className="text-lg font-semibold text-[#6E2936] mb-2">
+             {text.recipe_slug.chili_info_title}
+           </h2>
+           <p className="text-sm text-gray-700">
+             {text.recipe_slug.chili_info_text}
+           </p>
+         </div>
+       </div>
+     )}
    </Section>
  );
 };
-
 
 export default RecipeLayout;
