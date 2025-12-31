@@ -21,15 +21,21 @@ const GardsbutikHero = () => {
       {/* MARKIS – scrollar bort (inte fixed) */}
       <div className="relative w-full z-10 pointer-events-none overflow-hidden md:-mt-4">
         <div className="relative w-full h-[72px] sm:h-[86px] md:h-[180px] overflow-hidden">
-          {/* MOBIL */}
+          
+          {/* MOBIL – aldrig avhuggen */}
           <img
             src="/images/farmshop-awning.svg"
             alt=""
             aria-hidden="true"
-            className="absolute inset-0 w-full h-full object-cover object-top md:hidden"
+            className="
+              absolute top-0 left-1/2
+              h-full
+              max-w-none
+              -translate-x-1/2
+              md:hidden
+            "
             style={{
-              transform: "translateY(-4px) scaleX(0.96)",
-              transformOrigin: "center top",
+              width: "110vw", // 👈 medvetet bredare än viewport
             }}
           />
 
@@ -40,17 +46,17 @@ const GardsbutikHero = () => {
             aria-hidden="true"
             className="absolute inset-0 w-full h-full object-contain object-top hidden md:block"
             style={{
-              transform: "translateY(-32px) scaleX(1.16)",
-              transformOrigin: "center top",
+              transform: "translateY(-32px)",
             }}
           />
         </div>
       </div>
 
-      {/* HERO – exakt din fungerande kod */}
+      {/* HERO */}
       <div className="w-full h-auto flex flex-col justify-center overflow-x-hidden">
         <Section className="pt-10 pb-20 md:pt-10 md:pb-20">
           <div className="flex flex-col justify-center items-center text-secondary">
+            
             <div className="w-full flex justify-start max-w-xl mx-auto -mb-[6px] md:-mb-[4px]">
               <img
                 src="/images/saveabl-gardsbutik.svg"
