@@ -19,11 +19,11 @@ const GardsbutikHero = () => {
   return (
     <>
       {/* MARKIS */}
-      <div className="relative w-full z-10 md:mt-[-16px] pointer-events-none">
+      <div className="relative w-full z-10 mt-0 md:mt-[-16px] pointer-events-none">
         <div className="relative w-full overflow-hidden">
           {/* Mobil: INTE fullbredd */}
-          <div className="relative mx-auto h-[72px] sm:h-[86px] md:h-[180px] 
-                          max-w-[420px] sm:max-w-[520px] md:max-w-none">
+          <div className="relative mx-auto h-[90px] sm:h-[100px] md:h-[180px] 
+                          max-w-[380px] sm:max-w-[520px] md:max-w-none">
             <img
               src="/images/farmshop-awning.svg"
               alt=""
