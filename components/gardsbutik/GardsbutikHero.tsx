@@ -19,7 +19,7 @@ const GardsbutikHero = () => {
   return (
     <>
       {/* MARKIS */}
-      <div className="relative w-full z-10 pointer-events-none">
+      <div className="relative w-full z-10 md:mt-[-16px] pointer-events-none">
         <div className="relative w-full overflow-hidden">
           {/* Mobil: INTE fullbredd */}
           <div className="relative mx-auto h-[72px] sm:h-[86px] md:h-[180px] 
