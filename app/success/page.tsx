@@ -3,46 +3,72 @@
 import BodyText from "@/components/ui/BodyText";
 import Button from "@/components/ui/Button";
 import { useLang } from "@/hooks/useLang";
-import React, { useState, useContext } from "react"; 
-import { db } from '@/firebase/init'; 
-import { collection, doc, setDoc } from "firebase/firestore"; 
-import Image from 'next/image';
-import { CheckoutContext } from "@/providers/CheckoutProvider"; 
-import morotImage from '../../public/images/illustrations/morot.png';
+import React, { useState, useContext, useEffect } from "react";
+import { db } from "@/firebase/init";
+import { doc, setDoc } from "firebase/firestore";
+import Image from "next/image";
+import { CheckoutContext } from "@/providers/CheckoutProvider";
+import morotImage from "../../public/images/illustrations/morot.png";
+
+// ✅ NYTT: töm varukorg när vi landar på success med session_id
+import { useSearchParams } from "next/navigation";
+import { useCart } from "@/providers/CartContext";
 
 const SuccessPage: React.FC = () => {
   const { text } = useLang();
-  const { state } = useContext(CheckoutContext); 
+  const { state } = useContext(CheckoutContext);
+
+  // ✅ NYTT
+  const searchParams = useSearchParams();
+  const sessionId = searchParams ? searchParams.get("session_id") : null;
+  const { clearCart } = useCart();
+
+  // ✅ Töm bara när session_id finns (dvs riktig Stripe-success)
+  useEffect(() => {
+    if (!sessionId) return;
+
+    // 1) Töm state (om vi är i samma provider)
+    clearCart();
+
+    // 2) Töm localStorage (robust oavsett layout/provider)
+    try {
+      window.localStorage.removeItem("saveabl_cart_v1");
+      // alternativt:
+      // window.localStorage.setItem("saveabl_cart_v1", "[]");
+    } catch (e) {
+      console.warn("Could not clear cart storage", e);
+    }
+  }, [sessionId, clearCart]);
+
   const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [otherText, setOtherText] = useState<string>("");
 
   const handleFeedback = async () => {
-    // Säkerställ att email inte är null
     const email = state.email;
 
-    // Om email är null, visa ett felmeddelande eller returnera för att förhindra vidare körning
     if (!email) {
       console.error("Ingen e-postadress tillgänglig.");
       return;
     }
 
     const timestamp = Date.now();
-    const readableDate = new Date(timestamp).toLocaleString(); // Skapa ett läsbart datumformat
+    const readableDate = new Date(timestamp).toLocaleString();
 
     const feedbackData = {
-      email: email, // Inkludera e-post i feedbackData
-      source: selectedOption === text?.success?.options?.other ? otherText : selectedOption,
-      timestamp: timestamp, // Timestamp för sortering
-      readableDate: readableDate // Lägg till läsbart datum för enklare visning
+      email,
+      source:
+        selectedOption === text?.success?.options?.other ? otherText : selectedOption,
+      timestamp,
+      readableDate,
     };
-    
+
     try {
-      const feedbackDocRef = doc(db, "feedback", email); // Använd e-posten som dokument-ID
-      await setDoc(feedbackDocRef, feedbackData); // Spara feedback med setDoc
+      const feedbackDocRef = doc(db, "feedback", email);
+      await setDoc(feedbackDocRef, feedbackData);
       setFeedbackSubmitted(true);
     } catch (error) {
-      console.error('Error saving feedback:', error);
+      console.error("Error saving feedback:", error);
     }
   };
 
@@ -87,7 +113,7 @@ const SuccessPage: React.FC = () => {
         }
 
         input[type="text"] {
-          width: 100%; 
+          width: 100%;
           max-width: 320px;
           padding: 0.5rem;
           border: 2px solid #6E2936;
@@ -177,7 +203,10 @@ const SuccessPage: React.FC = () => {
       <div className="flex items-center mt-10 justify-center px-4">
         <div className="max-w-3xl flex flex-col items-start text-left">
           <div className="centered-section">
-            <h1 className="w-full text-3xl sm:text-4xl font-bold" style={{ color: '#6E2936' }}>
+            <h1
+              className="w-full text-3xl sm:text-4xl font-bold"
+              style={{ color: "#6E2936" }}
+            >
               {text?.success?.title ?? "Tack för din beställning!"}
             </h1>
 
@@ -190,10 +219,10 @@ const SuccessPage: React.FC = () => {
               {text?.success?.nextStepsDescription ??
                 "För att hantera din beställning eller se dina abonnemang, gå till Mina sidor."}
             </BodyText>
-            
+
             <div className="centered-buttons mt-6 mb-2">
               <Button
-                onClick={() => window.location.href = "https://www.saveabl.com/mina-sidor"}
+                onClick={() => (window.location.href = "https://www.saveabl.com/mina-sidor")}
                 className="button"
                 style={{
                   backgroundColor: "#6E2936",
@@ -209,23 +238,21 @@ const SuccessPage: React.FC = () => {
           </div>
 
           <div className="morot-image-container">
-            <Image
-              src={morotImage}
-              alt="morot"
-              layout="fixed"
-              width={150}
-              height={150}
-            />
+            <Image src={morotImage} alt="morot" layout="fixed" width={150} height={150} />
           </div>
 
           {!feedbackSubmitted ? (
             <>
-              <h2 className="w-full text-2xl sm:text-3xl font-semibold mt-2 sm:mt-10" style={{ color: '#6E2936' }}>
+              <h2
+                className="w-full text-2xl sm:text-3xl font-semibold mt-2 sm:mt-10"
+                style={{ color: "#6E2936" }}
+              >
                 {text?.success?.feedbackTitle ?? "Hur hittade du oss?"}
               </h2>
-              
+
               <BodyText className="mt-2 w-full text-lg sm:text-xl">
-                {text?.success?.feedbackSubtitle ?? "Vi skulle bli så tacksamma om du vill ange hur du hittade till Saveabl :)"} 
+                {text?.success?.feedbackSubtitle ??
+                  "Vi skulle bli så tacksamma om du vill ange hur du hittade till Saveabl :)"}
               </BodyText>
 
               <div className="feedback-options mt-4 w-full">
@@ -240,17 +267,25 @@ const SuccessPage: React.FC = () => {
                   />
                   <span className="ml-2">{text?.success?.options?.friend ?? "Via en vän"}</span>
                 </label>
+
                 <label className="inline-flex items-center">
                   <input
                     type="radio"
                     className="custom-radio"
                     name="feedback"
                     value={text?.success?.options?.socialMedia ?? "Sociala medier"}
-                    onChange={() => setSelectedOption(text?.success?.options?.socialMedia ?? "Sociala medier")}
-                    checked={selectedOption === (text?.success?.options?.socialMedia ?? "Sociala medier")}
+                    onChange={() =>
+                      setSelectedOption(text?.success?.options?.socialMedia ?? "Sociala medier")
+                    }
+                    checked={
+                      selectedOption === (text?.success?.options?.socialMedia ?? "Sociala medier")
+                    }
                   />
-                  <span className="ml-2">{text?.success?.options?.socialMedia ?? "Sociala medier"}</span>
+                  <span className="ml-2">
+                    {text?.success?.options?.socialMedia ?? "Sociala medier"}
+                  </span>
                 </label>
+
                 <label className="inline-flex items-center">
                   <input
                     type="radio"
@@ -297,24 +332,32 @@ const SuccessPage: React.FC = () => {
             </>
           ) : (
             <div className="mt-2">
-              <h2 className="w-full text-2xl sm:text-3xl font-semibold mt-0 sm:mt-10" style={{ color: '#6E2936' }}>
+              <h2
+                className="w-full text-2xl sm:text-3xl font-semibold mt-0 sm:mt-10"
+                style={{ color: "#6E2936" }}
+              >
                 {text?.success?.thankYouTitle ?? "Tack för din feedback!"}
               </h2>
               <BodyText className="mt-4 w-full mb-4 text-lg sm:text-xl">
-                {text?.success?.thankYouDescription ?? "Vi uppskattar din feedback och kommer att använda den för att förbättra vår tjänst."}
+                {text?.success?.thankYouDescription ??
+                  "Vi uppskattar din feedback och kommer att använda den för att förbättra vår tjänst."}
               </BodyText>
             </div>
           )}
 
-          <h2 className="w-full text-2xl sm:text-3xl font-semibold mt-8 sm:mt-10" style={{ color: '#6E2936' }}>
+          <h2
+            className="w-full text-2xl sm:text-3xl font-semibold mt-8 sm:mt-10"
+            style={{ color: "#6E2936" }}
+          >
             {text?.success?.contactTitle ?? "Kontakta oss"}
           </h2>
+
           <BodyText className="mt-2 mb-20 w-full text-lg sm:text-xl">
-            {text?.success?.contactDescription ??
-              "Har du frågor? Tveka inte att kontakta oss på "}
+            {text?.success?.contactDescription ?? "Har du frågor? Tveka inte att kontakta oss på "}
             <a href="mailto:hello@saveabl.se" className="text-current underline">
               hello@saveabl.se
-            </a>.
+            </a>
+            .
           </BodyText>
         </div>
       </div>

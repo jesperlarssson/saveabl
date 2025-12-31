@@ -294,6 +294,9 @@ const svText = {
     no_steps: "Inga steg listade än - kommer snart!", 
     chili_info_title: "Vad betyder chilin?",
     chili_info_text: "Ingredienser med chili-ikon är kryddstarka. Du kan enkelt justera mängden efter din smak!",
+    farmshop_title: "Gårdsbutiken",
+  farmshop_line: "Missa inte nyheterna i Gårdsbutiken.",
+  farmshop_cta: "→",
   
   },
 
@@ -343,7 +346,7 @@ const svText = {
     monday_description_stockholm: "kl. 16-22", 
     copenhagen_monday: "Måndag 10/11", 
     monday_description_copenhagen: "kl. 16-22", 
-    address: "Vart ska middagarna levereras?",
+    address: "Vart ska vi leverera?",
     extra: "Extra info",
     contact: "Kontakt & Konto",
     terms: "Jag godkänner villkoren och att mitt konto kommer att skapas.",
@@ -819,6 +822,93 @@ popup: {
     error_generic: "Något gick fel. Försök igen.",
     success_message: "Tack! Vi har skickat koden till dig 💌",
   }, 
+  farmshop: {
+    title: "Gårdsbutik",
+    description: {
+      desktop:
+        "Ett hörn med godsaker vi själva älskar. Vår hemrostade granola, handgjorda kryddblandningar och andra noga utvalda produkter som gör vardagen lite godare.",
+      mobile:
+        "Ett hörn med godsaker vi själva älskar. Vår hemrostade granola, handgjorda kryddblandningar och andra noga utvalda produkter som gör vardagen lite godare.",
+    },
+    cta: "Hur gör jag?",
+  },
+  farmshop_products: {
+    heading: "Just nu i Gårdsbutiken",
+    description:
+      "Sortimentet uppdateras löpande med säsongens smaker och produkter som matchar kommande middagar. Håll utkik efter nyheter varje vecka.",
+    cta_more: "Sugen på fler?",
+    next_week_title_alt: "Tips till nästa veckas middagar",
+    sold_out: "Meddela mig",
+    add_to_cart: "Lägg i varukorg",
+    cta_hide: "Dölj", 
+  },
+  cart: {
+    title: "Din varukorg",
+    empty: "Din varukorg är tom.",
+    unit_price_prefix: "à", // samma på båda språk
+    total_label: "Totalt",
+    checkout_button: "Gå till kassan",
+    clear_button: "Töm",
+    remove_button: "Ta bort",
+    increase_aria: "Öka antal",
+    decrease_aria: "Minska antal",
+    close_aria: "Stäng varukorg",
+  },
+  how: {
+    title: "Hur gör jag?",
+    steps: [
+      {
+        title: "Beställ dina middagar",
+        description:
+          "Gårdsbutiken är öppen för dig som prenumererar eller beställer Saveabls middagar. ",
+      },
+      {
+        title: "Välj från Gårdsbutiken",
+        description:
+          "Lägg dina favoritprodukter från gårdsbutiken i varukorgen och beställ.",
+      },
+      {
+        title: "Allt i samma leverans",
+        description:
+          "Produkterna skickas tillsammans med dina nästa middagar, utan extra frakt.",
+      },
+    ],
+  },
+  notify: {
+    title: "Meddela mig",
+    description_prefix: "Skriv din e-post så hör vi av oss när",
+    description_suffix: "finns i lager.",
+    email_label: "E-post",
+    email_placeholder: "din@email.se",
+    sending: "Skickar...",
+    submit: "Meddela mig",
+    thanks_title: "Tack!",
+    thanks_text: "Vi skickar ett mejl så fort varan är tillbaka i lager.",
+    close_aria: "Stäng",
+  },
+  farmshop_requests: {
+    double_up_cta: "Önska dubbelt upp",
+  
+    double_up_title: "Dubbelt upp?",
+    double_up_description_1:
+      "Önska dubbelt upp av ett recept till kommande vecka. Ibland har vi möjlighet att erbjuda detta, ibland inte.",
+    double_up_description_2: "Om du får dubbelt upp läggs kostnaden på din nästa faktura. Priset motsvarar en portion i din vanliga prenumeration.",
+    wish_label: "Från vilken rätt vill du ha dubbelt nästa vecka?",
+    wish_placeholder: "Skriv namnet på rätten här…",
+  
+    email_label: "Din mejl",
+    email_placeholder: "din@email.se",
+  
+    submit: "Skicka önskan",
+    submit_aria: "Skicka önskan",
+    sending: "Skickar...",
+  
+    thanks_title: "Tack!",
+    thanks_text: "Vi har fått din önskan och gör allt vi kan för att uppfylla den!",
+  
+    close_aria: "Stäng",
+  },
+  
   
 };
 
@@ -1040,6 +1130,9 @@ button: "Got it - order now!"
     no_steps: "No steps listed yet - coming soon!", 
     chili_info_title: "What does the chili mean?",
   chili_info_text: "Ingredients with the chili icon are spicy. You can adjust the amount to your taste!",
+  farmshop_title: "Gårdsbutiken",
+  farmshop_line: "Don’t miss the latest additions in the 'Gårdsbutik'.",
+  farmshop_cta: "→",
   },
 
   order: {
@@ -1088,7 +1181,7 @@ button: "Got it - order now!"
     monday_description_stockholm: "at 16-22", 
     copenhagen_monday: "Monday 10/11", 
     monday_description_copenhagen: "at 16-22", 
-    address: "Where should the dinners be delivered?",
+    address: "Where should we deliver?",
     extra: "Extra information",
     contact: "Contact & Account",
     terms: "I accept the terms and understand that an account will be created.",
@@ -1528,6 +1621,96 @@ optionGreen: "Saveabl Grön",
       success_message: "Thanks! We've sent you the code 💌",
     },
     
+    farmshop: {
+      title: "Gårdsbutik",
+      description: {
+        desktop:
+          "A corner filled with treats we truly love. Our home-roasted granola, handcrafted spice blends and other carefully selected products that make everyday life a little better.",
+        mobile:
+          "A corner filled with treats we truly love. Our home-roasted granola, handcrafted spice blends and other carefully selected products that make everyday life a little better.",
+      },
+      cta: "How does it work?",
+    },
+    farmshop_products: {
+      heading: "In the Gårdsbutik right now",
+      description:
+        "The assortment is continuously updated with seasonal flavours and products that match upcoming meals. Look out for new arrivals every week.",
+      cta_more: "Show more?",
+      next_week_title_alt: "Tips for next week’s dinners",
+      sold_out: "Notify me",
+      add_to_cart: "Add to cart",
+      cta_hide: "Hide", 
+    },
+    cart: {
+      title: "Your cart",
+      empty: "Your cart is empty.",
+      unit_price_prefix: "à", // same in both languages
+      total_label: "Total",
+      checkout_button: "Go to checkout",
+      clear_button: "Clear",
+      remove_button: "Remove",
+      increase_aria: "Increase quantity",
+      decrease_aria: "Decrease quantity",
+      close_aria: "Close cart",
+    },
+    
+    how: {
+      title: "How does it work?",
+      steps: [
+        {
+          title: "Order your meals",
+          description:
+            "The Farm Shop is available to you when you subscribe to or order Saveabl meals.",
+        },
+        {
+          title: "Choose from the Farm Shop",
+          description:
+            "Add your favorite products from the Farm Shop to your cart and place your order.",
+        },
+        {
+          title: "Everything in one delivery",
+          description:
+            "The products are delivered together with your next meals, at no extra shipping cost.",
+        },
+      ],
+    },
+    notify: {
+      title: "Notify me",
+      description_prefix: "Leave your email and we’ll let you know when",
+      description_suffix: "is back in stock.",
+      email_label: "Email",
+      email_placeholder: "you@email.com",
+      sending: "Sending...",
+      submit: "Notify me",
+      thanks_title: "Thanks!",
+      thanks_text: "We’ll email you as soon as it’s back in stock.",
+      close_aria: "Close",
+    },
+    farmshop_requests: {
+      double_up_cta: "Request double",
+    
+      double_up_title: "Double up?",
+      double_up_description_1:
+        "Request a double portion of a recipe for the coming week. Sometimes we’re able to offer this, sometimes not.",
+      double_up_description_2: "If your request is approved, the cost will be added to your next invoice. The price equals one portion from your regular subscription.", 
+      wish_label: "Which dish would you like to double next week?",
+      wish_placeholder: "Write the name of the dish here…",
+    
+      email_label: "Your email",
+      email_placeholder: "your@email.com",
+    
+      submit: "Send request",
+      submit_aria: "Send request",
+      sending: "Sending...",
+    
+      thanks_title: "Thank you!",
+      thanks_text: "We’ve received your request and are doing everything we can to fulfil it!",
+    
+      close_aria: "Close",
+    },
+    
+    
+      
 };
 
 const daText = {

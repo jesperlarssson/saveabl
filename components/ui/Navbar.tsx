@@ -1,4 +1,5 @@
 "use client";
+
 import Image from "next/image";
 import { useState } from "react";
 import Link from "next/link";
@@ -10,59 +11,35 @@ import useAuthModal from "@/hooks/useAuthModal";
 import { useAuth } from "@/hooks/useAuth";
 import LanguageSelector from "../general/LanguageSelector";
 import { useLang } from "@/hooks/useLang";
+import { useCart } from "@/providers/CartContext";
+import CartPreview from "@/components/modals/CartPreview";
 
 const Navbar = () => {
   const authModal = useAuthModal();
   const [active, setActive] = useState(false);
+  const [showCart, setShowCart] = useState(false);
+
   const pathname = usePathname();
-
   const { text } = useLang();
+  const { items } = useCart();
 
-  const navLinkFaqClass = "ml-[-10px]";
-
-  const handleScrollToFAQ = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-    e.preventDefault();
-    const faqSection = document.getElementById("vanliga-fragor");
-    if (faqSection) {
-      faqSection.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-  
+  const totalQty = items.reduce((sum, item) => sum + item.quantity, 0);
 
   interface NavigationItem {
     id: number;
     name: string;
-    path?: string; 
-    onClick?: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void; 
+    path?: string;
+    onClick?: (
+      e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+    ) => void;
     disabled?: boolean;
   }
-  
 
   const navigation: NavigationItem[] = [
-    {
-      id: 1,
-      name: text.nav.order,
-      path: "/bestall",
-      disabled: false,
-    },
-    {
-      id: 2,
-      name: text.nav.recipe,
-      path: "/recept",
-      disabled: false,
-    },
-    {
-      id: 3,
-      name: text.nav.about,
-      path: "/om-oss",
-      disabled: false,
-    },
-    {
-      id: 5,
-      name: text.nav.giftcard, 
-      path: "/presentkort", 
-      disabled: false,
-    },
+    { id: 1, name: text.nav.order, path: "/bestall" },
+    { id: 2, name: text.nav.recipe, path: "/recept" },
+    { id: 3, name: text.nav.about, path: "/om-oss" },
+    { id: 5, name: text.nav.giftcard, path: "/presentkort" },
     {
       id: 6,
       name: text.nav.faq,
@@ -70,208 +47,257 @@ const Navbar = () => {
       onClick: (e) => {
         e.preventDefault();
         setActive(false);
-    
+
         if (pathname !== "/") {
-          // Navigera till startsidan + ankarlänk
           window.location.href = "/#vanliga-fragor";
         } else {
-          // Scrolla till sektionen på samma sida
           setTimeout(() => {
-            requestAnimationFrame(() => {
-              const faqSection = document.getElementById("vanliga-fragor");
-    
-              if (faqSection) {
-                faqSection.scrollIntoView({ behavior: "smooth", block: "start" });
-    
-                setTimeout(() => {
-                  window.scrollTo({
-                    top: faqSection.offsetTop - 50,
-                    behavior: "smooth",
-                  });
-                }, 100);
-              }
-            });
-          }, 300);
+            const el = document.getElementById("vanliga-fragor");
+            if (!el) return;
+            el.scrollIntoView({ behavior: "smooth", block: "start" });
+            setTimeout(() => {
+              window.scrollTo({
+                top: el.offsetTop - 50,
+                behavior: "smooth",
+              });
+            }, 120);
+          }, 250);
         }
       },
-      disabled: false,
-    }    
-    
+    },
   ];
 
   const auth = useAuth();
-  if (!auth) {
-    return null;
-  }
-
+  if (!auth) return null;
   const { user } = auth;
 
-  const handleClick = () => {
-    setActive(!active);
-  };
-
+  const handleCartClick = () => setShowCart(true);
 
   return (
-    <div
-    id="site-header"
-      className={twMerge(
-        `sticky top-0 w-full bg-primary-200 border-b border-primary border-opacity-25 drop-shadow-sm  z-50 transition`,
-        active && ""
-      )}
-    >
-      <nav className="w-full flex items-center justify-between px-2 sm:px-4 md:px-8 2xl:px-10">
-        <Link
-          href={"/"}
-          className=" px-4 h-14 flex items-center rounded-md hover:shadow-inner hover:scale-95 transition-all"
-        >
-          <Image
-            className="object-contain"
-            width={90}
-            height={18}
-            alt="Saveabl home"
-            src={"/svg/logo.svg"}
-          />
-        </Link>
-        <ul className="hidden md:flex">
-  {navigation.map((item) => (
-    <li key={item.id}>
-      <NavItem
-        className={twMerge(
-          `px-8 h-14 flex items-center hover:bg-primary hover:shadow-inner bg-opacity-60 `,
-          [
-            pathname === item.path && "bg-primary",
-            item.disabled && "cursor-not-allowed opacity-50 hover:bg-primary-200",
-          ]
-        )}
-        active={pathname === item.path}
-        href={item.path || "#"} 
-        disabled={item.disabled}
-        onClick={item.onClick} 
-      >
-        {item.name}
-      </NavItem>
-    </li>
-  ))}
-</ul>
-
-
-        <div className="hidden md:flex gap-2">
-          <LanguageSelector />
-
-          {!user ? (
-            <button
-              onClick={authModal.onOpen}
-              className="hidden md:flex px-8 py-3 rounded-full bg-accent text-primary-200 text-sm font-poppins tracking-wider border border-transparent disabled:cursor-not-allowed disabled:opacity-50 hover:bg-accent-600 hover:drop-shadow-md transition"
-            >
-              {text.nav.log_in}
-            </button>
-          ) : (
-            <div className="hidden md:flex items-center gap-x-4">
-              <Link
-                href="/mina-sidor"
-                onClick={() => setActive(false)}
-                className=" px-8 py-3 rounded-full bg-primary text-primary-900 text-sm font-poppins tracking-wider border border-transparent disabled:cursor-not-allowed disabled:opacity-50 hover:bg-primary-500 hover:drop-shadow-md transition"
-              >
-                {text.nav.my_account}
-              </Link>
-            </div>
-          )}
-        </div>
-
-        <div className="md:hidden mr-2">
-          <button
-            className="p-2 bg-transparent bg-opacity-50 rounded-lg hover:drop-shadow-md "
-            onClick={handleClick}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              stroke="#6E2936"  // Ändra färgen
-              className="h-7 w-7 fill-none"
-            >
-              {active ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              )}
-            </svg>
-          </button>
-        </div>
-      </nav>
-
+    <>
       <div
-        className={twMerge(
-          `flex flex-col fixed top-0 left-0 md:hidden h-[calc(100vh+2rem)] w-screen opacity-0 bg-primary-200 transition duration-300 -translate-x-full`,
-          active && "translate-x-0 opacity-100"
-        )}
+        id="site-header"
+        className="
+          fixed top-0 left-0 right-0 z-50
+          bg-primary-200 border-b border-primary/25 drop-shadow-sm
+        "
       >
-        <button
-          className="absolute top-[-4px] right-4 p-4 text-5xl text-[#EECFAA] hover:text-opacity-75"
-          onClick={handleClick}
+        {/* NAVBAR RAD */}
+        <nav
+          className="
+            w-full h-16
+            flex items-stretch justify-between
+            px-4 md:px-8 2xl:px-10
+          "
         >
-          &times;
-        </button>
+          {/* Logo */}
+          <Link
+            href="/"
+            className="
+              h-full px-3
+              flex items-center
+              rounded-md
+              hover:shadow-inner hover:scale-95
+              transition-all
+              outline-none
+              focus-visible:ring-2
+              focus-visible:ring-[#6E2936]
+              focus-visible:ring-offset-2
+              focus-visible:ring-offset-primary-200
+            "
+          >
+            <Image
+              src="/svg/logo.svg"
+              alt="Saveabl home"
+              width={90}
+              height={18}
+              className="object-contain"
+            />
+          </Link>
 
-        <li className="mt-12 mb-6 flex justify-center md:hidden">
-  <div className="p-3 rounded-full">
-    <LanguageSelector />
-  </div>
-</li>
+          {/* Desktop navigation */}
+          <ul className="hidden md:flex h-full">
+            {navigation.map((item) => (
+              <li key={item.id} className="h-full">
+                <NavItem
+                  className={twMerge(
+                    `
+                      h-full px-8
+                      flex items-center
+                      hover:bg-primary hover:shadow-inner
+                      transition
+                    `,
+                    pathname === item.path && "bg-primary",
+                    item.disabled && "cursor-not-allowed opacity-50"
+                  )}
+                  active={pathname === item.path}
+                  href={item.path ?? "#"}
+                  disabled={item.disabled}
+                  onClick={item.onClick}
+                >
+                  {item.name}
+                </NavItem>
+              </li>
+            ))}
+          </ul>
 
+          {/* Right side desktop */}
+          <div className="hidden md:flex h-full gap-4 items-center">
+            <LanguageSelector />
 
-<ul className="flex flex-col w-full items-center text-center">
-          {navigation.map((item) => (
-            <li onClick={() => setActive(false)} key={item.id} className="w-full">
-              <NavItem
-  className={twMerge(
-    `block w-full px-8 h-14 flex justify-center items-center text-xl font-bold text-center hover:bg-primary hover:shadow-inner bg-opacity-60 transition duration-600`,
-    [
-      pathname === item.path && "bg-primary",
-      item.disabled &&
-        "cursor-not-allowed opacity-50 hover:bg-primary-200",
-      active && "translate-x-0",
-    ]
-  )}
-  active={pathname === item.path}
-  href={item.path || "#"}
-  disabled={item.disabled}
->
-  {item.name}
-</NavItem>
-
-            </li>
-          ))}
-          {!user ? (
+            {/* Cart */}
             <button
-              onClick={authModal.onOpen}
-              className="flex md:hidden mx-4 mt-8 justify-center w-40 px-8 py-3 rounded-full bg-accent text-primary-200 text-sm font-poppins tracking-wider border border-transparent disabled:cursor-not-allowed disabled:opacity-50 hover:bg-accent-600 hover:drop-shadow-md transition"
+              onClick={handleCartClick}
+              className="relative flex items-center justify-center p-2 hover:opacity-80 transition"
+              aria-label="Varukorg"
             >
-              {text.nav.log_in}
+              <Image src="/icons/cart.svg" alt="Cart" width={26} height={26} />
+              {totalQty > 0 && (
+                <span className="absolute -top-1 -right-1 bg-[#6E2936] text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center">
+                  {totalQty}
+                </span>
+              )}
             </button>
-          ) : (
-            <div className="flex md:hidden items-center gap-x-4">
+
+            {/* Auth */}
+            {!user ? (
+              <button
+                onClick={authModal.onOpen}
+                className="px-8 py-2.5 rounded-full bg-accent text-primary-200 text-sm tracking-wider hover:bg-accent-600 transition"
+              >
+                {text.nav.log_in}
+              </button>
+            ) : (
               <Link
                 href="/mina-sidor"
-                onClick={() => setActive(false)}
-                className="px-8 py-3 mx-4 mt-8 w-40 flex items-center justify-center rounded-full bg-primary text-primary-900 text-sm font-poppins tracking-wider border border-transparent disabled:cursor-not-allowed disabled:opacity-50 hover:bg-primary-500 hover:drop-shadow-md transition"
+                className="px-8 py-2.5 rounded-full bg-primary text-primary-900 text-sm tracking-wider hover:bg-primary-500 transition"
               >
                 {text.nav.my_account}
               </Link>
-            </div>
+            )}
+          </div>
+
+          {/* Mobile right side */}
+          <div className="md:hidden flex items-center gap-1 mr-2">
+            <button
+              onClick={handleCartClick}
+              className="relative flex items-center justify-center p-2"
+              aria-label="Varukorg"
+            >
+              <Image src="/icons/cart.svg" alt="Cart" width={24} height={24} />
+              {totalQty > 0 && (
+                <span className="absolute -top-1 -right-1 bg-[#6E2936] text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center">
+                  {totalQty}
+                </span>
+              )}
+            </button>
+
+            <button
+              className="p-2 rounded-lg"
+              onClick={() => setActive(!active)}
+              aria-label="Öppna meny"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                stroke="#6E2936"
+                className="h-7 w-7"
+                fill="none"
+              >
+                {active ? (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                ) : (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                )}
+              </svg>
+            </button>
+          </div>
+        </nav>
+
+        {/* Mobile menu */}
+        <div
+          className={twMerge(
+            `
+              md:hidden fixed top-0 left-0 w-screen
+              h-[calc(100vh+2rem)]
+              bg-primary-200
+              opacity-0 -translate-x-full
+              transition duration-300
+            `,
+            active && "translate-x-0 opacity-100"
           )}
-        </ul>
+        >
+          <button
+            className="absolute top-[-4px] right-4 p-4 text-5xl text-[#EECFAA]"
+            onClick={() => setActive(false)}
+          >
+            &times;
+          </button>
+
+          <li className="mt-12 mb-4 flex justify-center">
+            <LanguageSelector />
+          </li>
+
+          <ul className="flex flex-col w-full items-center text-center">
+            {navigation.map((item) => (
+              <li
+                key={item.id}
+                onClick={() => setActive(false)}
+                className="w-full"
+              >
+                <NavItem
+                  className={twMerge(
+                    `
+                      block w-full px-8 py-4
+                      flex justify-center items-center
+                      text-xl font-bold
+                      hover:bg-primary transition
+                    `,
+                    pathname === item.path && "bg-primary",
+                    item.disabled && "opacity-50"
+                  )}
+                  active={pathname === item.path}
+                  href={item.path ?? "#"}
+                  disabled={item.disabled}
+                >
+                  {item.name}
+                </NavItem>
+              </li>
+            ))}
+
+            {!user ? (
+              <button
+                onClick={authModal.onOpen}
+                className="mx-4 mt-8 w-40 px-8 py-3 rounded-full bg-accent text-primary-200 text-sm hover:bg-accent-600 transition"
+              >
+                {text.nav.log_in}
+              </button>
+            ) : (
+              <Link
+                href="/mina-sidor"
+                onClick={() => setActive(false)}
+                className="mx-4 mt-8 w-40 px-8 py-3 rounded-full bg-primary text-primary-900 text-sm hover:bg-primary-500 transition"
+              >
+                {text.nav.my_account}
+              </Link>
+            )}
+          </ul>
+        </div>
       </div>
-    </div>
+
+      {/* Cart modal */}
+      <CartPreview open={showCart} onClose={() => setShowCart(false)} />
+    </>
   );
 };
 

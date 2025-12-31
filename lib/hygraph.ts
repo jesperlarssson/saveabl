@@ -10,8 +10,7 @@ async function fetchAPI(
 ): Promise<any> {
   const res: Response = await fetch(process.env.HYGRAPH_PROJECT_API!, {
     method: "POST",
-    cache: "no-store",            // ⬅️ behåll endast denna
-    // next: { revalidate: 0 },   // ⬅️ TA BORT denna rad (orsakade konflikt)
+    cache: "no-store",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${
@@ -206,7 +205,11 @@ export async function getAllRecipes() {
 /**
  * Används av "Äldre recept" (serverpaginering – legacy)
  */
-export async function getPaginatedRecipes(limit: number, offset: number, endDate: Date) {
+export async function getPaginatedRecipes(
+  limit: number,
+  offset: number,
+  endDate: Date
+) {
   const variables = { limit, offset, endDate };
   const data = await fetchAPI(
     `
@@ -341,7 +344,6 @@ export async function getRecipesForWeek(week: number) {
 
 /**
  * Ny: hämta senaste recepten i publiceringsordning (för rullande flödet)
- * returnerar fält som behövs för listor/tiles och gruppering
  */
 export async function getLatestRecipes(limit: number = 120) {
   const data = await fetchAPI(
@@ -359,7 +361,6 @@ export async function getLatestRecipes(limit: number = 120) {
           url(transformation: { image: { resize: { height: 500, width: 700 }}})
         }
         chef { name title picture { url } }
-        # localizations med locale valfri – om du vill slå upp språk i klient
         localizations {
           locale
           title
@@ -438,7 +439,6 @@ export async function getRecipeWithSlug(slug: string) {
   return data.recept;
 }
 
-
 /* ----------------------- Singleton: RecipeWeekConfig ---------------------- */
 
 export type RecipeWeekConfig = { nextWeekOrderUntil: number };
@@ -482,7 +482,6 @@ const DELIVERY_DATE_BY_PRODUCT = /* GraphQL */ `
 
 /**
  * Hämtar datum-posten för en given produkt (t.ex. "Saveabl Gård" eller "Saveabl Grön").
- * Returnerar null om det inte finns någon post.
  */
 export async function getDeliveryDatesForProduct(
   product: string
@@ -530,6 +529,7 @@ export async function getPauseWeeks(): Promise<number[]> {
   const settings = await getPauseWeekSettings();
   return settings?.weeks ?? [];
 }
+
 /* ========= ADD-ONLY: Helpers för diet-växling (veg ↔ meat) ========= */
 /*  Enum-värden i Hygraph: VEG / KOTT  */
 
@@ -539,7 +539,9 @@ const HYGRAPH_DIET_ENUM_MAP: Record<"veg" | "meat", string> = {
 };
 
 /** Lättvikt: meta för togglern (normaliserar till "veg" | "meat") */
-export async function getRecipeMetaForToggle(slug: string): Promise<{
+export async function getRecipeMetaForToggle(
+  slug: string
+): Promise<{
   id: string;
   slug: string;
   title: string;
@@ -566,9 +568,10 @@ export async function getRecipeMetaForToggle(slug: string): Promise<{
   const r = data?.recept;
   if (!r) return null;
 
-  // diet kan vara enum eller lista – normalisera till "veg" | "meat"
   const arr: string[] = Array.isArray(r.diet) ? r.diet : [r.diet].filter(Boolean);
-  const norm = arr.some((v) => String(v).toLowerCase().startsWith("veg")) ? "veg" : "meat";
+  const norm = arr.some((v) => String(v).toLowerCase().startsWith("veg"))
+    ? "veg"
+    : "meat";
 
   return {
     id: r.id,
@@ -581,7 +584,9 @@ export async function getRecipeMetaForToggle(slug: string): Promise<{
 }
 
 /** Hitta syskonrecept (samma vecka + nummer, motsatt diet) via enum-filter */
-export async function getSiblingRecipeForToggle(slug: string): Promise<{
+export async function getSiblingRecipeForToggle(
+  slug: string
+): Promise<{
   id: string;
   slug: string;
   title: string;
@@ -623,7 +628,9 @@ export async function getSiblingRecipeForToggle(slug: string): Promise<{
   if (!s) return null;
 
   const arr: string[] = Array.isArray(s.diet) ? s.diet : [s.diet].filter(Boolean);
-  const norm = arr.some((v) => String(v).toLowerCase().startsWith("veg")) ? "veg" : "meat";
+  const norm = arr.some((v) => String(v).toLowerCase().startsWith("veg"))
+    ? "veg"
+    : "meat";
 
   return {
     id: s.id,
@@ -633,4 +640,96 @@ export async function getSiblingRecipeForToggle(slug: string): Promise<{
     recipeNumber: s.recipeNumber,
     diet: norm,
   };
+}
+
+/* --------------------------- Farm shop products --------------------------- */
+/**
+ * OBS: jag utgår från att din model i Hygraph heter "farmshopProducts"
+ * (API ID), vilket matchar dina befintliga queries.
+ */
+
+export type FarmShopProductLocalization = {
+  locale: string;
+  title?: string | null;
+  description?: string | null;
+  price?: number | null;
+};
+
+// ✅ Enum-typer (matchar Hygraph enums)
+export type FarmshopProductType = "STRIPE" | "REQUEST";
+export type FarmshopRequestType = "DOUBLE_UP";
+
+export type FarmShopProduct = {
+  id: string;
+  title: string;
+  description?: string | null;
+  price?: number | null;
+  slug: string;
+  soldOut?: boolean | null;
+  showInNextWeek?: boolean | null;
+  sortOrder?: number | null;
+  image?: { url: string } | null;
+  stripePriceId?: string | null;
+
+  // ✅ NYA FÄLT
+  productType?: FarmshopProductType | null;
+  requestType?: FarmshopRequestType | null;
+
+  localizations?: FarmShopProductLocalization[];
+};
+
+const FARM_SHOP_PRODUCT_FIELDS = `
+  id
+  title
+  description
+  price
+  slug
+  soldOut
+  showInNextWeek
+  sortOrder
+  stripePriceId
+
+  productType
+  requestType
+
+  image {
+    url(transformation: { image: { resize: { height: 500, width: 700 }}})
+  }
+  localizations {
+    locale
+    title
+    description
+    price
+  }
+`;
+
+/** Alla produkter för "Just nu i Gårdsbutiken" */
+const FARM_SHOP_PRODUCTS_QUERY = `
+  query GetFarmShopProducts {
+    farmshopProducts(orderBy: sortOrder_ASC) {
+      ${FARM_SHOP_PRODUCT_FIELDS}
+    }
+  }
+`;
+
+export async function getFarmShopProducts(): Promise<FarmShopProduct[]> {
+  const data = await fetchAPI(FARM_SHOP_PRODUCTS_QUERY, {});
+  return data?.farmshopProducts ?? [];
+}
+
+/** Produkter markerade med ShowInNextWeek = true */
+const NEXT_WEEK_FARM_SHOP_PRODUCTS_QUERY = `
+  query GetNextWeekFarmShopProducts {
+    farmshopProducts(
+      where: { showInNextWeek: true }
+      orderBy: sortOrder_ASC
+    ) {
+      ${FARM_SHOP_PRODUCT_FIELDS}
+    }
+  }
+`;
+
+export async function getNextWeekFarmShopProducts(): Promise<FarmShopProduct[]> {
+  const data = await fetchAPI(NEXT_WEEK_FARM_SHOP_PRODUCTS_QUERY, {});
+  return data?.farmshopProducts ?? [];
 }

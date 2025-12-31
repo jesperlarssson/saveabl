@@ -13,8 +13,8 @@ export interface OrderWizardHandle {
   prev: () => void;
   next: () => void;
   getStep: () => number;
-  // Valfritt – om du senare vill kunna hoppa till ett steg men med “guard”
-  goTo?: (to: number) => void;
+  // ⬇️ Uppdaterad: kan nu forcera hopp till ett steg
+  goTo?: (to: number, options?: { force?: boolean }) => void;
 }
 
 interface OrderWizardProps {
@@ -89,11 +89,19 @@ const OrderWizard = forwardRef<OrderWizardHandle, OrderWizardProps>(
       return true;
     };
 
-    const guardedGoTo = (to: number) => {
+    // ⬇️ Nu med stöd för force
+    const guardedGoTo = (to: number, options?: { force?: boolean }) => {
       if (to === currentStep) return;
-      // Blockera hopp framåt om tidigare steg inte är uppfyllda
-      if (to > currentStep && !allPrevSatisfied(to)) return;
-      setCurrentStep(Math.min(Math.max(1, to), maxStep));
+
+      const target = Math.min(Math.max(1, to), maxStep);
+
+      // Blockera hopp framåt om tidigare steg inte är uppfyllda,
+      // förutom om vi explicit sagt force: true (t.ex. från varukorgen)
+      if (target > currentStep && !options?.force && !allPrevSatisfied(target)) {
+        return;
+      }
+
+      setCurrentStep(target);
     };
 
     // Ping till stegbaren när steg ändras
@@ -111,7 +119,7 @@ const OrderWizard = forwardRef<OrderWizardHandle, OrderWizardProps>(
         if (canProceed(currentStep)) nextStep();
       },
       getStep: () => currentStep,
-      goTo: guardedGoTo,
+      goTo: (to, options) => guardedGoTo(to, options),
     }));
 
     // Enhetlig CTA-storlek

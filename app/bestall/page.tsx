@@ -5,7 +5,13 @@ import NextImage from "next/image";
 import { twMerge } from "tailwind-merge";
 import useCheckout from "@/hooks/useCheckout";
 import CheckoutStepBar from "./components/CheckoutStepBar";
-import React, { ChangeEvent, useEffect, useMemo, useRef, useState } from "react";
+import React, {
+  ChangeEvent,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { toast } from "react-hot-toast";
 import Section from "@/components/ui/Section";
 import { AnimatePresence, motion } from "framer-motion";
@@ -42,6 +48,9 @@ import {
   vastPostalCodes6,
   vastPostalCodes7,
 } from "@/lib/zipCodes";
+
+// 🛒 Cart
+import { useCart } from "@/providers/CartContext";
 
 /* ------------ Animations ------------- */
 const variants = {
@@ -108,7 +117,9 @@ const shippingDk: string[] = [];
 
 /** API-hämtare – läser Hygraph 1:1 via din API-route och filtrerar veckodagar per postnummer + produkt */
 async function fetchDeliveryWindows(zip: string, product: string) {
-  const url = `/api/delivery-dates?zip=${zip}&product=${encodeURIComponent(product)}`;
+  const url = `/api/delivery-dates?zip=${zip}&product=${encodeURIComponent(
+    product
+  )}`;
   const res = await fetch(url, { cache: "no-store" });
   if (!res.ok) throw new Error("Failed to fetch delivery dates");
   return (await res.json()) as {
@@ -131,7 +142,10 @@ function daysFromWindows(
   text: any
 ) {
   const now = Math.floor(Date.now() / 1000);
-  const bestByWeekday = new Map<number, { start: number; end: number; label: string; weekday: number }>();
+  const bestByWeekday = new Map<
+    number,
+    { start: number; end: number; label: string; weekday: number }
+  >();
 
   windows
     .filter((w) => w.start >= now)
@@ -140,11 +154,8 @@ function daysFromWindows(
       if (!bestByWeekday.has(w.weekday)) bestByWeekday.set(w.weekday, w);
     });
 
-  const pad2 = (n: number) => (n < 10 ? `0${n}` : String(n));
-
   return Array.from(bestByWeekday.values()).map((w) => {
     const start = new Date(w.start * 1000);
-    const end = new Date(w.end * 1000);
 
     const day = start.getDate();
     const month = start.getMonth() + 1;
@@ -168,7 +179,6 @@ function daysFromWindows(
         description = text?.order?.monday_description ?? "kl. 16-22";
         break;
       default:
-        // om Hygraph någon gång skickar andra veckodagar, visa bara datum
         weekdayText = "";
         description = "";
         break;
@@ -184,9 +194,75 @@ function daysFromWindows(
   });
 }
 
+/* ========= SAMMA PRISLOGIK SOM I OrderSummary ========= */
+
+type SmartType = "veg" | "gard" | null;
+
+const isFamilyType = (t: any) =>
+  !!t &&
+  (t.id === "Familybox" ||
+    /(^|\s)3\s*[–-]?\s*4(\s|$)|3–4|3-4/i.test(t.label));
+
+const isCoupleType = (t: any) =>
+  !!t &&
+  (t.id === "Couplebox" ||
+    /(^|\s)2\s*[–-]?\s*3(\s|$)|2–3|2-3/i.test(t.label));
+
+const normalizeVariantLabel = (label: string) => {
+  const l = label.toLowerCase();
+  if (/(engångsköp|one\s*time|engangskøb)/i.test(l)) return "one";
+  if (/(varje vecka|every week|hver uge)/i.test(l)) return "weekly";
+  if (/(varannan vecka|every other week|hver anden uge)/i.test(l))
+    return "biweekly";
+  return "unknown";
+};
+
+type Bucket = {
+  family: { sub: number; one: number };
+  couple: { sub: number; one: number };
+};
+
+const PRICES = {
+  seStockholm: {
+    veg: { family: { sub: 708, one: 828 }, couple: { sub: 621, one: 711 } },
+    gard: { family: { sub: 828, one: 948 }, couple: { sub: 711, one: 801 } },
+  },
+  seOther: {
+    veg: { family: { sub: 708, one: 828 }, couple: { sub: 621, one: 711 } },
+    gard: { family: { sub: 828, one: 948 }, couple: { sub: 711, one: 801 } },
+  },
+  dk: {
+    veg: { family: { sub: 539, one: 599 }, couple: { sub: 449, one: 519 } },
+    gard: { family: { sub: 660, one: 720 }, couple: { sub: 540, one: 612 } },
+  },
+} as const;
+
+const pickPrice = ({
+  lineup,
+  region,
+  typeKey,
+  isSub,
+}: {
+  lineup: "veg" | "gard";
+  region: "seStockholm" | "seOther" | "dk";
+  typeKey: "family" | "couple";
+  isSub: boolean;
+}) => {
+  const bucket: Bucket = (PRICES as any)[region][lineup];
+  return isSub ? bucket[typeKey].sub : bucket[typeKey].one;
+};
+
+/* ====================================================== */
+
 const Order = () => {
   const { text, lang } = useLang();
   const router = useRouter();
+
+  // 🛒 Cart items + actions
+  const { items: cartItems, addItem, removeItem, clearCart } = useCart();
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
+
+
 
   // --- Sticky stepbar under header ---
   const barWrapRef = useRef<HTMLDivElement>(null);
@@ -296,6 +372,12 @@ const Order = () => {
   const id = searchParams?.get("id") || "1";
   const offerId = parseInt(id, 10);
 
+  // ⭐ flagga om sidan öppnats från varukorgen
+  const fromCart = searchParams?.get("fromCart") === "1";
+  // 🔐 Om man kommer från varukorgen → aldrig postnummerkontroll
+const skipZipCheck = fromCart;
+
+
   const [deliveryWindows, setDeliveryWindows] = useState<
     { start: number; end: number; label: string; weekday: number }[]
   >([]);
@@ -377,6 +459,13 @@ const Order = () => {
     setDeliveryPeriodId,
   } = useCheckout();
 
+  // ⭐ Endast gårdsbutik: kommit från varukorgen, har varor, ingen matkasse vald
+  const hasMealKitInCart = cartItems.some((i: { id: string; }) => i.id === "mealkit");
+
+const hasOnlyFarmShop =
+  fromCart && cartItems.length > 0 && !hasMealKitInCart;
+
+
   /** ------------ AUTO: validera postnummer medan man skriver ------------- */
   const serviceable = (pcRaw: string) => {
     const pc = pcRaw.trim();
@@ -423,7 +512,10 @@ const Order = () => {
       }
 
       try {
-        const dw = await fetchDeliveryWindows(clean, productNameFor(selectedSmartType));
+        const dw = await fetchDeliveryWindows(
+          clean,
+          productNameFor(selectedSmartType)
+        );
         setDeliveryWindows(dw.windows);
         updateWeekdaysList(dw.windows);
         setSoldOut(!!dw.soldOut);
@@ -451,20 +543,40 @@ const Order = () => {
     if (zip.length === 5 && serviceStatus === "ok") {
       (async () => {
         try {
-          const dw = await fetchDeliveryWindows(zip, productNameFor(selectedSmartType));
+          const dw = await fetchDeliveryWindows(
+            zip,
+            productNameFor(selectedSmartType)
+          );
           setDeliveryWindows(dw.windows);
           setSoldOut(!!dw.soldOut);
 
           const nextDays = applyGardMondayRule(daysFromWindows(dw.windows, text));
           setDeliveryDaysToChoose(nextDays);
         } catch {
-          setDeliveryWindowsErrors("Något gick fel vid hämtning av leveransdatum.");
+          setDeliveryWindowsErrors(
+            "Något gick fel vid hämtning av leveransdatum."
+          );
         }
       })();
     }
-  }, [selectedSmartType, address.postalCode, serviceStatus, applyGardMondayRule, text]);
+  }, [
+    selectedSmartType,
+    address.postalCode,
+    serviceStatus,
+    applyGardMondayRule,
+    text,
+  ]);
 
-  /** Knapp: fortsätt */
+ /** 🔁 Om vi kommer från varukorgen: hoppa alltid förbi postnummer-steget */
+useEffect(() => {
+  if (skipZipCheck) {
+    setCanDeliver(true);
+    setShowAddressFields(true);
+  }
+}, [skipZipCheck]);
+
+
+  /** Knapp: fortsätt (matkasse-flöde) */
   const handleContinue = () => {
     if (serviceStatus !== "ok") {
       toast.error("Skriv ett giltigt postnummer först");
@@ -543,13 +655,25 @@ const Order = () => {
     userInformation.address.country = country;
 
     try {
-      const deliveryDayLabel = getDayLabelFromId(selectedWeekday) ?? "Okänt";
-      const people = (selectedType?.label ?? "").replace(/\s*[-–]\s*/g, "-");
-      const descriptionForStripe =
-        `Vald leverans: ${deliveryDayLabel}\n` +
-        `Antal personer: ${people}\n` +
-        `Matkasse: ${selectedSmartType === "gard" ? "Saveabl Gård" : "Saveabl Grön"}\n` +
-        `Extra info: ${userInformation.extraInfo || ""}`;
+      let descriptionForStripe: string;
+
+      if (hasOnlyFarmShop) {
+        // 🧺 Ren gårdsbutiksorder: ingen matkasse-text
+        descriptionForStripe = `Gårdsbutiksorder\nExtra info: ${
+          userInformation.extraInfo || ""
+        }`;
+      } else {
+        const deliveryDayLabel = getDayLabelFromId(selectedWeekday) ?? "Okänt";
+        const people = (selectedType?.label ?? "").replace(/\s*[-–]\s*/g, "-");
+
+        descriptionForStripe =
+          `Vald leverans: ${deliveryDayLabel}\n` +
+          `Antal personer: ${people}\n` +
+          `Matkasse: ${
+            selectedSmartType === "gard" ? "Saveabl Gård" : "Saveabl Grön"
+          }\n` +
+          `Extra info: ${userInformation.extraInfo || ""}`;
+      }
 
       const response = await axios.post("/api/create_stripe_customer", {
         email: userInformation.email,
@@ -573,13 +697,42 @@ const Order = () => {
       });
 
       const stripeUserId = response.data.stripeUser.id;
-      const sessionResponse = await axios.post("/api/checkout_sessions", {
-        customerId: stripeUserId,
-        mode: isSubscription(productId) ? "subscription" : "payment",
-        country: countryCode,
-        items: [{ price: productId, quantity: 1 }],
-      });
-      router.push(sessionResponse.data.url);
+
+      // 🧾 Bygg line items: ALLT i varukorgen (matkasse + gårdsbutik)
+      const lineItems =
+        cartItems.map((item: { priceId: any; quantity: any; }) => ({
+          price: item.priceId,
+          quantity: item.quantity,
+        })) || [];
+
+      // Om det mot förmodan inte finns något att ta betalt för
+      if (lineItems.length === 0) {
+        toast.error("Det finns inget i din beställning att betala.");
+        setStripeCheckoutIsLoading(false);
+        return;
+      }
+
+      // 🔍 Är någon av raderna ett abonnemangs-price?
+      const hasRecurringItemInCart = cartItems.some((item: { priceId: string | null; }) =>
+        isSubscription(item.priceId)
+      );
+
+      // ✅ Mode styrs av varukorgens innehåll
+      const sessionMode: "subscription" | "payment" = hasRecurringItemInCart
+        ? "subscription"
+        : "payment";
+
+        const sessionResponse = await axios.post("/api/checkout_sessions", {
+          customerId: stripeUserId,
+          mode: sessionMode,
+          country: countryCode,
+          items: lineItems,
+        });
+        setIsCheckingOut(true);
+       
+        
+        router.push(sessionResponse.data.url);
+        
     } catch (error) {
       setFormErrors({
         ...formErrors,
@@ -591,6 +744,24 @@ const Order = () => {
 
   /** --- Låsning av "Fortsätt" i alla steg (används av OrderWizard) --- */
   const canProceedGuard = (step: number) => {
+  // 🧺 Kommer från varukorg: ignorera steg 1–4, lås bara adresssteget
+if (skipZipCheck) {
+  if (step === 5) {
+    return (
+      (name?.length ?? 0) > 1 &&
+      (address?.street?.length ?? 0) > 1 &&
+      (address?.city?.length ?? 0) > 1 &&
+      (phone?.length ?? 0) > 1 &&
+      (email?.length ?? 0) > 3 &&
+      (password?.length ?? 0) >= 6 &&
+      agreeToTerms
+    );
+  }
+  return true;
+}
+
+
+    // 🔁 Vanliga matkasse-flödet
     switch (step) {
       case 1:
         return !!selectedSmartType; // valt Smartkasse (veg/gard)
@@ -618,7 +789,9 @@ const Order = () => {
   // --- DRIV ENBART AV HYGRAPH + API ---
   // När windows ändras (nytt postnummer eller ny fetch), bygg knappar och applicera Gård-regeln
   useEffect(() => {
-    setDeliveryDaysToChoose(applyGardMondayRule(daysFromWindows(deliveryWindows, text)));
+    setDeliveryDaysToChoose(
+      applyGardMondayRule(daysFromWindows(deliveryWindows, text))
+    );
   }, [deliveryWindows, applyGardMondayRule, text]);
 
   // Om man växlar mellan Grön/Gård: applicera regeln och nolla måndagsvalet om det blivit ogiltigt
@@ -637,6 +810,174 @@ const Order = () => {
       return next;
     });
   }, [selectedSmartType, isDk, applyGardMondayRule]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // === Samma totalpris som i OrderSummary (exkl. frakt) ===
+  const mealKitPrice = React.useMemo(() => {
+    if (!selectedType || !selectedVariant || !selectedSmartType) return 0;
+
+    const typeKey: "family" | "couple" | null =
+      isFamilyType(selectedType)
+        ? "family"
+        : isCoupleType(selectedType)
+        ? "couple"
+        : null;
+
+    if (!typeKey) return 0;
+
+    const variantLabel =
+      typeof selectedVariant === "string"
+        ? selectedVariant
+        : selectedVariant?.label ?? "";
+
+    const norm = normalizeVariantLabel(variantLabel);
+    const isSub = norm === "weekly" || norm === "biweekly";
+
+    const postalCode = address.postalCode || "";
+
+    const inSTH =
+      !!postalCode &&
+      (stockholmPostalCodes1.includes(postalCode) ||
+        stockholmPostalCodes2.includes(postalCode) ||
+        stockholmPostalCodes3.includes(postalCode));
+
+    const region: "seStockholm" | "seOther" | "dk" =
+      isDk ? "dk" : inSTH ? "seStockholm" : "seOther";
+
+    const lineup: "veg" | "gard" =
+      selectedSmartType === "gard" ? "gard" : "veg";
+
+    return pickPrice({ lineup, region, typeKey, isSub });
+  }, [
+    selectedType,
+    selectedVariant,
+    selectedSmartType,
+    address.postalCode,
+    isDk,
+  ]);
+
+  // 🔒 Om användaren har tagit bort matkassen (eller tömt varukorgen) i fromCart-flödet
+// ska vi aldrig auto-lägga tillbaka den under samma session på sidan.
+const mealkitAutoDisabledRef = React.useRef(false);
+
+useEffect(() => {
+  if (!fromCart) return;
+
+  const hasMealkit = cartItems.some((i) => i.id === "mealkit");
+
+  // Har man väl tagit bort den (eller clearCart) → lås
+  if (!hasMealkit) {
+    mealkitAutoDisabledRef.current = true;
+  }
+}, [fromCart, cartItems]);
+
+  // === Synka matkassen som ETT item i varukorgen ===
+useEffect(() => {
+  if (isCheckingOut) return;
+  
+  const id = "mealkit";
+
+  // 🧺 Endast gårdsbutik → matkassen ska aldrig ligga i varukorgen
+  if (hasOnlyFarmShop) {
+    if (cartItems.some((i: { id: string; }) => i.id === id)) removeItem(id);
+    return;
+  }
+
+  // ⭐ Om vi kommer från varukorgen och matkassen redan ligger där → behåll den.
+  if (fromCart) {
+    // 🔒 Om användaren har tagit bort/tömt → lägg aldrig tillbaka automatiskt
+    if (mealkitAutoDisabledRef.current) return;
+  
+    const existing = cartItems.find((i) => i.id === id);
+  
+    // Om den inte finns (t.ex. clearCart eller remove) → gör inget
+    if (!existing) return;
+  
+    // Om användaren har ändrat val → uppdatera bara om den finns
+    if (
+      productId &&
+      selectedVariant &&
+      selectedDay &&
+      selectedSmartType &&
+      mealKitPrice
+    ) {
+      if (existing.price !== mealKitPrice || existing.priceId !== productId) {
+        removeItem(id);
+        addItem({
+          id,
+          name: selectedSmartType === "gard" ? "Saveabl Gård" : "Saveabl Grön",
+          price: mealKitPrice,
+          priceId: productId,
+          image:
+            selectedSmartType === "gard"
+              ? "/images/saveabl-gard.jpg"
+              : "/images/saveabl-gron.jpg",
+        });
+      }
+    }
+  
+    return;
+  }
+  
+
+  // ⭐ Normal logik för nya kunder som bygger matkassen från början
+  if (!showAddressFields || wizardStep < 5) {
+    if (cartItems.some((i: { id: string; }) => i.id === id)) removeItem(id);
+    return;
+  }
+
+  if (!productId || !selectedVariant || !selectedDay || !selectedSmartType) {
+    if (cartItems.some((i: { id: string; }) => i.id === id)) removeItem(id);
+    return;
+  }
+
+  const price = mealKitPrice;
+  if (!price) return;
+
+  const name = selectedSmartType === "gard" ? "Saveabl Gård" : "Saveabl Grön";
+
+  const image =
+    selectedSmartType === "gard"
+      ? "/images/saveabl-gard.jpg"
+      : "/images/saveabl-gron.jpg";
+
+  const existing = cartItems.find((i: { id: string; }) => i.id === id);
+
+  if (!existing) {
+    addItem({
+      id,
+      name,
+      price,
+      image,
+      priceId: productId,
+    });
+    return;
+  }
+
+  if (existing.price !== price || existing.priceId !== productId) {
+    removeItem(id);
+    addItem({
+      id,
+      name,
+      price,
+      image,
+      priceId: productId,
+    });
+  }
+}, [
+  productId,
+  selectedVariant,
+  selectedDay,
+  selectedSmartType,
+  mealKitPrice,
+  cartItems,
+  addItem,
+  removeItem,
+  showAddressFields,
+  wizardStep,
+  hasOnlyFarmShop,
+  fromCart,
+]);
+
 
   // Räkna ut phase + within (3 steg)
   const progress = useMemo(() => {
@@ -669,6 +1010,14 @@ const Order = () => {
 
   // Back-knappen
   const wizardRef = useRef<OrderWizardHandle>(null);
+
+  // Om vi kommer från varukorgen och adress-steget är igång → hoppa direkt till steg 5
+  useEffect(() => {
+    if (fromCart && showAddressFields && wizardRef.current) {
+      wizardRef.current.goTo?.(5, { force: true });
+    }
+  }, [fromCart, showAddressFields]);
+
   const handleBack = () => {
     if (!canDeliver) {
       router.back();
@@ -725,8 +1074,9 @@ const Order = () => {
 
       <Section className="pt-16 overflow-visible">
         <div className="w-full flex flex-col items-center ">
-          {/* Pre-checkout */}
-          {!canDeliver && (
+         {/* Pre-checkout – visas aldrig när man kommer från varukorgen */}
+{!canDeliver && !skipZipCheck && (
+
             <>
               <div className="text-center">
                 {serviceStatus === "ok" && (
@@ -768,10 +1118,11 @@ const Order = () => {
 
                 <Title className="text-center">
                   {serviceStatus === "ok"
-                    ? (text.order.we_deliver_to_you ?? "Vi levererar till ditt område 🎉")
+                    ? (text.order.we_deliver_to_you ??
+                        "Vi levererar till ditt område 🎉")
                     : serviceStatus === "no"
                     ? (text.order.no_delivery_to_you ??
-                      "Vi levererar tyvärr inte till ditt område just nu")
+                        "Vi levererar tyvärr inte till ditt område just nu")
                     : id === "1"
                     ? text.order.title1
                     : text.order.title2}
@@ -856,7 +1207,8 @@ const Order = () => {
                     {serviceStatus === "ok"
                       ? (text.order.zip_ok_sr ?? "Vi levererar till dig")
                       : serviceStatus === "no"
-                      ? (text.order.zip_no_sr ?? "Vi levererar tyvärr inte till dig")
+                      ? (text.order.zip_no_sr ??
+                          "Vi levererar tyvärr inte till dig")
                       : ""}
                   </span>
                 </div>
@@ -876,7 +1228,8 @@ const Order = () => {
                   {serviceStatus === "ok"
                     ? (text.order.continue ?? "Fortsätt")
                     : serviceStatus === "no"
-                    ? (text.order.outside_area_badge ?? "Utanför leveransområde")
+                    ? (text.order.outside_area_badge ??
+                        "Utanför leveransområde")
                     : id === "1"
                     ? text.order.button1
                     : text.order.button2}
@@ -1107,10 +1460,12 @@ const Order = () => {
                             "
                           >
                             <p className="font-semibold">
-                              {text?.order?.sold_out_title ?? "Den kommande veckans matkasse är tyvärr slutsåld."}
+                              {text?.order?.sold_out_title ??
+                                "Den kommande veckans matkasse är tyvärr slutsåld."}
                             </p>
                             <p className="text-sm mt-1">
-                              {text?.order?.sold_out_subtitle ?? "Välj närmaste tillgängliga leveransdag nedan."}
+                              {text?.order?.sold_out_subtitle ??
+                                "Välj närmaste tillgängliga leveransdag nedan."}
                             </p>
                           </div>
                         )}
@@ -1121,51 +1476,62 @@ const Order = () => {
                         />
                         <div className={`${STEP_GROUP} max-w-3xl mx-auto`}>
                           <AnimatePresence mode="wait">
-                            {deliveryDaysToChoose.map((day: any, index: number) => (
-                              <motion.div
-                                key={day.label + day.id}
-                                initial={{ opacity: 0, y: -10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -10 }}
-                                transition={{ delay: 0.05 * index }}
-                                className="w-full sm:w-auto"
-                              >
-                                <CheckoutButton
-                                  className={`w-full sm:w-auto px-8 py-4 border bg-transparent text-neutral-700 font-medium border-primary rounded-md transition-all hover:bg-primary ${
-                                    selectedDay?.id === day.id
-                                      ? "bg-primary text-[#6E2936] font-bold"
-                                      : ""
-                                  }`}
-                                  selected={selectedWeekday == day.id}
-                                  onClick={() => {
-                                    if (selectedWeekday == day.id) {
-                                      setSelectedWeekday(null);
-                                      setDeliveryWindow(null);
-                                      setSelectedDay(null);
-                                      return;
-                                    }
-                                    setSelectedWeekday(day.id);
-
-                                    // Välj första kommande fönster som matchar API:ts weekday
-                                    const win =
-                                      deliveryWindows
-                                        .filter((w) => w.weekday === day.id)
-                                        .sort((a: any, b: any) => a.start - b.start)[0] ?? null;
-
-                                    setDeliveryWindow(win);
-                                    setSelectedDay(day);
-                                  }}
+                            {deliveryDaysToChoose.map(
+                              (day: any, index: number) => (
+                                <motion.div
+                                  key={day.label + day.id}
+                                  initial={{ opacity: 0, y: -10 }}
+                                  animate={{ opacity: 1, y: 0 }}
+                                  exit={{ opacity: 0, y: -10 }}
+                                  transition={{ delay: 0.05 * index }}
+                                  className="w-full sm:w-auto"
                                 >
-                                  {day.label}
-                                  {day.description ? (
-                                    <p className="text-xs mt-1">{day.description}</p>
-                                  ) : null}
-                                  {showUrgency && (
-                                    <h4 className="text-xs mt-2">{text.order.urgency}</h4>
-                                  )}
-                                </CheckoutButton>
-                              </motion.div>
-                            ))}
+                                  <CheckoutButton
+                                    className={`w-full sm:w-auto px-8 py-4 border bg-transparent text-neutral-700 font-medium border-primary rounded-md transition-all hover:bg-primary ${
+                                      selectedDay?.id === day.id
+                                        ? "bg-primary text-[#6E2936] font-bold"
+                                        : ""
+                                    }`}
+                                    selected={selectedWeekday == day.id}
+                                    onClick={() => {
+                                      if (selectedWeekday == day.id) {
+                                        setSelectedWeekday(null);
+                                        setDeliveryWindow(null);
+                                        setSelectedDay(null);
+                                        return;
+                                      }
+                                      setSelectedWeekday(day.id);
+
+                                      // Välj första kommande fönster som matchar API:ts weekday
+                                      const win =
+                                        deliveryWindows
+                                          .filter(
+                                            (w) => w.weekday === day.id
+                                          )
+                                          .sort(
+                                            (a: any, b: any) =>
+                                              a.start - b.start
+                                          )[0] ?? null;
+
+                                      setDeliveryWindow(win);
+                                      setSelectedDay(day);
+                                    }}
+                                  >
+                                    {day.label}
+                                    {day.description ? (
+                                      <p className="text-xs mt-1">
+                                        {day.description}
+                                      </p>
+                                    ) : null}
+                                    {showUrgency && (
+                                      <h4 className="text-xs mt-2">
+                                        {text.order.urgency}
+                                      </h4>
+                                    )}
+                                  </CheckoutButton>
+                                </motion.div>
+                              )
+                            )}
                           </AnimatePresence>
                         </div>
                       </motion.div>
@@ -1302,7 +1668,7 @@ const Order = () => {
                     text-center font-semibold
                     text-[#6E2936]
                     whitespace-nowrap
-                    text-[13px] leading-tight
+                    text-[11px] leading-tight
                     sm:text[15px] sm:leading-normal
                   "
                 >
@@ -1350,7 +1716,7 @@ const Order = () => {
           {/* Global overlay som “släcker” även stepbaren vid Stripe-redirect */}
           {stripeCheckoutIsLoading && (
             <div
-              className="fixed inset-0 z-[9999] bg-primary bg-opacity-70 flex justify-center items-center"
+              className="fixed inset-0 z-[10002] bg-primary bg-opacity-70 flex justify-center items-center"
               role="alert"
               aria-live="assertive"
             >
