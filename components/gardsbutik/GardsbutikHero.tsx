@@ -18,29 +18,40 @@ const GardsbutikHero = () => {
 
   return (
     <>
-      {/* MARKIS – ALDRIG AVHUGGEN */}
-      <div className="relative w-full z-10 pointer-events-none">
-        <div
-          className="
-            w-full
-            h-[72px]
-            sm:h-[86px]
-            md:h-[180px]
-          "
-          style={{
-            backgroundImage: "url(/images/farmshop-awning.svg)",
-            backgroundRepeat: "repeat-x",
-            backgroundPosition: "top center",
-            backgroundSize: "auto 100%",
-          }}
-        />
+      {/* MARKIS – full bleed, aldrig avhuggen, och aldrig under navbar på mobil */}
+      <div
+        className="
+          relative
+          w-screen
+          left-1/2 right-1/2
+          -ml-[50vw] -mr-[50vw]
+          bg-[#FBF4E6]
+          mt-0
+          md:-mt-4
+          z-10
+          pointer-events-none
+        "
+      >
+        <div className="relative h-[72px] sm:h-[86px] md:h-[180px] overflow-hidden flex justify-center">
+          <img
+            src="/images/farmshop-awning.svg"
+            alt=""
+            aria-hidden="true"
+            className="h-full w-auto max-w-none"
+            style={{
+              // ✅ “tight” utan att hamna under navbar:
+              transform: "translateY(-6px)",
+              transformOrigin: "center top",
+            }}
+          />
+        </div>
       </div>
 
       {/* HERO */}
-      <div className="w-full h-auto flex flex-col justify-center overflow-x-hidden">
+      <div className="w-full flex flex-col justify-center overflow-x-hidden">
         <Section className="pt-10 pb-20 md:pt-10 md:pb-20">
           <div className="flex flex-col justify-center items-center text-secondary">
-            
+            {/* Logga */}
             <div className="w-full flex justify-start max-w-xl mx-auto -mb-[6px] md:-mb-[4px]">
               <img
                 src="/images/saveabl-gardsbutik.svg"
@@ -49,6 +60,7 @@ const GardsbutikHero = () => {
               />
             </div>
 
+            {/* Titel */}
             <motion.h1
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -58,6 +70,7 @@ const GardsbutikHero = () => {
               {text.farmshop.title}
             </motion.h1>
 
+            {/* Illustration */}
             <div className="-mt-5 -mb-5 flex justify-center md:mt-1 md:mb-2">
               <Lottie
                 animationData={gardAnimation}
@@ -66,6 +79,7 @@ const GardsbutikHero = () => {
               />
             </div>
 
+            {/* Text */}
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -80,6 +94,7 @@ const GardsbutikHero = () => {
               </span>
             </motion.p>
 
+            {/* CTA */}
             <Button
               onClick={handleScrollToHow}
               className="w-full md:w-72 bg-[#6E2936] text-white hover:bg-[#5a2430] mt-2"
