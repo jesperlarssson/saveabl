@@ -18,38 +18,22 @@ const GardsbutikHero = () => {
 
   return (
     <>
-      {/* MARKIS – scrollar bort (inte fixed) */}
-      <div className="relative w-full z-10 pointer-events-none overflow-hidden md:-mt-4">
-        <div className="relative w-full h-[72px] sm:h-[86px] md:h-[180px] overflow-hidden">
-          
-          {/* MOBIL – aldrig avhuggen */}
-          <img
-            src="/images/farmshop-awning.svg"
-            alt=""
-            aria-hidden="true"
-            className="
-              absolute top-0 left-1/2
-              h-full
-              max-w-none
-              -translate-x-1/2
-              md:hidden
-            "
-            style={{
-              width: "110vw", // 👈 medvetet bredare än viewport
-            }}
-          />
-
-          {/* DESKTOP */}
-          <img
-            src="/images/farmshop-awning.svg"
-            alt=""
-            aria-hidden="true"
-            className="absolute inset-0 w-full h-full object-contain object-top hidden md:block"
-            style={{
-              transform: "translateY(-32px)",
-            }}
-          />
-        </div>
+      {/* MARKIS – ALDRIG AVHUGGEN */}
+      <div className="relative w-full z-10 pointer-events-none">
+        <div
+          className="
+            w-full
+            h-[72px]
+            sm:h-[86px]
+            md:h-[180px]
+          "
+          style={{
+            backgroundImage: "url(/images/farmshop-awning.svg)",
+            backgroundRepeat: "repeat-x",
+            backgroundPosition: "top center",
+            backgroundSize: "auto 100%",
+          }}
+        />
       </div>
 
       {/* HERO */}
