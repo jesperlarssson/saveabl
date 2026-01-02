@@ -559,21 +559,23 @@ const FarmShopProductsSectionClient = ({ products, nextWeekProducts }: Props) =>
                   </div>
                 ) : (
                   <form
-                    className="w-full flex flex-col gap-4"
+                    className="w-full flex flex-col gap-2"
                     onSubmit={(e) => {
                       e.preventDefault();
                       handleSubmitDoubleUp();
                     }}
                   >
-                    <p className="text-lg md:text-xl font-semibold text-[#6E2936] mb-1">
+                    <p className="text-lg md:text-xl font-semibold text-[#6E2936]">
                       {text.farmshop_requests.double_up_title}
                     </p>
 
-                    <div className="text-sm md:text-base text-gray-700 space-y-2">
-  <p>{text.farmshop_requests.double_up_description_1}</p>
-  <p>{text.farmshop_requests.double_up_description_2}</p>
-</div>
+                    <p className="text-sm md:text-base text-gray-700">
+                      {text.farmshop_requests.double_up_description_1}
+                    </p>
 
+                    <p className="text-sm md:text-base text-gray-700 mb-4">
+                      {text.farmshop_requests.double_up_description_2}
+                    </p>
 
                     <div className="flex flex-col gap-2">
                       <label className="text-sm font-semibold text-[#6E2936]">
@@ -655,7 +657,7 @@ const FarmShopProductsSectionClient = ({ products, nextWeekProducts }: Props) =>
                     <div className="w-full flex justify-center pt-1">
                       <Button
                         type="submit"
-                        className="w-full md:w-72 py-2 text-sm md:text-sm font-semibold"
+                        className="w-full md:w-72 py-2 text-sm md:text-sm font-semibold mt-4"
                         disabled={
                           doubleUpLoading ||
                           !doubleUpEmail.includes("@") ||

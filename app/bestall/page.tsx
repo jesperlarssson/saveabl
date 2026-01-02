@@ -100,6 +100,68 @@ const StepHeader: React.FC<{ title?: string; className?: string }> = ({
 );
 
 /* -------------------------------------------------------------------- */
+const ReassuranceRow: React.FC<{
+  text: any;
+  trustClickable?: boolean;
+  className?: string;
+}> = ({ text, trustClickable = true, className }) => (
+  <p
+    className={twMerge(
+      `
+        mx-auto mt-6 mb-8 max-w-[40rem]
+        text-center font-semibold
+        text-[#6E2936]
+        whitespace-nowrap
+        text-[11px] leading-tight
+        sm:text-[15px] sm:leading-normal
+      `,
+      className
+    )}
+  >
+    <span className="whitespace-nowrap align-middle">
+      {text?.order?.reassurance?.noBind}
+    </span>
+
+    <span
+      aria-hidden="true"
+      className="
+        mx-2 text-[11px] align-middle text-[#6E2936]
+        sm:mx-3 sm:text-sm
+      "
+    >
+      ●
+    </span>
+
+    <span className="whitespace-nowrap align-middle">
+      {text?.order?.reassurance?.fast}
+    </span>
+
+    <span
+      aria-hidden="true"
+      className="
+        mx-2 text-[11px] align-middle text-[#6E2936]
+        sm:mx-3 sm:text-sm
+      "
+    >
+      ●
+    </span>
+
+    {trustClickable ? (
+      <a
+        href="https://www.trustpilot.com/review/saveabl.se"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="whitespace-nowrap underline-offset-4 hover:underline align-middle"
+      >
+        {text?.order?.reassurance?.trust}
+      </a>
+    ) : (
+      <span className="whitespace-nowrap align-middle">
+        {text?.order?.reassurance?.trust}
+      </span>
+    )}
+  </p>
+);
 
 type RowError = { message: string | null };
 type FormError = {
@@ -1242,6 +1304,9 @@ useEffect(() => {
 
               <div className="my-8 max-w-4xl w-full h-1 border-b border-primary border-opacity-50" />
 
+              <ReassuranceRow text={text} trustClickable={false} className="mb-2" />
+
+
               {showLinks && (
                 <>
                   <Title>{text.order.linkTitle}</Title>
@@ -1661,55 +1726,8 @@ useEffect(() => {
                 </>
               </OrderWizard>
 
-              {wizardStep === 5 && (
-                <p
-                  className="
-                    mx-auto mt-6 mb-8 max-w-[40rem]
-                    text-center font-semibold
-                    text-[#6E2936]
-                    whitespace-nowrap
-                    text-[11px] leading-tight
-                    sm:text[15px] sm:leading-normal
-                  "
-                >
-                  <span className="whitespace-nowrap align-middle">
-                    {text.order.reassurance.noBind}
-                  </span>
+              {wizardStep === 5 && <ReassuranceRow text={text} trustClickable />}
 
-                  <span
-                    aria-hidden="true"
-                    className="
-                      mx-2 text:[11px] align-middle text-[#6E2936]
-                      sm:mx-3 sm:text-sm
-                    "
-                  >
-                    ●
-                  </span>
-
-                  <span className="whitespace-nowrap align-middle">
-                    {text.order.reassurance.fast}
-                  </span>
-
-                  <span
-                    aria-hidden="true"
-                    className="
-                      mx-2 text:[11px] align-middle text-[#6E2936]
-                      sm:mx-3 sm:text-sm
-                    "
-                  >
-                    ●
-                  </span>
-
-                  <a
-                    href="https://www.trustpilot.com/review/saveabl.se"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="whitespace-nowrap underline-offset-4 hover:underline align-middle"
-                  >
-                    {text.order.reassurance.trust}
-                  </a>
-                </p>
-              )}
             </>
           )}
 
