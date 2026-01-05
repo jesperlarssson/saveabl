@@ -22,7 +22,7 @@ const GardsbutikHero = () => {
       <div className="relative w-full z-10 mt-0 md:mt-[-16px] pointer-events-none">
         <div className="relative w-full overflow-hidden">
           {/* Mobil: INTE fullbredd */}
-          <div className="relative mx-auto h-[90px] sm:h-[100px] md:h-[180px] 
+          <div className="relative mx-auto h-[70px] sm:h-[90px] md:h-[180px] 
                           max-w-[380px] sm:max-w-[520px] md:max-w-none">
             <img
               src="/images/farmshop-awning.svg"
@@ -43,7 +43,7 @@ const GardsbutikHero = () => {
 
       {/* HERO */}
       <div className="w-full h-auto flex flex-col justify-center overflow-x-hidden">
-        <Section className="pt-10 pb-20 md:pt-10 md:pb-20">
+        <Section className="pt-6 pb-20 md:pt-10 md:pb-20">
           <div className="flex flex-col justify-center items-center text-secondary">
             <div className="w-full flex justify-start max-w-xl mx-auto -mb-[6px] md:-mb-[4px]">
               <img
