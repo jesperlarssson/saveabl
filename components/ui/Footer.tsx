@@ -130,15 +130,18 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Footer-text */}
-        <p className="mx-auto mt-12 md:mt-16 max-w-md text-center leading-relaxed text-primary-200">
-          Övre Kaserngården 12, 415 27 Göteborg, Sweden, Org. number: 559266-3149. VAT
-          number: SE559266314901.
-        </p>
 
         {/* Länkar */}
         <div>
-          <p className="mx-auto mt-5 mb-1 max-w-md text-center leading-relaxed hover:underline text-primary-200">
+  <p className="mx-auto mt-10 mb-1 max-w-md text-center leading-relaxed hover:underline text-primary-200">
+    <a href="/presentkort">
+      {text.footer.giftcard}
+    </a>
+  </p>
+</div>
+
+        <div>
+          <p className="mx-auto mt-1 mb-1 max-w-md text-center leading-relaxed hover:underline text-primary-200">
             <a
               href="https://www.saveabl.com/villkor"
               target="_blank"
@@ -166,6 +169,13 @@ const Footer = () => {
           <div className="text-center text-primary opacity-50">
             <p>Copyright © {date.getFullYear()} Foody Impact AB</p>
           </div>
+          <div className="text-center text-primary opacity-50 mt-6">
+  <p className="mx-auto max-w-md leading-relaxed">
+    Övre Kaserngården 12, 415 27 Göteborg, Sweden, Org. number: 559266-3149. VAT
+    number: SE559266314901.
+  </p>
+</div>
+
         </div>
       </Section>
     </footer>

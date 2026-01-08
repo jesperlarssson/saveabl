@@ -39,9 +39,10 @@ const Navbar = () => {
     { id: 1, name: text.nav.order, path: "/bestall" },
     { id: 2, name: text.nav.recipe, path: "/recept" },
     { id: 3, name: text.nav.about, path: "/om-oss" },
-    { id: 5, name: text.nav.giftcard, path: "/presentkort" },
+
+    // Vanliga frågor (flyttad till presentkort-platsen)
     {
-      id: 6,
+      id: 5,
       name: text.nav.faq,
       path: "/#vanliga-fragor",
       onClick: (e) => {
@@ -64,6 +65,13 @@ const Navbar = () => {
           }, 250);
         }
       },
+    },
+
+    // Ny länk: Gårdsbutik
+    {
+      id: 6,
+      name: text.nav.farmshop ?? "Gårdsbutik",
+      path: "/gardsbutik",
     },
   ];
 

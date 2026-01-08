@@ -248,38 +248,76 @@ const RecipeLayout: React.FC<RecipeLayoutProps> = ({ recipe }) => {
                <li>{text.recipe_slug.no_ingredients}</li>
              )}
            </ul>
+           {/* Gårdsbutiken */}
+<div className="mt-10 rounded-lg bg-[#FCF7E8] px-5 py-3">
+              <a
+                href="/gardsbutik"
+                className="flex items-stretch gap-4 hover:opacity-80"
+                aria-label="Gå till Gårdsbutiken"
+              >
+                <div className="w-8 overflow-hidden flex items-stretch">
+                  <img
+                    src="/images/icon-farmshop.svg"
+                    alt=""
+                    aria-hidden
+                    className="h-full w-full object-cover block"
+                  />
+                </div>
+
+                <div className="flex flex-col justify-between">
+                  <span className="font-poppins font-medium text-[#6E2936]">
+                    {text.recipe_slug.farmshop_title}
+                  </span>
+
+                  <span className="text-sm text-gray-700">
+                    {text.recipe_slug.farmshop_line}
+                  </span>
+
+                  <span
+                    className="text-[#6E2936] text-lg sm:text-xl md:text-2xl leading-none"
+                    aria-hidden
+                  >
+                    →
+                  </span>
+                </div>
+              </a>
+</div>
+
          </div>
        </div>
      </Card>
 
-     <Grid>
-       <Card>
-         <h3 className="text-secondary font-poppins">
-           {text.recipe_slug.saved_ingredients}
-         </h3>
-         <p className="text-gray-700 whitespace-pre-line">
-           {recept.savedIngredients}
-         </p>
-       </Card>
+     {/* ✅ ENDA ÄNDRINGEN: wrapper för spacing innan Grid */}
+     <div className="mt-6 sm:mt-8">
+       <Grid>
+         <Card>
+           <h3 className="text-secondary font-poppins">
+             {text.recipe_slug.saved_ingredients}
+           </h3>
+           <p className="text-gray-700 whitespace-pre-line">
+             {recept.savedIngredients}
+           </p>
+         </Card>
 
-       <Card>
-         <h3 className="text-secondary font-poppins">
-           {text.recipe_slug.nutrients}
-         </h3>
-         <p className="text-gray-700 whitespace-pre-line">
-           {recept.nutritionalValues}
-         </p>
-       </Card>
+         <Card>
+           <h3 className="text-secondary font-poppins">
+             {text.recipe_slug.nutrients}
+           </h3>
+           <p className="text-gray-700 whitespace-pre-line">
+             {recept.nutritionalValues}
+           </p>
+         </Card>
 
-       <Card>
-         <h3 className="text-secondary font-poppins">
-           {text.recipe_slug.ingredients}
-         </h3>
-         <p className="text-gray-700 whitespace-pre-line">
-           {recept.contentAllergies}
-         </p>
-       </Card>
-     </Grid>
+         <Card>
+           <h3 className="text-secondary font-poppins">
+             {text.recipe_slug.ingredients}
+           </h3>
+           <p className="text-gray-700 whitespace-pre-line">
+             {recept.contentAllergies}
+           </p>
+         </Card>
+       </Grid>
+     </div>
 
      <div id="comment-section">
        {comments.length > 0 && <CommentSection comments={comments} />}

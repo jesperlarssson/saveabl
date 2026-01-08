@@ -54,6 +54,7 @@ const AuthModal = () => {
         {signInOpen ? <SignInForm /> : <SignUpForm />}
         <p className="mt-4 text-sm text-gray-500 sm:mt-0 w-full text-center">
           {signInOpen ? text.auth.missing_account : text.auth.has_account}
+           {" "}
           <a
             onClick={toggleForm}
             className="text-accent underline cursor-pointer"

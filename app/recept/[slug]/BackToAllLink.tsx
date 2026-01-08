@@ -2,14 +2,20 @@
 
 import Link from "next/link";
 import { useLang } from "@/hooks/useLang";
+import { useSearchParams } from "next/navigation";
 
 export default function BackToAllLink() {
   const { text } = useLang();
   const backLabel = text?.recipes?.back_to_all ?? "Alla recept";
 
+  const sp = useSearchParams();
+  const returnTo = sp?.get("returnTo");
+
+  const href = returnTo ? decodeURIComponent(returnTo) : "/recept";
+
   return (
     <Link
-      href="/recept"
+      href={href}
       className="inline-flex items-center gap-2 mb-2 md:mb-4 text-[#6E2936] hover:underline focus:underline rounded"
       aria-label={backLabel}
     >
