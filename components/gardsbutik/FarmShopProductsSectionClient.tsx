@@ -264,6 +264,7 @@ const FarmShopProductsSectionClient = ({ products, nextWeekProducts }: Props) =>
                   </div>
 
                   <div className="flex-1 flex flex-col text-center">
+                     <div className="px-2 md:px-3">
                     <p className="font-semibold text-sm md:text-lg mb-1 text-[#6E2936]">
                       {product.title}
                     </p>
@@ -277,6 +278,7 @@ const FarmShopProductsSectionClient = ({ products, nextWeekProducts }: Props) =>
                         {product.price} kr
                       </p>
                     )}
+                    </div>
 
                     <button
                       type="button"
@@ -343,6 +345,8 @@ const FarmShopProductsSectionClient = ({ products, nextWeekProducts }: Props) =>
 
                 <div className={`grid gap-4 md:gap-6 ${nextWeekGridCols}`}>
                   {nextWeekList.map((product) => {
+                    const hasPrice = product.price != null;
+
                     const buttonBase =
                       "mt-auto text-xs md:text-base font-semibold rounded-full py-2 px-3 w-full text-center transition-colors duration-200 border";
 
@@ -361,8 +365,15 @@ const FarmShopProductsSectionClient = ({ products, nextWeekProducts }: Props) =>
                     return (
                       <article
                         key={product.id}
-                        className="bg-[#FCF7E8] rounded-2xl p-3 flex flex-col h-full"
-                      >
+                        className={`
+    bg-[#FCF7E8]
+    rounded-2xl
+    p-3
+    flex flex-col
+    h-full
+    ${!hasPrice ? "min-h-[360px] md:min-h-[420px]" : ""}
+  `}
+>
                         <div className="relative w-full aspect-[7/5] mb-3 overflow-hidden rounded-xl">
                           <Image
                             src={product.image?.url || "/images/placeholder.jpg"}
@@ -373,6 +384,7 @@ const FarmShopProductsSectionClient = ({ products, nextWeekProducts }: Props) =>
                         </div>
 
                         <div className="flex-1 flex flex-col text-center">
+                          <div className="px-2 md:px-3">
                           <p className="font-semibold text-sm md:text-lg mb-1 text-[#6E2936]">
                             {product.title}
                           </p>
@@ -386,7 +398,8 @@ const FarmShopProductsSectionClient = ({ products, nextWeekProducts }: Props) =>
                               {product.price} kr
                             </p>
                           )}
-
+                          </div>
+                          <div className={`mt-auto ${!hasPrice ? "pt-4" : "pt-0"}`}>
                           <button
                             type="button"
                             onClick={() => {
@@ -413,6 +426,7 @@ const FarmShopProductsSectionClient = ({ products, nextWeekProducts }: Props) =>
                           >
                             {buttonLabel}
                           </button>
+                        </div>
                         </div>
                       </article>
                     );
