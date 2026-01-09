@@ -269,7 +269,7 @@ const FarmShopProductsSectionClient = ({ products, nextWeekProducts }: Props) =>
                       {product.title}
                     </p>
 
-                    <p className="text-xs md:text-base text-gray-700 mb-2">
+                    <p className="text-sm md:text-base text-gray-700 mb-2">
                       {product.description}
                     </p>
 
@@ -389,7 +389,7 @@ const FarmShopProductsSectionClient = ({ products, nextWeekProducts }: Props) =>
                             {product.title}
                           </p>
 
-                          <p className="text-xs md:text-base text-gray-700 mb-2">
+                          <p className="text-sm md:text-base text-gray-700 mb-2">
                             {product.description}
                           </p>
 
