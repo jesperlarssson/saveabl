@@ -599,7 +599,7 @@ const svText = {
     mealbox_label: "Middagar", 
     peopleModalTitle: "Hur många sitter runt middagsbordet?",
   peopleModalDescription: "Här kan du ändra om du vill ha middagar för 2-3 personer eller 3-4 personer. För att vi ska kunna planera behöver vi godkänna ändringen, så det kan ta en liten stund innan den syns på ditt konto. Tack för ditt tålamod! :)",
-  saveButton: "Ändra middagar",
+  saveButton: "Ändra middagar", 
   peopleSaveButton: "Ändra antal personer", 
   optionTwoThree: "2–3 personer",
   optionThreeFour: "3–4 personer",
