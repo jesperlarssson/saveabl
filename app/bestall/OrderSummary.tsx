@@ -65,11 +65,11 @@ type Bucket = { family: { sub: number; one: number }; couple: { sub: number; one
 const PRICES = {
   seStockholm: {
     veg: { family: { sub: 708, one: 828 }, couple: { sub: 621, one: 711 } },
-    gard: { family: { sub: 828, one: 948 }, couple: { sub: 711, one: 801 } },
+    gard: { family: { sub: 948, one: 1068 }, couple: { sub: 801, one: 891 } },
   },
   seOther: {
     veg: { family: { sub: 708, one: 828 }, couple: { sub: 621, one: 711 } },
-    gard: { family: { sub: 828, one: 948 }, couple: { sub: 711, one: 801 } },
+    gard: { family: { sub: 948, one: 1068 }, couple: { sub: 801, one: 891 } },
   },
   dk: {
     veg: { family: { sub: 539, one: 599 }, couple: { sub: 449, one: 519 } },

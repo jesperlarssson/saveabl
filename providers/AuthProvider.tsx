@@ -9,7 +9,7 @@ import {
   signInWithEmailAndPassword,
   signOut as firebaseSignOut,
 } from "@firebase/auth";
-import { auth } from "@/firebase/init";
+import { auth, isFirebaseBypassed } from "@/firebase/init";
 import LoadingScreen from "@/components/section/LoadingScreen";
 
 export interface AuthContextInterface {

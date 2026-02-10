@@ -39,12 +39,12 @@
    export const SE_GRON_ONE_TIME_COUPLE     = "price_1S8zG8EhPZIzKmuiQDdQLLq1"; // 2–3
    
    /* SE — GÅRD (Saveabl Gård) */
-   export const SE_GARD_EVERY_WEEK_FAMILY   = "price_1SDjhVEhPZIzKmui9xYGfdmQ"; // 3–4
-   export const SE_GARD_EVERY_WEEK_COUPLE   = "price_1S92BKEhPZIzKmuiVVzivpkn"; // 2–3
-   export const SE_GARD_EVERY_OTHER_FAMILY  = "price_1SDjn3EhPZIzKmuiwGh8EQPN"; // 3–4
-   export const SE_GARD_EVERY_OTHER_COUPLE  = "price_1S92EvEhPZIzKmuiVb47nEEf"; // 2–3
-   export const SE_GARD_ONE_TIME_FAMILY     = "price_1SDjpzEhPZIzKmuiC4gDuKkI"; // 3–4
-   export const SE_GARD_ONE_TIME_COUPLE     = "price_1S92GvEhPZIzKmui13XdBjv5"; // 2–3
+   export const SE_GARD_EVERY_WEEK_FAMILY   = "price_1SyquVEhPZIzKmuit0kM8CPF"; // 3–4
+   export const SE_GARD_EVERY_WEEK_COUPLE   = "price_1SyqymEhPZIzKmuiicD00W0c"; // 2–3
+   export const SE_GARD_EVERY_OTHER_FAMILY  = "price_1SyqshEhPZIzKmui36719u2d"; // 3–4
+   export const SE_GARD_EVERY_OTHER_COUPLE  = "price_1SyqxkEhPZIzKmuiuLwyCsZV"; // 2–3
+   export const SE_GARD_ONE_TIME_FAMILY     = "price_1SyqrFEhPZIzKmuiQFdLMrUS"; // 3–4
+   export const SE_GARD_ONE_TIME_COUPLE     = "price_1SyqvvEhPZIzKmuiCeaaDmIW"; // 2–3
    
    /* DK — GRØN */
    export const DK_GRON_EVERY_WEEK_FAMILY   = "price_1SDkgJEhPZIzKmuiAD6Mbjqa"; // 3–4
@@ -241,13 +241,13 @@
      [SE_GRON_EVERY_OTHER_COUPLE]: "69kr/portion",
      [SE_GRON_ONE_TIME_COUPLE]:    "79kr/portion",
    
-     [SE_GARD_EVERY_WEEK_FAMILY]:  "69kr/portion",
-     [SE_GARD_EVERY_OTHER_FAMILY]: "69kr/portion",
-     [SE_GARD_ONE_TIME_FAMILY]:    "79kr/portion",
+     [SE_GARD_EVERY_WEEK_FAMILY]:  "79kr/portion",
+     [SE_GARD_EVERY_OTHER_FAMILY]: "79kr/portion",
+     [SE_GARD_ONE_TIME_FAMILY]:    "89kr/portion",
    
-     [SE_GARD_EVERY_WEEK_COUPLE]:  "79kr/portion",
-     [SE_GARD_EVERY_OTHER_COUPLE]: "79kr/portion",
-     [SE_GARD_ONE_TIME_COUPLE]:    "89kr/portion",
+     [SE_GARD_EVERY_WEEK_COUPLE]:  "89kr/portion",
+     [SE_GARD_EVERY_OTHER_COUPLE]: "89kr/portion",
+     [SE_GARD_ONE_TIME_COUPLE]:    "99kr/portion",
    } as const;
    
    const PRICE_TEXT_DK = {
