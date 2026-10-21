@@ -193,7 +193,7 @@ const svText = {
     sections: [
       {
         title: "Vilka vi är",
-        text: "Saveabl bestod av tre studenter och en kock när vi öppnade portarna november 2021. Den första idén till det som skulle komma att bli Saveabl. hade Jeroen och Alexander spånat på redan sommaren 2020 när de båda studerade tillsammans och de förväntade sig minst sagt en snabbare och smidigare uppstart än vad som blev verklighet. Idag består teamet av Jeroen som styr skutan. Emil som varje vecka fram nya kreativa recept och ansvarar för det operativa. Louise som ser till att vi når ut till rätt kunder och att vi kan expandera. Hassan som ansvarar för packningen och säkerställer att våra kunder möts av en trevlig syn varje vecka. Jesper som designar och skapar en identitet åt Saveabl samt Alexander som ser till att vi har koll på juridiken.",
+        text: "Saveabl bestod av tre studenter och en kock när vi öppnade portarna november 2021. Idag består teamet av Jeroen som styr skutan. Emil som varje vecka tar fram nya kreativa recept och ansvarar för det operativa. Louise som ser till att vi når ut till rätt kunder och att vi kan expandera. Hassan som ansvarar för packningen och säkerställer att våra kunder möts av en trevlig syn varje vecka. Jesper som designar och skapar en identitet åt Saveabl.",
       },
       {
         title: "Vår matkasse",
@@ -212,7 +212,7 @@ const svText = {
     faqItems: [
       {
         question: "Prenumeration, hur funkar det?",
-        answer: "Våra prenumerationer är helt utan bindningstid, vilket innebär att du kan pausa och avbryta när du vill. För att pausa eller avbryta din prenumeration loggar du enkelt in på ditt konto, alternativt kontaktar oss via mejl så ordnar vi det. Pausningar/uppsägningar behöver komma in till oss innan torsdagen inför leverans. Detta då vi bokar leveranserna denna dag, samt så vi ska kunna planera exakt antal matkassar med våra kockar.",
+        answer: "Våra prenumerationer är helt utan bindningstid, vilket innebär att du kan pausa och avbryta när du vill. Vi rekommenderar att du pausar eller säger upp prenumerationen via ditt konto eller via e-post till hello@saveabl.se. Det är en rekommendation, inte ett krav. Du kan också säga upp prenumerationen via telefon, brev eller på annat sätt genom att meddela oss att du vill avsluta den. Pausningar/uppsägningar behöver komma in till oss innan torsdagen inför leverans. Detta då vi bokar leveranserna denna dag, samt så vi ska kunna planera exakt antal matkassar med våra kockar.",
       },
       {
         question: "15 minuter, hur då?",
@@ -394,7 +394,7 @@ const svText = {
     faqItems: [ 
       {
         question: "Prenumeration, hur funkar det?",
-        answer: "Våra prenumerationer är helt utan bindningstid, vilket innebär att du kan pausa och avbryta när du vill. För att pausa eller avbryta din prenumeration loggar du enkelt in på ditt konto, alternativt kontaktar oss via mejl så ordnar vi det. Pausningar/uppsägningar behöver komma in till oss innan torsdagen inför leverans. Detta då vi bokar leveranserna denna dag, samt så vi ska kunna planera exakt antal matkassar med våra kockar.",
+        answer: "Våra prenumerationer är helt utan bindningstid, vilket innebär att du kan pausa och avbryta när du vill. Vi rekommenderar att du pausar eller säger upp prenumerationen via ditt konto eller via e-post till hello@saveabl.se. Det är en rekommendation, inte ett krav. Du kan också säga upp prenumerationen via telefon, brev eller på annat sätt genom att meddela oss att du vill avsluta den. Pausningar/uppsägningar behöver komma in till oss innan torsdagen inför leverans. Detta då vi bokar leveranserna denna dag, samt så vi ska kunna planera exakt antal matkassar med våra kockar.",
       },
       {
         question: "Allergier? Vad gäller", 
@@ -645,9 +645,9 @@ optionGreen: "Saveabl Grön",
   terms: {
     title: "Villkor",
     subtitle: "Prenumeration", 
-    description: "Våra prenumerationer är helt utan bindningstid, vilket innebär att du kan pausa och avbryta när du vill. För att pausa eller avbryta din prenumeration loggar du enkelt in på ditt konto, alternativt kontaktar oss via mejl så ordnar vi det. Pausningar/uppsägningar behöver komma in till oss innan torsdagen inför leverans. Detta då vi bokar leveranserna denna dag, samt så vi ska kunna planera exakt antal matkassar med våra kockar.",
+    description: "Våra prenumerationer är helt utan bindningstid, vilket innebär att du kan pausa och avbryta när du vill. Vi rekommenderar att du pausar eller säger upp prenumerationen via ditt konto eller via e-post till hello@saveabl.se. Det är en rekommendation, inte ett krav. Du kan också säga upp prenumerationen via telefon, brev eller på annat sätt genom att meddela oss att du vill avsluta den. Pausningar/uppsägningar behöver komma in till oss innan torsdagen inför leverans. Detta då vi bokar leveranserna denna dag, samt så vi ska kunna planera exakt antal matkassar med våra kockar.",
     subtitle1: "Allmänna villkor Saveabl",
-    description1: "När du handlar på Saveabls hemsida ingås alla avtal med Foody Impact AB (”Saveabl”, ”vi”, ”vår”, eller ”oss”), organisationsnummer 559266-3149, med adress Övre Kaserngården 12, 415 27 Göteborg. I samband med ett köp hos oss accepterar du de här allmänna villkoren. Enbart privatpersoner, eller representanter för företag, som är över 18 år och har full juridisk rätt att ingå avtal får handla Saveabls produkter.",
+    description1: "När du handlar på Saveabls hemsida ingås alla avtal med Saveabl AB (”Saveabl”, ”vi”, ”vår”, eller ”oss”), organisationsnummer 559266-3149, med adress Övre Kaserngården 12, 415 27 Göteborg. I samband med ett köp hos oss accepterar du de här allmänna villkoren. Enbart privatpersoner, eller representanter för företag, som är över 18 år och har full juridisk rätt att ingå avtal får handla Saveabls produkter.",
     subtitle2: "Betalning, beställning och priser", 
     description2: "Alla priser anges i svenska kronor och är inklusive mervärdesskatt (s.k. moms) och avgifter, om inte annat anges. På Saveabls hemsida kan följande  debit- eller kreditkort användas för betalning: Visa, MasterCard, American Express, Discover & Diners Club och China UnionPay. Därtill acccepteras också betalning via Klarna Bank AB, Sveavägen 46, 111 34 Stockholm (”Klarna”). Om du betalar via Klarna godkänner du också deras villkor, som du hittar här. Efter godkänd betalning skickas en orderbekräftelse till den e-postadress kunden angivit vid beställningen eller vid skapandet av användarkontot. Saveabl tar inget ansvar för om kunden angivit fel e-postadress.",
     subtitle3: "Leverans",
@@ -655,7 +655,7 @@ optionGreen: "Saveabl Grön",
     subtitle4: "Reservation för informationsfel",
     description4: "Saveabl reserverar sig för eventuella skrivfel på hemsidan såsom felaktiga priser, fel i produktbeskrivningen och felaktig lagerstatus av matkassar. Saveabl förbehåller sig rätten att korrigera eventuella fel. Om felaktigt pris har angivits på hemsidan förbehåller sig Saveabl rätten att korrigera priset och eventuellt ta bort varan från beställningar. Alla bilder som presenteras på hemsidan ska ses som exempelbilder och garanterar inte att spegla maträtternas exakta utseende.",
     subtitle5: "Reklamation",
-    description5: "Om du önskar reklamera en vara på grund av att något fel upptäcks ska du kontakta oss så snart som möjligt. Det här ska dock som senast ske inom 14 dagar. Du når oss på ",
+    description5: "Om en vara är felaktig har du rätt att reklamera enligt konsumentköplagen. Meddela oss om felet inom skälig tid efter att du borde ha märkt det. En reklamation som görs inom två månader efter att du märkt felet anses alltid ha gjorts i rätt tid. Vi rekommenderar att du kontaktar oss så snart som möjligt, särskilt när det gäller färskvaror, så att vi kan hjälpa dig. Rekommendationen begränsar inte din lagstadgade reklamationsrätt. Du når oss till exempel via e-post på",
     subtitle6: "Force Majeure",
     description6: "Om Saveabl på grund av någon omständighet eller omständigheter som anses ligga bortom vår kontroll (s.k. ”Force Majeure”) förhindras att utföra våra åtaganden gentemot våra kunder utgör detta inte ett avtalsbrott.", 
     subtitle7: "Tvist",
@@ -671,7 +671,7 @@ optionGreen: "Saveabl Grön",
     introduction: "Integritetspolicy",
     section_1: {
       title: "1. Introduktion",
-      description: "Den här integritetspolicyn (”Policyn”) beskriver hur varumärket Saveabl via företaget Foody Impact AB (”Vi”, ”vår” och ”oss”) (organisationsnummer 559266-3149), adress Övre Kaserngården 12, 415 27 Göteborg, hanterar personuppgifter. Vi värnar om våra kunders personliga integritet och är måna om att alla kunder och besökare på hemsidans trygghet i vår behandling av personuppgifter. Vi har i den här policyn samlat information om hur vi hanterar dina personuppgifter som du lämnat till oss i samband med att du använt våra tjänster samt de personuppgifter vi på andra sätt fått tillgång till. Vi har en skyldighet att se till att behandlingen av dina personuppgifter utförs i enlighet med denna Policy och gällande personuppgiftlagstiftning."
+      description: "Den här integritetspolicyn (”Policyn”) beskriver hur varumärket Saveabl via företaget Saveabl AB (”Vi”, ”vår” och ”oss”) (organisationsnummer 559266-3149), adress Övre Kaserngården 12, 415 27 Göteborg, hanterar personuppgifter. Vi värnar om våra kunders personliga integritet och är måna om att alla kunder och besökare på hemsidans trygghet i vår behandling av personuppgifter. Vi har i den här policyn samlat information om hur vi hanterar dina personuppgifter som du lämnat till oss i samband med att du använt våra tjänster samt de personuppgifter vi på andra sätt fått tillgång till. Vi har en skyldighet att se till att behandlingen av dina personuppgifter utförs i enlighet med denna Policy och gällande personuppgiftlagstiftning."
     },
     section_2: {
       title: "2. Hur Saveabl behandlar dina personuppgifter",
@@ -1032,7 +1032,7 @@ const enText = {
     sections: [
       {
         title: "Who we are",
-        text: "Saveabl consisted of three students and a chef when they opened their doors in November 2021. The seeds of Saveabl were first sown by Jeroen and Alexander during a summer of shared studies in 2020. They had anticipated a swifter and smoother journey than what unfolded. Today, the team comprises Jeroen, steering the ship. Emil, the creative culinary genius responsible for weekly recipe innovations and operations. Louise, our gatekeeper to the right customers and expansion opportunities. Hassan, who is in charge of packing, ensures that our customers are greeted with a pleasant sight every week. Jesper, the visionary behind Saveabl's identity. And Alexander, our compliance guardian, ensuring we play by the rules and regulations.",
+        text: "Saveabl consisted of three students and a chef when they opened their doors in November 2021. Today, the team comprises Jeroen, steering the ship. Emil, the creative culinary genius responsible for weekly recipe innovations and operations. Louise, our gatekeeper to the right customers and expansion opportunities. Hassan, who is in charge of packing, ensures that our customers are greeted with a pleasant sight every week. Jesper, the visionary behind Saveabl's identity.",
       },
       {
         title: "Our meal kit",
@@ -1051,7 +1051,7 @@ const enText = {
 faqItems: [
   {
     question: "Subscription, how does it work?",
-    answer: "Our subscriptions are completely without a binding period, meaning you can pause or cancel whenever you want. To pause or cancel your subscription, simply log in to your account or contact us via email, and we'll take care of it. Pauses/cancellations need to be submitted to us by Thursday before the delivery, as we book deliveries on this day and need to plan the exact number of meal kits with our chefs."
+    answer: "Our subscriptions are completely without a binding period, meaning you can pause or cancel whenever you want. We recommend pausing or cancelling your subscription through your account or by emailing hello@saveabl.se. This is a recommendation, not a requirement. You may also cancel by phone, by letter or in any other way that lets us know you want to end your subscription. Pauses/cancellations need to be submitted to us by Thursday before the delivery, as we book deliveries on this day and need to plan the exact number of meal kits with our chefs."
   },
   {
     question: "15 minutes, how is that possible?",
@@ -1230,7 +1230,7 @@ button: "Got it - order now!"
     faqItems: [
       {
         question: "Subscription, how does it work?",
-        answer: "Our subscriptions have no binding period, meaning you can pause and cancel whenever you like. To pause or cancel your subscription, simply log in to your account or contact us via email, and we'll take care of it. Pauses/cancellations must be submitted to us before Thursday ahead of delivery. This is when we schedule deliveries and need to plan the exact number of meal kits with our chefs.",
+        answer: "Our subscriptions have no binding period, meaning you can pause and cancel whenever you like. We recommend pausing or cancelling your subscription through your account or by emailing hello@saveabl.se. This is a recommendation, not a requirement. You may also cancel by phone, by letter or in any other way that lets us know you want to end your subscription. Pauses/cancellations must be submitted to us before Thursday ahead of delivery. This is when we schedule deliveries and need to plan the exact number of meal kits with our chefs.",
       },
       {
         question: "Allergies? What applies?",
@@ -1447,9 +1447,9 @@ optionGreen: "Saveabl Grön",
   terms: {
     title: "Terms",
     subtitle: "Subscription", 
-    description: "Our subscriptions are completely commitment-free, which means you can pause or cancel whenever you want. To pause or cancel your subscription, simply log in to your account, or alternatively contact us via email and we'll take care of it. Pauses/cancellations need to be communicated to us before Thursday ahead of the delivery. This is because we schedule deliveries on this day, and so we can plan the exact number of meal kits with our chefs.",
+    description: "Our subscriptions are completely commitment-free, which means you can pause or cancel whenever you want. We recommend pausing or cancelling your subscription through your account or by emailing hello@saveabl.se. This is a recommendation, not a requirement. You may also cancel by phone, by letter or in any other way that lets us know you want to end your subscription. Pauses/cancellations need to be communicated to us before Thursday ahead of the delivery. This is because we schedule deliveries on this day, and so we can plan the exact number of meal kits with our chefs.",
     subtitle1: "General terms of Saveabl",
-    description1: "When you shop on Saveabl's website, all agreements are made with Foody Impact AB ('Saveabl', 'we', 'our', or 'us'), organization number 559266-3149, with address Övre Kaserngården 12, 415 27 Gothenburg. By making a purchase from us, you accept these general terms and conditions. Only individuals, or representatives of companies, who are over 18 years old and have full legal capacity to enter into agreements may purchase Saveabl's products.",
+    description1: "When you shop on Saveabl's website, all agreements are made with Saveabl AB ('Saveabl', 'we', 'our', or 'us'), organization number 559266-3149, with address Övre Kaserngården 12, 415 27 Gothenburg. By making a purchase from us, you accept these general terms and conditions. Only individuals, or representatives of companies, who are over 18 years old and have full legal capacity to enter into agreements may purchase Saveabl's products.",
     subtitle2: "Payment, ordering, and prices",
     description2: "All prices are stated in Swedish kronor and include value added tax (VAT) and fees, unless otherwise stated. On Saveabl's website, the following debit or credit cards can be used for payment: Visa, MasterCard, American Express, Discover & Diners Club, and China UnionPay. In addition, payment via Klarna Bank AB, Sveavägen 46, 111 34 Stockholm ('Klarna') is accepted. If you pay via Klarna, you also accept their terms, which you can find here. After approved payment, an order confirmation is sent to the email address provided by the customer when ordering or when creating the user account. Saveabl is not responsible if the customer has provided the wrong email address.",
     subtitle3: "Delivery",
@@ -1457,7 +1457,7 @@ optionGreen: "Saveabl Grön",
     subtitle4: "Disclaimer for errors",
     description4: "Saveabl reserves the right to correct any errors on the website, such as incorrect prices, errors in product descriptions, and incorrect stock status of food packages. Saveabl reserves the right to correct any errors. If an incorrect price has been stated on the website, Saveabl reserves the right to correct the price and possibly remove the item from orders. All images presented on the website should be seen as example images and do not guarantee to reflect the exact appearance of the dishes.",
     subtitle5: "Complaints",
-    description5: "If you wish to complain about a product due to any discovered faults, you should contact us as soon as possible. However, this must be done no later than within 14 days. You can reach us at ",
+    description5: "If a product is faulty, you have the right to make a complaint under the Swedish Consumer Sales Act. Notify us of the fault within a reasonable time after you ought to have noticed it. A complaint made within two months after you noticed the fault is always considered to have been made in time. We recommend contacting us as soon as possible, especially for perishable goods, so that we can help you. This recommendation does not limit your statutory rights. For example, you can email us at",
     subtitle6: "Force Majeure",
     description6: "If Saveabl, due to any circumstance or circumstances considered beyond our control ('Force Majeure'), is prevented from fulfilling our obligations to our customers, this does not constitute a breach of contract.",
     subtitle7: "Dispute",
@@ -1473,7 +1473,7 @@ optionGreen: "Saveabl Grön",
       introduction: "Privacy Policy",
       section_1: {
         title: "1. Introduction",
-        description: "This privacy policy ('Policy') describes how the brand Saveabl, through the company Foody Impact AB ('We', 'Our' and 'Us') (registration number 559266-3149), located at Övre Kaserngården 12, 415 27 Gothenburg, handles personal data. We value the personal integrity of our customers and are committed to ensuring the safety of all customers and visitors to our website in our handling of personal data. In this policy, we have collected information on how we handle your personal data that you have provided to us in connection with your use of our services, as well as the personal data we have otherwise accessed. We have an obligation to ensure that the processing of your personal data is carried out in accordance with this Policy and applicable data protection legislation."
+        description: "This privacy policy ('Policy') describes how the brand Saveabl, through the company Saveabl AB ('We', 'Our' and 'Us') (registration number 559266-3149), located at Övre Kaserngården 12, 415 27 Gothenburg, handles personal data. We value the personal integrity of our customers and are committed to ensuring the safety of all customers and visitors to our website in our handling of personal data. In this policy, we have collected information on how we handle your personal data that you have provided to us in connection with your use of our services, as well as the personal data we have otherwise accessed. We have an obligation to ensure that the processing of your personal data is carried out in accordance with this Policy and applicable data protection legislation."
       },
       section_2: {
         title: "2. How Saveabl handles your personal data",
@@ -1832,7 +1832,7 @@ const daText = {
     sections: [
       {
         title: "Hvem vi er",
-        text: "Saveabl bestod af tre studerende og en kok, da vi åbnede dørene i november 2021. Den første idé til det, der skulle komme til at blive Saveabl, var opstået sommeren 2020, da Jeroen og Alexander studerede sammen. De forventede sig mindst sagt en hurtigere og smidigere opstart end virkeligheden viste sig at være. I dag består teamet af Jeroen, der styrer skuden, Emil, der hver uge fremkommer med nye kreative opskrifter og har ansvar for det operationelle. Louise sikrer, at vi når ud til de rigtige kunder og kan ekspandere. Hassan har ansvaret for pakningen og sikrer, at vores kunder mødes af en behagelig syn hver uge. Jesper designer og skaber en identitet for Saveabl, og Alexander sørger for, at vi har styr på juraen.",
+        text: "Saveabl bestod af tre studerende og en kok, da vi åbnede dørene i november 2021. I dag består teamet af Jeroen, der styrer skuden, Emil, der hver uge fremkommer med nye kreative opskrifter og har ansvar for det operationelle. Louise sikrer, at vi når ud til de rigtige kunder og kan ekspandere. Hassan har ansvaret for pakningen og sikrer, at vores kunder mødes af en behagelig syn hver uge. Jesper designer og skaber en identitet for Saveabl.",
       },
       {
         title: "Vores måltidskasse",
@@ -1851,7 +1851,7 @@ const daText = {
 faqItems: [
   {
     question: "Abonnement, hvordan fungerer det?",
-    answer: "Vore abonnementer er helt uden bindingstid, hvilket betyder, at du kan pause eller afmelde når som helst. For at pause eller afmelde dit abonnement logger du nemt ind på din konto eller kontakter os via e-mail, så ordner vi det. Pauser/afmeldinger skal indsendes til os senest torsdag før levering, da vi booker leveringer den dag og skal planlægge det præcise antal måltidskasser med vores kokke."
+    answer: "Vore abonnementer er helt uden bindingstid, hvilket betyder, at du kan pause eller afmelde når som helst. Vi anbefaler, at du sætter abonnementet på pause eller opsiger det via din konto eller via e-mail til hello@saveabl.se. Det er en anbefaling, ikke et krav. Du kan også opsige abonnementet via telefon, brev eller på anden måde ved at give os besked om, at du ønsker at afslutte det. Pauser/afmeldinger skal indsendes til os senest torsdag før levering, da vi booker leveringer den dag og skal planlægge det præcise antal måltidskasser med vores kokke."
   },
   {
     question: "15 minutter, hvordan kan det lade sig gøre?",
@@ -2017,7 +2017,7 @@ button: "Jeg forstår - bestil nu!"
     faqItems: [
       {
         question: "Abonnement, hvordan fungerer det?",
-        answer: "Vores abonnementer er helt uden bindingsperiode, hvilket betyder, at du kan sætte det på pause eller annullere, når du vil. For at sætte eller annullere dit abonnement, skal du blot logge ind på din konto eller kontakte os via e-mail, så ordner vi det. Pauser/afmeldinger skal sendes til os inden torsdag før leveringen. Det er på denne dag, vi planlægger leverancerne, og vi skal kunne planlægge det præcise antal måltidskasser med vores kokke.",
+        answer: "Vores abonnementer er helt uden bindingsperiode, hvilket betyder, at du kan sætte det på pause eller annullere, når du vil. Vi anbefaler, at du sætter abonnementet på pause eller opsiger det via din konto eller via e-mail til hello@saveabl.se. Det er en anbefaling, ikke et krav. Du kan også opsige abonnementet via telefon, brev eller på anden måde ved at give os besked om, at du ønsker at afslutte det. Pauser/afmeldinger skal sendes til os inden torsdag før leveringen. Det er på denne dag, vi planlægger leverancerne, og vi skal kunne planlægge det præcise antal måltidskasser med vores kokke.",
       },
       {
         question: "Allergier? Hvad gælder?",
@@ -2218,9 +2218,9 @@ optionGreen: "Saveabl Grön",
   terms: {
     title: "Betingelser",
     subtitle: "Abonnement", 
-    description: "Vores abonnementer er helt uden forpligtelser, hvilket betyder, at du kan sætte på pause eller annullere, når du ønsker det. For at sætte på pause eller annullere dit abonnement, skal du blot logge ind på din konto, eller alternativt kontakte os via e-mail, og vi sørger for det. Pauser/annulleringer skal kommunikeres til os inden torsdag inden leveringen. Dette skyldes, at vi planlægger leverancer på denne dag, og så vi kan planlægge det præcise antal måltidskasser med vores kokke.",
+    description: "Vores abonnementer er helt uden forpligtelser, hvilket betyder, at du kan sætte på pause eller annullere, når du ønsker det. Vi anbefaler, at du sætter abonnementet på pause eller opsiger det via din konto eller via e-mail til hello@saveabl.se. Det er en anbefaling, ikke et krav. Du kan også opsige abonnementet via telefon, brev eller på anden måde ved at give os besked om, at du ønsker at afslutte det. Pauser/annulleringer skal kommunikeres til os inden torsdag inden leveringen. Dette skyldes, at vi planlægger leverancer på denne dag, og så vi kan planlægge det præcise antal måltidskasser med vores kokke.",
     subtitle1: "Generelle betingelser for Saveabl",
-    description1: "Når du handler på Saveabls hjemmeside, indgås alle aftaler med Foody Impact AB ('Saveabl', 'vi', 'vores' eller 'os'), organisationsnummer 559266-3149, med adresse Övre Kaserngården 12, 415 27 Göteborg. Ved at foretage et køb hos os, accepterer du disse generelle betingelser og vilkår. Kun enkeltpersoner eller repræsentanter for virksomheder, der er over 18 år og har fuld juridisk kapacitet til at indgå aftaler, må købe Saveabls produkter.",
+    description1: "Når du handler på Saveabls hjemmeside, indgås alle aftaler med Saveabl AB ('Saveabl', 'vi', 'vores' eller 'os'), organisationsnummer 559266-3149, med adresse Övre Kaserngården 12, 415 27 Göteborg. Ved at foretage et køb hos os, accepterer du disse generelle betingelser og vilkår. Kun enkeltpersoner eller repræsentanter for virksomheder, der er over 18 år og har fuld juridisk kapacitet til at indgå aftaler, må købe Saveabls produkter.",
     subtitle2: "Betaling, bestilling og priser",
     description2: "Alle priser er angivet i svenske kroner og inkluderer moms og gebyrer, medmindre andet er angivet. På Saveabls hjemmeside kan følgende debet- eller kreditkort bruges til betaling: Visa, MasterCard, American Express, Discover & Diners Club og China UnionPay. Derudover accepteres betaling via Klarna Bank AB, Sveavägen 46, 111 34 Stockholm ('Klarna'). Hvis du betaler via Klarna, accepterer du også deres vilkår, som du kan finde her. Efter godkendt betaling sendes en ordrebekræftelse til den e-mailadresse, kunden har angivet ved bestillingen eller ved oprettelsen af brugerkontoen. Saveabl påtager sig intet ansvar, hvis kunden har angivet en forkert e-mailadresse.",
     subtitle3: "Levering",
@@ -2228,7 +2228,7 @@ optionGreen: "Saveabl Grön",
     subtitle4: "Ansvarsfraskrivelse for fejl",
     description4: "Saveabl forbeholder sig ret til at rette eventuelle fejl på hjemmesiden, såsom forkerte priser, fejl i produktbeskrivelser og forkert lagerstatus af madpakker. Saveabl forbeholder sig ret til at rette eventuelle fejl. Hvis en forkert pris er angivet på hjemmesiden, forbeholder Saveabl sig ret til at rette prisen og eventuelt fjerne varen fra ordrer. Alle billeder, der præsenteres på hjemmesiden, skal betragtes som eksempelbilleder og garanterer ikke at afspejle retternes nøjagtige udseende.",
     subtitle5: "Klager",
-    description5: "Hvis du ønsker at klage over et produkt på grund af opdagede fejl, skal du kontakte os så hurtigt som muligt. Dette skal dog gøres senest inden for 14 dage. Du kan kontakte os på ",
+    description5: "Hvis en vare er mangelfuld, har du ret til at reklamere efter den svenske forbrugerkøbelov (konsumentköplagen). Giv os besked om fejlen inden for rimelig tid efter, at du burde have opdaget den. En reklamation, der fremsættes inden for to måneder efter, at du opdagede fejlen, anses altid for rettidig. Vi anbefaler, at du kontakter os hurtigst muligt, især ved ferskvarer, så vi kan hjælpe dig. Anbefalingen begrænser ikke din lovbestemte reklamationsret. Du kan for eksempel kontakte os via e-mail på",
     subtitle6: "Force Majeure",
     description6: "Hvis Saveabl på grund af omstændigheder, der anses for at ligge uden for vores kontrol ('Force Majeure'), forhindres i at opfylde vores forpligtelser over for vores kunder, udgør dette ikke et kontraktbrud.",
     subtitle7: "Tvist",
@@ -2245,7 +2245,7 @@ integrity_policy: {
   introduction: "Integritetspolitik",
   section_1: {
   title: "1. Introduktion",
-  description: "Denne integritetspolitik ('Politik') beskriver, hvordan brandet Saveabl, gennem virksomheden Foody Impact AB ('Vi', 'Vores' og 'Os') (registreringsnummer 559266-3149), beliggende på Övre Kaserngården 12, 415 27 Göteborg, håndterer personoplysninger. Vi værdsætter vores kunders personlige integritet og er forpligtede til at sikre sikkerheden for alle kunder og besøgende på vores hjemmeside i vores håndtering af personoplysninger. I denne politik har vi samlet information om, hvordan vi behandler dine personoplysninger, som du har givet os i forbindelse med din brug af vores tjenester, samt de personoplysninger, vi på anden vis har adgang til. Vi har en forpligtelse til at sikre, at behandlingen af dine personoplysninger udføres i overensstemmelse med denne politik og gældende databeskyttelseslovgivning."
+  description: "Denne integritetspolitik ('Politik') beskriver, hvordan brandet Saveabl, gennem virksomheden Saveabl AB ('Vi', 'Vores' og 'Os') (registreringsnummer 559266-3149), beliggende på Övre Kaserngården 12, 415 27 Göteborg, håndterer personoplysninger. Vi værdsætter vores kunders personlige integritet og er forpligtede til at sikre sikkerheden for alle kunder og besøgende på vores hjemmeside i vores håndtering af personoplysninger. I denne politik har vi samlet information om, hvordan vi behandler dine personoplysninger, som du har givet os i forbindelse med din brug af vores tjenester, samt de personoplysninger, vi på anden vis har adgang til. Vi har en forpligtelse til at sikre, at behandlingen af dine personoplysninger udføres i overensstemmelse med denne politik og gældende databeskyttelseslovgivning."
   },
   section_2: {
   title: "2. Hvordan Saveabl håndterer dine personoplysninger",

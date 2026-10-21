@@ -66,7 +66,7 @@ const Villkor = () => {
                 {/* Placera länken till mejlen efter "på" */}
                 {index === 5 && (
                   <React.Fragment>
-                    <span> på </span>
+                    <span>{" "}</span>
                     <a href="mailto:hello@saveabl.se" style={styles.link}>
                       hello@saveabl.se
                     </a>
@@ -76,12 +76,12 @@ const Villkor = () => {
                 {/* Placera länken till integritetspolicyn efter "vår" */}
                 {index === 8 && (
                   <React.Fragment>
-                    <span> vår </span>
+                    <span>{" "}</span>
                     <a
-                      href="https://www.saveabl.com/villkor/integritetspolicy"
+                      href="/villkor/integritetspolicy"
                       style={styles.link}
                     >
-                      integritetspolicy
+                      {text.footer.integrity}
                     </a>
                     <span>.</span>
                   </React.Fragment>

@@ -1713,7 +1713,7 @@ useEffect(() => {
                       <span>
                         {lang.order}{" "}
                         <a
-                          href="https://www.saveabl.com/villkor"
+                          href="/villkor"
                           target="_blank"
                           rel="noopener noreferrer"
                           style={{ textDecoration: "underline" }}

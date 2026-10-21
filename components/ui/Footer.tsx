@@ -47,6 +47,9 @@ const Footer = () => {
     <p className="hover:underline text-primary-200 text-lg sm:text-xl">
       <a href="mailto:hello@saveabl.se">hello@saveabl.se</a>
     </p>
+    <p className="hover:underline text-primary-200 text-lg sm:text-xl">
+      <a href="tel:+46730876207">073-087 62 07</a>
+    </p>
   </div>
   {/* Sociala medier på mobil - Placeras före nyhetsbrevet i mobilvy */}
   <ul className="flex justify-center gap-4 md:hidden mt-10">
@@ -143,7 +146,7 @@ const Footer = () => {
         <div>
           <p className="mx-auto mt-1 mb-1 max-w-md text-center leading-relaxed hover:underline text-primary-200">
             <a
-              href="https://www.saveabl.com/villkor"
+              href="/villkor"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -155,7 +158,7 @@ const Footer = () => {
         <div>
           <p className="mx-auto mt-1 mb-2 max-w-md text-center leading-relaxed hover:underline text-primary-200">
             <a
-              href="https://www.saveabl.com/villkor/integritetspolicy"
+              href="/villkor/integritetspolicy"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -167,7 +170,7 @@ const Footer = () => {
         {/* Copyright */}
         <div className="w-full mt-10 pt-10 border-t border-secondary-900 border-opacity-30">
           <div className="text-center text-primary opacity-50">
-            <p>Copyright © {date.getFullYear()} Foody Impact AB</p>
+            <p>Copyright © {date.getFullYear()} Saveabl AB</p>
           </div>
           <div className="text-center text-primary opacity-50 mt-6">
   <p className="mx-auto max-w-md leading-relaxed">
